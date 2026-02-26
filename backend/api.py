@@ -1,0 +1,181 @@
+"""
+FastAPI Server
+==============
+Exposes the video generation pipeline as async HTTP endpoints.
+
+Endpoints:
+    POST /api/generate      -- Upload image + video, start a pipeline job
+    GET  /api/jobs/{job_id}  -- Poll job status and step progress
+    GET  /api/jobs/{job_id}/result -- Download the final video
+
+Run:
+    cd backend && source venv/bin/activate
+    uvicorn api:app --reload --port 8000
+"""
+
+import os
+import sys
+import shutil
+import threading
+import tempfile
+from pathlib import Path
+
+from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+
+# Ensure backend modules are importable
+sys.path.insert(0, os.path.dirname(__file__))
+
+from job_manager import job_manager, JobStatus
+from pipeline import run_full_pipeline
+
+# ---------------------------------------------------------------------------
+# App
+# ---------------------------------------------------------------------------
+
+app = FastAPI(title="Lumeet Video Pipeline API", version="1.0.0")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",   # Vite dev server
+        "http://localhost:3000",
+        "http://127.0.0.1:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Base directory for job files
+JOBS_DIR = os.path.join(os.path.dirname(__file__), "jobs")
+os.makedirs(JOBS_DIR, exist_ok=True)
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+def _save_upload(upload: UploadFile, dest: str) -> None:
+    """Save an UploadFile to disk."""
+    with open(dest, "wb") as f:
+        shutil.copyfileobj(upload.file, f)
+
+
+def _run_pipeline_thread(job_id: str, video_path: str, image_path: str, output_dir: str) -> None:
+    """Target for the background thread that runs the pipeline."""
+    job_manager.mark_processing(job_id)
+    cb = job_manager.make_step_callback(job_id)
+
+    try:
+        result = run_full_pipeline(
+            video_path=video_path,
+            model_image_path=image_path,
+            output_dir=output_dir,
+            on_step=cb,
+        )
+        job_manager.mark_completed(job_id, result["final_video"], result)
+    except Exception as exc:
+        job_manager.mark_failed(job_id, str(exc))
+
+
+# ---------------------------------------------------------------------------
+# Endpoints
+# ---------------------------------------------------------------------------
+
+@app.post("/api/generate")
+async def generate(
+    image: UploadFile = File(..., description="Model / identity reference image"),
+    video: UploadFile = File(..., description="Reference video"),
+):
+    """
+    Start a new video generation pipeline job.
+
+    Accepts multipart form data with two files:
+      - ``image``: the model/identity reference image (PNG/JPG)
+      - ``video``: the reference video (MP4)
+
+    Returns the ``job_id`` which can be used to poll progress and
+    download the result.
+    """
+    # Basic validation
+    if not image.content_type or not image.content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="image must be an image file (PNG, JPG, etc.)")
+    if not video.content_type or not video.content_type.startswith("video/"):
+        raise HTTPException(status_code=400, detail="video must be a video file (MP4, etc.)")
+
+    # Create a job directory to hold uploads and outputs
+    job = job_manager.create_job("", "", "")  # placeholder paths, filled below
+
+    job_dir = os.path.join(JOBS_DIR, job.id)
+    input_dir = os.path.join(job_dir, "input")
+    output_dir = os.path.join(job_dir, "output")
+    os.makedirs(input_dir, exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Save uploaded files
+    image_ext = os.path.splitext(image.filename or "image.png")[1] or ".png"
+    video_ext = os.path.splitext(video.filename or "video.mp4")[1] or ".mp4"
+
+    image_path = os.path.join(input_dir, f"model_image{image_ext}")
+    video_path = os.path.join(input_dir, f"reference_video{video_ext}")
+
+    _save_upload(image, image_path)
+    _save_upload(video, video_path)
+
+    # Update job with real paths
+    job.video_path = video_path
+    job.image_path = image_path
+    job.output_dir = output_dir
+
+    # Launch pipeline in background thread
+    thread = threading.Thread(
+        target=_run_pipeline_thread,
+        args=(job.id, video_path, image_path, output_dir),
+        daemon=True,
+    )
+    thread.start()
+
+    return {"job_id": job.id}
+
+
+@app.get("/api/jobs/{job_id}")
+async def get_job_status(job_id: str):
+    """
+    Get the current status and step-by-step progress of a pipeline job.
+    """
+    job = job_manager.get_job(job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail=f"Job {job_id} not found.")
+    return job.to_dict()
+
+
+@app.get("/api/jobs/{job_id}/result")
+async def get_job_result(job_id: str):
+    """
+    Download the final generated video.
+
+    Returns 404 if the job doesn't exist, and 409 if it isn't complete yet.
+    """
+    job = job_manager.get_job(job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail=f"Job {job_id} not found.")
+
+    if job.status == JobStatus.FAILED:
+        raise HTTPException(status_code=500, detail=f"Job failed: {job.error}")
+
+    if job.status != JobStatus.COMPLETED:
+        raise HTTPException(
+            status_code=409,
+            detail=f"Job is not complete yet (status: {job.status.value}).",
+        )
+
+    if not job.result_path or not os.path.isfile(job.result_path):
+        raise HTTPException(status_code=500, detail="Result file not found on server.")
+
+    return FileResponse(
+        job.result_path,
+        media_type="video/mp4",
+        filename="lumeet_output.mp4",
+    )

@@ -3,12 +3,12 @@ Unified Video Generation Pipeline
 ===================================
 Orchestrates all services into a single end-to-end flow:
 
-    1. Scene Detection   — trim the video at the first scene cut
-    2. Frame Extraction   — screenshot at second 1
-    3. Caption Detection  — detect on-screen captions via OpenAI Vision
-    4. Scene Recreation   — Gemini Nano Banana identity swap
-    5. Motion Control     — Fal AI Kling video generation
-    6. Caption Overlay    — burn detected caption into the final video
+    1. Scene Detection   -- trim the video at the first scene cut
+    2. Frame Extraction  -- screenshot at second 1
+    3. Caption Detection  -- detect on-screen captions via OpenAI Vision
+    4. Scene Recreation   -- Gemini Nano Banana identity swap
+    5. Motion Control     -- Fal AI Kling video generation
+    6. Caption Overlay    -- burn detected caption into the final video
 
 Usage (standalone):
     cd backend && source venv/bin/activate
@@ -24,7 +24,7 @@ Usage (as library):
 
 import os
 import sys
-from typing import Optional
+from typing import Callable, Optional
 
 from scene_detector import crop_to_first_scene
 from frame_extractor import extract_frame
@@ -34,12 +34,18 @@ from motion_control import generate_motion_video
 from caption_overlay import overlay_caption
 
 
+def _noop_callback(step_key: str, event: str, message: str = "") -> None:
+    """Default no-op callback when no progress reporter is provided."""
+    pass
+
+
 def run_full_pipeline(
     video_path: str,
     model_image_path: str,
     output_dir: str,
     prompt: Optional[str] = None,
     motion_prompt: str = "A young woman reacting to the camera",
+    on_step: Optional[Callable[[str, str, str], None]] = None,
 ) -> dict:
     """
     Run the full video generation pipeline.
@@ -50,6 +56,9 @@ def run_full_pipeline(
         output_dir: Directory where all intermediate and final files are saved.
         prompt: Custom prompt for Gemini scene recreation. None uses the default.
         motion_prompt: Prompt for the Fal AI motion control step.
+        on_step: Optional callback ``(step_key, event, message)`` where
+                 event is ``'start'``, ``'complete'``, or ``'fail'``.
+                 Used by the job manager to track progress.
 
     Returns:
         A dict with paths and metadata for each step:
@@ -65,6 +74,8 @@ def run_full_pipeline(
         EnvironmentError: If required API keys are missing.
         RuntimeError: If any step fails.
     """
+    cb = on_step or _noop_callback
+
     # --- Validate inputs ---
     if not os.path.isfile(video_path):
         raise FileNotFoundError(f"Input video not found: {video_path}")
@@ -76,8 +87,9 @@ def run_full_pipeline(
     result = {}
 
     # =========================================================================
-    # Step 1: Scene Detection — trim at first scene cut
+    # Step 1: Scene Detection -- trim at first scene cut
     # =========================================================================
+    cb("scene_detection", "start", "Detecting scene changes...")
     print("=" * 60)
     print("[1/6] Scene Detection")
     print("=" * 60)
@@ -87,18 +99,21 @@ def run_full_pipeline(
 
     if trim_result is not None:
         result["trimmed_video"] = trim_result["output_path"]
-        print(f"  ✓ Trimmed at {trim_result['cut_at_seconds']:.2f}s")
+        msg = f"Trimmed at {trim_result['cut_at_seconds']:.2f}s"
+        print(f"  {msg}")
     else:
-        # No scene change — use the original video
         result["trimmed_video"] = video_path
-        print("  No scene change detected — using original video.")
+        msg = "No scene change detected -- using original video."
+        print(f"  {msg}")
 
     working_video = result["trimmed_video"]
+    cb("scene_detection", "complete", msg)
     print()
 
     # =========================================================================
-    # Step 2: Frame Extraction — screenshot at second 1
+    # Step 2: Frame Extraction -- screenshot at second 1
     # =========================================================================
+    cb("frame_extraction", "start", "Extracting reference frame...")
     print("=" * 60)
     print("[2/6] Frame Extraction (1s)")
     print("=" * 60)
@@ -107,12 +122,15 @@ def run_full_pipeline(
     result["screenshot"] = extract_frame(
         working_video, timestamp_sec=1.0, output_path=screenshot_path
     )
-    print(f"  ✓ Screenshot saved → {result['screenshot']}")
+    msg = f"Screenshot saved"
+    print(f"  {msg}")
+    cb("frame_extraction", "complete", msg)
     print()
 
     # =========================================================================
-    # Step 3: Caption Detection — OpenAI Vision
+    # Step 3: Caption Detection -- OpenAI Vision
     # =========================================================================
+    cb("caption_detection", "start", "Detecting on-screen captions...")
     print("=" * 60)
     print("[3/6] Caption Detection (GPT-4o Vision)")
     print("=" * 60)
@@ -121,14 +139,18 @@ def run_full_pipeline(
     result["caption"] = caption
 
     if caption:
-        print(f"  ✓ Caption detected: \"{caption}\"")
+        msg = f'Caption: "{caption}"'
+        print(f"  {msg}")
     else:
-        print("  No caption detected.")
+        msg = "No caption detected."
+        print(f"  {msg}")
+    cb("caption_detection", "complete", msg)
     print()
 
     # =========================================================================
-    # Step 4: Scene Recreation — Gemini Nano Banana Pro
+    # Step 4: Scene Recreation -- Gemini Nano Banana Pro
     # =========================================================================
+    cb("scene_recreation", "start", "Recreating scene with Gemini...")
     print("=" * 60)
     print("[4/6] Scene Recreation (Gemini Nano Banana Pro)")
     print("=" * 60)
@@ -140,12 +162,15 @@ def run_full_pipeline(
         output_path=recreated_path,
         prompt=prompt,
     )
-    print(f"  ✓ Recreated scene → {result['recreated_scene']}")
+    msg = "Recreated scene saved"
+    print(f"  {msg}")
+    cb("scene_recreation", "complete", msg)
     print()
 
     # =========================================================================
-    # Step 5: Motion Control — Fal AI Kling
+    # Step 5: Motion Control -- Fal AI Kling
     # =========================================================================
+    cb("motion_control", "start", "Generating video with Kling AI (this may take a few minutes)...")
     print("=" * 60)
     print("[5/6] Motion Control (Fal AI Kling 2.6)")
     print("=" * 60)
@@ -157,12 +182,15 @@ def run_full_pipeline(
         raw_video_path,
         prompt=motion_prompt,
     )
-    print(f"  ✓ Generated video → {result['raw_video']}")
+    msg = "Video generated"
+    print(f"  {msg}")
+    cb("motion_control", "complete", msg)
     print()
 
     # =========================================================================
-    # Step 6: Caption Overlay — burn caption into the video
+    # Step 6: Caption Overlay -- burn caption into the video
     # =========================================================================
+    cb("caption_overlay", "start", "Adding caption overlay...")
     print("=" * 60)
     print("[6/6] Caption Overlay")
     print("=" * 60)
@@ -174,11 +202,14 @@ def run_full_pipeline(
             result["caption"],
             output_path=final_path,
         )
-        print(f"  ✓ Final video with caption → {result['final_video']}")
+        msg = "Caption overlaid on video"
+        print(f"  {msg}")
     else:
-        # No caption — the raw video IS the final video
         result["final_video"] = result["raw_video"]
-        print("  No caption to overlay — raw video is the final output.")
+        msg = "No caption to overlay -- raw video is the final output."
+        print(f"  {msg}")
+
+    cb("caption_overlay", "complete", msg)
 
     print()
     print("=" * 60)
