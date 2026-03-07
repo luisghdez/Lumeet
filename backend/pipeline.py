@@ -32,6 +32,10 @@ from caption_detector import detect_captions_summary
 from scene_recreator import recreate_scene
 from motion_control import generate_motion_video
 from caption_overlay import overlay_caption
+from audio_extractor import extract_audio
+from video_concatenator import concatenate_videos
+from audio_replacer import replace_audio
+from config import ADDITIONAL_VIDEO_PATH
 
 
 def _noop_callback(step_key: str, event: str, message: str = "") -> None:
@@ -46,6 +50,8 @@ def run_full_pipeline(
     prompt: Optional[str] = None,
     motion_prompt: str = "A young woman reacting to the camera",
     on_step: Optional[Callable[[str, str, str], None]] = None,
+    extended: bool = False,
+    additional_video_path: Optional[str] = None,
 ) -> dict:
     """
     Run the full video generation pipeline.
@@ -59,6 +65,9 @@ def run_full_pipeline(
         on_step: Optional callback ``(step_key, event, message)`` where
                  event is ``'start'``, ``'complete'``, or ``'fail'``.
                  Used by the job manager to track progress.
+        extended: If True, run extended pipeline (concatenate additional video and replace audio).
+        additional_video_path: Path to additional video to append. If None and extended=True,
+                              uses ADDITIONAL_VIDEO_PATH from config.
 
     Returns:
         A dict with paths and metadata for each step:
@@ -68,6 +77,9 @@ def run_full_pipeline(
             - recreated_scene: path to the Gemini-generated image
             - raw_video: path to the Kling-generated video (before caption)
             - final_video: path to the final output video (with caption if detected)
+            - extracted_audio: path to extracted audio (if extended=True)
+            - concatenated_video: path to concatenated video (if extended=True)
+            - extended_final_video: path to final extended video (if extended=True)
 
     Raises:
         FileNotFoundError: If input files don't exist.
@@ -210,6 +222,72 @@ def run_full_pipeline(
         print(f"  {msg}")
 
     cb("caption_overlay", "complete", msg)
+    print()
+
+    # =========================================================================
+    # Extended Pipeline Steps (if enabled)
+    # =========================================================================
+    if extended:
+        # Determine additional video path
+        if additional_video_path is None:
+            additional_video_path = ADDITIONAL_VIDEO_PATH
+        
+        if not os.path.isfile(additional_video_path):
+            raise FileNotFoundError(
+                f"Additional video not found: {additional_video_path}"
+            )
+
+        # Step 7: Audio Extraction
+        cb("audio_extraction", "start", "Extracting audio from original video...")
+        print("=" * 60)
+        print("[7/9] Audio Extraction")
+        print("=" * 60)
+
+        extracted_audio_path = os.path.join(output_dir, "extracted_audio.aac")
+        result["extracted_audio"] = extract_audio(
+            video_path, output_path=extracted_audio_path
+        )
+        msg = "Audio extracted from original video"
+        print(f"  {msg}")
+        cb("audio_extraction", "complete", msg)
+        print()
+
+        # Step 8: Video Concatenation
+        cb("video_concatenation", "start", "Concatenating videos...")
+        print("=" * 60)
+        print("[8/9] Video Concatenation")
+        print("=" * 60)
+
+        concatenated_path = os.path.join(output_dir, "concatenated.mp4")
+        result["concatenated_video"] = concatenate_videos(
+            result["final_video"],
+            additional_video_path,
+            output_path=concatenated_path,
+        )
+        msg = "Videos concatenated"
+        print(f"  {msg}")
+        cb("video_concatenation", "complete", msg)
+        print()
+
+        # Step 9: Audio Replacement
+        cb("audio_replacement", "start", "Replacing audio with original...")
+        print("=" * 60)
+        print("[9/9] Audio Replacement")
+        print("=" * 60)
+
+        extended_final_path = os.path.join(output_dir, "extended_final_output.mp4")
+        result["extended_final_video"] = replace_audio(
+            result["concatenated_video"],
+            result["extracted_audio"],
+            output_path=extended_final_path,
+        )
+        msg = "Audio replaced with original"
+        print(f"  {msg}")
+        cb("audio_replacement", "complete", msg)
+        print()
+
+        # Update final_video to point to extended version
+        result["final_video"] = result["extended_final_video"]
 
     print()
     print("=" * 60)

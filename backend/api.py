@@ -20,7 +20,7 @@ import threading
 import tempfile
 from pathlib import Path
 
-from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi import FastAPI, File, UploadFile, HTTPException, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 
@@ -63,7 +63,9 @@ def _save_upload(upload: UploadFile, dest: str) -> None:
         shutil.copyfileobj(upload.file, f)
 
 
-def _run_pipeline_thread(job_id: str, video_path: str, image_path: str, output_dir: str) -> None:
+def _run_pipeline_thread(
+    job_id: str, video_path: str, image_path: str, output_dir: str, extended: bool = False
+) -> None:
     """Target for the background thread that runs the pipeline."""
     job_manager.mark_processing(job_id)
     cb = job_manager.make_step_callback(job_id)
@@ -74,6 +76,7 @@ def _run_pipeline_thread(job_id: str, video_path: str, image_path: str, output_d
             model_image_path=image_path,
             output_dir=output_dir,
             on_step=cb,
+            extended=extended,
         )
         job_manager.mark_completed(job_id, result["final_video"], result)
     except Exception as exc:
@@ -88,13 +91,15 @@ def _run_pipeline_thread(job_id: str, video_path: str, image_path: str, output_d
 async def generate(
     image: UploadFile = File(..., description="Model / identity reference image"),
     video: UploadFile = File(..., description="Reference video"),
+    extended: bool = Form(False, description="Enable extended pipeline (concatenate additional video and replace audio)"),
 ):
     """
     Start a new video generation pipeline job.
 
-    Accepts multipart form data with two files:
+    Accepts multipart form data with:
       - ``image``: the model/identity reference image (PNG/JPG)
       - ``video``: the reference video (MP4)
+      - ``extended``: optional boolean to enable extended pipeline (default: False)
 
     Returns the ``job_id`` which can be used to poll progress and
     download the result.
@@ -106,7 +111,7 @@ async def generate(
         raise HTTPException(status_code=400, detail="video must be a video file (MP4, etc.)")
 
     # Create a job directory to hold uploads and outputs
-    job = job_manager.create_job("", "", "")  # placeholder paths, filled below
+    job = job_manager.create_job("", "", "", extended=extended)  # placeholder paths, filled below
 
     job_dir = os.path.join(JOBS_DIR, job.id)
     input_dir = os.path.join(job_dir, "input")
@@ -132,7 +137,7 @@ async def generate(
     # Launch pipeline in background thread
     thread = threading.Thread(
         target=_run_pipeline_thread,
-        args=(job.id, video_path, image_path, output_dir),
+        args=(job.id, video_path, image_path, output_dir, extended),
         daemon=True,
     )
     thread.start()

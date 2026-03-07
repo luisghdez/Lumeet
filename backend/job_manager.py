@@ -38,6 +38,12 @@ PIPELINE_STEPS = [
     {"key": "caption_overlay", "label": "Caption Overlay"},
 ]
 
+EXTENDED_PIPELINE_STEPS = [
+    {"key": "audio_extraction", "label": "Audio Extraction"},
+    {"key": "video_concatenation", "label": "Video Concatenation"},
+    {"key": "audio_replacement", "label": "Audio Replacement"},
+]
+
 
 @dataclass
 class StepInfo:
@@ -96,10 +102,27 @@ class JobManager:
         video_path: str,
         image_path: str,
         output_dir: str,
+        extended: bool = False,
     ) -> Job:
-        """Create a new job with pending steps."""
+        """
+        Create a new job with pending steps.
+        
+        Args:
+            video_path: Path to input video.
+            image_path: Path to model image.
+            output_dir: Output directory.
+            extended: If True, include extended pipeline steps.
+        """
         job_id = uuid.uuid4().hex[:12]
         steps = [StepInfo(key=s["key"], label=s["label"]) for s in PIPELINE_STEPS]
+        
+        # Add extended steps if enabled
+        if extended:
+            extended_steps = [
+                StepInfo(key=s["key"], label=s["label"]) for s in EXTENDED_PIPELINE_STEPS
+            ]
+            steps.extend(extended_steps)
+        
         job = Job(
             id=job_id,
             steps=steps,
