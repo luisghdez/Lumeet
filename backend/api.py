@@ -17,24 +17,28 @@ import os
 import sys
 import shutil
 import threading
-import tempfile
+import logging
 from pathlib import Path
+from typing import List, Optional
 
-from fastapi import FastAPI, File, UploadFile, HTTPException, Form
+from fastapi import FastAPI, File, UploadFile, HTTPException, Form, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+from pydantic import BaseModel, Field
 
 # Ensure backend modules are importable
 sys.path.insert(0, os.path.dirname(__file__))
 
 from job_manager import job_manager, JobStatus
 from pipeline import run_full_pipeline
+from late_service import late_service, LateServiceError
 
 # ---------------------------------------------------------------------------
 # App
 # ---------------------------------------------------------------------------
 
 app = FastAPI(title="Lumeet Video Pipeline API", version="1.0.0")
+logger = logging.getLogger("lumeet.api")
 
 app.add_middleware(
     CORSMiddleware,
@@ -51,6 +55,30 @@ app.add_middleware(
 # Base directory for job files
 JOBS_DIR = os.path.join(os.path.dirname(__file__), "jobs")
 os.makedirs(JOBS_DIR, exist_ok=True)
+
+
+class LateProfileCreateRequest(BaseModel):
+    sessionId: str = Field(default="local-dev-session")
+    name: str = Field(min_length=1, max_length=120)
+    description: str = Field(default="", max_length=500)
+
+
+class LatePlatformTarget(BaseModel):
+    platform: str = Field(min_length=1, max_length=50)
+    accountId: str = Field(min_length=1, max_length=120)
+
+
+class LateCreatePostRequest(BaseModel):
+    sessionId: str = Field(default="local-dev-session")
+    profileId: Optional[str] = None
+    content: str = Field(min_length=1, max_length=5000)
+    platforms: List[LatePlatformTarget]
+    timezone: Optional[str] = Field(default="UTC")
+    scheduledFor: Optional[str] = None
+    publishNow: bool = False
+    mediaUrls: List[str] = Field(default_factory=list)
+    includeResultVideo: bool = False
+    jobId: Optional[str] = None
 
 
 # ---------------------------------------------------------------------------
@@ -184,3 +212,82 @@ async def get_job_result(job_id: str):
         media_type="video/mp4",
         filename="lumeet_output.mp4",
     )
+
+
+@app.post("/api/late/profiles")
+async def create_late_profile(payload: LateProfileCreateRequest):
+    """Create a Late profile and bind it to the current local session."""
+    logger.info("Late profile create requested for session=%s", payload.sessionId)
+    try:
+        result = late_service.create_profile(
+            session_id=payload.sessionId,
+            name=payload.name,
+            description=payload.description,
+        )
+    except LateServiceError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+    return result
+
+
+@app.get("/api/late/connect-url")
+async def get_late_connect_url(
+    platform: str = Query(..., min_length=1),
+    sessionId: str = Query("local-dev-session"),
+    profileId: Optional[str] = Query(None),
+    redirectUrl: Optional[str] = Query(None),
+    state: Optional[str] = Query(None),
+):
+    """Return OAuth authorization URL for connecting a social account via Late."""
+    logger.info("Late connect URL requested for platform=%s session=%s", platform, sessionId)
+    try:
+        result = late_service.get_connect_url(
+            session_id=sessionId,
+            platform=platform,
+            profile_id=profileId,
+            redirect_url=redirectUrl,
+            state=state,
+        )
+    except LateServiceError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+    return result
+
+
+@app.get("/api/late/accounts")
+async def list_late_accounts(
+    sessionId: str = Query("local-dev-session"),
+    profileId: Optional[str] = Query(None),
+):
+    """List Late-connected accounts for a session/profile."""
+    logger.info("Late accounts list requested for session=%s", sessionId)
+    try:
+        result = late_service.list_accounts(session_id=sessionId, profile_id=profileId)
+    except LateServiceError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+    return result
+
+
+@app.post("/api/late/posts")
+async def create_late_post(payload: LateCreatePostRequest):
+    """Create/schedule a social post via Late."""
+    logger.info(
+        "Late post create requested session=%s targets=%d includeResultVideo=%s",
+        payload.sessionId,
+        len(payload.platforms),
+        payload.includeResultVideo,
+    )
+    try:
+        result = late_service.create_post(
+            session_id=payload.sessionId,
+            content=payload.content,
+            platforms=[p.model_dump() for p in payload.platforms],
+            profile_id=payload.profileId,
+            scheduled_for=payload.scheduledFor,
+            publish_now=payload.publishNow,
+            timezone=payload.timezone,
+            media_urls=payload.mediaUrls,
+            include_result_video=payload.includeResultVideo,
+            job_id=payload.jobId,
+        )
+    except LateServiceError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+    return result

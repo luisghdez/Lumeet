@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LayoutDashboard, Users, MessageSquare, Plus, Video } from 'lucide-react';
 import ApplicantCard from './components/ApplicantCard';
 import CreateSection from './components/CreateSection';
@@ -6,6 +6,13 @@ import VariantLab from './components/VariantLab';
 
 function App() {
   const [activeTab, setActiveTab] = useState('recruit');
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('late_connected') === '1') {
+      setActiveTab('create');
+    }
+  }, []);
 
   const navItems = [
     // { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },

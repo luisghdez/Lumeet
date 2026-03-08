@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Upload, Image, Film, Loader2, CheckCircle2, Circle, XCircle, ArrowLeft, Download, Play, X } from 'lucide-react';
+import ScheduleToSocial from './ScheduleToSocial';
 
 const PIPELINE_STEPS = [
   { key: 'scene_detection', label: 'Scene Detection' },
@@ -316,7 +317,7 @@ function CreateSection() {
   if (viewState === 'result') {
     return (
       <div className="h-full flex flex-col items-center justify-center px-4 py-8">
-        <div className="w-full max-w-lg flex-1 flex flex-col justify-center items-center">
+        <div className="w-full max-w-4xl flex-1 flex flex-col justify-center items-center">
           <div className="text-center mb-6">
             <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-green-100 mb-4">
               <CheckCircle2 size={28} className="text-green-600" />
@@ -360,6 +361,8 @@ function CreateSection() {
               </a>
             )}
           </div>
+
+          <ScheduleToSocial jobId={jobId} resultUrl={resultUrl} />
         </div>
       </div>
     );
