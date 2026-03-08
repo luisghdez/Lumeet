@@ -9,8 +9,9 @@ then creates images using OpenAI's image generation model.
 import os
 import json
 import base64
+import re
 from datetime import datetime
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, List
 
 from openai import OpenAI
 import requests
@@ -18,7 +19,8 @@ from PIL import Image
 import io
 
 TEXT_MODEL_CANDIDATES = [
-    os.environ.get("OPENAI_TEXT_MODEL", "gpt-5.3-chat-latest"),
+    os.environ.get("OPENAI_TEXT_MODEL", "gpt-5.4-2026-03-05"),
+    "gpt-5-mini",
     "gpt-4.1",
 ]
 IMAGE_MODEL_CANDIDATES = [
@@ -32,15 +34,29 @@ IMAGE_SIZE = os.environ.get("OPENAI_IMAGE_SIZE", "1024x1536")
 
 HOOK_SLIDE_TEMPLATE = """Create a vertical 9:16 educational carousel cover slide in a bold modern flat cartoon style for Instagram or TikTok. Use a dark green background. Add very large cream-colored headline text reading: "{HEADLINE}". The text should take up most of the upper half and be extremely readable on mobile.
 
-In the lower half, show the same student in 3 stages from left to right: first overwhelmed and slouched, second unsure and improving, third confident and successful. Add a large upward arrow behind the character progression to symbolize growth and improvement. Keep the illustration simple, clean, and visually bold with thick outlines and minimal clutter. Make it feel like a viral faceless educational carousel cover. Use Poppins font for all text."""
+In the lower half, design a creative visual metaphor that communicates improvement, progress, or transformation in a bold and instantly understandable way. You may use one character, multiple poses, symbolic elements, or scene-based storytelling, but avoid repeating the exact same composition every time. Keep the illustration simple, clean, and visually bold with thick outlines and minimal clutter. Make it feel like a viral faceless educational carousel cover. Use Poppins Regular (font weight 400) for all hook text."""
 
-INDIVIDUAL_SLIDE_TEMPLATE = """Create a vertical 9:16 educational carousel slide in a modern flat cartoon style for Instagram or TikTok. Use a bright sky-blue outdoor-style background or simple clean background that feels lighter than the cover slide. At the top, add large bold text reading: "{NUMBER}. {TIP_TITLE}".
+INDIVIDUAL_SLIDE_TEMPLATE = """Design a vertical 9:16 Instagram carousel slide. Style: minimalist flat illustration, editorial and modern. Must NOT look AI-generated.
 
-Show a cartoon student in the center {SCENE_DESCRIPTION}. Add visual cues that {VISUAL_CUES}. The scene should instantly communicate {EMOTION_MEANING}.
+LAYOUT — three zones only, separated by generous empty space:
 
-Add a rounded white explanation box in the lower-middle area containing this exact text: "{EXPLANATION_TEXT}"
+ZONE 1 — TOP THIRD:
+Render "{NUMBER}" as a very large bold graphic numeral — treat it as a dominant design element that anchors the slide, not just a label. Below it, place the slide title in Poppins Bold: "{TIP_TITLE}". Title is maximum 2 lines, no wrapping.
 
-Use thick outlines, simple shapes, bold contrast, and a mobile-first layout. Keep the visual fun, clear, and highly readable. Use Poppins font for all text."""
+ZONE 2 — MIDDLE (the illustration):
+{SCENE_DESCRIPTION}. Flat vector style. Maximum 3 visual elements total in the scene. No background clutter. No secondary characters. No text inside the illustration. Leave at least 40% of this zone as intentional empty space around the focal element.
+
+ZONE 3 — BOTTOM FIFTH:
+Place this text in Poppins Regular directly on the background — no card, no box, no border, no shadow: "{EXPLANATION_TEXT}". Maximum 2 lines. Left-aligned or centered, clean.
+
+DESIGN RULES — follow strictly:
+- Background: a single solid color OR a clean 2-tone horizontal split. No gradients, no textures, no patterns.
+- Color palette: 2-3 colors ONLY. The background color covers at least 55% of the slide.
+- Typography: Poppins Bold for the number + title, Poppins Regular for the explanation text. No other typefaces.
+- Illustration focal point: one primary element only — {EMOTION_MEANING}. Keep outlines clean and thick. No realistic shading.
+- White space: deliberately generous. The slide should feel uncluttered and breathable.
+
+DO NOT INCLUDE: speech bubbles, UI cards floating over illustrations, gradient backgrounds, realistic textures or lighting, complex crowd scenes, drop shadows on text, multiple characters competing for attention, decorative borders, clipart-style icons scattered around the slide."""
 
 CTA_SLIDE_TEMPLATE = """Create a vertical 9:16 final CTA carousel slide in a bold modern flat cartoon style for Instagram or TikTok. Keep the same visual style, character design, and thick outlined illustration style as the earlier study carousel slides. Use a bright clean background, such as white or light cream, for contrast.
 
@@ -57,39 +73,40 @@ Make the layout feel like a high-converting final carousel slide while staying f
 
 # ── System Prompt for Content Generation ────────────────────────────────────────
 
-SYSTEM_PROMPT = """You are an expert at creating educational carousel content. Your task is to analyze an initial prompt and generate structured content for a carousel.
+SYSTEM_PROMPT = """You are an expert at creating minimalist educational carousel content for Instagram and TikTok. Your content will be rendered as flat-illustration slides in an editorial, modern style — NOT as detailed, complex illustrations.
 
 Given an initial prompt (e.g., "a carousel giving 7 tips for more efficient studying"), you must:
 
-1. Determine the appropriate number of slides (between 5-8 based on the content)
-2. Generate a compelling hook headline for the cover slide
-3. Generate numbered tip titles and detailed explanations for each individual slide
-4. Provide scene descriptions, visual cues, and emotion/meaning for each slide
+1. Respect an explicit tip count when provided by the user
+2. Otherwise choose between 5-8 tips based on the content
+3. Generate a compelling hook headline for the cover slide
+4. For each tip slide, generate content that fits a MINIMALIST 3-zone layout (big number + title, one focal illustration, one short text line)
 
 Return your response as a JSON object with this exact structure:
 {
-  "num_slides": <number between 5-8>,
-  "hook_headline": "<compelling headline for the cover slide>",
+  "num_slides": <number>,
+  "hook_headline": "<compelling 6-10 word headline>",
   "slides": [
     {
       "number": 1,
-      "tip_title": "<short tip title>",
-      "scene_description": "<detailed description of what the student is doing/feeling>",
-      "visual_cues": "<description of visual elements like arrows, icons, etc.>",
-      "emotion_meaning": "<what emotion or concept this slide communicates>",
-      "explanation_text": "<the exact text to go in the white explanation box>"
+      "tip_title": "<3-5 word tip title, punchy and direct>",
+      "scene_description": "<describe ONE simple flat illustration — a single object, symbol, or minimal character moment. Max 20 words. No complex scenes.>",
+      "visual_cues": "<ignored — left blank or N/A>",
+      "emotion_meaning": "<one word or short phrase: the dominant feeling or concept this slide should convey>",
+      "explanation_text": "<10-14 words max. One punchy sentence. No paragraph. Direct and impactful.>"
     },
     ...
   ]
 }
 
-Important guidelines:
-- The hook headline should be compelling and create curiosity
-- Tip titles should be concise and actionable
-- Scene descriptions should be detailed enough for image generation
-- Visual cues should match the tip (e.g., circular arrows for repetition, checkmarks for success)
-- Explanation text should be clear, concise, and educational
-- Maintain consistency in the educational theme throughout"""
+Content quality rules:
+- Hook headline: create curiosity, not clickbait. 6-10 words. Make it feel like the reader NEEDS to swipe.
+- Tip titles: short, bold, scannable — 3 to 5 words. No filler.
+- Scene descriptions: describe ONE minimal visual element only (e.g., "a single open book with a lightbulb above it", "a person sitting cross-legged with eyes closed, calm expression"). Avoid describing complex multi-element scenes or detailed backgrounds.
+- Explanation text: MAXIMUM 14 words. One sentence. Should feel like a tweet, not a paragraph. Make it punchy and memorable.
+- Vary the emotional tone across slides (some tense/negative to contrast with positive ones).
+- Each slide scene should feel visually distinct from the others — avoid same composition twice.
+"""
 
 
 # ── Main Service Function ────────────────────────────────────────────────────────
@@ -223,18 +240,21 @@ def _read_key_from_env_file(env_file_path: str, key: str) -> Optional[str]:
 def _generate_content_structure(client: OpenAI, initial_prompt: str) -> Dict[str, Any]:
     """Generate the content structure using OpenAI chat API."""
     print("  Generating content structure...")
-    
-    response = _chat_with_model_fallback(
-        client=client,
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": f"Initial prompt: {initial_prompt}"},
-        ],
-        temperature=0.7,
-        max_tokens=2000,
+
+    requested_tip_count = _extract_explicit_tip_count(initial_prompt)
+    user_instruction = (
+        f"Initial prompt: {initial_prompt}\n"
+        f"Requested tip count: {requested_tip_count if requested_tip_count is not None else 'none'}\n"
+        "If requested tip count is provided, return exactly that many items in slides."
     )
 
-    content = response.choices[0].message.content.strip()
+    response = _responses_with_model_fallback(
+        client=client,
+        system_prompt=SYSTEM_PROMPT,
+        user_prompt=user_instruction,
+    )
+
+    content = _extract_response_text(response).strip()
     
     # Try to extract JSON from the response
     # Sometimes the model wraps JSON in markdown code blocks
@@ -251,10 +271,8 @@ def _generate_content_structure(client: OpenAI, initial_prompt: str) -> Dict[str
     # Validate structure
     if "num_slides" not in structure or "hook_headline" not in structure or "slides" not in structure:
         raise RuntimeError(f"Invalid content structure returned: {structure}")
-    
-    if len(structure["slides"]) != structure["num_slides"]:
-        print(f"  Warning: num_slides ({structure['num_slides']}) doesn't match slides array length ({len(structure['slides'])})")
-    
+
+    structure = _normalize_slide_count(structure, requested_tip_count)
     print(f"  ✓ Generated {structure['num_slides']} slides")
     return structure
 
@@ -366,13 +384,12 @@ def _generate_single_image(
         raise RuntimeError(f"Failed to generate image: {e}\nPrompt: {prompt[:100]}...")
 
 
-def _chat_with_model_fallback(
+def _responses_with_model_fallback(
     client: OpenAI,
-    messages: list,
-    temperature: float,
-    max_tokens: int,
+    system_prompt: str,
+    user_prompt: str,
 ):
-    """Try newer text models first, then fall back to compatible alternatives."""
+    """Try newer text models first using the Responses API."""
     last_error = None
     seen = set()
     for model in TEXT_MODEL_CANDIDATES:
@@ -380,16 +397,92 @@ def _chat_with_model_fallback(
             continue
         seen.add(model)
         try:
-            return client.chat.completions.create(
+            return client.responses.create(
                 model=model,
-                messages=messages,
-                temperature=temperature,
-                max_tokens=max_tokens,
+                input=[
+                    {"role": "system", "content": [{"type": "input_text", "text": system_prompt}]},
+                    {"role": "user", "content": [{"type": "input_text", "text": user_prompt}]},
+                ],
+                reasoning={"effort": "medium"},
             )
         except Exception as exc:
             last_error = exc
             print(f"  Warning: text model '{model}' failed, trying fallback...")
     raise RuntimeError(f"All text model candidates failed: {last_error}")
+
+
+def _extract_response_text(response: Any) -> str:
+    """Extract text from a Responses API result, with fallback paths."""
+    output_text = getattr(response, "output_text", None)
+    if output_text:
+        return output_text
+
+    output = getattr(response, "output", []) or []
+    chunks: List[str] = []
+    for item in output:
+        for content in getattr(item, "content", []) or []:
+            text = getattr(content, "text", None)
+            if text:
+                chunks.append(text)
+    if chunks:
+        return "\n".join(chunks)
+
+    raise RuntimeError("Responses API returned no text output.")
+
+
+def _extract_explicit_tip_count(initial_prompt: str) -> Optional[int]:
+    """Extract explicit tip count from prompt (e.g., '3 tips', 'seven tips')."""
+    lowered = initial_prompt.lower()
+    match = re.search(r"\b(\d{1,2})\s+(tips?|realizations?|lessons?|ways?)\b", lowered)
+    if match:
+        count = int(match.group(1))
+        if 1 <= count <= 20:
+            return count
+
+    words_to_numbers = {
+        "one": 1,
+        "two": 2,
+        "three": 3,
+        "four": 4,
+        "five": 5,
+        "six": 6,
+        "seven": 7,
+        "eight": 8,
+        "nine": 9,
+        "ten": 10,
+    }
+    for word, number in words_to_numbers.items():
+        if re.search(rf"\b{word}\s+(tips?|realizations?|lessons?|ways?)\b", lowered):
+            return number
+    return None
+
+
+def _normalize_slide_count(
+    structure: Dict[str, Any], requested_tip_count: Optional[int]
+) -> Dict[str, Any]:
+    """Ensure slide list length and numbering are consistent and respect explicit counts."""
+    slides = structure.get("slides", [])
+    if not isinstance(slides, list):
+        raise RuntimeError("Invalid slides format returned by model.")
+
+    target_count = requested_tip_count if requested_tip_count is not None else len(slides)
+    if target_count <= 0:
+        raise RuntimeError("Model returned no slides.")
+
+    normalized = slides[:target_count]
+    if len(normalized) < target_count and normalized:
+        last = normalized[-1]
+        while len(normalized) < target_count:
+            clone = dict(last)
+            clone["tip_title"] = f"{clone.get('tip_title', 'Tip')} (variant {len(normalized) + 1})"
+            normalized.append(clone)
+
+    for idx, slide in enumerate(normalized, start=1):
+        slide["number"] = idx
+
+    structure["slides"] = normalized
+    structure["num_slides"] = len(normalized)
+    return structure
 
 
 def _image_with_model_fallback(
