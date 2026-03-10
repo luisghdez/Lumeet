@@ -32,9 +32,29 @@ IMAGE_SIZE = os.environ.get("OPENAI_IMAGE_SIZE", "1024x1536")
 
 # ── Prompt Templates ────────────────────────────────────────────────────────────
 
-HOOK_SLIDE_TEMPLATE = """Create a vertical 9:16 educational carousel cover slide in a bold modern flat cartoon style for Instagram or TikTok. Use a dark green background. Add very large cream-colored headline text reading: "{HEADLINE}". The text should take up most of the upper half and be extremely readable on mobile.
+HOOK_SLIDE_TEMPLATE = """Design a vertical 9:16 Instagram carousel cover slide. Style: minimalist flat illustration, editorial and modern. Must NOT look AI-generated.
 
-In the lower half, design a creative visual metaphor that communicates improvement, progress, or transformation in a bold and instantly understandable way. You may use one character, multiple poses, symbolic elements, or scene-based storytelling, but avoid repeating the exact same composition every time. Keep the illustration simple, clean, and visually bold with thick outlines and minimal clutter. Make it feel like a viral faceless educational carousel cover. Use Poppins Regular (font weight 400) for all hook text."""
+LAYOUT — two zones only, separated by generous empty space:
+
+ZONE 1 — TOP HALF:
+Place the headline in Poppins Bold, very large, light-colored text on a deep dark background: "{HEADLINE}". The headline is the hero of this slide — it should dominate and be instantly readable at thumbnail size. Maximum 2 lines. No decorative elements competing with the text.
+
+ZONE 2 — BOTTOM HALF (the illustration):
+One single flat illustration that visually represents the theme of the headline. Choose ONE of these creative directions — do not default to the same every time:
+- A single symbolic object (e.g., a cracked clock, a glowing book, a maze with one clear exit)
+- A minimal abstract shape composition (e.g., upward geometric forms, a clean progress arc)
+- A single faceless character in one decisive moment (e.g., standing at a crossroads, looking upward, holding something meaningful)
+Leave at least 40% of this zone as empty background. The illustration is a supporting accent, not the main event.
+
+DESIGN RULES — follow strictly:
+- Background: choose a bold, deep background color that fits the mood and topic. Good options include deep navy, dark charcoal, rich burgundy, dark forest green, deep violet, dark teal — vary it creatively. Solid color only. No gradients, no textures, no patterns.
+- Text color: use a high-contrast light color that pairs well with your chosen background — cream, soft white, pale yellow, or light coral. NOT always cream on green.
+- Color palette: background + contrasting text color + ONE accent color for the illustration. Maximum 3 colors total.
+- Typography: Poppins Bold (weight 700) for the headline. Poppins Regular (weight 400) for any secondary text. No other typefaces.
+- Illustration: flat vector, thick clean outlines, minimal details. One focal element only.
+- White space: the slide should feel uncluttered and bold — like a high-end editorial cover.
+
+DO NOT INCLUDE: character progression sequences (multiple poses), upward arrows with multiple figures, paragraph text below the headline, rounded cards or UI boxes, gradient backgrounds, decorative borders, multiple competing illustration elements, speech bubbles, drop shadows on text, always defaulting to dark green — vary the background color every time."""
 
 INDIVIDUAL_SLIDE_TEMPLATE = """Design a vertical 9:16 Instagram carousel slide. Style: minimalist flat illustration, editorial and modern. Must NOT look AI-generated.
 
