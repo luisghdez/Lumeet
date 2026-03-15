@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { LayoutDashboard, Users, MessageSquare, Plus, Video, Image, Film } from 'lucide-react';
 import ApplicantCard from './components/ApplicantCard';
 import CreateSection from './components/CreateSection';
 import VariantLab from './components/VariantLab';
 import CarouselStudio from './components/CarouselStudio';
 import VideoLibrary from './components/VideoLibrary';
+import GenerationCenter from './components/GenerationCenter';
+import ScheduleModal from './components/ScheduleModal';
 
 function App() {
   const [activeTab, setActiveTab] = useState('recruit');
+  const [scheduleTarget, setScheduleTarget] = useState(null);
+
+  const handleScheduleFromCenter = useCallback((generation) => {
+    setScheduleTarget(generation);
+  }, []);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -92,6 +99,17 @@ function App() {
 
   return (
     <div className="flex h-screen overflow-hidden relative">
+      {/* Generation Center – top-right floating button */}
+      <GenerationCenter onSchedule={handleScheduleFromCenter} />
+
+      {/* Schedule Modal – opened from Generation Center */}
+      {scheduleTarget && (
+        <ScheduleModal
+          generation={scheduleTarget}
+          onClose={() => setScheduleTarget(null)}
+        />
+      )}
+
       {/* Background blobs */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 -left-4 w-96 h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30" />

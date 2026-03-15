@@ -91,6 +91,10 @@ VIDEO_METADATA_FILE = _get_env(
     "VIDEO_METADATA_FILE",
     os.path.join(os.path.dirname(__file__), "video_metadata.json"),
 )
+GENERATION_METADATA_FILE = _get_env(
+    "GENERATION_METADATA_FILE",
+    os.path.join(os.path.dirname(__file__), "generation_metadata.json"),
+)
 
 # If credentials are provided via backend/.env or repo .env, expose them
 # to libraries that rely on the exact process env var (e.g. OpenAI SDK, Gemini SDK, Fal AI SDK).

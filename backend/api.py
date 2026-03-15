@@ -34,6 +34,7 @@ from pipeline import run_full_pipeline
 from late_service import late_service, LateServiceError
 from carousel_service import carousel_service, CarouselServiceError
 from video_metadata_store import video_metadata_store
+from generation_store import generation_store, GenerationStatus
 from config import GCS_VIDEO_OBJECT_PREFIX
 
 # ---------------------------------------------------------------------------
@@ -122,10 +123,21 @@ def _run_pipeline_thread(
     output_dir: str,
     extended: bool = False,
     additional_video_path: Optional[str] = None,
+    generation_id: Optional[str] = None,
 ) -> None:
     """Target for the background thread that runs the pipeline."""
     job_manager.mark_processing(job_id)
-    cb = job_manager.make_step_callback(job_id)
+    if generation_id:
+        generation_store.mark_processing(generation_id, current_step="pipeline")
+
+    # Build a callback that updates both the legacy job_manager AND generation_store
+    jm_cb = job_manager.make_step_callback(job_id)
+
+    def cb(step_key: str, event: str, message: str = ""):
+        jm_cb(step_key, event, message)
+        if generation_id:
+            step_status = {"start": "running", "complete": "completed", "fail": "failed"}.get(event, event)
+            generation_store.update_step(generation_id, step_key, step_status, message)
 
     try:
         result = run_full_pipeline(
@@ -161,8 +173,46 @@ def _run_pipeline_thread(
                 "extended": extended,
                 "createdAt": datetime.now(_tz.utc).isoformat(),
             })
+
+        # Update generation store with completed output
+        if generation_id:
+            video_url = (gcs_info or {}).get("url", "") if gcs_info else ""
+            generation_store.mark_completed(generation_id, {
+                "jobId": job_id,
+                "videoUrl": video_url,
+                "resultPath": result.get("final_video", ""),
+                "videoGcs": gcs_info,
+            })
     except Exception as exc:
         job_manager.mark_failed(job_id, str(exc))
+        if generation_id:
+            generation_store.mark_failed(generation_id, str(exc))
+
+
+def _run_carousel_thread(generation_id: str, prompt: str, timezone_name: str) -> None:
+    """Background thread that generates a carousel and updates the generation store."""
+    generation_store.mark_processing(generation_id, current_step="generating")
+    generation_store.update_step(generation_id, "generating", "running", "Generating carousel slides...")
+
+    try:
+        result = carousel_service.create_carousel(
+            prompt=prompt,
+            timezone_name=timezone_name,
+        )
+        generation_store.update_step(generation_id, "generating", "completed", "Carousel generated")
+        generation_store.mark_completed(generation_id, {
+            "carouselId": result.get("carouselId", ""),
+            "mediaUrls": result.get("mediaUrls", []),
+            "captionDraft": result.get("captionDraft", ""),
+            "hashtags": result.get("hashtags", []),
+            "slides": result.get("slides", []),
+            "suggestedScheduledFor": result.get("suggestedScheduledFor", ""),
+            "carousel": result,
+        })
+    except (CarouselServiceError, Exception) as exc:
+        generation_store.update_step(generation_id, "generating", "failed", str(exc))
+        err_msg = exc.message if hasattr(exc, "message") else str(exc)
+        generation_store.mark_failed(generation_id, err_msg)
 
 
 # ---------------------------------------------------------------------------
@@ -464,3 +514,115 @@ async def get_video(video_id: str):
     if not item:
         raise HTTPException(status_code=404, detail=f"Video {video_id} not found.")
     return _refresh_video_url(item)
+
+
+# ---------------------------------------------------------------------------
+# Generation Center Endpoints
+# ---------------------------------------------------------------------------
+
+from job_manager import PIPELINE_STEPS as _PIPELINE_STEPS, EXTENDED_PIPELINE_STEPS as _EXTENDED_PIPELINE_STEPS
+
+
+@app.post("/api/generations/video")
+async def generation_create_video(
+    image: UploadFile = File(..., description="Model / identity reference image"),
+    video: UploadFile = File(..., description="Reference video"),
+    extended: bool = Form(False),
+    additional_video: Optional[UploadFile] = File(None),
+):
+    """Start a video generation job tracked in the Generation Center."""
+    # Validation (same as /api/generate)
+    if not image.content_type or not image.content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="image must be an image file")
+    if not video.content_type or not video.content_type.startswith("video/"):
+        raise HTTPException(status_code=400, detail="video must be a video file")
+    if extended:
+        if additional_video is None or not additional_video.filename:
+            raise HTTPException(status_code=400, detail="additional_video is required when extended=True")
+
+    # Build step list for generation store
+    step_defs = list(_PIPELINE_STEPS)
+    if extended:
+        step_defs = step_defs + list(_EXTENDED_PIPELINE_STEPS)
+    steps = [{"key": s["key"], "label": s["label"], "status": "pending", "message": ""} for s in step_defs]
+
+    gen = generation_store.create(
+        gen_type="video",
+        label=video.filename or "Video generation",
+        steps=steps,
+    )
+    gen_id = gen["generationId"]
+
+    # Create legacy job (reuse existing infra)
+    job = job_manager.create_job("", "", "", extended=extended)
+    job_dir = os.path.join(JOBS_DIR, job.id)
+    input_dir = os.path.join(job_dir, "input")
+    output_dir = os.path.join(job_dir, "output")
+    os.makedirs(input_dir, exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
+
+    image_ext = os.path.splitext(image.filename or "image.png")[1] or ".png"
+    video_ext = os.path.splitext(video.filename or "video.mp4")[1] or ".mp4"
+    image_path = os.path.join(input_dir, f"model_image{image_ext}")
+    video_path = os.path.join(input_dir, f"reference_video{video_ext}")
+    _save_upload(image, image_path)
+    _save_upload(video, video_path)
+
+    additional_video_path: Optional[str] = None
+    if extended and additional_video is not None:
+        add_ext = os.path.splitext(additional_video.filename or "additional.mp4")[1] or ".mp4"
+        additional_video_path = os.path.join(input_dir, f"additional_video{add_ext}")
+        _save_upload(additional_video, additional_video_path)
+
+    job.video_path = video_path
+    job.image_path = image_path
+    job.output_dir = output_dir
+
+    # Store the legacy jobId on the generation record for cross-reference
+    generation_store.update(gen_id, jobId=job.id)
+
+    thread = threading.Thread(
+        target=_run_pipeline_thread,
+        args=(job.id, video_path, image_path, output_dir, extended, additional_video_path, gen_id),
+        daemon=True,
+    )
+    thread.start()
+
+    return {"generationId": gen_id, "jobId": job.id}
+
+
+@app.post("/api/generations/carousel")
+async def generation_create_carousel(payload: CarouselCreateRequest):
+    """Start an async carousel generation job tracked in the Generation Center."""
+    steps = [{"key": "generating", "label": "Generating Carousel", "status": "pending", "message": ""}]
+    gen = generation_store.create(
+        gen_type="carousel",
+        label=payload.prompt[:80],
+        steps=steps,
+    )
+    gen_id = gen["generationId"]
+
+    thread = threading.Thread(
+        target=_run_carousel_thread,
+        args=(gen_id, payload.prompt, payload.timezone),
+        daemon=True,
+    )
+    thread.start()
+
+    return {"generationId": gen_id}
+
+
+@app.get("/api/generations")
+async def list_generations(limit: int = Query(50, ge=1, le=200)):
+    """List generation jobs for the Generation Center panel."""
+    items = generation_store.list_all(limit=limit)
+    return {"generations": items}
+
+
+@app.get("/api/generations/{generation_id}")
+async def get_generation(generation_id: str):
+    """Get a single generation job's status and output."""
+    item = generation_store.get(generation_id)
+    if not item:
+        raise HTTPException(status_code=404, detail=f"Generation {generation_id} not found.")
+    return item

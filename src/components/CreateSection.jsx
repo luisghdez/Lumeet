@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Upload, Image, Film, Loader2, CheckCircle2, Circle, XCircle, ArrowLeft, Download, Play, X, ToggleLeft, ToggleRight } from 'lucide-react';
 import ScheduleToSocial from './ScheduleToSocial';
+import { startVideoGeneration } from '../lib/lateApi';
 
 const BASE_PIPELINE_STEPS = [
   { key: 'scene_detection', label: 'Scene Detection' },
@@ -262,7 +263,7 @@ function CreateSection() {
   // Derive whether the form is submittable
   const canSubmit = imageFile && videoFile && (!extended || additionalVideoFile);
 
-  // Submit job
+  // Submit job — uses the new /api/generations/video endpoint
   const handleSubmit = useCallback(async () => {
     if (!canSubmit) return;
 
@@ -279,14 +280,9 @@ function CreateSection() {
     }
 
     try {
-      const resp = await fetch('/api/generate', { method: 'POST', body: formData });
-      if (!resp.ok) {
-        const errData = await resp.json().catch(() => ({}));
-        throw new Error(errData.detail || `Upload failed (${resp.status})`);
-      }
-      const { job_id } = await resp.json();
-      setJobId(job_id);
-      startPolling(job_id);
+      const data = await startVideoGeneration(formData);
+      setJobId(data.jobId);
+      startPolling(data.jobId);
     } catch (err) {
       setError(err.message);
       setViewState('error');

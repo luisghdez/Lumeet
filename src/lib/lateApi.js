@@ -82,4 +82,31 @@ export async function getVideo(videoId) {
   return request(`/api/videos/${encodeURIComponent(videoId)}`);
 }
 
+// ---------------------------------------------------------------------------
+// Generation Center API
+// ---------------------------------------------------------------------------
+
+export async function startVideoGeneration(formData) {
+  const resp = await fetch('/api/generations/video', { method: 'POST', body: formData });
+  const data = await resp.json().catch(() => ({}));
+  if (!resp.ok) throw new Error(data.detail || `Upload failed (${resp.status})`);
+  return data;
+}
+
+export async function startCarouselGeneration({ prompt, timezone }) {
+  return request('/api/generations/carousel', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt, timezone }),
+  });
+}
+
+export async function listGenerations(limit = 50) {
+  return request(`/api/generations?limit=${limit}`);
+}
+
+export async function getGeneration(generationId) {
+  return request(`/api/generations/${encodeURIComponent(generationId)}`);
+}
+
 export { DEFAULT_SESSION_ID };

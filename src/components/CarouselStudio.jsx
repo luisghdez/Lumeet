@@ -9,6 +9,8 @@ import {
   getLateConnectUrl,
   listLateAccounts,
   listLatePosts,
+  startCarouselGeneration,
+  getGeneration,
 } from '../lib/lateApi';
 
 function toDatetimeLocal(iso) {
@@ -82,22 +84,41 @@ function CarouselStudio() {
   const handleGenerate = async () => {
     setIsGenerating(true);
     setError('');
-    setStatusMessage('');
+    setStatusMessage('Generating carousel in background...');
     try {
-      const data = await createCarousel({ prompt, timezone });
-      setCarousel(data);
-      setCaption(
-        [data.captionDraft, ...(data.hashtags || [])]
-          .filter(Boolean)
-          .join('\n\n')
-          .trim(),
-      );
-      setScheduledFor(toDatetimeLocal(data.suggestedScheduledFor));
-      setStatusMessage('Carousel generated. Review slides and schedule when ready.');
-      await handleLoadSavedCarousels();
+      // Start async generation via Generation Center endpoint
+      const { generationId } = await startCarouselGeneration({ prompt, timezone });
+
+      // Poll until done
+      const poll = async () => {
+        const gen = await getGeneration(generationId);
+        if (gen.status === 'completed') {
+          const output = gen.output || {};
+          const carouselData = output.carousel || output;
+          setCarousel(carouselData);
+          setCaption(
+            [carouselData.captionDraft, ...(carouselData.hashtags || [])]
+              .filter(Boolean)
+              .join('\n\n')
+              .trim(),
+          );
+          setScheduledFor(toDatetimeLocal(carouselData.suggestedScheduledFor));
+          setStatusMessage('Carousel generated. Review slides and schedule when ready.');
+          setIsGenerating(false);
+          await handleLoadSavedCarousels();
+          return;
+        }
+        if (gen.status === 'failed') {
+          setError(gen.error || 'Carousel generation failed.');
+          setIsGenerating(false);
+          return;
+        }
+        // Still processing — poll again
+        setTimeout(poll, 2500);
+      };
+      setTimeout(poll, 2000);
     } catch (err) {
       setError(err.message);
-    } finally {
       setIsGenerating(false);
     }
   };
