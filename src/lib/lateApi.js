@@ -46,4 +46,40 @@ export async function createLatePost(payload) {
   });
 }
 
+export async function listLatePosts({
+  sessionId = DEFAULT_SESSION_ID,
+  profileId,
+  status,
+  limit = 25,
+} = {}) {
+  const params = new URLSearchParams({ sessionId, limit: String(limit) });
+  if (profileId) params.set('profileId', profileId);
+  if (status) params.set('status', status);
+  return request(`/api/late/posts?${params.toString()}`);
+}
+
+export async function createCarousel({ prompt, timezone }) {
+  return request('/api/carousels', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt, timezone }),
+  });
+}
+
+export async function getCarousel(carouselId) {
+  return request(`/api/carousels/${encodeURIComponent(carouselId)}`);
+}
+
+export async function listCarousels() {
+  return request('/api/carousels');
+}
+
+export async function listVideos() {
+  return request('/api/videos');
+}
+
+export async function getVideo(videoId) {
+  return request(`/api/videos/${encodeURIComponent(videoId)}`);
+}
+
 export { DEFAULT_SESSION_ID };

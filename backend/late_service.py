@@ -5,7 +5,11 @@ Service layer for Late API integration.
 from __future__ import annotations
 
 from datetime import datetime
+from urllib.parse import urlparse
 from typing import Any, Dict, List, Optional
+
+import json
+import logging
 
 from config import (
     LATE_ALLOW_MISSING_API_KEY,
@@ -15,6 +19,8 @@ from config import (
     PUBLIC_BACKEND_BASE_URL,
 )
 from late_client import LateApiError, LateClient
+
+logger = logging.getLogger("lumeet.late_service")
 
 
 class LateServiceError(Exception):
@@ -98,9 +104,26 @@ class LateService:
 
     def list_accounts(self, session_id: str, profile_id: Optional[str] = None) -> Dict[str, Any]:
         client = self._client_or_error()
-        resolved_profile_id = profile_id or self.get_profile_id_for_session(session_id)
+        del session_id  # Keep API surface stable; list defaults to all connected accounts.
         try:
-            return client.list_accounts(profile_id=resolved_profile_id)
+            # Match Late SDK behavior (`client.accounts.list()`): if no profileId is
+            # provided, list all connected accounts available to this API key.
+            return client.list_accounts(profile_id=profile_id)
+        except LateApiError as exc:
+            raise self._map_error(exc) from exc
+
+    def list_posts(
+        self,
+        session_id: str,
+        *,
+        profile_id: Optional[str] = None,
+        status: Optional[str] = None,
+        limit: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        client = self._client_or_error()
+        del session_id  # Reserved for future multi-tenant persistence.
+        try:
+            return client.list_posts(profile_id=profile_id, status=status, limit=limit)
         except LateApiError as exc:
             raise self._map_error(exc) from exc
 
@@ -130,10 +153,34 @@ class LateService:
     ) -> List[str]:
         normalized = [u for u in (media_urls or []) if u]
         if include_result_video and job_id:
-            base = PUBLIC_BACKEND_BASE_URL.rstrip("/")
-            normalized.append(f"{base}/api/jobs/{job_id}/result")
+            # Prefer the stable GCS public URL stored on the job if available;
+            # fall back to the local result endpoint.
+            from job_manager import job_manager as _jm
+
+            gcs_url: Optional[str] = None
+            job = _jm.get_job(job_id)
+            if job and job.video_gcs:
+                gcs_url = job.video_gcs.get("url")
+            if gcs_url:
+                normalized.append(gcs_url)
+            else:
+                base = PUBLIC_BACKEND_BASE_URL.rstrip("/")
+                normalized.append(f"{base}/api/jobs/{job_id}/result")
         # Keep insertion order while deduplicating.
         return list(dict.fromkeys(normalized))
+
+    @staticmethod
+    def _guess_mime_type(url: str) -> str:
+        path = (urlparse(url).path or "").lower()
+        if path.endswith(".png"):
+            return "image/png"
+        if path.endswith(".webp"):
+            return "image/webp"
+        if path.endswith(".gif"):
+            return "image/gif"
+        if path.endswith(".mp4"):
+            return "video/mp4"
+        return "image/jpeg"
 
     def create_post(
         self,
@@ -172,6 +219,10 @@ class LateService:
             "content": content.strip(),
             "platforms": platforms,
         }
+        has_tiktok_target = any(
+            str(target.get("platform", "")).strip().lower() == "tiktok"
+            for target in platforms
+        )
         if profile_id:
             payload["profileId"] = profile_id
         if scheduled_for:
@@ -184,6 +235,36 @@ class LateService:
             # Pass both common keys for compatibility across API revisions.
             payload["mediaUrls"] = media_list
             payload["media"] = [{"url": url} for url in media_list]
+            payload["mediaItems"] = [
+                {
+                    "url": url,
+                    "type": "video" if self._guess_mime_type(url).startswith("video/") else "image",
+                    "mimeType": self._guess_mime_type(url),
+                    "sortOrder": idx,
+                }
+                for idx, url in enumerate(media_list)
+            ]
+            # Full TikTok settings for photo carousels (matches Late SDK docs).
+            is_photo_carousel = (
+                len(media_list) > 1
+                and all(not self._guess_mime_type(url).startswith("video/") for url in media_list)
+            )
+            if has_tiktok_target and is_photo_carousel:
+                payload["tiktok_settings"] = {
+                    "privacy_level": "PUBLIC_TO_EVERYONE",
+                    "allow_comment": True,
+                    "media_type": "photo",
+                    "photo_cover_index": 0,
+                    "description": content.strip(),
+                    "auto_add_music": True,
+                    "content_preview_confirmed": True,
+                    "express_consent_given": True,
+                }
+
+        logger.info(
+            "Late create_post payload:\n%s",
+            json.dumps(payload, indent=2, default=str),
+        )
 
         client = self._client_or_error()
         try:

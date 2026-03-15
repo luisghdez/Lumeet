@@ -105,6 +105,56 @@ class TestGenerateValidation:
         assert resp.status_code == 400
         assert "video" in resp.json()["detail"].lower()
 
+    def test_extended_without_additional_video_returns_400(self, client):
+        """extended=true without additional_video should be rejected with 400."""
+        resp = client.post(
+            "/api/generate",
+            data={"extended": "true"},
+            files={
+                "image": ("model.png", _dummy_image(), "image/png"),
+                "video": ("input.mp4", _dummy_video(), "video/mp4"),
+            },
+        )
+        assert resp.status_code == 400
+        assert "additional_video" in resp.json()["detail"].lower()
+
+    def test_extended_with_wrong_additional_video_type_returns_400(self, client):
+        """additional_video with a non-video MIME type should be rejected with 400."""
+        resp = client.post(
+            "/api/generate",
+            data={"extended": "true"},
+            files={
+                "image": ("model.png", _dummy_image(), "image/png"),
+                "video": ("input.mp4", _dummy_video(), "video/mp4"),
+                "additional_video": ("extra.txt", io.BytesIO(b"hello"), "text/plain"),
+            },
+        )
+        assert resp.status_code == 400
+        assert "additional_video" in resp.json()["detail"].lower()
+
+    def test_extended_with_valid_additional_video_accepted(self, client):
+        """extended=true with a valid additional_video should start a job (202/200)."""
+        with patch("api.run_full_pipeline") as mock_pipeline:
+            import tempfile, os
+            tmp = tempfile.NamedTemporaryFile(suffix=".mp4", delete=False)
+            tmp.write(b"\x00" * 100)
+            tmp.close()
+            mock_pipeline.return_value = {"final_video": tmp.name}
+
+            resp = client.post(
+                "/api/generate",
+                data={"extended": "true"},
+                files={
+                    "image": ("model.png", _dummy_image(), "image/png"),
+                    "video": ("input.mp4", _dummy_video(), "video/mp4"),
+                    "additional_video": ("extra.mp4", _dummy_video(), "video/mp4"),
+                },
+            )
+            os.unlink(tmp.name)
+
+        assert resp.status_code == 200
+        assert "job_id" in resp.json()
+
 
 # -- Job status tests -------------------------------------------------------
 
@@ -177,7 +227,8 @@ class TestFullFlow:
         video_file = tmp_path / "final.mp4"
         video_file.write_bytes(b"\x00" * 500)
 
-        def fake_pipeline(video_path, model_image_path, output_dir, on_step=None):
+        def fake_pipeline(video_path, model_image_path, output_dir, on_step=None,
+                          extended=False, additional_video_path=None, **kwargs):
             """Simulates pipeline steps completing quickly."""
             if on_step:
                 for step_key in [
@@ -245,3 +296,195 @@ class TestFullFlow:
         data = status_resp.json()
         assert data["status"] == "failed"
         assert "Fal AI" in data["error"]
+
+    @patch("api.run_full_pipeline")
+    def test_extended_pipeline_forwards_additional_video_path(self, mock_pipeline, client, tmp_path):
+        """When extended=True, additional_video_path must be forwarded to run_full_pipeline."""
+        video_file = tmp_path / "final.mp4"
+        video_file.write_bytes(b"\x00" * 100)
+
+        captured_kwargs = {}
+
+        def fake_pipeline(video_path, model_image_path, output_dir, on_step=None,
+                          extended=False, additional_video_path=None, **kwargs):
+            captured_kwargs["extended"] = extended
+            captured_kwargs["additional_video_path"] = additional_video_path
+            if on_step:
+                all_steps = [
+                    "scene_detection", "frame_extraction", "caption_detection",
+                    "scene_recreation", "motion_control", "caption_overlay",
+                    "audio_extraction", "video_concatenation", "audio_replacement",
+                ]
+                for step_key in all_steps:
+                    on_step(step_key, "start")
+                    on_step(step_key, "complete")
+            return {"final_video": str(video_file)}
+
+        mock_pipeline.side_effect = fake_pipeline
+
+        resp = client.post(
+            "/api/generate",
+            data={"extended": "true"},
+            files={
+                "image": ("model.png", _dummy_image(), "image/png"),
+                "video": ("input.mp4", _dummy_video(), "video/mp4"),
+                "additional_video": ("extra.mp4", _dummy_video(), "video/mp4"),
+            },
+        )
+        assert resp.status_code == 200
+        job_id = resp.json()["job_id"]
+
+        # Wait for completion
+        for _ in range(50):
+            status_resp = client.get(f"/api/jobs/{job_id}")
+            if status_resp.json()["status"] == "completed":
+                break
+            time.sleep(0.1)
+        else:
+            pytest.fail("Extended job did not complete within timeout")
+
+        # Verify pipeline was called with extended=True and a real path for additional_video
+        assert captured_kwargs.get("extended") is True
+        assert captured_kwargs.get("additional_video_path") is not None
+        assert captured_kwargs["additional_video_path"].endswith(".mp4")
+
+        # Verify job has all 9 steps (6 base + 3 extended)
+        data = status_resp.json()
+        assert len(data["steps"]) == 9
+
+
+# -- GCS upload on completion -----------------------------------------------
+
+class TestGcsVideoUpload:
+    @patch("api._upload_video_to_gcs")
+    @patch("api.run_full_pipeline")
+    def test_gcs_metadata_in_job_status(self, mock_pipeline, mock_gcs_upload, client, tmp_path):
+        """When GCS upload succeeds, video_gcs metadata should appear in job status."""
+        video_file = tmp_path / "final.mp4"
+        video_file.write_bytes(b"\x00" * 100)
+
+        mock_gcs_upload.return_value = {
+            "bucket": "test-bucket",
+            "object": "videos/abc123/final_output.mp4",
+            "url": "https://storage.googleapis.com/test-bucket/videos/abc123/final_output.mp4",
+        }
+
+        def fake_pipeline(video_path, model_image_path, output_dir, on_step=None,
+                          extended=False, additional_video_path=None, **kwargs):
+            if on_step:
+                for step_key in [
+                    "scene_detection", "frame_extraction", "caption_detection",
+                    "scene_recreation", "motion_control", "caption_overlay",
+                ]:
+                    on_step(step_key, "start")
+                    on_step(step_key, "complete")
+            return {"final_video": str(video_file)}
+
+        mock_pipeline.side_effect = fake_pipeline
+
+        resp = client.post(
+            "/api/generate",
+            files={
+                "image": ("model.png", _dummy_image(), "image/png"),
+                "video": ("input.mp4", _dummy_video(), "video/mp4"),
+            },
+        )
+        job_id = resp.json()["job_id"]
+
+        for _ in range(50):
+            status_resp = client.get(f"/api/jobs/{job_id}")
+            if status_resp.json()["status"] == "completed":
+                break
+            time.sleep(0.1)
+        else:
+            pytest.fail("Job did not complete within timeout")
+
+        data = status_resp.json()
+        assert data["status"] == "completed"
+        assert "video_gcs" in data
+        assert data["video_gcs"]["url"] == "https://storage.googleapis.com/test-bucket/videos/abc123/final_output.mp4"
+        assert data["video_gcs"]["bucket"] == "test-bucket"
+
+    @patch("api._upload_video_to_gcs")
+    @patch("api.run_full_pipeline")
+    def test_job_completes_even_when_gcs_unavailable(self, mock_pipeline, mock_gcs_upload, client, tmp_path):
+        """When GCS upload fails, the job should still complete successfully."""
+        video_file = tmp_path / "final.mp4"
+        video_file.write_bytes(b"\x00" * 100)
+
+        # Simulate GCS failure
+        mock_gcs_upload.return_value = None
+
+        def fake_pipeline(video_path, model_image_path, output_dir, on_step=None,
+                          extended=False, additional_video_path=None, **kwargs):
+            if on_step:
+                for step_key in [
+                    "scene_detection", "frame_extraction", "caption_detection",
+                    "scene_recreation", "motion_control", "caption_overlay",
+                ]:
+                    on_step(step_key, "start")
+                    on_step(step_key, "complete")
+            return {"final_video": str(video_file)}
+
+        mock_pipeline.side_effect = fake_pipeline
+
+        resp = client.post(
+            "/api/generate",
+            files={
+                "image": ("model.png", _dummy_image(), "image/png"),
+                "video": ("input.mp4", _dummy_video(), "video/mp4"),
+            },
+        )
+        job_id = resp.json()["job_id"]
+
+        for _ in range(50):
+            status_resp = client.get(f"/api/jobs/{job_id}")
+            if status_resp.json()["status"] == "completed":
+                break
+            time.sleep(0.1)
+        else:
+            pytest.fail("Job did not complete within timeout")
+
+        data = status_resp.json()
+        assert data["status"] == "completed"
+        # video_gcs should NOT be present when upload failed
+        assert "video_gcs" not in data
+
+
+# -- Late media URL preference (GCS vs local fallback) ----------------------
+
+class TestLateMediaGcsPreference:
+    def test_normalize_media_urls_prefers_gcs_url(self):
+        """When a job has video_gcs metadata, _normalize_media_urls should use the GCS URL."""
+        from late_service import LateService
+
+        # Set up a completed job with video_gcs metadata
+        job = job_manager.create_job("/tmp/v.mp4", "/tmp/i.png", "/tmp/out")
+        job_manager.mark_completed(job.id, "/tmp/final.mp4", {"final_video": "/tmp/final.mp4"})
+        job.video_gcs = {
+            "bucket": "test-bucket",
+            "object": "videos/test/final.mp4",
+            "url": "https://storage.googleapis.com/test-bucket/videos/test/final.mp4",
+        }
+
+        urls = LateService._normalize_media_urls(
+            include_result_video=True,
+            job_id=job.id,
+        )
+        assert len(urls) == 1
+        assert urls[0] == "https://storage.googleapis.com/test-bucket/videos/test/final.mp4"
+
+    def test_normalize_media_urls_falls_back_to_local(self):
+        """When a job has no video_gcs metadata, falls back to the local result endpoint."""
+        from late_service import LateService
+
+        job = job_manager.create_job("/tmp/v.mp4", "/tmp/i.png", "/tmp/out")
+        job_manager.mark_completed(job.id, "/tmp/final.mp4", {"final_video": "/tmp/final.mp4"})
+        # No video_gcs set
+
+        urls = LateService._normalize_media_urls(
+            include_result_video=True,
+            job_id=job.id,
+        )
+        assert len(urls) == 1
+        assert f"/api/jobs/{job.id}/result" in urls[0]

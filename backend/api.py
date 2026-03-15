@@ -32,6 +32,9 @@ sys.path.insert(0, os.path.dirname(__file__))
 from job_manager import job_manager, JobStatus
 from pipeline import run_full_pipeline
 from late_service import late_service, LateServiceError
+from carousel_service import carousel_service, CarouselServiceError
+from video_metadata_store import video_metadata_store
+from config import GCS_VIDEO_OBJECT_PREFIX
 
 # ---------------------------------------------------------------------------
 # App
@@ -81,6 +84,11 @@ class LateCreatePostRequest(BaseModel):
     jobId: Optional[str] = None
 
 
+class CarouselCreateRequest(BaseModel):
+    prompt: str = Field(min_length=3, max_length=500)
+    timezone: str = Field(default="UTC", min_length=1, max_length=80)
+
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -91,8 +99,29 @@ def _save_upload(upload: UploadFile, dest: str) -> None:
         shutil.copyfileobj(upload.file, f)
 
 
+def _upload_video_to_gcs(job_id: str, local_video_path: str) -> Optional[dict]:
+    """Upload the final video to GCS and return metadata dict, or None on failure."""
+    try:
+        from storage_gcs import GcsStorage, GcsStorageError
+
+        gcs = GcsStorage()
+        ext = os.path.splitext(local_video_path)[1] or ".mp4"
+        object_name = f"{GCS_VIDEO_OBJECT_PREFIX.strip('/')}/{job_id}/final_output{ext}"
+        gcs_info = gcs.upload_file_public(local_video_path, object_name)
+        logger.info("Uploaded video to GCS: %s", gcs_info.get("url"))
+        return gcs_info
+    except Exception as exc:
+        logger.warning("GCS video upload failed (non-fatal): %s", exc)
+        return None
+
+
 def _run_pipeline_thread(
-    job_id: str, video_path: str, image_path: str, output_dir: str, extended: bool = False
+    job_id: str,
+    video_path: str,
+    image_path: str,
+    output_dir: str,
+    extended: bool = False,
+    additional_video_path: Optional[str] = None,
 ) -> None:
     """Target for the background thread that runs the pipeline."""
     job_manager.mark_processing(job_id)
@@ -105,8 +134,33 @@ def _run_pipeline_thread(
             output_dir=output_dir,
             on_step=cb,
             extended=extended,
+            additional_video_path=additional_video_path,
         )
+
+        # Attempt to upload final video to GCS for stable public URL.
+        gcs_info = _upload_video_to_gcs(job_id, result["final_video"])
+        if gcs_info:
+            result["final_video_gcs"] = gcs_info
+
         job_manager.mark_completed(job_id, result["final_video"], result)
+
+        # Store GCS metadata on the job so it's exposed via to_dict().
+        if gcs_info:
+            job = job_manager.get_job(job_id)
+            if job:
+                job.video_gcs = gcs_info
+
+            # Persist video metadata for the video library.
+            from datetime import datetime, timezone as _tz
+
+            video_metadata_store.save(job_id, {
+                "videoId": job_id,
+                "url": gcs_info.get("url", ""),
+                "bucket": gcs_info.get("bucket", ""),
+                "object": gcs_info.get("object", ""),
+                "extended": extended,
+                "createdAt": datetime.now(_tz.utc).isoformat(),
+            })
     except Exception as exc:
         job_manager.mark_failed(job_id, str(exc))
 
@@ -120,6 +174,7 @@ async def generate(
     image: UploadFile = File(..., description="Model / identity reference image"),
     video: UploadFile = File(..., description="Reference video"),
     extended: bool = Form(False, description="Enable extended pipeline (concatenate additional video and replace audio)"),
+    additional_video: Optional[UploadFile] = File(None, description="Second section video to append (required when extended=True)"),
 ):
     """
     Start a new video generation pipeline job.
@@ -128,6 +183,7 @@ async def generate(
       - ``image``: the model/identity reference image (PNG/JPG)
       - ``video``: the reference video (MP4)
       - ``extended``: optional boolean to enable extended pipeline (default: False)
+      - ``additional_video``: second-section video to append; required when extended=True
 
     Returns the ``job_id`` which can be used to poll progress and
     download the result.
@@ -137,6 +193,19 @@ async def generate(
         raise HTTPException(status_code=400, detail="image must be an image file (PNG, JPG, etc.)")
     if not video.content_type or not video.content_type.startswith("video/"):
         raise HTTPException(status_code=400, detail="video must be a video file (MP4, etc.)")
+
+    # Extended-mode validation
+    if extended:
+        if additional_video is None or not additional_video.filename:
+            raise HTTPException(
+                status_code=400,
+                detail="additional_video is required when extended=True",
+            )
+        if not additional_video.content_type or not additional_video.content_type.startswith("video/"):
+            raise HTTPException(
+                status_code=400,
+                detail="additional_video must be a video file (MP4, etc.)",
+            )
 
     # Create a job directory to hold uploads and outputs
     job = job_manager.create_job("", "", "", extended=extended)  # placeholder paths, filled below
@@ -157,6 +226,13 @@ async def generate(
     _save_upload(image, image_path)
     _save_upload(video, video_path)
 
+    # Save additional video if provided
+    additional_video_path: Optional[str] = None
+    if extended and additional_video is not None:
+        add_ext = os.path.splitext(additional_video.filename or "additional.mp4")[1] or ".mp4"
+        additional_video_path = os.path.join(input_dir, f"additional_video{add_ext}")
+        _save_upload(additional_video, additional_video_path)
+
     # Update job with real paths
     job.video_path = video_path
     job.image_path = image_path
@@ -165,7 +241,7 @@ async def generate(
     # Launch pipeline in background thread
     thread = threading.Thread(
         target=_run_pipeline_thread,
-        args=(job.id, video_path, image_path, output_dir, extended),
+        args=(job.id, video_path, image_path, output_dir, extended, additional_video_path),
         daemon=True,
     )
     thread.start()
@@ -266,14 +342,37 @@ async def list_late_accounts(
     return result
 
 
+@app.get("/api/late/posts")
+async def list_late_posts(
+    sessionId: str = Query("local-dev-session"),
+    profileId: Optional[str] = Query(None),
+    status: Optional[str] = Query(None),
+    limit: Optional[int] = Query(25),
+):
+    """List scheduled/published posts from Late for dashboard visibility."""
+    logger.info("Late posts list requested for session=%s", sessionId)
+    try:
+        result = late_service.list_posts(
+            session_id=sessionId,
+            profile_id=profileId,
+            status=status,
+            limit=limit,
+        )
+    except LateServiceError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+    return result
+
+
 @app.post("/api/late/posts")
 async def create_late_post(payload: LateCreatePostRequest):
     """Create/schedule a social post via Late."""
     logger.info(
-        "Late post create requested session=%s targets=%d includeResultVideo=%s",
+        "Late post create requested session=%s targets=%d includeResultVideo=%s mediaUrls=%d scheduledFor=%s",
         payload.sessionId,
         len(payload.platforms),
         payload.includeResultVideo,
+        len(payload.mediaUrls),
+        payload.scheduledFor,
     )
     try:
         result = late_service.create_post(
@@ -289,5 +388,79 @@ async def create_late_post(payload: LateCreatePostRequest):
             job_id=payload.jobId,
         )
     except LateServiceError as exc:
+        logger.warning(
+            "Late post failed: status=%s message=%s details=%s",
+            exc.status_code,
+            exc.message,
+            exc.details,
+        )
         raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
     return result
+
+
+@app.post("/api/carousels")
+async def create_carousel(payload: CarouselCreateRequest):
+    """Generate a carousel from prompt, upload media to GCS, and return review payload."""
+    logger.info("Carousel create requested timezone=%s", payload.timezone)
+    try:
+        return carousel_service.create_carousel(
+            prompt=payload.prompt,
+            timezone_name=payload.timezone,
+        )
+    except CarouselServiceError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+
+
+@app.get("/api/carousels/{carousel_id}")
+async def get_carousel(carousel_id: str):
+    """Fetch previously generated carousel metadata for review/scheduling."""
+    try:
+        return carousel_service.get_carousel(carousel_id)
+    except CarouselServiceError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+
+
+@app.get("/api/carousels")
+async def list_carousels():
+    """List saved carousel payloads for quick scheduling."""
+    try:
+        return carousel_service.list_carousels()
+    except CarouselServiceError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+
+
+# ---------------------------------------------------------------------------
+# Video Library Endpoints
+# ---------------------------------------------------------------------------
+
+def _refresh_video_url(item: dict) -> dict:
+    """Regenerate the signed URL for a stored video if needed."""
+    refreshed = dict(item)
+    bucket = item.get("bucket")
+    object_name = item.get("object")
+    if bucket and object_name:
+        try:
+            from storage_gcs import GcsStorage
+            gcs = GcsStorage()
+            if bucket == gcs.bucket_name:
+                refreshed["url"] = gcs.generate_read_url(object_name)
+        except Exception:
+            pass  # keep existing url
+    return refreshed
+
+
+@app.get("/api/videos")
+async def list_videos():
+    """List previously generated videos that were uploaded to GCS."""
+    items = video_metadata_store.list_all()
+    refreshed = [_refresh_video_url(item) for item in items]
+    return {"videos": refreshed}
+
+
+@app.get("/api/videos/{video_id}")
+async def get_video(video_id: str):
+    """Get metadata for a single generated video."""
+    item = video_metadata_store.get(video_id)
+    if not item:
+        raise HTTPException(status_code=404, detail=f"Video {video_id} not found.")
+    return _refresh_video_url(item)

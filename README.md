@@ -37,6 +37,14 @@ Set these before starting `uvicorn`:
 - `LATE_REQUEST_TIMEOUT_SEC` (optional, default `20`)
 - `PUBLIC_BACKEND_BASE_URL` (optional, default `http://127.0.0.1:8000`)
 
+### Carousel + GCS Environment Variables (backend)
+
+- `GCS_BUCKET_NAME` (required for `/api/carousels`)
+- `GCS_OBJECT_PREFIX` (optional, default `carousels`)
+- `GCS_SIGNED_URL_TTL_SEC` (optional, default `604800`)
+- `CAROUSEL_SUGGESTION_MINUTES_STEP` (optional, default `30`)
+- `CAROUSEL_METADATA_FILE` (optional, default `backend/carousel_metadata.json`)
+
 ### Late Scheduling Flow
 
 After a video is generated in the **Create** tab, use **Schedule to Social** to:
@@ -51,7 +59,29 @@ Backend endpoints used by the frontend:
 - `POST /api/late/profiles`
 - `GET /api/late/connect-url`
 - `GET /api/late/accounts`
+- `GET /api/late/posts`
 - `POST /api/late/posts`
+- `POST /api/carousels`
+- `GET /api/carousels`
+- `GET /api/carousels/{carousel_id}`
+
+### GCS Connectivity Prephase
+
+Before implementing carousel storage, verify bucket access from backend:
+
+1. Configure credentials:
+   - Option A: `export GOOGLE_APPLICATION_CREDENTIALS="/absolute/path/to/service-account.json"`
+   - Option B: use ADC from `gcloud auth application-default login`
+2. Set bucket name:
+   - `export GCS_BUCKET_NAME="your-bucket-name"`
+3. Run smoke test:
+   - `cd backend && python test_gcs_connection.py`
+
+Optional flags:
+
+- `--bucket <name>`
+- `--prefix <path-prefix>`
+- `--timeout <seconds>`
 
 ### Development
 

@@ -33,3 +33,6 @@ venv/
 env/
 ENV/
 .venv
+
+# Local cloud credentials
+backend/lumeet-backend-e40115f9b72b.json

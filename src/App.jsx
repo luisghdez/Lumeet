@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { LayoutDashboard, Users, MessageSquare, Plus, Video } from 'lucide-react';
+import { LayoutDashboard, Users, MessageSquare, Plus, Video, Image, Film } from 'lucide-react';
 import ApplicantCard from './components/ApplicantCard';
 import CreateSection from './components/CreateSection';
 import VariantLab from './components/VariantLab';
+import CarouselStudio from './components/CarouselStudio';
+import VideoLibrary from './components/VideoLibrary';
 
 function App() {
   const [activeTab, setActiveTab] = useState('recruit');
@@ -20,6 +22,8 @@ function App() {
     // { id: 'messages', label: 'Messages', icon: MessageSquare },
     { id: 'create', label: 'Create', icon: Plus },
     { id: 'variant-lab', label: 'Variant Lab', icon: Video },
+    { id: 'carousel-studio', label: 'Carousel Studio', icon: Image },
+    { id: 'video-library', label: 'Video Library', icon: Film },
   ];
 
   // Mock data for applicant cards
@@ -137,6 +141,10 @@ function App() {
           <CreateSection />
         ) : activeTab === 'variant-lab' ? (
           <VariantLab />
+        ) : activeTab === 'carousel-studio' ? (
+          <CarouselStudio />
+        ) : activeTab === 'video-library' ? (
+          <VideoLibrary />
         ) : (
           <div className="max-w-7xl mx-auto">
             {/* Header */}

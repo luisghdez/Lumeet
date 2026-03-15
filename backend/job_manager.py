@@ -78,8 +78,11 @@ class Job:
     image_path: Optional[str] = None
     output_dir: Optional[str] = None
 
+    # GCS metadata for the uploaded final video (set after GCS upload)
+    video_gcs: Optional[dict] = None
+
     def to_dict(self) -> dict:
-        return {
+        d = {
             "id": self.id,
             "status": self.status.value,
             "current_step": self.current_step,
@@ -88,6 +91,9 @@ class Job:
             "created_at": self.created_at,
             "completed_at": self.completed_at,
         }
+        if self.video_gcs:
+            d["video_gcs"] = self.video_gcs
+        return d
 
 
 class JobManager:

@@ -1,14 +1,20 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Upload, Image, Film, Loader2, CheckCircle2, Circle, XCircle, ArrowLeft, Download, Play, X } from 'lucide-react';
+import { Upload, Image, Film, Loader2, CheckCircle2, Circle, XCircle, ArrowLeft, Download, Play, X, ToggleLeft, ToggleRight } from 'lucide-react';
 import ScheduleToSocial from './ScheduleToSocial';
 
-const PIPELINE_STEPS = [
+const BASE_PIPELINE_STEPS = [
   { key: 'scene_detection', label: 'Scene Detection' },
   { key: 'frame_extraction', label: 'Frame Extraction' },
   { key: 'caption_detection', label: 'Caption Detection' },
   { key: 'scene_recreation', label: 'Scene Recreation' },
   { key: 'motion_control', label: 'Motion Control (Kling AI)' },
   { key: 'caption_overlay', label: 'Caption Overlay' },
+];
+
+const EXTENDED_PIPELINE_STEPS = [
+  { key: 'audio_extraction', label: 'Audio Extraction' },
+  { key: 'video_concatenation', label: 'Video Concatenation' },
+  { key: 'audio_replacement', label: 'Audio Replacement' },
 ];
 
 const POLL_INTERVAL = 2000;
@@ -125,19 +131,55 @@ function StepItem({ step, index }) {
 }
 
 
+// ---------- Extended Toggle ----------
+
+function ExtendedToggle({ extended, onChange }) {
+  return (
+    <button
+      type="button"
+      onClick={() => onChange(!extended)}
+      className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl border-2 transition-all duration-200 text-sm font-medium
+        ${extended
+          ? 'border-purple-400 bg-purple-50 text-purple-700'
+          : 'border-gray-200 bg-white text-gray-500 hover:border-gray-300'}`}
+    >
+      {extended
+        ? <ToggleRight size={20} className="text-purple-600" />
+        : <ToggleLeft size={20} className="text-gray-400" />}
+      <span>Extended Mode</span>
+      <span className={`text-xs px-1.5 py-0.5 rounded-full font-semibold
+        ${extended ? 'bg-purple-200 text-purple-700' : 'bg-gray-100 text-gray-400'}`}>
+        {extended ? 'ON' : 'OFF'}
+      </span>
+    </button>
+  );
+}
+
+
 // ---------- Main Component ----------
 
 function CreateSection() {
   const [viewState, setViewState] = useState('upload'); // 'upload' | 'processing' | 'result' | 'error'
   const [imageFile, setImageFile] = useState(null);
   const [videoFile, setVideoFile] = useState(null);
+  const [additionalVideoFile, setAdditionalVideoFile] = useState(null);
+  const [extended, setExtended] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
   const [videoPreview, setVideoPreview] = useState(null);
+  const [additionalVideoPreview, setAdditionalVideoPreview] = useState(null);
   const [jobId, setJobId] = useState(null);
-  const [steps, setSteps] = useState(PIPELINE_STEPS.map(s => ({ ...s, status: 'pending', message: '' })));
+  const [steps, setSteps] = useState(BASE_PIPELINE_STEPS.map(s => ({ ...s, status: 'pending', message: '' })));
   const [error, setError] = useState(null);
   const [resultUrl, setResultUrl] = useState(null);
+  const [videoGcsUrl, setVideoGcsUrl] = useState(null);
   const pollRef = useRef(null);
+
+  // Clear additional video when extended is turned off
+  useEffect(() => {
+    if (!extended) {
+      setAdditionalVideoFile(null);
+    }
+  }, [extended]);
 
   // Preview URLs
   useEffect(() => {
@@ -159,6 +201,16 @@ function CreateSection() {
       setVideoPreview(null);
     }
   }, [videoFile]);
+
+  useEffect(() => {
+    if (additionalVideoFile) {
+      const url = URL.createObjectURL(additionalVideoFile);
+      setAdditionalVideoPreview({ type: 'video', url });
+      return () => URL.revokeObjectURL(url);
+    } else {
+      setAdditionalVideoPreview(null);
+    }
+  }, [additionalVideoFile]);
 
   // Cleanup poll on unmount
   useEffect(() => {
@@ -182,7 +234,10 @@ function CreateSection() {
         if (data.status === 'completed') {
           clearInterval(pollRef.current);
           pollRef.current = null;
-          setResultUrl(`/api/jobs/${id}/result`);
+          // Prefer GCS public URL for playback/scheduling; fall back to local endpoint.
+          const gcsUrl = data.video_gcs?.url || null;
+          setVideoGcsUrl(gcsUrl);
+          setResultUrl(gcsUrl || `/api/jobs/${id}/result`);
           setViewState('result');
         } else if (data.status === 'failed') {
           clearInterval(pollRef.current);
@@ -196,17 +251,32 @@ function CreateSection() {
     }, POLL_INTERVAL);
   }, []);
 
+  const allStepsForMode = useCallback((isExtended) => {
+    const base = BASE_PIPELINE_STEPS.map(s => ({ ...s, status: 'pending', message: '' }));
+    if (isExtended) {
+      return [...base, ...EXTENDED_PIPELINE_STEPS.map(s => ({ ...s, status: 'pending', message: '' }))];
+    }
+    return base;
+  }, []);
+
+  // Derive whether the form is submittable
+  const canSubmit = imageFile && videoFile && (!extended || additionalVideoFile);
+
   // Submit job
   const handleSubmit = useCallback(async () => {
-    if (!imageFile || !videoFile) return;
+    if (!canSubmit) return;
 
     setViewState('processing');
-    setSteps(PIPELINE_STEPS.map(s => ({ ...s, status: 'pending', message: '' })));
+    setSteps(allStepsForMode(extended));
     setError(null);
 
     const formData = new FormData();
     formData.append('image', imageFile);
     formData.append('video', videoFile);
+    formData.append('extended', extended ? 'true' : 'false');
+    if (extended && additionalVideoFile) {
+      formData.append('additional_video', additionalVideoFile);
+    }
 
     try {
       const resp = await fetch('/api/generate', { method: 'POST', body: formData });
@@ -221,7 +291,7 @@ function CreateSection() {
       setError(err.message);
       setViewState('error');
     }
-  }, [imageFile, videoFile, startPolling]);
+  }, [canSubmit, imageFile, videoFile, additionalVideoFile, extended, allStepsForMode, startPolling]);
 
   // Reset everything
   const handleReset = useCallback(() => {
@@ -229,10 +299,13 @@ function CreateSection() {
     setViewState('upload');
     setImageFile(null);
     setVideoFile(null);
+    setAdditionalVideoFile(null);
+    setExtended(false);
     setJobId(null);
-    setSteps(PIPELINE_STEPS.map(s => ({ ...s, status: 'pending', message: '' })));
+    setSteps(BASE_PIPELINE_STEPS.map(s => ({ ...s, status: 'pending', message: '' })));
     setError(null);
     setResultUrl(null);
+    setVideoGcsUrl(null);
   }, []);
 
   // ---------- Upload View ----------
@@ -245,7 +318,8 @@ function CreateSection() {
             <p className="text-gray-600 mt-2">Upload a reference video and model image to generate your video</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          {/* Main uploads: always shown */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
             <DropZone
               label="Model Image"
               icon={Image}
@@ -264,12 +338,38 @@ function CreateSection() {
             />
           </div>
 
+          {/* Extended mode toggle */}
+          <div className="flex items-center justify-between mb-4">
+            <ExtendedToggle extended={extended} onChange={setExtended} />
+            {extended && (
+              <p className="text-xs text-purple-600 font-medium">
+                Second section video required
+              </p>
+            )}
+          </div>
+
+          {/* Second section video: shown only when extended is ON */}
+          {extended && (
+            <div className="mb-6 transition-all duration-300">
+              <DropZone
+                label="Second Section Video"
+                icon={Film}
+                accept="video/*"
+                file={additionalVideoFile}
+                onFileSelect={setAdditionalVideoFile}
+                preview={additionalVideoPreview}
+              />
+            </div>
+          )}
+
+          {!extended && <div className="mb-6" />}
+
           <div className="flex justify-center">
             <button
               onClick={handleSubmit}
-              disabled={!imageFile || !videoFile}
+              disabled={!canSubmit}
               className={`px-8 py-4 font-semibold rounded-2xl transition-all duration-200 shadow-lg hover:shadow-xl
-                ${imageFile && videoFile
+                ${canSubmit
                   ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white hover:from-purple-700 hover:to-purple-600'
                   : 'bg-gray-200 text-gray-400 cursor-not-allowed shadow-none'}`}
             >
@@ -362,7 +462,7 @@ function CreateSection() {
             )}
           </div>
 
-          <ScheduleToSocial jobId={jobId} resultUrl={resultUrl} />
+          <ScheduleToSocial jobId={jobId} resultUrl={resultUrl} videoGcsUrl={videoGcsUrl} />
         </div>
       </div>
     );

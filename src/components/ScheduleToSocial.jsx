@@ -39,7 +39,7 @@ function toIsoLocal(datetimeLocal) {
   return localDate.toISOString();
 }
 
-function ScheduleToSocial({ jobId, resultUrl }) {
+function ScheduleToSocial({ jobId, resultUrl, videoGcsUrl }) {
   const [profileId, setProfileId] = useState('');
   const [profileName, setProfileName] = useState('Lumeet Profile');
   const [caption, setCaption] = useState('Generated with Lumeet');
@@ -140,6 +140,8 @@ function ScheduleToSocial({ jobId, resultUrl }) {
     setError('');
     setStatusMessage('');
     try {
+      // Prefer the stable GCS public URL for media; fall back to local result endpoint.
+      const videoUrl = videoGcsUrl || (resultUrl ? toAbsoluteUrl(resultUrl) : null);
       const payload = {
         sessionId: DEFAULT_SESSION_ID,
         profileId: profileId || undefined,
@@ -150,7 +152,7 @@ function ScheduleToSocial({ jobId, resultUrl }) {
         scheduledFor: publishNow ? undefined : toIsoLocal(scheduledFor),
         includeResultVideo: includeGeneratedVideo,
         jobId: jobId || undefined,
-        mediaUrls: includeGeneratedVideo && resultUrl ? [toAbsoluteUrl(resultUrl)] : [],
+        mediaUrls: includeGeneratedVideo && videoUrl ? [videoUrl] : [],
       };
       const data = await createLatePost(payload);
       const postId = data?.post?._id || data?._id || 'created';

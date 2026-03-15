@@ -38,16 +38,28 @@ class LateClient:
         *,
         params: Optional[Dict[str, Any]] = None,
         json: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         url = f"{self.base_url}{path}"
-        response = requests.request(
-            method=method,
-            url=url,
-            headers=self._headers(),
-            params=params,
-            json=json,
-            timeout=self.timeout_sec,
-        )
+        try:
+            response = requests.request(
+                method=method,
+                url=url,
+                headers=self._headers(),
+                params=params,
+                json=json,
+                timeout=timeout or self.timeout_sec,
+            )
+        except requests.exceptions.ReadTimeout:
+            raise LateApiError(
+                504,
+                "Late API timed out — the request was sent but the server "
+                "did not respond in time. The post may have been created; "
+                "check your scheduled posts.",
+            )
+        except requests.exceptions.ConnectionError as exc:
+            raise LateApiError(502, f"Could not reach Late API: {exc}")
+
         try:
             payload = response.json()
         except ValueError:
@@ -85,5 +97,23 @@ class LateClient:
             params["profileId"] = profile_id
         return self._request("GET", "/accounts", params=params or None)
 
+    def list_posts(
+        self,
+        *,
+        profile_id: Optional[str] = None,
+        status: Optional[str] = None,
+        limit: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        params: Dict[str, Any] = {}
+        if profile_id:
+            params["profileId"] = profile_id
+        if status:
+            params["status"] = status
+        if limit:
+            params["limit"] = limit
+        return self._request("GET", "/posts", params=params or None)
+
     def create_post(self, payload: Dict[str, Any]) -> Dict[str, Any]:
-        return self._request("POST", "/posts", json=payload)
+        # Use a longer timeout for post creation — Late may need to
+        # download and process video/image media from the provided URLs.
+        return self._request("POST", "/posts", json=payload, timeout=120)

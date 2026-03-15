@@ -2,14 +2,16 @@
 Carousel Image Generation Service
 
 Generates educational carousel images for Instagram/TikTok using OpenAI.
-Takes an initial prompt, generates a hook, individual slide prompts, and CTA prompt,
-then creates images using OpenAI's image generation model.
+Takes an initial prompt, generates a hook and individual slide images using OpenAI.
+The CTA slide is always picked randomly from the static assets in backend/input/.
 """
 
 import os
 import json
 import base64
 import re
+import random
+import shutil
 from datetime import datetime
 from typing import Any, Dict, Optional, List
 
@@ -27,19 +29,19 @@ IMAGE_MODEL_CANDIDATES = [
     os.environ.get("OPENAI_IMAGE_MODEL", "gpt-image-1.5"),
     "gpt-image-1",
 ]
-IMAGE_SIZE = os.environ.get("OPENAI_IMAGE_SIZE", "1024x1536")
+IMAGE_SIZE = os.environ.get("OPENAI_IMAGE_SIZE", "1024x1024")
 
 
 # ── Prompt Templates ────────────────────────────────────────────────────────────
 
-HOOK_SLIDE_TEMPLATE = """Design a vertical 9:16 Instagram carousel cover slide. Style: minimalist flat illustration, editorial and modern. Must NOT look AI-generated.
+HOOK_SLIDE_TEMPLATE = """Design a square 1:1 TikTok/Instagram carousel cover slide. Style: minimalist flat illustration, editorial and modern. Must NOT look AI-generated.
 
 LAYOUT — two zones only, separated by generous empty space:
 
-ZONE 1 — TOP HALF:
+ZONE 1 — LEFT OR TOP HALF:
 Place the headline in Poppins Bold, very large, light-colored text on a deep dark background: "{HEADLINE}". The headline is the hero of this slide — it should dominate and be instantly readable at thumbnail size. Maximum 2 lines. No decorative elements competing with the text.
 
-ZONE 2 — BOTTOM HALF (the illustration):
+ZONE 2 — RIGHT OR BOTTOM HALF (the illustration):
 One single flat illustration that visually represents the theme of the headline. Choose ONE of these creative directions — do not default to the same every time:
 - A single symbolic object (e.g., a cracked clock, a glowing book, a maze with one clear exit)
 - A minimal abstract shape composition (e.g., upward geometric forms, a clean progress arc)
@@ -56,18 +58,18 @@ DESIGN RULES — follow strictly:
 
 DO NOT INCLUDE: character progression sequences (multiple poses), upward arrows with multiple figures, paragraph text below the headline, rounded cards or UI boxes, gradient backgrounds, decorative borders, multiple competing illustration elements, speech bubbles, drop shadows on text, always defaulting to dark green — vary the background color every time."""
 
-INDIVIDUAL_SLIDE_TEMPLATE = """Design a vertical 9:16 Instagram carousel slide. Style: minimalist flat illustration, editorial and modern. Must NOT look AI-generated.
+INDIVIDUAL_SLIDE_TEMPLATE = """Design a square 1:1 TikTok/Instagram carousel slide. Style: minimalist flat illustration, editorial and modern. Must NOT look AI-generated.
 
 LAYOUT — three zones only, separated by generous empty space:
 
-ZONE 1 — TOP THIRD:
-Render "{NUMBER}" as a very large bold graphic numeral — treat it as a dominant design element that anchors the slide, not just a label. Below it, place the slide title in Poppins Bold: "{TIP_TITLE}". Title is maximum 2 lines, no wrapping.
+ZONE 1 — TOP QUARTER:
+Render "{NUMBER}" as a very large bold graphic numeral — treat it as a dominant design element that anchors the slide, not just a label. Beside or below it, place the slide title in Poppins Bold: "{TIP_TITLE}". Title is maximum 2 lines, no wrapping.
 
-ZONE 2 — MIDDLE (the illustration):
+ZONE 2 — CENTER (the illustration):
 {SCENE_DESCRIPTION}. Flat vector style. Maximum 3 visual elements total in the scene. No background clutter. No secondary characters. No text inside the illustration. Leave at least 40% of this zone as intentional empty space around the focal element.
 
-ZONE 3 — BOTTOM FIFTH:
-Place this text in Poppins Regular directly on the background — no card, no box, no border, no shadow: "{EXPLANATION_TEXT}". Maximum 2 lines. Left-aligned or centered, clean.
+ZONE 3 — BOTTOM STRIP:
+Place this text in Poppins Regular directly on the background — no card, no box, no border, no shadow: "{EXPLANATION_TEXT}". Maximum 1 line. Left-aligned or centered, clean.
 
 DESIGN RULES — follow strictly:
 - Background: a single solid color OR a clean 2-tone horizontal split. No gradients, no textures, no patterns.
@@ -78,17 +80,9 @@ DESIGN RULES — follow strictly:
 
 DO NOT INCLUDE: speech bubbles, UI cards floating over illustrations, gradient backgrounds, realistic textures or lighting, complex crowd scenes, drop shadows on text, multiple characters competing for attention, decorative borders, clipart-style icons scattered around the slide."""
 
-CTA_SLIDE_TEMPLATE = """Create a vertical 9:16 final CTA carousel slide in a bold modern flat cartoon style for Instagram or TikTok. Keep the same visual style, character design, and thick outlined illustration style as the earlier study carousel slides. Use a bright clean background, such as white or light cream, for contrast.
-
-At the top, add very large bold text reading: "Download Lumi Learn".
-
-Directly beneath or very close to the headline, include a clear App Store-style download badge with the Apple logo, so it is immediately understood that Lumi Learn is available on the App Store.
-
-In the center, show the same cartoon student standing confidently beside an organized visual system made of flashcards, quiz cards, a study checklist, and neatly structured notes. The scene should visually communicate that studying is now easier, clearer, and more effective. Keep it clean, friendly, and highly readable.
-
-Add a rounded white box near the bottom containing this exact text: "The easier way to study, review, and remember more."
-
-Make the layout feel like a high-converting final carousel slide while staying fully illustrated and consistent with the previous slides. Use strong visual hierarchy, minimal clutter, mobile-first readability, and a polished viral carousel feel. Use Poppins font for all text."""
+# Static CTA images — randomly selected from backend/input/ instead of AI-generated
+_CTA_ASSETS_DIR = os.path.join(os.path.dirname(__file__), "input")
+_CTA_FILENAMES = ["cta_1.png", "cta_2.png"]
 
 
 # ── System Prompt for Content Generation ────────────────────────────────────────
@@ -317,9 +311,6 @@ def _build_prompts(content_structure: Dict[str, Any]) -> Dict[str, str]:
             EXPLANATION_TEXT=slide["explanation_text"]
         )
     
-    # CTA slide
-    prompts["cta"] = CTA_SLIDE_TEMPLATE
-    
     return prompts
 
 
@@ -357,17 +348,14 @@ def _generate_images(client: OpenAI, prompts: Dict[str, str], output_dir: str) -
             )
             image_paths[slide_key] = slide_path
     
-    # Generate CTA image
-    print("  Generating CTA image...")
+    # Use a static CTA image (randomly pick cta_1.png or cta_2.png)
+    chosen_cta_filename = random.choice(_CTA_FILENAMES)
+    chosen_cta_src = os.path.join(_CTA_ASSETS_DIR, chosen_cta_filename)
     cta_path = os.path.join(output_dir, "cta.png")
-    _generate_single_image(
-        client,
-        prompts["cta"],
-        cta_path,
-        style_reference_path=style_reference_path,
-    )
+    print(f"  Using static CTA image: {chosen_cta_filename}")
+    shutil.copy2(chosen_cta_src, cta_path)
     image_paths["cta"] = cta_path
-    
+
     return image_paths
 
 
