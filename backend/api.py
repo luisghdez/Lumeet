@@ -626,3 +626,22 @@ async def get_generation(generation_id: str):
     if not item:
         raise HTTPException(status_code=404, detail=f"Generation {generation_id} not found.")
     return item
+
+
+class GenerationPatchRequest(BaseModel):
+    scheduled: Optional[bool] = None
+
+
+@app.patch("/api/generations/{generation_id}")
+async def patch_generation(generation_id: str, payload: GenerationPatchRequest):
+    """Update mutable fields on a generation (e.g. mark as scheduled)."""
+    item = generation_store.get(generation_id)
+    if not item:
+        raise HTTPException(status_code=404, detail=f"Generation {generation_id} not found.")
+    updates = {}
+    if payload.scheduled is not None:
+        updates["scheduled"] = payload.scheduled
+    if not updates:
+        return item
+    updated = generation_store.update(generation_id, **updates)
+    return updated

@@ -17,6 +17,7 @@ import {
   createLateProfile,
   getLateConnectUrl,
   listLateAccounts,
+  patchGeneration,
   DEFAULT_SESSION_ID,
 } from '../lib/lateApi';
 
@@ -130,7 +131,7 @@ function CarouselPreview({ slides, mediaUrls }) {
   );
 }
 
-export default function ScheduleModal({ generation, onClose }) {
+export default function ScheduleModal({ generation, onClose, onScheduled }) {
   const [profileId, setProfileId] = useState('');
   const [profileName, setProfileName] = useState('Lumeet Profile');
   const [caption, setCaption] = useState('');
@@ -292,6 +293,17 @@ export default function ScheduleModal({ generation, onClose }) {
       const data = await createLatePost(payload);
       const postId = data?.post?._id || data?._id || 'created';
       setStatusMessage(`Scheduled successfully (${postId}).`);
+
+      // Mark generation as scheduled in backend
+      if (generation?.generationId) {
+        try {
+          await patchGeneration(generation.generationId, { scheduled: true });
+        } catch {
+          // non-critical — the post was already scheduled
+        }
+      }
+      // Notify parent so GenerationCenter can refresh
+      if (onScheduled) onScheduled(generation);
     } catch (err) {
       setError(err.message);
     } finally {

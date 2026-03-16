@@ -109,4 +109,12 @@ export async function getGeneration(generationId) {
   return request(`/api/generations/${encodeURIComponent(generationId)}`);
 }
 
+export async function patchGeneration(generationId, updates) {
+  return request(`/api/generations/${encodeURIComponent(generationId)}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updates),
+  });
+}
+
 export { DEFAULT_SESSION_ID };

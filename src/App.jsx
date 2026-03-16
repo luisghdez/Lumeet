@@ -11,9 +11,15 @@ import ScheduleModal from './components/ScheduleModal';
 function App() {
   const [activeTab, setActiveTab] = useState('recruit');
   const [scheduleTarget, setScheduleTarget] = useState(null);
+  const [genRefreshKey, setGenRefreshKey] = useState(0);
 
   const handleScheduleFromCenter = useCallback((generation) => {
     setScheduleTarget(generation);
+  }, []);
+
+  const handleScheduled = useCallback(() => {
+    // Bump key so GenerationCenter re-fetches and sees the scheduled flag
+    setGenRefreshKey((k) => k + 1);
   }, []);
 
   useEffect(() => {
@@ -100,13 +106,14 @@ function App() {
   return (
     <div className="flex h-screen overflow-hidden relative">
       {/* Generation Center – top-right floating button */}
-      <GenerationCenter onSchedule={handleScheduleFromCenter} />
+      <GenerationCenter onSchedule={handleScheduleFromCenter} refreshKey={genRefreshKey} />
 
       {/* Schedule Modal – opened from Generation Center */}
       {scheduleTarget && (
         <ScheduleModal
           generation={scheduleTarget}
           onClose={() => setScheduleTarget(null)}
+          onScheduled={handleScheduled}
         />
       )}
 

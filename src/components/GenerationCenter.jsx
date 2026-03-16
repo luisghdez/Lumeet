@@ -10,7 +10,7 @@ import {
   ChevronDown,
   CalendarClock,
 } from 'lucide-react';
-import { listGenerations, getGeneration } from '../lib/lateApi';
+import { listGenerations } from '../lib/lateApi';
 
 const POLL_INTERVAL = 2500;
 
@@ -35,27 +35,67 @@ function timeSince(ts) {
   return `${Math.floor(sec / 86400)}d ago`;
 }
 
-export default function GenerationCenter({ onSchedule }) {
+function hasActive(gens) {
+  return gens.some((g) => g.status === 'queued' || g.status === 'processing');
+}
+
+export default function GenerationCenter({ onSchedule, refreshKey }) {
   const [open, setOpen] = useState(false);
   const [generations, setGenerations] = useState([]);
   const pollRef = useRef(null);
   const panelRef = useRef(null);
 
-  const fetchGenerations = useCallback(async () => {
-    try {
-      const data = await listGenerations(30);
-      setGenerations(data.generations || []);
-    } catch {
-      // silently ignore
+  const stopPolling = useCallback(() => {
+    if (pollRef.current) {
+      clearInterval(pollRef.current);
+      pollRef.current = null;
     }
   }, []);
 
-  // Start polling when mounted
+  const fetchGenerations = useCallback(async () => {
+    try {
+      const data = await listGenerations(30);
+      const gens = data.generations || [];
+      setGenerations(gens);
+      return gens;
+    } catch {
+      return [];
+    }
+  }, []);
+
+  const startPolling = useCallback(() => {
+    stopPolling();
+    pollRef.current = setInterval(async () => {
+      const gens = await fetchGenerations();
+      // Auto-stop when no more active jobs
+      if (!hasActive(gens)) {
+        stopPolling();
+      }
+    }, POLL_INTERVAL);
+  }, [fetchGenerations, stopPolling]);
+
+  // Initial fetch on mount
   useEffect(() => {
-    fetchGenerations();
-    pollRef.current = setInterval(fetchGenerations, POLL_INTERVAL);
-    return () => clearInterval(pollRef.current);
-  }, [fetchGenerations]);
+    (async () => {
+      const gens = await fetchGenerations();
+      if (hasActive(gens)) {
+        startPolling();
+      }
+    })();
+    return () => stopPolling();
+  }, [fetchGenerations, startPolling, stopPolling]);
+
+  // When refreshKey changes (e.g. after scheduling or a new submission),
+  // re-fetch and restart polling if there are active jobs.
+  useEffect(() => {
+    if (refreshKey === undefined || refreshKey === 0) return;
+    (async () => {
+      const gens = await fetchGenerations();
+      if (hasActive(gens)) {
+        startPolling();
+      }
+    })();
+  }, [refreshKey, fetchGenerations, startPolling]);
 
   // Close on outside click
   useEffect(() => {
@@ -71,7 +111,9 @@ export default function GenerationCenter({ onSchedule }) {
   const activeCount = generations.filter(
     (g) => g.status === 'queued' || g.status === 'processing',
   ).length;
-  const completedCount = generations.filter((g) => g.status === 'completed').length;
+  const completedCount = generations.filter(
+    (g) => g.status === 'completed' && !g.scheduled,
+  ).length;
 
   return (
     <div ref={panelRef} className="fixed top-5 right-5 z-50">
@@ -142,6 +184,7 @@ function GenerationRow({ gen, onSchedule }) {
   const isActive = gen.status === 'queued' || gen.status === 'processing';
   const isCompleted = gen.status === 'completed';
   const isFailed = gen.status === 'failed';
+  const isScheduled = isCompleted && gen.scheduled;
 
   return (
     <div className="px-4 py-3 hover:bg-white/30 transition-colors">
@@ -183,15 +226,27 @@ function GenerationRow({ gen, onSchedule }) {
             <p className="text-[11px] text-red-500 mt-1 line-clamp-2">{gen.error}</p>
           )}
 
-          {/* Schedule button for completed */}
+          {/* Completed: scheduled indicator OR schedule button */}
           {isCompleted && (
-            <button
-              onClick={() => onSchedule && onSchedule(gen)}
-              className="mt-1.5 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-purple-500 text-white text-xs font-semibold hover:from-purple-700 hover:to-purple-600 transition-all"
-            >
-              <CalendarClock size={12} />
-              Schedule
-            </button>
+            <div className="mt-1.5 flex items-center gap-2">
+              {isScheduled && (
+                <span className="inline-flex items-center gap-1 text-xs text-green-600 font-medium">
+                  <CheckCircle2 size={13} />
+                  Scheduled
+                </span>
+              )}
+              <button
+                onClick={() => onSchedule && onSchedule(gen)}
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                  isScheduled
+                    ? 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    : 'bg-gradient-to-r from-purple-600 to-purple-500 text-white hover:from-purple-700 hover:to-purple-600'
+                }`}
+              >
+                <CalendarClock size={12} />
+                {isScheduled ? 'Reschedule' : 'Schedule'}
+              </button>
+            </div>
           )}
         </div>
       </div>
