@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Image, Loader2, Sparkles } from 'lucide-react';
+import { ChevronDown, Loader2, Settings2, Sparkles, X } from 'lucide-react';
 import { startCarouselGeneration } from '../lib/lateApi';
 
 const HOOK_STYLES = [
@@ -51,9 +51,10 @@ function getTimezoneOptions() {
 
 export default function CarouselStudio() {
   const [prompt, setPrompt] = useState('');
-  const [hookStyle, setHookStyle] = useState('illustrated');
-  const [carouselStyle, setCarouselStyle] = useState('illustrated');
+  const [hookStyle, setHookStyle] = useState('pinterest');
+  const [carouselStyle, setCarouselStyle] = useState('illustrated_2');
   const [timezone, setTimezone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC');
+  const [showAdvanced, setShowAdvanced] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [generationId, setGenerationId] = useState('');
@@ -85,122 +86,158 @@ export default function CarouselStudio() {
 
   return (
     <div className="h-full flex flex-col items-center justify-center px-4 py-8">
-      <div className="w-full max-w-4xl flex-1 flex flex-col justify-center">
-        <div className="mb-8 text-center">
-          <div className="inline-flex items-center gap-3">
-            <Image size={26} className="text-purple-600" />
-            <h1 className="text-4xl font-semibold text-gray-900">Carousel Studio</h1>
-          </div>
+      <div className="w-full max-w-2xl flex-1 flex flex-col justify-center">
+        <div className="mb-10 text-center">
+          <h1 className="text-4xl font-semibold text-gray-900">Create Carousel</h1>
           <p className="text-gray-600 mt-2">
-            Generate social carousels with customizable hook and slide styles.
+            Enter one prompt and generate a ready-to-post carousel.
           </p>
         </div>
 
-        <div className="glass-card border border-white/40 rounded-3xl p-6 md:p-8 space-y-6">
-          <div>
-            <label className="block text-sm font-semibold text-gray-900 mb-2">
+        <div className="space-y-4">
+          <div className="rounded-2xl border border-gray-200 bg-white/70 px-4 py-3.5 shadow-sm">
+            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">
               Prompt
             </label>
-            <textarea
+            <input
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              rows={5}
               placeholder="Example: 7 study methods that help me retain more in less time"
-              className="w-full rounded-2xl border border-gray-200 bg-white/70 px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-purple-300 transition"
+              className="w-full bg-transparent text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none"
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
-                Hook Style
-              </label>
-              <div className="grid grid-cols-1 gap-2">
-                {HOOK_STYLES.map((option) => (
-                  <button
-                    key={option.id}
-                    type="button"
-                    onClick={() => setHookStyle(option.id)}
-                    className={`text-left rounded-xl border px-3 py-2.5 transition ${
-                      hookStyle === option.id
-                        ? 'border-purple-400 bg-purple-50'
-                        : 'border-gray-200 bg-white/80 hover:border-purple-300'
-                    }`}
-                  >
-                    <p className="text-sm font-semibold text-gray-900">{option.name}</p>
-                    <p className="text-xs text-gray-600 mt-0.5">{option.description}</p>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
-                Carousel Style
-              </label>
-              <div className="grid grid-cols-1 gap-2">
-                {CAROUSEL_STYLES.map((option) => (
-                  <button
-                    key={option.id}
-                    type="button"
-                    onClick={() => setCarouselStyle(option.id)}
-                    className={`text-left rounded-xl border px-3 py-2.5 transition ${
-                      carouselStyle === option.id
-                        ? 'border-purple-400 bg-purple-50'
-                        : 'border-gray-200 bg-white/80 hover:border-purple-300'
-                    }`}
-                  >
-                    <p className="text-sm font-semibold text-gray-900">{option.name}</p>
-                    <p className="text-xs text-gray-600 mt-0.5">{option.description}</p>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-900 mb-2">
-              Timezone
-            </label>
-            <select
-              value={timezone}
-              onChange={(e) => setTimezone(e.target.value)}
-              className="w-full rounded-xl border border-gray-200 bg-white/80 px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-purple-300 transition"
+          <div className="flex items-center justify-center">
+            <button
+              type="button"
+              onClick={() => setShowAdvanced(true)}
+              className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
             >
-              {timezoneOptions.map((tz) => (
-                <option key={tz} value={tz}>
-                  {tz}
-                </option>
-              ))}
-            </select>
+              <Settings2 size={16} />
+              Advanced settings
+              <ChevronDown
+                size={16}
+                className={`transition-transform duration-200 ${showAdvanced ? 'rotate-180' : ''}`}
+              />
+            </button>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center justify-center gap-3 pt-1">
             <button
               onClick={handleSubmit}
               disabled={!canSubmit}
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-200 ${
+              className={`inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl ${
                 canSubmit
-                  ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white hover:from-purple-700 hover:to-purple-600 shadow-lg hover:shadow-xl'
-                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                  ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white hover:from-purple-700 hover:to-purple-600'
+                  : 'bg-gray-200 text-gray-400 cursor-not-allowed shadow-none'
               }`}
             >
               {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : <Sparkles size={18} />}
               {isSubmitting ? 'Starting...' : 'Generate Carousel'}
             </button>
+          </div>
 
-            {generationId && (
+          {generationId && (
+            <div className="flex justify-center">
               <span className="text-sm text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-2">
                 Started: {generationId}
               </span>
-            )}
-          </div>
+            </div>
+          )}
 
           {error && (
-            <p className="text-sm text-red-600">{error}</p>
+            <p className="text-sm text-red-600 text-center">{error}</p>
           )}
         </div>
       </div>
+
+      {showAdvanced && (
+        <div
+          className="fixed inset-0 z-40 bg-black/35 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setShowAdvanced(false)}
+        >
+          <div
+            className="w-full max-w-3xl glass-card border border-white/40 rounded-2xl p-5 md:p-6 space-y-5 max-h-[85vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-gray-900">Advanced settings</h2>
+              <button
+                type="button"
+                onClick={() => setShowAdvanced(false)}
+                className="p-1.5 rounded-lg text-gray-500 hover:text-gray-800 hover:bg-white/70 transition-colors"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  Hook Style
+                </label>
+                <div className="grid grid-cols-1 gap-2">
+                  {HOOK_STYLES.map((option) => (
+                    <button
+                      key={option.id}
+                      type="button"
+                      onClick={() => setHookStyle(option.id)}
+                      className={`text-left rounded-xl border px-3 py-2.5 transition ${
+                        hookStyle === option.id
+                          ? 'border-purple-400 bg-purple-50'
+                          : 'border-gray-200 bg-white/80 hover:border-purple-300'
+                      }`}
+                    >
+                      <p className="text-sm font-semibold text-gray-900">{option.name}</p>
+                      <p className="text-xs text-gray-600 mt-0.5">{option.description}</p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  Carousel Style
+                </label>
+                <div className="grid grid-cols-1 gap-2">
+                  {CAROUSEL_STYLES.map((option) => (
+                    <button
+                      key={option.id}
+                      type="button"
+                      onClick={() => setCarouselStyle(option.id)}
+                      className={`text-left rounded-xl border px-3 py-2.5 transition ${
+                        carouselStyle === option.id
+                          ? 'border-purple-400 bg-purple-50'
+                          : 'border-gray-200 bg-white/80 hover:border-purple-300'
+                      }`}
+                    >
+                      <p className="text-sm font-semibold text-gray-900">{option.name}</p>
+                      <p className="text-xs text-gray-600 mt-0.5">{option.description}</p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-900 mb-2">
+                Timezone
+              </label>
+              <select
+                value={timezone}
+                onChange={(e) => setTimezone(e.target.value)}
+                className="w-full rounded-xl border border-gray-200 bg-white/80 px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-purple-300 transition"
+              >
+                {timezoneOptions.map((tz) => (
+                  <option key={tz} value={tz}>
+                    {tz}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

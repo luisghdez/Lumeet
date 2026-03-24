@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { LayoutDashboard, Users, MessageSquare, Plus, Video, Image, Film, CalendarDays } from 'lucide-react';
+import { LayoutDashboard, Users, MessageSquare, Plus, Video, Film, CalendarDays } from 'lucide-react';
 import ApplicantCard from './components/ApplicantCard';
 import CreateSection from './components/CreateSection';
 import VariantLab from './components/VariantLab';
-import CarouselStudio from './components/CarouselStudio';
 import VideoLibrary from './components/VideoLibrary';
 import GenerationCenter from './components/GenerationCenter';
 import ScheduleModal from './components/ScheduleModal';
@@ -34,9 +33,8 @@ function App() {
     // { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     // { id: 'recruit', label: 'Recruit', icon: Users },
     // { id: 'messages', label: 'Messages', icon: MessageSquare },
-    { id: 'create', label: 'Create Video', icon: Plus },
+    { id: 'create', label: 'Create', icon: Plus },
     // { id: 'variant-lab', label: 'Variant Lab', icon: Video },
-    { id: 'carousel-studio', label: 'Carousel Studio', icon: Image },
     { id: 'video-library', label: 'Video Library', icon: Film },
     { id: 'scheduled', label: 'Scheduled', icon: CalendarDays },
   ];
@@ -168,8 +166,6 @@ function App() {
           <CreateSection />
         ) : activeTab === 'variant-lab' ? (
           <VariantLab />
-        ) : activeTab === 'carousel-studio' ? (
-          <CarouselStudio />
         ) : activeTab === 'video-library' ? (
           <VideoLibrary />
         ) : activeTab === 'scheduled' ? (

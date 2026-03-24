@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Upload, Image, Film, Loader2, CheckCircle2, Circle, XCircle, ArrowLeft, Download, Play, X, ToggleLeft, ToggleRight } from 'lucide-react';
+import { Image, Film, Loader2, CheckCircle2, Circle, XCircle, ArrowLeft, Download, X, ToggleLeft, ToggleRight } from 'lucide-react';
 import ScheduleToSocial from './ScheduleToSocial';
+import CarouselStudio from './CarouselStudio';
 import { startVideoGeneration } from '../lib/lateApi';
 
 const BASE_PIPELINE_STEPS = [
@@ -160,6 +161,7 @@ function ExtendedToggle({ extended, onChange }) {
 // ---------- Main Component ----------
 
 function CreateSection() {
+  const [createTab, setCreateTab] = useState('video'); // 'video' | 'carousel'
   const [viewState, setViewState] = useState('upload'); // 'upload' | 'processing' | 'result' | 'error'
   const [imageFile, setImageFile] = useState(null);
   const [videoFile, setVideoFile] = useState(null);
@@ -304,194 +306,239 @@ function CreateSection() {
     setVideoGcsUrl(null);
   }, []);
 
-  // ---------- Upload View ----------
-  if (viewState === 'upload') {
-    return (
-      <div className="h-full flex flex-col items-center justify-center px-4 py-8">
-        <div className="w-full max-w-2xl flex-1 flex flex-col justify-center">
-          <div className="mb-10 text-center">
-            <h1 className="text-4xl font-semibold text-gray-900">Create Video</h1>
-            <p className="text-gray-600 mt-2">Upload a reference video and model image to generate your video</p>
-          </div>
+  const renderVideoContent = () => {
+    // ---------- Upload View ----------
+    if (viewState === 'upload') {
+      return (
+        <div className="h-full flex flex-col items-center justify-center px-4 py-8">
+          <div className="w-full max-w-2xl flex-1 flex flex-col justify-center">
+            <div className="mb-10 text-center">
+              <h1 className="text-4xl font-semibold text-gray-900">Create Video</h1>
+              <p className="text-gray-600 mt-2">Upload a reference video and model image to generate your video</p>
+            </div>
 
-          {/* Main uploads: always shown */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-            <DropZone
-              label="Model Image"
-              icon={Image}
-              accept="image/*"
-              file={imageFile}
-              onFileSelect={setImageFile}
-              preview={imagePreview}
-            />
-            <DropZone
-              label="Reference Video"
-              icon={Film}
-              accept="video/*"
-              file={videoFile}
-              onFileSelect={setVideoFile}
-              preview={videoPreview}
-            />
-          </div>
-
-          {/* Extended mode toggle */}
-          <div className="flex items-center justify-between mb-4">
-            <ExtendedToggle extended={extended} onChange={setExtended} />
-            {extended && (
-              <p className="text-xs text-purple-600 font-medium">
-                Second section video required
-              </p>
-            )}
-          </div>
-
-          {/* Second section video: shown only when extended is ON */}
-          {extended && (
-            <div className="mb-6 transition-all duration-300">
+            {/* Main uploads: always shown */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
               <DropZone
-                label="Second Section Video"
+                label="Model Image"
+                icon={Image}
+                accept="image/*"
+                file={imageFile}
+                onFileSelect={setImageFile}
+                preview={imagePreview}
+              />
+              <DropZone
+                label="Reference Video"
                 icon={Film}
                 accept="video/*"
-                file={additionalVideoFile}
-                onFileSelect={setAdditionalVideoFile}
-                preview={additionalVideoPreview}
+                file={videoFile}
+                onFileSelect={setVideoFile}
+                preview={videoPreview}
               />
             </div>
-          )}
 
-          {!extended && <div className="mb-6" />}
-
-          <div className="flex justify-center">
-            <button
-              onClick={handleSubmit}
-              disabled={!canSubmit}
-              className={`px-8 py-4 font-semibold rounded-2xl transition-all duration-200 shadow-lg hover:shadow-xl
-                ${canSubmit
-                  ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white hover:from-purple-700 hover:to-purple-600'
-                  : 'bg-gray-200 text-gray-400 cursor-not-allowed shadow-none'}`}
-            >
-              Generate Video
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // ---------- Processing View ----------
-  if (viewState === 'processing') {
-    const completedCount = steps.filter(s => s.status === 'completed').length;
-    const progressPercent = Math.round((completedCount / steps.length) * 100);
-
-    return (
-      <div className="h-full flex flex-col items-center justify-center px-4 py-8">
-        <div className="w-full max-w-lg flex-1 flex flex-col justify-center">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Generating Your Video</h2>
-            <p className="text-gray-600">This may take a few minutes...</p>
-          </div>
-
-          {/* Progress bar */}
-          <div className="w-full h-2 bg-gray-200 rounded-full mb-8 overflow-hidden">
-            <div
-              className="h-full bg-gradient-to-r from-purple-500 to-purple-600 rounded-full transition-all duration-500"
-              style={{ width: `${progressPercent}%` }}
-            />
-          </div>
-
-          {/* Steps list */}
-          <div className="glass-card border border-white/40 rounded-2xl divide-y divide-white/20">
-            {steps.map((step, i) => (
-              <StepItem key={step.key} step={step} index={i} />
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // ---------- Result View ----------
-  if (viewState === 'result') {
-    return (
-      <div className="h-full flex flex-col items-center justify-center px-4 py-8">
-        <div className="w-full max-w-4xl flex-1 flex flex-col justify-center items-center">
-          <div className="text-center mb-6">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-green-100 mb-4">
-              <CheckCircle2 size={28} className="text-green-600" />
+            {/* Extended mode toggle */}
+            <div className="flex items-center justify-between mb-4">
+              <ExtendedToggle extended={extended} onChange={setExtended} />
+              {extended && (
+                <p className="text-xs text-purple-600 font-medium">
+                  Second section video required
+                </p>
+              )}
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-1">Video Ready!</h2>
-            <p className="text-gray-600">Your generated video is ready to download</p>
-          </div>
 
-          {/* Video Player */}
-          {resultUrl && (
-            <div className="w-full max-w-xs aspect-[9/16] rounded-2xl overflow-hidden bg-black shadow-xl mb-6">
-              <video
-                src={resultUrl}
-                controls
-                autoPlay
-                className="w-full h-full object-contain"
+            {/* Second section video: shown only when extended is ON */}
+            {extended && (
+              <div className="mb-6 transition-all duration-300">
+                <DropZone
+                  label="Second Section Video"
+                  icon={Film}
+                  accept="video/*"
+                  file={additionalVideoFile}
+                  onFileSelect={setAdditionalVideoFile}
+                  preview={additionalVideoPreview}
+                />
+              </div>
+            )}
+
+            {!extended && <div className="mb-6" />}
+
+            <div className="flex justify-center">
+              <button
+                onClick={handleSubmit}
+                disabled={!canSubmit}
+                className={`px-8 py-4 font-semibold rounded-2xl transition-all duration-200 shadow-lg hover:shadow-xl
+                  ${canSubmit
+                    ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white hover:from-purple-700 hover:to-purple-600'
+                    : 'bg-gray-200 text-gray-400 cursor-not-allowed shadow-none'}`}
+              >
+                Generate Video
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // ---------- Processing View ----------
+    if (viewState === 'processing') {
+      const completedCount = steps.filter(s => s.status === 'completed').length;
+      const progressPercent = Math.round((completedCount / steps.length) * 100);
+
+      return (
+        <div className="h-full flex flex-col items-center justify-center px-4 py-8">
+          <div className="w-full max-w-lg flex-1 flex flex-col justify-center">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Generating Your Video</h2>
+              <p className="text-gray-600">This may take a few minutes...</p>
+            </div>
+
+            {/* Progress bar */}
+            <div className="w-full h-2 bg-gray-200 rounded-full mb-8 overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-purple-500 to-purple-600 rounded-full transition-all duration-500"
+                style={{ width: `${progressPercent}%` }}
               />
             </div>
-          )}
 
-          <div className="flex gap-4">
+            {/* Steps list */}
+            <div className="glass-card border border-white/40 rounded-2xl divide-y divide-white/20">
+              {steps.map((step, i) => (
+                <StepItem key={step.key} step={step} index={i} />
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // ---------- Result View ----------
+    if (viewState === 'result') {
+      return (
+        <div className="h-full flex flex-col items-center justify-center px-4 py-8">
+          <div className="w-full max-w-4xl flex-1 flex flex-col justify-center items-center">
+            <div className="text-center mb-6">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-green-100 mb-4">
+                <CheckCircle2 size={28} className="text-green-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-1">Video Ready!</h2>
+              <p className="text-gray-600">Your generated video is ready to download</p>
+            </div>
+
+            {/* Video Player */}
+            {resultUrl && (
+              <div className="w-full max-w-xs aspect-[9/16] rounded-2xl overflow-hidden bg-black shadow-xl mb-6">
+                <video
+                  src={resultUrl}
+                  controls
+                  autoPlay
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            )}
+
+            <div className="flex gap-4">
+              <button
+                onClick={handleReset}
+                className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all duration-200"
+              >
+                <span className="flex items-center gap-2">
+                  <ArrowLeft size={18} />
+                  New Video
+                </span>
+              </button>
+              {resultUrl && (
+                <a
+                  href={resultUrl}
+                  download="lumeet_output.mp4"
+                  className="px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-500 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-purple-600 transition-all duration-200"
+                >
+                  <span className="flex items-center gap-2">
+                    <Download size={18} />
+                    Download
+                  </span>
+                </a>
+              )}
+            </div>
+
+            <ScheduleToSocial jobId={jobId} resultUrl={resultUrl} videoGcsUrl={videoGcsUrl} />
+          </div>
+        </div>
+      );
+    }
+
+    // ---------- Error View ----------
+    if (viewState === 'error') {
+      return (
+        <div className="h-full flex flex-col items-center justify-center px-4 py-8">
+          <div className="w-full max-w-lg flex-1 flex flex-col justify-center items-center">
+            <div className="text-center mb-6">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-red-100 mb-4">
+                <XCircle size={28} className="text-red-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Generation Failed</h2>
+              <p className="text-gray-600 text-sm max-w-md">{error}</p>
+            </div>
+
             <button
               onClick={handleReset}
               className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all duration-200"
             >
               <span className="flex items-center gap-2">
                 <ArrowLeft size={18} />
-                New Video
+                Try Again
               </span>
             </button>
-            {resultUrl && (
-              <a
-                href={resultUrl}
-                download="lumeet_output.mp4"
-                className="px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-500 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-purple-600 transition-all duration-200"
-              >
-                <span className="flex items-center gap-2">
-                  <Download size={18} />
-                  Download
-                </span>
-              </a>
-            )}
           </div>
-
-          <ScheduleToSocial jobId={jobId} resultUrl={resultUrl} videoGcsUrl={videoGcsUrl} />
         </div>
-      </div>
-    );
-  }
+      );
+    }
 
-  // ---------- Error View ----------
-  if (viewState === 'error') {
-    return (
-      <div className="h-full flex flex-col items-center justify-center px-4 py-8">
-        <div className="w-full max-w-lg flex-1 flex flex-col justify-center items-center">
-          <div className="text-center mb-6">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-red-100 mb-4">
-              <XCircle size={28} className="text-red-600" />
-            </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Generation Failed</h2>
-            <p className="text-gray-600 text-sm max-w-md">{error}</p>
-          </div>
+    return null;
+  };
 
+  return (
+    <div className="h-full flex flex-col">
+      <div className="w-full max-w-4xl mx-auto px-4 pt-2 flex justify-center">
+        <div className="inline-flex p-1 rounded-2xl bg-white/70 border border-white/40">
           <button
-            onClick={handleReset}
-            className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all duration-200"
+            type="button"
+            onClick={() => setCreateTab('video')}
+            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
+              createTab === 'video'
+                ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white shadow'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
           >
-            <span className="flex items-center gap-2">
-              <ArrowLeft size={18} />
-              Try Again
-            </span>
+            <Film size={16} />
+            Video
+          </button>
+          <button
+            type="button"
+            onClick={() => setCreateTab('carousel')}
+            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
+              createTab === 'carousel'
+                ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white shadow'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            <Image size={16} />
+            Carousel
           </button>
         </div>
       </div>
-    );
-  }
 
-  return null;
+      <div className="flex-1 min-h-0">
+        <div
+          key={createTab}
+          style={{ animation: 'slideDownFade 0.22s ease-out' }}
+          className="h-full"
+        >
+          {createTab === 'video' ? renderVideoContent() : <CarouselStudio />}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default CreateSection;
