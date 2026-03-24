@@ -17,9 +17,12 @@ import {
   createLateProfile,
   getLateConnectUrl,
   listLateAccounts,
+  listLatePosts,
   patchGeneration,
   DEFAULT_SESSION_ID,
 } from '../lib/lateApi';
+import AccountRow from './AccountRow';
+import MiniCalendar, { isoToDateKey, toDateKey } from './MiniCalendar';
 
 const SOCIAL_PLATFORMS = [
   'instagram',
@@ -148,6 +151,7 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
   const [isConnecting, setIsConnecting] = useState(false);
   const [isLoadingAccounts, setIsLoadingAccounts] = useState(false);
   const [isScheduling, setIsScheduling] = useState(false);
+  const [scheduledPosts, setScheduledPosts] = useState([]);
 
   const output = generation?.output || {};
   const isVideo = generation?.type === 'video';
@@ -227,8 +231,55 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
     }
   };
 
+  const loadScheduledPosts = async () => {
+    try {
+      const data = await listLatePosts({
+        sessionId: DEFAULT_SESSION_ID,
+        status: 'scheduled',
+        limit: 100,
+      });
+      const rawPosts = data.posts || data.results || data.data || [];
+      setScheduledPosts(rawPosts.map((p) => ({
+        scheduledFor: p?.scheduledFor || p?.scheduled_at || p?.scheduledTime || '',
+        accountIds: (p?.platforms || []).map((pl) =>
+          String(typeof pl === 'string' ? '' : pl?.accountId || pl?.account_id || ''),
+        ).filter(Boolean),
+      })));
+    } catch {
+      // non-critical
+    }
+  };
+
+  // Scheduled date strings filtered to selected accounts
+  const calendarDates = useMemo(() => {
+    if (selectedAccountIds.length === 0) return [];
+    return scheduledPosts
+      .filter((p) =>
+        p.accountIds.length === 0 ||
+        p.accountIds.some((id) => selectedAccountIds.includes(id)),
+      )
+      .map((p) => p.scheduledFor)
+      .filter(Boolean);
+  }, [scheduledPosts, selectedAccountIds]);
+
+  // Currently selected date key from scheduledFor input
+  const selectedCalendarDate = useMemo(() => {
+    if (!scheduledFor) return '';
+    const d = new Date(scheduledFor);
+    if (Number.isNaN(d.getTime())) return '';
+    return toDateKey(d);
+  }, [scheduledFor]);
+
+  const handleCalendarSelect = (dateKey) => {
+    // Keep current time or default to next slot
+    const currentTime = scheduledFor ? scheduledFor.slice(11, 16) : '';
+    const time = currentTime || nextSlotDatetimeLocal().slice(11, 16);
+    setScheduledFor(`${dateKey}T${time}`);
+  };
+
   useEffect(() => {
     loadAccounts();
+    loadScheduledPosts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -409,24 +460,18 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
         {accounts.length > 0 && (
           <div className="mb-4 border border-gray-200 rounded-xl p-3 max-h-32 overflow-y-auto">
             {accounts.map((acc) => (
-              <label
+              <AccountRow
                 key={acc._id}
-                className="flex items-center gap-2 py-1 text-sm text-gray-800"
-              >
-                <input
-                  type="checkbox"
-                  checked={selectedAccountIds.includes(acc._id)}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setSelectedAccountIds((prev) => [...prev, acc._id]);
-                    } else {
-                      setSelectedAccountIds((prev) => prev.filter((id) => id !== acc._id));
-                    }
-                  }}
-                />
-                <span className="font-medium">{acc.platform}</span>
-                <span className="text-gray-400 text-xs">{acc._id}</span>
-              </label>
+                account={acc}
+                checked={selectedAccountIds.includes(acc._id)}
+                onToggle={(checked) => {
+                  if (checked) {
+                    setSelectedAccountIds((prev) => [...prev, acc._id]);
+                  } else {
+                    setSelectedAccountIds((prev) => prev.filter((id) => id !== acc._id));
+                  }
+                }}
+              />
             ))}
           </div>
         )}
@@ -441,7 +486,7 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
         />
 
         {/* Date & timezone */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
           <input
             type="datetime-local"
             value={scheduledFor}
@@ -455,6 +500,21 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
             placeholder="Timezone"
           />
         </div>
+
+        {/* Mini calendar showing existing scheduled posts */}
+        {selectedAccountIds.length > 0 && (
+          <div className="mb-4 border border-gray-200 rounded-xl p-3">
+            <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-2">
+              Account schedule &middot; dots = existing posts
+            </p>
+            <MiniCalendar
+              compact
+              scheduledDates={calendarDates}
+              selectedDate={selectedCalendarDate}
+              onSelectDate={handleCalendarSelect}
+            />
+          </div>
+        )}
 
         {/* Schedule button */}
         <button

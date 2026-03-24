@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { CalendarClock, Link2, RefreshCw, Send, CheckCircle2 } from 'lucide-react';
+import AccountRow from './AccountRow';
 import {
   createLatePost,
   createLateProfile,
@@ -218,21 +219,18 @@ function ScheduleToSocial({ jobId, resultUrl, videoGcsUrl }) {
       {hasAccounts && (
         <div className="mb-4 border border-gray-200 rounded-xl p-3 max-h-36 overflow-y-auto">
           {accounts.map((acc) => (
-            <label key={acc._id} className="flex items-center gap-2 py-1 text-sm text-gray-800">
-              <input
-                type="checkbox"
-                checked={selectedAccountIds.includes(acc._id)}
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setSelectedAccountIds((prev) => [...prev, acc._id]);
-                  } else {
-                    setSelectedAccountIds((prev) => prev.filter((id) => id !== acc._id));
-                  }
-                }}
-              />
-              <span>{acc.platform}</span>
-              <span className="text-gray-500">{acc._id}</span>
-            </label>
+            <AccountRow
+              key={acc._id}
+              account={acc}
+              checked={selectedAccountIds.includes(acc._id)}
+              onToggle={(checked) => {
+                if (checked) {
+                  setSelectedAccountIds((prev) => [...prev, acc._id]);
+                } else {
+                  setSelectedAccountIds((prev) => prev.filter((id) => id !== acc._id));
+                }
+              }}
+            />
           ))}
         </div>
       )}

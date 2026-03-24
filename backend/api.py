@@ -88,6 +88,7 @@ class LateCreatePostRequest(BaseModel):
 class CarouselCreateRequest(BaseModel):
     prompt: str = Field(min_length=3, max_length=500)
     timezone: str = Field(default="UTC", min_length=1, max_length=80)
+    hook_style: str = Field(default="illustrated", pattern=r"^(illustrated|study_desk|study_girl)$")
 
 
 # ---------------------------------------------------------------------------
@@ -189,7 +190,7 @@ def _run_pipeline_thread(
             generation_store.mark_failed(generation_id, str(exc))
 
 
-def _run_carousel_thread(generation_id: str, prompt: str, timezone_name: str) -> None:
+def _run_carousel_thread(generation_id: str, prompt: str, timezone_name: str, hook_style: str = "illustrated") -> None:
     """Background thread that generates a carousel and updates the generation store."""
     generation_store.mark_processing(generation_id, current_step="generating")
     generation_store.update_step(generation_id, "generating", "running", "Generating carousel slides...")
@@ -198,6 +199,7 @@ def _run_carousel_thread(generation_id: str, prompt: str, timezone_name: str) ->
         result = carousel_service.create_carousel(
             prompt=prompt,
             timezone_name=timezone_name,
+            hook_style=hook_style,
         )
         generation_store.update_step(generation_id, "generating", "completed", "Carousel generated")
         generation_store.mark_completed(generation_id, {
@@ -451,11 +453,12 @@ async def create_late_post(payload: LateCreatePostRequest):
 @app.post("/api/carousels")
 async def create_carousel(payload: CarouselCreateRequest):
     """Generate a carousel from prompt, upload media to GCS, and return review payload."""
-    logger.info("Carousel create requested timezone=%s", payload.timezone)
+    logger.info("Carousel create requested timezone=%s hook_style=%s", payload.timezone, payload.hook_style)
     try:
         return carousel_service.create_carousel(
             prompt=payload.prompt,
             timezone_name=payload.timezone,
+            hook_style=payload.hook_style,
         )
     except CarouselServiceError as exc:
         raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
@@ -604,7 +607,7 @@ async def generation_create_carousel(payload: CarouselCreateRequest):
 
     thread = threading.Thread(
         target=_run_carousel_thread,
-        args=(gen_id, payload.prompt, payload.timezone),
+        args=(gen_id, payload.prompt, payload.timezone, payload.hook_style),
         daemon=True,
     )
     thread.start()
@@ -645,3 +648,19 @@ async def patch_generation(generation_id: str, payload: GenerationPatchRequest):
         return item
     updated = generation_store.update(generation_id, **updates)
     return updated
+
+
+@app.post("/api/generations/{generation_id}/cancel")
+async def cancel_generation(generation_id: str):
+    """Cancel a generation that is queued or processing (marks it as failed)."""
+    item = generation_store.get(generation_id)
+    if not item:
+        raise HTTPException(status_code=404, detail=f"Generation {generation_id} not found.")
+    status = item.get("status")
+    if status in (GenerationStatus.COMPLETED, GenerationStatus.FAILED):
+        raise HTTPException(
+            status_code=400,
+            detail=f"Generation is already {status}, cannot cancel.",
+        )
+    generation_store.mark_failed(generation_id, "Cancelled by user")
+    return {"generationId": generation_id, "status": "failed", "message": "Generation cancelled."}

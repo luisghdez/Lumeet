@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { CheckCircle2, Film, Link2, Play, RefreshCw, Send } from 'lucide-react';
+import AccountRow from './AccountRow';
 import {
   createLatePost,
   createLateProfile,
   DEFAULT_SESSION_ID,
   getLateConnectUrl,
   listLateAccounts,
-  listLatePosts,
   listVideos,
 } from '../lib/lateApi';
 
@@ -51,13 +51,11 @@ function VideoLibrary() {
   const [platformToConnect, setPlatformToConnect] = useState('instagram');
   const [accounts, setAccounts] = useState([]);
   const [selectedAccountIds, setSelectedAccountIds] = useState([]);
-  const [scheduledPosts, setScheduledPosts] = useState([]);
   const [statusMessage, setStatusMessage] = useState('');
   const [error, setError] = useState('');
   const [isCreatingProfile, setIsCreatingProfile] = useState(false);
   const [isConnecting, setIsConnecting] = useState(false);
   const [isLoadingAccounts, setIsLoadingAccounts] = useState(false);
-  const [isLoadingPosts, setIsLoadingPosts] = useState(false);
   const [isScheduling, setIsScheduling] = useState(false);
 
   const selectedPlatforms = useMemo(
@@ -119,43 +117,9 @@ function VideoLibrary() {
     }
   };
 
-  const handleLoadScheduledPosts = async () => {
-    setIsLoadingPosts(true);
-    setError('');
-    try {
-      const data = await listLatePosts({
-        sessionId: DEFAULT_SESSION_ID,
-        profileId: profileId || undefined,
-        status: 'scheduled',
-        limit: 25,
-      });
-      const rawPosts = data.posts || data.results || data.data || [];
-      const normalized = rawPosts
-        .map((post) => {
-          const platforms = (post.platforms || [])
-            .map((p) => (typeof p === 'string' ? p : p?.platform || p?.provider || ''))
-            .filter(Boolean);
-          return {
-            id: String(post?._id ?? post?.id ?? ''),
-            status: String(post?.status ?? post?.state ?? post?.publishStatus ?? ''),
-            scheduledFor: post?.scheduledFor || post?.scheduled_at || post?.scheduledTime || '',
-            content: String(post?.content ?? post?.caption ?? post?.text ?? ''),
-            platforms,
-          };
-        })
-        .filter((p) => p.id);
-      setScheduledPosts(normalized);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoadingPosts(false);
-    }
-  };
-
   useEffect(() => {
     handleLoadVideos();
     handleLoadAccounts();
-    handleLoadScheduledPosts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -244,7 +208,6 @@ function VideoLibrary() {
       const data = await createLatePost(payload);
       const postId = data?.post?._id || data?._id || 'created';
       setStatusMessage(`Post ${publishNow ? 'published' : 'scheduled'} successfully (${postId}).`);
-      await handleLoadScheduledPosts();
     } catch (err) {
       setError(err.message);
     } finally {
@@ -262,38 +225,6 @@ function VideoLibrary() {
           <h2 className="text-3xl font-bold text-gray-900">Video Library</h2>
         </div>
         <p className="text-gray-600 mt-2">Browse past generated videos and schedule or publish them.</p>
-      </div>
-
-      {/* Scheduled Posts */}
-      <div className="glass-card border border-white/40 rounded-2xl p-5 mb-6">
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="text-lg font-bold text-gray-900">Scheduled Posts</h3>
-          <button
-            onClick={handleLoadScheduledPosts}
-            disabled={isLoadingPosts}
-            className="px-3 py-2 rounded-xl bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50 flex items-center gap-2"
-          >
-            <RefreshCw size={14} className={isLoadingPosts ? 'animate-spin' : ''} />
-            Refresh
-          </button>
-        </div>
-        {scheduledPosts.length === 0 ? (
-          <p className="text-sm text-gray-600">No scheduled posts found yet.</p>
-        ) : (
-          <div className="space-y-2">
-            {scheduledPosts.map((post) => (
-              <div key={post.id} className="rounded-xl border border-gray-200 bg-white p-3">
-                <div className="flex items-center justify-between mb-1">
-                  <p className="text-xs text-gray-500">{post.id}</p>
-                  <p className="text-xs font-semibold text-purple-700">{post.status || 'scheduled'}</p>
-                </div>
-                <p className="text-xs text-gray-600 mb-1">{post.scheduledFor || 'No schedule time'}</p>
-                <p className="text-sm text-gray-900 line-clamp-2">{post.content || 'No content'}</p>
-                <p className="text-xs text-gray-500 mt-1">{post.platforms.join(', ') || 'No platform info'}</p>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
 
       {/* Video Gallery */}
@@ -435,21 +366,18 @@ function VideoLibrary() {
             {accounts.length > 0 && (
               <div className="mb-4 border border-gray-200 rounded-xl p-3 max-h-36 overflow-y-auto">
                 {accounts.map((acc) => (
-                  <label key={acc._id} className="flex items-center gap-2 py-1 text-sm text-gray-800">
-                    <input
-                      type="checkbox"
-                      checked={selectedAccountIds.includes(acc._id)}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setSelectedAccountIds((prev) => [...prev, acc._id]);
-                        } else {
-                          setSelectedAccountIds((prev) => prev.filter((id) => id !== acc._id));
-                        }
-                      }}
-                    />
-                    <span>{acc.platform}</span>
-                    <span className="text-gray-500">{acc._id}</span>
-                  </label>
+                  <AccountRow
+                    key={acc._id}
+                    account={acc}
+                    checked={selectedAccountIds.includes(acc._id)}
+                    onToggle={(checked) => {
+                      if (checked) {
+                        setSelectedAccountIds((prev) => [...prev, acc._id]);
+                      } else {
+                        setSelectedAccountIds((prev) => prev.filter((id) => id !== acc._id));
+                      }
+                    }}
+                  />
                 ))}
               </div>
             )}

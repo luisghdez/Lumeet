@@ -1260,5 +1260,870 @@
     ],
     "createdAt": "2026-03-16T21:40:52.337273Z",
     "outputDir": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/carousel_images/20260316_153604"
+  },
+  "339665f1c42a": {
+    "carouselId": "339665f1c42a",
+    "prompt": "How students at harvard actually study",
+    "status": "ready",
+    "timezone": "America/Ciudad_Juarez",
+    "suggestedScheduledFor": "2026-03-23T10:00:00-06:00",
+    "captionDraft": "How students at Harvard actually study \ud83d\udc47\n\nIt\u2019s not about studying longer. It\u2019s about studying smarter:\n\u2022 preview, then ask better questions\n\u2022 recall before you reread\n\u2022 start with problem sets\n\u2022 use office hours early\n\u2022 block deep work on your calendar\n\u2022 teach concepts out loud\n\u2022 protect sleep like it\u2019s part of the syllabus\n\nSteal these 7 habits and your study sessions will work harder than your stress ever will. Save this for finals.",
+    "hashtags": [
+      "#StudyTips",
+      "#StudentSuccess",
+      "#StudySmarter",
+      "#CollegeTips",
+      "#DeepWork",
+      "#ExamPrep",
+      "#LearningHowToLearn",
+      "#ProductivityForStudents"
+    ],
+    "slides": [
+      {
+        "kind": "hook",
+        "number": null,
+        "tipTitle": null,
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/339665f1c42a/hook.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T154858Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=9313aa009935e0ddf9f9718a39271482342f118a27ab29b9e2bdf85702db59e641220b27d1a99c2f36b83f7d589570699cb7289b2ca67c25425eff7dd82eb0078225b83950b35694d95efa4cae59e67799ee505d5e2fe01ba180102291f6e848f07f980aa494db8bb0a5692510d7c797460f6eba8e379aced16f777cb5d6b5d6966ba030f9a75537461b99e936fe154974651d943c76bbeb018c2225329a7f4726807622034213f7ddfd0ca4c147564942d7bc73e0b55dec40f54d5b6eaeca1e9e87bd0cb4feaa203793146fc4c46b541934dcc7de5154f76e81ea17e22a72b97f651d02a0ba103dee65ff98c64553f39f6a4fee5e5b1cb547a6db94d05c58e5",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/339665f1c42a/hook.png"
+      },
+      {
+        "kind": "slide_1",
+        "number": 1,
+        "tipTitle": "Preview Then Question",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/339665f1c42a/slide_1.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T154858Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=1ea2ae5e4f8e3b99b579c2695f25802afbf3756fb8902dd8aacb214b82046e8ae9215ba6c6b04377f82e2eff7e1625637138adb146987b78fd395b66d59746e184518c50960e04f69f75fbfc7d3c589e9f153a521ec12416bdb3e0dd46cc85328f6323e183bd7de37e2348bb770fd4445a7ab760eb7162c7e5d401db970427d2e0c2443434bf7733cc64234d8786766de74bb47650da3a62704a1a75f6cd3ed4d402b6388bd6f6a9c07615d0c7ef43594c1d511d4f8a7164d5a5454908d25f9a3b859932fab976f8a9776bc2a826867bed98ba4218feae1551e4b0f938fd8f4a81614bb0fe223d802dfb09dafe233ad0bb7fcefae524bc1a777e9fd5e7bed08b",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/339665f1c42a/slide_1.png"
+      },
+      {
+        "kind": "slide_2",
+        "number": 2,
+        "tipTitle": "Recall Before Reread",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/339665f1c42a/slide_2.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T154859Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b2c0060e76c049f9c102f6249fd7ecdec70259e7ef3b4157d3e41fa543f06c733b04725d322f71fae67606442b6908fefa8e60293b7f2d0ad803f0da8b5c8674488e71ec6a6921188ff5fd2d0688f26d39f7a7466e2ed0840907cffbe4b4ad0ea2b0cf8c79ee3755d27dd7285c6e282adfa54dea4c8356727677e97e207a5bbab163bf86a89075c0130de7ff8145ca41b376b6307c65a9e23d58787d96299e44a80987871730548a99950c6eef8767e10a3a528098797791841bec1e1270ae40392a568365d627ffa2e0de0b2c096a684eb826205566d12ca0a03fa11f421cfff2895627de82f848e7ad0ffa1534e8127d1c1db4c6637be214dafe87aaed3981",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/339665f1c42a/slide_2.png"
+      },
+      {
+        "kind": "slide_3",
+        "number": 3,
+        "tipTitle": "Problem Sets First",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/339665f1c42a/slide_3.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T154900Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=c9a0add40ebc24d12a02639cd0d775a638c1aa76eb6b7080114be4a467cb777a9c6dbcd5a4beb3a9e2ee4c3e75226c77214992089b11c7739ab314e27374b21176dfa652bcc24bad6e76b7307f4346abd058b2b14dd676baecd2fc57670b46ee2614862a10d0dffd05120a9f48d7b6967d0633dc331e82a04e5ac589d993a16e379369bfab51b32f5fef911005feed90a8e74548a87d200c17163f89d5d79008942de05e1ae7102e63b8aecff91e2648d0283355ec1b36aca3790c0ed86bb412c86b120a4016e09c89bfeb5f959844884db13dc7de0460a4242ab450c92fa37aa9f8a9797560e14f0d1f2e8e78d9cdeff2a66837703671cea515495eb84c2605",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/339665f1c42a/slide_3.png"
+      },
+      {
+        "kind": "slide_4",
+        "number": 4,
+        "tipTitle": "Use Office Hours",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/339665f1c42a/slide_4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T154900Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=139be58181a518a19abc4b061e3c4b62d93c24ee4714d04db8859599d7702d7319a78d3f7a38aa61d7b167793c86aaf97d5530b62054b9f3bec7d99214245a0d948f33fd94eb493586203f8f39029faa9152487ce7418f664013150b414a6af64d25c7a5d2792313c007e380e42d2db92379d82d3d989dab083200c8055b324d4c8680b7cdc11945b6cf1ed283106beea056ef85a9b370a7d525875dc6e4fadd691928558f1667bd004a0aac5e6c7eb265d9b091979f9cb538f0d6f5043c64ae4262202a9e682d8062aee60522b0e60b9d392394eea0d17080629407bdd0da0f4c908003abe829592301891f4d92934536236ab4a0690af70c41268c46b52311",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/339665f1c42a/slide_4.png"
+      },
+      {
+        "kind": "slide_5",
+        "number": 5,
+        "tipTitle": "Calendar Deep Work",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/339665f1c42a/slide_5.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T154901Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=34d14c19759f2aa8d16edb72791a32da1044f4f08350971f9f37e7b08c22e92899d44bbfd8109231d3df83e563e863b276ab7bdcca26006e767e6220554e43c81b79b02c811d9de025f7da11d3f2c84edaa3524506d82431d227f5188774796a6e0b9bc3b82bdbb6fab694d3e910daafe51821c1df16c5f94d77e84ca6aecee2f0616457e015c02ee466fb4af0be36ad48f95347416560a02298f696796d50f0dc7383cfa4bdade620f5b3d20addc81ac86eb93dca31c0a7a12760f4adc26b237e7f423107c27832aec57920ef1382f924ddb932ac19ae4438e32620dfd77b4f66d87e9036d888da5c460ee3acdbc32f971419f34f630aa904b1c7328797b9ca",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/339665f1c42a/slide_5.png"
+      },
+      {
+        "kind": "slide_6",
+        "number": 6,
+        "tipTitle": "Teach It Aloud",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/339665f1c42a/slide_6.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T154902Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=bf93b48781e3fa56c1482656d786bcebf06fe991a087726190822a267fddcbde9b4c4064261f0269f4ccf0892c322b134fd1a8ba71e42e41b96424144b334dad321ebb60b50778dc33e2e17ed3421679924a0b56544a78528e0833ff011f9a6b86ff3efd9f55be194a3f2fc232086d82f1f64dc010f01a0b4599e747fcb040fe718d56b9ff1268e803e3a2a4b82033c26b28db6ed0099c214bfb3bc0b078392a92b579f795812c40fc6de472d199d7d7764dd93de0b9d7ae390206f867462390841b8ea1d9f26260c2279a2a3ab5c783c732e2d51df69bcfb6f93fbf32a4dee6d1db7d07e646d65b4960eff56526ab4a0927e81d230a137e3e7fa4360e86e64c",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/339665f1c42a/slide_6.png"
+      },
+      {
+        "kind": "slide_7",
+        "number": 7,
+        "tipTitle": "Protect Sleep Ruthlessly",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/339665f1c42a/slide_7.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T154902Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=4daa26dba49504949e7fd096b5f90fd1da2ce3f705869fd3b23ac7f1ea48d06318fb28263aead8f9adb8b40394a373f5d8b2625c39eb9df78114015d1ebb5eb27bb0510aaa9e9ec92b01e09ebb4e448ed837189c72509c1578a720c9a8c72885a698e63002c4ed68ac9ece56598927d97a46a99f5211d9369875f529cf20e48b065d7804590c3143d9902631b62dafff139d16154ab64540c8dec21a8e3527fd9de2c93d44c04d2dcfca2fbaac8694fea34b2f3d3e17341bed5c660d00d4485249989756ce937c608f6d77c28bc7ece49a9b0f530ab23916d1ace86a4a9a38189ac699c8dfcad4546e1ae11146c71268004c1beebda42ac5f4c66186d7a29b12",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/339665f1c42a/slide_7.png"
+      },
+      {
+        "kind": "cta",
+        "number": null,
+        "tipTitle": null,
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/339665f1c42a/cta.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T154903Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=a4975b4ae0d2fce0857dfe8d76177cbcad0f3514bb2e1e3cde6977d79e93bfc8675f838eca294ccdf1165ce4aee6a1aa9b34e5d184fc518cb5608cee6f076b9327f5c1eeca77cd1a8d4c7cbf8ba9496d57e2a4082ddaa4fe96f2cfef2fd166f214f1134df1ac1d8a731bffaee031cd42804ecb682c7153c6a8d2ddfec92b240d9f2e3367c7c45ac2b34ae302194c19a4ab7d8cb5569b7534615a711ec0ef6f9a27138fb111715e5e96996b96975df3e5baf7604ae1839d862b37c99938d16cfa514f5d06b3c3025481850cd8fb0279573a2e0d2b7f02b1a3517bf5932851a85150367abcd90d6b006a8d00d74d80a699a15be1edc8a4ab0ed9c34f12add42151",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/339665f1c42a/cta.png"
+      }
+    ],
+    "mediaUrls": [
+      "https://storage.googleapis.com/lumeet-bucket/carousels/339665f1c42a/hook.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T154858Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=9313aa009935e0ddf9f9718a39271482342f118a27ab29b9e2bdf85702db59e641220b27d1a99c2f36b83f7d589570699cb7289b2ca67c25425eff7dd82eb0078225b83950b35694d95efa4cae59e67799ee505d5e2fe01ba180102291f6e848f07f980aa494db8bb0a5692510d7c797460f6eba8e379aced16f777cb5d6b5d6966ba030f9a75537461b99e936fe154974651d943c76bbeb018c2225329a7f4726807622034213f7ddfd0ca4c147564942d7bc73e0b55dec40f54d5b6eaeca1e9e87bd0cb4feaa203793146fc4c46b541934dcc7de5154f76e81ea17e22a72b97f651d02a0ba103dee65ff98c64553f39f6a4fee5e5b1cb547a6db94d05c58e5",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/339665f1c42a/slide_1.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T154858Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=1ea2ae5e4f8e3b99b579c2695f25802afbf3756fb8902dd8aacb214b82046e8ae9215ba6c6b04377f82e2eff7e1625637138adb146987b78fd395b66d59746e184518c50960e04f69f75fbfc7d3c589e9f153a521ec12416bdb3e0dd46cc85328f6323e183bd7de37e2348bb770fd4445a7ab760eb7162c7e5d401db970427d2e0c2443434bf7733cc64234d8786766de74bb47650da3a62704a1a75f6cd3ed4d402b6388bd6f6a9c07615d0c7ef43594c1d511d4f8a7164d5a5454908d25f9a3b859932fab976f8a9776bc2a826867bed98ba4218feae1551e4b0f938fd8f4a81614bb0fe223d802dfb09dafe233ad0bb7fcefae524bc1a777e9fd5e7bed08b",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/339665f1c42a/slide_2.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T154859Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b2c0060e76c049f9c102f6249fd7ecdec70259e7ef3b4157d3e41fa543f06c733b04725d322f71fae67606442b6908fefa8e60293b7f2d0ad803f0da8b5c8674488e71ec6a6921188ff5fd2d0688f26d39f7a7466e2ed0840907cffbe4b4ad0ea2b0cf8c79ee3755d27dd7285c6e282adfa54dea4c8356727677e97e207a5bbab163bf86a89075c0130de7ff8145ca41b376b6307c65a9e23d58787d96299e44a80987871730548a99950c6eef8767e10a3a528098797791841bec1e1270ae40392a568365d627ffa2e0de0b2c096a684eb826205566d12ca0a03fa11f421cfff2895627de82f848e7ad0ffa1534e8127d1c1db4c6637be214dafe87aaed3981",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/339665f1c42a/slide_3.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T154900Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=c9a0add40ebc24d12a02639cd0d775a638c1aa76eb6b7080114be4a467cb777a9c6dbcd5a4beb3a9e2ee4c3e75226c77214992089b11c7739ab314e27374b21176dfa652bcc24bad6e76b7307f4346abd058b2b14dd676baecd2fc57670b46ee2614862a10d0dffd05120a9f48d7b6967d0633dc331e82a04e5ac589d993a16e379369bfab51b32f5fef911005feed90a8e74548a87d200c17163f89d5d79008942de05e1ae7102e63b8aecff91e2648d0283355ec1b36aca3790c0ed86bb412c86b120a4016e09c89bfeb5f959844884db13dc7de0460a4242ab450c92fa37aa9f8a9797560e14f0d1f2e8e78d9cdeff2a66837703671cea515495eb84c2605",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/339665f1c42a/slide_4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T154900Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=139be58181a518a19abc4b061e3c4b62d93c24ee4714d04db8859599d7702d7319a78d3f7a38aa61d7b167793c86aaf97d5530b62054b9f3bec7d99214245a0d948f33fd94eb493586203f8f39029faa9152487ce7418f664013150b414a6af64d25c7a5d2792313c007e380e42d2db92379d82d3d989dab083200c8055b324d4c8680b7cdc11945b6cf1ed283106beea056ef85a9b370a7d525875dc6e4fadd691928558f1667bd004a0aac5e6c7eb265d9b091979f9cb538f0d6f5043c64ae4262202a9e682d8062aee60522b0e60b9d392394eea0d17080629407bdd0da0f4c908003abe829592301891f4d92934536236ab4a0690af70c41268c46b52311",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/339665f1c42a/slide_5.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T154901Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=34d14c19759f2aa8d16edb72791a32da1044f4f08350971f9f37e7b08c22e92899d44bbfd8109231d3df83e563e863b276ab7bdcca26006e767e6220554e43c81b79b02c811d9de025f7da11d3f2c84edaa3524506d82431d227f5188774796a6e0b9bc3b82bdbb6fab694d3e910daafe51821c1df16c5f94d77e84ca6aecee2f0616457e015c02ee466fb4af0be36ad48f95347416560a02298f696796d50f0dc7383cfa4bdade620f5b3d20addc81ac86eb93dca31c0a7a12760f4adc26b237e7f423107c27832aec57920ef1382f924ddb932ac19ae4438e32620dfd77b4f66d87e9036d888da5c460ee3acdbc32f971419f34f630aa904b1c7328797b9ca",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/339665f1c42a/slide_6.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T154902Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=bf93b48781e3fa56c1482656d786bcebf06fe991a087726190822a267fddcbde9b4c4064261f0269f4ccf0892c322b134fd1a8ba71e42e41b96424144b334dad321ebb60b50778dc33e2e17ed3421679924a0b56544a78528e0833ff011f9a6b86ff3efd9f55be194a3f2fc232086d82f1f64dc010f01a0b4599e747fcb040fe718d56b9ff1268e803e3a2a4b82033c26b28db6ed0099c214bfb3bc0b078392a92b579f795812c40fc6de472d199d7d7764dd93de0b9d7ae390206f867462390841b8ea1d9f26260c2279a2a3ab5c783c732e2d51df69bcfb6f93fbf32a4dee6d1db7d07e646d65b4960eff56526ab4a0927e81d230a137e3e7fa4360e86e64c",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/339665f1c42a/slide_7.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T154902Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=4daa26dba49504949e7fd096b5f90fd1da2ce3f705869fd3b23ac7f1ea48d06318fb28263aead8f9adb8b40394a373f5d8b2625c39eb9df78114015d1ebb5eb27bb0510aaa9e9ec92b01e09ebb4e448ed837189c72509c1578a720c9a8c72885a698e63002c4ed68ac9ece56598927d97a46a99f5211d9369875f529cf20e48b065d7804590c3143d9902631b62dafff139d16154ab64540c8dec21a8e3527fd9de2c93d44c04d2dcfca2fbaac8694fea34b2f3d3e17341bed5c660d00d4485249989756ce937c608f6d77c28bc7ece49a9b0f530ab23916d1ace86a4a9a38189ac699c8dfcad4546e1ae11146c71268004c1beebda42ac5f4c66186d7a29b12",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/339665f1c42a/cta.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T154903Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=a4975b4ae0d2fce0857dfe8d76177cbcad0f3514bb2e1e3cde6977d79e93bfc8675f838eca294ccdf1165ce4aee6a1aa9b34e5d184fc518cb5608cee6f076b9327f5c1eeca77cd1a8d4c7cbf8ba9496d57e2a4082ddaa4fe96f2cfef2fd166f214f1134df1ac1d8a731bffaee031cd42804ecb682c7153c6a8d2ddfec92b240d9f2e3367c7c45ac2b34ae302194c19a4ab7d8cb5569b7534615a711ec0ef6f9a27138fb111715e5e96996b96975df3e5baf7604ae1839d862b37c99938d16cfa514f5d06b3c3025481850cd8fb0279573a2e0d2b7f02b1a3517bf5932851a85150367abcd90d6b006a8d00d74d80a699a15be1edc8a4ab0ed9c34f12add42151"
+    ],
+    "createdAt": "2026-03-23T15:49:09.168298Z",
+    "outputDir": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/carousel_images/20260323_094409"
+  },
+  "9426043006ff": {
+    "carouselId": "9426043006ff",
+    "prompt": "6 Realizations Every Overwhelmed Student Needs",
+    "status": "ready",
+    "timezone": "America/Ciudad_Juarez",
+    "suggestedScheduledFor": "2026-03-23T10:00:00-06:00",
+    "captionDraft": "If school has you feeling like you\u2019re drowning, this is your reminder: you do not have to do everything at once to be doing enough. The students who thrive aren\u2019t always the busiest\u2014they\u2019re the ones who learn to rest, ask for help, and keep showing up with small consistent steps. Read through these 6 realizations, then come back to the one you needed most today. Save this for your next overwhelmed moment, and send it to a friend who needs the reminder too.",
+    "hashtags": [
+      "#StudentLife",
+      "#StudyMotivation",
+      "#AcademicStress",
+      "#CollegeTips",
+      "#SchoolMotivation",
+      "#ProductivityTips",
+      "#MentalHealthMatters",
+      "#StudyTok"
+    ],
+    "slides": [
+      {
+        "kind": "hook",
+        "number": null,
+        "tipTitle": null,
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/9426043006ff/hook.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T155018Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=3ae6a2f4baac4e33b12691f24f6c122617788575abfe86fdac70e993ba7cf78746cb53d1843195e3a7895d0196999a942facdedc29d7bafedd64bb1357179e601e016363ecd3ba9bb8851bbf9c4d117f0ff344cabd26c6776f765164873c3cff049df2227fd0198a6d75d27a2edbf175a72a140c3773a9145f1007e150c033821769cb75f7d77b66860a85148c5753f2d822109d96215bcbf5bbe05ab37c769593adcdf3c14c8dab337eed2627cdd32d2fa0d881cf74fb82ad9bea73ccd854caef12a925544ab9eb2c55c43988fa04cde419d27c15db530f97e2782db4c7c94fed831b7191a0a98b957e42acc393e8940d15562ea8ce7ee0f7a78ea3b39868c6",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/9426043006ff/hook.png"
+      },
+      {
+        "kind": "slide_1",
+        "number": 1,
+        "tipTitle": "You Can't Do Everything",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/9426043006ff/slide_1.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T155018Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=0de113fe7971b3eb5dcb9c2af4a617b2165dc322df2af759ec0ffbeb2da678ed359617d37824f06db18c28b713687d643f2e8aa6849d58e51361aa858057763e1b5164e2ff6794b93ca21bd4b44baee7f9ef6501625191a1937bb8af0cc7fba12233fed902594f4d20f0b8ccb124f9f91028370a7d6a3babbe7f26d71a2a51acfb0d55db28350eadf459ab8ca1ecad5e6f10700edb34167fcf488a1624d441589766eeb737552f996c9fcd7a5141024b78c402f4ea7e391ead27886095b3178de37a50ae475a2a5f1f72ef82fa6d27b6475559ab69133b01ca62a5e7e56e14bc34f8886da948e7758349d431053c54609526a3e28b21a83912bc4fc83b9cce36",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/9426043006ff/slide_1.png"
+      },
+      {
+        "kind": "slide_2",
+        "number": 2,
+        "tipTitle": "Busy Isn't Progress",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/9426043006ff/slide_2.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T155019Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=864fb1387362b0b5f22c4b715acb24ab38d96276dc0c5bb97fd26ea387c2126b10a742c8533c3c2a45335f2902317707c2b69bae1a5d2510d9e24c514f12a7c30e03b1ec43f2e7deabcb794946a7924d23630f2b9e9c63f79c5226cfd4639b5efa081b37c888fc909ddbb90e36489dd44db663f4cc4c2283725b597d178afcfe157e23f4d9de29fe9fb76c992ad07a1ed09e1516521253beed352ab8a6469cc4fc869ad09af1f5b557ca684081cb10488658b7d78d7d9c27ecc7fcc85b9451346e8f3672341ca4f51f0a8c51dcae965e232b13c626f517d3eee96dd63a449bf7cf79c474adaf10ed7ec9e6e7bf2d7127e37ed48bdd1d5ce72b312545f4aaed30",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/9426043006ff/slide_2.png"
+      },
+      {
+        "kind": "slide_3",
+        "number": 3,
+        "tipTitle": "Rest Is Productive",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/9426043006ff/slide_3.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T155019Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=95956e2ebb101303aecd87937d956069207d8c7349239123f21c88f455eda55681e9e8154ef1e8c1b64b9142b7a3f780534736a729be0a7b2cdffa979329ab6149c4e03dae52312887278925f19dfa5f0cb12410f5c59dfe8b26e78c551b6ebebe6215818c0daeb6ebffdf828df6005fafeb9b904685082528836d95b794c1d4bccf701bec44e6986a0fc68f0c638d50c97b87d7a53a581cffdae164c7639bbd2bb45008902b1df0fe8a0c0b4f2e2bdad82b23ffd7f51976e3a54b681bad990c2fe919c8f90e087ec7e3b38606d8e67d8350152f879e9b0172e2995e24ac7431152dca78a9414070748e415e4806793b989713c150a2eac24cb18113284209cc",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/9426043006ff/slide_3.png"
+      },
+      {
+        "kind": "slide_4",
+        "number": 4,
+        "tipTitle": "Ask Earlier, Not Later",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/9426043006ff/slide_4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T155019Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=42b1d7bc55f4372a1ec6b36fbac41567f2d86cc709d4a9d7695402d03aaad27198b3cb7fa8c47e21654bb55a2f6ca2b4b48cb4a35ce04df41b5593b0ab494582c2ad13986c015642b6b8e9d850c6b3fa726c71b7fd95b6e9a0073f86e876b36e545757234035520ccefe2f59430ee9898061b363ced99c53e863b4b2208b5b41a7c7b32ef3428bfe1a15417a32584fa68480b2cf851ac9f2a399d4977a4eb4b735c5c48e553c705db9dc8f44228c06f7d69a12f90040d5ee426400e8dc8aadf4ae041ed0f92ee02c4e111d04d77caf7485a5a3051895ea664a5f189c2d662684c37e29c7d2e9f163ca9643e668be0b53e801cf93b3ca63f1d6661e88d15d13f7",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/9426043006ff/slide_4.png"
+      },
+      {
+        "kind": "slide_5",
+        "number": 5,
+        "tipTitle": "Small Steps Compound",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/9426043006ff/slide_5.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T155020Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=89fdbde0f50a6d2346225125b909f19a0af11b8035ee45b6fb41dcdea5eb9985cf4a7cb127893757008028e4b2a2c1ab1a9d2cb5d2193f04e72e3e0ab744784ad4606fbe9698382e68a24177dd9421c56f223b575bedac8cd67110a3d25fa37b351bac7d5ede2ddf460f60e99d04d4be6986c804bee00ef00e32d9f2b4185d7eb90283918d806cb4af4cce9be0f5e953747b0e17c92dbdd4bfd2d1e5a082d0ea86c0cebcf8fbb75b5f723ac34e76fc984dedfe2be33848b4b2e5503063d78f4196b24569ff41c7583781b3801a702f8952f6976aa35c9f0ff17922fa5f9972aefa9bb7340480f054e41bfb8ddcd7f3be5ec6c26329b5f0c434d67d3c83733f6c",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/9426043006ff/slide_5.png"
+      },
+      {
+        "kind": "slide_6",
+        "number": 6,
+        "tipTitle": "Grades Don't Define You",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/9426043006ff/slide_6.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T155020Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=8fc5a7b0b95a5a64160ee77b76638bbda705fd5be0b0adbd33770f2028c736d1dad3b4737af7a50f837987bae06a77eb88139d86d6d1bad8a373c9c02ca5d28835d945b710789b24e681ff28f543c80182308e0748eb56c836c4670749967b4524df5dc5b2056b470779932c4daf03dfda6df47ace264a851b30aa399b48483ae3f718d77fe694e2a64cc000fbdebadd4cea7e1470c21367148c4d8d4e8f0f91b59c855e6e9c8e9be58c03e9b352923ba2408b0e1b7d57b7896c67da7e9496c6bb6f659bbaec8509cc835db3c0336fe8cfba8b791ddc8c196ebf8dced103d9bf69650f469593e452b61f9e1d9ed9309af8b1db9e03a2230683818a5bc0d29d74",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/9426043006ff/slide_6.png"
+      },
+      {
+        "kind": "cta",
+        "number": null,
+        "tipTitle": null,
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/9426043006ff/cta.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T155020Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b603793b7a6b354213b029948ec9221ae9b16fd0b51c2c81a77e065aa7938eadcd30839611e44e950f5a95efbc0e8f584d94f700fd03e920938b4b48d5af19206976fb4f679e04fdead7e316da00bea08cdef4ce11ba2b36baa2b01c6e5fd8beec6ff9b37b3853a0a30057cc1999d381bdcf74debfab9a6d0551214f5f6da74a897bfebb7a0b77947b768276ec2f06060fd884cd05af95eec4c8d65b13bc4b84c2329765f866e6cf58ac9af80095c50a2a44919dff9946785a8a6209409d2bf44ce897036a90e06a1fc451f8d4b9eed3120011a9ad44b889c750b7c7c78bc64a1a998da6926647a0300648a6e913e176ef702be4a5461f8435dc294970013f12",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/9426043006ff/cta.png"
+      }
+    ],
+    "mediaUrls": [
+      "https://storage.googleapis.com/lumeet-bucket/carousels/9426043006ff/hook.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T155018Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=3ae6a2f4baac4e33b12691f24f6c122617788575abfe86fdac70e993ba7cf78746cb53d1843195e3a7895d0196999a942facdedc29d7bafedd64bb1357179e601e016363ecd3ba9bb8851bbf9c4d117f0ff344cabd26c6776f765164873c3cff049df2227fd0198a6d75d27a2edbf175a72a140c3773a9145f1007e150c033821769cb75f7d77b66860a85148c5753f2d822109d96215bcbf5bbe05ab37c769593adcdf3c14c8dab337eed2627cdd32d2fa0d881cf74fb82ad9bea73ccd854caef12a925544ab9eb2c55c43988fa04cde419d27c15db530f97e2782db4c7c94fed831b7191a0a98b957e42acc393e8940d15562ea8ce7ee0f7a78ea3b39868c6",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/9426043006ff/slide_1.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T155018Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=0de113fe7971b3eb5dcb9c2af4a617b2165dc322df2af759ec0ffbeb2da678ed359617d37824f06db18c28b713687d643f2e8aa6849d58e51361aa858057763e1b5164e2ff6794b93ca21bd4b44baee7f9ef6501625191a1937bb8af0cc7fba12233fed902594f4d20f0b8ccb124f9f91028370a7d6a3babbe7f26d71a2a51acfb0d55db28350eadf459ab8ca1ecad5e6f10700edb34167fcf488a1624d441589766eeb737552f996c9fcd7a5141024b78c402f4ea7e391ead27886095b3178de37a50ae475a2a5f1f72ef82fa6d27b6475559ab69133b01ca62a5e7e56e14bc34f8886da948e7758349d431053c54609526a3e28b21a83912bc4fc83b9cce36",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/9426043006ff/slide_2.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T155019Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=864fb1387362b0b5f22c4b715acb24ab38d96276dc0c5bb97fd26ea387c2126b10a742c8533c3c2a45335f2902317707c2b69bae1a5d2510d9e24c514f12a7c30e03b1ec43f2e7deabcb794946a7924d23630f2b9e9c63f79c5226cfd4639b5efa081b37c888fc909ddbb90e36489dd44db663f4cc4c2283725b597d178afcfe157e23f4d9de29fe9fb76c992ad07a1ed09e1516521253beed352ab8a6469cc4fc869ad09af1f5b557ca684081cb10488658b7d78d7d9c27ecc7fcc85b9451346e8f3672341ca4f51f0a8c51dcae965e232b13c626f517d3eee96dd63a449bf7cf79c474adaf10ed7ec9e6e7bf2d7127e37ed48bdd1d5ce72b312545f4aaed30",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/9426043006ff/slide_3.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T155019Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=95956e2ebb101303aecd87937d956069207d8c7349239123f21c88f455eda55681e9e8154ef1e8c1b64b9142b7a3f780534736a729be0a7b2cdffa979329ab6149c4e03dae52312887278925f19dfa5f0cb12410f5c59dfe8b26e78c551b6ebebe6215818c0daeb6ebffdf828df6005fafeb9b904685082528836d95b794c1d4bccf701bec44e6986a0fc68f0c638d50c97b87d7a53a581cffdae164c7639bbd2bb45008902b1df0fe8a0c0b4f2e2bdad82b23ffd7f51976e3a54b681bad990c2fe919c8f90e087ec7e3b38606d8e67d8350152f879e9b0172e2995e24ac7431152dca78a9414070748e415e4806793b989713c150a2eac24cb18113284209cc",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/9426043006ff/slide_4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T155019Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=42b1d7bc55f4372a1ec6b36fbac41567f2d86cc709d4a9d7695402d03aaad27198b3cb7fa8c47e21654bb55a2f6ca2b4b48cb4a35ce04df41b5593b0ab494582c2ad13986c015642b6b8e9d850c6b3fa726c71b7fd95b6e9a0073f86e876b36e545757234035520ccefe2f59430ee9898061b363ced99c53e863b4b2208b5b41a7c7b32ef3428bfe1a15417a32584fa68480b2cf851ac9f2a399d4977a4eb4b735c5c48e553c705db9dc8f44228c06f7d69a12f90040d5ee426400e8dc8aadf4ae041ed0f92ee02c4e111d04d77caf7485a5a3051895ea664a5f189c2d662684c37e29c7d2e9f163ca9643e668be0b53e801cf93b3ca63f1d6661e88d15d13f7",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/9426043006ff/slide_5.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T155020Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=89fdbde0f50a6d2346225125b909f19a0af11b8035ee45b6fb41dcdea5eb9985cf4a7cb127893757008028e4b2a2c1ab1a9d2cb5d2193f04e72e3e0ab744784ad4606fbe9698382e68a24177dd9421c56f223b575bedac8cd67110a3d25fa37b351bac7d5ede2ddf460f60e99d04d4be6986c804bee00ef00e32d9f2b4185d7eb90283918d806cb4af4cce9be0f5e953747b0e17c92dbdd4bfd2d1e5a082d0ea86c0cebcf8fbb75b5f723ac34e76fc984dedfe2be33848b4b2e5503063d78f4196b24569ff41c7583781b3801a702f8952f6976aa35c9f0ff17922fa5f9972aefa9bb7340480f054e41bfb8ddcd7f3be5ec6c26329b5f0c434d67d3c83733f6c",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/9426043006ff/slide_6.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T155020Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=8fc5a7b0b95a5a64160ee77b76638bbda705fd5be0b0adbd33770f2028c736d1dad3b4737af7a50f837987bae06a77eb88139d86d6d1bad8a373c9c02ca5d28835d945b710789b24e681ff28f543c80182308e0748eb56c836c4670749967b4524df5dc5b2056b470779932c4daf03dfda6df47ace264a851b30aa399b48483ae3f718d77fe694e2a64cc000fbdebadd4cea7e1470c21367148c4d8d4e8f0f91b59c855e6e9c8e9be58c03e9b352923ba2408b0e1b7d57b7896c67da7e9496c6bb6f659bbaec8509cc835db3c0336fe8cfba8b791ddc8c196ebf8dced103d9bf69650f469593e452b61f9e1d9ed9309af8b1db9e03a2230683818a5bc0d29d74",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/9426043006ff/cta.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260323%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260323T155020Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b603793b7a6b354213b029948ec9221ae9b16fd0b51c2c81a77e065aa7938eadcd30839611e44e950f5a95efbc0e8f584d94f700fd03e920938b4b48d5af19206976fb4f679e04fdead7e316da00bea08cdef4ce11ba2b36baa2b01c6e5fd8beec6ff9b37b3853a0a30057cc1999d381bdcf74debfab9a6d0551214f5f6da74a897bfebb7a0b77947b768276ec2f06060fd884cd05af95eec4c8d65b13bc4b84c2329765f866e6cf58ac9af80095c50a2a44919dff9946785a8a6209409d2bf44ce897036a90e06a1fc451f8d4b9eed3120011a9ad44b889c750b7c7c78bc64a1a998da6926647a0300648a6e913e176ef702be4a5461f8435dc294970013f12"
+    ],
+    "createdAt": "2026-03-23T15:50:25.764025Z",
+    "outputDir": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/carousel_images/20260323_094541"
+  },
+  "8e1b4c5a2292": {
+    "carouselId": "8e1b4c5a2292",
+    "prompt": "You\u2019re not lazy. Your study method is broken",
+    "status": "ready",
+    "timezone": "America/Denver",
+    "suggestedScheduledFor": "2026-03-23T19:30:00-06:00",
+    "captionDraft": "You\u2019re not lazy\u2014you\u2019ve just been taught a study method that feels productive but kills recall.\n\nIf you keep rereading, making perfect notes, and cramming the night before, this carousel will show you why your brain isn\u2019t retaining what you study.\n\nInside: how to use questions, mix topics without overwhelm, and make starting so small you can\u2019t avoid it.\n\nSave this for your next study session\u2014and send it to the friend who says they \u201cstudied all day\u201d but remembers nothing.",
+    "hashtags": [
+      "#StudyTips",
+      "#StudentSuccess",
+      "#StudyMotivation",
+      "#LearningHowToLearn",
+      "#ExamPrep",
+      "#ProductivityTips",
+      "#RevisionTips",
+      "#StudySmarter",
+      "#AcademicSuccess"
+    ],
+    "slides": [
+      {
+        "kind": "hook",
+        "number": null,
+        "tipTitle": null,
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/8e1b4c5a2292/hook.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T010017Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=4ab63434879de55f356a513d84a9d7960404b651932ecb212f8036cbf7c0dd6196a33accb17047162c072541528a628a9c472379329f361171d76824ab9c0cc78bd8e560b9e5db2466b4ecb20e3c3f895baacca59c59aea558a96a0aeb3081c1a94351761787e1ec33d0d56b3b4bd808ce40340531e62979e684288cbb66778d8d29fef083724e849907b3c785cee570733576b1c294b49e68e4cfc79aaf52d2f08aede33c675f573e5f9512cdc75d87fc02469b5ab96f05467b03bb1a293036a310ec06211c5b4ea9e3b1c6b5b183fcb5536ef382f0ba1c2fecc67007e7d9db485e1c3af55e52042e535ca84acf8c31f0ed28064a1fce1afc6c19bc84068c51",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/8e1b4c5a2292/hook.png"
+      },
+      {
+        "kind": "slide_1",
+        "number": 1,
+        "tipTitle": "Stop Rereading Everything",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/8e1b4c5a2292/slide_1.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T010017Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=7a20d2db15b1ba369ea448b0f549a891b08585f22f903d0ba780f4098356bc9733cb8b2eaf51c3481d23f6ca64448d2ade4c566c887da2c6b3971d6d08c50c7fd931f7f922e6f2b23ab0a9f46a3086e33c907e860fcea13b0d354840c9860d094310582dcca01d5b9e19be763ac3c8b18ae6eef4680e3e3cec1ff9159a65805eeb74e79bff8a299d2e58f5a1c220df1ed9d606373f79c4261d4cece0f03581b5aed69cdcfc608ba8e468d4a79a0be60474f15ca8f58d92b51756cc447c415a21a6b7087556bb9f679fc6399b6954275be35c79dbcdfa29eb9410bd89b16369b8054d8b58bbd55961ae9c210597aca8af57a38747b8c151645d060ab9965eef8e",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/8e1b4c5a2292/slide_1.png"
+      },
+      {
+        "kind": "slide_2",
+        "number": 2,
+        "tipTitle": "Pretty Notes Lie",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/8e1b4c5a2292/slide_2.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T010018Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=934f54098f6d03fe2697e23b1215a15e8f262d2f0d092484ed189b37f8a57d7a4ea4d6bec3ef5a086e45c57d3682ac5aaa42be0593fb99a150046c9790f4e3e59671259acd38c71ca269ff11fae0fa1d2cbc2d42b0e97b18d160d9cc79c72efbcd57188a774274fde2759f6374b9b9bb57d9cba26f3454d7685f3e248f40707fb431c57f27d98292002ccb5be3bbd0e14f9273927424a47cbfc0fe9fde49742a534002d6c74e83215d257c2a9a52af75a4a6caf1f7392610ed72ac44808f9e9f76a8d753eb3512e75b472d5c2d1d7205861afb411e149259923c0d79490c82db81a6de2e56056b8cb6fbdf01cdb9b2d748e85b5858131a4272d196bb6f9c1bfd",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/8e1b4c5a2292/slide_2.png"
+      },
+      {
+        "kind": "slide_3",
+        "number": 3,
+        "tipTitle": "Cramming Destroys Recall",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/8e1b4c5a2292/slide_3.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T010018Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b61a2ba23c76078ef8b88eaab4ba0ae914690d6f6ff8e96056129af9a6310966697e825bbc17ccacfa7de5caeb50201084faa5dc34764bb0637f961d4d24c569dc842430eac31ca870396e2832b5c84c337d343a71e4b49e9639415d4b82555731eb25db99433234e17aa7faa169e56bb35a2335a5aa95da2adc9f91d4fdf4d5d56fd1aa5ff82716705f7b223cf12984d7b758e2f8633ddad3136bf9511962fa32b18f9f07eb49c5830d4438e238c4de9cfe59181f3b2c6e559e85cdce652812cef92a9668447ca868b557d61dd5a6829ad6e007d18b9a589aa0ca4e994bea33eaf351f2d3d12f0861951cbff2dea047554309d6acc5eb41ba1735122d8389a0",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/8e1b4c5a2292/slide_3.png"
+      },
+      {
+        "kind": "slide_4",
+        "number": 4,
+        "tipTitle": "Study With Questions",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/8e1b4c5a2292/slide_4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T010018Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=56e95b06bc9e716c7fcb4f38e45c48817e10aa61dc86edf9e3488006b49c4c56f8f649328196800f3eebe06e88c60bc58756540978ab83584074b65f5bcd59885bd66c8e89f95ed3bf91f0dad0cbbe97b10ad06fa6592151e00acf91e8a64ce13d01bc6a6dc00ce554e8f17c70388f5ef05ca703dde7c87bcec0eea718a07487a5f719655df051b31c3f54555d5977c43544718f0bfb87f9bb0228d4b44066142dab418ad93aa11109d7a70a1f2dbae695e818ad69ff40c2ce6b75f00eba1f0298b3336c157d4e8dc5ca45cc92d4ddc006f8bb9af3285ce99542599ef4eb87b8ed3ee6c6b5f2eccceb358d50d13b0333cb183a4e14e9368462b48c4be3110f23",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/8e1b4c5a2292/slide_4.png"
+      },
+      {
+        "kind": "slide_5",
+        "number": 5,
+        "tipTitle": "Mix Topics Briefly",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/8e1b4c5a2292/slide_5.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T010018Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=5e199d06adb49841b4f1f924621a6bcc4f5fb0471b5c0339850268f39c49a4530f620059b592ecfb7c99a795d0303b1542ec5b7a4eb2e559229471ebd2c5dd4349c21eb049fa6e846f8b807effdd3cf8ffb876935e43e05d84407ed8b362d6527213578d84ded879be92bf8076bd00704fcd75acb22fe702e19fc3c3e9e3782d804cecd1a6484aeb75dc5500d462ea6c9d76db672e342a5f36a9a9fcf2782b9157b1c96c3edf87ba84edc5179463242eb5b0c6b632c9f02afe0abff489765b46d050a6f5acb27c4f6f6f6fc364df068b7f2c47a58afe7f4640778a1e46a2efd7984d11d0ea0cce49ddee3f521c0976e9ce05f20e122c47cda6736d4746d16be0",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/8e1b4c5a2292/slide_5.png"
+      },
+      {
+        "kind": "slide_6",
+        "number": 6,
+        "tipTitle": "Make Starting Tiny",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/8e1b4c5a2292/slide_6.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T010018Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=64f6ece98a015db902a394ba2c96d3056eebb277e313d4d255fb5eb4aefdf093bdee86d487c7fdce408b7ab70518ef2ee2070fa0ce27e82c6debbb7b4e6c19d81c17cd388da5c8aeebd5234440cb5ad90509c8536691833f9333eb90fdca3aefd22d1c171b9c6a233da87ce71b7ecfc015978ca8c4410a0340669d7887500720bce469a31aa3799d12b650cc3ee028b5ff4c80554ef7887a8703425f0b9ac87b5c7432c51e12bcc7066d7b190d81e8b6ad19271ae72a607147e69f40335a1bde9f5fb9bbff4b094a533a20e27fb1cd32b37dcdf6d53d5f71221c69a021aec455c9eb2e29a9437163385cc57d80bc4b02bce3704a2097c286a20fe0057966cdbc",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/8e1b4c5a2292/slide_6.png"
+      },
+      {
+        "kind": "cta",
+        "number": null,
+        "tipTitle": null,
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/8e1b4c5a2292/cta.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T010018Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=040eb0dd007f732c75f23db4c97815698deffb11e9deae690fcdcbfa42b0dbd6d8c0c4e04b3628419448871a31a6b1091b3375c777422d7710f401230b52e91d72aae9717c40410c6d96c3233b82b8583167c44a717f76823202ab97e8b2169b510d3d5497a8ffe08dc092614ce1ac4f0f2cf7eab1c17eacf5ec4987656beb811e3cc987359e42afdb47e7b4a5c80dfc3a6991769371d5200a463b38fffc490264fb75c4e98be7281d54be4808073843cfc0005065fa0031ea5dbd75a69a5826c75f5ffec8345a2b6ba524604728dd17396addf92daa01128d08f56ae5b27b42dd20a08456f629e33d514ecac28be43895191e7cd2d1c60e16945aa4235980b4",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/8e1b4c5a2292/cta.png"
+      }
+    ],
+    "mediaUrls": [
+      "https://storage.googleapis.com/lumeet-bucket/carousels/8e1b4c5a2292/hook.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T010017Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=4ab63434879de55f356a513d84a9d7960404b651932ecb212f8036cbf7c0dd6196a33accb17047162c072541528a628a9c472379329f361171d76824ab9c0cc78bd8e560b9e5db2466b4ecb20e3c3f895baacca59c59aea558a96a0aeb3081c1a94351761787e1ec33d0d56b3b4bd808ce40340531e62979e684288cbb66778d8d29fef083724e849907b3c785cee570733576b1c294b49e68e4cfc79aaf52d2f08aede33c675f573e5f9512cdc75d87fc02469b5ab96f05467b03bb1a293036a310ec06211c5b4ea9e3b1c6b5b183fcb5536ef382f0ba1c2fecc67007e7d9db485e1c3af55e52042e535ca84acf8c31f0ed28064a1fce1afc6c19bc84068c51",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/8e1b4c5a2292/slide_1.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T010017Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=7a20d2db15b1ba369ea448b0f549a891b08585f22f903d0ba780f4098356bc9733cb8b2eaf51c3481d23f6ca64448d2ade4c566c887da2c6b3971d6d08c50c7fd931f7f922e6f2b23ab0a9f46a3086e33c907e860fcea13b0d354840c9860d094310582dcca01d5b9e19be763ac3c8b18ae6eef4680e3e3cec1ff9159a65805eeb74e79bff8a299d2e58f5a1c220df1ed9d606373f79c4261d4cece0f03581b5aed69cdcfc608ba8e468d4a79a0be60474f15ca8f58d92b51756cc447c415a21a6b7087556bb9f679fc6399b6954275be35c79dbcdfa29eb9410bd89b16369b8054d8b58bbd55961ae9c210597aca8af57a38747b8c151645d060ab9965eef8e",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/8e1b4c5a2292/slide_2.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T010018Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=934f54098f6d03fe2697e23b1215a15e8f262d2f0d092484ed189b37f8a57d7a4ea4d6bec3ef5a086e45c57d3682ac5aaa42be0593fb99a150046c9790f4e3e59671259acd38c71ca269ff11fae0fa1d2cbc2d42b0e97b18d160d9cc79c72efbcd57188a774274fde2759f6374b9b9bb57d9cba26f3454d7685f3e248f40707fb431c57f27d98292002ccb5be3bbd0e14f9273927424a47cbfc0fe9fde49742a534002d6c74e83215d257c2a9a52af75a4a6caf1f7392610ed72ac44808f9e9f76a8d753eb3512e75b472d5c2d1d7205861afb411e149259923c0d79490c82db81a6de2e56056b8cb6fbdf01cdb9b2d748e85b5858131a4272d196bb6f9c1bfd",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/8e1b4c5a2292/slide_3.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T010018Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b61a2ba23c76078ef8b88eaab4ba0ae914690d6f6ff8e96056129af9a6310966697e825bbc17ccacfa7de5caeb50201084faa5dc34764bb0637f961d4d24c569dc842430eac31ca870396e2832b5c84c337d343a71e4b49e9639415d4b82555731eb25db99433234e17aa7faa169e56bb35a2335a5aa95da2adc9f91d4fdf4d5d56fd1aa5ff82716705f7b223cf12984d7b758e2f8633ddad3136bf9511962fa32b18f9f07eb49c5830d4438e238c4de9cfe59181f3b2c6e559e85cdce652812cef92a9668447ca868b557d61dd5a6829ad6e007d18b9a589aa0ca4e994bea33eaf351f2d3d12f0861951cbff2dea047554309d6acc5eb41ba1735122d8389a0",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/8e1b4c5a2292/slide_4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T010018Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=56e95b06bc9e716c7fcb4f38e45c48817e10aa61dc86edf9e3488006b49c4c56f8f649328196800f3eebe06e88c60bc58756540978ab83584074b65f5bcd59885bd66c8e89f95ed3bf91f0dad0cbbe97b10ad06fa6592151e00acf91e8a64ce13d01bc6a6dc00ce554e8f17c70388f5ef05ca703dde7c87bcec0eea718a07487a5f719655df051b31c3f54555d5977c43544718f0bfb87f9bb0228d4b44066142dab418ad93aa11109d7a70a1f2dbae695e818ad69ff40c2ce6b75f00eba1f0298b3336c157d4e8dc5ca45cc92d4ddc006f8bb9af3285ce99542599ef4eb87b8ed3ee6c6b5f2eccceb358d50d13b0333cb183a4e14e9368462b48c4be3110f23",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/8e1b4c5a2292/slide_5.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T010018Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=5e199d06adb49841b4f1f924621a6bcc4f5fb0471b5c0339850268f39c49a4530f620059b592ecfb7c99a795d0303b1542ec5b7a4eb2e559229471ebd2c5dd4349c21eb049fa6e846f8b807effdd3cf8ffb876935e43e05d84407ed8b362d6527213578d84ded879be92bf8076bd00704fcd75acb22fe702e19fc3c3e9e3782d804cecd1a6484aeb75dc5500d462ea6c9d76db672e342a5f36a9a9fcf2782b9157b1c96c3edf87ba84edc5179463242eb5b0c6b632c9f02afe0abff489765b46d050a6f5acb27c4f6f6f6fc364df068b7f2c47a58afe7f4640778a1e46a2efd7984d11d0ea0cce49ddee3f521c0976e9ce05f20e122c47cda6736d4746d16be0",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/8e1b4c5a2292/slide_6.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T010018Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=64f6ece98a015db902a394ba2c96d3056eebb277e313d4d255fb5eb4aefdf093bdee86d487c7fdce408b7ab70518ef2ee2070fa0ce27e82c6debbb7b4e6c19d81c17cd388da5c8aeebd5234440cb5ad90509c8536691833f9333eb90fdca3aefd22d1c171b9c6a233da87ce71b7ecfc015978ca8c4410a0340669d7887500720bce469a31aa3799d12b650cc3ee028b5ff4c80554ef7887a8703425f0b9ac87b5c7432c51e12bcc7066d7b190d81e8b6ad19271ae72a607147e69f40335a1bde9f5fb9bbff4b094a533a20e27fb1cd32b37dcdf6d53d5f71221c69a021aec455c9eb2e29a9437163385cc57d80bc4b02bce3704a2097c286a20fe0057966cdbc",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/8e1b4c5a2292/cta.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T010018Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=040eb0dd007f732c75f23db4c97815698deffb11e9deae690fcdcbfa42b0dbd6d8c0c4e04b3628419448871a31a6b1091b3375c777422d7710f401230b52e91d72aae9717c40410c6d96c3233b82b8583167c44a717f76823202ab97e8b2169b510d3d5497a8ffe08dc092614ce1ac4f0f2cf7eab1c17eacf5ec4987656beb811e3cc987359e42afdb47e7b4a5c80dfc3a6991769371d5200a463b38fffc490264fb75c4e98be7281d54be4808073843cfc0005065fa0031ea5dbd75a69a5826c75f5ffec8345a2b6ba524604728dd17396addf92daa01128d08f56ae5b27b42dd20a08456f629e33d514ecac28be43895191e7cd2d1c60e16945aa4235980b4"
+    ],
+    "createdAt": "2026-03-24T01:00:23.909417Z",
+    "outputDir": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/carousel_images/20260323_185613"
+  },
+  "663efa021c06": {
+    "carouselId": "663efa021c06",
+    "prompt": "My dad is a professor at harvard and taught me these 5 tips",
+    "status": "ready",
+    "timezone": "America/Denver",
+    "suggestedScheduledFor": "2026-03-23T20:00:00-06:00",
+    "captionDraft": "My dad is a professor at Harvard, and these are the 5 study tips he drilled into me early:\n\n1. Read with questions\n2. Recall > rereading\n3. Teach it simply\n4. Study in sprints\n5. Review before forgetting\n\nThese sound basic, but they change how fast you learn. Save this for your next study session, and comment \u201cSTUDY\u201d if you want a part 2.",
+    "hashtags": [
+      "#StudyTips",
+      "#LearningHowToLearn",
+      "#StudentSuccess",
+      "#ProductivityHacks",
+      "#StudyMotivation",
+      "#ExamPrep",
+      "#MemoryTips",
+      "#AcademicSuccess"
+    ],
+    "slides": [
+      {
+        "kind": "hook",
+        "number": null,
+        "tipTitle": null,
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/663efa021c06/hook.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T013326Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=111eab973ed3b295e6310eb968447b2cbe04258df8b85dd404f328ce6be014a634f5ee6b5fbf74ffb31279d49d2caf2a7c3ddd249e0fdb142e34088f085c2ffad783b47d0662cac6853f20c2dd09b7a7b7726ba6749d7fb6abebee737d95217ba6820f3402616126e20b9b7a637e13c4aced8f86c9b9ed6635e91a1dd633d6993ecf7e81a80869652a5a982cac35028717bd021d424fdab249aa26927a61589025c8850d76a8bf55d6e10834e4b207b6931cba9f5d7ca0650c03906fb81d3e32a366c355883fc835076bdb8b9e8cf035d623725d94f112c50c8ddf6c2f7ee094ed2f84a64f5e6a0a2a0463195ee093752d291ddc2170a022da41f8042516db07",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/663efa021c06/hook.png"
+      },
+      {
+        "kind": "slide_1",
+        "number": 1,
+        "tipTitle": "Read With Questions",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/663efa021c06/slide_1.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T013326Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=9314914c8b55c333074f76d5771d5609b78473334ee6dd8880de9aa1b53c2b26298b13187c43d06a0c58a1f69b81719f394c8c43fa4347494be1092c8aef3303a7034180ea6f0d40ea2f7342d343184e0f00c7c7e4ef23afc55f8a3c926ea77fd89ab526b6d2a8727647ea75935ee76f9d5770a02980e7defc6e2248daf46faa7225275be96b3a8c90758c9d3b89fbfc3adb4a887ef8392185131e0c8553ce25ee085809cfe1368fe0dbc9e457cb4a19aab28ddc0478fcbc088b18453c60885d3d912c20d56ffc0f8cfdeb7d5312e577006267f2ac93b9c0a7ffb78a4d1ab37b42e36e1a77f101efea216427bf6525f88b7ab912c69eae45247ae4bbcec19ade",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/663efa021c06/slide_1.png"
+      },
+      {
+        "kind": "slide_2",
+        "number": 2,
+        "tipTitle": "Recall Beats Rereading",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/663efa021c06/slide_2.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T013326Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=7ef0c7162e0b468b98556eef37d464e49b2a6f4c095b82d79327273ed3f2972be3179f9b9ba65e4add51715d49bb2c93fea64dfbe4e59cad266d0475a8685ff2fb6b0668ec7e315a3c7d762c5dd51b143ec39eb0bf7dca18ce1d0af22c52a05b239455554e297a28799355f42d4ad6f784290c4b3cc62ab4c34fd25e294c388391d18868f3d4161a92b51f486cc87c1ed02b01b21d7f2ead30c26665a5be52d77f3b23e6b37d81ae7f6de2f3cc862907aaeaf711f26467dcf65c0ca2047343f15e54e8741a7b41ca73d17b951ae2a4d398b043514ad847cb201f5544246d37c099ccf3d1f2faceda3dad9c5f294e5ab9306f594dcd7ad8a81edf6d0ca284e13f",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/663efa021c06/slide_2.png"
+      },
+      {
+        "kind": "slide_3",
+        "number": 3,
+        "tipTitle": "Teach It Simply",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/663efa021c06/slide_3.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T013326Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=2628e414b9ad3b4bd1914c03e79087c435d453fef1d6b6d5cdffb37207deaa79f149fa8e72be8a851c07b6bb6fbec95ad849e48f3ea5f5d1fa302f700038d1907d90b55583487591e1bef4ec03aee5749721f7f55e5b472504dc3950d00ce13dfcc444ff3857f78213fb5e5d09d81bf1189a5733f3640a900ed2cb6e2aea156a0fee6f850328c4693e170c022b1efdec9d56db23657beb2f300cf2854f47dffe7f07b2b72e030720aed786e2e6b231e96e0a2eac3799a59e4d4754e2f5866cd20df4ba9f6ec19ac226e67b2f9ea6b8ed5cdeca363777e8d77737a29bdc1d797ee2a2310ee7febe64ee093ca894850d57749803f4fc65f3018f48d53e7c77e6e7",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/663efa021c06/slide_3.png"
+      },
+      {
+        "kind": "slide_4",
+        "number": 4,
+        "tipTitle": "Study In Sprints",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/663efa021c06/slide_4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T013327Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=1e6f18d814fbab3ff75a4a7098a0bfa4e205b182d1f06fbcf846a77c7ee94f6a1cf0178d206a652041a773fba3255a860510ef5c24a50560c74cab8715d40ccf0c2bb93efdb6e6ec57d44606a7b252f3ee578023478ef379f4f8eb3d700bdad2d9efd30b76bfc15ff27f0c21068f71b995b066dbb2b7665075eb854784ee346362b3774b088fa53106edabfc77b4d5ca631e883b0d72acd1da5df77ce41643e58297961f6a727187a2c4690cf2be9e997f753d111b66f6c3ae568663a716983755b92e71f29bdcced5b1db7776d6d6a2f5b3f3c3bc7545984028096c875367c73614f5624aafd3047bb16097426e15b25c333ff729ec8eb1adab059e6686971e",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/663efa021c06/slide_4.png"
+      },
+      {
+        "kind": "slide_5",
+        "number": 5,
+        "tipTitle": "Review Before Forgetting",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/663efa021c06/slide_5.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T013327Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=6d17a688e7be13103c3077689bbbdf3f158d0c417a04c747ffb7ea29769cf190977efffacf7b0a9d5033da0cde4f7a24c9e674e88045b0304fef64b07443567bcf63ec141b09f5dc338c64ebc22090d76255b4bd8d5a11fc0db18f3fd4922af31d518c690b3574512aea72d24f68bf13c45a131800ce46fc83a37f38e660842c67af90d35dc3d67258f07d0eb0bbfdfe8c32230e7bd90a0b9884ea9adf6850fbcb162167aa80a4dfdcfb347600aae9b78cfb018eb8ea08847afb2d9e7187ab8307ba3ebcf392a36cb831c76b9056514f4fb1f4512bcda978472a7f5a95649814cb9d3b0ef664b18c6bbba2ae68ad478bfb9c686d32fbd14a45d3a86d97525705",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/663efa021c06/slide_5.png"
+      },
+      {
+        "kind": "cta",
+        "number": null,
+        "tipTitle": null,
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/663efa021c06/cta.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T013327Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b386af245e3e35e6b000cf4aacd33f5857e02b71f97678666117bfcd973f28b24dfdf1f6ec3d13d69f698af636f4d8b8d592b8f549bbbe93c8f1d233d4dffdd8ed9f1a0cf6ac26cd2af36433ca8bb25abf3d3394a9ce59a491ee07369ba29cadef24b215bc0b8768c541e1000e90faff5682675ee7214d95a5723feaffa08448326fd211aca51146d480a45ffb6bf42fba06c38eddf7cdb0fe14fd5fc2f7d0482108627a59f8cc607d3a4ae6f94ab01fad0f1252d68d3bbd5a2f845437908a09cc55064bd9e9dd41cd8c7274a82bb6b2b03b33f363a36a07872ac830bd0ae133fa8a1372d0f22004c8395d396de466d07c6751ee3b7f4f818ec079de2637bc19",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/663efa021c06/cta.png"
+      }
+    ],
+    "mediaUrls": [
+      "https://storage.googleapis.com/lumeet-bucket/carousels/663efa021c06/hook.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T013326Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=111eab973ed3b295e6310eb968447b2cbe04258df8b85dd404f328ce6be014a634f5ee6b5fbf74ffb31279d49d2caf2a7c3ddd249e0fdb142e34088f085c2ffad783b47d0662cac6853f20c2dd09b7a7b7726ba6749d7fb6abebee737d95217ba6820f3402616126e20b9b7a637e13c4aced8f86c9b9ed6635e91a1dd633d6993ecf7e81a80869652a5a982cac35028717bd021d424fdab249aa26927a61589025c8850d76a8bf55d6e10834e4b207b6931cba9f5d7ca0650c03906fb81d3e32a366c355883fc835076bdb8b9e8cf035d623725d94f112c50c8ddf6c2f7ee094ed2f84a64f5e6a0a2a0463195ee093752d291ddc2170a022da41f8042516db07",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/663efa021c06/slide_1.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T013326Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=9314914c8b55c333074f76d5771d5609b78473334ee6dd8880de9aa1b53c2b26298b13187c43d06a0c58a1f69b81719f394c8c43fa4347494be1092c8aef3303a7034180ea6f0d40ea2f7342d343184e0f00c7c7e4ef23afc55f8a3c926ea77fd89ab526b6d2a8727647ea75935ee76f9d5770a02980e7defc6e2248daf46faa7225275be96b3a8c90758c9d3b89fbfc3adb4a887ef8392185131e0c8553ce25ee085809cfe1368fe0dbc9e457cb4a19aab28ddc0478fcbc088b18453c60885d3d912c20d56ffc0f8cfdeb7d5312e577006267f2ac93b9c0a7ffb78a4d1ab37b42e36e1a77f101efea216427bf6525f88b7ab912c69eae45247ae4bbcec19ade",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/663efa021c06/slide_2.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T013326Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=7ef0c7162e0b468b98556eef37d464e49b2a6f4c095b82d79327273ed3f2972be3179f9b9ba65e4add51715d49bb2c93fea64dfbe4e59cad266d0475a8685ff2fb6b0668ec7e315a3c7d762c5dd51b143ec39eb0bf7dca18ce1d0af22c52a05b239455554e297a28799355f42d4ad6f784290c4b3cc62ab4c34fd25e294c388391d18868f3d4161a92b51f486cc87c1ed02b01b21d7f2ead30c26665a5be52d77f3b23e6b37d81ae7f6de2f3cc862907aaeaf711f26467dcf65c0ca2047343f15e54e8741a7b41ca73d17b951ae2a4d398b043514ad847cb201f5544246d37c099ccf3d1f2faceda3dad9c5f294e5ab9306f594dcd7ad8a81edf6d0ca284e13f",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/663efa021c06/slide_3.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T013326Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=2628e414b9ad3b4bd1914c03e79087c435d453fef1d6b6d5cdffb37207deaa79f149fa8e72be8a851c07b6bb6fbec95ad849e48f3ea5f5d1fa302f700038d1907d90b55583487591e1bef4ec03aee5749721f7f55e5b472504dc3950d00ce13dfcc444ff3857f78213fb5e5d09d81bf1189a5733f3640a900ed2cb6e2aea156a0fee6f850328c4693e170c022b1efdec9d56db23657beb2f300cf2854f47dffe7f07b2b72e030720aed786e2e6b231e96e0a2eac3799a59e4d4754e2f5866cd20df4ba9f6ec19ac226e67b2f9ea6b8ed5cdeca363777e8d77737a29bdc1d797ee2a2310ee7febe64ee093ca894850d57749803f4fc65f3018f48d53e7c77e6e7",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/663efa021c06/slide_4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T013327Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=1e6f18d814fbab3ff75a4a7098a0bfa4e205b182d1f06fbcf846a77c7ee94f6a1cf0178d206a652041a773fba3255a860510ef5c24a50560c74cab8715d40ccf0c2bb93efdb6e6ec57d44606a7b252f3ee578023478ef379f4f8eb3d700bdad2d9efd30b76bfc15ff27f0c21068f71b995b066dbb2b7665075eb854784ee346362b3774b088fa53106edabfc77b4d5ca631e883b0d72acd1da5df77ce41643e58297961f6a727187a2c4690cf2be9e997f753d111b66f6c3ae568663a716983755b92e71f29bdcced5b1db7776d6d6a2f5b3f3c3bc7545984028096c875367c73614f5624aafd3047bb16097426e15b25c333ff729ec8eb1adab059e6686971e",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/663efa021c06/slide_5.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T013327Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=6d17a688e7be13103c3077689bbbdf3f158d0c417a04c747ffb7ea29769cf190977efffacf7b0a9d5033da0cde4f7a24c9e674e88045b0304fef64b07443567bcf63ec141b09f5dc338c64ebc22090d76255b4bd8d5a11fc0db18f3fd4922af31d518c690b3574512aea72d24f68bf13c45a131800ce46fc83a37f38e660842c67af90d35dc3d67258f07d0eb0bbfdfe8c32230e7bd90a0b9884ea9adf6850fbcb162167aa80a4dfdcfb347600aae9b78cfb018eb8ea08847afb2d9e7187ab8307ba3ebcf392a36cb831c76b9056514f4fb1f4512bcda978472a7f5a95649814cb9d3b0ef664b18c6bbba2ae68ad478bfb9c686d32fbd14a45d3a86d97525705",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/663efa021c06/cta.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T013327Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b386af245e3e35e6b000cf4aacd33f5857e02b71f97678666117bfcd973f28b24dfdf1f6ec3d13d69f698af636f4d8b8d592b8f549bbbe93c8f1d233d4dffdd8ed9f1a0cf6ac26cd2af36433ca8bb25abf3d3394a9ce59a491ee07369ba29cadef24b215bc0b8768c541e1000e90faff5682675ee7214d95a5723feaffa08448326fd211aca51146d480a45ffb6bf42fba06c38eddf7cdb0fe14fd5fc2f7d0482108627a59f8cc607d3a4ae6f94ab01fad0f1252d68d3bbd5a2f845437908a09cc55064bd9e9dd41cd8c7274a82bb6b2b03b33f363a36a07872ac830bd0ae133fa8a1372d0f22004c8395d396de466d07c6751ee3b7f4f818ec079de2637bc19"
+    ],
+    "createdAt": "2026-03-24T01:33:32.242240Z",
+    "outputDir": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/carousel_images/20260323_193024"
+  },
+  "7e0005c7c6b9": {
+    "carouselId": "7e0005c7c6b9",
+    "prompt": "my favorite study method that gives me STRAIGHT A\u2019s",
+    "status": "ready",
+    "timezone": "America/Denver",
+    "suggestedScheduledFor": "2026-03-23T20:00:00-06:00",
+    "captionDraft": "My favorite study method that helped me earn STRAIGHT A\u2019s \ud83d\udc47\n\n1) Preview before class so nothing feels brand new\n2) Take messy notes and focus on understanding\n3) Rewrite from memory to find gaps fast\n4) Turn notes into questions instead of rereading\n5) Study in short sprints so your brain stays sharp\n6) Test yourself before the panic hits\n\nIt\u2019s simple, repeatable, and way more effective than cramming. Save this for your next study session.",
+    "hashtags": [
+      "#StudyTips",
+      "#StraightAs",
+      "#StudentSuccess",
+      "#StudyMotivation",
+      "#ExamPrep",
+      "#StudyMethods",
+      "#AcademicSuccess",
+      "#CollegeTips"
+    ],
+    "slides": [
+      {
+        "kind": "hook",
+        "number": null,
+        "tipTitle": null,
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/7e0005c7c6b9/hook.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015233Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=a17bdd546ea589a191a92ac5e293612fcc4e27a68a19d009a731aacefccd07613c0a57aa7bb9810808dcaa70a7c9530d13ef8eabc2519f0c3ba970bb71ab785c847c0ad2940ab40e8a904bd0239e0b84befd5bbdd97ee57088fc49f259dc6655d2f858d4b58b85992593cbd5f224aa331505c5345fdd8147b6a94fad793293f850d8d630fdc58fc0a1d9e0da2c244e4fcc630a34b4f3fb206c6cc1f454011c8160e6da3351cc31215ddaa04dc4fdeb2879b4eb2409d07666a85b21f53d95f07a32e9f81f0ea189f28704bf3ef9e6ba759f0587a900913d95b30a16e011334526415c36ca10bacbeb659d786a74c3e65abb90bd99847fab40081fec92be5b102d",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/7e0005c7c6b9/hook.png"
+      },
+      {
+        "kind": "slide_1",
+        "number": 1,
+        "tipTitle": "Preview Before Class",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/7e0005c7c6b9/slide_1.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015234Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b7f902e5c4639b29ddaed6114c9d91fe1bf8a3cbbea7b082646fefbc6a29fe120b2457582e9310cb85c6e3b2e592831907e4013ce54b6ec604bfdb53bdd25eb5b0f5d1a974d9cdfa445ca8303b19973e8601f6dbe7a075e28eee21a86f9c5de7271fb266a2da209483884c4993b8cfb7fbad28fa413d2455f44394a348571cfcfaddfc0a7118c3ea0ee09c13c85bd9cfabb2c08cf2fc4fd3ba98d2fac77753d3732678e1928b96e95b6b4601aefe8ce73c2d8655a5b8fc5248af1a28d55323a2c8bf72a28a1fd2ea2b522056fdd990b9f300f34b27dfff99593f1c4f5bf6a77baca97a553418c1763eee259d50ee6812b9988bf9692de080e45629d24c6fd538",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/7e0005c7c6b9/slide_1.png"
+      },
+      {
+        "kind": "slide_2",
+        "number": 2,
+        "tipTitle": "Take Messy Notes",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/7e0005c7c6b9/slide_2.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015234Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=6720ee47169f44ccf252e641c1c77498f5d405d78b9338d6f1851a9b729abcef77e7b6a9c0f21f66ba43106f8abb2aa016dbb8f1b43cadfe8a97cb02af703bab14be915766351088ada9f0ac8cf79c4b078b826b95844e5f5d25a21932417243aa892fe79788c354e26a59bea400f27a6affde5b1c2f5ae8d85cd760588e6cc0ce7c7cf28cf27a19a2cf5b857ca493a5e1e12dc9fe351abf081573c007c85689951e239b01bdbfcde8c0010894728ac85d16b03be96834f2da798416354ede41cef05d002402021fb96ba2da0c13beb2c71a3a81f5e5fbbde96d62183c0c6a6d94852ef709c5f4e8c603539d6a805a885c65bb1508a5d6c2a05e842ce9b439c8",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/7e0005c7c6b9/slide_2.png"
+      },
+      {
+        "kind": "slide_3",
+        "number": 3,
+        "tipTitle": "Rewrite From Memory",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/7e0005c7c6b9/slide_3.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015234Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=6a0268a8cad7e35034630e2db650332e1cc4e4d08eb67bbbbdf08dfd0d90378e8b0be620d0804e4c935413a3309f2801f9bad639798bd7c9282b3f26c0098638f807d3f8e10788d4e97069ef4f904961ba78cab3235a64a4daff1f30c13407542817a963aa777d5e30fdc8f302070730ca1e09c5f79eee394c5f186aaa2af30069f47c6084a1ba117a0573ab872cb2f1871c75fdbea847208fa2410708393e4eb01b069f517900aafdcd548cf5d69c6c75408200c98ba62fc26cbbe2972cb51a575d6dad007dee1a80c7ebd20e19a2d85dbde9b9217449e6ed786e49396f76f4a12841c539baee6fd42e920107040af064fd696a3f95eaeb6fc12eae302d02cb",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/7e0005c7c6b9/slide_3.png"
+      },
+      {
+        "kind": "slide_4",
+        "number": 4,
+        "tipTitle": "Turn Notes Into Questions",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/7e0005c7c6b9/slide_4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015234Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=7f84f2a0daad35750dc6f513793571b2db07ce05ac6e255f906ed714bd053132fae8cadbde93c5cf484b09f95b2527a4df5b0934008693150bb68730d70f58f391f172e6406b201cd2ad676b9cd013a76f56c7c46627c19869357dc963965e696dfee782295be7235bcc11a1812647d79c9d12f445baecc6b6fae7d70de6d9e7c5ac38bd2702104b187b112d72b73bd41d662e56fda904c7e4aed1e6098d1e144c2560318abad7ad3d6b2f5e95c3682895a9d663982c6453e9e30d6a7ea2a2b7cb2d3ce680cf8f99d887783a46c288a1d87e4824a4d4852429ba9739829380096f12fbd0774fe71111359514877e1a80052003526a571916b8420bb22ed59fbb",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/7e0005c7c6b9/slide_4.png"
+      },
+      {
+        "kind": "slide_5",
+        "number": 5,
+        "tipTitle": "Study In Sprints",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/7e0005c7c6b9/slide_5.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015234Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=c5bcda77078748644f1f0d79f864f3d024eda069dba424e4688a855ff9bb1123bfad731d47c5ae2039d51d4df3e445e2c22ab4ee47f268e5403e7c133126f3c9112af8aa1f3a6862ab085924752351e0b86c2e30ca3c31b1c18359634cfda2943ebdcccfb5130900d711431145ccadbdee2cc128545de2d2c109b6a0d65dfcdde2cd874de7f889bae45e185f21a1b137fb2b98c39c1bebafed2eeb925e69383b69b6d7f0ba8e1d2adb62f5862e8d7b5afc8aa750898f104831c10b962b7d4b270a846e85b3e5985d970cc0f4077795559cb9f94a3ff7483db19f570db382099b1f87c35756bb07b93266ac1c73771b45b8a32cb51b077998f00b86334d48f34b",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/7e0005c7c6b9/slide_5.png"
+      },
+      {
+        "kind": "slide_6",
+        "number": 6,
+        "tipTitle": "Test Before Panic",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/7e0005c7c6b9/slide_6.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015235Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=4573bbc8d928b91defccaccc99226f821882b9b0c5281e3ccd53e2271d2b66a8423e17f28cfcb7ac335d804c0836f2e0d518fad141dd26028f8b2201704236b4f96a848ea01c1d1343f2872146fdc2bf552e88a07c9fccb14a64fb2d3a87c5e1a8929e4bd6c3204cce87c91a6fc4167bd3d50ba1bce89f37247f87d6289e74b40e7aded01c80f2885f5192fd52bc9e9a4f38ff164337147396492298852914dd7ef7e178fa6f2852a643d2f95e63221841d4cfe9bb7636d9d4030fc5d85144afbdb162890c09a6b546f56dfe4cbd0212bcf17b2972ade477a282ad72d94eff202df64f3b7944b3a58d55acf7d3070c7550454aa1fbc8404b55809513bf70b24a",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/7e0005c7c6b9/slide_6.png"
+      },
+      {
+        "kind": "cta",
+        "number": null,
+        "tipTitle": null,
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/7e0005c7c6b9/cta.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015235Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=9e50f3515b18699adb2bdde83d3aa23f06a28d150f47f207747f2e2b78d542fedc565ec66728bfb689224fd1c5992ee8ebd8658236b94ec0ade53e45b5663314bc7082b0409501800910edf53f0568f1b26e48782bd3aff53538e9b4b400294da738886aa58868f35422e7e37c3350567e6904fd92989cc383b1d55333aab48b504b8aea4ee68ea4f3dcff097b82b62a4b72956b47206176b96014d94023310757ea8018c1a8642d7a5f976d056028c3b5013919f1ed9042c30454a68a2a2b87c5a61c7e1fe8872319105a2692a088423938bbc0d6f238b63c34760fad5eef4c63f7b10f410f72a5cd1c393c80bebcebd2ae4457e3445483ccba3b49398f0b4a",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/7e0005c7c6b9/cta.png"
+      }
+    ],
+    "mediaUrls": [
+      "https://storage.googleapis.com/lumeet-bucket/carousels/7e0005c7c6b9/hook.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015233Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=a17bdd546ea589a191a92ac5e293612fcc4e27a68a19d009a731aacefccd07613c0a57aa7bb9810808dcaa70a7c9530d13ef8eabc2519f0c3ba970bb71ab785c847c0ad2940ab40e8a904bd0239e0b84befd5bbdd97ee57088fc49f259dc6655d2f858d4b58b85992593cbd5f224aa331505c5345fdd8147b6a94fad793293f850d8d630fdc58fc0a1d9e0da2c244e4fcc630a34b4f3fb206c6cc1f454011c8160e6da3351cc31215ddaa04dc4fdeb2879b4eb2409d07666a85b21f53d95f07a32e9f81f0ea189f28704bf3ef9e6ba759f0587a900913d95b30a16e011334526415c36ca10bacbeb659d786a74c3e65abb90bd99847fab40081fec92be5b102d",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/7e0005c7c6b9/slide_1.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015234Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b7f902e5c4639b29ddaed6114c9d91fe1bf8a3cbbea7b082646fefbc6a29fe120b2457582e9310cb85c6e3b2e592831907e4013ce54b6ec604bfdb53bdd25eb5b0f5d1a974d9cdfa445ca8303b19973e8601f6dbe7a075e28eee21a86f9c5de7271fb266a2da209483884c4993b8cfb7fbad28fa413d2455f44394a348571cfcfaddfc0a7118c3ea0ee09c13c85bd9cfabb2c08cf2fc4fd3ba98d2fac77753d3732678e1928b96e95b6b4601aefe8ce73c2d8655a5b8fc5248af1a28d55323a2c8bf72a28a1fd2ea2b522056fdd990b9f300f34b27dfff99593f1c4f5bf6a77baca97a553418c1763eee259d50ee6812b9988bf9692de080e45629d24c6fd538",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/7e0005c7c6b9/slide_2.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015234Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=6720ee47169f44ccf252e641c1c77498f5d405d78b9338d6f1851a9b729abcef77e7b6a9c0f21f66ba43106f8abb2aa016dbb8f1b43cadfe8a97cb02af703bab14be915766351088ada9f0ac8cf79c4b078b826b95844e5f5d25a21932417243aa892fe79788c354e26a59bea400f27a6affde5b1c2f5ae8d85cd760588e6cc0ce7c7cf28cf27a19a2cf5b857ca493a5e1e12dc9fe351abf081573c007c85689951e239b01bdbfcde8c0010894728ac85d16b03be96834f2da798416354ede41cef05d002402021fb96ba2da0c13beb2c71a3a81f5e5fbbde96d62183c0c6a6d94852ef709c5f4e8c603539d6a805a885c65bb1508a5d6c2a05e842ce9b439c8",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/7e0005c7c6b9/slide_3.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015234Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=6a0268a8cad7e35034630e2db650332e1cc4e4d08eb67bbbbdf08dfd0d90378e8b0be620d0804e4c935413a3309f2801f9bad639798bd7c9282b3f26c0098638f807d3f8e10788d4e97069ef4f904961ba78cab3235a64a4daff1f30c13407542817a963aa777d5e30fdc8f302070730ca1e09c5f79eee394c5f186aaa2af30069f47c6084a1ba117a0573ab872cb2f1871c75fdbea847208fa2410708393e4eb01b069f517900aafdcd548cf5d69c6c75408200c98ba62fc26cbbe2972cb51a575d6dad007dee1a80c7ebd20e19a2d85dbde9b9217449e6ed786e49396f76f4a12841c539baee6fd42e920107040af064fd696a3f95eaeb6fc12eae302d02cb",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/7e0005c7c6b9/slide_4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015234Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=7f84f2a0daad35750dc6f513793571b2db07ce05ac6e255f906ed714bd053132fae8cadbde93c5cf484b09f95b2527a4df5b0934008693150bb68730d70f58f391f172e6406b201cd2ad676b9cd013a76f56c7c46627c19869357dc963965e696dfee782295be7235bcc11a1812647d79c9d12f445baecc6b6fae7d70de6d9e7c5ac38bd2702104b187b112d72b73bd41d662e56fda904c7e4aed1e6098d1e144c2560318abad7ad3d6b2f5e95c3682895a9d663982c6453e9e30d6a7ea2a2b7cb2d3ce680cf8f99d887783a46c288a1d87e4824a4d4852429ba9739829380096f12fbd0774fe71111359514877e1a80052003526a571916b8420bb22ed59fbb",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/7e0005c7c6b9/slide_5.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015234Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=c5bcda77078748644f1f0d79f864f3d024eda069dba424e4688a855ff9bb1123bfad731d47c5ae2039d51d4df3e445e2c22ab4ee47f268e5403e7c133126f3c9112af8aa1f3a6862ab085924752351e0b86c2e30ca3c31b1c18359634cfda2943ebdcccfb5130900d711431145ccadbdee2cc128545de2d2c109b6a0d65dfcdde2cd874de7f889bae45e185f21a1b137fb2b98c39c1bebafed2eeb925e69383b69b6d7f0ba8e1d2adb62f5862e8d7b5afc8aa750898f104831c10b962b7d4b270a846e85b3e5985d970cc0f4077795559cb9f94a3ff7483db19f570db382099b1f87c35756bb07b93266ac1c73771b45b8a32cb51b077998f00b86334d48f34b",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/7e0005c7c6b9/slide_6.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015235Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=4573bbc8d928b91defccaccc99226f821882b9b0c5281e3ccd53e2271d2b66a8423e17f28cfcb7ac335d804c0836f2e0d518fad141dd26028f8b2201704236b4f96a848ea01c1d1343f2872146fdc2bf552e88a07c9fccb14a64fb2d3a87c5e1a8929e4bd6c3204cce87c91a6fc4167bd3d50ba1bce89f37247f87d6289e74b40e7aded01c80f2885f5192fd52bc9e9a4f38ff164337147396492298852914dd7ef7e178fa6f2852a643d2f95e63221841d4cfe9bb7636d9d4030fc5d85144afbdb162890c09a6b546f56dfe4cbd0212bcf17b2972ade477a282ad72d94eff202df64f3b7944b3a58d55acf7d3070c7550454aa1fbc8404b55809513bf70b24a",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/7e0005c7c6b9/cta.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015235Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=9e50f3515b18699adb2bdde83d3aa23f06a28d150f47f207747f2e2b78d542fedc565ec66728bfb689224fd1c5992ee8ebd8658236b94ec0ade53e45b5663314bc7082b0409501800910edf53f0568f1b26e48782bd3aff53538e9b4b400294da738886aa58868f35422e7e37c3350567e6904fd92989cc383b1d55333aab48b504b8aea4ee68ea4f3dcff097b82b62a4b72956b47206176b96014d94023310757ea8018c1a8642d7a5f976d056028c3b5013919f1ed9042c30454a68a2a2b87c5a61c7e1fe8872319105a2692a088423938bbc0d6f238b63c34760fad5eef4c63f7b10f410f72a5cd1c393c80bebcebd2ae4457e3445483ccba3b49398f0b4a"
+    ],
+    "createdAt": "2026-03-24T01:52:38.904044Z",
+    "outputDir": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/carousel_images/20260323_194840"
+  },
+  "4e203b5c8b29": {
+    "carouselId": "4e203b5c8b29",
+    "prompt": "How Harvard students ACTUALLY study",
+    "status": "ready",
+    "timezone": "America/Denver",
+    "suggestedScheduledFor": "2026-03-23T20:00:00-06:00",
+    "captionDraft": "How Harvard students ACTUALLY study \ud83d\udc47\n\nIt\u2019s not about studying longer\u2014it\u2019s about studying smarter.\n\nThis carousel breaks down 7 habits top students use to learn faster, remember more, and perform under pressure:\n\u2022 preview before class\n\u2022 ask sharper questions\n\u2022 use study intervals\n\u2022 teach concepts out loud\n\u2022 practice like it\u2019s the real exam\n\u2022 protect deep work time\n\u2022 review before you forget\n\nSave this for your next study session\u2014and send it to the friend who needs better study habits.",
+    "hashtags": [
+      "#StudyTips",
+      "#StudentSuccess",
+      "#StudySmarter",
+      "#CollegeHacks",
+      "#LearningHowToLearn",
+      "#DeepWork",
+      "#ExamPrep",
+      "#AcademicSuccess"
+    ],
+    "slides": [
+      {
+        "kind": "hook",
+        "number": null,
+        "tipTitle": null,
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/4e203b5c8b29/hook.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015300Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b55e4082d0607c47c02e20497dda141e7047410371bb63e9c8f54bb2a269741a8d0a94c9079df6fcc834cef5495e8272e9ebed1a955dc282d9725b68c9c6f0e599213257f4d110f21fdaf12504706427904edbb384c90d8c393e598529c8271375ff1b867d5e0162d2c9541d0f8755ccb53304cd1df6f89ea48c5f28bd945f32dc27849169351ee0811df9b196a981e73eccabc3c8e22c20e7215e38288ace378c5b81e918650a4bb3bbb491c4f3df4e77eebf6f3157c0c86c94b610e31ff81862003309c7d118d52de8a488efeb741c6e8ce3464025e26eeb3a01f7fb032275191b18527556625f51b8cf9c9936cc2e9e088193a90d70784db7d6bbd435bed2",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/4e203b5c8b29/hook.png"
+      },
+      {
+        "kind": "slide_1",
+        "number": 1,
+        "tipTitle": "Preview Before Lecture",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/4e203b5c8b29/slide_1.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015301Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=17ed605036da6fb4c790b23cc131fee7a5510aa03e67700e344ebc2f75cab0584fcc4485c7177fd51f76b6515ecabaf40637296efe8252c148f632707f3882d0d7295ef5c492ee69c2d3f00cab7785805000e6c1718a62f8ed4f5267e1aa45faa4cdd8e452107596cd7567f926b5c202aeb280786a80845ebcd12af5213e7cc1cb8a6e39cc67dc225ad5839d4783990f91781cbbeb3b8031559226ed682742e51bcf53c33172b84c333382aee8bb38fa6b82bf83f4f08a40e9ee4ca3da880e9dc8511ac744ba2c320b7a1c6910d22718096180f5e0b73c5804dfea9aa36d91326412cfea82b13300a81ad43439544266cc79ec2d74ada9e7f20e3fc49143cb04",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/4e203b5c8b29/slide_1.png"
+      },
+      {
+        "kind": "slide_2",
+        "number": 2,
+        "tipTitle": "Ask Better Questions",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/4e203b5c8b29/slide_2.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015301Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=abc4c56213f66cf256b3d840364c3f6e66fd9e77cb0abfb96f5c960b4a2f2374f5a8d8f910c363fecd4e9301ea02d99c51848070130b716737eec7e8a961dd49ad870f437e8a37595b1825f034da533bec0054265604030bd854a1ff26b395a56d04df3b91580eb223bb3f574d96251c72e5d52d19d009b7848c4cbc88c80af1f7a57f60cfee4e22722d3cb04b1accb9e24ce5ffc94a97813f2eb90a301b008450d20a17502abfd5e461397fb0b596c19dfde81e9a8ff6092220962c90f53d04b4cca2041d42a5fec1a57d7446e14ad30281be7a3d0d625ba5d9f2c94a740fa47965044e002790d192669132214b815d11e13acd09003be2dddbb6bfe70bdc8d",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/4e203b5c8b29/slide_2.png"
+      },
+      {
+        "kind": "slide_3",
+        "number": 3,
+        "tipTitle": "Study in Intervals",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/4e203b5c8b29/slide_3.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015301Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=2ee8c3b68cda8a4abd979e689b92a249d6b35f4518e56f8611cb3736ce9eb8c05e2d2fa30c7a54b7bf8f9e58e5acf5aed7c283636c83b918374380da9d5ac9286c777d6b46363a69cdc2c2ead6b8de66079ace0ac27a8e19829fff1435ebef4f5e30bfb8514ac9bcebdb8d8714a09a7253e84020c9dcf56bc50f092049779289b155eaa0b3a9a4c90b0bc7bd49a2342823c0e5af51930267981c731a8daf357d976b850b529ab38e4b34a7e483c8e8f4124667ed4b1313152f7413fb2140b4f04b5d7784af039f45d96b895f432c3b24c869021ea00f4f8cb506f4a8e1dabe449940c7880b575774c851beb9c4339611f53be107da26da5dcd9fe9b3663d9821",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/4e203b5c8b29/slide_3.png"
+      },
+      {
+        "kind": "slide_4",
+        "number": 4,
+        "tipTitle": "Teach It Out Loud",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/4e203b5c8b29/slide_4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015301Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=d5adcb227a941f28370651fbd7f30f3dc0654781be88281600495e0b8a77d57a7a51bb2ba531883e7c8437ed8f06322e324f72e8451f01c05a583d3300fd987996e2ddaf8ca332fa4775c286f9114e23b40f183efa6c444cae19a1062663bda887e4ac20d381de69aa903b8d8fb5a3393b9df3abae6f5fb9ec0bbb839238afeb0b02ba2afceafa8b24c8473776dab602a12f8a77fc4bc5cac0f0a160fb07b3a8542db8684b781b586b3cfc871952694ff81fb2f450aeabbd2f28bb0609d6fd34e6a841eb7dd824a7cf2c17296594d1dcbd43e719675e21bc6b132e90a894d2789cab1d500ad7a75a0d668e48c327ef5a170d60093c7edb9bcee2861643a24438",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/4e203b5c8b29/slide_4.png"
+      },
+      {
+        "kind": "slide_5",
+        "number": 5,
+        "tipTitle": "Practice Under Pressure",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/4e203b5c8b29/slide_5.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015301Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=dbcbce0995bde73a80b9c680f986540bbc27edfd7b3b0bc896d179e7cf724ddb410f4fe1df1c10b4305df8d6eff1a55348c76172356fd9844905f194c89e37a038609acf830a754d83bb4cf35450f40485591026a2f9b8bdb2b4b954e2b16bb06ea05f2ba03da475c620c52c556ea618d739df3872c129d6cc81c984c836f9a62e39667af743b73f768946aa75f990ca76615dff55261cfa9f3637ed6b6a2055a8b07824193b2575ca1c30dcbd6fa78c4b38d1180f8226f6500abcddba7cff24af1c006b9661838ae78c4105b13baad61add426d0293943666b7d07e289ec9a18352072d95c01c622b443322b382766697ee248eafce4c525f859d13bc8dc265",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/4e203b5c8b29/slide_5.png"
+      },
+      {
+        "kind": "slide_6",
+        "number": 6,
+        "tipTitle": "Protect Deep Work",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/4e203b5c8b29/slide_6.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015302Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=5dcbe34a263f2a8e4b8cc8a86f6dc1bc362d3d2479545cf56412f0c9b447eff14db7c2e7b3f9aee3cdf884a0676d9f78bb31a96329550cb3b66532c7affa4961dcb3dcfe0c25f486c2592ee2745a0daf060b7da7936f60a5cc84a6508769d87009072a7125ec360f273f5ec579345abcd4fd43eac24ce19ce6f99407bb35edee43a3730f6fdb0c290b4e00d518d639cbf6f68d8c1eb4244766dce0fca1474d334cc42caa259f9b3451748f234ecbc76dddc4bd242de8f7bd9cb81e84102bd7184dc2ee56ff0beaa9bd87cbed609407abd0505d0cada1af517af687e24f0edadc4b7dfec29e3e84552cd8c9793b60b383b7940ab4efefc3e1bc933d0e19c56219",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/4e203b5c8b29/slide_6.png"
+      },
+      {
+        "kind": "slide_7",
+        "number": 7,
+        "tipTitle": "Review Before Forgetting",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/4e203b5c8b29/slide_7.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015302Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=99539f301ed752066a40e5a2ef73f1750389bcf666442d4af441858c83aa8b70a1caac9a21cfd099679af991b55d3f288800b7c2728d64a321cf6a2f34d0577d235bcb74fc6c027408317b3f40eac84ba85ff7e23651d25b1ed3c6cc7502f8ece2ec8f484e7dccabd80121e406fde964cf3f5611d2c1ea7ae181d18f3bb8cd953ef989ea0a3a0ece7161dd6b7109657a916d5e8b020d3e48a4214d47e11b54f9a648b6073259b0eda7598643fc9980c12e5f858fd04285c3c2eed9af20be04283138aeda220e62b3937f6b3fc1d7bc59cc98ff6d8c4b333f2221290ff5c5156624e4bbcbbf2baf3984ad3f4810065afcde65e2c0f9e8a8358b80315872220f5a",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/4e203b5c8b29/slide_7.png"
+      },
+      {
+        "kind": "cta",
+        "number": null,
+        "tipTitle": null,
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/4e203b5c8b29/cta.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015302Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=d5719571efc828816140a3ec3602232df4c83d94b9f2d2b61736e5a6105b2e2589fdd62b9fdef64beec384aaddb6a381e2bbdec453e3a4055f3d8d97d83fa9345da76ce7078d75c6037cbc576472b0a8a0396c33c43f75e0a31c9bfcb84303fe11b7b12775684116d5ec213181046418eb3d6220c069e2c455c811112524f0eafe9e097a0c61433b58d526b85f8b7c9e528452d093c6bb894edc7c23caadfb9eec2ee1599a7f09f9bbcf157b667908607ea5c163462fabf929d61e61e24b8b290b92c82ac54f5b8810af370b0ca0893b5905d6511af68adcfa0dc0ddedc0dc233412d7211139905db911c51bb0113e8afc8bb7429c55cd721b3462c5918f88f8",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/4e203b5c8b29/cta.png"
+      }
+    ],
+    "mediaUrls": [
+      "https://storage.googleapis.com/lumeet-bucket/carousels/4e203b5c8b29/hook.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015300Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b55e4082d0607c47c02e20497dda141e7047410371bb63e9c8f54bb2a269741a8d0a94c9079df6fcc834cef5495e8272e9ebed1a955dc282d9725b68c9c6f0e599213257f4d110f21fdaf12504706427904edbb384c90d8c393e598529c8271375ff1b867d5e0162d2c9541d0f8755ccb53304cd1df6f89ea48c5f28bd945f32dc27849169351ee0811df9b196a981e73eccabc3c8e22c20e7215e38288ace378c5b81e918650a4bb3bbb491c4f3df4e77eebf6f3157c0c86c94b610e31ff81862003309c7d118d52de8a488efeb741c6e8ce3464025e26eeb3a01f7fb032275191b18527556625f51b8cf9c9936cc2e9e088193a90d70784db7d6bbd435bed2",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/4e203b5c8b29/slide_1.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015301Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=17ed605036da6fb4c790b23cc131fee7a5510aa03e67700e344ebc2f75cab0584fcc4485c7177fd51f76b6515ecabaf40637296efe8252c148f632707f3882d0d7295ef5c492ee69c2d3f00cab7785805000e6c1718a62f8ed4f5267e1aa45faa4cdd8e452107596cd7567f926b5c202aeb280786a80845ebcd12af5213e7cc1cb8a6e39cc67dc225ad5839d4783990f91781cbbeb3b8031559226ed682742e51bcf53c33172b84c333382aee8bb38fa6b82bf83f4f08a40e9ee4ca3da880e9dc8511ac744ba2c320b7a1c6910d22718096180f5e0b73c5804dfea9aa36d91326412cfea82b13300a81ad43439544266cc79ec2d74ada9e7f20e3fc49143cb04",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/4e203b5c8b29/slide_2.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015301Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=abc4c56213f66cf256b3d840364c3f6e66fd9e77cb0abfb96f5c960b4a2f2374f5a8d8f910c363fecd4e9301ea02d99c51848070130b716737eec7e8a961dd49ad870f437e8a37595b1825f034da533bec0054265604030bd854a1ff26b395a56d04df3b91580eb223bb3f574d96251c72e5d52d19d009b7848c4cbc88c80af1f7a57f60cfee4e22722d3cb04b1accb9e24ce5ffc94a97813f2eb90a301b008450d20a17502abfd5e461397fb0b596c19dfde81e9a8ff6092220962c90f53d04b4cca2041d42a5fec1a57d7446e14ad30281be7a3d0d625ba5d9f2c94a740fa47965044e002790d192669132214b815d11e13acd09003be2dddbb6bfe70bdc8d",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/4e203b5c8b29/slide_3.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015301Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=2ee8c3b68cda8a4abd979e689b92a249d6b35f4518e56f8611cb3736ce9eb8c05e2d2fa30c7a54b7bf8f9e58e5acf5aed7c283636c83b918374380da9d5ac9286c777d6b46363a69cdc2c2ead6b8de66079ace0ac27a8e19829fff1435ebef4f5e30bfb8514ac9bcebdb8d8714a09a7253e84020c9dcf56bc50f092049779289b155eaa0b3a9a4c90b0bc7bd49a2342823c0e5af51930267981c731a8daf357d976b850b529ab38e4b34a7e483c8e8f4124667ed4b1313152f7413fb2140b4f04b5d7784af039f45d96b895f432c3b24c869021ea00f4f8cb506f4a8e1dabe449940c7880b575774c851beb9c4339611f53be107da26da5dcd9fe9b3663d9821",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/4e203b5c8b29/slide_4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015301Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=d5adcb227a941f28370651fbd7f30f3dc0654781be88281600495e0b8a77d57a7a51bb2ba531883e7c8437ed8f06322e324f72e8451f01c05a583d3300fd987996e2ddaf8ca332fa4775c286f9114e23b40f183efa6c444cae19a1062663bda887e4ac20d381de69aa903b8d8fb5a3393b9df3abae6f5fb9ec0bbb839238afeb0b02ba2afceafa8b24c8473776dab602a12f8a77fc4bc5cac0f0a160fb07b3a8542db8684b781b586b3cfc871952694ff81fb2f450aeabbd2f28bb0609d6fd34e6a841eb7dd824a7cf2c17296594d1dcbd43e719675e21bc6b132e90a894d2789cab1d500ad7a75a0d668e48c327ef5a170d60093c7edb9bcee2861643a24438",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/4e203b5c8b29/slide_5.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015301Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=dbcbce0995bde73a80b9c680f986540bbc27edfd7b3b0bc896d179e7cf724ddb410f4fe1df1c10b4305df8d6eff1a55348c76172356fd9844905f194c89e37a038609acf830a754d83bb4cf35450f40485591026a2f9b8bdb2b4b954e2b16bb06ea05f2ba03da475c620c52c556ea618d739df3872c129d6cc81c984c836f9a62e39667af743b73f768946aa75f990ca76615dff55261cfa9f3637ed6b6a2055a8b07824193b2575ca1c30dcbd6fa78c4b38d1180f8226f6500abcddba7cff24af1c006b9661838ae78c4105b13baad61add426d0293943666b7d07e289ec9a18352072d95c01c622b443322b382766697ee248eafce4c525f859d13bc8dc265",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/4e203b5c8b29/slide_6.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015302Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=5dcbe34a263f2a8e4b8cc8a86f6dc1bc362d3d2479545cf56412f0c9b447eff14db7c2e7b3f9aee3cdf884a0676d9f78bb31a96329550cb3b66532c7affa4961dcb3dcfe0c25f486c2592ee2745a0daf060b7da7936f60a5cc84a6508769d87009072a7125ec360f273f5ec579345abcd4fd43eac24ce19ce6f99407bb35edee43a3730f6fdb0c290b4e00d518d639cbf6f68d8c1eb4244766dce0fca1474d334cc42caa259f9b3451748f234ecbc76dddc4bd242de8f7bd9cb81e84102bd7184dc2ee56ff0beaa9bd87cbed609407abd0505d0cada1af517af687e24f0edadc4b7dfec29e3e84552cd8c9793b60b383b7940ab4efefc3e1bc933d0e19c56219",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/4e203b5c8b29/slide_7.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015302Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=99539f301ed752066a40e5a2ef73f1750389bcf666442d4af441858c83aa8b70a1caac9a21cfd099679af991b55d3f288800b7c2728d64a321cf6a2f34d0577d235bcb74fc6c027408317b3f40eac84ba85ff7e23651d25b1ed3c6cc7502f8ece2ec8f484e7dccabd80121e406fde964cf3f5611d2c1ea7ae181d18f3bb8cd953ef989ea0a3a0ece7161dd6b7109657a916d5e8b020d3e48a4214d47e11b54f9a648b6073259b0eda7598643fc9980c12e5f858fd04285c3c2eed9af20be04283138aeda220e62b3937f6b3fc1d7bc59cc98ff6d8c4b333f2221290ff5c5156624e4bbcbbf2baf3984ad3f4810065afcde65e2c0f9e8a8358b80315872220f5a",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/4e203b5c8b29/cta.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015302Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=d5719571efc828816140a3ec3602232df4c83d94b9f2d2b61736e5a6105b2e2589fdd62b9fdef64beec384aaddb6a381e2bbdec453e3a4055f3d8d97d83fa9345da76ce7078d75c6037cbc576472b0a8a0396c33c43f75e0a31c9bfcb84303fe11b7b12775684116d5ec213181046418eb3d6220c069e2c455c811112524f0eafe9e097a0c61433b58d526b85f8b7c9e528452d093c6bb894edc7c23caadfb9eec2ee1599a7f09f9bbcf157b667908607ea5c163462fabf929d61e61e24b8b290b92c82ac54f5b8810af370b0ca0893b5905d6511af68adcfa0dc0ddedc0dc233412d7211139905db911c51bb0113e8afc8bb7429c55cd721b3462c5918f88f8"
+    ],
+    "createdAt": "2026-03-24T01:53:06.976958Z",
+    "outputDir": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/carousel_images/20260323_194854"
+  },
+  "e6b9a90f9059": {
+    "carouselId": "e6b9a90f9059",
+    "prompt": "my favorite study method that gives me STRAIGHT A\u2019s\n5 tips for better focus while studying\nHow Harvard students ACTUALLY study",
+    "status": "ready",
+    "timezone": "America/Denver",
+    "suggestedScheduledFor": "2026-03-23T20:00:00-06:00",
+    "captionDraft": "Straight A\u2019s didn\u2019t come from studying longer\u2014they came from studying with a system. \ud83d\udc47\nThese 5 focus rules changed everything for me:\n1) brutal time blocks\n2) study before you scroll\n3) write recall first\n4) change subjects strategically\n5) end with tomorrow\u2019s cue\nIf you keep \u201cstudying\u201d but nothing sticks, this carousel will fix that. Save it for your next study session and send it to a friend who needs better focus.",
+    "hashtags": [
+      "#studytips",
+      "#studyhack",
+      "#studentlife",
+      "#productivitytips",
+      "#studymotivation",
+      "#focusbetter",
+      "#academicsuccess",
+      "#schooltips"
+    ],
+    "slides": [
+      {
+        "kind": "hook",
+        "number": null,
+        "tipTitle": null,
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/e6b9a90f9059/hook.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015357Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=9ef138f758c5014f2a85f42cad93a148a8ae27ed447baec52b76cfec737807f3afec5bfa472d88fcab9469889b9165377d495cad9abf9d133d4fb89f4b20241f98b920fec5ed408e185e6059afbf6dde10fad9e3f6ef0548b2c237a47f935e43d116bc42fd0d5a32467c3cb7184fbd20a2def3417485f971baa87b5b7c920f5e4cceeb744d870eba6425288b02d5b123803a0c608a82fc9fdead100566d1a4cbcfe9886a4f9c4b5e9325a7a54e8529d57a76fb57f88e3e92b19a450b7af6baa84247a7469918fa6b375fb0209f262666eafbfe2a51b3fb47bb5c1c22cf01a683e39b0d4116d8d337effc970d9aa2240f6b019a17956306e2a58e2f4fa47d432e",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/e6b9a90f9059/hook.png"
+      },
+      {
+        "kind": "slide_1",
+        "number": 1,
+        "tipTitle": "Use Brutal Time Blocks",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/e6b9a90f9059/slide_1.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015358Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=bf287c43ab467ea50608eb96a7f0e03be5c49fbbc1ae79e1b6f851a7f84c0286a0d900a5b392a6ad33d87a066eeda280cc8128b06baebd65304133b6a4cfb6663b789a4db443b68758d035cc7aa75f741b315c272db19ade6576c50c6537260dae48ae7494a6fa836ce755d11d89e9b82b587607d2e868bbb94a0c205e5853c798aebf2a5e2ea506edb13b5be55bbf2bd76556df01e8a1b91a4e9b18fb6bf1138a411a6805b32db42a9d68e4bd19f18656a0eddf654fdc714e024569ce273f6b3a2b2679de51c78b00e56ade3d10c290c94c9df864b2d93591f8d11c132a63f1f301e20142f818eaeeb0360c8b256193f8ee3abe3edde2ce683ad7d2d109ff2d",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/e6b9a90f9059/slide_1.png"
+      },
+      {
+        "kind": "slide_2",
+        "number": 2,
+        "tipTitle": "Study Before You Scroll",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/e6b9a90f9059/slide_2.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015358Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=d4981db059548a3370e22507ffe9a688b941de13db3670f21752b7079d21d79c7787c1781163f78d663ad3b8439ffa0a64f3bbfad65b27c7810c6b8e990e7426de9f4823c0d875cccd35864569dd160065047bd0cd59b2fac435df780b351d814b9a18e2c43db5bf4dc05081cbac8252985a877a690161cb2fa1a69943110dba0cd341488f2682a610756cee734e37c9487ebe2eddb4ca7b7d69a4a13ba25b14df9c7cf3a1e2a3d30b0b1a30daf78b48440de086db4b096c4e9a943a4246a2209b56807a120b2382ab0f5f2261408296f42643210daec84e07dcc0cfda3d14d94ec3f1d96bf4f76acc2b4236c4fc7de882bca0ac7ad6cdd096eb2f4689a7384d",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/e6b9a90f9059/slide_2.png"
+      },
+      {
+        "kind": "slide_3",
+        "number": 3,
+        "tipTitle": "Write Recall First",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/e6b9a90f9059/slide_3.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015358Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=08f8613434368014d151277d92418c3161d13dd0c7e461afa855516ff96840489fd43bf56e9d32b45eef445457a5f6b1d3a9f5c25d8e5b97a0c1535e13528d251c16d379a245d75f02971cb23d1abdc052e693fcbf6d59e8adf61ddd1be1226977c448d91bb97c703cbd869b4973b395a8dd61b06cf420fcaee6e291a0770d8c4889d690a0ce1cc26786d9da85007ff41c3f45fdcfc76ebc1644761ed173e2441b4145bcc1c840afd89589edf97a6fa956f53324397e8d9591a69dbdd6907425330a8bab6c9b6f58f6539457668c5cd9e4b14905c059118bc5279236f37cc1d0957a348d0505fabfac96199f2aca37b9465ed54ee6f15ffb1b269e1a787aa92d",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/e6b9a90f9059/slide_3.png"
+      },
+      {
+        "kind": "slide_4",
+        "number": 4,
+        "tipTitle": "Change Subjects Strategically",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/e6b9a90f9059/slide_4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015358Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=db61a8e4d151f34d1907d6971b47e59b6b181e468a261c89d12d7598c8c7a6870d0b1455927f520e628082c48e60cdbcfe73401f0b9c47d248e3c5bcc6afbf7b5f37ba20df2ff86b03f4c8a461541bdc3fd96e17634af6143898e508e3691ab09cf81ddd9b98a1289b0a1723f22ce588a1b5d53a8718f2ac895d3cddc6fee5d7b481dc5e5a14d14a03aefda5b36230eccb5d29f61052ba807fcab9c41bec23464bf06ce6c40e2332adbc5d6b0f44b16b725577c6f4fe4ab4b7e90fdd796f0942b1ee8331d54528add21c618bef72ca3aa5143789886f873d5f0844e4a2c97207726a24a014f6e60a6072d7cb57add9470bd82adb60f5d6478083f5cc18569933",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/e6b9a90f9059/slide_4.png"
+      },
+      {
+        "kind": "slide_5",
+        "number": 5,
+        "tipTitle": "End With Tomorrow's Cue",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/e6b9a90f9059/slide_5.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015358Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=05855fd462721b77e49f9280787daabc61b5081dd5d06df3c108e4468f74c072fc35070e3d657dff2ae3409d1448d433042fcd65a806e73d0673e02ba5434115de4acc711ef174b2cdb014b724b61ba29ad66a9ba2a715e1d4a640ceec2dd3365c5389dc4351bac97ae7e9f8013a81284dd99356429242ced30c32dbc39fe7e97f4cb734f3271caf766703b1e94ab324e59581e805fd01f9e9a98fe382ab156ca08b80edd5e0ccc0314438dae410e12c77ce51464d6b5c43b23c5f8202cb3935c1af510c9c72b836fa319d89cae53dffbd3a46ab9e3ee66a677ff092787bda3c1a0c953c4932e571a815cf7d4b9d1fa348f9f90e92c33d51ba56417ac63fdc01",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/e6b9a90f9059/slide_5.png"
+      },
+      {
+        "kind": "cta",
+        "number": null,
+        "tipTitle": null,
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/e6b9a90f9059/cta.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015358Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=1cdea70bf4691dd50cfc99f278db0119423787985ebe3ce29220063e5f27dc563da14178bea32dc6b4369b21f8b4ceac15137c2a45a864a1bd1bb274c770d25989d8ac6e2b8f24b52634899386c7d2dd664c5426a0ad44b8978f9b196fb14663ba1a11d8d395d4075fa114f325f86879a9c4bc594ab68d3fdbb5a6e50bdee018209badd96eae6399dffa5690ed3f78a16decd0760f7caa281d049f1c6c2d19f94951080e92b90d84d1bd32e152100fdaae201be99e33b75ef2dcf04fdd1cd9d583b0d042a53b9312f34848bf819fe35a541b32bacd73480443c31e28e0b7c6868800c38bcd264dc094956b9d68237f3e1ad97877cc4f7a7b77e7048d5832630d",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/e6b9a90f9059/cta.png"
+      }
+    ],
+    "mediaUrls": [
+      "https://storage.googleapis.com/lumeet-bucket/carousels/e6b9a90f9059/hook.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015357Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=9ef138f758c5014f2a85f42cad93a148a8ae27ed447baec52b76cfec737807f3afec5bfa472d88fcab9469889b9165377d495cad9abf9d133d4fb89f4b20241f98b920fec5ed408e185e6059afbf6dde10fad9e3f6ef0548b2c237a47f935e43d116bc42fd0d5a32467c3cb7184fbd20a2def3417485f971baa87b5b7c920f5e4cceeb744d870eba6425288b02d5b123803a0c608a82fc9fdead100566d1a4cbcfe9886a4f9c4b5e9325a7a54e8529d57a76fb57f88e3e92b19a450b7af6baa84247a7469918fa6b375fb0209f262666eafbfe2a51b3fb47bb5c1c22cf01a683e39b0d4116d8d337effc970d9aa2240f6b019a17956306e2a58e2f4fa47d432e",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/e6b9a90f9059/slide_1.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015358Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=bf287c43ab467ea50608eb96a7f0e03be5c49fbbc1ae79e1b6f851a7f84c0286a0d900a5b392a6ad33d87a066eeda280cc8128b06baebd65304133b6a4cfb6663b789a4db443b68758d035cc7aa75f741b315c272db19ade6576c50c6537260dae48ae7494a6fa836ce755d11d89e9b82b587607d2e868bbb94a0c205e5853c798aebf2a5e2ea506edb13b5be55bbf2bd76556df01e8a1b91a4e9b18fb6bf1138a411a6805b32db42a9d68e4bd19f18656a0eddf654fdc714e024569ce273f6b3a2b2679de51c78b00e56ade3d10c290c94c9df864b2d93591f8d11c132a63f1f301e20142f818eaeeb0360c8b256193f8ee3abe3edde2ce683ad7d2d109ff2d",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/e6b9a90f9059/slide_2.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015358Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=d4981db059548a3370e22507ffe9a688b941de13db3670f21752b7079d21d79c7787c1781163f78d663ad3b8439ffa0a64f3bbfad65b27c7810c6b8e990e7426de9f4823c0d875cccd35864569dd160065047bd0cd59b2fac435df780b351d814b9a18e2c43db5bf4dc05081cbac8252985a877a690161cb2fa1a69943110dba0cd341488f2682a610756cee734e37c9487ebe2eddb4ca7b7d69a4a13ba25b14df9c7cf3a1e2a3d30b0b1a30daf78b48440de086db4b096c4e9a943a4246a2209b56807a120b2382ab0f5f2261408296f42643210daec84e07dcc0cfda3d14d94ec3f1d96bf4f76acc2b4236c4fc7de882bca0ac7ad6cdd096eb2f4689a7384d",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/e6b9a90f9059/slide_3.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015358Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=08f8613434368014d151277d92418c3161d13dd0c7e461afa855516ff96840489fd43bf56e9d32b45eef445457a5f6b1d3a9f5c25d8e5b97a0c1535e13528d251c16d379a245d75f02971cb23d1abdc052e693fcbf6d59e8adf61ddd1be1226977c448d91bb97c703cbd869b4973b395a8dd61b06cf420fcaee6e291a0770d8c4889d690a0ce1cc26786d9da85007ff41c3f45fdcfc76ebc1644761ed173e2441b4145bcc1c840afd89589edf97a6fa956f53324397e8d9591a69dbdd6907425330a8bab6c9b6f58f6539457668c5cd9e4b14905c059118bc5279236f37cc1d0957a348d0505fabfac96199f2aca37b9465ed54ee6f15ffb1b269e1a787aa92d",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/e6b9a90f9059/slide_4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015358Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=db61a8e4d151f34d1907d6971b47e59b6b181e468a261c89d12d7598c8c7a6870d0b1455927f520e628082c48e60cdbcfe73401f0b9c47d248e3c5bcc6afbf7b5f37ba20df2ff86b03f4c8a461541bdc3fd96e17634af6143898e508e3691ab09cf81ddd9b98a1289b0a1723f22ce588a1b5d53a8718f2ac895d3cddc6fee5d7b481dc5e5a14d14a03aefda5b36230eccb5d29f61052ba807fcab9c41bec23464bf06ce6c40e2332adbc5d6b0f44b16b725577c6f4fe4ab4b7e90fdd796f0942b1ee8331d54528add21c618bef72ca3aa5143789886f873d5f0844e4a2c97207726a24a014f6e60a6072d7cb57add9470bd82adb60f5d6478083f5cc18569933",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/e6b9a90f9059/slide_5.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015358Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=05855fd462721b77e49f9280787daabc61b5081dd5d06df3c108e4468f74c072fc35070e3d657dff2ae3409d1448d433042fcd65a806e73d0673e02ba5434115de4acc711ef174b2cdb014b724b61ba29ad66a9ba2a715e1d4a640ceec2dd3365c5389dc4351bac97ae7e9f8013a81284dd99356429242ced30c32dbc39fe7e97f4cb734f3271caf766703b1e94ab324e59581e805fd01f9e9a98fe382ab156ca08b80edd5e0ccc0314438dae410e12c77ce51464d6b5c43b23c5f8202cb3935c1af510c9c72b836fa319d89cae53dffbd3a46ab9e3ee66a677ff092787bda3c1a0c953c4932e571a815cf7d4b9d1fa348f9f90e92c33d51ba56417ac63fdc01",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/e6b9a90f9059/cta.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015358Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=1cdea70bf4691dd50cfc99f278db0119423787985ebe3ce29220063e5f27dc563da14178bea32dc6b4369b21f8b4ceac15137c2a45a864a1bd1bb274c770d25989d8ac6e2b8f24b52634899386c7d2dd664c5426a0ad44b8978f9b196fb14663ba1a11d8d395d4075fa114f325f86879a9c4bc594ab68d3fdbb5a6e50bdee018209badd96eae6399dffa5690ed3f78a16decd0760f7caa281d049f1c6c2d19f94951080e92b90d84d1bd32e152100fdaae201be99e33b75ef2dcf04fdd1cd9d583b0d042a53b9312f34848bf819fe35a541b32bacd73480443c31e28e0b7c6868800c38bcd264dc094956b9d68237f3e1ad97877cc4f7a7b77e7048d5832630d"
+    ],
+    "createdAt": "2026-03-24T01:54:04.439272Z",
+    "outputDir": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/carousel_images/20260323_195030"
+  },
+  "609d01f7af44": {
+    "carouselId": "609d01f7af44",
+    "prompt": "5 tips for better focus while studying",
+    "status": "ready",
+    "timezone": "America/Denver",
+    "suggestedScheduledFor": "2026-03-23T20:00:00-06:00",
+    "captionDraft": "Can\u2019t focus when you study? Start here \ud83d\udc47 These 5 simple shifts can help you lock in faster: silence phone distractions, study in short timed sprints, clear your desk, choose one goal per session, and protect your energy with real breaks. Small changes = better concentration, less burnout, and more done in less time. Save this for your next study session and share it with a friend who needs to focus.",
+    "hashtags": [
+      "#StudyTips",
+      "#StudentSuccess",
+      "#FocusTips",
+      "#ProductivityHacks",
+      "#StudyMotivation",
+      "#DeepWork",
+      "#TimeManagement",
+      "#ExamPrep"
+    ],
+    "slides": [
+      {
+        "kind": "hook",
+        "number": null,
+        "tipTitle": null,
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/609d01f7af44/hook.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015554Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=1761ad70cfcdc92f889a568e058ec4d59314f1f66e80989b7bf20329b21cb105b6d040e09754f222e75e57ca5302450d0a58b8d336b08cb8b881643d57263b13e008e45c4c21c97e678754faecb74a519b4fafecd52e2eaf0b96147f412dbd53a4cea4ea8610a6afc5ed17e42a389f6b164bc719630271caac5b95d99795f4058ef0040cdf14a6707523b0d7927ec254ba14a4c52f727488238e03607d6f24430f3fd2041135cefbf8228c374130352b78761fd61b4ffb78ec79fbb16108c724322a4f3a786fb61e16228de27a52e34223207acbaebe85670bc0654497b324df5a24d360a621ba8e5714fcc3123823fdeb1b1bfb82d872306c7cae722ab9bb08",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/609d01f7af44/hook.png"
+      },
+      {
+        "kind": "slide_1",
+        "number": 1,
+        "tipTitle": "Kill Phone Distractions",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/609d01f7af44/slide_1.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015554Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=0a053fc0c4ecc70282d408b9bc16a8a053957d43dda8ea4ee371d2a8c600d2fa2abbc2f6654cd2cdadcc15d54de7e1dcfb4258449c28c72dfdbdd46a7e16273149afd80a954b510fe2b39ff5c14bbc7549f86af46570a6ccbb7133c2d913d91192b733bf4531eafc0b8b127c1d17b2df796cedeb66b0422d05c1fb2839852e9f58bba1473a39c300ae3c6b9a3c6e2971de3083f17f36fc165de9110a011abf72d056b918407f80afd8e0f2c3df99c03e3154e911dfb04a847c8f545af03dd5d50120c6c51506db45adad5b05f4d6db840922fddfbd6aff892240a6d75cf16a9a13ccacba01a8ebf590ea4fb8d3b74b9e6250809398aeff41b9c19a430f8c62ab",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/609d01f7af44/slide_1.png"
+      },
+      {
+        "kind": "slide_2",
+        "number": 2,
+        "tipTitle": "Use Short Timers",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/609d01f7af44/slide_2.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015554Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=268a626b70382df781477e540fdb82728c9e1283230351a520c472f5b77e40cc4171ebf8900dc8fcc4843f00ff8b62b00eb543ac3d6e72391ae28b77241de8a7ae3495abbcb7411bb643b2002fa7de71dc20284c2b831e95a3e154390da7d336f5ca797883d60548a4145242becc8389bd6d7c5085d52d99400394c708285c882d10677a710f5e284368d593996c700ae48cfd1907fd9a9f38ea2ee24e9eb7ff7fbc4729f064c2e98d04b7820c2457241fb00c1db32806fb48fe49a27176b59fc685beaf217544f154a3664e036e0cb60b25be230ba6eca7d18f81ee1f853a08ba85433401671d259bbe6f12e79f4234aaf9a41c51d63211bda8bc041ca9cb46",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/609d01f7af44/slide_2.png"
+      },
+      {
+        "kind": "slide_3",
+        "number": 3,
+        "tipTitle": "Clear Visual Clutter",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/609d01f7af44/slide_3.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015554Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=672e2b3fb1f26b281844d9b13db55e97747be6858994921e058091fd2a4ee5bd29b710c242316656341960039c6a5f1fe47a31f13aaf203afbf01e7a4fa15204dc766be930d6d9ec542a3e8f66715bdf86b422d744ff2a7f7cc7c8e8ef8aaef8baa990af81e33521a9681af77954de52c23ffef95a100a4908162f8207cb3b2569f25c0522be9b912fefbc0c559355eaa6b4125bc561071bb5086208bfa49ddf5957ca49733509ae5d9978fbf7468b331d4cc1a9a83d8acb4dec15a48bca162d75ab08bec7988f716760affed0007fda16e906ffe66c8587186c974445a7ae8972b50121371cb8e78adb240ed55811a8accae02687ae1a45110ddd7b29368050",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/609d01f7af44/slide_3.png"
+      },
+      {
+        "kind": "slide_4",
+        "number": 4,
+        "tipTitle": "Pick One Target",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/609d01f7af44/slide_4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015554Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=8d113ae929affba5f53d26a9f7eb11a88c15495f353e0441f2d824e8dd4829b3ccbe7c605e98b85e3249e8d9498afc08308aba9220d255a3896f3cca268740a03ed9392fb0d00619348fd593871439a8d888f270642da94edb2c3368eb31464201542103d7a3edc5895862fda82db23483a7e4cee28e0a0b40acf17826d3e518be4f110d86dc61ed1f055becd34fdf4114c527bfbba4d29324126e9e578ffe0c0da375e6c1fe0ef3045cfc0e903e9a3969746ce829b297a1b6fc57bd5a102d134bc36a53f5a5fd7c6de8e79d1a14ca5497003d2c0a167be0c48be7bc91a3a2f42ae184ba0bbe1431b5d9d7e6f492282e81a7a182e2f70fcf58287db68a447a44",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/609d01f7af44/slide_4.png"
+      },
+      {
+        "kind": "slide_5",
+        "number": 5,
+        "tipTitle": "Protect Your Energy",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/609d01f7af44/slide_5.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015555Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=59b6c3d46a15ee017a4c8799df2fafbe22eb052ebfb97b07a777050f610af3ee579c82aaccd65cfb1f6b6ac2c0bbbc357c8ca689501a09cdc2ad8d5941112b94675a69ac32ce0efb7094d5eed6c13b28880678b111ca21c03eaf65fb4ad3fdc652d5ef74fc3e0ddbbf4fbb39a989aff68d70b464eb4e40ff27630cdb2136f9b3bf369af5c6f68facd3cdca5d7d80f2ffc11799320ee19f03ccf2581bfc7542a063bea2ab68f71025d0aa88fc12ffb3751701abdde0325e807441ba90699ede824c6de803684fbbdeb36a9f82a7d5fdf2ae1ad9a9147a787955b15ecff89ecda22fdd1043768f9a27f78ec42ad19d984df25bcb2062d2af4daef16f3f14729302",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/609d01f7af44/slide_5.png"
+      },
+      {
+        "kind": "cta",
+        "number": null,
+        "tipTitle": null,
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/609d01f7af44/cta.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015555Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=d6981f012cdca81540de8df5018744cc5b91560f7f9deb360ce6e9ef2261aad26c5e646121aa57a96ed6e3b578032ec4cd5d963720c74b31521893534c2834af0518ae5736c2ab05f31cd9f7388097a9d9f70da4b7b5dbc4e9ae1ad87d4a16a2ac25d637879ad50fb6439240f11ec621971fa162a2e25937537a58c3cd2b6e23a49ef4e7e0288e6b6ad82a3a26a6b02cfd1b08fb2e3a28e64c66e806e8e6a88949ac4bd6a060fe8146f1817df269b0a262beccb691f8130f2112a88f7c7a9fb7a6c5b6d31d5e4d681114e2bac005205db68b45f307f339a52d8f01f9810dc5bac6cb250aaff5b53931b2c1bae0a5770c983a0c8962bdab9afaf6a9dd65c2ca58",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/609d01f7af44/cta.png"
+      }
+    ],
+    "mediaUrls": [
+      "https://storage.googleapis.com/lumeet-bucket/carousels/609d01f7af44/hook.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015554Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=1761ad70cfcdc92f889a568e058ec4d59314f1f66e80989b7bf20329b21cb105b6d040e09754f222e75e57ca5302450d0a58b8d336b08cb8b881643d57263b13e008e45c4c21c97e678754faecb74a519b4fafecd52e2eaf0b96147f412dbd53a4cea4ea8610a6afc5ed17e42a389f6b164bc719630271caac5b95d99795f4058ef0040cdf14a6707523b0d7927ec254ba14a4c52f727488238e03607d6f24430f3fd2041135cefbf8228c374130352b78761fd61b4ffb78ec79fbb16108c724322a4f3a786fb61e16228de27a52e34223207acbaebe85670bc0654497b324df5a24d360a621ba8e5714fcc3123823fdeb1b1bfb82d872306c7cae722ab9bb08",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/609d01f7af44/slide_1.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015554Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=0a053fc0c4ecc70282d408b9bc16a8a053957d43dda8ea4ee371d2a8c600d2fa2abbc2f6654cd2cdadcc15d54de7e1dcfb4258449c28c72dfdbdd46a7e16273149afd80a954b510fe2b39ff5c14bbc7549f86af46570a6ccbb7133c2d913d91192b733bf4531eafc0b8b127c1d17b2df796cedeb66b0422d05c1fb2839852e9f58bba1473a39c300ae3c6b9a3c6e2971de3083f17f36fc165de9110a011abf72d056b918407f80afd8e0f2c3df99c03e3154e911dfb04a847c8f545af03dd5d50120c6c51506db45adad5b05f4d6db840922fddfbd6aff892240a6d75cf16a9a13ccacba01a8ebf590ea4fb8d3b74b9e6250809398aeff41b9c19a430f8c62ab",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/609d01f7af44/slide_2.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015554Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=268a626b70382df781477e540fdb82728c9e1283230351a520c472f5b77e40cc4171ebf8900dc8fcc4843f00ff8b62b00eb543ac3d6e72391ae28b77241de8a7ae3495abbcb7411bb643b2002fa7de71dc20284c2b831e95a3e154390da7d336f5ca797883d60548a4145242becc8389bd6d7c5085d52d99400394c708285c882d10677a710f5e284368d593996c700ae48cfd1907fd9a9f38ea2ee24e9eb7ff7fbc4729f064c2e98d04b7820c2457241fb00c1db32806fb48fe49a27176b59fc685beaf217544f154a3664e036e0cb60b25be230ba6eca7d18f81ee1f853a08ba85433401671d259bbe6f12e79f4234aaf9a41c51d63211bda8bc041ca9cb46",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/609d01f7af44/slide_3.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015554Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=672e2b3fb1f26b281844d9b13db55e97747be6858994921e058091fd2a4ee5bd29b710c242316656341960039c6a5f1fe47a31f13aaf203afbf01e7a4fa15204dc766be930d6d9ec542a3e8f66715bdf86b422d744ff2a7f7cc7c8e8ef8aaef8baa990af81e33521a9681af77954de52c23ffef95a100a4908162f8207cb3b2569f25c0522be9b912fefbc0c559355eaa6b4125bc561071bb5086208bfa49ddf5957ca49733509ae5d9978fbf7468b331d4cc1a9a83d8acb4dec15a48bca162d75ab08bec7988f716760affed0007fda16e906ffe66c8587186c974445a7ae8972b50121371cb8e78adb240ed55811a8accae02687ae1a45110ddd7b29368050",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/609d01f7af44/slide_4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015554Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=8d113ae929affba5f53d26a9f7eb11a88c15495f353e0441f2d824e8dd4829b3ccbe7c605e98b85e3249e8d9498afc08308aba9220d255a3896f3cca268740a03ed9392fb0d00619348fd593871439a8d888f270642da94edb2c3368eb31464201542103d7a3edc5895862fda82db23483a7e4cee28e0a0b40acf17826d3e518be4f110d86dc61ed1f055becd34fdf4114c527bfbba4d29324126e9e578ffe0c0da375e6c1fe0ef3045cfc0e903e9a3969746ce829b297a1b6fc57bd5a102d134bc36a53f5a5fd7c6de8e79d1a14ca5497003d2c0a167be0c48be7bc91a3a2f42ae184ba0bbe1431b5d9d7e6f492282e81a7a182e2f70fcf58287db68a447a44",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/609d01f7af44/slide_5.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015555Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=59b6c3d46a15ee017a4c8799df2fafbe22eb052ebfb97b07a777050f610af3ee579c82aaccd65cfb1f6b6ac2c0bbbc357c8ca689501a09cdc2ad8d5941112b94675a69ac32ce0efb7094d5eed6c13b28880678b111ca21c03eaf65fb4ad3fdc652d5ef74fc3e0ddbbf4fbb39a989aff68d70b464eb4e40ff27630cdb2136f9b3bf369af5c6f68facd3cdca5d7d80f2ffc11799320ee19f03ccf2581bfc7542a063bea2ab68f71025d0aa88fc12ffb3751701abdde0325e807441ba90699ede824c6de803684fbbdeb36a9f82a7d5fdf2ae1ad9a9147a787955b15ecff89ecda22fdd1043768f9a27f78ec42ad19d984df25bcb2062d2af4daef16f3f14729302",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/609d01f7af44/cta.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T015555Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=d6981f012cdca81540de8df5018744cc5b91560f7f9deb360ce6e9ef2261aad26c5e646121aa57a96ed6e3b578032ec4cd5d963720c74b31521893534c2834af0518ae5736c2ab05f31cd9f7388097a9d9f70da4b7b5dbc4e9ae1ad87d4a16a2ac25d637879ad50fb6439240f11ec621971fa162a2e25937537a58c3cd2b6e23a49ef4e7e0288e6b6ad82a3a26a6b02cfd1b08fb2e3a28e64c66e806e8e6a88949ac4bd6a060fe8146f1817df269b0a262beccb691f8130f2112a88f7c7a9fb7a6c5b6d31d5e4d681114e2bac005205db68b45f307f339a52d8f01f9810dc5bac6cb250aaff5b53931b2c1bae0a5770c983a0c8962bdab9afaf6a9dd65c2ca58"
+    ],
+    "createdAt": "2026-03-24T01:55:59.111046Z",
+    "outputDir": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/carousel_images/20260323_195238"
+  },
+  "0b702d4edb03": {
+    "carouselId": "0b702d4edb03",
+    "prompt": "how HARVARD STUDENTS actually study",
+    "status": "ready",
+    "timezone": "America/Denver",
+    "suggestedScheduledFor": "2026-03-23T20:30:00-06:00",
+    "captionDraft": "Want to study smarter\u2014not longer? Here\u2019s how Harvard students actually approach learning: start with the syllabus, preview before lecture, use active recall, lean on spaced repetition, study like you\u2019re testing, protect deep work, and teach concepts simply. It\u2019s not about cramming or being a genius\u2014it\u2019s about using systems that make information stick. Save this for your next study session and share it with someone who needs better study habits.",
+    "hashtags": [
+      "#StudyTips",
+      "#StudentSuccess",
+      "#ActiveRecall",
+      "#SpacedRepetition",
+      "#DeepWork",
+      "#StudyMotivation",
+      "#LearningHowToLearn",
+      "#AcademicSuccess"
+    ],
+    "slides": [
+      {
+        "kind": "hook",
+        "number": null,
+        "tipTitle": null,
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/0b702d4edb03/hook.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T021010Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=6e0e9145d58537c079e396bf93ce3732546ad2d6bc91ecb40ca7db8e026316d1919d9de5ae319304e5424ec4b9aa288364a993b8b14b1a76bee7fb5ff0339213bebb87f75ae8d4246c99c7c1973156b40f884d84abec081013e9c2acfedfc79571f6ee60c8efe8409cffae9dfe81cc4c4a2d42b7bacd75a185bdac90e3f7b0241d797559b88aa6a31983b8a04ddb09dc114ccdfe32cb1b3bcd9febf7ca4f85bfe1aaae36e27cddc3f3c2d1836ad2c64b3f6aa080edb2e7c428bdf85878fff0ad1d0405245a975d2eb2430f7edb57d643ff0735e67ff968535eb93fcef6bfe6a8013c10db19d2ed29ce85aa83d9745b50459a0a016cd16a32fa8d0924b763b106",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/0b702d4edb03/hook.png"
+      },
+      {
+        "kind": "slide_1",
+        "number": 1,
+        "tipTitle": "Start With Syllabus",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/0b702d4edb03/slide_1.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T021010Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b47dc867537e5c8b0ef01f9c3bafc0aea51994958b5391a1102ac3cb13c884313df90d6ac9b9d968d46ed8e8d3b1f7afaa93276fb4c270ce5ceee2e830d2c37c6044c9fe3466d608108c1a27146e21385824e0ec808b772e52a56df16162285505539423e76127708f9b2ab6e1bf130c55431b810904be19d632e72906d4d0f24511f6deb7d343c3e61a39a9f300faaaf40b350be490886046a183ea4e343c638bcaa2398e8fcb4c69e2b42b54d3b5055f8d8ebdfe3a3ef164d5756f607237bc4ddc1b450b272d0880e355bbe6b093f4f154cf540daa99c18a0f555f78fe010051e37e0bac64b2234d5c7a35b5f48ca58dcc6c5c0ab7da7cbe125fdfedb111d4",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/0b702d4edb03/slide_1.png"
+      },
+      {
+        "kind": "slide_2",
+        "number": 2,
+        "tipTitle": "Preview Before Lecture",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/0b702d4edb03/slide_2.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T021010Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=82e935e54f839e22e588959486332510f7eafd58abd45684ad304caa569f73c41ab2cb561ea815950242870b97dc11c75742ecde48a31ad1d497d0c456702c217f4d43a547865c96adffcf7241ecc7cc41891fd0ff05dce5c323987df41f9bbd5c3f12035fb5ef48f2e110f7cacbe7a27278b20df0a45b50633850743de207818152057988fa0a3cf07b0973a8bd4c89f33690ea54ce3f5786e9b0b3a22aec004dbae52e7846acacb120742668e6b1261b0aa0dca715983baabc5cf5b08e7d3cd32f0cc8194944c14f79858a6ae8ba7a175740ed5f6dee954c5e782112e0aa23f9169dc05aa44f5d33b8c7c18bcc56733a76b10fea370088752fc09b102ac924",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/0b702d4edb03/slide_2.png"
+      },
+      {
+        "kind": "slide_3",
+        "number": 3,
+        "tipTitle": "Use Active Recall",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/0b702d4edb03/slide_3.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T021010Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=3b7f10e7afbb41014d5b40f26d1ca66914fdd52d01307e20e079997804890039105fa3bfb57c71c75f8be9a2bd954a9164c278df3ddbd9879d74d05c9c8bef678cd5f4df8bd72080408925971aaffbc9367bab7b454a2bccd578f0d6e3db9dcf436300f8140cbbe681e50f6dedeed2dcedb59207a3fd332d3b2b41b22a38587220f3858f0d0b2225a70e4526fdd9579376b2d518a0e786d94e0b37b6a2008333bad8a9de0cc91647e15348bf0e941626e3a7ba97fbcc520fe9d86593c160a2a8a21b6c4f4e48424a6b46f5548381b9914f836997e045f68a50b3e17d37b0cac7159dfe537aa3c9f8dbff99b11b34baf2c50f1cd1adce537a2ec406f890310130",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/0b702d4edb03/slide_3.png"
+      },
+      {
+        "kind": "slide_4",
+        "number": 4,
+        "tipTitle": "Space Repetition Wins",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/0b702d4edb03/slide_4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T021011Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=19367b5e8f23b818f544ded100ab975e78a5e42078d77f5edbd1cc68836a99e18ee3291c9e49de95492896b1eec11ffcae6785859cd683302c4e4fe1c41d6e9685e559583ac490dc286096a3a3bf7ad2c629900a6b7dfc4b44595eae8256b80eb800df0ef434cc9e71c9f889cc6fcf574d039055ffcb28928866fcac23abba9ee2bbc8bbfe6f8d6f8b188968a04e3503da518029adf94b908791e4cef8c470587835970887b905377e0f304f1edb7b99e051f96fe2668bac8de3205ac9a9bb30577669b753bc0518fa3183e3f36a5cd88830fa7020c15e0b02095c2028dab9180edf44ac2d615d52ce772a93a4f515104f864da4ca5cb0ee1a59c79cf44e0c13",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/0b702d4edb03/slide_4.png"
+      },
+      {
+        "kind": "slide_5",
+        "number": 5,
+        "tipTitle": "Study Like Testing",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/0b702d4edb03/slide_5.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T021011Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=c361e376324874df705de3cc06892f6fa012778ae345bb56e0e07f8085156059b8dfb6d5cf315a16932979f93ed65b4bb874eb08870b74a474cac0e3f2f5707ab9ff724dcb91b11f92d4e0cfb46c195a59a82f5b64cb050d71b9d2b8d5dcaf13e31d787fad2f0af50d3f5059fc439ae7c3965a34dd5b1504ae8b396e956a0a61a40276976aec55816148587584cf0d67cce296116c33ceaf3a958081c7f002df7d1827a956728c4b0d58d32f36cacd70087b63d073c441c38c62ce350a09a5b66f9f44fe95e9c7c3bedc8f2292a81120e35866aaccc3253235fd4f5ceffdc9a0fee4e6f1e01c5e839dff114aaad51853580a19779dac04c17dddb6b8e0e4c793",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/0b702d4edb03/slide_5.png"
+      },
+      {
+        "kind": "slide_6",
+        "number": 6,
+        "tipTitle": "Protect Deep Work",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/0b702d4edb03/slide_6.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T021011Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=9f245acffd8b50975c47893d4bae9accd6f185bcf3b12523f555cae2e40de760c85a0024c8942f70cd99787e3b9a192ade9c1fb2b760cd4b6e9a99c1c990ae5d6d58d1ffacdff945e927e51aa15b62837c48feeff053a4294eaef555ef5b0624d7d4bdbd344e54dc3083c4ae3ce8a41bdddc0ba5b3f313275158519974a5c1be11094132798ee179a04c678b4ae3d17e51e538d28f355c3e5800ccc1021c9f9e19fea3cf56361f3e3eba86f4b0caa502c8d72e8af7e67e7b933f3971a921f4b1b12d33b96694bf7d3e2e4a9f24a2fc83c75f45441fa3a9e15302f93505b3879b10492ae6284d3cab20d0ab9cbca021bd18d38a04772f0e29f20ce22bbfea19fa",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/0b702d4edb03/slide_6.png"
+      },
+      {
+        "kind": "slide_7",
+        "number": 7,
+        "tipTitle": "Teach It Simply",
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/0b702d4edb03/slide_7.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T021011Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=55778b0a5fd68b17b1c93b2f840206be1857c4ce47768f7e09f7de0914efad7e15e1cea0d40c78221ad404488f4e09fbdb93883fce37a26a6a0076153d07e2775d0ec3189edf052244af79e6f4fb230558bb109225184e79fca6852dd83a6e240815080677aa3fccfdaa63db3f0f1d8f2adb875701a1780e4fdfe8b6f75a94553a515344bc1292f378ed5eddb628d90ca0769d890249f5e59914fecad040e5d5653eafa838ee7c01f29d3a401ff633d5bb6aa35ab06a148148f2b504366d0948dacb1db01f3a15a54ce5bbe056a78d745a90ce23d846456e940a94e3c08fb9fddaa09032cf2d4391824317a2243a0fe8b3fbedc8bbe73501964fe6568b169b5d",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/0b702d4edb03/slide_7.png"
+      },
+      {
+        "kind": "cta",
+        "number": null,
+        "tipTitle": null,
+        "url": "https://storage.googleapis.com/lumeet-bucket/carousels/0b702d4edb03/cta.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T021011Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=a4f3503915d0baaab78f0e43a5ed74dabe3fcb53e8c3e63bdf9283b895663874fc294c6d53a2b2de39ffd56c3fb72f2ef64391b476c7413f13f5a41dc8540ac97a3aff211997d0f2859834fbc29c92539d7393146e75636b7fbda2e3072e3b5ebd3e86880500a2341c72c4b44b5066ea45145ea442b1da049c51cf3b019b2315304d51de5901342095958eb59075aa165a5d72bb238a713e375bbb6f2e5c0ec8c244f1fe135871358f395682ed4fd4f71611942df439444dd48e1e51a72275828e1cbc79f5f3cf25f7e954cf38f528cf768ef61ce57cb22bca2985a7aae5fc44279fc4aabdabd4f318301cb604c1e91e4e60764b71895f5d26a368ae9ade11ba",
+        "bucket": "lumeet-bucket",
+        "object": "carousels/0b702d4edb03/cta.png"
+      }
+    ],
+    "mediaUrls": [
+      "https://storage.googleapis.com/lumeet-bucket/carousels/0b702d4edb03/hook.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T021010Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=6e0e9145d58537c079e396bf93ce3732546ad2d6bc91ecb40ca7db8e026316d1919d9de5ae319304e5424ec4b9aa288364a993b8b14b1a76bee7fb5ff0339213bebb87f75ae8d4246c99c7c1973156b40f884d84abec081013e9c2acfedfc79571f6ee60c8efe8409cffae9dfe81cc4c4a2d42b7bacd75a185bdac90e3f7b0241d797559b88aa6a31983b8a04ddb09dc114ccdfe32cb1b3bcd9febf7ca4f85bfe1aaae36e27cddc3f3c2d1836ad2c64b3f6aa080edb2e7c428bdf85878fff0ad1d0405245a975d2eb2430f7edb57d643ff0735e67ff968535eb93fcef6bfe6a8013c10db19d2ed29ce85aa83d9745b50459a0a016cd16a32fa8d0924b763b106",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/0b702d4edb03/slide_1.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T021010Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b47dc867537e5c8b0ef01f9c3bafc0aea51994958b5391a1102ac3cb13c884313df90d6ac9b9d968d46ed8e8d3b1f7afaa93276fb4c270ce5ceee2e830d2c37c6044c9fe3466d608108c1a27146e21385824e0ec808b772e52a56df16162285505539423e76127708f9b2ab6e1bf130c55431b810904be19d632e72906d4d0f24511f6deb7d343c3e61a39a9f300faaaf40b350be490886046a183ea4e343c638bcaa2398e8fcb4c69e2b42b54d3b5055f8d8ebdfe3a3ef164d5756f607237bc4ddc1b450b272d0880e355bbe6b093f4f154cf540daa99c18a0f555f78fe010051e37e0bac64b2234d5c7a35b5f48ca58dcc6c5c0ab7da7cbe125fdfedb111d4",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/0b702d4edb03/slide_2.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T021010Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=82e935e54f839e22e588959486332510f7eafd58abd45684ad304caa569f73c41ab2cb561ea815950242870b97dc11c75742ecde48a31ad1d497d0c456702c217f4d43a547865c96adffcf7241ecc7cc41891fd0ff05dce5c323987df41f9bbd5c3f12035fb5ef48f2e110f7cacbe7a27278b20df0a45b50633850743de207818152057988fa0a3cf07b0973a8bd4c89f33690ea54ce3f5786e9b0b3a22aec004dbae52e7846acacb120742668e6b1261b0aa0dca715983baabc5cf5b08e7d3cd32f0cc8194944c14f79858a6ae8ba7a175740ed5f6dee954c5e782112e0aa23f9169dc05aa44f5d33b8c7c18bcc56733a76b10fea370088752fc09b102ac924",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/0b702d4edb03/slide_3.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T021010Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=3b7f10e7afbb41014d5b40f26d1ca66914fdd52d01307e20e079997804890039105fa3bfb57c71c75f8be9a2bd954a9164c278df3ddbd9879d74d05c9c8bef678cd5f4df8bd72080408925971aaffbc9367bab7b454a2bccd578f0d6e3db9dcf436300f8140cbbe681e50f6dedeed2dcedb59207a3fd332d3b2b41b22a38587220f3858f0d0b2225a70e4526fdd9579376b2d518a0e786d94e0b37b6a2008333bad8a9de0cc91647e15348bf0e941626e3a7ba97fbcc520fe9d86593c160a2a8a21b6c4f4e48424a6b46f5548381b9914f836997e045f68a50b3e17d37b0cac7159dfe537aa3c9f8dbff99b11b34baf2c50f1cd1adce537a2ec406f890310130",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/0b702d4edb03/slide_4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T021011Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=19367b5e8f23b818f544ded100ab975e78a5e42078d77f5edbd1cc68836a99e18ee3291c9e49de95492896b1eec11ffcae6785859cd683302c4e4fe1c41d6e9685e559583ac490dc286096a3a3bf7ad2c629900a6b7dfc4b44595eae8256b80eb800df0ef434cc9e71c9f889cc6fcf574d039055ffcb28928866fcac23abba9ee2bbc8bbfe6f8d6f8b188968a04e3503da518029adf94b908791e4cef8c470587835970887b905377e0f304f1edb7b99e051f96fe2668bac8de3205ac9a9bb30577669b753bc0518fa3183e3f36a5cd88830fa7020c15e0b02095c2028dab9180edf44ac2d615d52ce772a93a4f515104f864da4ca5cb0ee1a59c79cf44e0c13",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/0b702d4edb03/slide_5.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T021011Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=c361e376324874df705de3cc06892f6fa012778ae345bb56e0e07f8085156059b8dfb6d5cf315a16932979f93ed65b4bb874eb08870b74a474cac0e3f2f5707ab9ff724dcb91b11f92d4e0cfb46c195a59a82f5b64cb050d71b9d2b8d5dcaf13e31d787fad2f0af50d3f5059fc439ae7c3965a34dd5b1504ae8b396e956a0a61a40276976aec55816148587584cf0d67cce296116c33ceaf3a958081c7f002df7d1827a956728c4b0d58d32f36cacd70087b63d073c441c38c62ce350a09a5b66f9f44fe95e9c7c3bedc8f2292a81120e35866aaccc3253235fd4f5ceffdc9a0fee4e6f1e01c5e839dff114aaad51853580a19779dac04c17dddb6b8e0e4c793",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/0b702d4edb03/slide_6.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T021011Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=9f245acffd8b50975c47893d4bae9accd6f185bcf3b12523f555cae2e40de760c85a0024c8942f70cd99787e3b9a192ade9c1fb2b760cd4b6e9a99c1c990ae5d6d58d1ffacdff945e927e51aa15b62837c48feeff053a4294eaef555ef5b0624d7d4bdbd344e54dc3083c4ae3ce8a41bdddc0ba5b3f313275158519974a5c1be11094132798ee179a04c678b4ae3d17e51e538d28f355c3e5800ccc1021c9f9e19fea3cf56361f3e3eba86f4b0caa502c8d72e8af7e67e7b933f3971a921f4b1b12d33b96694bf7d3e2e4a9f24a2fc83c75f45441fa3a9e15302f93505b3879b10492ae6284d3cab20d0ab9cbca021bd18d38a04772f0e29f20ce22bbfea19fa",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/0b702d4edb03/slide_7.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T021011Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=55778b0a5fd68b17b1c93b2f840206be1857c4ce47768f7e09f7de0914efad7e15e1cea0d40c78221ad404488f4e09fbdb93883fce37a26a6a0076153d07e2775d0ec3189edf052244af79e6f4fb230558bb109225184e79fca6852dd83a6e240815080677aa3fccfdaa63db3f0f1d8f2adb875701a1780e4fdfe8b6f75a94553a515344bc1292f378ed5eddb628d90ca0769d890249f5e59914fecad040e5d5653eafa838ee7c01f29d3a401ff633d5bb6aa35ab06a148148f2b504366d0948dacb1db01f3a15a54ce5bbe056a78d745a90ce23d846456e940a94e3c08fb9fddaa09032cf2d4391824317a2243a0fe8b3fbedc8bbe73501964fe6568b169b5d",
+      "https://storage.googleapis.com/lumeet-bucket/carousels/0b702d4edb03/cta.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260324%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260324T021011Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=a4f3503915d0baaab78f0e43a5ed74dabe3fcb53e8c3e63bdf9283b895663874fc294c6d53a2b2de39ffd56c3fb72f2ef64391b476c7413f13f5a41dc8540ac97a3aff211997d0f2859834fbc29c92539d7393146e75636b7fbda2e3072e3b5ebd3e86880500a2341c72c4b44b5066ea45145ea442b1da049c51cf3b019b2315304d51de5901342095958eb59075aa165a5d72bb238a713e375bbb6f2e5c0ec8c244f1fe135871358f395682ed4fd4f71611942df439444dd48e1e51a72275828e1cbc79f5f3cf25f7e954cf38f528cf768ef61ce57cb22bca2985a7aae5fc44279fc4aabdabd4f318301cb604c1e91e4e60764b71895f5d26a368ae9ade11ba"
+    ],
+    "createdAt": "2026-03-24T02:10:15.972011Z",
+    "outputDir": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/carousel_images/20260323_200549"
   }
 }

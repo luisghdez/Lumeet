@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { CheckCircle2, Image, Link2, Loader2, RefreshCw, Send } from 'lucide-react';
+import { CheckCircle2, Image, Layout, Link2, Loader2, RefreshCw, Send, User } from 'lucide-react';
+import AccountRow from './AccountRow';
 import {
   createCarousel,
   listCarousels,
@@ -8,7 +9,6 @@ import {
   DEFAULT_SESSION_ID,
   getLateConnectUrl,
   listLateAccounts,
-  listLatePosts,
   startCarouselGeneration,
   getGeneration,
 } from '../lib/lateApi';
@@ -52,6 +52,7 @@ const SOCIAL_PLATFORMS = [
 
 function CarouselStudio() {
   const [prompt, setPrompt] = useState('');
+  const [hookStyle, setHookStyle] = useState('illustrated');
   const [timezone, setTimezone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC');
   const [carousel, setCarousel] = useState(null);
   const [savedCarousels, setSavedCarousels] = useState([]);
@@ -65,12 +66,10 @@ function CarouselStudio() {
   const [selectedAccountIds, setSelectedAccountIds] = useState([]);
   const [statusMessage, setStatusMessage] = useState('');
   const [error, setError] = useState('');
-  const [scheduledPosts, setScheduledPosts] = useState([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isCreatingProfile, setIsCreatingProfile] = useState(false);
   const [isConnecting, setIsConnecting] = useState(false);
   const [isLoadingAccounts, setIsLoadingAccounts] = useState(false);
-  const [isLoadingPosts, setIsLoadingPosts] = useState(false);
   const [isScheduling, setIsScheduling] = useState(false);
 
   const selectedPlatforms = useMemo(
@@ -87,7 +86,7 @@ function CarouselStudio() {
     setStatusMessage('Generating carousel in background...');
     try {
       // Start async generation via Generation Center endpoint
-      const { generationId } = await startCarouselGeneration({ prompt, timezone });
+      const { generationId } = await startCarouselGeneration({ prompt, timezone, hookStyle });
 
       // Poll until done
       const poll = async () => {
@@ -211,39 +210,6 @@ function CarouselStudio() {
     }
   };
 
-  const handleLoadScheduledPosts = async () => {
-    setIsLoadingPosts(true);
-    setError('');
-    try {
-      const data = await listLatePosts({
-        sessionId: DEFAULT_SESSION_ID,
-        profileId: profileId || undefined,
-        status: 'scheduled',
-        limit: 25,
-      });
-      const rawPosts = data.posts || data.results || data.data || [];
-      const normalized = rawPosts
-        .map((post) => {
-          const platforms = (post.platforms || [])
-            .map((p) => (typeof p === 'string' ? p : p?.platform || p?.provider || ''))
-            .filter(Boolean);
-          return {
-            id: String(post?._id ?? post?.id ?? ''),
-            status: String(post?.status ?? post?.state ?? post?.publishStatus ?? ''),
-            scheduledFor: post?.scheduledFor || post?.scheduled_at || post?.scheduledTime || '',
-            content: String(post?.content ?? post?.caption ?? post?.text ?? ''),
-            platforms,
-          };
-        })
-        .filter((p) => p.id);
-      setScheduledPosts(normalized);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoadingPosts(false);
-    }
-  };
-
   const selectSavedCarousel = (item) => {
     setCarousel(item);
     setCaption(
@@ -267,7 +233,6 @@ function CarouselStudio() {
     // Auto-load existing Late-connected accounts so users can schedule quickly.
     handleLoadAccounts();
     handleLoadSavedCarousels();
-    handleLoadScheduledPosts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -302,7 +267,6 @@ function CarouselStudio() {
       const data = await createLatePost(payload);
       const postId = data?.post?._id || data?._id || 'created';
       setStatusMessage(`Carousel scheduled successfully (${postId}).`);
-      await handleLoadScheduledPosts();
     } catch (err) {
       setError(err.message);
     } finally {
@@ -318,37 +282,6 @@ function CarouselStudio() {
           <h2 className="text-3xl font-bold text-gray-900">Carousel Studio</h2>
         </div>
         <p className="text-gray-600 mt-2">Generate a carousel from a prompt, review it, then schedule in one flow.</p>
-      </div>
-
-      <div className="glass-card border border-white/40 rounded-2xl p-5 mb-6">
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="text-lg font-bold text-gray-900">Scheduled Posts</h3>
-          <button
-            onClick={handleLoadScheduledPosts}
-            disabled={isLoadingPosts}
-            className="px-3 py-2 rounded-xl bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50 flex items-center gap-2"
-          >
-            <RefreshCw size={14} className={isLoadingPosts ? 'animate-spin' : ''} />
-            Refresh
-          </button>
-        </div>
-        {scheduledPosts.length === 0 ? (
-          <p className="text-sm text-gray-600">No scheduled posts found yet.</p>
-        ) : (
-          <div className="space-y-2">
-            {scheduledPosts.map((post) => (
-              <div key={post.id} className="rounded-xl border border-gray-200 bg-white p-3">
-                <div className="flex items-center justify-between mb-1">
-                  <p className="text-xs text-gray-500">{post.id}</p>
-                  <p className="text-xs font-semibold text-purple-700">{post.status || 'scheduled'}</p>
-                </div>
-                <p className="text-xs text-gray-600 mb-1">{post.scheduledFor || 'No schedule time'}</p>
-                <p className="text-sm text-gray-900 line-clamp-2">{post.content || 'No content'}</p>
-                <p className="text-xs text-gray-500 mt-1">{post.platforms.join(', ') || 'No platform info'}</p>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
 
       <div className="glass-card border border-white/40 rounded-2xl p-5 mb-6">
@@ -390,7 +323,7 @@ function CarouselStudio() {
       </div>
 
       <div className="glass-card border border-white/40 rounded-2xl p-5 mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
           <textarea
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
@@ -413,6 +346,51 @@ function CarouselStudio() {
               {isGenerating && <Loader2 size={16} className="animate-spin" />}
               {isGenerating ? 'Generating...' : 'Generate Carousel'}
             </button>
+          </div>
+        </div>
+
+        <div>
+          <p className="text-sm font-semibold text-gray-700 mb-2">Hook Image Style</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {[
+              {
+                key: 'illustrated',
+                label: 'Illustrated',
+                description: 'Minimalist flat-illustration editorial cover with bold typography',
+                Icon: Image,
+              },
+              {
+                key: 'study_desk',
+                label: 'Study Desk',
+                description: 'Pinterest-aesthetic study desk flatlay with pastel stationery',
+                Icon: Layout,
+              },
+              {
+                key: 'study_girl',
+                label: 'Study Girl',
+                description: 'Candid TikTok-style study photo — libraries, bookshelves, natural poses',
+                Icon: User,
+              },
+            ].map(({ key, label, description, Icon }) => (
+              <button
+                key={key}
+                type="button"
+                onClick={() => setHookStyle(key)}
+                className={`text-left rounded-xl border-2 p-3 transition-all ${
+                  hookStyle === key
+                    ? 'border-purple-500 bg-purple-50 shadow-sm'
+                    : 'border-gray-200 bg-white hover:border-purple-300'
+                }`}
+              >
+                <div className="flex items-center gap-2 mb-1">
+                  <Icon size={16} className={hookStyle === key ? 'text-purple-600' : 'text-gray-400'} />
+                  <span className={`text-sm font-semibold ${hookStyle === key ? 'text-purple-700' : 'text-gray-800'}`}>
+                    {label}
+                  </span>
+                </div>
+                <p className="text-xs text-gray-500 leading-snug">{description}</p>
+              </button>
+            ))}
           </div>
         </div>
       </div>
@@ -484,21 +462,18 @@ function CarouselStudio() {
             {accounts.length > 0 && (
               <div className="mb-4 border border-gray-200 rounded-xl p-3 max-h-36 overflow-y-auto">
                 {accounts.map((acc) => (
-                  <label key={acc._id} className="flex items-center gap-2 py-1 text-sm text-gray-800">
-                    <input
-                      type="checkbox"
-                      checked={selectedAccountIds.includes(acc._id)}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setSelectedAccountIds((prev) => [...prev, acc._id]);
-                        } else {
-                          setSelectedAccountIds((prev) => prev.filter((id) => id !== acc._id));
-                        }
-                      }}
-                    />
-                    <span>{acc.platform}</span>
-                    <span className="text-gray-500">{acc._id}</span>
-                  </label>
+                  <AccountRow
+                    key={acc._id}
+                    account={acc}
+                    checked={selectedAccountIds.includes(acc._id)}
+                    onToggle={(checked) => {
+                      if (checked) {
+                        setSelectedAccountIds((prev) => [...prev, acc._id]);
+                      } else {
+                        setSelectedAccountIds((prev) => prev.filter((id) => id !== acc._id));
+                      }
+                    }}
+                  />
                 ))}
               </div>
             )}

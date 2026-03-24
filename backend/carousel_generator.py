@@ -34,7 +34,7 @@ IMAGE_SIZE = os.environ.get("OPENAI_IMAGE_SIZE", "1024x1024")
 
 # ── Prompt Templates ────────────────────────────────────────────────────────────
 
-HOOK_SLIDE_TEMPLATE = """Design a square 1:1 TikTok/Instagram carousel cover slide. Style: minimalist flat illustration, editorial and modern. Must NOT look AI-generated.
+HOOK_SLIDE_TEMPLATE_ILLUSTRATED = """Design a square 1:1 TikTok/Instagram carousel cover slide. Style: minimalist flat illustration, editorial and modern. Must NOT look AI-generated.
 
 LAYOUT — two zones only, separated by generous empty space:
 
@@ -57,6 +57,159 @@ DESIGN RULES — follow strictly:
 - White space: the slide should feel uncluttered and bold — like a high-end editorial cover.
 
 DO NOT INCLUDE: character progression sequences (multiple poses), upward arrows with multiple figures, paragraph text below the headline, rounded cards or UI boxes, gradient backgrounds, decorative borders, multiple competing illustration elements, speech bubbles, drop shadows on text, always defaulting to dark green — vary the background color every time."""
+
+HOOK_SLIDE_TEMPLATE_STUDY_DESK = """Generate a square 1:1 TikTok/Instagram carousel cover photo. Style: a REAL Pinterest-aesthetic study desk flatlay photograph. Must look like a real photograph taken by a lifestyle content creator — NOT AI-generated, NOT illustrated.
+
+THE SCENE — a beautifully styled overhead (bird's-eye) or slightly angled shot of an aesthetic study desk:
+- An open notebook or planner with handwritten-style notes visible
+- Pastel-colored stationery: highlighters, pens, washi tape, sticky notes
+- A warm drink — matcha latte, iced coffee, or a cute mug of tea
+- Soft ambient lighting: fairy lights, a candle, or warm golden-hour window light
+- Optional cozy touches: a small plant, dried flowers, a knit sweater draped on the chair
+- The desk surface should be clean wood, white marble, or light-colored — bright and airy
+
+TEXT OVERLAY — the hook headline:
+Render this text as a bold overlay on the image: "{HEADLINE}"
+- Use a clean sans-serif font (like Poppins Bold or Montserrat Bold), large enough to read at thumbnail size.
+- Text color: white or cream with a subtle drop shadow or semi-transparent dark background strip behind the text for readability.
+- Position the text in the center or upper-third of the image so it dominates.
+- Maximum 2 lines of text.
+
+PHOTOGRAPHIC RULES — follow strictly:
+- This must look like a REAL photograph, shot on an iPhone or DSLR. Shallow depth of field is fine.
+- Color palette: warm, soft, muted tones — think beige, blush pink, sage green, cream, dusty rose, soft brown. Pinterest-worthy aesthetic.
+- Lighting: soft natural light or warm fairy-light glow. No harsh shadows, no flash.
+- Composition: flatlay or 45-degree angle. The desk should feel organized but lived-in — styled but not sterile.
+- The overall mood: cozy, aspirational, motivating — the kind of image someone saves on Pinterest.
+
+DO NOT INCLUDE: messy desks, dark or dim lighting, cluttered backgrounds, neon colors, cartoon elements, illustrated graphics, stock-photo-looking setups, computer screens or phones as the main subject, people's faces."""
+
+HOOK_SLIDE_TEMPLATE_STUDY_GIRL = """Generate a square 1:1 TikTok/Instagram carousel cover photo. Style: a REAL candid photograph that looks like it was taken by a TikTok or Instagram content creator — authentic, natural, NOT AI-generated, NOT illustrated, NOT stock photography.
+
+THE SCENE — pick ONE of these scene types at random (VARY every time, never repeat the same setup):
+
+OPTION A – LIBRARY PORTRAIT: A young woman sitting casually in a beautiful old library or reading room. She is relaxed — chin resting on her hand, leaning back in a leather chair or wooden seat. Bookshelves fill the background. A laptop or open book is in front of her. She looks directly at the camera with a natural, relaxed expression — like a friend snapped this photo of her. The library should feel grand and atmospheric (dark wood, warm lamp light, tall shelves).
+
+OPTION B – BETWEEN THE BOOKSHELVES: Close-up portrait of a young woman standing or leaning between library bookshelves. She faces the camera with a soft, natural expression — chin on hands, or leaning against the shelf. The bookshelves stretch behind her creating depth. Tight framing, intimate and candid. Soft natural light or warm overhead library lighting.
+
+OPTION C – STUDY TABLE CANDID: A young woman at a study table or café, seen from across the table. Books, notebooks, phone, or a drink are scattered naturally in front of her. She could be wearing headphones or have them around her neck. She looks up from studying toward the camera — a casual, caught-in-the-moment feel. A friend might be partially visible at the edge of the frame.
+
+OPTION D – COZY STUDY NOOK: A young woman curled up in a window seat, beanbag, or cozy corner with books and notes around her. Warm natural light from a window. She glances at the camera with a natural smile or focused expression. Oversized sweater or hoodie, cozy vibes.
+
+WARDROBE & STYLING (vary each time):
+- Oversized knit sweaters, hoodies, cardigans in muted tones (cream, gray, blue, sage, dusty pink)
+- Casual accessories: headphones (over-ear or around neck), simple jewelry, glasses
+- Hair styled naturally — not overly done
+- The person should look like a real university student or young content creator, not a model
+
+TEXT OVERLAY — the hook headline:
+Render this text as a bold overlay on the image: "{HEADLINE}"
+- Use a thick, heavy sans-serif font (like Poppins ExtraBold, Montserrat Black, or similar chunky typeface).
+- Text must be LARGE — at least 30-40% of the image width — and instantly readable at thumbnail size on a phone screen.
+- CRITICAL TEXT STYLING — pick ONE of these text treatments (vary each time):
+  1. HIGHLIGHTED WORDS: Render 1-2 key words with a bright solid-color highlight box behind them (yellow, coral, mint green, or light blue) while the rest of the text is clean white with a subtle drop shadow. This creates the viral TikTok "highlighted keyword" look.
+  2. ALL-CAPS BOLD WHITE: All text in white with a strong drop shadow or thin dark outline for readability. Key words can be slightly larger or on their own line for emphasis.
+  3. MIXED CASE WITH COLOR POP: Most text in white, but one power word rendered in a bright accent color (yellow, coral, electric blue) to draw the eye.
+- Position the text in the CENTER of the image vertically, or slightly above center.
+- Maximum 3 lines. Each line should be punchy and short.
+- If the headline contains emoji, render the emoji inline with the text.
+
+PHOTOGRAPHIC RULES — follow strictly:
+- This MUST look like a real candid photograph taken on an iPhone by a friend or with a self-timer. NOT a professional studio shot.
+- The person CAN and SHOULD face the camera — natural, relaxed expression. This is NOT a faceless aesthetic.
+- Shallow depth of field with soft bokeh background is ideal.
+- Lighting: warm natural light (golden hour, window light), or atmospheric library lighting (warm overhead lamps, reading lights). NEVER harsh fluorescent or flash.
+- Color grading: warm, slightly desaturated tones — the "TikTok study" color palette. Think warm browns, creams, soft greens, muted blues. The image should feel cozy and inviting.
+- The composition should feel spontaneous, not staged — like a real moment captured.
+- The person should be the clear subject, with the study environment providing context and atmosphere.
+
+DO NOT INCLUDE: stock-photo-looking poses (hands on hips, corporate smiles), sterile/clean environments, harsh lighting, neon colors, cartoon or illustrated elements, overly posed or model-like compositions, AI-looking faces or hands, perfectly symmetrical compositions, clipart or graphic overlays, thin or small text that can't be read at thumbnail size."""
+
+# Study-girl realism and diversity controls (selected in code per generation)
+_STUDY_GIRL_SCENES = [
+    "library reading table with stacked books and warm desk lamps in frame",
+    "narrow aisle between bookshelves with depth and foreground blur",
+    "cozy cafe corner near a window with notebook, cup, and backpack",
+    "university common area with soft daylight and classmates blurred in background",
+    "window-seat study nook with books and a blanket nearby",
+    "bedroom desk setup at home with fairy lights, planner, and laptop",
+    "full-length mirror corner at home with a study desk reflected behind her",
+    "library staircase landing with books and tote bag, candid lifestyle vibe",
+    "kitchen island at home turned into a temporary study station",
+    "quiet classroom after hours with notebooks spread out and soft ambient light",
+]
+
+_STUDY_GIRL_SUBJECTS = [
+    "young woman (early 20s), East Asian features, natural makeup, student vibe",
+    "young woman (early 20s), Latina features, minimal makeup, student vibe",
+    "young woman (early 20s), South Asian features, minimal makeup, student vibe",
+    "young woman (early 20s), Black features, minimal makeup, student vibe",
+    "young woman (early 20s), white features, minimal makeup, student vibe",
+    "young woman (early 20s), Middle Eastern features, minimal makeup, student vibe",
+]
+
+_STUDY_GIRL_POSES = [
+    "looking up from writing notes, pen still in hand, soft half-smile",
+    "chin resting on one hand while reading, relaxed eye contact with camera",
+    "adjusting headphones around her neck, candid expression, mid-movement",
+    "holding an open book against her chest, casual stance, natural eye contact",
+    "typing on laptop then glancing at camera, caught-in-the-moment feel",
+    "arm extended taking a close selfie, natural smile, candid social vibe",
+    "mirror selfie pose with phone in hand, relaxed body angle, not over-posed",
+    "playful kissy-face expression for one quick frame, still natural and believable",
+    "laughing while talking with a friend, looking briefly toward the camera",
+    "walking between shelves while turning back toward camera mid-step",
+]
+
+_STUDY_GIRL_CAMERA_SETUPS = [
+    "eye-level medium shot, 35mm lens look, shallow depth of field, slight handheld feel",
+    "close-up portrait, 50mm lens look, focus on eyes, soft background bokeh",
+    "slightly high angle from across the table, 35mm lens look, natural perspective",
+    "over-the-shoulder framing with subject turning toward camera, shallow depth of field",
+    "very close selfie framing, phone-camera perspective, realistic slight distortion",
+    "mirror-photo composition with subject and room visible, natural phone framing",
+    "wide environmental shot from farther away showing full body and room context",
+    "tight crop on face and hands with shallow depth for intimate candid feel",
+]
+
+_STUDY_GIRL_LIGHTING = [
+    "soft window light from camera-left with gentle falloff and realistic shadow gradients",
+    "warm practical lamp light with subtle ambient daylight balancing from background",
+    "golden-hour side light, soft contrast, no clipped highlights, no harsh shadows",
+    "moody dark lighting with a single warm desk lamp and visible shadow depth",
+    "low-light evening scene with practical lights only, realistic phone-camera noise level",
+    "bright airy daylight with soft bounce light and clean color tones",
+]
+
+_STUDY_GIRL_STYLING = [
+    "oversized knit sweater in cream + simple necklace + neutral notebook",
+    "muted hoodie in sage or dusty blue + thin-frame glasses + highlighters on desk",
+    "cardigan layered over basic tee + messy bun + sticky notes and tabs visible",
+    "cozy sweatshirt + over-ear headphones + iced coffee and planner in frame",
+    "simple going-out outfit plus tote bag and textbook stack for campus vibe",
+    "at-home comfy set with claw clip hairstyle and cozy socks visible in frame",
+]
+
+_STUDY_GIRL_TEXT_TREATMENTS = [
+    "highlight 1-2 keywords with a yellow or mint rectangle behind text",
+    "all-caps heavy white text with thin dark stroke for readability",
+    "mostly white text with one accent word in coral or electric blue",
+]
+
+_STUDY_GIRL_COMPOSITIONS = [
+    "solo: one subject only, clear focal person",
+    "duo: subject with one friend, both candid and natural",
+    "group: 3-4 students in frame with one primary subject still clearly dominant",
+]
+
+# ── Hook Style Registry ──────────────────────────────────────────────────────────
+
+HOOK_STYLES = {
+    "illustrated": HOOK_SLIDE_TEMPLATE_ILLUSTRATED,
+    "study_desk": HOOK_SLIDE_TEMPLATE_STUDY_DESK,
+    "study_girl": HOOK_SLIDE_TEMPLATE_STUDY_GIRL,
+}
+DEFAULT_HOOK_STYLE = "illustrated"
 
 INDIVIDUAL_SLIDE_TEMPLATE = """Design a square 1:1 TikTok/Instagram carousel slide. Style: minimalist flat illustration, editorial and modern. Must NOT look AI-generated.
 
@@ -87,19 +240,19 @@ _CTA_FILENAMES = ["cta_1.png", "cta_2.png"]
 
 # ── System Prompt for Content Generation ────────────────────────────────────────
 
-SYSTEM_PROMPT = """You are an expert at creating minimalist educational carousel content for Instagram and TikTok. Your content will be rendered as flat-illustration slides in an editorial, modern style — NOT as detailed, complex illustrations.
+SYSTEM_PROMPT = """You are an expert at creating viral, scroll-stopping educational carousel content for Instagram and TikTok. Your content will be rendered as flat-illustration slides in an editorial, modern style — NOT as detailed, complex illustrations.
 
 Given an initial prompt (e.g., "a carousel giving 7 tips for more efficient studying"), you must:
 
 1. Respect an explicit tip count when provided by the user
 2. Otherwise choose between 5-8 tips based on the content
-3. Generate a compelling hook headline for the cover slide
+3. Set the hook_headline to be the EXACT text from the user's prompt — copy it WORD FOR WORD. Do NOT rephrase, rewrite, or generate a different headline. The user's prompt IS the hook headline.
 4. For each tip slide, generate content that fits a MINIMALIST 3-zone layout (big number + title, one focal illustration, one short text line)
 
 Return your response as a JSON object with this exact structure:
 {
   "num_slides": <number>,
-  "hook_headline": "<compelling 6-10 word headline>",
+  "hook_headline": "<the user's EXACT prompt text, copied verbatim>",
   "slides": [
     {
       "number": 1,
@@ -113,8 +266,13 @@ Return your response as a JSON object with this exact structure:
   ]
 }
 
+HOOK HEADLINE — CRITICAL RULE:
+- The hook_headline MUST be the EXACT text the user typed in their prompt. Copy it character-for-character.
+- Do NOT rephrase it, do NOT make it "more viral", do NOT apply any formula to it.
+- The user has already written the hook they want. Respect it exactly.
+- If the prompt includes emoji, keep the emoji. If it includes punctuation, keep the punctuation.
+
 Content quality rules:
-- Hook headline: create curiosity, not clickbait. 6-10 words. Make it feel like the reader NEEDS to swipe.
 - Tip titles: short, bold, scannable — 3 to 5 words. No filler.
 - Scene descriptions: describe ONE minimal visual element only (e.g., "a single open book with a lightbulb above it", "a person sitting cross-legged with eyes closed, calm expression"). Avoid describing complex multi-element scenes or detailed backgrounds.
 - Explanation text: MAXIMUM 14 words. One sentence. Should feel like a tweet, not a paragraph. Make it punchy and memorable.
@@ -129,6 +287,7 @@ def generate_carousel(
     initial_prompt: str,
     output_base_dir: Optional[str] = None,
     api_key: Optional[str] = None,
+    hook_style: str = DEFAULT_HOOK_STYLE,
 ) -> Dict[str, Any]:
     """
     Generate a complete carousel of educational images.
@@ -138,6 +297,8 @@ def generate_carousel(
                        (e.g., "a carousel giving 7 tips for more efficient studying")
         output_base_dir: Base directory for output. If None, uses backend/carousel_images/
         api_key: OpenAI API key. If None, uses OPENAI_API_KEY env var.
+        hook_style: Style for the hook/cover slide image. One of "illustrated",
+                    "study_desk", or "study_girl". Defaults to "illustrated".
 
     Returns:
         A dict containing:
@@ -172,7 +333,7 @@ def generate_carousel(
     content_structure = _generate_content_structure(client, initial_prompt)
 
     # Step 2: Build prompts from templates
-    prompts = _build_prompts(content_structure)
+    prompts = _build_prompts(content_structure, hook_style=hook_style)
 
     # Step 3: Generate images
     print(f"Generating {len(prompts)} images...")
@@ -291,13 +452,14 @@ def _generate_content_structure(client: OpenAI, initial_prompt: str) -> Dict[str
     return structure
 
 
-def _build_prompts(content_structure: Dict[str, Any]) -> Dict[str, str]:
+def _build_prompts(content_structure: Dict[str, Any], hook_style: str = DEFAULT_HOOK_STYLE) -> Dict[str, str]:
     """Build image generation prompts from content structure using templates."""
     prompts = {}
     
-    # Hook slide
-    prompts["hook"] = HOOK_SLIDE_TEMPLATE.format(
-        HEADLINE=content_structure["hook_headline"]
+    # Hook slide — select template based on hook_style
+    prompts["hook"] = _build_hook_prompt(
+        headline=content_structure["hook_headline"],
+        hook_style=hook_style,
     )
     
     # Individual slides
@@ -312,6 +474,51 @@ def _build_prompts(content_structure: Dict[str, Any]) -> Dict[str, str]:
         )
     
     return prompts
+
+
+def _build_hook_prompt(headline: str, hook_style: str = DEFAULT_HOOK_STYLE) -> str:
+    """Build hook prompt and inject style-specific controls."""
+    hook_template = HOOK_STYLES.get(hook_style, HOOK_STYLES[DEFAULT_HOOK_STYLE])
+    prompt = hook_template.format(HEADLINE=headline)
+    if hook_style == "study_girl":
+        prompt = f"{prompt}\n\n{_build_study_girl_variation_block()}"
+    return prompt
+
+
+def _build_study_girl_variation_block() -> str:
+    """
+    Inject explicit non-repetitive choices so each study-girl hook changes:
+    subject profile, pose, scene, camera setup, lighting, and text treatment.
+    """
+    scene = random.choice(_STUDY_GIRL_SCENES)
+    subject = random.choice(_STUDY_GIRL_SUBJECTS)
+    pose = random.choice(_STUDY_GIRL_POSES)
+    camera_setup = random.choice(_STUDY_GIRL_CAMERA_SETUPS)
+    lighting = random.choice(_STUDY_GIRL_LIGHTING)
+    styling = random.choice(_STUDY_GIRL_STYLING)
+    text_treatment = random.choice(_STUDY_GIRL_TEXT_TREATMENTS)
+    composition = random.choice(_STUDY_GIRL_COMPOSITIONS)
+    variation_id = datetime.now().strftime("%Y%m%d-%H%M%S") + f"-{random.randint(100, 999)}"
+
+    return (
+        "REALISM + VARIATION BLUEPRINT (MANDATORY):\n"
+        f"- Variation ID: {variation_id}\n"
+        f"- Exact subject profile to depict: {subject}\n"
+        f"- Exact environment to depict: {scene}\n"
+        f"- Exact candid action/pose: {pose}\n"
+        f"- Camera direction: {camera_setup}\n"
+        f"- Lighting direction: {lighting}\n"
+        f"- Wardrobe/props direction: {styling}\n"
+        f"- People composition mode: {composition}\n"
+        f"- Text treatment to apply: {text_treatment}\n"
+        "- Render as smartphone/DSLR photo realism: natural skin texture, realistic pores,"
+        " tiny hair flyaways, natural fabric folds, physically plausible shadows,"
+        " believable perspective, no waxy skin.\n"
+        "- Candid social-photo energy is welcome (selfie, mirror pic, close shot, far shot),"
+        " but keep anatomy and perspective realistic.\n"
+        "- No duplicated limbs, no extra fingers, no warped text,"
+        " no AI artifacts. If conflict exists, this blueprint overrides generic defaults."
+    )
 
 
 def _generate_images(client: OpenAI, prompts: Dict[str, str], output_dir: str) -> Dict[str, str]:
