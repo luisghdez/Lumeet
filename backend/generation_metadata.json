@@ -4426,9 +4426,9 @@
     "generationId": "4df2559c2937",
     "type": "carousel",
     "label": "I stopped studying harder and started studying LIKE THIS",
-    "status": "processing",
+    "status": "failed",
     "progress": 0,
-    "currentStep": "generating",
+    "currentStep": null,
     "steps": [
       {
         "key": "generating",
@@ -4437,18 +4437,18 @@
         "message": "Generating carousel slides..."
       }
     ],
-    "error": null,
+    "error": "Cancelled by user",
     "createdAt": 1774317678.451363,
-    "completedAt": null,
+    "completedAt": 1774370062.415256,
     "output": null
   },
   "a43dbf4ccb57": {
     "generationId": "a43dbf4ccb57",
     "type": "carousel",
     "label": "5 habits that made my study sessions way more PRODUCTIVE",
-    "status": "processing",
+    "status": "failed",
     "progress": 0,
-    "currentStep": "generating",
+    "currentStep": null,
     "steps": [
       {
         "key": "generating",
@@ -4457,9 +4457,9 @@
         "message": "Generating carousel slides..."
       }
     ],
-    "error": null,
+    "error": "Cancelled by user",
     "createdAt": 1774317707.319123,
-    "completedAt": null,
+    "completedAt": 1774370058.5713542,
     "output": null
   },
   "a0c1333fef62": {

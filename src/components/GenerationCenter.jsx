@@ -10,7 +10,7 @@ import {
   ChevronDown,
   CalendarClock,
 } from 'lucide-react';
-import { listGenerations } from '../lib/lateApi';
+import { listGenerations, cancelGeneration } from '../lib/lateApi';
 
 const POLL_INTERVAL = 2500;
 
@@ -42,6 +42,8 @@ function hasActive(gens) {
 export default function GenerationCenter({ onSchedule, refreshKey }) {
   const [open, setOpen] = useState(false);
   const [generations, setGenerations] = useState([]);
+  const [cancellingById, setCancellingById] = useState({});
+  const [cancelErrorById, setCancelErrorById] = useState({});
   const pollRef = useRef(null);
   const panelRef = useRef(null);
 
@@ -115,6 +117,27 @@ export default function GenerationCenter({ onSchedule, refreshKey }) {
     (g) => g.status === 'completed' && !g.scheduled,
   ).length;
 
+  const handleCancel = useCallback(async (generationId) => {
+    setCancellingById((prev) => ({ ...prev, [generationId]: true }));
+    setCancelErrorById((prev) => ({ ...prev, [generationId]: '' }));
+    try {
+      await cancelGeneration(generationId);
+      const gens = await fetchGenerations();
+      if (hasActive(gens)) {
+        startPolling();
+      } else {
+        stopPolling();
+      }
+    } catch (err) {
+      setCancelErrorById((prev) => ({
+        ...prev,
+        [generationId]: err?.message || 'Unable to cancel generation.',
+      }));
+    } finally {
+      setCancellingById((prev) => ({ ...prev, [generationId]: false }));
+    }
+  }, [fetchGenerations, startPolling, stopPolling]);
+
   return (
     <div ref={panelRef} className="fixed top-5 right-5 z-50">
       {/* Trigger button */}
@@ -168,6 +191,9 @@ export default function GenerationCenter({ onSchedule, refreshKey }) {
                     key={gen.generationId}
                     gen={gen}
                     onSchedule={onSchedule}
+                    onCancel={handleCancel}
+                    isCancelling={Boolean(cancellingById[gen.generationId])}
+                    cancelError={cancelErrorById[gen.generationId]}
                   />
                 ))}
               </div>
@@ -180,7 +206,7 @@ export default function GenerationCenter({ onSchedule, refreshKey }) {
 }
 
 
-function GenerationRow({ gen, onSchedule }) {
+function GenerationRow({ gen, onSchedule, onCancel, isCancelling, cancelError }) {
   const isActive = gen.status === 'queued' || gen.status === 'processing';
   const isCompleted = gen.status === 'completed';
   const isFailed = gen.status === 'failed';
@@ -224,6 +250,22 @@ function GenerationRow({ gen, onSchedule }) {
           {/* Error for failed */}
           {isFailed && (
             <p className="text-[11px] text-red-500 mt-1 line-clamp-2">{gen.error}</p>
+          )}
+
+          {isActive && (
+            <div className="mt-1.5">
+              <button
+                onClick={() => onCancel && onCancel(gen.generationId)}
+                disabled={isCancelling}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-50 text-red-700 hover:bg-red-100 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+              >
+                {isCancelling ? <Loader2 size={12} className="animate-spin" /> : <XCircle size={12} />}
+                {isCancelling ? 'Cancelling...' : 'Cancel'}
+              </button>
+              {cancelError && (
+                <p className="text-[11px] text-red-500 mt-1 line-clamp-2">{cancelError}</p>
+              )}
+            </div>
           )}
 
           {/* Completed: scheduled indicator OR schedule button */}

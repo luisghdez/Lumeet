@@ -117,4 +117,10 @@ export async function patchGeneration(generationId, updates) {
   });
 }
 
+export async function cancelGeneration(generationId) {
+  return request(`/api/generations/${encodeURIComponent(generationId)}/cancel`, {
+    method: 'POST',
+  });
+}
+
 export { DEFAULT_SESSION_ID };
