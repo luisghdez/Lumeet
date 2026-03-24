@@ -58,11 +58,21 @@ export async function listLatePosts({
   return request(`/api/late/posts?${params.toString()}`);
 }
 
-export async function createCarousel({ prompt, timezone, hookStyle = 'illustrated' }) {
+export async function createCarousel({
+  prompt,
+  timezone,
+  hookStyle = 'illustrated',
+  carouselStyle = 'illustrated',
+}) {
   return request('/api/carousels', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt, timezone, hook_style: hookStyle }),
+    body: JSON.stringify({
+      prompt,
+      timezone,
+      hook_style: hookStyle,
+      carousel_style: carouselStyle,
+    }),
   });
 }
 
@@ -93,11 +103,21 @@ export async function startVideoGeneration(formData) {
   return data;
 }
 
-export async function startCarouselGeneration({ prompt, timezone, hookStyle = 'illustrated' }) {
+export async function startCarouselGeneration({
+  prompt,
+  timezone,
+  hookStyle = 'illustrated',
+  carouselStyle = 'illustrated',
+}) {
   return request('/api/generations/carousel', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt, timezone, hook_style: hookStyle }),
+    body: JSON.stringify({
+      prompt,
+      timezone,
+      hook_style: hookStyle,
+      carousel_style: carouselStyle,
+    }),
   });
 }
 

@@ -20,6 +20,7 @@ from zoneinfo import ZoneInfo
 from openai import OpenAI
 
 from carousel_generator import (
+    DEFAULT_CAROUSEL_STYLE,
     DEFAULT_HOOK_STYLE,
     _extract_response_text,
     _resolve_openai_api_key,
@@ -139,7 +140,14 @@ class CarouselService:
         except Exception:
             return self._fallback_caption(prompt, slide_titles)
 
-    def create_carousel(self, *, prompt: str, timezone_name: str, hook_style: str = DEFAULT_HOOK_STYLE) -> Dict[str, Any]:
+    def create_carousel(
+        self,
+        *,
+        prompt: str,
+        timezone_name: str,
+        hook_style: str = DEFAULT_HOOK_STYLE,
+        carousel_style: str = DEFAULT_CAROUSEL_STYLE,
+    ) -> Dict[str, Any]:
         if not prompt or not prompt.strip():
             raise CarouselServiceError(400, "prompt is required.")
         if not timezone_name:
@@ -155,7 +163,11 @@ class CarouselService:
 
         carousel_id = uuid.uuid4().hex[:12]
         try:
-            generated = generate_carousel(initial_prompt=prompt.strip(), hook_style=hook_style)
+            generated = generate_carousel(
+                initial_prompt=prompt.strip(),
+                hook_style=hook_style,
+                carousel_style=carousel_style,
+            )
         except Exception as exc:
             raise CarouselServiceError(500, f"Carousel generation failed: {exc}") from exc
 
@@ -192,6 +204,8 @@ class CarouselService:
             "prompt": prompt.strip(),
             "status": "ready",
             "timezone": timezone_name,
+            "hookStyle": hook_style,
+            "carouselStyle": carousel_style,
             "suggestedScheduledFor": suggested,
             "captionDraft": caption_data["caption"],
             "hashtags": caption_data["hashtags"],

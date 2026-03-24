@@ -1,18 +1,44 @@
-import React, { useState } from 'react';
-import { LayoutDashboard, Users, MessageSquare, Plus, Video } from 'lucide-react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { LayoutDashboard, Users, MessageSquare, Plus, Video, Image, Film, CalendarDays } from 'lucide-react';
 import ApplicantCard from './components/ApplicantCard';
 import CreateSection from './components/CreateSection';
 import VariantLab from './components/VariantLab';
+import CarouselStudio from './components/CarouselStudio';
+import VideoLibrary from './components/VideoLibrary';
+import GenerationCenter from './components/GenerationCenter';
+import ScheduleModal from './components/ScheduleModal';
+import ScheduledPosts from './components/ScheduledPosts';
 
 function App() {
   const [activeTab, setActiveTab] = useState('recruit');
+  const [scheduleTarget, setScheduleTarget] = useState(null);
+  const [genRefreshKey, setGenRefreshKey] = useState(0);
+
+  const handleScheduleFromCenter = useCallback((generation) => {
+    setScheduleTarget(generation);
+  }, []);
+
+  const handleScheduled = useCallback(() => {
+    // Bump key so GenerationCenter re-fetches and sees the scheduled flag
+    setGenRefreshKey((k) => k + 1);
+  }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('late_connected') === '1') {
+      setActiveTab('create');
+    }
+  }, []);
 
   const navItems = [
     // { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { id: 'recruit', label: 'Recruit', icon: Users },
+    // { id: 'recruit', label: 'Recruit', icon: Users },
     // { id: 'messages', label: 'Messages', icon: MessageSquare },
-    { id: 'create', label: 'Create', icon: Plus },
-    { id: 'variant-lab', label: 'Variant Lab', icon: Video },
+    { id: 'create', label: 'Create Video', icon: Plus },
+    // { id: 'variant-lab', label: 'Variant Lab', icon: Video },
+    { id: 'carousel-studio', label: 'Carousel Studio', icon: Image },
+    { id: 'video-library', label: 'Video Library', icon: Film },
+    { id: 'scheduled', label: 'Scheduled', icon: CalendarDays },
   ];
 
   // Mock data for applicant cards
@@ -81,6 +107,18 @@ function App() {
 
   return (
     <div className="flex h-screen overflow-hidden relative">
+      {/* Generation Center – top-right floating button */}
+      <GenerationCenter onSchedule={handleScheduleFromCenter} refreshKey={genRefreshKey} />
+
+      {/* Schedule Modal – opened from Generation Center */}
+      {scheduleTarget && (
+        <ScheduleModal
+          generation={scheduleTarget}
+          onClose={() => setScheduleTarget(null)}
+          onScheduled={handleScheduled}
+        />
+      )}
+
       {/* Background blobs */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 -left-4 w-96 h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30" />
@@ -130,6 +168,12 @@ function App() {
           <CreateSection />
         ) : activeTab === 'variant-lab' ? (
           <VariantLab />
+        ) : activeTab === 'carousel-studio' ? (
+          <CarouselStudio />
+        ) : activeTab === 'video-library' ? (
+          <VideoLibrary />
+        ) : activeTab === 'scheduled' ? (
+          <ScheduledPosts />
         ) : (
           <div className="max-w-7xl mx-auto">
             {/* Header */}

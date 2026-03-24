@@ -125,6 +125,28 @@ PHOTOGRAPHIC RULES — follow strictly:
 
 DO NOT INCLUDE: stock-photo-looking poses (hands on hips, corporate smiles), sterile/clean environments, harsh lighting, neon colors, cartoon or illustrated elements, overly posed or model-like compositions, AI-looking faces or hands, perfectly symmetrical compositions, clipart or graphic overlays, thin or small text that can't be read at thumbnail size."""
 
+HOOK_SLIDE_TEMPLATE_PINTEREST = """Create a 9:9 Pinterest-style study image that looks like a real lifestyle photo with text overlay.
+
+GOAL:
+- The image must feel human, candid, and save-worthy for social media.
+- Avoid anything staged, over-polished, or obvious AI artifacts.
+
+TYPOGRAPHY RULES (MANDATORY):
+- Overlay text must say exactly: "{HEADLINE}"
+- Use a bold geometric sans-serif style (Poppins ExtraBold feel).
+- Thick white text with a subtle soft gray shadow for readability.
+- Keep the highlight rectangle flat and clean: no rounded corners, no glow, no effects.
+- Use a stacked social-media text layout (centered or slightly offset like TikTok edits).
+- Preserve natural negative space around subject and text.
+
+PHOTO STYLE RULES (MANDATORY):
+- Organic iPhone mirror/lifestyle photo look.
+- Slight grain, warm tones, soft natural shadows.
+- Realistic imperfections in composition and environment.
+- Not overly sharp and not studio quality.
+- Room/scene should look lived-in and believable.
+"""
+
 # Study-girl realism and diversity controls (selected in code per generation)
 _STUDY_GIRL_SCENES = [
     "library reading table with stacked books and warm desk lamps in frame",
@@ -202,12 +224,47 @@ _STUDY_GIRL_COMPOSITIONS = [
     "group: 3-4 students in frame with one primary subject still clearly dominant",
 ]
 
+_PINTEREST_SCENES = [
+    (
+        "mirror selfie (relatable)",
+        "A college girl taking a casual mirror selfie in her room. In the reflection, show a cozy study setup "
+        "with an open laptop, notebook, highlighter, and coffee. Room feels lived-in, slightly messy but aesthetic, "
+        "warm natural window light.",
+    ),
+    (
+        "desk focus (aspirational)",
+        "A student-focused desk scene as a realistic lifestyle photo, with active study materials, natural clutter, "
+        "and warm daylight. Subject appears candid in-frame, not posed.",
+    ),
+    (
+        "bed study (cozy)",
+        "A girl studying on her bed with laptop, notebook, and coffee or matcha. Cozy lamp + warm tones, slightly "
+        "messy blankets, realistic late-night study mood.",
+    ),
+    (
+        "library (productive)",
+        "A candid library moment with a student actively studying at a table, books and notes spread naturally, "
+        "ambient warm practical lighting and real-world imperfections.",
+    ),
+    (
+        "coffee shop (aesthetic)",
+        "A real cafe study moment with notebook, drink, and laptop, shallow depth and natural scene clutter. "
+        "Looks like an organic social photo, not a commercial shoot.",
+    ),
+    (
+        "messy floor (real)",
+        "A guy sitting on the floor with papers spread out, laptop nearby, and backpack next to him. "
+        "He is holding a pen or looking at notes, stressed-but-productive candid study moment with imperfect composition.",
+    ),
+]
+
 # ── Hook Style Registry ──────────────────────────────────────────────────────────
 
 HOOK_STYLES = {
     "illustrated": HOOK_SLIDE_TEMPLATE_ILLUSTRATED,
     "study_desk": HOOK_SLIDE_TEMPLATE_STUDY_DESK,
     "study_girl": HOOK_SLIDE_TEMPLATE_STUDY_GIRL,
+    "pinterest": HOOK_SLIDE_TEMPLATE_PINTEREST,
 }
 DEFAULT_HOOK_STYLE = "illustrated"
 
@@ -232,6 +289,47 @@ DESIGN RULES — follow strictly:
 - White space: deliberately generous. The slide should feel uncluttered and breathable.
 
 DO NOT INCLUDE: speech bubbles, UI cards floating over illustrations, gradient backgrounds, realistic textures or lighting, complex crowd scenes, drop shadows on text, multiple characters competing for attention, decorative borders, clipart-style icons scattered around the slide."""
+
+INDIVIDUAL_SLIDE_TEMPLATE_ILLUSTRATED_2 = """Create a 9:9 social-media educational carousel slide for a study app.
+
+STYLE:
+- Save-worthy mini lesson for Instagram/TikTok.
+- Clean, structured, educational.
+- Illustration/layout based (not lifestyle photography).
+- Modern flat visual language, premium but not corporate.
+- Strong visual hierarchy and generous spacing.
+- Easy to scan quickly.
+
+LAYOUT:
+- Headline (large, bold): "{TIP_TITLE}"
+- Support line below headline: "{EXPLANATION_TEXT}"
+- Section label: "WHY IT WORKS"
+- Add exactly 3 short bullet-style points with small flat icons/illustrations:
+  1) {WHY_POINT_1}
+  2) {WHY_POINT_2}
+  3) {WHY_POINT_3}
+
+VISUAL ELEMENTS:
+- Include subtle study-app cues like flashcards, quiz cards, or note cards.
+- Keep iconography simple, flat, and coherent with the slide.
+- Use teal accent/highlight bars sparingly for emphasis.
+
+TYPOGRAPHY:
+- Bold geometric sans serif style similar to Poppins.
+- Clear heading, readable support text, clean spacing.
+
+DO NOT INCLUDE:
+- Lifestyle-photo-only Pinterest aesthetics.
+- Cluttered infographic overload.
+- Generic startup ad look.
+- Decorative noise or excessive ornament.
+"""
+
+CAROUSEL_STYLES = {
+    "illustrated": INDIVIDUAL_SLIDE_TEMPLATE,
+    "illustrated_2": INDIVIDUAL_SLIDE_TEMPLATE_ILLUSTRATED_2,
+}
+DEFAULT_CAROUSEL_STYLE = "illustrated"
 
 # Static CTA images — randomly selected from backend/input/ instead of AI-generated
 _CTA_ASSETS_DIR = os.path.join(os.path.dirname(__file__), "input")
@@ -260,7 +358,12 @@ Return your response as a JSON object with this exact structure:
       "scene_description": "<describe ONE simple flat illustration — a single object, symbol, or minimal character moment. Max 20 words. No complex scenes.>",
       "visual_cues": "<ignored — left blank or N/A>",
       "emotion_meaning": "<one word or short phrase: the dominant feeling or concept this slide should convey>",
-      "explanation_text": "<10-14 words max. One punchy sentence. No paragraph. Direct and impactful.>"
+      "explanation_text": "<10-14 words max. One punchy sentence. No paragraph. Direct and impactful.>",
+      "why_it_works_points": [
+        "<short bullet 1, 3-7 words>",
+        "<short bullet 2, 3-7 words>",
+        "<short bullet 3, 3-7 words>"
+      ]
     },
     ...
   ]
@@ -276,6 +379,7 @@ Content quality rules:
 - Tip titles: short, bold, scannable — 3 to 5 words. No filler.
 - Scene descriptions: describe ONE minimal visual element only (e.g., "a single open book with a lightbulb above it", "a person sitting cross-legged with eyes closed, calm expression"). Avoid describing complex multi-element scenes or detailed backgrounds.
 - Explanation text: MAXIMUM 14 words. One sentence. Should feel like a tweet, not a paragraph. Make it punchy and memorable.
+- why_it_works_points: exactly 3 concise, non-redundant bullet phrases per slide.
 - Vary the emotional tone across slides (some tense/negative to contrast with positive ones).
 - Each slide scene should feel visually distinct from the others — avoid same composition twice.
 """
@@ -288,6 +392,7 @@ def generate_carousel(
     output_base_dir: Optional[str] = None,
     api_key: Optional[str] = None,
     hook_style: str = DEFAULT_HOOK_STYLE,
+    carousel_style: str = DEFAULT_CAROUSEL_STYLE,
 ) -> Dict[str, Any]:
     """
     Generate a complete carousel of educational images.
@@ -298,7 +403,9 @@ def generate_carousel(
         output_base_dir: Base directory for output. If None, uses backend/carousel_images/
         api_key: OpenAI API key. If None, uses OPENAI_API_KEY env var.
         hook_style: Style for the hook/cover slide image. One of "illustrated",
-                    "study_desk", or "study_girl". Defaults to "illustrated".
+                    "study_desk", "study_girl", or "pinterest". Defaults to "illustrated".
+        carousel_style: Style for individual content slides. One of "illustrated"
+                        or "illustrated_2". Defaults to "illustrated".
 
     Returns:
         A dict containing:
@@ -333,7 +440,11 @@ def generate_carousel(
     content_structure = _generate_content_structure(client, initial_prompt)
 
     # Step 2: Build prompts from templates
-    prompts = _build_prompts(content_structure, hook_style=hook_style)
+    prompts = _build_prompts(
+        content_structure,
+        hook_style=hook_style,
+        carousel_style=carousel_style,
+    )
 
     # Step 3: Generate images
     print(f"Generating {len(prompts)} images...")
@@ -452,7 +563,11 @@ def _generate_content_structure(client: OpenAI, initial_prompt: str) -> Dict[str
     return structure
 
 
-def _build_prompts(content_structure: Dict[str, Any], hook_style: str = DEFAULT_HOOK_STYLE) -> Dict[str, str]:
+def _build_prompts(
+    content_structure: Dict[str, Any],
+    hook_style: str = DEFAULT_HOOK_STYLE,
+    carousel_style: str = DEFAULT_CAROUSEL_STYLE,
+) -> Dict[str, str]:
     """Build image generation prompts from content structure using templates."""
     prompts = {}
     
@@ -463,14 +578,22 @@ def _build_prompts(content_structure: Dict[str, Any], hook_style: str = DEFAULT_
     )
     
     # Individual slides
+    slide_template = CAROUSEL_STYLES.get(
+        carousel_style,
+        CAROUSEL_STYLES[DEFAULT_CAROUSEL_STYLE],
+    )
     for slide in content_structure["slides"]:
-        prompts[f"slide_{slide['number']}"] = INDIVIDUAL_SLIDE_TEMPLATE.format(
+        why_points = _derive_why_points(slide)
+        prompts[f"slide_{slide['number']}"] = slide_template.format(
             NUMBER=slide["number"],
             TIP_TITLE=slide["tip_title"],
             SCENE_DESCRIPTION=slide["scene_description"],
-            VISUAL_CUES=slide["visual_cues"],
-            EMOTION_MEANING=slide["emotion_meaning"],
-            EXPLANATION_TEXT=slide["explanation_text"]
+            VISUAL_CUES=slide.get("visual_cues", ""),
+            EMOTION_MEANING=slide.get("emotion_meaning", ""),
+            EXPLANATION_TEXT=slide["explanation_text"],
+            WHY_POINT_1=why_points[0],
+            WHY_POINT_2=why_points[1],
+            WHY_POINT_3=why_points[2],
         )
     
     return prompts
@@ -482,7 +605,31 @@ def _build_hook_prompt(headline: str, hook_style: str = DEFAULT_HOOK_STYLE) -> s
     prompt = hook_template.format(HEADLINE=headline)
     if hook_style == "study_girl":
         prompt = f"{prompt}\n\n{_build_study_girl_variation_block()}"
+    if hook_style == "pinterest":
+        prompt = f"{prompt}\n\n{_build_pinterest_variation_block()}"
     return prompt
+
+
+def _derive_why_points(slide: Dict[str, Any]) -> List[str]:
+    """Create 3 concise 'why it works' bullets for structured slide styles."""
+    provided = slide.get("why_it_works_points")
+    if isinstance(provided, list):
+        normalized = [str(item).strip() for item in provided if str(item).strip()]
+        if len(normalized) >= 3:
+            return normalized[:3]
+
+    explanation = str(slide.get("explanation_text", "")).strip().rstrip(".")
+    emotion = str(slide.get("emotion_meaning", "")).strip()
+    scene = str(slide.get("scene_description", "")).strip().rstrip(".")
+
+    p1 = explanation if explanation else "strengthens memory retrieval"
+    if len(p1) > 58:
+        p1 = p1[:58].rstrip() + "..."
+    p2 = f"reinforces {emotion.lower()} through repetition" if emotion else "exposes weak areas fast"
+    p3 = "makes studying easier to repeat consistently"
+    if scene:
+        p3 = f"connects ideas to a concrete cue: {scene[:42].rstrip()}"
+    return [p1, p2, p3]
 
 
 def _build_study_girl_variation_block() -> str:
@@ -518,6 +665,22 @@ def _build_study_girl_variation_block() -> str:
         " but keep anatomy and perspective realistic.\n"
         "- No duplicated limbs, no extra fingers, no warped text,"
         " no AI artifacts. If conflict exists, this blueprint overrides generic defaults."
+    )
+
+
+def _build_pinterest_variation_block() -> str:
+    """Rotate Pinterest hook setups so generated covers feel human and non-repetitive."""
+    scene_label, scene_instruction = random.choice(_PINTEREST_SCENES)
+    variation_id = datetime.now().strftime("%Y%m%d-%H%M%S") + f"-{random.randint(100, 999)}"
+    return (
+        "PINTEREST REALISM BLUEPRINT (MANDATORY):\n"
+        f"- Variation ID: {variation_id}\n"
+        f"- Rotating scene selected: {scene_label}\n"
+        f"- Exact scene direction: {scene_instruction}\n"
+        "- Keep subject candid and imperfect (not ad-like, not model-polished).\n"
+        "- Maintain warm natural light and subtle film grain.\n"
+        "- Composition should feel authentic: slightly off-center or naturally framed.\n"
+        "- Keep typography clean and social-native; text must remain instantly readable."
     )
 
 
