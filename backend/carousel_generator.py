@@ -290,39 +290,35 @@ DESIGN RULES — follow strictly:
 
 DO NOT INCLUDE: speech bubbles, UI cards floating over illustrations, gradient backgrounds, realistic textures or lighting, complex crowd scenes, drop shadows on text, multiple characters competing for attention, decorative borders, clipart-style icons scattered around the slide."""
 
-INDIVIDUAL_SLIDE_TEMPLATE_ILLUSTRATED_2 = """Create a 9:9 social-media educational carousel slide for a study app.
+INDIVIDUAL_SLIDE_TEMPLATE_ILLUSTRATED_2 = """Create a 1:1 social-media educational carousel slide for a study app.
 
-STYLE:
-- Save-worthy mini lesson for Instagram/TikTok.
-- Clean, structured, educational.
-- Illustration/layout based (not lifestyle photography).
-- Modern flat visual language, premium but not corporate.
-- Strong visual hierarchy and generous spacing.
-- Easy to scan quickly.
+VISUAL STYLE (MANDATORY — apply to every slide):
+- Save-worthy mini lesson designed for Instagram/TikTok carousel engagement.
+- Clean, structured, educational layout — illustration and typography based, NOT photography.
+- Modern flat visual language. Premium but not corporate.
+- Strong visual hierarchy with generous spacing. Easy to scan quickly at phone size.
+- Bold geometric sans-serif typography similar to Poppins throughout.
+- Use a teal accent color sparingly for highlight bars, labels, or emphasis.
+- Include subtle study-app visual cues where appropriate (flashcard shapes, note cards, quiz icons).
+- Keep iconography simple, flat, and coherent.
 
-LAYOUT:
-- Headline (large, bold): "{TIP_TITLE}"
-- Support line below headline: "{EXPLANATION_TEXT}"
-- Section label: "WHY IT WORKS"
-- Add exactly 3 short bullet-style points with small flat icons/illustrations:
-  1) {WHY_POINT_1}
-  2) {WHY_POINT_2}
-  3) {WHY_POINT_3}
+CONTENT TO RENDER ON THIS SLIDE:
+{SLIDE_IMAGE_PROMPT}
 
-VISUAL ELEMENTS:
-- Include subtle study-app cues like flashcards, quiz cards, or note cards.
-- Keep iconography simple, flat, and coherent with the slide.
-- Use teal accent/highlight bars sparingly for emphasis.
-
-TYPOGRAPHY:
-- Bold geometric sans serif style similar to Poppins.
-- Clear heading, readable support text, clean spacing.
+DESIGN RULES:
+- The content above defines what text blocks, sections, headings, lists, or callouts to place on the slide. Follow it closely.
+- Large clear heading at the top or as the dominant element.
+- Support text and body content should be smaller but still readable at thumbnail size.
+- Organize content with clear spatial separation — do not cram elements together.
+- Background: solid color or clean two-tone split. No gradients, no textures.
+- Color palette: 2-3 colors maximum. Background covers at least 50% of the slide.
 
 DO NOT INCLUDE:
-- Lifestyle-photo-only Pinterest aesthetics.
-- Cluttered infographic overload.
-- Generic startup ad look.
-- Decorative noise or excessive ornament.
+- Lifestyle photography or realistic photo elements.
+- Cluttered infographic overload or too many decorative elements.
+- Generic startup ad aesthetics.
+- Gradient backgrounds or drop shadows on text.
+- Multiple competing illustration elements.
 """
 
 CAROUSEL_STYLES = {
@@ -358,12 +354,7 @@ Return your response as a JSON object with this exact structure:
       "scene_description": "<describe ONE simple flat illustration — a single object, symbol, or minimal character moment. Max 20 words. No complex scenes.>",
       "visual_cues": "<ignored — left blank or N/A>",
       "emotion_meaning": "<one word or short phrase: the dominant feeling or concept this slide should convey>",
-      "explanation_text": "<10-14 words max. One punchy sentence. No paragraph. Direct and impactful.>",
-      "why_it_works_points": [
-        "<short bullet 1, 3-7 words>",
-        "<short bullet 2, 3-7 words>",
-        "<short bullet 3, 3-7 words>"
-      ]
+      "explanation_text": "<10-14 words max. One punchy sentence. No paragraph. Direct and impactful.>"
     },
     ...
   ]
@@ -379,9 +370,58 @@ Content quality rules:
 - Tip titles: short, bold, scannable — 3 to 5 words. No filler.
 - Scene descriptions: describe ONE minimal visual element only (e.g., "a single open book with a lightbulb above it", "a person sitting cross-legged with eyes closed, calm expression"). Avoid describing complex multi-element scenes or detailed backgrounds.
 - Explanation text: MAXIMUM 14 words. One sentence. Should feel like a tweet, not a paragraph. Make it punchy and memorable.
-- why_it_works_points: exactly 3 concise, non-redundant bullet phrases per slide.
 - Vary the emotional tone across slides (some tense/negative to contrast with positive ones).
 - Each slide scene should feel visually distinct from the others — avoid same composition twice.
+"""
+
+SYSTEM_PROMPT_ILLUSTRATED_2 = """You are an expert at creating viral, save-worthy educational carousel content for Instagram and TikTok. Each slide will be rendered as a clean, structured, illustration-and-layout-based educational graphic — like a premium mini-lesson card.
+
+Given an initial prompt, you must:
+
+1. Respect an explicit slide/tip count when provided by the user.
+2. Otherwise choose between 5-8 slides based on the content depth.
+3. Set the hook_headline to be the EXACT text from the user's prompt — copy it WORD FOR WORD. Do NOT rephrase, rewrite, or generate a different headline. The user's prompt IS the hook headline.
+4. Analyze what the hook is about and decide the BEST content structure for the carousel — it could be step-by-step instructions, a listicle of tips, a deep-dive on one method, a comparison, a myth-vs-reality breakdown, or anything else that fits. DO NOT default to the same layout on every slide.
+5. For each slide, write a `slide_image_prompt` that describes the EXACT text content and visual layout the image model should render on that slide. This is your creative freedom — you decide what sections, headings, bullet points, callout boxes, numbered steps, comparisons, or quotes appear on each slide.
+
+CRITICAL: Vary the content structure across slides. Not every slide should have the same layout. Think about what makes each slide individually interesting, scannable, and save-worthy. Some slides might have 3 bullet points, others a single bold statement, others a before/after comparison, others a numbered step with a mini explanation, others a quick definition with an example. Mix it up. The carousel should feel dynamic when swiped through, not like the same card repeated.
+
+Return your response as a JSON object with this exact structure:
+{
+  "num_slides": <number>,
+  "hook_headline": "<the user's EXACT prompt text, copied verbatim>",
+  "slides": [
+    {
+      "number": 1,
+      "tip_title": "<3-6 word slide title, punchy and direct>",
+      "explanation_text": "<10-14 words max. One punchy sentence summarizing the slide.>",
+      "scene_description": "<describe ONE simple flat icon or illustration element for visual accent. Max 15 words.>",
+      "emotion_meaning": "<one word or short phrase: the dominant feeling this slide conveys>",
+      "slide_image_prompt": "<40-80 words describing what text blocks, sections, headings, lists, callouts, or layout elements should appear on this specific slide. Be specific about the actual text content. This is the full content blueprint for the image model.>"
+    },
+    ...
+  ]
+}
+
+HOOK HEADLINE — CRITICAL RULE:
+- The hook_headline MUST be the EXACT text the user typed in their prompt. Copy it character-for-character.
+- Do NOT rephrase it, do NOT make it "more viral", do NOT apply any formula to it.
+- The user has already written the hook they want. Respect it exactly.
+- If the prompt includes emoji, keep the emoji. If it includes punctuation, keep the punctuation.
+
+slide_image_prompt EXAMPLES (showing variety — DO NOT copy these, create unique ones for the topic):
+- "Large heading: 'ACTIVE RECALL'. Below it a one-line definition: 'Testing yourself instead of re-reading.' Then a section '3 WAYS TO USE IT' with three short bullet lines: 'Flashcards after each chapter', 'Cover your notes and recite', 'Practice problems before reviewing solutions'."
+- "Bold number '01' in the top-left corner. Heading: 'START WITH THE HARDEST TOPIC'. A single prominent callout box with the text: 'Your brain is freshest in the first 20 minutes — use that window on your weakest subject.' Small footer text: 'This is called cognitive loading.'"
+- "Split layout — left side labeled 'BEFORE' with text: 'Re-reading notes 5x, highlighting everything, cramming the night before'. Right side labeled 'AFTER' with text: 'One focused review, self-testing, spaced over 3 days'. A small 'Which one are you?' label at the bottom."
+- "Heading: 'THE POMODORO METHOD'. Step-by-step vertical layout: 'Step 1: Set a 25-min timer', 'Step 2: Work with zero distractions', 'Step 3: Take a 5-min break', 'Step 4: Repeat 4x, then longer break'. Small note at bottom: 'Named after a tomato-shaped kitchen timer.'"
+- "Large quote-style text: 'You don\\'t truly learn something until you can explain it simply.' Below it, a small attribution: '— The Feynman Technique'. Then a short paragraph: 'Pick a concept. Explain it like you\\'re teaching a 5-year-old. Find the gaps. Go back and fill them.'"
+
+Content quality rules:
+- Tip titles: short, bold, scannable — 3 to 6 words. No filler.
+- Explanation text: MAXIMUM 14 words. One sentence. Direct and impactful.
+- slide_image_prompt: 40-80 words. Be SPECIFIC about the actual text that should appear on the slide. Include real content, not placeholder descriptions.
+- Vary the emotional tone across slides.
+- Each slide should feel visually and structurally distinct from the others.
 """
 
 
@@ -437,7 +477,7 @@ def generate_carousel(
 
     # Step 1: Generate content structure using chat API
     print(f"Generating carousel content from prompt: {initial_prompt}")
-    content_structure = _generate_content_structure(client, initial_prompt)
+    content_structure = _generate_content_structure(client, initial_prompt, carousel_style=carousel_style)
 
     # Step 2: Build prompts from templates
     prompts = _build_prompts(
@@ -523,7 +563,11 @@ def _read_key_from_env_file(env_file_path: str, key: str) -> Optional[str]:
 
     return None
 
-def _generate_content_structure(client: OpenAI, initial_prompt: str) -> Dict[str, Any]:
+def _generate_content_structure(
+    client: OpenAI,
+    initial_prompt: str,
+    carousel_style: str = DEFAULT_CAROUSEL_STYLE,
+) -> Dict[str, Any]:
     """Generate the content structure using OpenAI chat API."""
     print("  Generating content structure...")
 
@@ -534,9 +578,12 @@ def _generate_content_structure(client: OpenAI, initial_prompt: str) -> Dict[str
         "If requested tip count is provided, return exactly that many items in slides."
     )
 
+    # Select system prompt based on carousel style
+    sys_prompt = SYSTEM_PROMPT_ILLUSTRATED_2 if carousel_style == "illustrated_2" else SYSTEM_PROMPT
+
     response = _responses_with_model_fallback(
         client=client,
-        system_prompt=SYSTEM_PROMPT,
+        system_prompt=sys_prompt,
         user_prompt=user_instruction,
     )
 
@@ -583,18 +630,28 @@ def _build_prompts(
         CAROUSEL_STYLES[DEFAULT_CAROUSEL_STYLE],
     )
     for slide in content_structure["slides"]:
-        why_points = _derive_why_points(slide)
-        prompts[f"slide_{slide['number']}"] = slide_template.format(
-            NUMBER=slide["number"],
-            TIP_TITLE=slide["tip_title"],
-            SCENE_DESCRIPTION=slide["scene_description"],
-            VISUAL_CUES=slide.get("visual_cues", ""),
-            EMOTION_MEANING=slide.get("emotion_meaning", ""),
-            EXPLANATION_TEXT=slide["explanation_text"],
-            WHY_POINT_1=why_points[0],
-            WHY_POINT_2=why_points[1],
-            WHY_POINT_3=why_points[2],
-        )
+        if carousel_style == "illustrated_2":
+            # Use the model's free-form slide_image_prompt when available;
+            # build a sensible fallback from structured fields otherwise.
+            image_prompt_text = slide.get("slide_image_prompt", "").strip()
+            if not image_prompt_text:
+                image_prompt_text = (
+                    f"Heading (large, bold): \"{slide['tip_title']}\"\n"
+                    f"Support line: \"{slide['explanation_text']}\"\n"
+                    f"Visual accent: {slide.get('scene_description', 'a simple flat icon')}"
+                )
+            prompts[f"slide_{slide['number']}"] = slide_template.format(
+                SLIDE_IMAGE_PROMPT=image_prompt_text,
+            )
+        else:
+            prompts[f"slide_{slide['number']}"] = slide_template.format(
+                NUMBER=slide["number"],
+                TIP_TITLE=slide["tip_title"],
+                SCENE_DESCRIPTION=slide["scene_description"],
+                VISUAL_CUES=slide.get("visual_cues", ""),
+                EMOTION_MEANING=slide.get("emotion_meaning", ""),
+                EXPLANATION_TEXT=slide["explanation_text"],
+            )
     
     return prompts
 
@@ -608,28 +665,6 @@ def _build_hook_prompt(headline: str, hook_style: str = DEFAULT_HOOK_STYLE) -> s
     if hook_style == "pinterest":
         prompt = f"{prompt}\n\n{_build_pinterest_variation_block()}"
     return prompt
-
-
-def _derive_why_points(slide: Dict[str, Any]) -> List[str]:
-    """Create 3 concise 'why it works' bullets for structured slide styles."""
-    provided = slide.get("why_it_works_points")
-    if isinstance(provided, list):
-        normalized = [str(item).strip() for item in provided if str(item).strip()]
-        if len(normalized) >= 3:
-            return normalized[:3]
-
-    explanation = str(slide.get("explanation_text", "")).strip().rstrip(".")
-    emotion = str(slide.get("emotion_meaning", "")).strip()
-    scene = str(slide.get("scene_description", "")).strip().rstrip(".")
-
-    p1 = explanation if explanation else "strengthens memory retrieval"
-    if len(p1) > 58:
-        p1 = p1[:58].rstrip() + "..."
-    p2 = f"reinforces {emotion.lower()} through repetition" if emotion else "exposes weak areas fast"
-    p3 = "makes studying easier to repeat consistently"
-    if scene:
-        p3 = f"connects ideas to a concrete cue: {scene[:42].rstrip()}"
-    return [p1, p2, p3]
 
 
 def _build_study_girl_variation_block() -> str:
