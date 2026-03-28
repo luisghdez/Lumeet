@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { CheckCircle2, Film, Link2, Play, RefreshCw, Send } from 'lucide-react';
+import { CheckCircle2, Film, Image as ImageIcon, Link2, Play, RefreshCw, Send } from 'lucide-react';
 import AccountRow from './AccountRow';
 import {
   createLatePost,
   createLateProfile,
   DEFAULT_SESSION_ID,
   getLateConnectUrl,
+  listCarousels,
   listLateAccounts,
   listVideos,
 } from '../lib/lateApi';
@@ -38,10 +39,23 @@ const SOCIAL_PLATFORMS = [
   'twitter',
 ];
 
+const LIBRARY_CACHE_TTL_MS = 2 * 60 * 1000;
+
+const libraryCache = {
+  videos: null,
+  videosFetchedAt: 0,
+  carousels: null,
+  carouselsFetchedAt: 0,
+};
+
 function VideoLibrary() {
+  const [libraryTab, setLibraryTab] = useState('video'); // 'video' | 'carousel'
   const [videos, setVideos] = useState([]);
+  const [carousels, setCarousels] = useState([]);
   const [isLoadingVideos, setIsLoadingVideos] = useState(false);
+  const [isLoadingCarousels, setIsLoadingCarousels] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [selectedCarousel, setSelectedCarousel] = useState(null);
   const [caption, setCaption] = useState('');
   const [timezone, setTimezone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC');
   const [scheduledFor, setScheduledFor] = useState('');
@@ -69,16 +83,57 @@ function VideoLibrary() {
 
   // ---- Data loading ----
 
-  const handleLoadVideos = async () => {
+  const handleLoadVideos = async (force = false) => {
+    const now = Date.now();
+    const videosCacheIsFresh = (
+      !force
+      && Array.isArray(libraryCache.videos)
+      && now - libraryCache.videosFetchedAt < LIBRARY_CACHE_TTL_MS
+    );
+    if (videosCacheIsFresh) {
+      setVideos(libraryCache.videos);
+      return;
+    }
+
     setIsLoadingVideos(true);
     setError('');
     try {
       const data = await listVideos();
-      setVideos(data.videos || []);
+      const nextVideos = data.videos || [];
+      setVideos(nextVideos);
+      libraryCache.videos = nextVideos;
+      libraryCache.videosFetchedAt = Date.now();
     } catch (err) {
       setError(err.message);
     } finally {
       setIsLoadingVideos(false);
+    }
+  };
+
+  const handleLoadCarousels = async (force = false) => {
+    const now = Date.now();
+    const carouselsCacheIsFresh = (
+      !force
+      && Array.isArray(libraryCache.carousels)
+      && now - libraryCache.carouselsFetchedAt < LIBRARY_CACHE_TTL_MS
+    );
+    if (carouselsCacheIsFresh) {
+      setCarousels(libraryCache.carousels);
+      return;
+    }
+
+    setIsLoadingCarousels(true);
+    setError('');
+    try {
+      const data = await listCarousels();
+      const nextCarousels = data.carousels || [];
+      setCarousels(nextCarousels);
+      libraryCache.carousels = nextCarousels;
+      libraryCache.carouselsFetchedAt = Date.now();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoadingCarousels(false);
     }
   };
 
@@ -119,6 +174,7 @@ function VideoLibrary() {
 
   useEffect(() => {
     handleLoadVideos();
+    handleLoadCarousels();
     handleLoadAccounts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -131,6 +187,11 @@ function VideoLibrary() {
     setScheduledFor(nextSlotDatetimeLocal());
     setPublishNow(false);
     setStatusMessage(`Selected video ${video.videoId}.`);
+  };
+
+  const selectCarousel = (carousel) => {
+    setSelectedCarousel(carousel);
+    setStatusMessage(`Selected carousel ${carousel.carouselId}.`);
   };
 
   const handleCreateProfile = async () => {
@@ -221,211 +282,338 @@ function VideoLibrary() {
     <div className="max-w-6xl mx-auto">
       <div className="mb-8 text-center">
         <div className="flex items-center justify-center gap-3">
-          <Film size={24} className="text-purple-600" />
-          <h2 className="text-3xl font-bold text-gray-900">Video Library</h2>
+          {libraryTab === 'video' ? (
+            <Film size={24} className="text-purple-600" />
+          ) : (
+            <ImageIcon size={24} className="text-purple-600" />
+          )}
+          <h2 className="text-3xl font-bold text-gray-900">
+            {libraryTab === 'video' ? 'Video Library' : 'Carousel Library'}
+          </h2>
         </div>
-        <p className="text-gray-600 mt-2">Browse past generated videos and schedule or publish them.</p>
+        <p className="text-gray-600 mt-2">
+          {libraryTab === 'video'
+            ? 'Browse past generated videos and schedule or publish them.'
+            : 'Browse generated carousels and review their slides.'}
+        </p>
       </div>
 
-      {/* Video Gallery */}
-      <div className="glass-card border border-white/40 rounded-2xl p-5 mb-6">
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="text-lg font-bold text-gray-900">Generated Videos</h3>
+      <div className="mb-6 flex justify-center">
+        <div className="inline-flex p-1 rounded-2xl bg-white/70 border border-white/40">
           <button
-            onClick={handleLoadVideos}
-            disabled={isLoadingVideos}
-            className="px-3 py-2 rounded-xl bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50 flex items-center gap-2"
+            type="button"
+            onClick={() => setLibraryTab('video')}
+            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
+              libraryTab === 'video'
+                ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white shadow'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
           >
-            <RefreshCw size={14} className={isLoadingVideos ? 'animate-spin' : ''} />
-            Refresh
+            <Film size={16} />
+            Videos
+          </button>
+          <button
+            type="button"
+            onClick={() => setLibraryTab('carousel')}
+            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
+              libraryTab === 'carousel'
+                ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white shadow'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            <ImageIcon size={16} />
+            Carousels
           </button>
         </div>
-        {videos.length === 0 ? (
-          <p className="text-sm text-gray-600">
-            No generated videos yet. Create one in the <strong>Create</strong> tab and it will appear here.
-          </p>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {videos.map((video) => {
-              const isSelected = selectedVideo?.videoId === video.videoId;
-              return (
-                <button
-                  key={video.videoId}
-                  onClick={() => selectVideo(video)}
-                  className={`text-left rounded-2xl border-2 transition-all overflow-hidden
-                    ${isSelected
-                      ? 'border-purple-500 ring-2 ring-purple-200'
-                      : 'border-gray-200 hover:border-purple-300'
-                    }`}
-                >
-                  <div className="relative aspect-[9/16] bg-black">
-                    <video
-                      src={video.url}
-                      className="w-full h-full object-contain"
-                      muted
-                      preload="metadata"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 hover:opacity-100 transition-opacity">
-                      <Play size={36} className="text-white drop-shadow-lg" />
-                    </div>
-                    {isSelected && (
-                      <div className="absolute top-2 right-2">
-                        <CheckCircle2 size={22} className="text-purple-500 drop-shadow" />
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-3">
-                    <p className="text-xs text-gray-500">{video.createdAt || ''}</p>
-                    <p className="text-sm font-semibold text-gray-900 truncate">
-                      {video.videoId}
-                    </p>
-                    {video.extended && (
-                      <span className="inline-block mt-1 text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 font-medium">
-                        Extended
-                      </span>
-                    )}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        )}
       </div>
 
-      {/* Schedule / Publish Section — shown when a video is selected */}
-      {selectedVideo && (
+      {libraryTab === 'video' ? (
         <>
-          {/* Preview */}
+          {/* Video Gallery */}
           <div className="glass-card border border-white/40 rounded-2xl p-5 mb-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-3">Preview</h3>
-            <div className="flex justify-center">
-              <div className="w-full max-w-xs aspect-[9/16] rounded-2xl overflow-hidden bg-black shadow-xl">
-                <video
-                  src={selectedVideo.url}
-                  controls
-                  className="w-full h-full object-contain"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Schedule Controls */}
-          <div className="glass-card border border-white/40 rounded-2xl p-5">
-            <h3 className="text-lg font-bold text-gray-900 mb-3">Schedule or Publish</h3>
-
-            {/* Profile */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
-              <input
-                value={profileName}
-                onChange={(e) => setProfileName(e.target.value)}
-                className="px-3 py-2 rounded-xl border border-gray-200 focus:border-purple-400 outline-none"
-                placeholder="Profile name"
-              />
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-bold text-gray-900">Generated Videos</h3>
               <button
-                onClick={handleCreateProfile}
-                disabled={isCreatingProfile || !profileName.trim()}
-                className="px-4 py-2 rounded-xl bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50"
+                onClick={() => handleLoadVideos(true)}
+                disabled={isLoadingVideos}
+                className="px-3 py-2 rounded-xl bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50 flex items-center gap-2"
               >
-                {isCreatingProfile ? 'Creating...' : 'Create Profile'}
+                <RefreshCw size={14} className={isLoadingVideos ? 'animate-spin' : ''} />
+                Refresh
               </button>
             </div>
-            <p className="text-xs text-gray-500 mb-3">
-              Skip if your Late account already has connected accounts.
-            </p>
-
-            {/* Connect */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
-              <select
-                value={platformToConnect}
-                onChange={(e) => setPlatformToConnect(e.target.value)}
-                className="px-3 py-2 rounded-xl border border-gray-200 focus:border-purple-400 outline-none"
-              >
-                {SOCIAL_PLATFORMS.map((p) => (
-                  <option key={p} value={p}>{p}</option>
-                ))}
-              </select>
-              <button
-                onClick={handleConnect}
-                disabled={isConnecting}
-                className="px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-50 flex items-center justify-center gap-2"
-              >
-                <Link2 size={16} />
-                {isConnecting ? 'Opening...' : 'Connect Account'}
-              </button>
-              <button
-                onClick={handleLoadAccounts}
-                disabled={isLoadingAccounts}
-                className="px-4 py-2 rounded-xl bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50 flex items-center justify-center gap-2"
-              >
-                <RefreshCw size={16} className={isLoadingAccounts ? 'animate-spin' : ''} />
-                Refresh Accounts
-              </button>
-            </div>
-
-            {/* Account checkboxes */}
-            {accounts.length > 0 && (
-              <div className="mb-4 border border-gray-200 rounded-xl p-3 max-h-36 overflow-y-auto">
-                {accounts.map((acc) => (
-                  <AccountRow
-                    key={acc._id}
-                    account={acc}
-                    checked={selectedAccountIds.includes(acc._id)}
-                    onToggle={(checked) => {
-                      if (checked) {
-                        setSelectedAccountIds((prev) => [...prev, acc._id]);
-                      } else {
-                        setSelectedAccountIds((prev) => prev.filter((id) => id !== acc._id));
-                      }
-                    }}
-                  />
-                ))}
+            {videos.length === 0 ? (
+              <p className="text-sm text-gray-600">
+                No generated videos yet. Create one in the <strong>Create</strong> tab and it will appear here.
+              </p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {videos.map((video) => {
+                  const isSelected = selectedVideo?.videoId === video.videoId;
+                  return (
+                    <button
+                      key={video.videoId}
+                      onClick={() => selectVideo(video)}
+                      className={`text-left rounded-2xl border-2 transition-all overflow-hidden
+                        ${isSelected
+                          ? 'border-purple-500 ring-2 ring-purple-200'
+                          : 'border-gray-200 hover:border-purple-300'
+                        }`}
+                    >
+                      <div className="relative aspect-[9/16] bg-black">
+                        <video
+                          src={video.url}
+                          className="w-full h-full object-contain"
+                          muted
+                          preload="metadata"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 hover:opacity-100 transition-opacity">
+                          <Play size={36} className="text-white drop-shadow-lg" />
+                        </div>
+                        {isSelected && (
+                          <div className="absolute top-2 right-2">
+                            <CheckCircle2 size={22} className="text-purple-500 drop-shadow" />
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-3">
+                        <p className="text-xs text-gray-500">{video.createdAt || ''}</p>
+                        <p className="text-sm font-semibold text-gray-900 truncate">
+                          {video.videoId}
+                        </p>
+                        {video.extended && (
+                          <span className="inline-block mt-1 text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 font-medium">
+                            Extended
+                          </span>
+                        )}
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
             )}
-
-            {/* Caption */}
-            <textarea
-              value={caption}
-              onChange={(e) => setCaption(e.target.value)}
-              rows={4}
-              className="w-full mb-3 px-3 py-2 rounded-xl border border-gray-200 focus:border-purple-400 outline-none"
-              placeholder="Caption with hashtags"
-            />
-
-            {/* Schedule / Publish now */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
-              <label className="flex items-center gap-2 text-sm text-gray-700 font-medium">
-                <input
-                  type="checkbox"
-                  checked={publishNow}
-                  onChange={(e) => setPublishNow(e.target.checked)}
-                />
-                Publish now
-              </label>
-              <input
-                type="datetime-local"
-                value={scheduledFor}
-                onChange={(e) => setScheduledFor(e.target.value)}
-                disabled={publishNow}
-                className="px-3 py-2 rounded-xl border border-gray-200 focus:border-purple-400 outline-none disabled:bg-gray-100"
-              />
-              <input
-                value={timezone}
-                onChange={(e) => setTimezone(e.target.value)}
-                disabled={publishNow}
-                className="px-3 py-2 rounded-xl border border-gray-200 focus:border-purple-400 outline-none disabled:bg-gray-100"
-                placeholder="Timezone"
-              />
-            </div>
-
-            <button
-              onClick={handleSchedule}
-              disabled={isScheduling || selectedPlatforms.length === 0 || !caption.trim() || (!publishNow && !scheduledFor)}
-              className="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-purple-500 text-white font-semibold hover:from-purple-700 hover:to-purple-600 disabled:opacity-50 flex items-center justify-center gap-2"
-            >
-              <Send size={16} />
-              {isScheduling ? 'Sending...' : publishNow ? 'Publish Now' : 'Schedule Post'}
-            </button>
           </div>
+
+          {/* Schedule / Publish Section — shown when a video is selected */}
+          {selectedVideo && (
+            <>
+              {/* Preview */}
+              <div className="glass-card border border-white/40 rounded-2xl p-5 mb-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-3">Preview</h3>
+                <div className="flex justify-center">
+                  <div className="w-full max-w-xs aspect-[9/16] rounded-2xl overflow-hidden bg-black shadow-xl">
+                    <video
+                      src={selectedVideo.url}
+                      controls
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Schedule Controls */}
+              <div className="glass-card border border-white/40 rounded-2xl p-5">
+                <h3 className="text-lg font-bold text-gray-900 mb-3">Schedule or Publish</h3>
+
+                {/* Profile */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
+                  <input
+                    value={profileName}
+                    onChange={(e) => setProfileName(e.target.value)}
+                    className="px-3 py-2 rounded-xl border border-gray-200 focus:border-purple-400 outline-none"
+                    placeholder="Profile name"
+                  />
+                  <button
+                    onClick={handleCreateProfile}
+                    disabled={isCreatingProfile || !profileName.trim()}
+                    className="px-4 py-2 rounded-xl bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50"
+                  >
+                    {isCreatingProfile ? 'Creating...' : 'Create Profile'}
+                  </button>
+                </div>
+                <p className="text-xs text-gray-500 mb-3">
+                  Skip if your Late account already has connected accounts.
+                </p>
+
+                {/* Connect */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+                  <select
+                    value={platformToConnect}
+                    onChange={(e) => setPlatformToConnect(e.target.value)}
+                    className="px-3 py-2 rounded-xl border border-gray-200 focus:border-purple-400 outline-none"
+                  >
+                    {SOCIAL_PLATFORMS.map((p) => (
+                      <option key={p} value={p}>{p}</option>
+                    ))}
+                  </select>
+                  <button
+                    onClick={handleConnect}
+                    disabled={isConnecting}
+                    className="px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-50 flex items-center justify-center gap-2"
+                  >
+                    <Link2 size={16} />
+                    {isConnecting ? 'Opening...' : 'Connect Account'}
+                  </button>
+                  <button
+                    onClick={handleLoadAccounts}
+                    disabled={isLoadingAccounts}
+                    className="px-4 py-2 rounded-xl bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50 flex items-center justify-center gap-2"
+                  >
+                    <RefreshCw size={16} className={isLoadingAccounts ? 'animate-spin' : ''} />
+                    Refresh Accounts
+                  </button>
+                </div>
+
+                {/* Account checkboxes */}
+                {accounts.length > 0 && (
+                  <div className="mb-4 border border-gray-200 rounded-xl p-3 max-h-36 overflow-y-auto">
+                    {accounts.map((acc) => (
+                      <AccountRow
+                        key={acc._id}
+                        account={acc}
+                        checked={selectedAccountIds.includes(acc._id)}
+                        onToggle={(checked) => {
+                          if (checked) {
+                            setSelectedAccountIds((prev) => [...prev, acc._id]);
+                          } else {
+                            setSelectedAccountIds((prev) => prev.filter((id) => id !== acc._id));
+                          }
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {/* Caption */}
+                <textarea
+                  value={caption}
+                  onChange={(e) => setCaption(e.target.value)}
+                  rows={4}
+                  className="w-full mb-3 px-3 py-2 rounded-xl border border-gray-200 focus:border-purple-400 outline-none"
+                  placeholder="Caption with hashtags"
+                />
+
+                {/* Schedule / Publish now */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                  <label className="flex items-center gap-2 text-sm text-gray-700 font-medium">
+                    <input
+                      type="checkbox"
+                      checked={publishNow}
+                      onChange={(e) => setPublishNow(e.target.checked)}
+                    />
+                    Publish now
+                  </label>
+                  <input
+                    type="datetime-local"
+                    value={scheduledFor}
+                    onChange={(e) => setScheduledFor(e.target.value)}
+                    disabled={publishNow}
+                    className="px-3 py-2 rounded-xl border border-gray-200 focus:border-purple-400 outline-none disabled:bg-gray-100"
+                  />
+                  <input
+                    value={timezone}
+                    onChange={(e) => setTimezone(e.target.value)}
+                    disabled={publishNow}
+                    className="px-3 py-2 rounded-xl border border-gray-200 focus:border-purple-400 outline-none disabled:bg-gray-100"
+                    placeholder="Timezone"
+                  />
+                </div>
+
+                <button
+                  onClick={handleSchedule}
+                  disabled={isScheduling || selectedPlatforms.length === 0 || !caption.trim() || (!publishNow && !scheduledFor)}
+                  className="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-purple-500 text-white font-semibold hover:from-purple-700 hover:to-purple-600 disabled:opacity-50 flex items-center justify-center gap-2"
+                >
+                  <Send size={16} />
+                  {isScheduling ? 'Sending...' : publishNow ? 'Publish Now' : 'Schedule Post'}
+                </button>
+              </div>
+            </>
+          )}
+        </>
+      ) : (
+        <>
+          {/* Carousel Gallery */}
+          <div className="glass-card border border-white/40 rounded-2xl p-5 mb-6">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-bold text-gray-900">Generated Carousels</h3>
+              <button
+                onClick={() => handleLoadCarousels(true)}
+                disabled={isLoadingCarousels}
+                className="px-3 py-2 rounded-xl bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50 flex items-center gap-2"
+              >
+                <RefreshCw size={14} className={isLoadingCarousels ? 'animate-spin' : ''} />
+                Refresh
+              </button>
+            </div>
+            {carousels.length === 0 ? (
+              <p className="text-sm text-gray-600">
+                No generated carousels yet. Create one in the <strong>Create</strong> tab and it will appear here.
+              </p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {carousels.map((carousel) => {
+                  const isSelected = selectedCarousel?.carouselId === carousel.carouselId;
+                  const coverUrl = carousel.mediaUrls?.[0] || '';
+                  return (
+                    <button
+                      key={carousel.carouselId}
+                      onClick={() => selectCarousel(carousel)}
+                      className={`text-left rounded-2xl border-2 transition-all overflow-hidden
+                        ${isSelected
+                          ? 'border-purple-500 ring-2 ring-purple-200'
+                          : 'border-gray-200 hover:border-purple-300'
+                        }`}
+                    >
+                      <div className="relative aspect-square bg-gray-100">
+                        {coverUrl ? (
+                          <img
+                            src={coverUrl}
+                            alt=""
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-gray-400">
+                            <ImageIcon size={26} />
+                          </div>
+                        )}
+                        {isSelected && (
+                          <div className="absolute top-2 right-2">
+                            <CheckCircle2 size={22} className="text-purple-500 drop-shadow" />
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-3">
+                        <p className="text-xs text-gray-500">{carousel.createdAt || ''}</p>
+                        <p className="text-sm font-semibold text-gray-900 truncate">
+                          {carousel.prompt || carousel.carouselId}
+                        </p>
+                        <p className="text-xs text-gray-500 mt-1">
+                          {carousel.mediaUrls?.length || 0} slides
+                        </p>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* Carousel Preview */}
+          {selectedCarousel && (
+            <div className="glass-card border border-white/40 rounded-2xl p-5">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Carousel Preview</h3>
+              <p className="text-sm text-gray-600 mb-4">{selectedCarousel.prompt}</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {(selectedCarousel.mediaUrls || []).map((url) => (
+                  <div key={url} className="aspect-square rounded-xl overflow-hidden bg-gray-100">
+                    <img src={url} alt="" className="w-full h-full object-cover" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </>
       )}
 
