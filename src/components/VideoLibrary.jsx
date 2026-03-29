@@ -40,9 +40,11 @@ const SOCIAL_PLATFORMS = [
 ];
 
 const LIBRARY_CACHE_TTL_MS = 2 * 60 * 1000;
+const PAGE_SIZE = 5;
 
 const libraryCache = {
   videos: null,
+  videosTotal: 0,
   videosFetchedAt: 0,
   carousels: null,
   carouselsFetchedAt: 0,
@@ -51,8 +53,10 @@ const libraryCache = {
 function VideoLibrary() {
   const [libraryTab, setLibraryTab] = useState('video'); // 'video' | 'carousel'
   const [videos, setVideos] = useState([]);
+  const [videosTotal, setVideosTotal] = useState(0);
   const [carousels, setCarousels] = useState([]);
   const [isLoadingVideos, setIsLoadingVideos] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isLoadingCarousels, setIsLoadingCarousels] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [selectedCarousel, setSelectedCarousel] = useState(null);
@@ -92,16 +96,20 @@ function VideoLibrary() {
     );
     if (videosCacheIsFresh) {
       setVideos(libraryCache.videos);
+      setVideosTotal(libraryCache.videosTotal);
       return;
     }
 
     setIsLoadingVideos(true);
     setError('');
     try {
-      const data = await listVideos();
+      const data = await listVideos({ limit: PAGE_SIZE, offset: 0 });
       const nextVideos = data.videos || [];
+      const total = data.total ?? nextVideos.length;
       setVideos(nextVideos);
+      setVideosTotal(total);
       libraryCache.videos = nextVideos;
+      libraryCache.videosTotal = total;
       libraryCache.videosFetchedAt = Date.now();
     } catch (err) {
       setError(err.message);
@@ -109,6 +117,28 @@ function VideoLibrary() {
       setIsLoadingVideos(false);
     }
   };
+
+  const handleLoadMoreVideos = async () => {
+    setIsLoadingMore(true);
+    setError('');
+    try {
+      const data = await listVideos({ limit: PAGE_SIZE, offset: videos.length });
+      const moreVideos = data.videos || [];
+      const total = data.total ?? (videos.length + moreVideos.length);
+      const merged = [...videos, ...moreVideos];
+      setVideos(merged);
+      setVideosTotal(total);
+      libraryCache.videos = merged;
+      libraryCache.videosTotal = total;
+      libraryCache.videosFetchedAt = Date.now();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoadingMore(false);
+    }
+  };
+
+  const hasMoreVideos = videos.length < videosTotal;
 
   const handleLoadCarousels = async (force = false) => {
     const now = Date.now();
@@ -347,50 +377,70 @@ function VideoLibrary() {
                 No generated videos yet. Create one in the <strong>Create</strong> tab and it will appear here.
               </p>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {videos.map((video) => {
-                  const isSelected = selectedVideo?.videoId === video.videoId;
-                  return (
-                    <button
-                      key={video.videoId}
-                      onClick={() => selectVideo(video)}
-                      className={`text-left rounded-2xl border-2 transition-all overflow-hidden
-                        ${isSelected
-                          ? 'border-purple-500 ring-2 ring-purple-200'
-                          : 'border-gray-200 hover:border-purple-300'
-                        }`}
-                    >
-                      <div className="relative aspect-[9/16] bg-black">
-                        <video
-                          src={video.url}
-                          className="w-full h-full object-contain"
-                          muted
-                          preload="metadata"
-                        />
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 hover:opacity-100 transition-opacity">
-                          <Play size={36} className="text-white drop-shadow-lg" />
-                        </div>
-                        {isSelected && (
-                          <div className="absolute top-2 right-2">
-                            <CheckCircle2 size={22} className="text-purple-500 drop-shadow" />
+              <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  {videos.map((video) => {
+                    const isSelected = selectedVideo?.videoId === video.videoId;
+                    return (
+                      <button
+                        key={video.videoId}
+                        onClick={() => selectVideo(video)}
+                        className={`text-left rounded-2xl border-2 transition-all overflow-hidden
+                          ${isSelected
+                            ? 'border-purple-500 ring-2 ring-purple-200'
+                            : 'border-gray-200 hover:border-purple-300'
+                          }`}
+                      >
+                        <div className="relative aspect-[9/16] bg-black">
+                          <video
+                            src={video.url}
+                            className="w-full h-full object-contain"
+                            muted
+                            preload="metadata"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 hover:opacity-100 transition-opacity">
+                            <Play size={36} className="text-white drop-shadow-lg" />
                           </div>
-                        )}
-                      </div>
-                      <div className="p-3">
-                        <p className="text-xs text-gray-500">{video.createdAt || ''}</p>
-                        <p className="text-sm font-semibold text-gray-900 truncate">
-                          {video.videoId}
-                        </p>
-                        {video.extended && (
-                          <span className="inline-block mt-1 text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 font-medium">
-                            Extended
-                          </span>
-                        )}
-                      </div>
+                          {isSelected && (
+                            <div className="absolute top-2 right-2">
+                              <CheckCircle2 size={22} className="text-purple-500 drop-shadow" />
+                            </div>
+                          )}
+                        </div>
+                        <div className="p-3">
+                          <p className="text-xs text-gray-500">{video.createdAt || ''}</p>
+                          <p className="text-sm font-semibold text-gray-900 truncate">
+                            {video.videoId}
+                          </p>
+                          {video.extended && (
+                            <span className="inline-block mt-1 text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 font-medium">
+                              Extended
+                            </span>
+                          )}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+                {hasMoreVideos && (
+                  <div className="flex justify-center mt-4">
+                    <button
+                      onClick={handleLoadMoreVideos}
+                      disabled={isLoadingMore}
+                      className="px-5 py-2.5 rounded-xl bg-purple-50 text-purple-700 font-semibold hover:bg-purple-100 disabled:opacity-50 flex items-center gap-2 transition-colors"
+                    >
+                      {isLoadingMore ? (
+                        <>
+                          <RefreshCw size={14} className="animate-spin" />
+                          Loading…
+                        </>
+                      ) : (
+                        `Load More (${videos.length} of ${videosTotal})`
+                      )}
                     </button>
-                  );
-                })}
-              </div>
+                  </div>
+                )}
+              </>
             )}
           </div>
 

@@ -7889,5 +7889,695 @@
     "completedAt": 1774743737.445374,
     "output": null,
     "jobId": "99b65a84d006"
+  },
+  "1b0b1a068fda": {
+    "generationId": "1b0b1a068fda",
+    "type": "video",
+    "label": "ddtik.com_@yuna j_no_watermark.mp4",
+    "status": "failed",
+    "progress": 66,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "No scene change detected -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "No caption detected."
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "running",
+        "message": "Generating video with Kling AI (this may take a few minutes)..."
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "[{'loc': ['body'], 'msg': 'The input was rejected, No complete upper body detected in the video; ensure the upper body is clearly visible.', 'type': 'input_value_error', 'url': 'https://docs.fal.ai/errors#input_value_error', 'input': {'prompt': 'A young woman reacting to the camera', 'image_url': 'https://v3b.fal.media/files/b/0a940b5a/C61HPKDT0a4jIdoBE3IoL_recreated_scene.png', 'video_url': 'https://v3b.fal.media/files/b/0a940b5a/KctAZ1SVtRO2aRClnLZWC_reference_video.mp4', 'keep_original_sound': True, 'character_orientation': 'video'}}]",
+    "createdAt": 1774743893.386013,
+    "completedAt": 1774744190.527466,
+    "output": null,
+    "jobId": "6fd7f04e1b04"
+  },
+  "2cdc57294162": {
+    "generationId": "2cdc57294162",
+    "type": "video",
+    "label": "ddtik.com_@yuna j_no_watermark (1).mp4",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "No scene change detected -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"how i felt getting paid $10/hr in cash at a dodgy job in year 7\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      }
+    ],
+    "error": null,
+    "createdAt": 1774744091.452227,
+    "completedAt": 1774744592.655395,
+    "output": {
+      "jobId": "5bdceb3237cd",
+      "videoUrl": "https://storage.googleapis.com/lumeet-bucket/videos/5bdceb3237cd/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260329%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260329T003624Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=98bbd3a0c1a86892f6385cbdadc7160d39e38316b6233084257af72cbea4767e517ca61e87ac0bd9700f975d06cb2a4434a49c19bc57634aad1a4c6a82f094f9dd1dc874ae0339dfc1b9ed91148315e4b1c84f8355e177261ae362194bec5f1d412f2fbe669b2fcdd07bdba1818b4030c9f17c3b3e5eec14ded56dcedc04f21766b257518f3f2dabc4cd92335e50050806fe338d4295a774a5b44b2bf303cc37621fbea0f6311ef7811a05f35358199441558d61f03725aa5d4476dd075ece4cd0b338d2a453ba3f37e37a5d05675db5d783bf899cb6133dc8c9887eb743136a1b2a79ba94f9a0d16c5dfd693f4da7db96fa81e6c60b098b7d5e4a2504b5ee76",
+      "resultPath": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/jobs/5bdceb3237cd/output/final_output.mp4",
+      "videoGcs": {
+        "bucket": "lumeet-bucket",
+        "object": "videos/5bdceb3237cd/final_output.mp4",
+        "url": "https://storage.googleapis.com/lumeet-bucket/videos/5bdceb3237cd/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260329%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260329T003624Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=98bbd3a0c1a86892f6385cbdadc7160d39e38316b6233084257af72cbea4767e517ca61e87ac0bd9700f975d06cb2a4434a49c19bc57634aad1a4c6a82f094f9dd1dc874ae0339dfc1b9ed91148315e4b1c84f8355e177261ae362194bec5f1d412f2fbe669b2fcdd07bdba1818b4030c9f17c3b3e5eec14ded56dcedc04f21766b257518f3f2dabc4cd92335e50050806fe338d4295a774a5b44b2bf303cc37621fbea0f6311ef7811a05f35358199441558d61f03725aa5d4476dd075ece4cd0b338d2a453ba3f37e37a5d05675db5d783bf899cb6133dc8c9887eb743136a1b2a79ba94f9a0d16c5dfd693f4da7db96fa81e6c60b098b7d5e4a2504b5ee76"
+      }
+    },
+    "jobId": "5bdceb3237cd"
+  },
+  "535a3eaf8cc0": {
+    "generationId": "535a3eaf8cc0",
+    "type": "remix",
+    "label": "Remix of 8c8afafd89d8",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "download_hook",
+        "label": "Download Hook Video",
+        "status": "completed",
+        "message": "Hook video downloaded"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption applied"
+      },
+      {
+        "key": "video_concatenation",
+        "label": "Video Concatenation",
+        "status": "completed",
+        "message": "Videos concatenated"
+      },
+      {
+        "key": "audio_replacement",
+        "label": "Audio Replacement",
+        "status": "completed",
+        "message": "Audio replaced"
+      }
+    ],
+    "error": null,
+    "createdAt": 1774744459.5133388,
+    "completedAt": 1774744472.103214,
+    "output": {
+      "videoUrl": "https://storage.googleapis.com/lumeet-bucket/videos/535a3eaf8cc0/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260329%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260329T003432Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=d4f3f7b2e5f799dc5d19bc598c4f4877aa4b2fb7147fb468866294b261c0f22b7fa5536fda3e9765d6e215e32ce9c2937d809f849a9e340339d40680b960545c58fd6f6a5636a7c0269cc668244fc7d2dcfe500110e70b342b6c4cfd89592e0518bc4bf88ace38a6f4b78ecd60a9c4fac1ceef2b2b0e4ab7a3d7328cb7eddb1479fe8e0dd69998962d8ebd364f09337252a447765be19b0fb4122ee69317f743a7fb3fc8efedfb9555504f6ab46869d5e430ee292cdaed2d2b32344029d1fd60787507c29658bdb3686d066f18549a0e2451c10e27d800e02b79c9e5e2d89f25356d7bbbc24916b92dd4f155703dcd5480d1c784d452e10ed0f16645785baf41",
+      "resultPath": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/jobs/535a3eaf8cc0/output/remix_final.mp4",
+      "videoGcs": {
+        "bucket": "lumeet-bucket",
+        "object": "videos/535a3eaf8cc0/final_output.mp4",
+        "url": "https://storage.googleapis.com/lumeet-bucket/videos/535a3eaf8cc0/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260329%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260329T003432Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=d4f3f7b2e5f799dc5d19bc598c4f4877aa4b2fb7147fb468866294b261c0f22b7fa5536fda3e9765d6e215e32ce9c2937d809f849a9e340339d40680b960545c58fd6f6a5636a7c0269cc668244fc7d2dcfe500110e70b342b6c4cfd89592e0518bc4bf88ace38a6f4b78ecd60a9c4fac1ceef2b2b0e4ab7a3d7328cb7eddb1479fe8e0dd69998962d8ebd364f09337252a447765be19b0fb4122ee69317f743a7fb3fc8efedfb9555504f6ab46869d5e430ee292cdaed2d2b32344029d1fd60787507c29658bdb3686d066f18549a0e2451c10e27d800e02b79c9e5e2d89f25356d7bbbc24916b92dd4f155703dcd5480d1c784d452e10ed0f16645785baf41"
+      },
+      "sourceHookId": "8c8afafd89d8"
+    }
+  },
+  "eac500a04b16": {
+    "generationId": "eac500a04b16",
+    "type": "video",
+    "label": "ddtik.com_@yuna j_no_watermark (2).mp4",
+    "status": "processing",
+    "progress": 66,
+    "currentStep": "motion_control",
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "No scene change detected -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"when i\u2019m studying and my bed won\u2019t stop calling me\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "running",
+        "message": "Generating video with Kling AI (this may take a few minutes)..."
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": null,
+    "createdAt": 1774745050.689402,
+    "completedAt": null,
+    "output": null,
+    "jobId": "62f9bb098f2b"
+  },
+  "23b7b0727e7a": {
+    "generationId": "23b7b0727e7a",
+    "type": "video",
+    "label": "ddtik.com_@yuna j_no_watermark (2).mp4",
+    "status": "failed",
+    "progress": 50,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "No scene change detected -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"when i\u2019m studying and my bed won\u2019t stop calling me\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "running",
+        "message": "Recreating scene with Gemini..."
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "Cancelled by user",
+    "createdAt": 1774745335.2009568,
+    "completedAt": 1774745348.251382,
+    "output": null,
+    "jobId": "457ef23c377b"
+  },
+  "6d9d4706ef95": {
+    "generationId": "6d9d4706ef95",
+    "type": "remix",
+    "label": "Remix of 5bdceb3237cd",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "download_hook",
+        "label": "Download Hook Video",
+        "status": "completed",
+        "message": "Hook video downloaded"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption applied"
+      },
+      {
+        "key": "audio_replacement",
+        "label": "Audio Replacement",
+        "status": "completed",
+        "message": "Audio replaced"
+      }
+    ],
+    "error": null,
+    "createdAt": 1774745646.0716748,
+    "completedAt": 1774745659.9722502,
+    "output": {
+      "videoUrl": "https://storage.googleapis.com/lumeet-bucket/videos/6d9d4706ef95/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260329%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260329T005419Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=a6ee38b857ddfd3dfb75f88650411875d07d5bb0b9600020b6d6d5ecd716db6ff9b721a7fb802b7fca74b1f710111a14f9d9d3a2719408692d250286599953846a2663dfa69aee05ffdaf3142e8e8f97ab80d24077ab0314241f0aac8dca1a57bd56a231ca70e1720ee8ffbe0b0014dea8cc86bbec5a4b4cf72e97a827c53cf5e9de6450c33a617952c3da1c264c16a7fa021bcde9c5fe57ca244dbf9e76ffabb6aff210468dd81bae40013358903e541b4464fa611fd4052b2cde674ec46473becc88f36470d7d83d9d0b6fe625000a4d1af89bd454d393e1096555540b819178af480e924aaa933a2f9554bfd466757bb3bbf491b985bc4618edd561ebc6fb",
+      "resultPath": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/jobs/6d9d4706ef95/output/remix_final.mp4",
+      "videoGcs": {
+        "bucket": "lumeet-bucket",
+        "object": "videos/6d9d4706ef95/final_output.mp4",
+        "url": "https://storage.googleapis.com/lumeet-bucket/videos/6d9d4706ef95/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260329%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260329T005419Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=a6ee38b857ddfd3dfb75f88650411875d07d5bb0b9600020b6d6d5ecd716db6ff9b721a7fb802b7fca74b1f710111a14f9d9d3a2719408692d250286599953846a2663dfa69aee05ffdaf3142e8e8f97ab80d24077ab0314241f0aac8dca1a57bd56a231ca70e1720ee8ffbe0b0014dea8cc86bbec5a4b4cf72e97a827c53cf5e9de6450c33a617952c3da1c264c16a7fa021bcde9c5fe57ca244dbf9e76ffabb6aff210468dd81bae40013358903e541b4464fa611fd4052b2cde674ec46473becc88f36470d7d83d9d0b6fe625000a4d1af89bd454d393e1096555540b819178af480e924aaa933a2f9554bfd466757bb3bbf491b985bc4618edd561ebc6fb"
+      },
+      "sourceHookId": "5bdceb3237cd"
+    }
+  },
+  "e7a6e5f62f7f": {
+    "generationId": "e7a6e5f62f7f",
+    "type": "video",
+    "label": "ddtik.com_@user83437156607_no_watermark.mp4",
+    "status": "failed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Trimmed at 4.20s"
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"POV you're in your last year of school and only just found this\ud83d\ude2d\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      },
+      {
+        "key": "audio_extraction",
+        "label": "Audio Extraction",
+        "status": "completed",
+        "message": "Audio extracted from original video"
+      },
+      {
+        "key": "video_concatenation",
+        "label": "Video Concatenation",
+        "status": "completed",
+        "message": "Videos concatenated"
+      },
+      {
+        "key": "audio_replacement",
+        "label": "Audio Replacement",
+        "status": "completed",
+        "message": "Audio replaced with original"
+      }
+    ],
+    "error": "name 'raw_video_path' is not defined",
+    "createdAt": 1774745844.588993,
+    "completedAt": 1774746222.719719,
+    "output": null,
+    "jobId": "2e1993747122"
+  },
+  "4a675d6b5384": {
+    "generationId": "4a675d6b5384",
+    "type": "video",
+    "label": "ddtik.com_@user83437156607_no_watermark (1).mp4",
+    "status": "failed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Trimmed at 4.30s"
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"bro\ud83d\ude2d of course I only find this in my LAST semester of uni... WTF\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      },
+      {
+        "key": "audio_extraction",
+        "label": "Audio Extraction",
+        "status": "completed",
+        "message": "Audio extracted from original video"
+      },
+      {
+        "key": "video_concatenation",
+        "label": "Video Concatenation",
+        "status": "completed",
+        "message": "Videos concatenated"
+      },
+      {
+        "key": "audio_replacement",
+        "label": "Audio Replacement",
+        "status": "completed",
+        "message": "Audio replaced with original"
+      }
+    ],
+    "error": "name 'raw_video_path' is not defined",
+    "createdAt": 1774745900.561132,
+    "completedAt": 1774746257.695349,
+    "output": null,
+    "jobId": "bdd809fe28b3"
+  },
+  "37be0405b47a": {
+    "generationId": "37be0405b47a",
+    "type": "video",
+    "label": "ddtik.com_@yuna j_no_watermark (3).mp4",
+    "status": "failed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "No scene change detected -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"when my maths teacher asks me why all my assignments are missing\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      }
+    ],
+    "error": "name 'raw_video_path' is not defined",
+    "createdAt": 1774745972.485732,
+    "completedAt": 1774746542.199563,
+    "output": null,
+    "jobId": "8048c265a1b6"
+  },
+  "de475a3ea9fe": {
+    "generationId": "de475a3ea9fe",
+    "type": "video",
+    "label": "ddtik.com_@vanessa_no_watermark.mp4",
+    "status": "failed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "No scene change detected -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "No caption detected."
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "No caption to overlay -- raw video is the final output."
+      }
+    ],
+    "error": "name 'raw_video_path' is not defined",
+    "createdAt": 1774746126.032011,
+    "completedAt": 1774746498.8229902,
+    "output": null,
+    "jobId": "bbc76693244b"
+  },
+  "a450bb78ca4e": {
+    "generationId": "a450bb78ca4e",
+    "type": "video",
+    "label": "ddtik.com_@vanessa_no_watermark (1).mp4",
+    "status": "failed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "No scene change detected -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "No caption detected."
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "No caption to overlay -- raw video is the final output."
+      }
+    ],
+    "error": "name 'raw_video_path' is not defined",
+    "createdAt": 1774746432.060661,
+    "completedAt": 1774746992.1926882,
+    "output": null,
+    "jobId": "b02adff88876"
+  },
+  "f4cae08acdcb": {
+    "generationId": "f4cae08acdcb",
+    "type": "video",
+    "label": "ddtik.com_@vanessa_no_watermark (2).mp4",
+    "status": "failed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "No scene change detected -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "No caption detected."
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "No caption to overlay -- raw video is the final output."
+      }
+    ],
+    "error": "name 'raw_video_path' is not defined",
+    "createdAt": 1774748212.760949,
+    "completedAt": 1774748702.569845,
+    "output": null,
+    "jobId": "a1e5636cf63e"
+  },
+  "29277a4b90a7": {
+    "generationId": "29277a4b90a7",
+    "type": "remix",
+    "label": "Remix of f8b867b23735",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "download_hook",
+        "label": "Download Hook Video",
+        "status": "completed",
+        "message": "Hook video downloaded"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption applied"
+      },
+      {
+        "key": "video_concatenation",
+        "label": "Video Concatenation",
+        "status": "completed",
+        "message": "Videos concatenated"
+      },
+      {
+        "key": "audio_replacement",
+        "label": "Audio Replacement",
+        "status": "completed",
+        "message": "Audio replaced"
+      }
+    ],
+    "error": null,
+    "createdAt": 1774748329.9805849,
+    "completedAt": 1774748340.016108,
+    "output": {
+      "videoUrl": "https://storage.googleapis.com/lumeet-bucket/videos/29277a4b90a7/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260329%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260329T013900Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b304c0b7694ca0a626202adb23cbd13b12d8822dda02b14cef631cb3e27b02a760973ffada9a99778063424b81f63cc7b257bac522fae2aa9ee945a33a9854bcb7c5b18017374934aae8b9ed1f4a3292082ae32c3fb1ea9464f64169861e972bcefc3dae4cc5a38e67a1ddd79b060bf7d032b2ac881a5ef2bbfc4cf47d7e2263faa24c99c21c3bc625bedaf35e9d82e0915af82dea8b528f3fcb049d5c6bb0ed4a3488aadd4c05c03d73e3aa88ba7fa6352b1c2b4aefd5c90e51e3b30c3da8a070f9f05afd063e2efa2a4ce3fb80bda06f5987685b3e9bee61abfa1ce327143f0c7f650ff9920758dddcefb73b7b37ef6b5e268cf620b53aa844293894a7d2e9",
+      "resultPath": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/jobs/29277a4b90a7/output/remix_final.mp4",
+      "videoGcs": {
+        "bucket": "lumeet-bucket",
+        "object": "videos/29277a4b90a7/final_output.mp4",
+        "url": "https://storage.googleapis.com/lumeet-bucket/videos/29277a4b90a7/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260329%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260329T013900Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b304c0b7694ca0a626202adb23cbd13b12d8822dda02b14cef631cb3e27b02a760973ffada9a99778063424b81f63cc7b257bac522fae2aa9ee945a33a9854bcb7c5b18017374934aae8b9ed1f4a3292082ae32c3fb1ea9464f64169861e972bcefc3dae4cc5a38e67a1ddd79b060bf7d032b2ac881a5ef2bbfc4cf47d7e2263faa24c99c21c3bc625bedaf35e9d82e0915af82dea8b528f3fcb049d5c6bb0ed4a3488aadd4c05c03d73e3aa88ba7fa6352b1c2b4aefd5c90e51e3b30c3da8a070f9f05afd063e2efa2a4ce3fb80bda06f5987685b3e9bee61abfa1ce327143f0c7f650ff9920758dddcefb73b7b37ef6b5e268cf620b53aa844293894a7d2e9"
+      },
+      "sourceHookId": "f8b867b23735"
+    }
   }
 }

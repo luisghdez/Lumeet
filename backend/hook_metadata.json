@@ -218,5 +218,15 @@
     "originalSoundId": null,
     "label": "",
     "createdAt": "2026-03-29T00:15:05.646247+00:00"
+  },
+  "5bdceb3237cd": {
+    "hookId": "5bdceb3237cd",
+    "sourceJobId": "5bdceb3237cd",
+    "url": "https://storage.googleapis.com/lumeet-bucket/hooks/5bdceb3237cd/raw.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260329%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260329T003632Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=64f113fd64a62cc42cb10c6db8ed10f5e7ae1b45b4dee50dc47a20392deed862126dc26b19059d051f26a5e4a208ab042b79573527f541aa45baa1388d12325f44462c6db41acf7e6095d90764730b82f30983d901c5621fefba4b01e0fc86ce258c8158bb82ce1051dbaef891b616eb5df07be582104d68d66b3ea52d98bae3839bc0d11db1c64bf7844fdfa4c0b10ed0c78985f8336f1ba8c8ef6568c439327e54da1ed98aac2021d3e78471647236ec500a333d8f14b5e2cafdc5df9567fdb58f933104dcc3c6dadac82b2d8d42fd0626fb80cbe280ba11c9748c0d839d98b8a8d6a56ef3659b20f19a61b095aafd7e66e2f925770d49aee3009d121ab093",
+    "bucket": "lumeet-bucket",
+    "object": "hooks/5bdceb3237cd/raw.mp4",
+    "originalSoundId": "snd_5bdceb3237cd",
+    "label": "",
+    "createdAt": "2026-03-29T00:36:24.960456+00:00"
   }
 }

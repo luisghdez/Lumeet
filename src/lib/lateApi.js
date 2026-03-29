@@ -84,8 +84,12 @@ export async function listCarousels() {
   return request('/api/carousels');
 }
 
-export async function listVideos() {
-  return request('/api/videos');
+export async function listVideos({ limit = 0, offset = 0 } = {}) {
+  const params = new URLSearchParams();
+  if (limit) params.set('limit', String(limit));
+  if (offset) params.set('offset', String(offset));
+  const qs = params.toString();
+  return request(`/api/videos${qs ? `?${qs}` : ''}`);
 }
 
 export async function getVideo(videoId) {

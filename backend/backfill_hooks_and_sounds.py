@@ -94,6 +94,33 @@ def backfill() -> None:
     # ---- Pass 2: upload sounds ----
     for job_id in job_dirs:
         audio_path = os.path.join(JOBS_DIR, job_id, "output", "extracted_audio.aac")
+
+        # If no extracted audio exists, try to extract from the reference video
+        if not os.path.isfile(audio_path):
+            # Look for a reference video in the input dir
+            input_dir = os.path.join(JOBS_DIR, job_id, "input")
+            ref_video = None
+            for fname in ("reference_video.mp4", "reference_video.mov", "reference_video.avi"):
+                candidate = os.path.join(input_dir, fname)
+                if os.path.isfile(candidate):
+                    ref_video = candidate
+                    break
+            # Also check the trimmed video from the output
+            if not ref_video:
+                trimmed = os.path.join(JOBS_DIR, job_id, "output", "trimmed.mp4")
+                if os.path.isfile(trimmed):
+                    ref_video = trimmed
+
+            if ref_video:
+                print(f"  Extracting audio from {os.path.basename(ref_video)} for {job_id} ...")
+                try:
+                    from audio_extractor import extract_audio
+                    audio_path = os.path.join(JOBS_DIR, job_id, "output", "extracted_audio.aac")
+                    extract_audio(ref_video, output_path=audio_path)
+                except Exception as exc:
+                    print(f"  [warn] Audio extraction failed for {job_id}: {exc}")
+                    continue
+
         if not os.path.isfile(audio_path):
             continue
 

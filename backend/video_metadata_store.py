@@ -48,11 +48,26 @@ class VideoMetadataStore:
             item = all_items.get(video_id)
             return item if isinstance(item, dict) else None
 
-    def list_all(self) -> list[Dict[str, Any]]:
+    def list_all(self, *, limit: int = 0, offset: int = 0) -> tuple[list[Dict[str, Any]], int]:
+        """Return videos sorted newest-first.
+
+        Args:
+            limit: max items to return (0 = all).
+            offset: number of items to skip.
+
+        Returns:
+            (items, total_count)
+        """
         with self._lock:
             all_items = self._read_all_unlocked()
             values = [v for v in all_items.values() if isinstance(v, dict)]
-            return sorted(values, key=lambda x: x.get("createdAt", ""), reverse=True)
+            values.sort(key=lambda x: x.get("createdAt", ""), reverse=True)
+            total = len(values)
+            if offset:
+                values = values[offset:]
+            if limit:
+                values = values[:limit]
+            return values, total
 
 
 video_metadata_store = VideoMetadataStore(VIDEO_METADATA_FILE)

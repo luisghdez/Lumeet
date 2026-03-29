@@ -128,8 +128,13 @@ def _upload_video_to_gcs(job_id: str, local_video_path: str) -> Optional[dict]:
         return None
 
 
-def _save_hook_and_sound_to_gcs(job_id: str, result: dict, extended: bool) -> None:
-    """Upload the raw hook video and extracted audio to GCS for the hook/sound libraries."""
+def _save_hook_and_sound_to_gcs(job_id: str, result: dict, extended: bool, video_path: str = "") -> None:
+    """Upload the raw hook video and extracted audio to GCS for the hook/sound libraries.
+
+    For extended runs the audio comes from ``result["extracted_audio"]``.
+    For non-extended runs we extract the audio from the reference *video_path*
+    ourselves so that every generation gets a sound saved.
+    """
     from datetime import datetime, timezone as _tz
 
     try:
@@ -142,9 +147,22 @@ def _save_hook_and_sound_to_gcs(job_id: str, result: dict, extended: bool) -> No
     now_iso = datetime.now(_tz.utc).isoformat()
     sound_id: Optional[str] = None
 
-    # Upload extracted audio as a sound (if it exists — extended pipeline only)
-    raw_video_path = result.get("raw_video", "")
+    # Determine the audio file to upload.
+    # Extended pipeline already has it; for normal runs, extract from the reference video.
     extracted_audio_path = result.get("extracted_audio", "")
+    if not extracted_audio_path or not os.path.isfile(extracted_audio_path):
+        # Extract audio from the reference video on the fly
+        if video_path and os.path.isfile(video_path):
+            try:
+                from audio_extractor import extract_audio
+                output_dir = os.path.dirname(result.get("raw_video", "")) or os.path.dirname(video_path)
+                extracted_audio_path = os.path.join(output_dir, "extracted_audio.aac")
+                extract_audio(video_path, output_path=extracted_audio_path)
+                logger.info("Extracted audio from reference video for sound library")
+            except Exception as exc:
+                logger.warning("Audio extraction from reference video failed (non-fatal): %s", exc)
+                extracted_audio_path = ""
+
     if extracted_audio_path and os.path.isfile(extracted_audio_path):
         sound_id = f"snd_{job_id}"
         snd_object = f"{GCS_SOUNDS_OBJECT_PREFIX.strip('/')}/{sound_id}/audio.aac"
@@ -259,8 +277,8 @@ def _run_pipeline_thread(
                 "createdAt": datetime.now(_tz.utc).isoformat(),
             })
 
-        # Auto-save hook (generated_raw.mp4) to GCS for the hook library.
-        _save_hook_and_sound_to_gcs(job_id, result, extended)
+        # Auto-save hook (generated_raw.mp4) and sound to GCS for the libraries.
+        _save_hook_and_sound_to_gcs(job_id, result, extended, video_path=video_path)
 
         # Update generation store with completed output
         if generation_id:
@@ -603,11 +621,14 @@ def _refresh_video_url(item: dict) -> dict:
 
 
 @app.get("/api/videos")
-async def list_videos():
+async def list_videos(
+    limit: int = Query(0, ge=0, description="Max videos to return (0 = all)"),
+    offset: int = Query(0, ge=0, description="Number of videos to skip"),
+):
     """List previously generated videos that were uploaded to GCS."""
-    items = video_metadata_store.list_all()
+    items, total = video_metadata_store.list_all(limit=limit, offset=offset)
     refreshed = [_refresh_video_url(item) for item in items]
-    return {"videos": refreshed}
+    return {"videos": refreshed, "total": total}
 
 
 @app.get("/api/videos/{video_id}")
