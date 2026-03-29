@@ -81,6 +81,10 @@ LATE_ALLOW_MISSING_API_KEY = _get_bool_env("LATE_ALLOW_MISSING_API_KEY", False)
 GCS_BUCKET_NAME = _get_env("GCS_BUCKET_NAME", "")
 GCS_OBJECT_PREFIX = _get_env("GCS_OBJECT_PREFIX", "carousels")
 GCS_VIDEO_OBJECT_PREFIX = _get_env("GCS_VIDEO_OBJECT_PREFIX", "videos")
+GCS_HOOKS_OBJECT_PREFIX = _get_env("GCS_HOOKS_OBJECT_PREFIX", "hooks")
+GCS_SOUNDS_OBJECT_PREFIX = _get_env("GCS_SOUNDS_OBJECT_PREFIX", "sounds")
+GCS_MODELS_OBJECT_PREFIX = _get_env("GCS_MODELS_OBJECT_PREFIX", "models")
+GCS_EXTENSION_VIDEOS_OBJECT_PREFIX = _get_env("GCS_EXTENSION_VIDEOS_OBJECT_PREFIX", "extension_videos")
 GCS_SIGNED_URL_TTL_SEC = _get_int_env("GCS_SIGNED_URL_TTL_SEC", 60 * 60 * 24 * 7)
 CAROUSEL_SUGGESTION_MINUTES_STEP = _get_int_env("CAROUSEL_SUGGESTION_MINUTES_STEP", 30)
 CAROUSEL_METADATA_FILE = _get_env(
@@ -94,6 +98,22 @@ VIDEO_METADATA_FILE = _get_env(
 GENERATION_METADATA_FILE = _get_env(
     "GENERATION_METADATA_FILE",
     os.path.join(os.path.dirname(__file__), "generation_metadata.json"),
+)
+HOOK_METADATA_FILE = _get_env(
+    "HOOK_METADATA_FILE",
+    os.path.join(os.path.dirname(__file__), "hook_metadata.json"),
+)
+SOUND_METADATA_FILE = _get_env(
+    "SOUND_METADATA_FILE",
+    os.path.join(os.path.dirname(__file__), "sound_metadata.json"),
+)
+MODEL_METADATA_FILE = _get_env(
+    "MODEL_METADATA_FILE",
+    os.path.join(os.path.dirname(__file__), "model_metadata.json"),
+)
+EXTENSION_VIDEO_METADATA_FILE = _get_env(
+    "EXTENSION_VIDEO_METADATA_FILE",
+    os.path.join(os.path.dirname(__file__), "extension_video_metadata.json"),
 )
 
 # If credentials are provided via backend/.env or repo .env, expose them

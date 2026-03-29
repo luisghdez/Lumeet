@@ -143,4 +143,109 @@ export async function cancelGeneration(generationId) {
   });
 }
 
+// ---------------------------------------------------------------------------
+// Hook Library API
+// ---------------------------------------------------------------------------
+
+export async function listHooks() {
+  return request('/api/hooks');
+}
+
+export async function getHook(hookId) {
+  return request(`/api/hooks/${encodeURIComponent(hookId)}`);
+}
+
+export async function updateHookLabel(hookId, label) {
+  return request(`/api/hooks/${encodeURIComponent(hookId)}/label`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ label }),
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Sound Library API
+// ---------------------------------------------------------------------------
+
+export async function listSounds() {
+  return request('/api/sounds');
+}
+
+export async function getSound(soundId) {
+  return request(`/api/sounds/${encodeURIComponent(soundId)}`);
+}
+
+export async function updateSoundLabel(soundId, label) {
+  return request(`/api/sounds/${encodeURIComponent(soundId)}/label`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ label }),
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Remix API
+// ---------------------------------------------------------------------------
+
+export async function startRemix(formData) {
+  const resp = await fetch('/api/remix', { method: 'POST', body: formData });
+  const data = await resp.json().catch(() => ({}));
+  if (!resp.ok) throw new Error(data.detail || `Remix failed (${resp.status})`);
+  return data;
+}
+
+// ---------------------------------------------------------------------------
+// Model Library API
+// ---------------------------------------------------------------------------
+
+export async function listModels() {
+  return request('/api/models');
+}
+
+export async function uploadModel(formData) {
+  const resp = await fetch('/api/models', { method: 'POST', body: formData });
+  const data = await resp.json().catch(() => ({}));
+  if (!resp.ok) throw new Error(data.detail || `Model upload failed (${resp.status})`);
+  return data;
+}
+
+export async function updateModelLabel(modelId, label) {
+  return request(`/api/models/${encodeURIComponent(modelId)}/label`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ label }),
+  });
+}
+
+export async function deleteModel(modelId) {
+  return request(`/api/models/${encodeURIComponent(modelId)}`, { method: 'DELETE' });
+}
+
+// ---------------------------------------------------------------------------
+// Extension Video Library API
+// ---------------------------------------------------------------------------
+
+export async function listExtensionVideos() {
+  return request('/api/extension-videos');
+}
+
+export async function uploadExtensionVideo(formData) {
+  const resp = await fetch('/api/extension-videos', { method: 'POST', body: formData });
+  const data = await resp.json().catch(() => ({}));
+  if (!resp.ok) throw new Error(data.detail || `Extension video upload failed (${resp.status})`);
+  return data;
+}
+
+export async function updateExtensionVideoLabel(extId, label) {
+  return request(`/api/extension-videos/${encodeURIComponent(extId)}/label`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ label }),
+  });
+}
+
+export async function deleteExtensionVideo(extId) {
+  return request(`/api/extension-videos/${encodeURIComponent(extId)}`, { method: 'DELETE' });
+}
+
 export { DEFAULT_SESSION_ID };

@@ -1,0 +1,20 @@
+{
+  "a7997f2ee8a4": {
+    "modelId": "a7997f2ee8a4",
+    "url": "https://storage.googleapis.com/lumeet-bucket/models/a7997f2ee8a4/model.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260329%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260329T000722Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=582bd4b7022a46bee8e2502e7479a5635afb872c5ad847977196c40a4f846715d3e968f6bb277836a0c9c8d51687f6e152df1d868d6279eeb9517a8a6b7744f38a8534b2099b06ae75d0d69418d7095329d83b1f67b59ee84bf61b0a9230fce23e0c82ce2023b5c2e0cdb87fb37c3effbdf5a8ae15d0c44f4e4a4986ede6df59c632159d65baefa006a5cdb6d83e58001e886eb77f107f84d9ec11bbe54c971349b2685280c093844cc8eff9867c6bd6c9f909a8923f13453021a18023c66f29827310fb7d603cd324b98d316dcac699bcb105f958d8447c43fdd18913ac29574670a90db1b151647311cd312e9ae1e48916468e62f0cbff7be2d984de058483",
+    "bucket": "lumeet-bucket",
+    "object": "models/a7997f2ee8a4/model.png",
+    "label": "lumiModel2",
+    "filename": "lumiModel2.png",
+    "createdAt": "2026-03-29T00:07:22.150672+00:00"
+  },
+  "10bca8a5a53f": {
+    "modelId": "10bca8a5a53f",
+    "url": "https://storage.googleapis.com/lumeet-bucket/models/10bca8a5a53f/model.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260329%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260329T000735Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b885444083eee30975d103b09c7efe735c42e8e606015527ad63b2a94ac4453e5a26c9355d70373e01fd2ad15986ea00b0779dd23fb8837c049547510cd4f7e79df280e94b4ce8f50b07998b75de6703412609080e445d83ca891a54c4854d50ef4cbb39799649dda1789ad1334dbaeae28b41326d06adc3f89850d27714640bb7d3a6bf2904c3630d273971ea04978c9175d739150cb0cc224f0162ee0a035b1d3b0fb8a3a5031af541614c808d6f6b84179719aed91d07724f2f358fcc1914d32b72879803ee4590eff35ee8bfb1eb236f1f9b1abea89c09fb031ab8dd4c938463deae2c8e90542df65156b93c12a51cfe53c612e672053097d9e0ae367918",
+    "bucket": "lumeet-bucket",
+    "object": "models/10bca8a5a53f/model.png",
+    "label": "modelLumi",
+    "filename": "modelLumi.png",
+    "createdAt": "2026-03-29T00:07:35.351807+00:00"
+  }
+}

@@ -35,7 +35,17 @@ from late_service import late_service, LateServiceError
 from carousel_service import carousel_service, CarouselServiceError
 from video_metadata_store import video_metadata_store
 from generation_store import generation_store, GenerationStatus
-from config import GCS_VIDEO_OBJECT_PREFIX
+from hook_metadata_store import hook_metadata_store
+from sound_metadata_store import sound_metadata_store
+from model_metadata_store import model_metadata_store
+from extension_video_metadata_store import extension_video_metadata_store
+from config import (
+    GCS_VIDEO_OBJECT_PREFIX,
+    GCS_HOOKS_OBJECT_PREFIX,
+    GCS_SOUNDS_OBJECT_PREFIX,
+    GCS_MODELS_OBJECT_PREFIX,
+    GCS_EXTENSION_VIDEOS_OBJECT_PREFIX,
+)
 
 # ---------------------------------------------------------------------------
 # App
@@ -118,6 +128,79 @@ def _upload_video_to_gcs(job_id: str, local_video_path: str) -> Optional[dict]:
         return None
 
 
+def _save_hook_and_sound_to_gcs(job_id: str, result: dict, extended: bool) -> None:
+    """Upload the raw hook video and extracted audio to GCS for the hook/sound libraries."""
+    from datetime import datetime, timezone as _tz
+
+    try:
+        from storage_gcs import GcsStorage
+        gcs = GcsStorage()
+    except Exception as exc:
+        logger.warning("GCS not available for hook/sound save (non-fatal): %s", exc)
+        return
+
+    now_iso = datetime.now(_tz.utc).isoformat()
+    sound_id: Optional[str] = None
+
+    # Upload extracted audio as a sound (if it exists — extended pipeline only)
+    raw_video_path = result.get("raw_video", "")
+    extracted_audio_path = result.get("extracted_audio", "")
+    if extracted_audio_path and os.path.isfile(extracted_audio_path):
+        sound_id = f"snd_{job_id}"
+        snd_object = f"{GCS_SOUNDS_OBJECT_PREFIX.strip('/')}/{sound_id}/audio.aac"
+        try:
+            snd_gcs = gcs.upload_file_public(extracted_audio_path, snd_object)
+            # Get duration
+            import subprocess
+            dur_cmd = [
+                "ffprobe", "-v", "error",
+                "-show_entries", "format=duration",
+                "-of", "default=noprint_wrappers=1:nokey=1",
+                extracted_audio_path,
+            ]
+            dur_result = subprocess.run(dur_cmd, capture_output=True, text=True)
+            duration = 0.0
+            try:
+                duration = float(dur_result.stdout.strip())
+            except (ValueError, TypeError):
+                pass
+
+            sound_metadata_store.save(sound_id, {
+                "soundId": sound_id,
+                "sourceJobId": job_id,
+                "sourceHookId": job_id,
+                "url": snd_gcs.get("url", ""),
+                "bucket": snd_gcs.get("bucket", ""),
+                "object": snd_gcs.get("object", ""),
+                "label": "",
+                "durationSec": round(duration, 2),
+                "createdAt": now_iso,
+            })
+            logger.info("Saved sound %s to GCS", sound_id)
+        except Exception as exc:
+            logger.warning("Sound GCS upload failed (non-fatal): %s", exc)
+            sound_id = None
+
+    # Upload generated_raw.mp4 as a hook
+    if raw_video_path and os.path.isfile(raw_video_path):
+        hook_object = f"{GCS_HOOKS_OBJECT_PREFIX.strip('/')}/{job_id}/raw.mp4"
+        try:
+            hook_gcs = gcs.upload_file_public(raw_video_path, hook_object)
+            hook_metadata_store.save(job_id, {
+                "hookId": job_id,
+                "sourceJobId": job_id,
+                "url": hook_gcs.get("url", ""),
+                "bucket": hook_gcs.get("bucket", ""),
+                "object": hook_gcs.get("object", ""),
+                "originalSoundId": sound_id,
+                "label": "",
+                "createdAt": now_iso,
+            })
+            logger.info("Saved hook %s to GCS", job_id)
+        except Exception as exc:
+            logger.warning("Hook GCS upload failed (non-fatal): %s", exc)
+
+
 def _run_pipeline_thread(
     job_id: str,
     video_path: str,
@@ -175,6 +258,9 @@ def _run_pipeline_thread(
                 "extended": extended,
                 "createdAt": datetime.now(_tz.utc).isoformat(),
             })
+
+        # Auto-save hook (generated_raw.mp4) to GCS for the hook library.
+        _save_hook_and_sound_to_gcs(job_id, result, extended)
 
         # Update generation store with completed output
         if generation_id:
@@ -542,20 +628,31 @@ from job_manager import PIPELINE_STEPS as _PIPELINE_STEPS, EXTENDED_PIPELINE_STE
 
 @app.post("/api/generations/video")
 async def generation_create_video(
-    image: UploadFile = File(..., description="Model / identity reference image"),
+    image: Optional[UploadFile] = File(None, description="Model / identity reference image"),
     video: UploadFile = File(..., description="Reference video"),
     extended: bool = Form(False),
     additional_video: Optional[UploadFile] = File(None),
+    modelId: Optional[str] = Form(None, description="Saved model ID (alternative to image upload)"),
+    extensionVideoId: Optional[str] = Form(None, description="Saved extension video ID (alternative to additional_video upload)"),
 ):
     """Start a video generation job tracked in the Generation Center."""
-    # Validation (same as /api/generate)
-    if not image.content_type or not image.content_type.startswith("image/"):
-        raise HTTPException(status_code=400, detail="image must be an image file")
+    import requests as _requests
+
+    # Resolve model image: either from saved model or uploaded file
+    has_image_upload = image is not None and image.filename
+    if not has_image_upload and not modelId:
+        raise HTTPException(status_code=400, detail="Either image file or modelId is required")
+    if has_image_upload:
+        if not image.content_type or not image.content_type.startswith("image/"):
+            raise HTTPException(status_code=400, detail="image must be an image file")
+
     if not video.content_type or not video.content_type.startswith("video/"):
         raise HTTPException(status_code=400, detail="video must be a video file")
-    if extended:
-        if additional_video is None or not additional_video.filename:
-            raise HTTPException(status_code=400, detail="additional_video is required when extended=True")
+
+    # Resolve extension video source
+    has_ext_upload = additional_video is not None and additional_video.filename
+    if extended and not has_ext_upload and not extensionVideoId:
+        raise HTTPException(status_code=400, detail="additional_video or extensionVideoId is required when extended=True")
 
     # Build step list for generation store
     step_defs = list(_PIPELINE_STEPS)
@@ -578,18 +675,72 @@ async def generation_create_video(
     os.makedirs(input_dir, exist_ok=True)
     os.makedirs(output_dir, exist_ok=True)
 
-    image_ext = os.path.splitext(image.filename or "image.png")[1] or ".png"
+    # Save model image
+    if has_image_upload:
+        image_ext = os.path.splitext(image.filename or "image.png")[1] or ".png"
+        image_path = os.path.join(input_dir, f"model_image{image_ext}")
+        _save_upload(image, image_path)
+    else:
+        # Download from saved model
+        model_record = model_metadata_store.get(modelId)
+        if not model_record:
+            raise HTTPException(status_code=404, detail=f"Model {modelId} not found.")
+        model_url = model_record.get("url", "")
+        if not model_url:
+            raise HTTPException(status_code=500, detail=f"Model {modelId} has no URL.")
+        # Refresh signed URL
+        bucket = model_record.get("bucket")
+        obj = model_record.get("object")
+        if bucket and obj:
+            try:
+                from storage_gcs import GcsStorage
+                gcs = GcsStorage()
+                if bucket == gcs.bucket_name:
+                    model_url = gcs.generate_read_url(obj)
+            except Exception:
+                pass
+        image_ext = os.path.splitext(obj or ".png")[1] or ".png"
+        image_path = os.path.join(input_dir, f"model_image{image_ext}")
+        resp = _requests.get(model_url, timeout=60)
+        resp.raise_for_status()
+        with open(image_path, "wb") as f:
+            f.write(resp.content)
+
     video_ext = os.path.splitext(video.filename or "video.mp4")[1] or ".mp4"
-    image_path = os.path.join(input_dir, f"model_image{image_ext}")
     video_path = os.path.join(input_dir, f"reference_video{video_ext}")
-    _save_upload(image, image_path)
     _save_upload(video, video_path)
 
+    # Save extension video
     additional_video_path: Optional[str] = None
-    if extended and additional_video is not None:
-        add_ext = os.path.splitext(additional_video.filename or "additional.mp4")[1] or ".mp4"
-        additional_video_path = os.path.join(input_dir, f"additional_video{add_ext}")
-        _save_upload(additional_video, additional_video_path)
+    if extended:
+        if has_ext_upload:
+            add_ext = os.path.splitext(additional_video.filename or "additional.mp4")[1] or ".mp4"
+            additional_video_path = os.path.join(input_dir, f"additional_video{add_ext}")
+            _save_upload(additional_video, additional_video_path)
+        elif extensionVideoId:
+            ext_record = extension_video_metadata_store.get(extensionVideoId)
+            if not ext_record:
+                raise HTTPException(status_code=404, detail=f"Extension video {extensionVideoId} not found.")
+            ext_url = ext_record.get("url", "")
+            if not ext_url:
+                raise HTTPException(status_code=500, detail=f"Extension video {extensionVideoId} has no URL.")
+            # Refresh signed URL
+            bucket = ext_record.get("bucket")
+            obj = ext_record.get("object")
+            if bucket and obj:
+                try:
+                    from storage_gcs import GcsStorage
+                    gcs = GcsStorage()
+                    if bucket == gcs.bucket_name:
+                        ext_url = gcs.generate_read_url(obj)
+                except Exception:
+                    pass
+            add_ext = os.path.splitext(obj or ".mp4")[1] or ".mp4"
+            additional_video_path = os.path.join(input_dir, f"additional_video{add_ext}")
+            resp = _requests.get(ext_url, timeout=120)
+            resp.raise_for_status()
+            with open(additional_video_path, "wb") as f:
+                f.write(resp.content)
 
     job.video_path = video_path
     job.image_path = image_path
@@ -678,3 +829,422 @@ async def cancel_generation(generation_id: str):
         )
     generation_store.mark_failed(generation_id, "Cancelled by user")
     return {"generationId": generation_id, "status": "failed", "message": "Generation cancelled."}
+
+
+# ---------------------------------------------------------------------------
+# Hook Library Endpoints
+# ---------------------------------------------------------------------------
+
+def _refresh_hook_url(item: dict) -> dict:
+    """Regenerate the signed URL for a stored hook if needed."""
+    refreshed = dict(item)
+    bucket = item.get("bucket")
+    object_name = item.get("object")
+    if bucket and object_name:
+        try:
+            from storage_gcs import GcsStorage
+            gcs = GcsStorage()
+            if bucket == gcs.bucket_name:
+                refreshed["url"] = gcs.generate_read_url(object_name)
+        except Exception:
+            pass
+    return refreshed
+
+
+@app.get("/api/hooks")
+async def list_hooks():
+    """List saved hook videos for the remix studio."""
+    items = hook_metadata_store.list_all()
+    refreshed = [_refresh_hook_url(item) for item in items]
+    return {"hooks": refreshed}
+
+
+@app.get("/api/hooks/{hook_id}")
+async def get_hook(hook_id: str):
+    """Get metadata for a single hook video."""
+    item = hook_metadata_store.get(hook_id)
+    if not item:
+        raise HTTPException(status_code=404, detail=f"Hook {hook_id} not found.")
+    return _refresh_hook_url(item)
+
+
+class HookLabelRequest(BaseModel):
+    label: str = Field(max_length=200)
+
+
+@app.post("/api/hooks/{hook_id}/label")
+async def update_hook_label(hook_id: str, payload: HookLabelRequest):
+    """Update a hook's user-assignable label."""
+    item = hook_metadata_store.get(hook_id)
+    if not item:
+        raise HTTPException(status_code=404, detail=f"Hook {hook_id} not found.")
+    updated = hook_metadata_store.update(hook_id, label=payload.label)
+    return updated
+
+
+# ---------------------------------------------------------------------------
+# Sound Library Endpoints
+# ---------------------------------------------------------------------------
+
+def _refresh_sound_url(item: dict) -> dict:
+    """Regenerate the signed URL for a stored sound if needed."""
+    refreshed = dict(item)
+    bucket = item.get("bucket")
+    object_name = item.get("object")
+    if bucket and object_name:
+        try:
+            from storage_gcs import GcsStorage
+            gcs = GcsStorage()
+            if bucket == gcs.bucket_name:
+                refreshed["url"] = gcs.generate_read_url(object_name)
+        except Exception:
+            pass
+    return refreshed
+
+
+@app.get("/api/sounds")
+async def list_sounds():
+    """List saved sounds for the remix studio."""
+    items = sound_metadata_store.list_all()
+    refreshed = [_refresh_sound_url(item) for item in items]
+    return {"sounds": refreshed}
+
+
+@app.get("/api/sounds/{sound_id}")
+async def get_sound(sound_id: str):
+    """Get metadata for a single sound."""
+    item = sound_metadata_store.get(sound_id)
+    if not item:
+        raise HTTPException(status_code=404, detail=f"Sound {sound_id} not found.")
+    return _refresh_sound_url(item)
+
+
+class SoundLabelRequest(BaseModel):
+    label: str = Field(max_length=200)
+
+
+@app.post("/api/sounds/{sound_id}/label")
+async def update_sound_label(sound_id: str, payload: SoundLabelRequest):
+    """Update a sound's user-assignable label."""
+    item = sound_metadata_store.get(sound_id)
+    if not item:
+        raise HTTPException(status_code=404, detail=f"Sound {sound_id} not found.")
+    updated = sound_metadata_store.update(sound_id, label=payload.label)
+    return updated
+
+
+# ---------------------------------------------------------------------------
+# Remix Endpoints
+# ---------------------------------------------------------------------------
+
+REMIX_STEPS = [
+    {"key": "download_hook", "label": "Download Hook Video"},
+    {"key": "caption_overlay", "label": "Caption Overlay"},
+    {"key": "video_concatenation", "label": "Video Concatenation"},
+    {"key": "audio_replacement", "label": "Audio Replacement"},
+]
+
+
+def _run_remix_thread(
+    generation_id: str,
+    hook_id: str,
+    output_dir: str,
+    caption: Optional[str],
+    sound_id: Optional[str],
+    extension_video_path: Optional[str],
+) -> None:
+    """Background thread for the remix pipeline."""
+    from remix_service import run_remix, RemixError
+
+    generation_store.mark_processing(generation_id, current_step="download_hook")
+
+    def cb(step_key: str, event: str, message: str = ""):
+        step_status = {"start": "running", "complete": "completed", "fail": "failed"}.get(event, event)
+        generation_store.update_step(generation_id, step_key, step_status, message)
+
+    try:
+        result = run_remix(
+            hook_id=hook_id,
+            output_dir=output_dir,
+            caption=caption,
+            sound_id=sound_id,
+            extension_video_path=extension_video_path,
+            on_step=cb,
+        )
+
+        # Upload final remix to GCS
+        final_video = result.get("final_video", "")
+        gcs_info = None
+        if final_video and os.path.isfile(final_video):
+            gcs_info = _upload_video_to_gcs(generation_id, final_video)
+
+        video_url = (gcs_info or {}).get("url", "")
+
+        # Also save to video metadata store so it appears in the video library
+        if gcs_info:
+            from datetime import datetime, timezone as _tz
+            video_metadata_store.save(generation_id, {
+                "videoId": generation_id,
+                "url": video_url,
+                "bucket": gcs_info.get("bucket", ""),
+                "object": gcs_info.get("object", ""),
+                "extended": bool(extension_video_path),
+                "remix": True,
+                "sourceHookId": hook_id,
+                "createdAt": datetime.now(_tz.utc).isoformat(),
+            })
+
+        generation_store.mark_completed(generation_id, {
+            "videoUrl": video_url,
+            "resultPath": final_video,
+            "videoGcs": gcs_info,
+            "sourceHookId": hook_id,
+        })
+    except RemixError as exc:
+        generation_store.mark_failed(generation_id, exc.message)
+    except Exception as exc:
+        generation_store.mark_failed(generation_id, str(exc))
+
+
+@app.post("/api/remix")
+async def create_remix(
+    hookId: str = Form(..., description="ID of the hook video to remix"),
+    caption: Optional[str] = Form(None, description="Caption text to overlay"),
+    soundId: Optional[str] = Form(None, description="Sound ID to use (or __none__ to skip)"),
+    extension_video: Optional[UploadFile] = File(None, description="Extension video to append"),
+):
+    """Start a remix job from a saved hook video."""
+    # Validate hook exists
+    hook = hook_metadata_store.get(hookId)
+    if not hook:
+        raise HTTPException(status_code=404, detail=f"Hook {hookId} not found.")
+
+    # Validate sound exists if specified
+    if soundId and soundId != "__none__":
+        sound = sound_metadata_store.get(soundId)
+        if not sound:
+            raise HTTPException(status_code=404, detail=f"Sound {soundId} not found.")
+
+    # Build step list based on what's requested
+    steps = [{"key": "download_hook", "label": "Download Hook Video", "status": "pending", "message": ""}]
+    if caption and caption.strip():
+        steps.append({"key": "caption_overlay", "label": "Caption Overlay", "status": "pending", "message": ""})
+    if extension_video and extension_video.filename:
+        steps.append({"key": "video_concatenation", "label": "Video Concatenation", "status": "pending", "message": ""})
+    resolved_sound = soundId or hook.get("originalSoundId")
+    if resolved_sound and soundId != "__none__":
+        steps.append({"key": "audio_replacement", "label": "Audio Replacement", "status": "pending", "message": ""})
+
+    gen = generation_store.create(
+        gen_type="remix",
+        label=f"Remix of {hookId}",
+        steps=steps,
+    )
+    gen_id = gen["generationId"]
+
+    # Save extension video to disk if provided
+    remix_dir = os.path.join(JOBS_DIR, gen_id)
+    input_dir = os.path.join(remix_dir, "input")
+    output_dir = os.path.join(remix_dir, "output")
+    os.makedirs(input_dir, exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
+
+    ext_video_path: Optional[str] = None
+    if extension_video and extension_video.filename:
+        ext_ext = os.path.splitext(extension_video.filename or "ext.mp4")[1] or ".mp4"
+        ext_video_path = os.path.join(input_dir, f"extension_video{ext_ext}")
+        _save_upload(extension_video, ext_video_path)
+
+    thread = threading.Thread(
+        target=_run_remix_thread,
+        args=(gen_id, hookId, output_dir, caption, soundId, ext_video_path),
+        daemon=True,
+    )
+    thread.start()
+
+    return {"generationId": gen_id}
+
+
+# ---------------------------------------------------------------------------
+# Model Library Endpoints
+# ---------------------------------------------------------------------------
+
+def _refresh_model_url(item: dict) -> dict:
+    """Regenerate the signed URL for a stored model image if needed."""
+    refreshed = dict(item)
+    bucket = item.get("bucket")
+    object_name = item.get("object")
+    if bucket and object_name:
+        try:
+            from storage_gcs import GcsStorage
+            gcs = GcsStorage()
+            if bucket == gcs.bucket_name:
+                refreshed["url"] = gcs.generate_read_url(object_name)
+        except Exception:
+            pass
+    return refreshed
+
+
+@app.get("/api/models")
+async def list_models():
+    """List saved model / identity images."""
+    items = model_metadata_store.list_all()
+    refreshed = [_refresh_model_url(item) for item in items]
+    return {"models": refreshed}
+
+
+@app.post("/api/models")
+async def upload_model(
+    image: UploadFile = File(..., description="Model / identity image to save"),
+    label: str = Form("", description="Optional label for the model"),
+):
+    """Upload and save a model image for reuse."""
+    if not image.content_type or not image.content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="File must be an image.")
+
+    import uuid
+    from datetime import datetime, timezone as _tz
+
+    model_id = uuid.uuid4().hex[:12]
+    ext = os.path.splitext(image.filename or "model.png")[1] or ".png"
+
+    # Save to a temp location, upload to GCS
+    tmp_dir = os.path.join(JOBS_DIR, f"_model_{model_id}")
+    os.makedirs(tmp_dir, exist_ok=True)
+    local_path = os.path.join(tmp_dir, f"model{ext}")
+    _save_upload(image, local_path)
+
+    try:
+        from storage_gcs import GcsStorage
+        gcs = GcsStorage()
+        object_name = f"{GCS_MODELS_OBJECT_PREFIX.strip('/')}/{model_id}/model{ext}"
+        gcs_info = gcs.upload_file_public(local_path, object_name)
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"GCS upload failed: {exc}") from exc
+
+    now_iso = datetime.now(_tz.utc).isoformat()
+    record = {
+        "modelId": model_id,
+        "url": gcs_info.get("url", ""),
+        "bucket": gcs_info.get("bucket", ""),
+        "object": gcs_info.get("object", ""),
+        "label": label.strip() if label else "",
+        "filename": image.filename or "",
+        "createdAt": now_iso,
+    }
+    model_metadata_store.save(model_id, record)
+    return _refresh_model_url(record)
+
+
+class ModelLabelRequest(BaseModel):
+    label: str = Field(max_length=200)
+
+
+@app.post("/api/models/{model_id}/label")
+async def update_model_label(model_id: str, payload: ModelLabelRequest):
+    """Update a model's label."""
+    item = model_metadata_store.get(model_id)
+    if not item:
+        raise HTTPException(status_code=404, detail=f"Model {model_id} not found.")
+    updated = model_metadata_store.update(model_id, label=payload.label)
+    return _refresh_model_url(updated)
+
+
+@app.delete("/api/models/{model_id}")
+async def delete_model(model_id: str):
+    """Delete a saved model."""
+    if not model_metadata_store.delete(model_id):
+        raise HTTPException(status_code=404, detail=f"Model {model_id} not found.")
+    return {"deleted": True, "modelId": model_id}
+
+
+# ---------------------------------------------------------------------------
+# Extension Video Library Endpoints
+# ---------------------------------------------------------------------------
+
+def _refresh_extension_video_url(item: dict) -> dict:
+    """Regenerate the signed URL for a stored extension video if needed."""
+    refreshed = dict(item)
+    bucket = item.get("bucket")
+    object_name = item.get("object")
+    if bucket and object_name:
+        try:
+            from storage_gcs import GcsStorage
+            gcs = GcsStorage()
+            if bucket == gcs.bucket_name:
+                refreshed["url"] = gcs.generate_read_url(object_name)
+        except Exception:
+            pass
+    return refreshed
+
+
+@app.get("/api/extension-videos")
+async def list_extension_videos():
+    """List saved extension videos."""
+    items = extension_video_metadata_store.list_all()
+    refreshed = [_refresh_extension_video_url(item) for item in items]
+    return {"extensionVideos": refreshed}
+
+
+@app.post("/api/extension-videos")
+async def upload_extension_video(
+    video: UploadFile = File(..., description="Extension video to save"),
+    label: str = Form("", description="Optional label"),
+):
+    """Upload and save an extension video for reuse."""
+    if not video.content_type or not video.content_type.startswith("video/"):
+        raise HTTPException(status_code=400, detail="File must be a video.")
+
+    import uuid
+    from datetime import datetime, timezone as _tz
+
+    ext_id = uuid.uuid4().hex[:12]
+    ext = os.path.splitext(video.filename or "extension.mp4")[1] or ".mp4"
+
+    tmp_dir = os.path.join(JOBS_DIR, f"_ext_{ext_id}")
+    os.makedirs(tmp_dir, exist_ok=True)
+    local_path = os.path.join(tmp_dir, f"extension{ext}")
+    _save_upload(video, local_path)
+
+    try:
+        from storage_gcs import GcsStorage
+        gcs = GcsStorage()
+        object_name = f"{GCS_EXTENSION_VIDEOS_OBJECT_PREFIX.strip('/')}/{ext_id}/extension{ext}"
+        gcs_info = gcs.upload_file_public(local_path, object_name)
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"GCS upload failed: {exc}") from exc
+
+    now_iso = datetime.now(_tz.utc).isoformat()
+    record = {
+        "extensionVideoId": ext_id,
+        "url": gcs_info.get("url", ""),
+        "bucket": gcs_info.get("bucket", ""),
+        "object": gcs_info.get("object", ""),
+        "label": label.strip() if label else "",
+        "filename": video.filename or "",
+        "createdAt": now_iso,
+    }
+    extension_video_metadata_store.save(ext_id, record)
+    return _refresh_extension_video_url(record)
+
+
+class ExtensionVideoLabelRequest(BaseModel):
+    label: str = Field(max_length=200)
+
+
+@app.post("/api/extension-videos/{ext_id}/label")
+async def update_extension_video_label(ext_id: str, payload: ExtensionVideoLabelRequest):
+    """Update an extension video's label."""
+    item = extension_video_metadata_store.get(ext_id)
+    if not item:
+        raise HTTPException(status_code=404, detail=f"Extension video {ext_id} not found.")
+    updated = extension_video_metadata_store.update(ext_id, label=payload.label)
+    return _refresh_extension_video_url(updated)
+
+
+@app.delete("/api/extension-videos/{ext_id}")
+async def delete_extension_video(ext_id: str):
+    """Delete a saved extension video."""
+    if not extension_video_metadata_store.delete(ext_id):
+        raise HTTPException(status_code=404, detail=f"Extension video {ext_id} not found.")
+    return {"deleted": True, "extensionVideoId": ext_id}
