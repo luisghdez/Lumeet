@@ -8052,9 +8052,9 @@
     "generationId": "eac500a04b16",
     "type": "video",
     "label": "ddtik.com_@yuna j_no_watermark (2).mp4",
-    "status": "processing",
+    "status": "failed",
     "progress": 66,
-    "currentStep": "motion_control",
+    "currentStep": null,
     "steps": [
       {
         "key": "scene_detection",
@@ -8093,9 +8093,9 @@
         "message": ""
       }
     ],
-    "error": null,
+    "error": "Cancelled by user",
     "createdAt": 1774745050.689402,
-    "completedAt": null,
+    "completedAt": 1774750193.1041431,
     "output": null,
     "jobId": "62f9bb098f2b"
   },
