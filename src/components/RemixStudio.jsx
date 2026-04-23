@@ -15,12 +15,8 @@ import {
   Plus,
 } from 'lucide-react';
 import ScheduleToSocial from './ScheduleToSocial';
-import {
-  listHooks,
-  listSounds,
-  startRemix,
-  getGeneration,
-} from '../lib/lateApi';
+import { startRemix, getGeneration } from '../lib/lateApi';
+import { useHooks, useSounds } from '../lib/mediaLibrary';
 
 const POLL_INTERVAL = 2000;
 
@@ -311,11 +307,9 @@ function ExtensionDropZone({ file, onFileSelect }) {
 function RemixStudio() {
   const [viewState, setViewState] = useState('setup'); // 'setup' | 'processing' | 'result' | 'error'
 
-  // Data
-  const [hooks, setHooks] = useState([]);
-  const [sounds, setSounds] = useState([]);
-  const [loadingHooks, setLoadingHooks] = useState(true);
-  const [loadingSounds, setLoadingSounds] = useState(true);
+  // Data — shared cache (preloaded at app boot, reused across remounts)
+  const { hooks, loading: loadingHooks } = useHooks();
+  const { sounds, loading: loadingSounds } = useSounds();
 
   // Selections
   const [selectedHookId, setSelectedHookId] = useState(null);
@@ -330,30 +324,6 @@ function RemixStudio() {
   const [resultUrl, setResultUrl] = useState(null);
   const [videoGcsUrl, setVideoGcsUrl] = useState(null);
   const pollRef = useRef(null);
-
-  // Load hooks & sounds on mount
-  useEffect(() => {
-    (async () => {
-      try {
-        const data = await listHooks();
-        setHooks(data.hooks || []);
-      } catch (err) {
-        console.error('Failed to load hooks:', err);
-      } finally {
-        setLoadingHooks(false);
-      }
-    })();
-    (async () => {
-      try {
-        const data = await listSounds();
-        setSounds(data.sounds || []);
-      } catch (err) {
-        console.error('Failed to load sounds:', err);
-      } finally {
-        setLoadingSounds(false);
-      }
-    })();
-  }, []);
 
   // When selecting a hook, default sound to its original sound
   useEffect(() => {
@@ -449,12 +419,8 @@ function RemixStudio() {
   // ---------- Setup View ----------
   if (viewState === 'setup') {
     return (
-      <div className="h-full flex flex-col items-center px-4 py-8 overflow-y-auto">
+      <div className="h-full flex flex-col items-center px-4 pt-2 pb-6 md:pt-4 md:pb-8 overflow-y-auto">
         <div className="w-full max-w-2xl">
-          <div className="mb-8 text-center">
-            <h1 className="text-4xl font-semibold text-gray-900">Remix Studio</h1>
-            <p className="text-gray-600 mt-2">Pick a hook, add a caption, choose a sound, and generate</p>
-          </div>
 
           {/* 1. Hook Picker */}
           <section className="mb-6">
@@ -588,10 +554,10 @@ function RemixStudio() {
             </div>
           )}
 
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
             <button
               onClick={handleReset}
-              className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all duration-200"
+              className="w-full sm:w-auto px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all duration-200"
             >
               <span className="flex items-center gap-2">
                 <ArrowLeft size={18} />
@@ -602,7 +568,7 @@ function RemixStudio() {
               <a
                 href={resultUrl}
                 download="lumeet_remix.mp4"
-                className="px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-500 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-purple-600 transition-all duration-200"
+                className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-500 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-purple-600 transition-all duration-200"
               >
                 <span className="flex items-center gap-2">
                   <Download size={18} />

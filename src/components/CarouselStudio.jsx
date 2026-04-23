@@ -85,14 +85,8 @@ export default function CarouselStudio() {
   }
 
   return (
-    <div className="h-full flex flex-col items-center justify-center px-4 py-8">
+    <div className="h-full flex flex-col items-center justify-center px-4 pt-2 pb-6 md:pt-4 md:pb-8">
       <div className="w-full max-w-2xl flex-1 flex flex-col justify-center">
-        <div className="mb-10 text-center">
-          <h1 className="text-4xl font-semibold text-gray-900">Create Carousel</h1>
-          <p className="text-gray-600 mt-2">
-            Enter one prompt and generate a ready-to-post carousel.
-          </p>
-        </div>
 
         <div className="space-y-4">
           <div className="rounded-2xl border border-gray-200 bg-white/70 px-4 py-3.5 shadow-sm">
@@ -157,7 +151,7 @@ export default function CarouselStudio() {
           onClick={() => setShowAdvanced(false)}
         >
           <div
-            className="w-full max-w-3xl glass-card border border-white/40 rounded-2xl p-5 md:p-6 space-y-5 max-h-[85vh] overflow-y-auto"
+            className="w-full mx-2 sm:mx-auto sm:max-w-3xl glass-card border border-white/40 rounded-2xl p-5 md:p-6 space-y-5 max-h-[90vh] sm:max-h-[85vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between">

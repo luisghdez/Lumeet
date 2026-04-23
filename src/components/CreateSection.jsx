@@ -5,13 +5,12 @@ import CarouselStudio from './CarouselStudio';
 import RemixStudio from './RemixStudio';
 import {
   startVideoGeneration,
-  listModels,
   uploadModel,
   deleteModel,
-  listExtensionVideos,
   uploadExtensionVideo,
   deleteExtensionVideo,
 } from '../lib/lateApi';
+import { useModels, useExtensionVideos } from '../lib/mediaLibrary';
 
 const BASE_PIPELINE_STEPS = [
   { key: 'scene_detection', label: 'Scene Detection' },
@@ -54,7 +53,7 @@ function DropZone({ label, icon: Icon, accept, file, onFileSelect, preview }) {
     <div
       className={`relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed transition-all duration-200 cursor-pointer
         ${isDragging ? 'border-purple-500 bg-purple-50/50' : file ? 'border-purple-300 bg-purple-50/30' : 'border-gray-300 hover:border-purple-400 hover:bg-purple-50/20'}
-        ${file ? 'p-3' : 'p-8'}`}
+        ${file ? 'p-3' : 'p-5 md:p-8'}`}
       onClick={() => inputRef.current?.click()}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
@@ -102,7 +101,7 @@ function DropZone({ label, icon: Icon, accept, file, onFileSelect, preview }) {
         <>
           <Icon size={32} className="text-gray-400 mb-3" />
           <p className="text-sm font-semibold text-gray-700">{label}</p>
-          <p className="text-xs text-gray-500 mt-1">Click or drag & drop</p>
+          <p className="text-xs text-gray-500 mt-1">Tap to upload</p>
         </>
       )}
     </div>
@@ -149,18 +148,29 @@ function ExtendedToggle({ extended, onChange }) {
     <button
       type="button"
       onClick={() => onChange(!extended)}
-      className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl border-2 transition-all duration-200 text-sm font-medium
+      aria-pressed={extended}
+      className={`flex items-center justify-between gap-3 w-full sm:w-auto px-4 py-2.5 rounded-xl border-2 transition-all duration-300 text-sm font-medium
         ${extended
           ? 'border-purple-400 bg-purple-50 text-purple-700'
           : 'border-gray-200 bg-white text-gray-500 hover:border-gray-300'}`}
     >
-      {extended
-        ? <ToggleRight size={20} className="text-purple-600" />
-        : <ToggleLeft size={20} className="text-gray-400" />}
-      <span>Extended Mode</span>
-      <span className={`text-xs px-1.5 py-0.5 rounded-full font-semibold
+      <span className="flex items-center gap-2.5">
+        {extended
+          ? <ToggleRight size={20} className="text-purple-600 transition-transform duration-300" />
+          : <ToggleLeft size={20} className="text-gray-400 transition-transform duration-300" />}
+        <span>Extended Mode</span>
+      </span>
+
+      <span className="flex items-center gap-2">
+        <span className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300 ${extended ? 'bg-purple-500' : 'bg-gray-300'}`}>
+          <span
+            className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform duration-300 ${extended ? 'translate-x-5' : 'translate-x-0.5'}`}
+          />
+        </span>
+        <span className={`text-xs px-1.5 py-0.5 rounded-full font-semibold transition-all duration-300
         ${extended ? 'bg-purple-200 text-purple-700' : 'bg-gray-100 text-gray-400'}`}>
-        {extended ? 'ON' : 'OFF'}
+          {extended ? 'ON' : 'OFF'}
+        </span>
       </span>
     </button>
   );
@@ -360,11 +370,9 @@ function ExtensionVideoPicker({ videos, selectedId, onSelect, onUploadNew, onDel
 function CreateSection() {
   const [createTab, setCreateTab] = useState('video'); // 'video' | 'carousel' | 'remix'
   const [viewState, setViewState] = useState('upload'); // 'upload' | 'processing' | 'result' | 'error'
-  const [imageFile, setImageFile] = useState(null);
   const [videoFile, setVideoFile] = useState(null);
   const [additionalVideoFile, setAdditionalVideoFile] = useState(null);
   const [extended, setExtended] = useState(false);
-  const [imagePreview, setImagePreview] = useState(null);
   const [videoPreview, setVideoPreview] = useState(null);
   const [additionalVideoPreview, setAdditionalVideoPreview] = useState(null);
   const [jobId, setJobId] = useState(null);
@@ -373,48 +381,16 @@ function CreateSection() {
   const [resultUrl, setResultUrl] = useState(null);
   const [videoGcsUrl, setVideoGcsUrl] = useState(null);
   const pollRef = useRef(null);
+  const uploadScrollRef = useRef(null);
+  const previousExtendedRef = useRef(extended);
 
-  // Saved models state
-  const [savedModels, setSavedModels] = useState([]);
-  const [loadingModels, setLoadingModels] = useState(true);
+  // Saved models — shared cache (loaded once at app boot, kept in memory)
+  const { models: savedModels, loading: loadingModels, setModels: setSavedModels } = useModels();
   const [selectedModelId, setSelectedModelId] = useState(null);
 
-  // Saved extension videos state
-  const [savedExtensionVideos, setSavedExtensionVideos] = useState([]);
-  const [loadingExtVideos, setLoadingExtVideos] = useState(true);
+  // Saved extension videos — shared cache
+  const { extensionVideos: savedExtensionVideos, loading: loadingExtVideos, setExtensionVideos: setSavedExtensionVideos } = useExtensionVideos();
   const [selectedExtVideoId, setSelectedExtVideoId] = useState(null);
-
-  // Load saved models and extension videos on mount
-  useEffect(() => {
-    (async () => {
-      try {
-        const data = await listModels();
-        setSavedModels(data.models || []);
-      } catch (err) {
-        console.error('Failed to load models:', err);
-      } finally {
-        setLoadingModels(false);
-      }
-    })();
-    (async () => {
-      try {
-        const data = await listExtensionVideos();
-        setSavedExtensionVideos(data.extensionVideos || []);
-      } catch (err) {
-        console.error('Failed to load extension videos:', err);
-      } finally {
-        setLoadingExtVideos(false);
-      }
-    })();
-  }, []);
-
-  // When a saved model is selected, clear the uploaded image file (and vice versa)
-  useEffect(() => {
-    if (selectedModelId) setImageFile(null);
-  }, [selectedModelId]);
-  useEffect(() => {
-    if (imageFile) setSelectedModelId(null);
-  }, [imageFile]);
 
   // When a saved ext video is selected, clear the uploaded additional video (and vice versa)
   useEffect(() => {
@@ -432,17 +408,27 @@ function CreateSection() {
     }
   }, [extended]);
 
-  // Preview URLs
+  // Keep auto-scroll scoped to the upload container to avoid page-level jumps.
   useEffect(() => {
-    if (imageFile) {
-      const url = URL.createObjectURL(imageFile);
-      setImagePreview({ type: 'image', url });
-      return () => URL.revokeObjectURL(url);
-    } else {
-      setImagePreview(null);
-    }
-  }, [imageFile]);
+    const wasExtended = previousExtendedRef.current;
+    previousExtendedRef.current = extended;
 
+    if (!wasExtended && extended && uploadScrollRef.current) {
+      const timeout = setTimeout(() => {
+        if (uploadScrollRef.current) {
+          uploadScrollRef.current.scrollTo({
+            top: uploadScrollRef.current.scrollHeight,
+            behavior: 'smooth',
+          });
+        }
+      }, 260);
+      return () => clearTimeout(timeout);
+    }
+
+    return undefined;
+  }, [extended]);
+
+  // Preview URLs
   useEffect(() => {
     if (videoFile) {
       const url = URL.createObjectURL(videoFile);
@@ -511,7 +497,7 @@ function CreateSection() {
   }, []);
 
   // Derive whether the form is submittable
-  const hasModel = imageFile || selectedModelId;
+  const hasModel = selectedModelId;
   const hasExtVideo = additionalVideoFile || selectedExtVideoId;
   const canSubmit = hasModel && videoFile && (!extended || hasExtVideo);
 
@@ -524,9 +510,7 @@ function CreateSection() {
     setError(null);
 
     const formData = new FormData();
-    if (imageFile) {
-      formData.append('image', imageFile);
-    } else if (selectedModelId) {
+    if (selectedModelId) {
       formData.append('modelId', selectedModelId);
     }
     formData.append('video', videoFile);
@@ -547,7 +531,7 @@ function CreateSection() {
       setError(err.message);
       setViewState('error');
     }
-  }, [canSubmit, imageFile, selectedModelId, videoFile, additionalVideoFile, selectedExtVideoId, extended, allStepsForMode, startPolling]);
+  }, [canSubmit, selectedModelId, videoFile, additionalVideoFile, selectedExtVideoId, extended, allStepsForMode, startPolling]);
 
   // Model library handlers
   const handleModelUploaded = useCallback((newModel) => {
@@ -585,7 +569,6 @@ function CreateSection() {
   const handleReset = useCallback(() => {
     if (pollRef.current) clearInterval(pollRef.current);
     setViewState('upload');
-    setImageFile(null);
     setVideoFile(null);
     setAdditionalVideoFile(null);
     setSelectedModelId(null);
@@ -598,17 +581,24 @@ function CreateSection() {
     setVideoGcsUrl(null);
   }, []);
 
+  const handleUploadViewScrollIntent = useCallback((e) => {
+    if (!extended) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, [extended]);
+
   const renderVideoContent = () => {
     // ---------- Upload View ----------
     if (viewState === 'upload') {
       return (
-        <div className="h-full flex flex-col items-center px-4 py-8 overflow-y-auto">
+        <div
+          ref={uploadScrollRef}
+          onWheelCapture={handleUploadViewScrollIntent}
+          onTouchMoveCapture={handleUploadViewScrollIntent}
+          className={`h-full flex flex-col items-center px-4 pt-2 pb-6 md:pt-4 md:pb-8 ${extended ? 'overflow-y-auto' : 'overflow-y-hidden'}`}
+        >
           <div className="w-full max-w-2xl">
-            <div className="mb-10 text-center">
-              <h1 className="text-4xl font-semibold text-gray-900">Create Video</h1>
-              <p className="text-gray-600 mt-2">Upload a reference video and model image to generate your video</p>
-            </div>
-
             {/* Saved Models */}
             <section className="mb-5">
               <h3 className="text-sm font-bold text-gray-700 mb-2 flex items-center gap-2">
@@ -625,19 +615,6 @@ function CreateSection() {
                   onDelete={handleDeleteModel}
                   loading={loadingModels}
                 />
-                {/* Or upload a one-time image */}
-                {!selectedModelId && (
-                  <div className="mt-3 pt-3 border-t border-gray-100">
-                    <DropZone
-                      label="Upload one-time image"
-                      icon={Image}
-                      accept="image/*"
-                      file={imageFile}
-                      onFileSelect={setImageFile}
-                      preview={imagePreview}
-                    />
-                  </div>
-                )}
               </div>
             </section>
 
@@ -658,18 +635,24 @@ function CreateSection() {
             </section>
 
             {/* Extended mode toggle */}
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
               <ExtendedToggle extended={extended} onChange={setExtended} />
-              {extended && (
-                <p className="text-xs text-purple-600 font-medium">
-                  Second section video required
-                </p>
-              )}
+              <p
+                className={`text-xs font-medium transition-all duration-300 ease-out ${
+                  extended ? 'text-purple-600 opacity-100 translate-y-0 max-h-8' : 'text-purple-400/70 opacity-0 -translate-y-1 max-h-0 overflow-hidden'
+                }`}
+              >
+                Second section video required
+              </p>
             </div>
 
             {/* Extension Video: library or upload */}
-            {extended && (
-              <section className="mb-6 transition-all duration-300">
+            <div
+              className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                extended ? 'max-h-[560px] opacity-100 mb-6' : 'max-h-0 opacity-0 mb-0 pointer-events-none'
+              }`}
+            >
+              <section className="pt-1">
                 <h3 className="text-sm font-bold text-gray-700 mb-2 flex items-center gap-2">
                   <Film size={15} className="text-purple-500" />
                   Extension Video
@@ -699,11 +682,9 @@ function CreateSection() {
                   )}
                 </div>
               </section>
-            )}
+            </div>
 
-            {!extended && <div className="mb-6" />}
-
-            <div className="flex justify-center mb-12">
+            <div className="flex justify-center mb-8 md:mb-12">
               <button
                 onClick={handleSubmit}
                 disabled={!canSubmit}
@@ -777,10 +758,10 @@ function CreateSection() {
               </div>
             )}
 
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <button
                 onClick={handleReset}
-                className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all duration-200"
+                className="w-full sm:w-auto px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all duration-200"
               >
                 <span className="flex items-center gap-2">
                   <ArrowLeft size={18} />
@@ -791,7 +772,7 @@ function CreateSection() {
                 <a
                   href={resultUrl}
                   download="lumeet_output.mp4"
-                  className="px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-500 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-purple-600 transition-all duration-200"
+                  className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-500 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-purple-600 transition-all duration-200"
                 >
                   <span className="flex items-center gap-2">
                     <Download size={18} />
@@ -822,7 +803,7 @@ function CreateSection() {
 
             <button
               onClick={handleReset}
-              className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all duration-200"
+              className="w-full sm:w-auto px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all duration-200"
             >
               <span className="flex items-center gap-2">
                 <ArrowLeft size={18} />
@@ -841,42 +822,37 @@ function CreateSection() {
     <div className="h-full flex flex-col">
       <div className="w-full max-w-4xl mx-auto px-4 pt-2 flex justify-center">
         <div className="inline-flex p-1 rounded-2xl bg-white/70 border border-white/40">
-          <button
-            type="button"
-            onClick={() => setCreateTab('video')}
-            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
-              createTab === 'video'
-                ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white shadow'
-                : 'text-gray-600 hover:text-gray-900'
-            }`}
-          >
-            <Film size={16} />
-            Video
-          </button>
-          <button
-            type="button"
-            onClick={() => setCreateTab('carousel')}
-            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
-              createTab === 'carousel'
-                ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white shadow'
-                : 'text-gray-600 hover:text-gray-900'
-            }`}
-          >
-            <Image size={16} />
-            Carousel
-          </button>
-          <button
-            type="button"
-            onClick={() => setCreateTab('remix')}
-            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
-              createTab === 'remix'
-                ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white shadow'
-                : 'text-gray-600 hover:text-gray-900'
-            }`}
-          >
-            <Sparkles size={16} />
-            Remix
-          </button>
+          {[
+            { id: 'video', label: 'Video', Icon: Film },
+            { id: 'carousel', label: 'Carousel', Icon: Image },
+            { id: 'remix', label: 'Remix', Icon: Sparkles },
+          ].map(({ id, label, Icon }) => {
+            const isActive = createTab === id;
+            return (
+              <button
+                key={id}
+                type="button"
+                onClick={() => setCreateTab(id)}
+                aria-pressed={isActive}
+                className={`inline-flex items-center px-3 py-2 md:px-5 md:py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ease-out ${
+                  isActive
+                    ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white shadow'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                <Icon size={16} className="flex-shrink-0" />
+                <span
+                  className={`overflow-hidden whitespace-nowrap transition-all duration-300 ease-out ${
+                    isActive
+                      ? 'max-w-[100px] opacity-100 ml-2'
+                      : 'max-w-0 opacity-0 ml-0 sm:max-w-[100px] sm:opacity-100 sm:ml-2'
+                  }`}
+                >
+                  {label}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
 

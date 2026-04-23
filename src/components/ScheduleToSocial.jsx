@@ -166,7 +166,7 @@ function ScheduleToSocial({ jobId, resultUrl, videoGcsUrl }) {
   };
 
   return (
-    <div className="mt-8 w-full max-w-3xl glass-card border border-white/40 rounded-2xl p-5">
+    <div className="mt-8 w-full max-w-3xl glass-card border border-white/40 rounded-2xl p-4 md:p-5">
       <div className="flex items-center gap-3 mb-4">
         <CalendarClock size={20} className="text-purple-600" />
         <h3 className="text-lg font-bold text-gray-900">Schedule to Social</h3>
@@ -188,7 +188,7 @@ function ScheduleToSocial({ jobId, resultUrl, videoGcsUrl }) {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-3 mb-3">
         <select
           value={platformToConnect}
           onChange={(e) => setPlatformToConnect(e.target.value)}
@@ -201,7 +201,7 @@ function ScheduleToSocial({ jobId, resultUrl, videoGcsUrl }) {
         <button
           onClick={handleConnect}
           disabled={isConnecting}
-          className="px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-50 flex items-center justify-center gap-2"
+          className="w-full px-4 py-2.5 md:py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-50 flex items-center justify-center gap-2"
         >
           <Link2 size={16} />
           {isConnecting ? 'Opening...' : 'Connect Account'}
@@ -209,7 +209,7 @@ function ScheduleToSocial({ jobId, resultUrl, videoGcsUrl }) {
         <button
           onClick={loadAccounts}
           disabled={isLoadingAccounts}
-          className="px-4 py-2 rounded-xl bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50 flex items-center justify-center gap-2"
+          className="w-full px-4 py-2.5 md:py-2 rounded-xl bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50 flex items-center justify-center gap-2"
         >
           <RefreshCw size={16} className={isLoadingAccounts ? 'animate-spin' : ''} />
           Refresh Accounts
@@ -243,7 +243,7 @@ function ScheduleToSocial({ jobId, resultUrl, videoGcsUrl }) {
         placeholder="Caption/content"
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-3 mb-3">
         <label className="flex items-center gap-2 text-sm text-gray-700">
           <input
             type="checkbox"

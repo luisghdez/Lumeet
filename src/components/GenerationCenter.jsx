@@ -138,69 +138,94 @@ export default function GenerationCenter({ onSchedule, refreshKey }) {
     }
   }, [fetchGenerations, startPolling, stopPolling]);
 
+  const hasCount = activeCount > 0 || completedCount > 0;
+  const mobileCount = activeCount > 0 ? activeCount : completedCount;
+  const mobileBadgeTone = activeCount > 0 ? 'bg-purple-500' : 'bg-green-500';
+
   return (
-    <div ref={panelRef} className="fixed top-5 right-5 z-50">
+    <div ref={panelRef} className="fixed top-3 right-3 sm:top-5 sm:right-5 z-50">
       {/* Trigger button */}
       <button
         onClick={() => setOpen((p) => !p)}
-        className="relative flex items-center gap-2 px-3.5 py-2 rounded-2xl glass-card border border-white/40 shadow-lg hover:shadow-xl transition-all duration-200"
+        aria-expanded={open}
+        aria-label="Generations"
+        className="relative flex items-center gap-2 px-2.5 py-2 sm:px-3.5 rounded-2xl glass-card border border-white/40 shadow-lg hover:shadow-xl transition-all duration-200"
       >
         {activeCount > 0 ? (
           <Loader2 size={18} className="text-purple-600 animate-spin" />
         ) : (
           <Activity size={18} className="text-purple-600" />
         )}
-        <span className="text-sm font-semibold text-gray-800">
+
+        {/* Desktop label */}
+        <span className="hidden sm:inline text-sm font-semibold text-gray-800">
           {activeCount > 0 ? `${activeCount} running` : 'Generations'}
         </span>
+
+        {/* Mobile-only count pill (icon + count only) */}
+        {hasCount && (
+          <span
+            className={`sm:hidden min-w-[20px] h-5 flex items-center justify-center rounded-full ${mobileBadgeTone} text-white text-[11px] font-bold px-1.5`}
+          >
+            {mobileCount}
+          </span>
+        )}
+
+        {/* Desktop completed badge */}
         {completedCount > 0 && activeCount === 0 && (
-          <span className="ml-1 min-w-[20px] h-5 flex items-center justify-center rounded-full bg-green-500 text-white text-xs font-bold px-1.5">
+          <span className="hidden sm:inline-flex ml-1 min-w-[20px] h-5 items-center justify-center rounded-full bg-green-500 text-white text-xs font-bold px-1.5">
             {completedCount}
           </span>
         )}
+
         <ChevronDown
           size={14}
-          className={`text-gray-500 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          className={`hidden sm:inline text-gray-500 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
         />
       </button>
 
-      {/* Popover panel */}
-      {open && (
-        <div className="absolute right-0 mt-2 w-96 max-h-[70vh] rounded-2xl glass-heavy border border-white/40 shadow-2xl overflow-hidden flex flex-col animate-in fade-in slide-in-from-top-2">
-          {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-white/20">
-            <h3 className="font-bold text-gray-900 text-sm">Generation Center</h3>
-            <button
-              onClick={() => setOpen(false)}
-              className="p-1 rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              <X size={14} className="text-gray-500" />
-            </button>
-          </div>
-
-          {/* List */}
-          <div className="flex-1 overflow-y-auto">
-            {generations.length === 0 ? (
-              <div className="px-4 py-8 text-center text-sm text-gray-500">
-                No generation jobs yet. Start one from Create or Carousel Studio.
-              </div>
-            ) : (
-              <div className="divide-y divide-white/10">
-                {generations.map((gen) => (
-                  <GenerationRow
-                    key={gen.generationId}
-                    gen={gen}
-                    onSchedule={onSchedule}
-                    onCancel={handleCancel}
-                    isCancelling={Boolean(cancellingById[gen.generationId])}
-                    cancelError={cancelErrorById[gen.generationId]}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
+      {/* Popover panel — always mounted so it can animate open/close */}
+      <div
+        aria-hidden={!open}
+        className={`absolute right-0 mt-2 w-[calc(100vw-1.5rem)] sm:w-96 max-w-sm max-h-[70vh] rounded-2xl glass-heavy border border-white/40 shadow-2xl overflow-hidden flex flex-col origin-top-right transform-gpu transition-all duration-200 ease-out ${
+          open
+            ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto'
+            : 'opacity-0 scale-95 -translate-y-1 pointer-events-none'
+        }`}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-white/20">
+          <h3 className="font-bold text-gray-900 text-sm">Generation Center</h3>
+          <button
+            onClick={() => setOpen(false)}
+            className="p-1 rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            <X size={14} className="text-gray-500" />
+          </button>
         </div>
-      )}
+
+        {/* List */}
+        <div className="flex-1 overflow-y-auto">
+          {generations.length === 0 ? (
+            <div className="px-4 py-8 text-center text-sm text-gray-500">
+              No generation jobs yet. Start one from Create or Carousel Studio.
+            </div>
+          ) : (
+            <div className="divide-y divide-white/10">
+              {generations.map((gen) => (
+                <GenerationRow
+                  key={gen.generationId}
+                  gen={gen}
+                  onSchedule={onSchedule}
+                  onCancel={handleCancel}
+                  isCancelling={Boolean(cancellingById[gen.generationId])}
+                  cancelError={cancelErrorById[gen.generationId]}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

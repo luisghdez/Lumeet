@@ -125,7 +125,7 @@ function App() {
       </div>
 
       {/* Sidebar */}
-      <aside className="relative z-10 w-64 flex-shrink-0 p-6 glass-heavy border-r border-white/30">
+      <aside className="relative z-10 hidden md:flex md:w-64 md:flex-shrink-0 p-6 glass-heavy border-r border-white/30 flex-col">
         <div className="mb-12">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">
             Lumeet
@@ -161,7 +161,12 @@ function App() {
       </aside>
 
       {/* Main Content */}
-      <main className="relative z-10 flex-1 overflow-y-auto p-8">
+      <main className={`relative z-10 flex-1 p-4 pb-24 md:p-8 md:pb-8 ${activeTab === 'create' ? 'overflow-y-hidden' : 'overflow-y-auto'}`}>
+        <div className="md:hidden sticky top-0 z-20 py-2 mb-4">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            Lumeet
+          </h1>
+        </div>
         {activeTab === 'create' ? (
           <CreateSection />
         ) : activeTab === 'variant-lab' ? (
@@ -187,6 +192,28 @@ function App() {
           </div>
         )}
       </main>
+
+      <nav className="fixed bottom-0 inset-x-0 z-50 md:hidden glass-heavy border-t border-white/30 px-2 py-2">
+        <div className="max-w-lg mx-auto flex items-center justify-around">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeTab === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => setActiveTab(item.id)}
+                className={`
+                  flex flex-col items-center gap-1 px-3 py-2 rounded-xl min-w-[88px]
+                  ${isActive ? 'glass-card border border-purple-300/50 text-purple-700' : 'text-gray-700'}
+                `}
+              >
+                <Icon size={18} strokeWidth={isActive ? 2.5 : 2} />
+                <span className="text-xs font-semibold leading-none">{item.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </nav>
     </div>
   );
 }
