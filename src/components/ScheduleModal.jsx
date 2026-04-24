@@ -3,6 +3,7 @@ import {
   CalendarClock,
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
   RefreshCw,
   Send,
   CheckCircle2,
@@ -22,6 +23,8 @@ import {
   Clock,
   Pencil,
   Check,
+  Eye,
+  Maximize2,
 } from 'lucide-react';
 import {
   createLatePost,
@@ -141,70 +144,249 @@ function PlatformBadge({ platform, size = 36 }) {
 }
 
 // ---------------------------------------------------------------------------
-// Carousel preview
+// Preview helpers
 // ---------------------------------------------------------------------------
 
-function CarouselPreview({ slides, mediaUrls }) {
-  const scrollRef = useRef(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
+function buildSlideItems(slides, mediaUrls) {
+  return slides.length > 0
+    ? slides.map((s, i) => ({
+        url: s.url,
+        label: s.kind || '',
+        tipTitle: s.tipTitle || `Slide ${i + 1}`,
+      }))
+    : mediaUrls.map((url, i) => ({
+        url,
+        label: `Slide ${i + 1}`,
+        tipTitle: `Slide ${i + 1}`,
+      }));
+}
 
-  const checkScroll = () => {
-    const el = scrollRef.current;
-    if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 4);
-    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+// Compact carousel preview: main slide + thumbnail strip with arrows.
+function InlineCarouselPreview({
+  items,
+  activeIndex,
+  onActiveChange,
+  onExpand,
+}) {
+  const active = items[activeIndex] || items[0];
+
+  const goPrev = (e) => {
+    e.stopPropagation();
+    onActiveChange((activeIndex - 1 + items.length) % items.length);
   };
-
-  useEffect(() => {
-    checkScroll();
-    const el = scrollRef.current;
-    if (el) el.addEventListener('scroll', checkScroll, { passive: true });
-    return () => el?.removeEventListener('scroll', checkScroll);
-  }, []);
-
-  const scroll = (dir) => {
-    const el = scrollRef.current;
-    if (!el) return;
-    el.scrollBy({ left: dir * 200, behavior: 'smooth' });
+  const goNext = (e) => {
+    e.stopPropagation();
+    onActiveChange((activeIndex + 1) % items.length);
   };
-
-  const items = slides.length > 0
-    ? slides.map((s) => ({ url: s.url, label: s.kind || '', tipTitle: s.tipTitle || '' }))
-    : mediaUrls.map((url, i) => ({ url, label: `Slide ${i + 1}`, tipTitle: '' }));
 
   return (
-    <div className="relative group">
-      {canScrollLeft && (
-        <button
-          onClick={() => scroll(-1)}
-          className="absolute left-1 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white shadow-md border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors"
-        >
-          <ChevronLeft size={16} className="text-gray-700" />
-        </button>
-      )}
-      <div
-        ref={scrollRef}
-        className="flex gap-3 overflow-x-auto pb-1 scrollbar-hide"
-      >
-        {items.map((item, i) => (
-          <div key={i} className="flex-shrink-0 w-28">
-            <div className="aspect-square rounded-xl overflow-hidden bg-gray-100 border border-gray-200">
-              <img src={item.url} alt={item.label} className="w-full h-full object-cover" />
+    <div className="flex flex-col items-center">
+      <div className="relative w-44 sm:w-52">
+        <div className="aspect-square rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm">
+          <img
+            src={active.url}
+            alt={active.tipTitle}
+            className="w-full h-full object-cover"
+            onClick={onExpand}
+          />
+        </div>
+        {items.length > 1 && (
+          <>
+            <button
+              type="button"
+              onClick={goPrev}
+              className="absolute left-1 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/95 shadow-md border border-gray-200 flex items-center justify-center hover:bg-white transition-colors"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft size={16} className="text-gray-700" />
+            </button>
+            <button
+              type="button"
+              onClick={goNext}
+              className="absolute right-1 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/95 shadow-md border border-gray-200 flex items-center justify-center hover:bg-white transition-colors"
+              aria-label="Next slide"
+            >
+              <ChevronRight size={16} className="text-gray-700" />
+            </button>
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-black/55 text-white text-[10px] font-semibold">
+              {activeIndex + 1} / {items.length}
             </div>
-            <p className="mt-1 text-[11px] text-gray-500 text-center truncate">
-              {item.tipTitle || item.label}
-            </p>
-          </div>
-        ))}
+          </>
+        )}
       </div>
-      {canScrollRight && (
+      {active.tipTitle && (
+        <p className="mt-2 text-[11px] text-gray-500 text-center max-w-[14rem] truncate">
+          {active.tipTitle}
+        </p>
+      )}
+      {items.length > 1 && (
+        <div className="mt-3 flex gap-1.5 overflow-x-auto max-w-full px-1 pb-1 scrollbar-hide">
+          {items.map((item, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => onActiveChange(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className={`flex-shrink-0 w-10 h-10 rounded-lg overflow-hidden border-2 transition-all ${
+                i === activeIndex
+                  ? 'border-purple-500 ring-2 ring-purple-200 scale-105'
+                  : 'border-gray-200 opacity-75 hover:opacity-100'
+              }`}
+            >
+              <img src={item.url} alt="" className="w-full h-full object-cover" />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function InlineVideoPreview({ src, onExpand }) {
+  return (
+    <div className="flex justify-center">
+      <div className="relative group">
+        <div className="w-44 sm:w-52 aspect-[9/16] rounded-2xl overflow-hidden bg-black shadow-md">
+          <video
+            src={src}
+            controls
+            playsInline
+            preload="metadata"
+            className="w-full h-full object-contain"
+          />
+        </div>
         <button
-          onClick={() => scroll(1)}
-          className="absolute right-1 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white shadow-md border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors"
+          type="button"
+          onClick={onExpand}
+          className="absolute top-2 right-2 w-8 h-8 rounded-full bg-black/60 text-white flex items-center justify-center opacity-80 hover:opacity-100 hover:bg-black/80 transition-all backdrop-blur-sm"
+          title="View fullscreen"
+          aria-label="View fullscreen"
         >
-          <ChevronRight size={16} className="text-gray-700" />
+          <Maximize2 size={14} />
         </button>
+      </div>
+    </div>
+  );
+}
+
+// Fullscreen lightbox that overlays the modal panel. Handles both video
+// playback and carousel slide navigation (keyboard + buttons).
+function PreviewLightbox({
+  isVideo,
+  isCarousel,
+  mediaUrls,
+  items,
+  activeIndex,
+  onActiveChange,
+  onClose,
+}) {
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose();
+      if (!isCarousel || items.length < 2) return;
+      if (e.key === 'ArrowLeft') {
+        onActiveChange((activeIndex - 1 + items.length) % items.length);
+      }
+      if (e.key === 'ArrowRight') {
+        onActiveChange((activeIndex + 1) % items.length);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isCarousel, items.length, activeIndex, onActiveChange, onClose]);
+
+  const active = items[activeIndex];
+
+  return (
+    <div
+      className="lightbox-enter absolute inset-0 z-30 bg-black/95 flex flex-col"
+      onClick={onClose}
+    >
+      <div className="flex items-center justify-between px-4 py-3 text-white flex-shrink-0">
+        <div className="flex items-center gap-2">
+          <Eye size={16} />
+          <span className="text-sm font-semibold">
+            {isVideo ? 'Video preview' : `Slide ${activeIndex + 1} of ${items.length}`}
+          </span>
+        </div>
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClose();
+          }}
+          className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+          aria-label="Close preview"
+        >
+          <X size={18} />
+        </button>
+      </div>
+      <div
+        className="flex-1 flex items-center justify-center relative min-h-0 px-4 pb-4"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {isVideo && mediaUrls.length > 0 ? (
+          <video
+            src={mediaUrls[0]}
+            controls
+            autoPlay
+            playsInline
+            className="max-w-full max-h-full rounded-xl shadow-xl"
+          />
+        ) : isCarousel && active ? (
+          <>
+            <img
+              src={active.url}
+              alt={active.tipTitle}
+              className="max-w-full max-h-full rounded-xl shadow-xl object-contain"
+            />
+            {items.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={() =>
+                    onActiveChange((activeIndex - 1 + items.length) % items.length)
+                  }
+                  className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-colors"
+                  aria-label="Previous slide"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    onActiveChange((activeIndex + 1) % items.length)
+                  }
+                  className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-colors"
+                  aria-label="Next slide"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </>
+            )}
+          </>
+        ) : null}
+      </div>
+      {isCarousel && items.length > 1 && (
+        <div
+          className="flex-shrink-0 flex justify-center gap-1.5 pb-4 px-4 overflow-x-auto scrollbar-hide"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {items.map((item, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => onActiveChange(i)}
+              className={`flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden border-2 transition-all ${
+                i === activeIndex
+                  ? 'border-white scale-110'
+                  : 'border-white/30 opacity-60 hover:opacity-100'
+              }`}
+            >
+              <img src={item.url} alt="" className="w-full h-full object-cover" />
+            </button>
+          ))}
+        </div>
       )}
     </div>
   );
@@ -362,12 +544,18 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
   const [scheduledPosts, setScheduledPosts] = useState([]);
   const [isAddingAccount, setIsAddingAccount] = useState(false);
   const [connectingPlatform, setConnectingPlatform] = useState(null);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(true);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   // Bumped when any nickname changes, forces re-render of getNickname consumers
   const [, setNicknameVersion] = useState(0);
   const bumpNicknames = () => setNicknameVersion((v) => v + 1);
 
   const output = generation?.output || {};
-  const isVideo = generation?.type === 'video';
+  // Remix generations produce a video output, so treat them as videos for
+  // preview + payload purposes.
+  const isVideo =
+    generation?.type === 'video' || generation?.type === 'remix';
   const isCarousel = generation?.type === 'carousel';
 
   const mediaUrls = useMemo(() => {
@@ -385,6 +573,25 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
     if (isCarousel && output.slides) return output.slides;
     return [];
   }, [isCarousel, output]);
+
+  const previewItems = useMemo(
+    () => (isCarousel ? buildSlideItems(slides, mediaUrls) : []),
+    [isCarousel, slides, mediaUrls],
+  );
+
+  const hasPreview =
+    (isVideo && mediaUrls.length > 0) ||
+    (isCarousel && previewItems.length > 0);
+
+  const previewSummary = isVideo
+    ? '1 video'
+    : previewItems.length === 1
+      ? '1 slide'
+      : `${previewItems.length} slides`;
+
+  useEffect(() => {
+    setActiveSlide(0);
+  }, [isCarousel, previewItems.length]);
 
   useEffect(() => {
     if (isCarousel) {
@@ -565,12 +772,12 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm p-0 sm:p-4"
+      className="modal-backdrop-enter fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm p-0 sm:p-4"
       onClick={onClose}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full sm:max-w-xl max-h-[95vh] sm:max-h-[90vh] bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+        className="modal-panel-enter relative w-full sm:max-w-xl max-h-[95vh] sm:max-h-[90vh] bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden"
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 flex-shrink-0">
@@ -596,20 +803,66 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
 
         {/* Body (scrollable) */}
         <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5">
-          {/* Preview */}
-          {isVideo && mediaUrls.length > 0 && (
-            <div className="flex justify-center">
-              <div className="w-40 aspect-[9/16] rounded-2xl overflow-hidden bg-black shadow-md">
-                <video
-                  src={mediaUrls[0]}
-                  controls
-                  className="w-full h-full object-contain"
-                />
+          {/* Preview — collapsible card */}
+          {hasPreview && (
+            <section className="rounded-2xl border border-gray-200 overflow-hidden bg-white">
+              <div className="flex items-stretch bg-gray-50 border-b border-gray-100">
+                <button
+                  type="button"
+                  onClick={() => setIsPreviewOpen((v) => !v)}
+                  aria-expanded={isPreviewOpen}
+                  className="flex-1 flex items-center justify-between px-4 py-2.5 hover:bg-gray-100 transition-colors"
+                >
+                  <div className="flex items-center gap-2">
+                    <Eye size={14} className="text-purple-600" />
+                    <h4 className="text-xs font-bold text-gray-700 uppercase tracking-wide">
+                      Preview
+                    </h4>
+                    <span className="text-[11px] font-medium text-gray-500">
+                      {previewSummary}
+                    </span>
+                  </div>
+                  <ChevronDown
+                    size={16}
+                    className={`text-gray-500 transition-transform duration-300 ${
+                      isPreviewOpen ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsLightboxOpen(true)}
+                  className="px-3 flex items-center gap-1.5 text-[11px] font-semibold text-purple-600 hover:bg-purple-50 border-l border-gray-100 transition-colors"
+                  title="View fullscreen"
+                >
+                  <Maximize2 size={13} />
+                  <span className="hidden sm:inline">Fullscreen</span>
+                </button>
               </div>
-            </div>
-          )}
-          {isCarousel && mediaUrls.length > 0 && (
-            <CarouselPreview slides={slides} mediaUrls={mediaUrls} />
+              <div
+                className={`grid transition-all duration-300 ease-out ${
+                  isPreviewOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <div className="p-4">
+                    {isVideo ? (
+                      <InlineVideoPreview
+                        src={mediaUrls[0]}
+                        onExpand={() => setIsLightboxOpen(true)}
+                      />
+                    ) : (
+                      <InlineCarouselPreview
+                        items={previewItems}
+                        activeIndex={activeSlide}
+                        onActiveChange={setActiveSlide}
+                        onExpand={() => setIsLightboxOpen(true)}
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+            </section>
           )}
 
           {/* Accounts */}
@@ -924,6 +1177,19 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
             {isScheduling ? 'Scheduling…' : 'Schedule Post'}
           </button>
         </div>
+
+        {/* Fullscreen preview lightbox (overlays the whole modal panel) */}
+        {isLightboxOpen && hasPreview && (
+          <PreviewLightbox
+            isVideo={isVideo}
+            isCarousel={isCarousel}
+            mediaUrls={mediaUrls}
+            items={previewItems}
+            activeIndex={activeSlide}
+            onActiveChange={setActiveSlide}
+            onClose={() => setIsLightboxOpen(false)}
+          />
+        )}
       </div>
     </div>
   );

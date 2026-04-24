@@ -9,7 +9,7 @@ import ScheduleModal from './components/ScheduleModal';
 import ScheduledPosts from './components/ScheduledPosts';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('recruit');
+  const [activeTab, setActiveTab] = useState('create');
   const [scheduleTarget, setScheduleTarget] = useState(null);
   const [genRefreshKey, setGenRefreshKey] = useState(0);
 
@@ -35,7 +35,7 @@ function App() {
     // { id: 'messages', label: 'Messages', icon: MessageSquare },
     { id: 'create', label: 'Create', icon: Plus },
     // { id: 'variant-lab', label: 'Variant Lab', icon: Video },
-    { id: 'video-library', label: 'Video Library', icon: Film },
+    { id: 'video-library', label: 'Library', icon: Film },
     { id: 'scheduled', label: 'Scheduled', icon: CalendarDays },
   ];
 

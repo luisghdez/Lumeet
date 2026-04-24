@@ -1,15 +1,14 @@
 import React, { useEffect, useMemo, useState, useCallback } from 'react';
-import { CalendarRange, CheckCircle2, Film, Image as ImageIcon, Link2, Play, RefreshCw, Send } from 'lucide-react';
+import { CalendarRange, CheckCircle2, Clock, Film, Image as ImageIcon, RefreshCw, Send } from 'lucide-react';
 import AccountRow from './AccountRow';
+import ScheduleModal from './ScheduleModal';
 import {
   createLatePost,
-  createLateProfile,
   DEFAULT_SESSION_ID,
-  getLateConnectUrl,
-  listCarousels,
   listLateAccounts,
   listVideos,
 } from '../lib/lateApi';
+import { useLibraryVideos, useLibraryCarousels } from '../lib/mediaLibrary';
 
 function toIsoLocal(datetimeLocal) {
   if (!datetimeLocal) return null;
@@ -18,15 +17,40 @@ function toIsoLocal(datetimeLocal) {
   return localDate.toISOString();
 }
 
-function nextSlotDatetimeLocal(stepMinutes = 30) {
+/**
+ * Format a library item's `createdAt` (ISO string or Unix-seconds number) into
+ * a friendly relative/short label. Returns empty string if unparsable.
+ */
+function formatCreatedAt(raw) {
+  if (!raw && raw !== 0) return '';
+  let d;
+  if (typeof raw === 'number') {
+    // Unix seconds (backend stores e.g. 1773612943.11244)
+    d = new Date(raw * 1000);
+  } else if (typeof raw === 'string') {
+    d = new Date(raw);
+  } else {
+    return '';
+  }
+  if (Number.isNaN(d.getTime())) return '';
+
   const now = new Date();
-  const candidate = new Date(now.getTime() + stepMinutes * 60 * 1000);
-  const minutes = candidate.getMinutes();
-  const floored = Math.floor(minutes / stepMinutes) * stepMinutes;
-  candidate.setMinutes(floored, 0, 0);
-  const tzOffsetMs = candidate.getTimezoneOffset() * 60000;
-  const local = new Date(candidate.getTime() - tzOffsetMs);
-  return local.toISOString().slice(0, 16);
+  const diffMs = now.getTime() - d.getTime();
+  const diffMin = Math.floor(diffMs / 60000);
+  const diffH = Math.floor(diffMs / 3600000);
+  const diffD = Math.floor(diffMs / 86400000);
+
+  if (diffMin < 1) return 'Just now';
+  if (diffMin < 60) return `${diffMin}m ago`;
+  if (diffH < 24) return `${diffH}h ago`;
+  if (diffD < 7) return `${diffD}d ago`;
+
+  const sameYear = d.getFullYear() === now.getFullYear();
+  return d.toLocaleDateString(undefined, {
+    month: 'short',
+    day: 'numeric',
+    ...(sameYear ? {} : { year: 'numeric' }),
+  });
 }
 
 /** Return tomorrow's date as YYYY-MM-DD. */
@@ -100,52 +124,34 @@ function generateBulkSlots(items, { postsPerDay, startDate }) {
   return slots;
 }
 
-const SOCIAL_PLATFORMS = [
-  'instagram',
-  'tiktok',
-  'youtube',
-  'facebook',
-  'linkedin',
-  'threads',
-  'twitter',
-];
-
-const LIBRARY_CACHE_TTL_MS = 2 * 60 * 1000;
 const PAGE_SIZE = 5;
-
-const libraryCache = {
-  videos: null,
-  videosTotal: 0,
-  videosFetchedAt: 0,
-  carousels: null,
-  carouselsFetchedAt: 0,
-};
 
 function VideoLibrary() {
   const [libraryTab, setLibraryTab] = useState('video'); // 'video' | 'carousel'
-  const [videos, setVideos] = useState([]);
-  const [videosTotal, setVideosTotal] = useState(0);
-  const [carousels, setCarousels] = useState([]);
+  const {
+    videos,
+    total: videosTotal,
+    setVideos,
+    setTotal: setVideosTotal,
+    refresh: refreshVideos,
+  } = useLibraryVideos();
+  const {
+    carousels,
+    setCarousels,
+    refresh: refreshCarousels,
+  } = useLibraryCarousels();
   const [isLoadingVideos, setIsLoadingVideos] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isLoadingCarousels, setIsLoadingCarousels] = useState(false);
-  const [selectedVideo, setSelectedVideo] = useState(null);
-  const [selectedCarousel, setSelectedCarousel] = useState(null);
-  const [caption, setCaption] = useState('');
-  const [timezone, setTimezone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC');
-  const [scheduledFor, setScheduledFor] = useState('');
-  const [publishNow, setPublishNow] = useState(false);
-  const [profileName, setProfileName] = useState('Lumeet Profile');
-  const [profileId, setProfileId] = useState('');
-  const [platformToConnect, setPlatformToConnect] = useState('instagram');
+  const [timezone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC');
   const [accounts, setAccounts] = useState([]);
   const [selectedAccountIds, setSelectedAccountIds] = useState([]);
   const [statusMessage, setStatusMessage] = useState('');
   const [error, setError] = useState('');
-  const [isCreatingProfile, setIsCreatingProfile] = useState(false);
-  const [isConnecting, setIsConnecting] = useState(false);
   const [isLoadingAccounts, setIsLoadingAccounts] = useState(false);
   const [isScheduling, setIsScheduling] = useState(false);
+  // Target passed to the shared ScheduleModal when a library item is clicked.
+  const [scheduleTarget, setScheduleTarget] = useState(null);
 
   // ---- Bulk scheduling state ----
   const [bulkMode, setBulkMode] = useState(false);
@@ -169,29 +175,11 @@ function VideoLibrary() {
   // ---- Data loading ----
 
   const handleLoadVideos = async (force = false) => {
-    const now = Date.now();
-    const videosCacheIsFresh = (
-      !force
-      && Array.isArray(libraryCache.videos)
-      && now - libraryCache.videosFetchedAt < LIBRARY_CACHE_TTL_MS
-    );
-    if (videosCacheIsFresh) {
-      setVideos(libraryCache.videos);
-      setVideosTotal(libraryCache.videosTotal);
-      return;
-    }
-
+    if (!force) return;
     setIsLoadingVideos(true);
     setError('');
     try {
-      const data = await listVideos({ limit: PAGE_SIZE, offset: 0 });
-      const nextVideos = data.videos || [];
-      const total = data.total ?? nextVideos.length;
-      setVideos(nextVideos);
-      setVideosTotal(total);
-      libraryCache.videos = nextVideos;
-      libraryCache.videosTotal = total;
-      libraryCache.videosFetchedAt = Date.now();
+      await refreshVideos();
     } catch (err) {
       setError(err.message);
     } finally {
@@ -206,12 +194,8 @@ function VideoLibrary() {
       const data = await listVideos({ limit: PAGE_SIZE, offset: videos.length });
       const moreVideos = data.videos || [];
       const total = data.total ?? (videos.length + moreVideos.length);
-      const merged = [...videos, ...moreVideos];
-      setVideos(merged);
+      setVideos((prev) => [...prev, ...moreVideos]);
       setVideosTotal(total);
-      libraryCache.videos = merged;
-      libraryCache.videosTotal = total;
-      libraryCache.videosFetchedAt = Date.now();
     } catch (err) {
       setError(err.message);
     } finally {
@@ -255,25 +239,11 @@ function VideoLibrary() {
   }, []);
 
   const handleLoadCarousels = async (force = false) => {
-    const now = Date.now();
-    const carouselsCacheIsFresh = (
-      !force
-      && Array.isArray(libraryCache.carousels)
-      && now - libraryCache.carouselsFetchedAt < LIBRARY_CACHE_TTL_MS
-    );
-    if (carouselsCacheIsFresh) {
-      setCarousels(libraryCache.carousels);
-      return;
-    }
-
+    if (!force) return;
     setIsLoadingCarousels(true);
     setError('');
     try {
-      const data = await listCarousels();
-      const nextCarousels = data.carousels || [];
-      setCarousels(nextCarousels);
-      libraryCache.carousels = nextCarousels;
-      libraryCache.carouselsFetchedAt = Date.now();
+      await refreshCarousels();
     } catch (err) {
       setError(err.message);
     } finally {
@@ -288,7 +258,6 @@ function VideoLibrary() {
     try {
       const data = await listLateAccounts({
         sessionId: DEFAULT_SESSION_ID,
-        profileId: profileId || undefined,
       });
       const normalized = (data.accounts || [])
         .map((acc) => ({
@@ -317,107 +286,47 @@ function VideoLibrary() {
   };
 
   useEffect(() => {
-    handleLoadVideos();
-    handleLoadCarousels();
     handleLoadAccounts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // ---- Actions ----
 
-  const selectVideo = (video) => {
-    setSelectedVideo(video);
-    setCaption('Generated with Lumeet');
-    setScheduledFor(nextSlotDatetimeLocal());
-    setPublishNow(false);
-    setStatusMessage(`Selected video ${video.videoId}.`);
-  };
-
-  const selectCarousel = (carousel) => {
-    setSelectedCarousel(carousel);
-    setStatusMessage(`Selected carousel ${carousel.carouselId}.`);
-  };
-
-  const handleCreateProfile = async () => {
-    setIsCreatingProfile(true);
-    setError('');
+  // Open the shared ScheduleModal by constructing a generation-shaped payload
+  // from a library item. We intentionally omit `generationId` so the modal
+  // doesn't try to patch a non-existent generation record after scheduling.
+  const openVideoSchedule = (video) => {
     setStatusMessage('');
-    try {
-      const data = await createLateProfile({
-        sessionId: DEFAULT_SESSION_ID,
-        name: profileName,
-        description: 'Created from Video Library',
-      });
-      const createdProfileId = data?.profile?._id || '';
-      setProfileId(createdProfileId);
-      setStatusMessage(`Profile created: ${createdProfileId}`);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsCreatingProfile(false);
-    }
+    setError('');
+    setScheduleTarget({
+      type: 'video',
+      label: video.videoId,
+      output: {
+        videoUrl: video.url || '',
+        videoGcs: video.url ? { url: video.url } : null,
+      },
+    });
   };
 
-  const handleConnect = async () => {
-    setIsConnecting(true);
-    setError('');
+  const openCarouselSchedule = (carousel) => {
     setStatusMessage('');
-    try {
-      const redirectUrl = `${window.location.origin}${window.location.pathname}?late_connected=1`;
-      const data = await getLateConnectUrl({
-        platform: platformToConnect,
-        profileId: profileId || undefined,
-        sessionId: DEFAULT_SESSION_ID,
-        redirectUrl,
-      });
-      if (!data.authUrl) throw new Error('Late did not return an authUrl.');
-      window.location.href = data.authUrl;
-    } catch (err) {
-      setError(err.message);
-      setIsConnecting(false);
-    }
+    setError('');
+    setScheduleTarget({
+      type: 'carousel',
+      label: carousel.prompt || carousel.carouselId,
+      output: {
+        mediaUrls: carousel.mediaUrls || [],
+        slides: carousel.slides || [],
+        captionDraft: carousel.captionDraft || carousel.prompt || '',
+        hashtags: carousel.hashtags || [],
+        suggestedScheduledFor: carousel.suggestedScheduledFor || '',
+      },
+    });
   };
 
-  const handleSchedule = async () => {
-    if (!selectedVideo) return;
-    setIsScheduling(true);
-    setError('');
-    setStatusMessage('');
-    try {
-      const selectedAccounts = accounts.filter((acc) => selectedAccountIds.includes(acc._id));
-      const inferredProfileIds = Array.from(
-        new Set(selectedAccounts.map((acc) => acc.profileId).filter(Boolean)),
-      );
-      if (!profileId && inferredProfileIds.length > 1) {
-        throw new Error('Selected accounts belong to multiple profiles. Select accounts from one profile or create/use a profile.');
-      }
-      const resolvedProfileId = profileId || inferredProfileIds[0] || undefined;
-
-      if (!publishNow) {
-        const scheduledIso = toIsoLocal(scheduledFor);
-        if (!scheduledIso) {
-          throw new Error('Pick a valid schedule date/time, or toggle "Publish now".');
-        }
-      }
-
-      const payload = {
-        sessionId: DEFAULT_SESSION_ID,
-        profileId: resolvedProfileId,
-        content: caption,
-        platforms: selectedPlatforms,
-        publishNow,
-        timezone: publishNow ? undefined : timezone,
-        scheduledFor: publishNow ? undefined : toIsoLocal(scheduledFor),
-        mediaUrls: selectedVideo.url ? [selectedVideo.url] : [],
-      };
-      const data = await createLatePost(payload);
-      const postId = data?.post?._id || data?._id || 'created';
-      setStatusMessage(`Post ${publishNow ? 'published' : 'scheduled'} successfully (${postId}).`);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsScheduling(false);
-    }
+  const handleModalScheduled = () => {
+    setScheduleTarget(null);
+    setStatusMessage('Post scheduled successfully.');
   };
 
   // ---- Bulk schedule execution ----
@@ -432,7 +341,7 @@ function VideoLibrary() {
     const inferredProfileIds = Array.from(
       new Set(selectedAccounts.map((acc) => acc.profileId).filter(Boolean)),
     );
-    const resolvedProfileId = profileId || inferredProfileIds[0] || undefined;
+    const resolvedProfileId = inferredProfileIds[0] || undefined;
 
     const results = [];
     setBulkProgress({ current: 0, total: bulkSlots.length, results: [] });
@@ -478,72 +387,53 @@ function VideoLibrary() {
 
   // ---- Render ----
 
-  return (
-    <div className="max-w-6xl mx-auto">
-      <div className="mb-8 text-center">
-        <div className="flex items-center justify-center gap-3">
-          {bulkMode ? (
-            <CalendarRange size={24} className="text-purple-600" />
-          ) : libraryTab === 'video' ? (
-            <Film size={24} className="text-purple-600" />
-          ) : (
-            <ImageIcon size={24} className="text-purple-600" />
-          )}
-          <h2 className="text-3xl font-bold text-gray-900">
-            {bulkMode
-              ? 'Bulk Schedule'
-              : libraryTab === 'video'
-                ? 'Video Library'
-                : 'Carousel Library'}
-          </h2>
-        </div>
-        <p className="text-gray-600 mt-2">
-          {bulkMode
-            ? 'Select videos and carousels, then schedule them across multiple days.'
-            : libraryTab === 'video'
-              ? 'Browse past generated videos and schedule or publish them.'
-              : 'Browse generated carousels and review their slides.'}
-        </p>
-      </div>
+  const activeLibraryTabId = bulkMode ? 'bulk' : libraryTab;
+  const libraryTabs = [
+    { id: 'video', label: 'Videos', Icon: Film },
+    { id: 'carousel', label: 'Carousels', Icon: ImageIcon },
+    { id: 'bulk', label: 'Bulk Schedule', Icon: CalendarRange },
+  ];
+  const handleLibraryTabClick = (id) => {
+    if (id === 'bulk') {
+      if (!bulkMode) setBulkMode(true);
+      else exitBulkMode();
+      return;
+    }
+    if (bulkMode) exitBulkMode();
+    setLibraryTab(id);
+  };
 
-      <div className="mb-6 flex justify-center gap-3">
+  return (
+    <div className="max-w-6xl mx-auto pt-2 pb-6 md:pt-4 md:pb-8">
+      <div className="mb-4 md:mb-6 flex justify-center">
         <div className="inline-flex p-1 rounded-2xl bg-white/70 border border-white/40">
-          <button
-            type="button"
-            onClick={() => { if (bulkMode) exitBulkMode(); setLibraryTab('video'); }}
-            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
-              !bulkMode && libraryTab === 'video'
-                ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white shadow'
-                : 'text-gray-600 hover:text-gray-900'
-            }`}
-          >
-            <Film size={16} />
-            Videos
-          </button>
-          <button
-            type="button"
-            onClick={() => { if (bulkMode) exitBulkMode(); setLibraryTab('carousel'); }}
-            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
-              !bulkMode && libraryTab === 'carousel'
-                ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white shadow'
-                : 'text-gray-600 hover:text-gray-900'
-            }`}
-          >
-            <ImageIcon size={16} />
-            Carousels
-          </button>
-          <button
-            type="button"
-            onClick={() => { if (!bulkMode) { setBulkMode(true); } else { exitBulkMode(); } }}
-            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
-              bulkMode
-                ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white shadow'
-                : 'text-gray-600 hover:text-gray-900'
-            }`}
-          >
-            <CalendarRange size={16} />
-            Bulk Schedule
-          </button>
+          {libraryTabs.map(({ id, label, Icon }) => {
+            const isActive = activeLibraryTabId === id;
+            return (
+              <button
+                key={id}
+                type="button"
+                onClick={() => handleLibraryTabClick(id)}
+                aria-pressed={isActive}
+                className={`inline-flex items-center px-3 py-2 md:px-5 md:py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ease-out ${
+                  isActive
+                    ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white shadow'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                <Icon size={16} className="flex-shrink-0" />
+                <span
+                  className={`overflow-hidden whitespace-nowrap transition-all duration-300 ease-out ${
+                    isActive
+                      ? 'max-w-[160px] opacity-100 ml-2'
+                      : 'max-w-0 opacity-0 ml-0 sm:max-w-[160px] sm:opacity-100 sm:ml-2'
+                  }`}
+                >
+                  {label}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -747,12 +637,9 @@ function VideoLibrary() {
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Timezone</label>
-                  <input
-                    value={timezone}
-                    onChange={(e) => setTimezone(e.target.value)}
-                    className="px-3 py-2 rounded-xl border border-gray-200 focus:border-purple-400 outline-none w-full"
-                    placeholder="Timezone"
-                  />
+                  <div className="px-3 py-2 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-600 w-full truncate">
+                    {timezone}
+                  </div>
                 </div>
               </div>
 
@@ -860,49 +747,45 @@ function VideoLibrary() {
               </p>
             ) : (
               <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                  {videos.map((video) => {
-                    const isSelected = selectedVideo?.videoId === video.videoId;
-                    return (
-                      <button
-                        key={video.videoId}
-                        onClick={() => selectVideo(video)}
-                        className={`text-left rounded-2xl border-2 transition-all overflow-hidden
-                          ${isSelected
-                            ? 'border-purple-500 ring-2 ring-purple-200'
-                            : 'border-gray-200 hover:border-purple-300'
-                          }`}
-                      >
-                        <div className="relative aspect-[9/16] bg-black">
-                          <video
-                            src={video.url}
-                            className="w-full h-full object-contain"
-                            muted
-                            preload="metadata"
-                          />
-                          <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 hover:opacity-100 transition-opacity">
-                            <Play size={36} className="text-white drop-shadow-lg" />
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+                  {videos.map((video) => (
+                    <button
+                      key={video.videoId}
+                      onClick={() => openVideoSchedule(video)}
+                      className="group text-left rounded-2xl border-2 border-gray-200 hover:border-purple-400 transition-all overflow-hidden hover:shadow-md"
+                    >
+                      <div className="relative aspect-[9/16] bg-black">
+                        <video
+                          src={video.url}
+                          className="w-full h-full object-contain"
+                          muted
+                          preload="metadata"
+                        />
+                        {video.extended && (
+                          <span className="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-purple-600/90 text-white text-[10px] font-semibold shadow backdrop-blur-sm">
+                            Extended
+                          </span>
+                        )}
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 text-purple-700 text-xs font-semibold shadow">
+                            <Send size={12} />
+                            Schedule
                           </div>
-                          {isSelected && (
-                            <div className="absolute top-2 right-2">
-                              <CheckCircle2 size={22} className="text-purple-500 drop-shadow" />
-                            </div>
-                          )}
                         </div>
-                        <div className="p-3">
-                          <p className="text-xs text-gray-500">{video.createdAt || ''}</p>
-                          <p className="text-sm font-semibold text-gray-900 truncate">
-                            {video.videoId}
-                          </p>
-                          {video.extended && (
-                            <span className="inline-block mt-1 text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 font-medium">
-                              Extended
-                            </span>
-                          )}
-                        </div>
-                      </button>
-                    );
-                  })}
+                      </div>
+                      {(() => {
+                        const label = formatCreatedAt(video.createdAt);
+                        return label ? (
+                          <div className="px-3 py-2 flex items-center gap-1.5">
+                            <Clock size={11} className="text-gray-400 flex-shrink-0" />
+                            <p className="text-[11px] font-medium text-gray-600 truncate">
+                              {label}
+                            </p>
+                          </div>
+                        ) : null;
+                      })()}
+                    </button>
+                  ))}
                 </div>
                 {hasMoreVideos && (
                   <div className="flex justify-center mt-4">
@@ -926,142 +809,6 @@ function VideoLibrary() {
             )}
           </div>
 
-          {/* Schedule / Publish Section — shown when a video is selected */}
-          {selectedVideo && (
-            <>
-              {/* Preview */}
-              <div className="glass-card border border-white/40 rounded-2xl p-5 mb-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Preview</h3>
-                <div className="flex justify-center">
-                  <div className="w-full max-w-xs aspect-[9/16] rounded-2xl overflow-hidden bg-black shadow-xl">
-                    <video
-                      src={selectedVideo.url}
-                      controls
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Schedule Controls */}
-              <div className="glass-card border border-white/40 rounded-2xl p-5">
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Schedule or Publish</h3>
-
-                {/* Profile */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
-                  <input
-                    value={profileName}
-                    onChange={(e) => setProfileName(e.target.value)}
-                    className="px-3 py-2 rounded-xl border border-gray-200 focus:border-purple-400 outline-none"
-                    placeholder="Profile name"
-                  />
-                  <button
-                    onClick={handleCreateProfile}
-                    disabled={isCreatingProfile || !profileName.trim()}
-                    className="px-4 py-2 rounded-xl bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50"
-                  >
-                    {isCreatingProfile ? 'Creating...' : 'Create Profile'}
-                  </button>
-                </div>
-                <p className="text-xs text-gray-500 mb-3">
-                  Skip if your Late account already has connected accounts.
-                </p>
-
-                {/* Connect */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
-                  <select
-                    value={platformToConnect}
-                    onChange={(e) => setPlatformToConnect(e.target.value)}
-                    className="px-3 py-2 rounded-xl border border-gray-200 focus:border-purple-400 outline-none"
-                  >
-                    {SOCIAL_PLATFORMS.map((p) => (
-                      <option key={p} value={p}>{p}</option>
-                    ))}
-                  </select>
-                  <button
-                    onClick={handleConnect}
-                    disabled={isConnecting}
-                    className="px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-50 flex items-center justify-center gap-2"
-                  >
-                    <Link2 size={16} />
-                    {isConnecting ? 'Opening...' : 'Connect Account'}
-                  </button>
-                  <button
-                    onClick={handleLoadAccounts}
-                    disabled={isLoadingAccounts}
-                    className="px-4 py-2 rounded-xl bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50 flex items-center justify-center gap-2"
-                  >
-                    <RefreshCw size={16} className={isLoadingAccounts ? 'animate-spin' : ''} />
-                    Refresh Accounts
-                  </button>
-                </div>
-
-                {/* Account checkboxes */}
-                {accounts.length > 0 && (
-                  <div className="mb-4 border border-gray-200 rounded-xl p-3 max-h-36 overflow-y-auto">
-                    {accounts.map((acc) => (
-                      <AccountRow
-                        key={acc._id}
-                        account={acc}
-                        checked={selectedAccountIds.includes(acc._id)}
-                        onToggle={(checked) => {
-                          if (checked) {
-                            setSelectedAccountIds((prev) => [...prev, acc._id]);
-                          } else {
-                            setSelectedAccountIds((prev) => prev.filter((id) => id !== acc._id));
-                          }
-                        }}
-                      />
-                    ))}
-                  </div>
-                )}
-
-                {/* Caption */}
-                <textarea
-                  value={caption}
-                  onChange={(e) => setCaption(e.target.value)}
-                  rows={4}
-                  className="w-full mb-3 px-3 py-2 rounded-xl border border-gray-200 focus:border-purple-400 outline-none"
-                  placeholder="Caption with hashtags"
-                />
-
-                {/* Schedule / Publish now */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
-                  <label className="flex items-center gap-2 text-sm text-gray-700 font-medium">
-                    <input
-                      type="checkbox"
-                      checked={publishNow}
-                      onChange={(e) => setPublishNow(e.target.checked)}
-                    />
-                    Publish now
-                  </label>
-                  <input
-                    type="datetime-local"
-                    value={scheduledFor}
-                    onChange={(e) => setScheduledFor(e.target.value)}
-                    disabled={publishNow}
-                    className="px-3 py-2 rounded-xl border border-gray-200 focus:border-purple-400 outline-none disabled:bg-gray-100"
-                  />
-                  <input
-                    value={timezone}
-                    onChange={(e) => setTimezone(e.target.value)}
-                    disabled={publishNow}
-                    className="px-3 py-2 rounded-xl border border-gray-200 focus:border-purple-400 outline-none disabled:bg-gray-100"
-                    placeholder="Timezone"
-                  />
-                </div>
-
-                <button
-                  onClick={handleSchedule}
-                  disabled={isScheduling || selectedPlatforms.length === 0 || !caption.trim() || (!publishNow && !scheduledFor)}
-                  className="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-purple-500 text-white font-semibold hover:from-purple-700 hover:to-purple-600 disabled:opacity-50 flex items-center justify-center gap-2"
-                >
-                  <Send size={16} />
-                  {isScheduling ? 'Sending...' : publishNow ? 'Publish Now' : 'Schedule Post'}
-                </button>
-              </div>
-            </>
-          )}
         </>
       ) : (
         <>
@@ -1083,19 +830,15 @@ function VideoLibrary() {
                 No generated carousels yet. Create one in the <strong>Create</strong> tab and it will appear here.
               </p>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
                 {carousels.map((carousel) => {
-                  const isSelected = selectedCarousel?.carouselId === carousel.carouselId;
                   const coverUrl = carousel.mediaUrls?.[0] || '';
+                  const slideCount = carousel.mediaUrls?.length || 0;
                   return (
                     <button
                       key={carousel.carouselId}
-                      onClick={() => selectCarousel(carousel)}
-                      className={`text-left rounded-2xl border-2 transition-all overflow-hidden
-                        ${isSelected
-                          ? 'border-purple-500 ring-2 ring-purple-200'
-                          : 'border-gray-200 hover:border-purple-300'
-                        }`}
+                      onClick={() => openCarouselSchedule(carousel)}
+                      className="group text-left rounded-2xl border-2 border-gray-200 hover:border-purple-400 transition-all overflow-hidden hover:shadow-md"
                     >
                       <div className="relative aspect-square bg-gray-100">
                         {coverUrl ? (
@@ -1110,20 +853,33 @@ function VideoLibrary() {
                             <ImageIcon size={26} />
                           </div>
                         )}
-                        {isSelected && (
-                          <div className="absolute top-2 right-2">
-                            <CheckCircle2 size={22} className="text-purple-500 drop-shadow" />
-                          </div>
+                        {slideCount > 0 && (
+                          <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-black/55 text-white text-[10px] font-semibold">
+                            {slideCount} slides
+                          </span>
                         )}
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 text-purple-700 text-xs font-semibold shadow">
+                            <Send size={12} />
+                            Schedule
+                          </div>
+                        </div>
                       </div>
                       <div className="p-3">
-                        <p className="text-xs text-gray-500">{carousel.createdAt || ''}</p>
                         <p className="text-sm font-semibold text-gray-900 truncate">
                           {carousel.prompt || carousel.carouselId}
                         </p>
-                        <p className="text-xs text-gray-500 mt-1">
-                          {carousel.mediaUrls?.length || 0} slides
-                        </p>
+                        {(() => {
+                          const label = formatCreatedAt(carousel.createdAt);
+                          return label ? (
+                            <div className="mt-1 flex items-center gap-1.5">
+                              <Clock size={11} className="text-gray-400 flex-shrink-0" />
+                              <p className="text-[11px] font-medium text-gray-600 truncate">
+                                {label}
+                              </p>
+                            </div>
+                          ) : null;
+                        })()}
                       </div>
                     </button>
                   );
@@ -1131,21 +887,6 @@ function VideoLibrary() {
               </div>
             )}
           </div>
-
-          {/* Carousel Preview */}
-          {selectedCarousel && (
-            <div className="glass-card border border-white/40 rounded-2xl p-5">
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Carousel Preview</h3>
-              <p className="text-sm text-gray-600 mb-4">{selectedCarousel.prompt}</p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {(selectedCarousel.mediaUrls || []).map((url) => (
-                  <div key={url} className="aspect-square rounded-xl overflow-hidden bg-gray-100">
-                    <img src={url} alt="" className="w-full h-full object-cover" loading="lazy" />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
         </>
       )}
 
@@ -1156,6 +897,14 @@ function VideoLibrary() {
         </p>
       )}
       {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+
+      {scheduleTarget && (
+        <ScheduleModal
+          generation={scheduleTarget}
+          onClose={() => setScheduleTarget(null)}
+          onScheduled={handleModalScheduled}
+        />
+      )}
     </div>
   );
 }

@@ -4,7 +4,11 @@ import {
   listExtensionVideos,
   listHooks,
   listSounds,
+  listVideos,
+  listCarousels,
 } from './lateApi';
+
+const VIDEO_PAGE_SIZE = 5;
 
 // ---------------------------------------------------------------------------
 // Lightweight pub-sub store shared across the app.
@@ -12,8 +16,8 @@ import {
 // navigating between tabs renders instantly instead of re-hitting the API.
 // ---------------------------------------------------------------------------
 
-function createStore(fetcher, extract) {
-  let state = { data: [], loading: false, loaded: false, error: null };
+function createStore(fetcher, extract, initialData = []) {
+  let state = { data: initialData, loading: false, loaded: false, error: null };
   let pending = null;
   const listeners = new Set();
 
@@ -71,6 +75,21 @@ export const extensionVideoStore = createStore(
 export const hookStore = createStore(listHooks, (d) => d?.hooks);
 export const soundStore = createStore(listSounds, (d) => d?.sounds);
 
+// Generated video library (paginated). Data shape: { items, total }.
+export const videoStore = createStore(
+  () => listVideos({ limit: VIDEO_PAGE_SIZE, offset: 0 }),
+  (d) => ({
+    items: d?.videos || [],
+    total: d?.total ?? (d?.videos?.length || 0),
+  }),
+  { items: [], total: 0 }
+);
+
+export const carouselStore = createStore(
+  listCarousels,
+  (d) => d?.carousels
+);
+
 // ---------------------------------------------------------------------------
 // Asset warm-up: prime the browser HTTP cache so the first render of pickers
 // paints instantly instead of waterfall-loading thumbnails.
@@ -79,6 +98,8 @@ export const soundStore = createStore(listSounds, (d) => d?.sounds);
 const MODEL_WARM_COUNT = 12;
 const HOOK_WARM_COUNT = 6;
 const EXT_VIDEO_WARM_COUNT = 6;
+const LIBRARY_VIDEO_WARM_COUNT = 5;
+const CAROUSEL_WARM_COUNT = 12;
 
 const warmedImages = new Set();
 const warmedVideos = new Set();
@@ -124,6 +145,20 @@ function warmExtensionVideoAssets(videos) {
     .forEach((v) => warmVideoMetadata(v.url));
 }
 
+function warmLibraryVideoAssets(videos) {
+  videos
+    .slice(0, LIBRARY_VIDEO_WARM_COUNT)
+    .forEach((v) => warmVideoMetadata(v.url));
+}
+
+function warmCarouselAssets(carousels) {
+  const slice = carousels.slice(0, CAROUSEL_WARM_COUNT);
+  slice.forEach((c) => {
+    const firstImage = c.mediaUrls?.[0] || c.slides?.[0]?.url;
+    if (firstImage) warmImage(firstImage);
+  });
+}
+
 // ---------------------------------------------------------------------------
 // Public entrypoint — call once on app boot to kick off every fetch in
 // parallel. Safe to call multiple times; stores short-circuit if already
@@ -135,7 +170,7 @@ let preloadPromise = null;
 export function preloadMediaLibrary() {
   if (preloadPromise) return preloadPromise;
   preloadPromise = (async () => {
-    const [models, extVideos, hooks] = await Promise.all([
+    const [models, extVideos, hooks, , videosData, carousels] = await Promise.all([
       modelStore.load().then((items) => {
         warmModelAssets(items);
         return items;
@@ -149,8 +184,16 @@ export function preloadMediaLibrary() {
         return items;
       }),
       soundStore.load(),
+      videoStore.load().then((data) => {
+        warmLibraryVideoAssets(data?.items || []);
+        return data;
+      }),
+      carouselStore.load().then((items) => {
+        warmCarouselAssets(items);
+        return items;
+      }),
     ]);
-    return { models, extVideos, hooks };
+    return { models, extVideos, hooks, videosData, carousels };
   })();
   return preloadPromise;
 }
@@ -213,5 +256,38 @@ export function useSounds() {
     error,
     refresh: () => soundStore.load(true),
     setSounds: soundStore.mutate,
+  };
+}
+
+export function useLibraryVideos() {
+  const { data, loading, loaded, error } = useStore(videoStore);
+  const setVideos = (updater) => {
+    videoStore.mutate((prev) => {
+      const items = typeof updater === 'function' ? updater(prev?.items || []) : updater;
+      return { items: Array.isArray(items) ? items : prev?.items || [], total: prev?.total || 0 };
+    });
+  };
+  const setTotal = (total) => {
+    videoStore.mutate((prev) => ({ items: prev?.items || [], total }));
+  };
+  return {
+    videos: data?.items || [],
+    total: data?.total || 0,
+    loading: loading && !loaded,
+    error,
+    refresh: () => videoStore.load(true),
+    setVideos,
+    setTotal,
+  };
+}
+
+export function useLibraryCarousels() {
+  const { data, loading, loaded, error } = useStore(carouselStore);
+  return {
+    carousels: data,
+    loading: loading && !loaded,
+    error,
+    refresh: () => carouselStore.load(true),
+    setCarousels: carouselStore.mutate,
   };
 }
