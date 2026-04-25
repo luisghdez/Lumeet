@@ -89,6 +89,16 @@ class GenerationStore:
             item = all_items.get(gen_id)
             return item if isinstance(item, dict) else None
 
+    def delete(self, gen_id: str) -> bool:
+        """Remove a generation record from the store. Returns True if it existed."""
+        with self._lock:
+            all_items = self._read_all_unlocked()
+            if gen_id not in all_items:
+                return False
+            del all_items[gen_id]
+            self._write_all_unlocked(all_items)
+            return True
+
     def list_all(self, limit: int = 50) -> List[Dict[str, Any]]:
         with self._lock:
             all_items = self._read_all_unlocked()

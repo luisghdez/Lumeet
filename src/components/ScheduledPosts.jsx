@@ -288,7 +288,7 @@ export default function ScheduledPosts() {
       </div>
 
       {/* Controls bar */}
-      <div className="glass-card border border-white/40 rounded-2xl p-4 mb-6">
+      <div className="glass-card rounded-2xl p-4 mb-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
           {/* Account filter */}
           <div className="flex items-center gap-2 flex-1 min-w-0">
@@ -353,7 +353,7 @@ export default function ScheduledPosts() {
       {viewMode === 'calendar' && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Calendar */}
-          <div className="lg:col-span-2 glass-card border border-white/40 rounded-2xl p-5">
+          <div className="lg:col-span-2 glass-card rounded-2xl p-5">
             <MiniCalendar
               scheduledDates={scheduledDateIsos}
               selectedDate={selectedDay}
@@ -370,7 +370,7 @@ export default function ScheduledPosts() {
           </div>
 
           {/* Day detail panel – desktop sidebar */}
-          <div className="hidden lg:block glass-card border border-white/40 rounded-2xl p-5">
+          <div className="hidden lg:block glass-card rounded-2xl p-5">
             <DayPanel
               selectedDay={selectedDay}
               dayPosts={dayPosts}
@@ -381,7 +381,7 @@ export default function ScheduledPosts() {
 
       {/* List View */}
       {viewMode === 'list' && (
-        <div className="glass-card border border-white/40 rounded-2xl p-5">
+        <div className="glass-card rounded-2xl p-5">
           {sortedPosts.length === 0 ? (
             <EmptyState />
           ) : (

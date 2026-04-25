@@ -37,6 +37,11 @@ Set these before starting `uvicorn`:
 - `LATE_REQUEST_TIMEOUT_SEC` (optional, default `20`)
 - `PUBLIC_BACKEND_BASE_URL` (optional, default `http://127.0.0.1:8000`)
 
+### Video pipeline / Fal.ai (backend)
+
+- `FAL_KEY` or `FAL_AI` (required for Kling motion-control in **Create**)
+- `FAL_MOTION_CLIENT_TIMEOUT_SEC` (optional, default `1800`) — max seconds for the Fal `subscribe` wait (queue + inference). If Kling often needs longer, raise this (e.g. `3600`). The UI step **Motion Control** will show live Fal status while waiting.
+
 ### Carousel + GCS Environment Variables (backend)
 
 - `GCS_BUCKET_NAME` (required for `/api/carousels`)

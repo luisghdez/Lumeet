@@ -137,3 +137,7 @@ if FAL_KEY:
         os.environ["FAL_KEY"] = FAL_KEY
     if not os.environ.get("FAL_AI"):
         os.environ["FAL_AI"] = FAL_KEY
+
+# Max wall-clock time for fal_client.subscribe() on Kling motion-control (queue + inference).
+# Increase for very long reference videos; decrease to fail faster during integration tests.
+FAL_MOTION_CLIENT_TIMEOUT_SEC = _get_int_env("FAL_MOTION_CLIENT_TIMEOUT_SEC", 1800)

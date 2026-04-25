@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Image, Film, Loader2, CheckCircle2, Circle, XCircle, ArrowLeft, Download, X, ToggleLeft, ToggleRight, Sparkles, Plus, Save, User, Trash2 } from 'lucide-react';
-import ScheduleToSocial from './ScheduleToSocial';
+import { Image, Film, Loader2, CheckCircle2, XCircle, ArrowLeft, X, ToggleLeft, ToggleRight, Sparkles, Plus, Save, User, Trash2 } from 'lucide-react';
 import CarouselStudio from './CarouselStudio';
 import RemixStudio from './RemixStudio';
 import {
@@ -11,23 +10,6 @@ import {
   deleteExtensionVideo,
 } from '../lib/lateApi';
 import { useModels, useExtensionVideos } from '../lib/mediaLibrary';
-
-const BASE_PIPELINE_STEPS = [
-  { key: 'scene_detection', label: 'Scene Detection' },
-  { key: 'frame_extraction', label: 'Frame Extraction' },
-  { key: 'caption_detection', label: 'Caption Detection' },
-  { key: 'scene_recreation', label: 'Scene Recreation' },
-  { key: 'motion_control', label: 'Motion Control (Kling AI)' },
-  { key: 'caption_overlay', label: 'Caption Overlay' },
-];
-
-const EXTENDED_PIPELINE_STEPS = [
-  { key: 'audio_extraction', label: 'Audio Extraction' },
-  { key: 'video_concatenation', label: 'Video Concatenation' },
-  { key: 'audio_replacement', label: 'Audio Replacement' },
-];
-
-const POLL_INTERVAL = 2000;
 
 // ---------- File Drop Zone ----------
 
@@ -51,8 +33,14 @@ function DropZone({ label, icon: Icon, accept, file, onFileSelect, preview }) {
 
   return (
     <div
-      className={`relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed transition-all duration-200 cursor-pointer
-        ${isDragging ? 'border-purple-500 bg-purple-50/50' : file ? 'border-purple-300 bg-purple-50/30' : 'border-gray-300 hover:border-purple-400 hover:bg-purple-50/20'}
+      className={`relative flex flex-col items-center justify-center rounded-2xl border-2 transition-all duration-200 cursor-pointer shadow-[inset_0_1px_0_0_rgba(255,255,255,0.35)]
+        ${
+          isDragging
+            ? 'border-dashed border-nimbus-600/45 bg-white/28'
+            : file
+              ? 'border-solid border-nimbus-500/40 bg-white/25'
+              : 'border-dashed border-nimbus-400/45 bg-white/15 hover:border-nimbus-500/50 hover:bg-white/22'
+        }
         ${file ? 'p-3' : 'p-5 md:p-8'}`}
       onClick={() => inputRef.current?.click()}
       onDrop={handleDrop}
@@ -109,38 +97,6 @@ function DropZone({ label, icon: Icon, accept, file, onFileSelect, preview }) {
 }
 
 
-// ---------- Step Progress Item ----------
-
-function StepItem({ step, index }) {
-  const statusIcon = {
-    pending: <Circle size={18} className="text-gray-300" />,
-    running: <Loader2 size={18} className="text-purple-600 animate-spin" />,
-    completed: <CheckCircle2 size={18} className="text-green-500" />,
-    failed: <XCircle size={18} className="text-red-500" />,
-  };
-
-  return (
-    <div
-      className="flex items-center gap-3 py-3 px-4 rounded-xl transition-colors duration-200"
-      style={{
-        opacity: 0,
-        animation: `slideDownFade 0.4s ease-out ${index * 100}ms forwards`,
-      }}
-    >
-      {statusIcon[step.status] || statusIcon.pending}
-      <div className="flex-1">
-        <p className={`text-sm font-medium ${step.status === 'running' ? 'text-purple-700' : step.status === 'completed' ? 'text-gray-700' : 'text-gray-500'}`}>
-          {step.label}
-        </p>
-        {step.message && step.status !== 'pending' && (
-          <p className="text-xs text-gray-500 mt-0.5">{step.message}</p>
-        )}
-      </div>
-    </div>
-  );
-}
-
-
 // ---------- Extended Toggle ----------
 
 function ExtendedToggle({ extended, onChange }) {
@@ -149,10 +105,10 @@ function ExtendedToggle({ extended, onChange }) {
       type="button"
       onClick={() => onChange(!extended)}
       aria-pressed={extended}
-      className={`flex items-center justify-between gap-3 w-full sm:w-auto px-4 py-2.5 rounded-xl border-2 transition-all duration-300 text-sm font-medium
+      className={`flex items-center justify-between gap-3 w-full sm:w-auto px-4 py-2.5 rounded-xl border-2 transition-all duration-300 text-sm font-medium shadow-[inset_0_1px_0_0_rgba(255,255,255,0.35)]
         ${extended
-          ? 'border-purple-400 bg-purple-50 text-purple-700'
-          : 'border-gray-200 bg-white text-gray-500 hover:border-gray-300'}`}
+          ? 'border-nimbus-500/45 bg-white/35 text-nimbus-900'
+          : 'border-nimbus-400/45 bg-white/40 text-nimbus-700 hover:border-nimbus-500/45'}`}
     >
       <span className="flex items-center gap-2.5">
         {extended
@@ -217,10 +173,10 @@ function ModelPicker({ models, selectedModelId, onSelect, onUploadNew, onDelete,
             <button
               type="button"
               onClick={() => onSelect(isSelected ? null : m.modelId)}
-              className={`relative w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-200
+              className={`relative w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-200 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.25)]
                 ${isSelected
-                  ? 'border-purple-500 ring-2 ring-purple-300 shadow-md'
-                  : 'border-gray-200 hover:border-purple-300'}`}
+                  ? 'border-nimbus-600 ring-2 ring-white/70 shadow-md'
+                  : 'border-nimbus-400/40 hover:border-nimbus-500/48'}`}
             >
               <img src={m.url} alt={m.label || 'model'} className="w-full h-full object-cover" />
               {isSelected && (
@@ -248,7 +204,7 @@ function ModelPicker({ models, selectedModelId, onSelect, onUploadNew, onDelete,
           type="button"
           onClick={() => inputRef.current?.click()}
           disabled={uploading}
-          className="w-16 h-16 rounded-xl border-2 border-dashed border-gray-300 hover:border-purple-400 flex flex-col items-center justify-center transition-all duration-200"
+          className="w-16 h-16 rounded-xl border-2 border-dashed border-nimbus-400/45 bg-white/10 hover:border-nimbus-500/50 hover:bg-white/18 flex flex-col items-center justify-center transition-all duration-200 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.35)]"
         >
           {uploading ? <Loader2 size={18} className="text-purple-500 animate-spin" /> : <Plus size={18} className="text-gray-400" />}
         </button>
@@ -307,10 +263,10 @@ function ExtensionVideoPicker({ videos, selectedId, onSelect, onUploadNew, onDel
               <button
                 type="button"
                 onClick={() => onSelect(isSelected ? null : v.extensionVideoId)}
-                className={`relative w-20 h-14 rounded-xl overflow-hidden border-2 transition-all duration-200
+                className={`relative w-20 h-14 rounded-xl overflow-hidden border-2 transition-all duration-200 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.25)]
                   ${isSelected
-                    ? 'border-purple-500 ring-2 ring-purple-300 shadow-md'
-                    : 'border-gray-200 hover:border-purple-300'}`}
+                    ? 'border-nimbus-600 ring-2 ring-white/70 shadow-md'
+                    : 'border-nimbus-400/40 hover:border-nimbus-500/48'}`}
               >
                 <video
                   src={v.url}
@@ -346,7 +302,7 @@ function ExtensionVideoPicker({ videos, selectedId, onSelect, onUploadNew, onDel
             type="button"
             onClick={() => inputRef.current?.click()}
             disabled={uploading}
-            className="w-20 h-14 rounded-xl border-2 border-dashed border-gray-300 hover:border-purple-400 flex flex-col items-center justify-center transition-all duration-200"
+            className="w-20 h-14 rounded-xl border-2 border-dashed border-nimbus-400/45 bg-white/10 hover:border-nimbus-500/50 hover:bg-white/18 flex flex-col items-center justify-center transition-all duration-200 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.35)]"
           >
             {uploading ? <Loader2 size={16} className="text-purple-500 animate-spin" /> : <Plus size={16} className="text-gray-400" />}
           </button>
@@ -367,20 +323,17 @@ function ExtensionVideoPicker({ videos, selectedId, onSelect, onUploadNew, onDel
 
 // ---------- Main Component ----------
 
-function CreateSection() {
+function CreateSection({ onVideoGenerationStarted }) {
   const [createTab, setCreateTab] = useState('video'); // 'video' | 'carousel' | 'remix'
-  const [viewState, setViewState] = useState('upload'); // 'upload' | 'processing' | 'result' | 'error'
+  const [viewState, setViewState] = useState('upload'); // 'upload' | 'error'
   const [videoFile, setVideoFile] = useState(null);
   const [additionalVideoFile, setAdditionalVideoFile] = useState(null);
   const [extended, setExtended] = useState(false);
   const [videoPreview, setVideoPreview] = useState(null);
   const [additionalVideoPreview, setAdditionalVideoPreview] = useState(null);
-  const [jobId, setJobId] = useState(null);
-  const [steps, setSteps] = useState(BASE_PIPELINE_STEPS.map(s => ({ ...s, status: 'pending', message: '' })));
   const [error, setError] = useState(null);
-  const [resultUrl, setResultUrl] = useState(null);
-  const [videoGcsUrl, setVideoGcsUrl] = useState(null);
-  const pollRef = useRef(null);
+  const [isSubmittingVideo, setIsSubmittingVideo] = useState(false);
+  const [queueState, setQueueState] = useState('idle'); // 'idle' | 'confirming' | 'queued'
   const uploadScrollRef = useRef(null);
   const previousExtendedRef = useRef(extended);
 
@@ -449,53 +402,6 @@ function CreateSection() {
     }
   }, [additionalVideoFile]);
 
-  // Cleanup poll on unmount
-  useEffect(() => {
-    return () => {
-      if (pollRef.current) clearInterval(pollRef.current);
-    };
-  }, []);
-
-  // Poll job status
-  const startPolling = useCallback((id) => {
-    if (pollRef.current) clearInterval(pollRef.current);
-
-    pollRef.current = setInterval(async () => {
-      try {
-        const resp = await fetch(`/api/jobs/${id}`);
-        if (!resp.ok) return;
-        const data = await resp.json();
-
-        setSteps(data.steps);
-
-        if (data.status === 'completed') {
-          clearInterval(pollRef.current);
-          pollRef.current = null;
-          // Prefer GCS public URL for playback/scheduling; fall back to local endpoint.
-          const gcsUrl = data.video_gcs?.url || null;
-          setVideoGcsUrl(gcsUrl);
-          setResultUrl(gcsUrl || `/api/jobs/${id}/result`);
-          setViewState('result');
-        } else if (data.status === 'failed') {
-          clearInterval(pollRef.current);
-          pollRef.current = null;
-          setError(data.error || 'Pipeline failed.');
-          setViewState('error');
-        }
-      } catch (err) {
-        console.error('Poll error:', err);
-      }
-    }, POLL_INTERVAL);
-  }, []);
-
-  const allStepsForMode = useCallback((isExtended) => {
-    const base = BASE_PIPELINE_STEPS.map(s => ({ ...s, status: 'pending', message: '' }));
-    if (isExtended) {
-      return [...base, ...EXTENDED_PIPELINE_STEPS.map(s => ({ ...s, status: 'pending', message: '' }))];
-    }
-    return base;
-  }, []);
-
   // Derive whether the form is submittable
   const hasModel = selectedModelId;
   const hasExtVideo = additionalVideoFile || selectedExtVideoId;
@@ -503,11 +409,11 @@ function CreateSection() {
 
   // Submit job — uses the new /api/generations/video endpoint
   const handleSubmit = useCallback(async () => {
-    if (!canSubmit) return;
+    if (!canSubmit || isSubmittingVideo) return;
 
-    setViewState('processing');
-    setSteps(allStepsForMode(extended));
     setError(null);
+    setQueueState('confirming');
+    setIsSubmittingVideo(true);
 
     const formData = new FormData();
     if (selectedModelId) {
@@ -524,14 +430,17 @@ function CreateSection() {
     }
 
     try {
-      const data = await startVideoGeneration(formData);
-      setJobId(data.jobId);
-      startPolling(data.jobId);
+      await startVideoGeneration(formData);
+      onVideoGenerationStarted?.();
+      setQueueState('queued');
     } catch (err) {
+      setQueueState('idle');
       setError(err.message);
       setViewState('error');
+    } finally {
+      setIsSubmittingVideo(false);
     }
-  }, [canSubmit, selectedModelId, videoFile, additionalVideoFile, selectedExtVideoId, extended, allStepsForMode, startPolling]);
+  }, [canSubmit, isSubmittingVideo, selectedModelId, videoFile, additionalVideoFile, selectedExtVideoId, extended, onVideoGenerationStarted]);
 
   // Model library handlers
   const handleModelUploaded = useCallback((newModel) => {
@@ -567,18 +476,14 @@ function CreateSection() {
 
   // Reset everything
   const handleReset = useCallback(() => {
-    if (pollRef.current) clearInterval(pollRef.current);
     setViewState('upload');
     setVideoFile(null);
     setAdditionalVideoFile(null);
     setSelectedModelId(null);
     setSelectedExtVideoId(null);
     setExtended(false);
-    setJobId(null);
-    setSteps(BASE_PIPELINE_STEPS.map(s => ({ ...s, status: 'pending', message: '' })));
     setError(null);
-    setResultUrl(null);
-    setVideoGcsUrl(null);
+    setQueueState('idle');
   }, []);
 
   const handleUploadViewScrollIntent = useCallback((e) => {
@@ -589,6 +494,44 @@ function CreateSection() {
   }, [extended]);
 
   const renderVideoContent = () => {
+    if (queueState !== 'idle') {
+      const isConfirming = queueState === 'confirming';
+
+      return (
+        <div className="h-full flex items-center justify-center px-4 py-8">
+          <div
+            className="create-form-enter w-full max-w-sm rounded-3xl glass-card p-6 text-center shadow-xl"
+            role="status"
+            aria-live="polite"
+          >
+            <div className="mx-auto mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-white/70">
+              {isConfirming ? (
+                <Loader2 size={26} className="text-nimbus-700 animate-spin" />
+              ) : (
+                <CheckCircle2 size={28} className="text-emerald-600" />
+              )}
+            </div>
+            <h2 className="font-display text-2xl font-medium tracking-tight text-ink-950">
+              {isConfirming ? 'Confirming queue…' : 'Queued'}
+            </h2>
+            <p className="mt-2 text-sm text-nimbus-700">
+              {isConfirming ? 'One moment.' : 'Track it in Generation Center.'}
+            </p>
+
+            {!isConfirming && (
+              <button
+                type="button"
+                onClick={handleReset}
+                className="mt-5 inline-flex items-center justify-center rounded-2xl bg-ink-950 px-5 py-3 text-sm font-semibold text-white shadow-pill transition-transform duration-200 hover:-translate-y-0.5"
+              >
+                Create another video
+              </button>
+            )}
+          </div>
+        </div>
+      );
+    }
+
     // ---------- Upload View ----------
     if (viewState === 'upload') {
       return (
@@ -606,7 +549,7 @@ function CreateSection() {
                 Model Image
                 {selectedModelId && <span className="text-[10px] bg-purple-100 text-purple-600 px-1.5 py-0.5 rounded-full font-semibold">SAVED</span>}
               </h3>
-              <div className="glass-card border border-white/40 rounded-2xl p-3">
+              <div className="glass-card rounded-2xl p-3">
                 <ModelPicker
                   models={savedModels}
                   selectedModelId={selectedModelId}
@@ -658,7 +601,7 @@ function CreateSection() {
                   Extension Video
                   {selectedExtVideoId && <span className="text-[10px] bg-purple-100 text-purple-600 px-1.5 py-0.5 rounded-full font-semibold">SAVED</span>}
                 </h3>
-                <div className="glass-card border border-white/40 rounded-2xl p-3">
+                <div className="glass-card rounded-2xl p-3">
                   <ExtensionVideoPicker
                     videos={savedExtensionVideos}
                     selectedId={selectedExtVideoId}
@@ -669,7 +612,7 @@ function CreateSection() {
                   />
                   {/* Or upload a one-time video */}
                   {!selectedExtVideoId && (
-                    <div className="mt-3 pt-3 border-t border-gray-100">
+                    <div className="mt-3 pt-3 border-t border-nimbus-400/20">
                       <DropZone
                         label="Upload one-time extension video"
                         icon={Film}
@@ -686,103 +629,24 @@ function CreateSection() {
 
             <div className="flex justify-center mb-8 md:mb-12">
               <button
+                type="button"
                 onClick={handleSubmit}
-                disabled={!canSubmit}
-                className={`px-8 py-4 font-semibold rounded-2xl transition-all duration-200 shadow-lg hover:shadow-xl
-                  ${canSubmit
+                disabled={!canSubmit || isSubmittingVideo}
+                className={`px-8 py-4 font-semibold rounded-2xl transition-all duration-200 shadow-lg hover:shadow-xl inline-flex items-center justify-center gap-2 min-w-[12rem]
+                  ${canSubmit && !isSubmittingVideo
                     ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white hover:from-purple-700 hover:to-purple-600'
                     : 'bg-gray-200 text-gray-400 cursor-not-allowed shadow-none'}`}
               >
-                Generate Video
+                {isSubmittingVideo ? (
+                  <>
+                    <Loader2 size={20} className="animate-spin shrink-0" />
+                    Sending…
+                  </>
+                ) : (
+                  'Generate Video'
+                )}
               </button>
             </div>
-          </div>
-        </div>
-      );
-    }
-
-    // ---------- Processing View ----------
-    if (viewState === 'processing') {
-      const completedCount = steps.filter(s => s.status === 'completed').length;
-      const progressPercent = Math.round((completedCount / steps.length) * 100);
-
-      return (
-        <div className="h-full flex flex-col items-center justify-center px-4 py-8">
-          <div className="w-full max-w-lg flex-1 flex flex-col justify-center">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Generating Your Video</h2>
-              <p className="text-gray-600">This may take a few minutes...</p>
-            </div>
-
-            {/* Progress bar */}
-            <div className="w-full h-2 bg-gray-200 rounded-full mb-8 overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-purple-500 to-purple-600 rounded-full transition-all duration-500"
-                style={{ width: `${progressPercent}%` }}
-              />
-            </div>
-
-            {/* Steps list */}
-            <div className="glass-card border border-white/40 rounded-2xl divide-y divide-white/20">
-              {steps.map((step, i) => (
-                <StepItem key={step.key} step={step} index={i} />
-              ))}
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    // ---------- Result View ----------
-    if (viewState === 'result') {
-      return (
-        <div className="h-full flex flex-col items-center justify-center px-4 py-8">
-          <div className="w-full max-w-4xl flex-1 flex flex-col justify-center items-center">
-            <div className="text-center mb-6">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-green-100 mb-4">
-                <CheckCircle2 size={28} className="text-green-600" />
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-1">Video Ready!</h2>
-              <p className="text-gray-600">Your generated video is ready to download</p>
-            </div>
-
-            {/* Video Player */}
-            {resultUrl && (
-              <div className="w-full max-w-xs aspect-[9/16] rounded-2xl overflow-hidden bg-black shadow-xl mb-6">
-                <video
-                  src={resultUrl}
-                  controls
-                  autoPlay
-                  className="w-full h-full object-contain"
-                />
-              </div>
-            )}
-
-            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-              <button
-                onClick={handleReset}
-                className="w-full sm:w-auto px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all duration-200"
-              >
-                <span className="flex items-center gap-2">
-                  <ArrowLeft size={18} />
-                  New Video
-                </span>
-              </button>
-              {resultUrl && (
-                <a
-                  href={resultUrl}
-                  download="lumeet_output.mp4"
-                  className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-500 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-purple-600 transition-all duration-200"
-                >
-                  <span className="flex items-center gap-2">
-                    <Download size={18} />
-                    Download
-                  </span>
-                </a>
-              )}
-            </div>
-
-            <ScheduleToSocial jobId={jobId} resultUrl={resultUrl} videoGcsUrl={videoGcsUrl} />
           </div>
         </div>
       );

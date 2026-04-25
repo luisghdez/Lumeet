@@ -17,7 +17,7 @@ function VariantRow({ column, processingTime, isLoadingView = false }) {
 
   return (
     <div
-      className={`glass-card border border-white/40 rounded-2xl p-3 opacity-0 transform -translate-y-4 ${!isLoadingView ? 'hover:shadow-lg' : ''} transition-all duration-200`}
+      className={`glass-card rounded-2xl p-3 opacity-0 transform -translate-y-4 ${!isLoadingView ? 'hover:shadow-lg' : ''} transition-all duration-200`}
       style={{
         animation: `slideDownFade 0.6s ease-out ${column.delay}ms forwards`
       }}
@@ -210,7 +210,7 @@ function VariantLab() {
         {/* Quantity Selection */}
         <div>
           <label className="block text-sm font-semibold text-gray-900 mb-3">Quantity</label>
-          <div className="glass-card border border-white/40 rounded-2xl p-4 h-20 flex items-center">
+          <div className="glass-card rounded-2xl p-4 h-20 flex items-center">
             <div className="flex items-center justify-between w-full">
               <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -232,7 +232,7 @@ function VariantLab() {
         {/* Change Type Selection */}
         <div>
           <label className="block text-sm font-semibold text-gray-900 mb-3">What to Change</label>
-          <div className="glass-card border border-white/40 rounded-2xl p-4 h-20 flex items-center">
+          <div className="glass-card rounded-2xl p-4 h-20 flex items-center">
             <div className="flex items-center justify-between w-full">
               <button
                 onClick={() => {

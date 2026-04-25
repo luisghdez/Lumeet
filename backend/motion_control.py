@@ -17,8 +17,13 @@ Usage (as library):
 import os
 import sys
 import time
+from typing import Callable, Optional
+
 import requests
 import fal_client
+
+from config import FAL_MOTION_CLIENT_TIMEOUT_SEC
+from cancellation import PipelineCancelled
 
 # ---------------------------------------------------------------------------
 # Config
@@ -58,14 +63,17 @@ def upload_file(path: str, label: str) -> str:
     return url
 
 
-def download_file(url: str, dest: str) -> None:
+def download_file(url: str, dest: str, cancel_check: Optional[Callable[[], bool]] = None) -> None:
     """Download a file from a URL to a local path."""
     print(f"  Downloading result → {dest}")
     resp = requests.get(url, stream=True, timeout=300)
     resp.raise_for_status()
     with open(dest, "wb") as f:
         for chunk in resp.iter_content(chunk_size=8192):
-            f.write(chunk)
+            if cancel_check and cancel_check():
+                raise PipelineCancelled("Cancelled by user")
+            if chunk:
+                f.write(chunk)
     size_mb = os.path.getsize(dest) / (1024 * 1024)
     print(f"  ✓ Saved ({size_mb:.1f} MB)")
 
@@ -79,6 +87,8 @@ def generate_motion_video(
     video_path: str,
     output_path: str,
     prompt: str = "A young woman reacting to the camera",
+    on_fal_status: Optional[Callable[[str], None]] = None,
+    cancel_check: Optional[Callable[[], bool]] = None,
 ) -> str:
     """
     Generate a motion-control video using Fal AI's Kling model.
@@ -98,9 +108,18 @@ def generate_motion_video(
     Raises:
         FileNotFoundError: If image or video files don't exist.
         EnvironmentError: If FAL_KEY is not set.
-        RuntimeError: If the API returns no video URL.
+        RuntimeError: If the API returns no video URL, or if ``client_timeout`` is exceeded
+        (see ``FAL_MOTION_CLIENT_TIMEOUT_SEC`` in config).
+
+    Optional ``on_fal_status`` receives short status strings while Fal queues/renders
+    (wired to the UI as motion_control step progress).
     """
+    def check_cancelled() -> None:
+        if cancel_check and cancel_check():
+            raise PipelineCancelled("Cancelled by user")
+
     # Validate
+    check_cancelled()
     _ensure_fal_key()
 
     if not os.path.isfile(image_path):
@@ -113,9 +132,12 @@ def generate_motion_video(
         os.makedirs(out_dir, exist_ok=True)
 
     # Upload files
+    check_cancelled()
     print("  Uploading files to fal storage …")
     image_url = upload_file(image_path, "reference image")
+    check_cancelled()
     video_url = upload_file(video_path, "reference video")
+    check_cancelled()
 
     # Submit request
     print("  Submitting motion-control request …")
@@ -128,30 +150,102 @@ def generate_motion_video(
     }
     print(f"  Model: {MODEL_ID}")
 
+    fal_wait_started = time.time()
+    _last_ui_emit = [0.0]  # throttle JSON writes for noisy InProgress ticks
+
+    def _emit_ui(msg: str, *, min_interval_sec: float = 0.0) -> None:
+        if not msg or not on_fal_status:
+            return
+        now = time.time()
+        if min_interval_sec > 0 and (now - _last_ui_emit[0]) < min_interval_sec:
+            return
+        _last_ui_emit[0] = now
+        on_fal_status(msg)
+
     def on_queue_update(status):
         """Callback to print queue status updates."""
+        check_cancelled()
+        elapsed_s = int(time.time() - fal_wait_started)
         if isinstance(status, fal_client.Queued):
-            print(f"  ⏳ Queued (position: {status.position})")
+            pos = getattr(status, "position", "?")
+            print(f"  ⏳ Queued (position: {pos})")
+            _emit_ui(f"Fal queue: position {pos} (~{elapsed_s}s)")
         elif isinstance(status, fal_client.InProgress):
             logs = getattr(status, "logs", None)
             if logs:
                 for log in logs:
                     msg = log.get("message", "") if isinstance(log, dict) else str(log)
                     print(f"  🔄 {msg}")
+                    if msg:
+                        _emit_ui(f"Fal: {msg} (~{elapsed_s}s)")
             else:
                 print("  🔄 In progress …")
+                # Fal sends many InProgress ticks; avoid hammering the generation store.
+                _emit_ui(f"Fal rendering… (~{elapsed_s}s)", min_interval_sec=12.0)
         elif isinstance(status, fal_client.Completed):
             print("  ✅ Completed!")
+            _emit_ui("Fal finished, downloading result…")
+        check_cancelled()
 
     start_time = time.time()
-    result = fal_client.subscribe(
-        MODEL_ID,
-        arguments=arguments,
-        with_logs=True,
-        on_queue_update=on_queue_update,
-    )
+    timeout = FAL_MOTION_CLIENT_TIMEOUT_SEC if FAL_MOTION_CLIENT_TIMEOUT_SEC > 0 else None
+    handle = None
+
+    try:
+        # Use the queue handle API so user cancellation can cancel the remote Fal request.
+        handle = fal_client.submit(MODEL_ID, arguments=arguments)
+        request_id = getattr(handle, "request_id", "")
+        if request_id:
+            _emit_ui(f"Fal request queued ({request_id[:8]})")
+
+        for status in handle.iter_events(with_logs=True, interval=2.0):
+            check_cancelled()
+            on_queue_update(status)
+            if timeout is not None and (time.time() - start_time) > timeout:
+                raise TimeoutError()
+
+        check_cancelled()
+        result = handle.get()
+    except PipelineCancelled:
+        if handle is not None:
+            try:
+                handle.cancel()
+                print("  Fal request cancelled.")
+            except Exception as cancel_exc:
+                print(f"  Fal cancel failed (non-fatal): {cancel_exc}")
+        raise
+    except AttributeError:
+        # Older fal-client without submit/iter_events; cancellation can still stop
+        # between queue callbacks, but a silent blocking subscribe cannot be interrupted.
+        subscribe_kw: dict = {
+            "arguments": arguments,
+            "with_logs": True,
+            "on_queue_update": on_queue_update,
+        }
+        if timeout is not None:
+            subscribe_kw["client_timeout"] = timeout
+        try:
+            result = fal_client.subscribe(MODEL_ID, **subscribe_kw)
+        except TypeError:
+            subscribe_kw.pop("client_timeout", None)
+            result = fal_client.subscribe(MODEL_ID, **subscribe_kw)
+    except TimeoutError as exc:
+        raise RuntimeError(
+            f"Fal AI motion-control exceeded the client timeout ({timeout}s). "
+            "Kling can take a long time for long videos — increase FAL_MOTION_CLIENT_TIMEOUT_SEC "
+            "in backend/.env (default 1800 = 30 minutes)."
+        ) from exc
+    except Exception as exc:
+        err = str(exc).lower()
+        if timeout and ("timeout" in err or "timed out" in err):
+            raise RuntimeError(
+                f"Fal AI motion-control timed out after ~{timeout}s: {exc!r}. "
+                "Try raising FAL_MOTION_CLIENT_TIMEOUT_SEC."
+            ) from exc
+        raise
     elapsed = time.time() - start_time
     print(f"  Generation finished in {elapsed:.0f}s")
+    check_cancelled()
 
     # Download the output video
     video_info = result.get("video", {})
@@ -162,7 +256,8 @@ def generate_motion_video(
             f"Fal AI returned no video URL in the result. Full result: {result}"
         )
 
-    download_file(video_download_url, output_path)
+    download_file(video_download_url, output_path, cancel_check=cancel_check)
+    check_cancelled()
 
     return output_path
 

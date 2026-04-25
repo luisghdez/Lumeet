@@ -147,6 +147,13 @@ export async function cancelGeneration(generationId) {
   });
 }
 
+/** Remove a completed or failed generation from the Generation Center list. */
+export async function dismissGeneration(generationId) {
+  return request(`/api/generations/${encodeURIComponent(generationId)}`, {
+    method: 'DELETE',
+  });
+}
+
 // ---------------------------------------------------------------------------
 // Hook Library API
 // ---------------------------------------------------------------------------

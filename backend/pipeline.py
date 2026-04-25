@@ -36,6 +36,7 @@ from audio_extractor import extract_audio
 from video_concatenator import concatenate_videos
 from audio_replacer import replace_audio
 from config import ADDITIONAL_VIDEO_PATH
+from cancellation import PipelineCancelled
 
 
 def _noop_callback(step_key: str, event: str, message: str = "") -> None:
@@ -52,6 +53,7 @@ def run_full_pipeline(
     on_step: Optional[Callable[[str, str, str], None]] = None,
     extended: bool = False,
     additional_video_path: Optional[str] = None,
+    cancel_check: Optional[Callable[[], bool]] = None,
 ) -> dict:
     """
     Run the full video generation pipeline.
@@ -88,7 +90,12 @@ def run_full_pipeline(
     """
     cb = on_step or _noop_callback
 
+    def check_cancelled() -> None:
+        if cancel_check and cancel_check():
+            raise PipelineCancelled("Cancelled by user")
+
     # --- Validate inputs ---
+    check_cancelled()
     if not os.path.isfile(video_path):
         raise FileNotFoundError(f"Input video not found: {video_path}")
     if not os.path.isfile(model_image_path):
@@ -101,6 +108,7 @@ def run_full_pipeline(
     # =========================================================================
     # Step 1: Scene Detection -- trim at first scene cut
     # =========================================================================
+    check_cancelled()
     cb("scene_detection", "start", "Detecting scene changes...")
     print("=" * 60)
     print("[1/6] Scene Detection")
@@ -108,6 +116,7 @@ def run_full_pipeline(
 
     trimmed_path = os.path.join(output_dir, "trimmed.mp4")
     trim_result = crop_to_first_scene(video_path, output_path=trimmed_path)
+    check_cancelled()
 
     if trim_result is not None:
         result["trimmed_video"] = trim_result["output_path"]
@@ -125,6 +134,7 @@ def run_full_pipeline(
     # =========================================================================
     # Step 2: Frame Extraction -- screenshot at second 1
     # =========================================================================
+    check_cancelled()
     cb("frame_extraction", "start", "Extracting reference frame...")
     print("=" * 60)
     print("[2/6] Frame Extraction (1s)")
@@ -134,6 +144,7 @@ def run_full_pipeline(
     result["screenshot"] = extract_frame(
         working_video, timestamp_sec=1.0, output_path=screenshot_path
     )
+    check_cancelled()
     msg = f"Screenshot saved"
     print(f"  {msg}")
     cb("frame_extraction", "complete", msg)
@@ -142,12 +153,14 @@ def run_full_pipeline(
     # =========================================================================
     # Step 3: Caption Detection -- OpenAI Vision
     # =========================================================================
+    check_cancelled()
     cb("caption_detection", "start", "Detecting on-screen captions...")
     print("=" * 60)
     print("[3/6] Caption Detection (GPT-4o Vision)")
     print("=" * 60)
 
     caption = detect_captions_summary(working_video, interval_sec=0.5)
+    check_cancelled()
     result["caption"] = caption
 
     if caption:
@@ -162,6 +175,7 @@ def run_full_pipeline(
     # =========================================================================
     # Step 4: Scene Recreation -- Gemini Nano Banana Pro
     # =========================================================================
+    check_cancelled()
     cb("scene_recreation", "start", "Recreating scene with Gemini...")
     print("=" * 60)
     print("[4/6] Scene Recreation (Gemini Nano Banana Pro)")
@@ -174,6 +188,7 @@ def run_full_pipeline(
         output_path=recreated_path,
         prompt=prompt,
     )
+    check_cancelled()
     msg = "Recreated scene saved"
     print(f"  {msg}")
     cb("scene_recreation", "complete", msg)
@@ -182,18 +197,27 @@ def run_full_pipeline(
     # =========================================================================
     # Step 5: Motion Control -- Fal AI Kling
     # =========================================================================
+    check_cancelled()
     cb("motion_control", "start", "Generating video with Kling AI (this may take a few minutes)...")
     print("=" * 60)
     print("[5/6] Motion Control (Fal AI Kling 2.6)")
     print("=" * 60)
 
     raw_video_path = os.path.join(output_dir, "generated_raw.mp4")
+
+    def _fal_status(msg: str) -> None:
+        if msg:
+            cb("motion_control", "progress", msg)
+
     result["raw_video"] = generate_motion_video(
         result["recreated_scene"],
         working_video,
         raw_video_path,
         prompt=motion_prompt,
+        on_fal_status=_fal_status,
+        cancel_check=cancel_check,
     )
+    check_cancelled()
     msg = "Video generated"
     print(f"  {msg}")
     cb("motion_control", "complete", msg)
@@ -202,6 +226,7 @@ def run_full_pipeline(
     # =========================================================================
     # Step 6: Caption Overlay -- burn caption into the video
     # =========================================================================
+    check_cancelled()
     cb("caption_overlay", "start", "Adding caption overlay...")
     print("=" * 60)
     print("[6/6] Caption Overlay")
@@ -214,6 +239,7 @@ def run_full_pipeline(
             result["caption"],
             output_path=final_path,
         )
+        check_cancelled()
         msg = "Caption overlaid on video"
         print(f"  {msg}")
     else:
@@ -228,6 +254,7 @@ def run_full_pipeline(
     # Extended Pipeline Steps (if enabled)
     # =========================================================================
     if extended:
+        check_cancelled()
         # Determine additional video path
         if additional_video_path is None:
             additional_video_path = ADDITIONAL_VIDEO_PATH
@@ -238,6 +265,7 @@ def run_full_pipeline(
             )
 
         # Step 7: Audio Extraction
+        check_cancelled()
         cb("audio_extraction", "start", "Extracting audio from original video...")
         print("=" * 60)
         print("[7/9] Audio Extraction")
@@ -247,12 +275,14 @@ def run_full_pipeline(
         result["extracted_audio"] = extract_audio(
             video_path, output_path=extracted_audio_path
         )
+        check_cancelled()
         msg = "Audio extracted from original video"
         print(f"  {msg}")
         cb("audio_extraction", "complete", msg)
         print()
 
         # Step 8: Video Concatenation
+        check_cancelled()
         cb("video_concatenation", "start", "Concatenating videos...")
         print("=" * 60)
         print("[8/9] Video Concatenation")
@@ -264,12 +294,14 @@ def run_full_pipeline(
             additional_video_path,
             output_path=concatenated_path,
         )
+        check_cancelled()
         msg = "Videos concatenated"
         print(f"  {msg}")
         cb("video_concatenation", "complete", msg)
         print()
 
         # Step 9: Audio Replacement
+        check_cancelled()
         cb("audio_replacement", "start", "Replacing audio with original...")
         print("=" * 60)
         print("[9/9] Audio Replacement")
@@ -281,6 +313,7 @@ def run_full_pipeline(
             result["extracted_audio"],
             output_path=extended_final_path,
         )
+        check_cancelled()
         msg = "Audio replaced with original"
         print(f"  {msg}")
         cb("audio_replacement", "complete", msg)

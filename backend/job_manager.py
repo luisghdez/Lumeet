@@ -72,6 +72,7 @@ class Job:
     error: Optional[str] = None
     created_at: float = field(default_factory=time.time)
     completed_at: Optional[float] = None
+    cancel_requested: bool = False
 
     # Paths to uploaded files (set by the API layer)
     video_path: Optional[str] = None
@@ -155,8 +156,26 @@ class JobManager:
     def mark_processing(self, job_id: str) -> None:
         with self._lock:
             job = self._jobs.get(job_id)
-            if job:
+            if job and not job.cancel_requested:
                 job.status = JobStatus.PROCESSING
+
+    def request_cancel(self, job_id: str, error: str = "Cancelled by user") -> bool:
+        """Signal a running worker to stop at the next cancellation check."""
+        with self._lock:
+            job = self._jobs.get(job_id)
+            if not job:
+                return False
+            job.cancel_requested = True
+            job.status = JobStatus.FAILED
+            job.error = error
+            job.current_step = None
+            job.completed_at = time.time()
+            return True
+
+    def is_cancel_requested(self, job_id: str) -> bool:
+        with self._lock:
+            job = self._jobs.get(job_id)
+            return bool(job and job.cancel_requested)
 
     def step_start(self, job_id: str, step_key: str, message: str = "") -> None:
         with self._lock:
@@ -168,6 +187,16 @@ class JobManager:
             if step:
                 step.status = StepStatus.RUNNING
                 step.message = message or f"Running {step.label}..."
+
+    def step_progress(self, job_id: str, step_key: str, message: str = "") -> None:
+        """Update the running step's message only (e.g. Fal queue / inference updates)."""
+        with self._lock:
+            job = self._jobs.get(job_id)
+            if not job:
+                return
+            step = self._find_step(job, step_key)
+            if step and step.status == StepStatus.RUNNING and message:
+                step.message = message
 
     def step_complete(self, job_id: str, step_key: str, message: str = "") -> None:
         with self._lock:
@@ -193,6 +222,8 @@ class JobManager:
         with self._lock:
             job = self._jobs.get(job_id)
             if job:
+                if job.cancel_requested:
+                    return
                 job.status = JobStatus.COMPLETED
                 job.result_path = result_path
                 job.result = result
@@ -220,6 +251,8 @@ class JobManager:
                 self.step_complete(job_id, step_key, message)
             elif event == "fail":
                 self.step_fail(job_id, step_key, message)
+            elif event == "progress":
+                self.step_progress(job_id, step_key, message)
 
         return callback
 

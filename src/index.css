@@ -3,44 +3,128 @@
 @tailwind utilities;
 
 @layer base {
+  html,
   body {
-    @apply bg-gradient-to-br from-purple-100 via-pink-50 to-blue-50;
-    min-height: 100vh;
+    font-family: 'Inter Tight', Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: #1a2533; /* nimbus-900 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  
+
+  body {
+    /* Cloudscape backdrop: layered radials over a cool blue/slate gradient. */
+    background:
+      radial-gradient(ellipse 80% 60% at 75% 0%, rgba(220, 232, 244, 0.85) 0%, rgba(220, 232, 244, 0) 60%),
+      radial-gradient(ellipse 90% 70% at 15% 100%, rgba(140, 178, 217, 0.55) 0%, rgba(140, 178, 217, 0) 60%),
+      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 70%),
+      linear-gradient(180deg, #d6e3ef 0%, #c2d4e7 35%, #a9c1da 70%, #92aece 100%);
+    min-height: 100vh;
+    background-attachment: fixed;
+  }
+
   #root {
     @apply min-h-screen;
   }
 }
 
 @layer utilities {
-  .glass {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+  /* ===== Frosted surfaces ===== */
+
+  .glass-pane {
+    background: rgba(255, 255, 255, 0.32);
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.52);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.42),
+      0 0 0 1px rgba(91, 122, 157, 0.14);
   }
-  
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(24px) saturate(170%);
+    -webkit-backdrop-filter: blur(24px) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.45),
+      0 0 0 1px rgba(91, 122, 157, 0.16);
+  }
+
+  .glass-nav {
+    background: rgba(13, 20, 32, 0.35);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: white;
+  }
+
+  .glass-ink {
+    background: rgba(13, 20, 32, 0.78);
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: white;
+  }
+
+  /* Legacy aliases — keep until every component has been migrated. */
+  .glass {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
   .glass-heavy {
     background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(40px) saturate(200%);
-    -webkit-backdrop-filter: blur(40px) saturate(200%);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
   }
-  
-  .glass-card {
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(40px) saturate(200%);
-    -webkit-backdrop-filter: blur(40px) saturate(200%);
+
+  /* ===== Pill buttons (spectreAI-style) ===== */
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 pl-5 pr-1.5 py-1.5 rounded-full bg-ink-950 text-white text-sm font-medium tracking-tight transition-transform duration-200 hover:-translate-y-0.5;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 8px 24px -12px rgba(10, 20, 32, 0.45);
   }
-  
+
+  .btn-primary .arrow-chip {
+    @apply inline-flex items-center justify-center w-7 h-7 rounded-full bg-white text-ink-950;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 pl-5 pr-1.5 py-1.5 rounded-full bg-white text-ink-950 text-sm font-medium tracking-tight transition-transform duration-200 hover:-translate-y-0.5;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 8px 24px -12px rgba(10, 20, 32, 0.25);
+  }
+
+  .btn-secondary .arrow-chip {
+    @apply inline-flex items-center justify-center w-7 h-7 rounded-full bg-ink-950 text-white;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium tracking-tight text-nimbus-900 transition-colors;
+  }
+
+  .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.45);
+  }
+
+  /* ===== Misc ===== */
+
+  .hairline {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
-  
+
+  /* ===== Existing animations (preserved for current components) ===== */
+
   @keyframes slideDown {
     from {
       transform: translateY(-20px);
@@ -51,7 +135,7 @@
       opacity: 1;
     }
   }
-  
+
   @keyframes slideDownFade {
     from {
       transform: translateY(-16px);
@@ -75,6 +159,79 @@
     100% {
       opacity: 1;
       transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes createFormResetIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .create-form-enter {
+    animation: createFormResetIn 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* ---------- Generation Center popover ---------- */
+  @keyframes generationCenterIn {
+    0% {
+      opacity: 0;
+      transform: translate3d(10px, -12px, 0) scale(0.92);
+    }
+    58% {
+      opacity: 1;
+      transform: translate3d(0, 2px, 0) scale(1.01);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  @keyframes generationCenterInReduced {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .generation-center-popover {
+    transform-origin: top right;
+    will-change: transform, opacity;
+  }
+
+  .generation-center-popover:not(.generation-center-popover-open) {
+    opacity: 0;
+    transform: translate3d(8px, -10px, 0) scale(0.92);
+    pointer-events: none;
+    visibility: hidden;
+    transition:
+      opacity 220ms ease-out,
+      transform 260ms cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 0ms linear 260ms;
+  }
+
+  .generation-center-popover.generation-center-popover-open {
+    visibility: visible;
+    pointer-events: auto;
+    transition: none;
+    animation: generationCenterIn 400ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .generation-center-popover.generation-center-popover-open {
+      animation: generationCenterInReduced 140ms ease-out forwards;
+    }
+    .generation-center-popover:not(.generation-center-popover-open) {
+      transition-duration: 100ms, 100ms, 0ms;
+      transition-delay: 0ms, 0ms, 100ms;
     }
   }
 
@@ -138,4 +295,3 @@
     will-change: opacity, transform;
   }
 }
-

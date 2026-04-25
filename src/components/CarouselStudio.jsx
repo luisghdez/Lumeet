@@ -89,7 +89,7 @@ export default function CarouselStudio() {
       <div className="w-full max-w-2xl flex-1 flex flex-col justify-center">
 
         <div className="space-y-4">
-          <div className="rounded-2xl border border-gray-200 bg-white/70 px-4 py-3.5 shadow-sm">
+          <div className="rounded-2xl border border-nimbus-400/32 bg-white/70 px-4 py-3.5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_0_0_1px_rgba(91,122,157,0.12)]">
             <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">
               Prompt
             </label>
@@ -151,7 +151,7 @@ export default function CarouselStudio() {
           onClick={() => setShowAdvanced(false)}
         >
           <div
-            className="w-full mx-2 sm:mx-auto sm:max-w-3xl glass-card border border-white/40 rounded-2xl p-5 md:p-6 space-y-5 max-h-[90vh] sm:max-h-[85vh] overflow-y-auto"
+            className="w-full mx-2 sm:mx-auto sm:max-w-3xl glass-card rounded-2xl p-5 md:p-6 space-y-5 max-h-[90vh] sm:max-h-[85vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between">
@@ -179,7 +179,7 @@ export default function CarouselStudio() {
                       className={`text-left rounded-xl border px-3 py-2.5 transition ${
                         hookStyle === option.id
                           ? 'border-purple-400 bg-purple-50'
-                          : 'border-gray-200 bg-white/80 hover:border-purple-300'
+                          : 'border-nimbus-400/35 bg-white/80 hover:border-nimbus-500/42'
                       }`}
                     >
                       <p className="text-sm font-semibold text-gray-900">{option.name}</p>
@@ -202,7 +202,7 @@ export default function CarouselStudio() {
                       className={`text-left rounded-xl border px-3 py-2.5 transition ${
                         carouselStyle === option.id
                           ? 'border-purple-400 bg-purple-50'
-                          : 'border-gray-200 bg-white/80 hover:border-purple-300'
+                          : 'border-nimbus-400/35 bg-white/80 hover:border-nimbus-500/42'
                       }`}
                     >
                       <p className="text-sm font-semibold text-gray-900">{option.name}</p>
@@ -220,7 +220,7 @@ export default function CarouselStudio() {
               <select
                 value={timezone}
                 onChange={(e) => setTimezone(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 bg-white/80 px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-purple-300 transition"
+                className="w-full rounded-xl border border-nimbus-400/35 bg-white/80 px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-nimbus-500/45 transition shadow-[inset_0_1px_0_0_rgba(255,255,255,0.4)]"
               >
                 {timezoneOptions.map((tz) => (
                   <option key={tz} value={tz}>

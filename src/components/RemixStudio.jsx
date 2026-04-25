@@ -51,10 +51,10 @@ function HookPicker({ hooks, selectedHookId, onSelect, loading }) {
             key={hook.hookId}
             type="button"
             onClick={() => onSelect(hook.hookId)}
-            className={`relative group rounded-xl overflow-hidden border-2 transition-all duration-200 aspect-[9/16]
+            className={`relative group rounded-xl overflow-hidden border-2 transition-all duration-200 aspect-[9/16] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]
               ${isSelected
-                ? 'border-purple-500 ring-2 ring-purple-300 shadow-lg'
-                : 'border-gray-200 hover:border-purple-300'}`}
+                ? 'border-nimbus-600 ring-2 ring-white/65 shadow-lg'
+                : 'border-nimbus-400/40 hover:border-nimbus-500/48'}`}
           >
             <video
               src={hook.url}
@@ -156,11 +156,11 @@ function SoundSelector({ sounds, selectedSoundId, originalSoundId, onSelect, loa
             <button
               type="button"
               onClick={() => onSelect(opt.id)}
-              className={`inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium border-2 transition-all duration-200
+              className={`inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium border-2 transition-all duration-200 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.35)]
                 ${opt.url ? 'rounded-l-xl border-r-0' : 'rounded-xl'}
                 ${isSelected
-                  ? 'border-purple-500 bg-purple-50 text-purple-700'
-                  : 'border-gray-200 bg-white text-gray-600 hover:border-purple-300'}`}
+                  ? 'border-nimbus-500/45 bg-white/45 text-nimbus-900'
+                  : 'border-nimbus-400/38 bg-white/40 text-nimbus-800 hover:border-nimbus-500/45'}`}
             >
               {opt.icon || <Volume2 size={14} />}
               <span className="truncate max-w-[120px]">{opt.label}</span>
@@ -178,10 +178,10 @@ function SoundSelector({ sounds, selectedSoundId, originalSoundId, onSelect, loa
                 type="button"
                 onClick={() => togglePreview(opt.id)}
                 title={isPlaying ? 'Stop preview' : 'Preview sound'}
-                className={`inline-flex items-center justify-center w-8 h-full py-2 rounded-r-xl border-2 border-l-0 transition-all duration-200
+                className={`inline-flex items-center justify-center w-8 h-full py-2 rounded-r-xl border-2 border-l-0 transition-all duration-200 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.35)]
                   ${isSelected
-                    ? 'border-purple-500 bg-purple-50 text-purple-600 hover:bg-purple-100'
-                    : 'border-gray-200 bg-white text-gray-400 hover:text-purple-500 hover:border-purple-300'}`}
+                    ? 'border-nimbus-500/45 bg-white/45 text-nimbus-900 hover:bg-white/55'
+                    : 'border-nimbus-400/38 bg-white/40 text-nimbus-600 hover:text-nimbus-900 hover:border-nimbus-500/45'}`}
               >
                 {isPlaying ? <Volume2 size={13} className="animate-pulse" /> : <Play size={13} />}
               </button>
@@ -249,8 +249,14 @@ function ExtensionDropZone({ file, onFileSelect }) {
 
   return (
     <div
-      className={`relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed transition-all duration-200 cursor-pointer
-        ${isDragging ? 'border-purple-500 bg-purple-50/50' : file ? 'border-purple-300 bg-purple-50/30' : 'border-gray-300 hover:border-purple-400 hover:bg-purple-50/20'}
+      className={`relative flex flex-col items-center justify-center rounded-2xl border-2 transition-all duration-200 cursor-pointer shadow-[inset_0_1px_0_0_rgba(255,255,255,0.35)]
+        ${
+          isDragging
+            ? 'border-dashed border-nimbus-600/45 bg-white/28'
+            : file
+              ? 'border-solid border-nimbus-500/40 bg-white/25'
+              : 'border-dashed border-nimbus-400/45 bg-white/15 hover:border-nimbus-500/50 hover:bg-white/22'
+        }
         ${file ? 'p-3' : 'p-6'}`}
       onClick={() => inputRef.current?.click()}
       onDrop={handleDrop}
@@ -428,7 +434,7 @@ function RemixStudio() {
               <Film size={16} className="text-purple-500" />
               Select Hook Video
             </h3>
-            <div className="glass-card border border-white/40 rounded-2xl p-4">
+            <div className="glass-card rounded-2xl p-4">
               <HookPicker
                 hooks={hooks}
                 selectedHookId={selectedHookId}
@@ -449,8 +455,8 @@ function RemixStudio() {
               onChange={(e) => setCaption(e.target.value)}
               placeholder="Enter caption text to overlay on the video…"
               rows={3}
-              className="w-full rounded-2xl border-2 border-gray-200 px-4 py-3 text-sm text-gray-800 placeholder-gray-400
-                focus:border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-100 transition-all duration-200 resize-none"
+              className="w-full rounded-2xl border-2 border-nimbus-400/38 bg-white/50 px-4 py-3 text-sm text-gray-800 placeholder-nimbus-500 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.4)]
+                focus:border-nimbus-500/45 focus:outline-none focus:ring-2 focus:ring-white/55 transition-all duration-200 resize-none"
             />
           </section>
 
@@ -460,7 +466,7 @@ function RemixStudio() {
               <Music size={16} className="text-purple-500" />
               Sound
             </h3>
-            <div className="glass-card border border-white/40 rounded-2xl p-4">
+            <div className="glass-card rounded-2xl p-4">
               <SoundSelector
                 sounds={sounds}
                 selectedSoundId={selectedSoundId}
@@ -520,7 +526,7 @@ function RemixStudio() {
           </div>
 
           {/* Steps list */}
-          <div className="glass-card border border-white/40 rounded-2xl divide-y divide-white/20">
+          <div className="glass-card rounded-2xl divide-y divide-nimbus-400/15">
             {steps.map((step, i) => (
               <StepItem key={step.key} step={step} index={i} />
             ))}

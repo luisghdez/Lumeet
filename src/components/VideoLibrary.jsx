@@ -441,7 +441,7 @@ function VideoLibrary() {
         /* ===================== BULK SCHEDULE MODE ===================== */
         <>
           {/* Videos grid — multi-select */}
-          <div className="glass-card border border-white/40 rounded-2xl p-5 mb-6">
+          <div className="glass-card rounded-2xl p-5 mb-6">
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-lg font-bold text-gray-900">Videos</h3>
               <div className="flex items-center gap-2">
@@ -512,7 +512,7 @@ function VideoLibrary() {
           </div>
 
           {/* Carousels grid — multi-select */}
-          <div className="glass-card border border-white/40 rounded-2xl p-5 mb-6">
+          <div className="glass-card rounded-2xl p-5 mb-6">
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-lg font-bold text-gray-900">Carousels</h3>
               <div className="flex items-center gap-2">
@@ -575,7 +575,7 @@ function VideoLibrary() {
 
           {/* Bulk config + preview — shown when items are selected */}
           {bulkItems.length > 0 && (
-            <div className="glass-card border border-white/40 rounded-2xl p-5 mb-6">
+            <div className="glass-card rounded-2xl p-5 mb-6">
               <h3 className="text-lg font-bold text-gray-900 mb-4">
                 Schedule {bulkItems.length} Post{bulkItems.length > 1 ? 's' : ''}
               </h3>
@@ -729,7 +729,7 @@ function VideoLibrary() {
       ) : libraryTab === 'video' ? (
         <>
           {/* Video Gallery */}
-          <div className="glass-card border border-white/40 rounded-2xl p-5 mb-6">
+          <div className="glass-card rounded-2xl p-5 mb-6">
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-lg font-bold text-gray-900">Generated Videos</h3>
               <button
@@ -813,7 +813,7 @@ function VideoLibrary() {
       ) : (
         <>
           {/* Carousel Gallery */}
-          <div className="glass-card border border-white/40 rounded-2xl p-5 mb-6">
+          <div className="glass-card rounded-2xl p-5 mb-6">
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-lg font-bold text-gray-900">Generated Carousels</h3>
               <button

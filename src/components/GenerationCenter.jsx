@@ -9,21 +9,22 @@ import {
   X,
   ChevronDown,
   CalendarClock,
+  Trash2,
 } from 'lucide-react';
-import { listGenerations, cancelGeneration } from '../lib/lateApi';
+import { listGenerations, cancelGeneration, dismissGeneration } from '../lib/lateApi';
 
 const POLL_INTERVAL = 2500;
 
 function statusIcon(status) {
-  if (status === 'completed') return <CheckCircle2 size={16} className="text-green-500" />;
-  if (status === 'failed') return <XCircle size={16} className="text-red-500" />;
-  if (status === 'processing') return <Loader2 size={16} className="text-purple-600 animate-spin" />;
-  return <Loader2 size={16} className="text-gray-400" />;
+  if (status === 'completed') return <CheckCircle2 size={16} className="text-emerald-400" />;
+  if (status === 'failed') return <XCircle size={16} className="text-red-400" />;
+  if (status === 'processing') return <Loader2 size={16} className="text-white animate-spin" />;
+  return <Loader2 size={16} className="text-white/40" />;
 }
 
 function typeIcon(type) {
-  if (type === 'carousel') return <Image size={14} className="text-pink-500" />;
-  return <Video size={14} className="text-indigo-500" />;
+  if (type === 'carousel') return <Image size={14} className="text-nimbus-300" />;
+  return <Video size={14} className="text-nimbus-200" />;
 }
 
 function timeSince(ts) {
@@ -39,11 +40,13 @@ function hasActive(gens) {
   return gens.some((g) => g.status === 'queued' || g.status === 'processing');
 }
 
-export default function GenerationCenter({ onSchedule, refreshKey }) {
+export default function GenerationCenter({ onSchedule, refreshKey, focusKey }) {
   const [open, setOpen] = useState(false);
   const [generations, setGenerations] = useState([]);
   const [cancellingById, setCancellingById] = useState({});
   const [cancelErrorById, setCancelErrorById] = useState({});
+  const [dismissingById, setDismissingById] = useState({});
+  const [dismissErrorById, setDismissErrorById] = useState({});
   const pollRef = useRef(null);
   const panelRef = useRef(null);
 
@@ -99,6 +102,18 @@ export default function GenerationCenter({ onSchedule, refreshKey }) {
     })();
   }, [refreshKey, fetchGenerations, startPolling]);
 
+  // New run from Create (video): refetch, resume polling, open panel so the job is visible.
+  useEffect(() => {
+    if (focusKey === undefined || focusKey === 0) return;
+    (async () => {
+      const gens = await fetchGenerations();
+      if (hasActive(gens)) {
+        startPolling();
+      }
+      setOpen(true);
+    })();
+  }, [focusKey, fetchGenerations, startPolling]);
+
   // Close on outside click
   useEffect(() => {
     function handle(e) {
@@ -138,34 +153,52 @@ export default function GenerationCenter({ onSchedule, refreshKey }) {
     }
   }, [fetchGenerations, startPolling, stopPolling]);
 
+  const handleDismiss = useCallback(async (generationId) => {
+    setDismissingById((prev) => ({ ...prev, [generationId]: true }));
+    setDismissErrorById((prev) => ({ ...prev, [generationId]: '' }));
+    try {
+      await dismissGeneration(generationId);
+      await fetchGenerations();
+    } catch (err) {
+      setDismissErrorById((prev) => ({
+        ...prev,
+        [generationId]: err?.message || 'Could not dismiss.',
+      }));
+    } finally {
+      setDismissingById((prev) => ({ ...prev, [generationId]: false }));
+    }
+  }, [fetchGenerations]);
+
   const hasCount = activeCount > 0 || completedCount > 0;
   const mobileCount = activeCount > 0 ? activeCount : completedCount;
-  const mobileBadgeTone = activeCount > 0 ? 'bg-purple-500' : 'bg-green-500';
+  const mobileBadgeTone = activeCount > 0 ? 'bg-white text-ink-950' : 'bg-emerald-400 text-ink-950';
 
   return (
     <div ref={panelRef} className="fixed top-3 right-3 sm:top-5 sm:right-5 z-50">
-      {/* Trigger button */}
+      {/* Trigger pill (ink-frosted, matches the spectreAI primary CTA language) */}
       <button
         onClick={() => setOpen((p) => !p)}
         aria-expanded={open}
         aria-label="Generations"
-        className="relative flex items-center gap-2 px-2.5 py-2 sm:px-3.5 rounded-2xl glass-card border border-white/40 shadow-lg hover:shadow-xl transition-all duration-200"
+        className="relative flex items-center gap-2 pl-2 pr-2 sm:pl-3 sm:pr-3 py-1.5 rounded-full glass-ink shadow-pill hover:-translate-y-0.5 transition-transform duration-200"
       >
-        {activeCount > 0 ? (
-          <Loader2 size={18} className="text-purple-600 animate-spin" />
-        ) : (
-          <Activity size={18} className="text-purple-600" />
-        )}
+        <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/15">
+          {activeCount > 0 ? (
+            <Loader2 size={14} className="text-white animate-spin" />
+          ) : (
+            <Activity size={14} className="text-white" />
+          )}
+        </span>
 
         {/* Desktop label */}
-        <span className="hidden sm:inline text-sm font-semibold text-gray-800">
+        <span className="hidden sm:inline text-sm font-medium tracking-tight text-white">
           {activeCount > 0 ? `${activeCount} running` : 'Generations'}
         </span>
 
-        {/* Mobile-only count pill (icon + count only) */}
+        {/* Mobile-only count pill */}
         {hasCount && (
           <span
-            className={`sm:hidden min-w-[20px] h-5 flex items-center justify-center rounded-full ${mobileBadgeTone} text-white text-[11px] font-bold px-1.5`}
+            className={`sm:hidden min-w-[20px] h-5 flex items-center justify-center rounded-full ${mobileBadgeTone} text-[11px] font-semibold px-1.5`}
           >
             {mobileCount}
           </span>
@@ -173,41 +206,46 @@ export default function GenerationCenter({ onSchedule, refreshKey }) {
 
         {/* Desktop completed badge */}
         {completedCount > 0 && activeCount === 0 && (
-          <span className="hidden sm:inline-flex ml-1 min-w-[20px] h-5 items-center justify-center rounded-full bg-green-500 text-white text-xs font-bold px-1.5">
+          <span className="hidden sm:inline-flex ml-1 min-w-[20px] h-5 items-center justify-center rounded-full bg-emerald-400 text-ink-950 text-xs font-semibold px-1.5">
             {completedCount}
           </span>
         )}
 
         <ChevronDown
           size={14}
-          className={`hidden sm:inline text-gray-500 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          className={`hidden sm:inline text-white/70 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
         />
       </button>
 
-      {/* Popover panel — always mounted so it can animate open/close */}
+      {/* Popover — CSS enter/exit (see .generation-center-popover in index.css) */}
       <div
         aria-hidden={!open}
-        className={`absolute right-0 mt-2 w-[calc(100vw-1.5rem)] sm:w-96 max-w-sm max-h-[70vh] rounded-2xl glass-heavy border border-white/40 shadow-2xl overflow-hidden flex flex-col origin-top-right transform-gpu transition-all duration-200 ease-out ${
-          open
-            ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto'
-            : 'opacity-0 scale-95 -translate-y-1 pointer-events-none'
+        className={`generation-center-popover absolute right-0 mt-2 w-[calc(100vw-1.5rem)] sm:w-96 max-w-sm max-h-[70vh] rounded-3xl glass-ink shadow-pill overflow-hidden flex flex-col transform-gpu ${
+          open ? 'generation-center-popover-open' : ''
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-white/20">
-          <h3 className="font-bold text-gray-900 text-sm">Generation Center</h3>
+        <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.22em] text-white/50 font-medium">
+              Activity
+            </p>
+            <h3 className="font-display font-medium text-white text-base tracking-tight">
+              Generation Center
+            </h3>
+          </div>
           <button
             onClick={() => setOpen(false)}
-            className="p-1 rounded-lg hover:bg-gray-100 transition-colors"
+            className="p-1.5 rounded-full hover:bg-white/10 transition-colors"
           >
-            <X size={14} className="text-gray-500" />
+            <X size={14} className="text-white/70" />
           </button>
         </div>
 
         {/* List */}
         <div className="flex-1 overflow-y-auto">
           {generations.length === 0 ? (
-            <div className="px-4 py-8 text-center text-sm text-gray-500">
+            <div className="px-5 py-10 text-center text-sm text-white/60">
               No generation jobs yet. Start one from Create or Carousel Studio.
             </div>
           ) : (
@@ -218,8 +256,11 @@ export default function GenerationCenter({ onSchedule, refreshKey }) {
                   gen={gen}
                   onSchedule={onSchedule}
                   onCancel={handleCancel}
+                  onDismiss={handleDismiss}
                   isCancelling={Boolean(cancellingById[gen.generationId])}
                   cancelError={cancelErrorById[gen.generationId]}
+                  isDismissing={Boolean(dismissingById[gen.generationId])}
+                  dismissError={dismissErrorById[gen.generationId]}
                 />
               ))}
             </div>
@@ -231,14 +272,24 @@ export default function GenerationCenter({ onSchedule, refreshKey }) {
 }
 
 
-function GenerationRow({ gen, onSchedule, onCancel, isCancelling, cancelError }) {
+function GenerationRow({
+  gen,
+  onSchedule,
+  onCancel,
+  onDismiss,
+  isCancelling,
+  cancelError,
+  isDismissing,
+  dismissError,
+}) {
   const isActive = gen.status === 'queued' || gen.status === 'processing';
   const isCompleted = gen.status === 'completed';
   const isFailed = gen.status === 'failed';
   const isScheduled = isCompleted && gen.scheduled;
+  const canDismiss = isCompleted || isFailed;
 
   return (
-    <div className="px-4 py-3 hover:bg-white/30 transition-colors">
+    <div className="px-4 py-3 hover:bg-white/5 transition-colors">
       <div className="flex items-start gap-3">
         {/* Type + Status icon */}
         <div className="flex flex-col items-center gap-1 pt-0.5">
@@ -248,23 +299,46 @@ function GenerationRow({ gen, onSchedule, onCancel, isCancelling, cancelError })
 
         {/* Content */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2">
-            <p className="text-sm font-semibold text-gray-900 truncate">{gen.label || gen.type}</p>
-            <span className="text-[10px] text-gray-400 flex-shrink-0">
-              {timeSince(gen.createdAt)}
-            </span>
+          <div className="flex items-start justify-between gap-2">
+            <div className="flex items-center gap-2 min-w-0 flex-1">
+              <p className="text-sm font-medium text-white truncate tracking-tight">
+                {gen.label || gen.type}
+              </p>
+              <span className="text-[10px] text-white/40 flex-shrink-0">
+                {timeSince(gen.createdAt)}
+              </span>
+            </div>
+            {canDismiss && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDismiss && onDismiss(gen.generationId);
+                }}
+                disabled={isDismissing}
+                title="Dismiss from list"
+                aria-label="Dismiss from list"
+                className="flex-shrink-0 p-1.5 rounded-lg text-white/50 hover:text-white hover:bg-white/10 disabled:opacity-50 transition-colors"
+              >
+                {isDismissing ? (
+                  <Loader2 size={14} className="animate-spin" />
+                ) : (
+                  <Trash2 size={14} strokeWidth={2} />
+                )}
+              </button>
+            )}
           </div>
 
           {/* Progress bar for active jobs */}
           {isActive && (
             <div className="mt-1.5">
-              <div className="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
+              <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-purple-500 to-purple-600 rounded-full transition-all duration-500"
+                  className="h-full bg-white rounded-full transition-all duration-500"
                   style={{ width: `${gen.progress || 0}%` }}
                 />
               </div>
-              <p className="text-[11px] text-gray-500 mt-1">
+              <p className="text-[11px] text-white/50 mt-1">
                 {gen.currentStep
                   ? `${gen.currentStep} — ${gen.progress || 0}%`
                   : 'Queued...'}
@@ -274,40 +348,44 @@ function GenerationRow({ gen, onSchedule, onCancel, isCancelling, cancelError })
 
           {/* Error for failed */}
           {isFailed && (
-            <p className="text-[11px] text-red-500 mt-1 line-clamp-2">{gen.error}</p>
+            <p className="text-[11px] text-red-300 mt-1 line-clamp-2">{gen.error}</p>
+          )}
+
+          {dismissError && (
+            <p className="text-[11px] text-red-300 mt-1 line-clamp-2">{dismissError}</p>
           )}
 
           {isActive && (
-            <div className="mt-1.5">
+            <div className="mt-2">
               <button
                 onClick={() => onCancel && onCancel(gen.generationId)}
                 disabled={isCancelling}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-50 text-red-700 hover:bg-red-100 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-red-500/15 text-red-200 hover:bg-red-500/25 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
               >
                 {isCancelling ? <Loader2 size={12} className="animate-spin" /> : <XCircle size={12} />}
                 {isCancelling ? 'Cancelling...' : 'Cancel'}
               </button>
               {cancelError && (
-                <p className="text-[11px] text-red-500 mt-1 line-clamp-2">{cancelError}</p>
+                <p className="text-[11px] text-red-300 mt-1 line-clamp-2">{cancelError}</p>
               )}
             </div>
           )}
 
           {/* Completed: scheduled indicator OR schedule button */}
           {isCompleted && (
-            <div className="mt-1.5 flex items-center gap-2">
+            <div className="mt-2 flex items-center gap-2">
               {isScheduled && (
-                <span className="inline-flex items-center gap-1 text-xs text-green-600 font-medium">
+                <span className="inline-flex items-center gap-1 text-xs text-emerald-300 font-medium">
                   <CheckCircle2 size={13} />
                   Scheduled
                 </span>
               )}
               <button
                 onClick={() => onSchedule && onSchedule(gen)}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium tracking-tight transition-colors ${
                   isScheduled
-                    ? 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                    : 'bg-gradient-to-r from-purple-600 to-purple-500 text-white hover:from-purple-700 hover:to-purple-600'
+                    ? 'bg-white/10 text-white/70 hover:bg-white/20'
+                    : 'bg-white text-ink-950 hover:bg-white/90'
                 }`}
               >
                 <CalendarClock size={12} />

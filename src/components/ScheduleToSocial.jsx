@@ -166,7 +166,7 @@ function ScheduleToSocial({ jobId, resultUrl, videoGcsUrl }) {
   };
 
   return (
-    <div className="mt-8 w-full max-w-3xl glass-card border border-white/40 rounded-2xl p-4 md:p-5">
+    <div className="mt-8 w-full max-w-3xl glass-card rounded-2xl p-4 md:p-5">
       <div className="flex items-center gap-3 mb-4">
         <CalendarClock size={20} className="text-purple-600" />
         <h3 className="text-lg font-bold text-gray-900">Schedule to Social</h3>

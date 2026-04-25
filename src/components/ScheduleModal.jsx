@@ -515,7 +515,7 @@ function AccountCard({ account, selected, onToggle, onNicknameSaved }) {
       </div>
       <div
         className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors ${
-          selected ? 'border-purple-500 bg-purple-500' : 'border-gray-300 bg-white'
+          selected ? 'border-nimbus-700 bg-nimbus-700' : 'border-nimbus-400/45 bg-white shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5)]'
         }`}
       >
         {selected && <CheckCircle2 size={14} className="text-white" />}
@@ -772,22 +772,24 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
 
   return (
     <div
-      className="modal-backdrop-enter fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm p-0 sm:p-4"
+      className="modal-backdrop-enter fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-ink-950/55 backdrop-blur-md p-0 sm:p-4"
       onClick={onClose}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="modal-panel-enter relative w-full sm:max-w-xl max-h-[95vh] sm:max-h-[90vh] bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+        className="modal-panel-enter relative w-full sm:max-w-xl max-h-[95vh] sm:max-h-[90vh] bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 flex-shrink-0">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-nimbus-100 flex-shrink-0">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-600 to-purple-500 flex items-center justify-center flex-shrink-0">
+            <div className="w-10 h-10 rounded-2xl bg-ink-950 flex items-center justify-center flex-shrink-0 shadow-pill">
               <CalendarClock size={18} className="text-white" />
             </div>
             <div className="min-w-0">
-              <h3 className="text-base font-bold text-gray-900 leading-tight">Schedule Post</h3>
-              <p className="text-[11px] text-gray-500 flex items-center gap-1 mt-0.5 truncate">
+              <h3 className="text-lg font-display font-medium text-ink-950 leading-tight tracking-tight">
+                Schedule post
+              </h3>
+              <p className="text-[11px] text-nimbus-600 flex items-center gap-1 mt-0.5 truncate">
                 {isVideo ? <Video size={11} /> : <ImageIcon size={11} />}
                 <span className="truncate">{generation?.label || generation?.type}</span>
               </p>
@@ -795,9 +797,9 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-xl hover:bg-gray-100 transition-colors flex-shrink-0"
+            className="p-2 rounded-full hover:bg-nimbus-100 transition-colors flex-shrink-0"
           >
-            <X size={18} className="text-gray-500" />
+            <X size={18} className="text-nimbus-600" />
           </button>
         </div>
 
@@ -915,10 +917,10 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
                   type="button"
                   onClick={() => setIsAddingAccount((v) => !v)}
                   aria-expanded={isAddingAccount}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl border-2 border-dashed text-left transition-all duration-200 ${
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl border-2 border-dashed text-left transition-all duration-200 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.35)] ${
                     isAddingAccount
-                      ? 'border-purple-400 bg-purple-50'
-                      : 'border-gray-300 bg-white hover:border-purple-400 hover:bg-purple-50/40'
+                      ? 'border-nimbus-500/42 bg-white/45'
+                      : 'border-nimbus-400/42 bg-white/80 hover:border-nimbus-500/48 hover:bg-white'
                   }`}
                 >
                   <div

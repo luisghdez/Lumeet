@@ -31,6 +31,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 from job_manager import job_manager, JobStatus
 from pipeline import run_full_pipeline
+from cancellation import PipelineCancelled
 from late_service import late_service, LateServiceError
 from carousel_service import carousel_service, CarouselServiceError
 from video_metadata_store import video_metadata_store
@@ -199,11 +200,12 @@ def _save_hook_and_sound_to_gcs(job_id: str, result: dict, extended: bool, video
             logger.warning("Sound GCS upload failed (non-fatal): %s", exc)
             sound_id = None
 
-    # Upload generated_raw.mp4 as a hook
-    if raw_video_path and os.path.isfile(raw_video_path):
+    # Upload generated_raw.mp4 as a hook (path from pipeline result["raw_video"])
+    raw_hook_path = result.get("raw_video", "") or ""
+    if raw_hook_path and os.path.isfile(raw_hook_path):
         hook_object = f"{GCS_HOOKS_OBJECT_PREFIX.strip('/')}/{job_id}/raw.mp4"
         try:
-            hook_gcs = gcs.upload_file_public(raw_video_path, hook_object)
+            hook_gcs = gcs.upload_file_public(raw_hook_path, hook_object)
             hook_metadata_store.save(job_id, {
                 "hookId": job_id,
                 "sourceJobId": job_id,
@@ -229,18 +231,52 @@ def _run_pipeline_thread(
     generation_id: Optional[str] = None,
 ) -> None:
     """Target for the background thread that runs the pipeline."""
+    def cancel_check() -> bool:
+        return job_manager.is_cancel_requested(job_id)
+
+    if cancel_check():
+        logger.info(
+            "video pipeline not started because cancellation was already requested job_id=%s generation_id=%s",
+            job_id,
+            generation_id or "-",
+        )
+        if generation_id:
+            generation_store.mark_failed(generation_id, "Cancelled by user")
+        return
+
     job_manager.mark_processing(job_id)
     if generation_id:
         generation_store.mark_processing(generation_id, current_step="pipeline")
+
+    logger.info(
+        "video pipeline thread started job_id=%s generation_id=%s video=%s image=%s extended=%s",
+        job_id,
+        generation_id or "-",
+        os.path.basename(video_path),
+        os.path.basename(image_path),
+        extended,
+    )
 
     # Build a callback that updates both the legacy job_manager AND generation_store
     jm_cb = job_manager.make_step_callback(job_id)
 
     def cb(step_key: str, event: str, message: str = ""):
+        if event != "progress":
+            logger.info(
+                "video pipeline step job_id=%s generation_id=%s step=%s event=%s message=%s",
+                job_id,
+                generation_id or "-",
+                step_key,
+                event,
+                (message or "")[:220],
+            )
         jm_cb(step_key, event, message)
         if generation_id:
-            step_status = {"start": "running", "complete": "completed", "fail": "failed"}.get(event, event)
-            generation_store.update_step(generation_id, step_key, step_status, message)
+            if event == "progress":
+                generation_store.update_step(generation_id, step_key, "running", message)
+            else:
+                step_status = {"start": "running", "complete": "completed", "fail": "failed"}.get(event, event)
+                generation_store.update_step(generation_id, step_key, step_status, message)
 
     try:
         result = run_full_pipeline(
@@ -250,10 +286,15 @@ def _run_pipeline_thread(
             on_step=cb,
             extended=extended,
             additional_video_path=additional_video_path,
+            cancel_check=cancel_check,
         )
+        if cancel_check():
+            raise PipelineCancelled("Cancelled by user")
 
         # Attempt to upload final video to GCS for stable public URL.
         gcs_info = _upload_video_to_gcs(job_id, result["final_video"])
+        if cancel_check():
+            raise PipelineCancelled("Cancelled by user")
         if gcs_info:
             result["final_video_gcs"] = gcs_info
 
@@ -278,9 +319,13 @@ def _run_pipeline_thread(
             })
 
         # Auto-save hook (generated_raw.mp4) and sound to GCS for the libraries.
+        if cancel_check():
+            raise PipelineCancelled("Cancelled by user")
         _save_hook_and_sound_to_gcs(job_id, result, extended, video_path=video_path)
 
         # Update generation store with completed output
+        if cancel_check():
+            raise PipelineCancelled("Cancelled by user")
         if generation_id:
             video_url = (gcs_info or {}).get("url", "") if gcs_info else ""
             generation_store.mark_completed(generation_id, {
@@ -289,7 +334,28 @@ def _run_pipeline_thread(
                 "resultPath": result.get("final_video", ""),
                 "videoGcs": gcs_info,
             })
+        logger.info(
+            "video pipeline completed job_id=%s generation_id=%s final=%s",
+            job_id,
+            generation_id or "-",
+            os.path.basename(result.get("final_video", "") or ""),
+        )
+    except PipelineCancelled as exc:
+        logger.info(
+            "video pipeline CANCELLED job_id=%s generation_id=%s",
+            job_id,
+            generation_id or "-",
+        )
+        job_manager.request_cancel(job_id, str(exc) or "Cancelled by user")
+        if generation_id:
+            generation_store.mark_failed(generation_id, str(exc) or "Cancelled by user")
     except Exception as exc:
+        logger.exception(
+            "video pipeline FAILED job_id=%s generation_id=%s error=%s",
+            job_id,
+            generation_id or "-",
+            exc,
+        )
         job_manager.mark_failed(job_id, str(exc))
         if generation_id:
             generation_store.mark_failed(generation_id, str(exc))
@@ -324,6 +390,11 @@ def _run_carousel_thread(
             "carousel": result,
         })
     except (CarouselServiceError, Exception) as exc:
+        logger.exception(
+            "carousel generation FAILED generation_id=%s error=%s",
+            generation_id,
+            exc,
+        )
         generation_store.update_step(generation_id, "generating", "failed", str(exc))
         err_msg = exc.message if hasattr(exc, "message") else str(exc)
         generation_store.mark_failed(generation_id, err_msg)
@@ -838,7 +909,7 @@ async def patch_generation(generation_id: str, payload: GenerationPatchRequest):
 
 @app.post("/api/generations/{generation_id}/cancel")
 async def cancel_generation(generation_id: str):
-    """Cancel a generation that is queued or processing (marks it as failed)."""
+    """Cancel a generation that is queued or processing and signal its worker to stop."""
     item = generation_store.get(generation_id)
     if not item:
         raise HTTPException(status_code=404, detail=f"Generation {generation_id} not found.")
@@ -848,8 +919,29 @@ async def cancel_generation(generation_id: str):
             status_code=400,
             detail=f"Generation is already {status}, cannot cancel.",
         )
+    job_id = item.get("jobId")
+    if job_id:
+        job_manager.request_cancel(job_id, "Cancelled by user")
     generation_store.mark_failed(generation_id, "Cancelled by user")
     return {"generationId": generation_id, "status": "failed", "message": "Generation cancelled."}
+
+
+@app.delete("/api/generations/{generation_id}")
+async def delete_generation(generation_id: str):
+    """Remove a finished generation from the Generation Center (completed or failed only)."""
+    item = generation_store.get(generation_id)
+    if not item:
+        raise HTTPException(status_code=404, detail=f"Generation {generation_id} not found.")
+    status = item.get("status")
+    if status in (GenerationStatus.QUEUED, GenerationStatus.PROCESSING):
+        raise HTTPException(
+            status_code=400,
+            detail="Cannot dismiss a running generation. Cancel it first, then dismiss.",
+        )
+    if status not in (GenerationStatus.COMPLETED, GenerationStatus.FAILED):
+        raise HTTPException(status_code=400, detail=f"Cannot dismiss generation with status {status!r}.")
+    generation_store.delete(generation_id)
+    return {"generationId": generation_id, "dismissed": True}
 
 
 # ---------------------------------------------------------------------------
@@ -980,8 +1072,11 @@ def _run_remix_thread(
     generation_store.mark_processing(generation_id, current_step="download_hook")
 
     def cb(step_key: str, event: str, message: str = ""):
-        step_status = {"start": "running", "complete": "completed", "fail": "failed"}.get(event, event)
-        generation_store.update_step(generation_id, step_key, step_status, message)
+        if event == "progress":
+            generation_store.update_step(generation_id, step_key, "running", message)
+        else:
+            step_status = {"start": "running", "complete": "completed", "fail": "failed"}.get(event, event)
+            generation_store.update_step(generation_id, step_key, step_status, message)
 
     try:
         result = run_remix(
@@ -1022,8 +1117,20 @@ def _run_remix_thread(
             "sourceHookId": hook_id,
         })
     except RemixError as exc:
+        logger.exception(
+            "remix pipeline FAILED generation_id=%s hook_id=%s error=%s",
+            generation_id,
+            hook_id,
+            exc,
+        )
         generation_store.mark_failed(generation_id, exc.message)
     except Exception as exc:
+        logger.exception(
+            "remix pipeline FAILED generation_id=%s hook_id=%s error=%s",
+            generation_id,
+            hook_id,
+            exc,
+        )
         generation_store.mark_failed(generation_id, str(exc))
 
 
