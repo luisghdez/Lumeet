@@ -96,6 +96,10 @@ export async function getVideo(videoId) {
   return request(`/api/videos/${encodeURIComponent(videoId)}`);
 }
 
+export async function deleteVideo(videoId) {
+  return request(`/api/videos/${encodeURIComponent(videoId)}`, { method: 'DELETE' });
+}
+
 // ---------------------------------------------------------------------------
 // Generation Center API
 // ---------------------------------------------------------------------------
@@ -172,6 +176,10 @@ export async function updateHookLabel(hookId, label) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ label }),
   });
+}
+
+export async function deleteHook(hookId) {
+  return request(`/api/hooks/${encodeURIComponent(hookId)}`, { method: 'DELETE' });
 }
 
 // ---------------------------------------------------------------------------

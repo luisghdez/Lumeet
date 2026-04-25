@@ -55,6 +55,15 @@ class HookMetadataStore:
             item = all_items.get(hook_id)
             return item if isinstance(item, dict) else None
 
+    def delete(self, hook_id: str) -> bool:
+        with self._lock:
+            all_items = self._read_all_unlocked()
+            if hook_id not in all_items:
+                return False
+            del all_items[hook_id]
+            self._write_all_unlocked(all_items)
+            return True
+
     def update(self, hook_id: str, **fields: Any) -> Optional[Dict[str, Any]]:
         """Update arbitrary fields on a hook record and persist."""
         with self._lock:

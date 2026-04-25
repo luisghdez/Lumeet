@@ -48,6 +48,15 @@ class VideoMetadataStore:
             item = all_items.get(video_id)
             return item if isinstance(item, dict) else None
 
+    def delete(self, video_id: str) -> bool:
+        with self._lock:
+            all_items = self._read_all_unlocked()
+            if video_id not in all_items:
+                return False
+            del all_items[video_id]
+            self._write_all_unlocked(all_items)
+            return True
+
     def list_all(self, *, limit: int = 0, offset: int = 0) -> tuple[list[Dict[str, Any]], int]:
         """Return videos sorted newest-first.
 

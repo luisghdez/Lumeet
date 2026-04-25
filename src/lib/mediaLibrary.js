@@ -267,8 +267,11 @@ export function useLibraryVideos() {
       return { items: Array.isArray(items) ? items : prev?.items || [], total: prev?.total || 0 };
     });
   };
-  const setTotal = (total) => {
-    videoStore.mutate((prev) => ({ items: prev?.items || [], total }));
+  const setTotal = (updater) => {
+    videoStore.mutate((prev) => ({
+      items: prev?.items || [],
+      total: typeof updater === 'function' ? updater(prev?.total || 0) : updater,
+    }));
   };
   return {
     videos: data?.items || [],

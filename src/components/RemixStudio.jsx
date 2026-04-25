@@ -13,16 +13,17 @@ import {
   Play,
   Volume2,
   Plus,
+  Trash2,
 } from 'lucide-react';
 import ScheduleToSocial from './ScheduleToSocial';
-import { startRemix, getGeneration } from '../lib/lateApi';
+import { startRemix, getGeneration, deleteHook } from '../lib/lateApi';
 import { useHooks, useSounds } from '../lib/mediaLibrary';
 
 const POLL_INTERVAL = 2000;
 
 // ---------- Hook Picker ----------
 
-function HookPicker({ hooks, selectedHookId, onSelect, loading }) {
+function HookPicker({ hooks, selectedHookId, onSelect, onDelete, loading }) {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
@@ -47,35 +48,45 @@ function HookPicker({ hooks, selectedHookId, onSelect, loading }) {
       {hooks.map((hook) => {
         const isSelected = hook.hookId === selectedHookId;
         return (
-          <button
-            key={hook.hookId}
-            type="button"
-            onClick={() => onSelect(hook.hookId)}
-            className={`relative group rounded-xl overflow-hidden border-2 transition-all duration-200 aspect-[9/16] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]
-              ${isSelected
-                ? 'border-nimbus-600 ring-2 ring-white/65 shadow-lg'
-                : 'border-nimbus-400/40 hover:border-nimbus-500/48'}`}
-          >
-            <video
-              src={hook.url}
-              muted
-              playsInline
-              preload="metadata"
-              className="w-full h-full object-cover"
-              onMouseOver={(e) => e.target.play()}
-              onMouseOut={(e) => { e.target.pause(); e.target.currentTime = 0; }}
-            />
-            {isSelected && (
-              <div className="absolute top-1.5 right-1.5 bg-purple-500 rounded-full p-0.5">
-                <CheckCircle2 size={14} className="text-white" />
+          <div key={hook.hookId} className="relative group">
+            <button
+              type="button"
+              onClick={() => onSelect(hook.hookId)}
+              className={`relative rounded-xl overflow-hidden border-2 transition-all duration-200 aspect-[9/16] w-full shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]
+                ${isSelected
+                  ? 'border-nimbus-600 ring-2 ring-white/65 shadow-lg'
+                  : 'border-nimbus-400/40 hover:border-nimbus-500/48'}`}
+            >
+              <video
+                src={hook.url}
+                muted
+                playsInline
+                preload="metadata"
+                className="w-full h-full object-cover"
+                onMouseOver={(e) => e.target.play()}
+                onMouseOut={(e) => { e.target.pause(); e.target.currentTime = 0; }}
+              />
+              {isSelected && (
+                <div className="absolute top-1.5 right-1.5 bg-purple-500 rounded-full p-0.5">
+                  <CheckCircle2 size={14} className="text-white" />
+                </div>
+              )}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-2 py-1.5">
+                <p className="text-[10px] text-white truncate font-medium">
+                  {hook.label || hook.hookId.slice(0, 8)}
+                </p>
               </div>
-            )}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-2 py-1.5">
-              <p className="text-[10px] text-white truncate font-medium">
-                {hook.label || hook.hookId.slice(0, 8)}
-              </p>
-            </div>
-          </button>
+            </button>
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); onDelete(hook.hookId); }}
+              className="absolute top-1.5 left-1.5 bg-red-500 text-white rounded-full p-1 shadow transition-colors hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-white/80"
+              title="Delete hook"
+              aria-label={`Delete hook ${hook.label || hook.hookId}`}
+            >
+              <Trash2 size={12} />
+            </button>
+          </div>
         );
       })}
     </div>
@@ -314,7 +325,7 @@ function RemixStudio() {
   const [viewState, setViewState] = useState('setup'); // 'setup' | 'processing' | 'result' | 'error'
 
   // Data — shared cache (preloaded at app boot, reused across remounts)
-  const { hooks, loading: loadingHooks } = useHooks();
+  const { hooks, loading: loadingHooks, setHooks } = useHooks();
   const { sounds, loading: loadingSounds } = useSounds();
 
   // Selections
@@ -407,6 +418,18 @@ function RemixStudio() {
     }
   }, [selectedHookId, caption, selectedSoundId, extensionFile, startPolling]);
 
+  const handleDeleteHook = useCallback(async (hookId) => {
+    try {
+      await deleteHook(hookId);
+      setHooks((prev) => prev.filter((hook) => hook.hookId !== hookId));
+      if (selectedHookId === hookId) {
+        setSelectedHookId(null);
+      }
+    } catch (err) {
+      console.error('Failed to delete hook:', err);
+    }
+  }, [selectedHookId, setHooks]);
+
   // Reset
   const handleReset = useCallback(() => {
     if (pollRef.current) clearInterval(pollRef.current);
@@ -439,6 +462,7 @@ function RemixStudio() {
                 hooks={hooks}
                 selectedHookId={selectedHookId}
                 onSelect={setSelectedHookId}
+                onDelete={handleDeleteHook}
                 loading={loadingHooks}
               />
             </div>

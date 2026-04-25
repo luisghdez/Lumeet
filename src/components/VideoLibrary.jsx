@@ -1,10 +1,11 @@
 import React, { useEffect, useMemo, useState, useCallback } from 'react';
-import { CalendarRange, CheckCircle2, Clock, Film, Image as ImageIcon, RefreshCw, Send } from 'lucide-react';
+import { CalendarRange, CheckCircle2, Clock, Film, Image as ImageIcon, RefreshCw, Send, Trash2 } from 'lucide-react';
 import AccountRow from './AccountRow';
 import ScheduleModal from './ScheduleModal';
 import {
   createLatePost,
   DEFAULT_SESSION_ID,
+  deleteVideo,
   listLateAccounts,
   listVideos,
 } from '../lib/lateApi';
@@ -150,6 +151,7 @@ function VideoLibrary() {
   const [error, setError] = useState('');
   const [isLoadingAccounts, setIsLoadingAccounts] = useState(false);
   const [isScheduling, setIsScheduling] = useState(false);
+  const [deletingVideoId, setDeletingVideoId] = useState(null);
   // Target passed to the shared ScheduleModal when a library item is clicked.
   const [scheduleTarget, setScheduleTarget] = useState(null);
 
@@ -322,6 +324,23 @@ function VideoLibrary() {
         suggestedScheduledFor: carousel.suggestedScheduledFor || '',
       },
     });
+  };
+
+  const handleDeleteVideo = async (videoId) => {
+    setDeletingVideoId(videoId);
+    setError('');
+    setStatusMessage('');
+    try {
+      await deleteVideo(videoId);
+      setVideos((prev) => prev.filter((video) => video.videoId !== videoId));
+      setVideosTotal((prevTotal) => Math.max(0, prevTotal - 1));
+      setBulkSelectedVideos((prev) => prev.filter((video) => video.videoId !== videoId));
+      setStatusMessage('Generated video deleted.');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setDeletingVideoId(null);
+    }
   };
 
   const handleModalScheduled = () => {
@@ -749,42 +768,58 @@ function VideoLibrary() {
               <>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
                   {videos.map((video) => (
-                    <button
-                      key={video.videoId}
-                      onClick={() => openVideoSchedule(video)}
-                      className="group text-left rounded-2xl border-2 border-gray-200 hover:border-purple-400 transition-all overflow-hidden hover:shadow-md"
-                    >
-                      <div className="relative aspect-[9/16] bg-black">
-                        <video
-                          src={video.url}
-                          className="w-full h-full object-contain"
-                          muted
-                          preload="metadata"
-                        />
-                        {video.extended && (
-                          <span className="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-purple-600/90 text-white text-[10px] font-semibold shadow backdrop-blur-sm">
-                            Extended
-                          </span>
-                        )}
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 text-purple-700 text-xs font-semibold shadow">
-                            <Send size={12} />
-                            Schedule
+                    <div key={video.videoId} className="relative group">
+                      <button
+                        type="button"
+                        onClick={() => openVideoSchedule(video)}
+                        className="w-full text-left rounded-2xl border-2 border-gray-200 hover:border-purple-400 transition-all overflow-hidden hover:shadow-md"
+                      >
+                        <div className="relative aspect-[9/16] bg-black">
+                          <video
+                            src={video.url}
+                            className="w-full h-full object-contain"
+                            muted
+                            preload="metadata"
+                          />
+                          {video.extended && (
+                            <span className="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-purple-600/90 text-white text-[10px] font-semibold shadow backdrop-blur-sm">
+                              Extended
+                            </span>
+                          )}
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 text-purple-700 text-xs font-semibold shadow">
+                              <Send size={12} />
+                              Schedule
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      {(() => {
-                        const label = formatCreatedAt(video.createdAt);
-                        return label ? (
-                          <div className="px-3 py-2 flex items-center gap-1.5">
-                            <Clock size={11} className="text-gray-400 flex-shrink-0" />
-                            <p className="text-[11px] font-medium text-gray-600 truncate">
-                              {label}
-                            </p>
-                          </div>
-                        ) : null;
-                      })()}
-                    </button>
+                        {(() => {
+                          const label = formatCreatedAt(video.createdAt);
+                          return label ? (
+                            <div className="px-3 py-2 flex items-center gap-1.5">
+                              <Clock size={11} className="text-gray-400 flex-shrink-0" />
+                              <p className="text-[11px] font-medium text-gray-600 truncate">
+                                {label}
+                              </p>
+                            </div>
+                          ) : null;
+                        })()}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteVideo(video.videoId)}
+                        disabled={deletingVideoId === video.videoId}
+                        className="absolute top-2 left-2 rounded-full bg-red-500 p-1.5 text-white shadow transition-colors hover:bg-red-600 disabled:opacity-60 focus:outline-none focus:ring-2 focus:ring-white/80"
+                        title="Delete generated video"
+                        aria-label={`Delete generated video ${video.videoId}`}
+                      >
+                        {deletingVideoId === video.videoId ? (
+                          <RefreshCw size={13} className="animate-spin" />
+                        ) : (
+                          <Trash2 size={13} />
+                        )}
+                      </button>
+                    </div>
                   ))}
                 </div>
                 {hasMoreVideos && (

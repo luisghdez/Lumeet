@@ -711,6 +711,14 @@ async def get_video(video_id: str):
     return _refresh_video_url(item)
 
 
+@app.delete("/api/videos/{video_id}")
+async def delete_video(video_id: str):
+    """Delete a generated video from the video library."""
+    if not video_metadata_store.delete(video_id):
+        raise HTTPException(status_code=404, detail=f"Video {video_id} not found.")
+    return {"deleted": True, "videoId": video_id}
+
+
 # ---------------------------------------------------------------------------
 # Generation Center Endpoints
 # ---------------------------------------------------------------------------
@@ -993,6 +1001,14 @@ async def update_hook_label(hook_id: str, payload: HookLabelRequest):
         raise HTTPException(status_code=404, detail=f"Hook {hook_id} not found.")
     updated = hook_metadata_store.update(hook_id, label=payload.label)
     return updated
+
+
+@app.delete("/api/hooks/{hook_id}")
+async def delete_hook(hook_id: str):
+    """Delete a saved hook."""
+    if not hook_metadata_store.delete(hook_id):
+        raise HTTPException(status_code=404, detail=f"Hook {hook_id} not found.")
+    return {"deleted": True, "hookId": hook_id}
 
 
 # ---------------------------------------------------------------------------
