@@ -19,7 +19,7 @@ import shutil
 import threading
 import logging
 from pathlib import Path
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from fastapi import FastAPI, File, UploadFile, HTTPException, Form, Query
 from fastapi.middleware.cors import CORSMiddleware
@@ -34,6 +34,11 @@ from pipeline import run_full_pipeline
 from cancellation import PipelineCancelled
 from late_service import late_service, LateServiceError
 from carousel_service import carousel_service, CarouselServiceError
+from avatar_service import (
+    create_avatar_model,
+    validate_required as validate_avatar_selections,
+    AvatarServiceError,
+)
 from video_metadata_store import video_metadata_store
 from generation_store import generation_store, GenerationStatus
 from hook_metadata_store import hook_metadata_store
@@ -101,6 +106,12 @@ class CarouselCreateRequest(BaseModel):
     timezone: str = Field(default="UTC", min_length=1, max_length=80)
     hook_style: str = Field(default="illustrated", pattern=r"^(illustrated|study_desk|study_girl|pinterest)$")
     carousel_style: str = Field(default="illustrated", pattern=r"^(illustrated|illustrated_2)$")
+
+
+class AvatarCreateRequest(BaseModel):
+    selections: Dict[str, Any] = Field(default_factory=dict)
+    promptSummary: str = Field(default="", max_length=500)
+    label: str = Field(default="", max_length=120)
 
 
 # ---------------------------------------------------------------------------
@@ -398,6 +409,55 @@ def _run_carousel_thread(
         generation_store.update_step(generation_id, "generating", "failed", str(exc))
         err_msg = exc.message if hasattr(exc, "message") else str(exc)
         generation_store.mark_failed(generation_id, err_msg)
+
+
+def _run_avatar_thread(
+    generation_id: str,
+    selections: Dict[str, Any],
+    label: str,
+    prompt_summary: str,
+) -> None:
+    """Background thread that generates an AI avatar and saves it as a model."""
+    generation_store.mark_processing(generation_id, current_step="validate")
+
+    def _on_step(step_key: str, status: str, message: str = "") -> None:
+        generation_store.update_step(generation_id, step_key, status, message)
+
+    try:
+        record = create_avatar_model(
+            selections=selections,
+            label=label,
+            prompt_summary=prompt_summary,
+            jobs_dir=JOBS_DIR,
+            on_step=_on_step,
+        )
+        # Re-sign URL on completion so the frontend gets a fresh link.
+        refreshed = _refresh_model_url(record)
+        generation_store.mark_completed(generation_id, {
+            "modelId": refreshed.get("modelId"),
+            "model": refreshed,
+            "promptSummary": refreshed.get("promptSummary", ""),
+            "previewUrl": refreshed.get("url", ""),
+        })
+        logger.info(
+            "avatar generation completed generation_id=%s model_id=%s",
+            generation_id,
+            refreshed.get("modelId"),
+        )
+    except AvatarServiceError as exc:
+        logger.warning(
+            "avatar generation failed generation_id=%s error=%s",
+            generation_id,
+            exc.message,
+        )
+        generation_store.mark_failed(generation_id, exc.message)
+    except Exception as exc:
+        logger.exception(
+            "avatar generation crashed generation_id=%s error=%s",
+            generation_id,
+            exc,
+        )
+        generation_store.mark_failed(generation_id, str(exc))
 
 
 # ---------------------------------------------------------------------------
@@ -873,6 +933,49 @@ async def generation_create_carousel(payload: CarouselCreateRequest):
     thread = threading.Thread(
         target=_run_carousel_thread,
         args=(gen_id, payload.prompt, payload.timezone, payload.hook_style, payload.carousel_style),
+        daemon=True,
+    )
+    thread.start()
+
+    return {"generationId": gen_id}
+
+
+@app.post("/api/avatars")
+async def generation_create_avatar(payload: AvatarCreateRequest):
+    """Start an AI avatar generation job tracked in the Generation Center.
+
+    The job calls ``avatar_service.create_avatar_model`` which builds a safe
+    prompt from the user's visual selections, generates a portrait via Gemini
+    or OpenAI, uploads it to GCS, and saves the result into model_metadata
+    so it is immediately reusable in the existing video pipeline.
+    """
+    selections = dict(payload.selections or {})
+
+    missing = validate_avatar_selections(selections)
+    if missing:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Missing required selections: {', '.join(missing)}",
+        )
+
+    steps = [
+        {"key": "validate", "label": "Validating selections", "status": "pending", "message": ""},
+        {"key": "prompt", "label": "Composing prompt", "status": "pending", "message": ""},
+        {"key": "generate", "label": "Generating avatar image", "status": "pending", "message": ""},
+        {"key": "upload", "label": "Uploading to library", "status": "pending", "message": ""},
+        {"key": "save", "label": "Saving avatar", "status": "pending", "message": ""},
+    ]
+    label = (payload.label or "AI Avatar").strip()[:120]
+    gen = generation_store.create(
+        gen_type="avatar",
+        label=label,
+        steps=steps,
+    )
+    gen_id = gen["generationId"]
+
+    thread = threading.Thread(
+        target=_run_avatar_thread,
+        args=(gen_id, selections, label, payload.promptSummary or ""),
         daemon=True,
     )
     thread.start()

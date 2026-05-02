@@ -16,5 +16,35 @@
     "label": "modelLumi",
     "filename": "modelLumi.png",
     "createdAt": "2026-03-29T00:07:35.351807+00:00"
+  },
+  "da82defe5c9a": {
+    "modelId": "da82defe5c9a",
+    "url": "https://storage.googleapis.com/lumeet-bucket/models/da82defe5c9a/avatar.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T045426Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=2e828cbc5bf94cbe6ebf5c7b4ab808b4509e4641222ba324981d3a633281290d888fce9b4adecec0a916e368ca3e29ab5c876727eb9e320a37bdbb28c7d7d301cb7479eade50154defce37f2c476332f2d2ba72d02055c74df19cb6500a54cffcd268a9287218b6843b1c9e5c13dc32c765053e44b00ebabeb72f0e1afea9a0ba803c988c41dca0fe4c3782a5ba3b42663f4ab80a3baffcd2eebc71a2f431776c97517e37e8c350d302fdd90b2c734472118847e915b4ec27a7ec55386ed99ed66cdac154b89259e5559db30f5aab7d9dc176c279a3231d1abcb95ed9547d2f1792888b052ca825e0f60bf7872082fd85cbfdb02ec6332dbe997997a0709c9a6",
+    "bucket": "lumeet-bucket",
+    "object": "models/da82defe5c9a/avatar.png",
+    "label": "Male \u00b7 African \u00b7 Deep",
+    "filename": "avatar.png",
+    "createdAt": "2026-05-02T04:54:26.576647+00:00",
+    "source": "avatar_studio",
+    "avatarConfig": {
+      "gender": "male",
+      "ethnicity": "african",
+      "skinTone": "deep",
+      "eyeColor": "hazel",
+      "age": "young_adult",
+      "bodyType": "muscular",
+      "hairType": "curly",
+      "hairLength": "medium",
+      "hairColor": "dark_brown",
+      "tattoos": "full_sleeve",
+      "piercings": "septum",
+      "extras": [
+        "glasses",
+        "beard"
+      ],
+      "outfit": "casual"
+    },
+    "promptSummary": "male-presenting. African features and heritage. deep brown skin tone. hazel eyes. in their early 20s, fresh and youthful. visibly muscular build. curly hair. medium-length hair. dark brown hair. full sleeve tattoos. septum nose piercing. wearing thin-frame modern glasses, well-groomed short beard. casual everyday outfit, simple t-shirt and jeans",
+    "provider": "gemini"
   }
 }

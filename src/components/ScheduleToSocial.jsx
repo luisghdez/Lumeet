@@ -42,8 +42,8 @@ function toIsoLocal(datetimeLocal) {
 
 function ScheduleToSocial({ jobId, resultUrl, videoGcsUrl }) {
   const [profileId, setProfileId] = useState('');
-  const [profileName, setProfileName] = useState('Lumeet Profile');
-  const [caption, setCaption] = useState('Generated with Lumeet');
+  const [profileName, setProfileName] = useState('nflncr.ai Profile');
+  const [caption, setCaption] = useState('Generated with nflncr.ai');
   const [platformToConnect, setPlatformToConnect] = useState('twitter');
   const [accounts, setAccounts] = useState([]);
   const [selectedAccountIds, setSelectedAccountIds] = useState([]);
@@ -104,7 +104,7 @@ function ScheduleToSocial({ jobId, resultUrl, videoGcsUrl }) {
       const data = await createLateProfile({
         sessionId: DEFAULT_SESSION_ID,
         name: profileName,
-        description: 'Created from Lumeet',
+        description: 'Created from nflncr.ai',
       });
       const createdProfileId = data?.profile?._id || '';
       setProfileId(createdProfileId);

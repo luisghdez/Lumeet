@@ -606,7 +606,7 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
         }
       }
     } else {
-      setCaption('Generated with Lumeet');
+      setCaption('Generated with nflncr.ai');
     }
   }, [isCarousel, output]);
 

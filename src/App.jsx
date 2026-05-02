@@ -173,9 +173,6 @@ function App() {
         >
           {!sidebarCollapsed && (
             <div className="min-w-0 flex-1">
-              <p className="text-[10px] uppercase tracking-[0.22em] text-nimbus-600 font-medium mb-2">
-                Workspace
-              </p>
               <Wordmark size="lg" />
             </div>
           )}

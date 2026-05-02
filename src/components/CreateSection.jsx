@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Image, Film, Loader2, CheckCircle2, XCircle, ArrowLeft, X, ToggleLeft, ToggleRight, Sparkles, Plus, Save, User, Trash2 } from 'lucide-react';
+import { Image, Film, Loader2, CheckCircle2, XCircle, ArrowLeft, X, ToggleLeft, ToggleRight, Sparkles, Plus, Save, User, Trash2, UserCircle2 } from 'lucide-react';
 import CarouselStudio from './CarouselStudio';
 import RemixStudio from './RemixStudio';
+import AvatarStudio from './AvatarStudio';
 import {
   startVideoGeneration,
   uploadModel,
@@ -324,7 +325,7 @@ function ExtensionVideoPicker({ videos, selectedId, onSelect, onUploadNew, onDel
 // ---------- Main Component ----------
 
 function CreateSection({ onVideoGenerationStarted }) {
-  const [createTab, setCreateTab] = useState('video'); // 'video' | 'carousel' | 'remix'
+  const [createTab, setCreateTab] = useState('video'); // 'video' | 'carousel' | 'remix' | 'avatar'
   const [viewState, setViewState] = useState('upload'); // 'upload' | 'error'
   const [videoFile, setVideoFile] = useState(null);
   const [additionalVideoFile, setAdditionalVideoFile] = useState(null);
@@ -690,6 +691,7 @@ function CreateSection({ onVideoGenerationStarted }) {
             { id: 'video', label: 'Video', Icon: Film },
             { id: 'carousel', label: 'Carousel', Icon: Image },
             { id: 'remix', label: 'Remix', Icon: Sparkles },
+            { id: 'avatar', label: 'Avatar', Icon: UserCircle2 },
           ].map(({ id, label, Icon }) => {
             const isActive = createTab === id;
             return (
@@ -726,7 +728,19 @@ function CreateSection({ onVideoGenerationStarted }) {
           style={{ animation: 'slideDownFade 0.22s ease-out' }}
           className="h-full"
         >
-          {createTab === 'video' ? renderVideoContent() : createTab === 'carousel' ? <CarouselStudio /> : <RemixStudio />}
+          {createTab === 'video'
+            ? renderVideoContent()
+            : createTab === 'carousel'
+              ? <CarouselStudio />
+              : createTab === 'remix'
+                ? <RemixStudio />
+                : <AvatarStudio
+                    onGenerationStarted={onVideoGenerationStarted}
+                    onUseAvatarForVideo={(avatar) => {
+                      setSelectedModelId(avatar.modelId);
+                      setCreateTab('video');
+                    }}
+                  />}
         </div>
       </div>
     </div>

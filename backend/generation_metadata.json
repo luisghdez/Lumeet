@@ -386,5 +386,734 @@
       }
     },
     "jobId": "a75198e99d7a"
+  },
+  "2adba32622cc": {
+    "generationId": "2adba32622cc",
+    "type": "video",
+    "label": "ddtik.com_@study.with.nessa_no_watermark.mp4",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Trimmed at 3.40s"
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"POV: you figured out why everyone's deleting ChatGPT \ud83d\udc80\ud83d\udc80\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      },
+      {
+        "key": "audio_extraction",
+        "label": "Audio Extraction",
+        "status": "completed",
+        "message": "Audio extracted from original video"
+      },
+      {
+        "key": "video_concatenation",
+        "label": "Video Concatenation",
+        "status": "completed",
+        "message": "Videos concatenated"
+      },
+      {
+        "key": "audio_replacement",
+        "label": "Audio Replacement",
+        "status": "completed",
+        "message": "Audio replaced with original"
+      }
+    ],
+    "error": null,
+    "createdAt": 1777086898.808314,
+    "completedAt": 1777087234.228457,
+    "output": {
+      "jobId": "d4ad33a8d499",
+      "videoUrl": "https://storage.googleapis.com/lumeet-bucket/videos/d4ad33a8d499/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T032031Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=15040013b9133c4f2f5c52cdc6ff15c0372fec5d8dde99862f2fabe6f4e2c05920054be2fa98740b3d478c1fe26224f33b43cb4cf0025d3d3493f2ad36050868ff533b9ba887f5880d13f216c7ab75278b128d6f8b7b2a728e5c8e7c9e3fd52d2e00a9104a6935bec70f9ca1977dae2a0bad87461d3bf6fc5374c17bb5fb0cd142e24c81445a509dda0c45784ac05c08f06db3854f5a9937f0e08bd89db0ffce539aa6060ddf93caf6d258194c7cb9e40e7f3df5e0ec190ce596353c9a0575f4e8ecdcb6302bb0efea5e7e11f660dc88438987af27b03a9a5c6afa9fc22742ccc6d84f286b74ea66320b5fa0525e36553d727a727ce1ef087d4b69f1094911c2",
+      "resultPath": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/jobs/d4ad33a8d499/output/extended_final_output.mp4",
+      "videoGcs": {
+        "bucket": "lumeet-bucket",
+        "object": "videos/d4ad33a8d499/final_output.mp4",
+        "url": "https://storage.googleapis.com/lumeet-bucket/videos/d4ad33a8d499/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T032031Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=15040013b9133c4f2f5c52cdc6ff15c0372fec5d8dde99862f2fabe6f4e2c05920054be2fa98740b3d478c1fe26224f33b43cb4cf0025d3d3493f2ad36050868ff533b9ba887f5880d13f216c7ab75278b128d6f8b7b2a728e5c8e7c9e3fd52d2e00a9104a6935bec70f9ca1977dae2a0bad87461d3bf6fc5374c17bb5fb0cd142e24c81445a509dda0c45784ac05c08f06db3854f5a9937f0e08bd89db0ffce539aa6060ddf93caf6d258194c7cb9e40e7f3df5e0ec190ce596353c9a0575f4e8ecdcb6302bb0efea5e7e11f660dc88438987af27b03a9a5c6afa9fc22742ccc6d84f286b74ea66320b5fa0525e36553d727a727ce1ef087d4b69f1094911c2"
+      }
+    },
+    "jobId": "d4ad33a8d499",
+    "scheduled": true
+  },
+  "78283c86afc1": {
+    "generationId": "78283c86afc1",
+    "type": "video",
+    "label": "ddtik.com_@StudyWithCalla_no_watermark (3).mp4",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Trimmed at 4.20s"
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"as someone with ADHD who physically CANNOT read hundreds of pages... let me put you on this study hack\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      },
+      {
+        "key": "audio_extraction",
+        "label": "Audio Extraction",
+        "status": "completed",
+        "message": "Audio extracted from original video"
+      },
+      {
+        "key": "video_concatenation",
+        "label": "Video Concatenation",
+        "status": "completed",
+        "message": "Videos concatenated"
+      },
+      {
+        "key": "audio_replacement",
+        "label": "Audio Replacement",
+        "status": "completed",
+        "message": "Audio replaced with original"
+      }
+    ],
+    "error": null,
+    "createdAt": 1777086990.557796,
+    "completedAt": 1777087341.4641721,
+    "output": {
+      "jobId": "67af568ddc04",
+      "videoUrl": "https://storage.googleapis.com/lumeet-bucket/videos/67af568ddc04/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T032220Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=ccb335cea290dea7d4b537ab6039cac505698385d162f0de98622254b7c976d84f76e5604a9c21bccac039ab36252d948bf8612bba5a529dfed5887d1dc0171864127e1ff90f4fb04e16f5b75aa06458172168ac5695e6f286b3ae4148d167cf13f36ae261191dfe7376e1fe52529bef022a912252c81e590aad9bed2de83af8a9d6a22e1b3f1074c18760a43ccabd30d255c5fa19b54995b2517b76359298f64384e06a9b7b32ee39d980fa4c1bfb5f6804f91055bdaa61c295690cad52add0e059df345ccfe199693fb1103814def330b27786ad93c7b742cbafd2a52d562c2d4ddd73068a696b698b0ab7aaa3c7d373ddca216bebb5df2f5b1cc2d2c9136f",
+      "resultPath": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/jobs/67af568ddc04/output/extended_final_output.mp4",
+      "videoGcs": {
+        "bucket": "lumeet-bucket",
+        "object": "videos/67af568ddc04/final_output.mp4",
+        "url": "https://storage.googleapis.com/lumeet-bucket/videos/67af568ddc04/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T032220Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=ccb335cea290dea7d4b537ab6039cac505698385d162f0de98622254b7c976d84f76e5604a9c21bccac039ab36252d948bf8612bba5a529dfed5887d1dc0171864127e1ff90f4fb04e16f5b75aa06458172168ac5695e6f286b3ae4148d167cf13f36ae261191dfe7376e1fe52529bef022a912252c81e590aad9bed2de83af8a9d6a22e1b3f1074c18760a43ccabd30d255c5fa19b54995b2517b76359298f64384e06a9b7b32ee39d980fa4c1bfb5f6804f91055bdaa61c295690cad52add0e059df345ccfe199693fb1103814def330b27786ad93c7b742cbafd2a52d562c2d4ddd73068a696b698b0ab7aaa3c7d373ddca216bebb5df2f5b1cc2d2c9136f"
+      }
+    },
+    "jobId": "67af568ddc04",
+    "scheduled": true
+  },
+  "682a20946005": {
+    "generationId": "682a20946005",
+    "type": "video",
+    "label": "ddtik.com_@StudyroomwithCC_no_watermark.mp4",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "No scene change detected -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"how to study 10h every day as a LAZY student\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      }
+    ],
+    "error": null,
+    "createdAt": 1777087080.253016,
+    "completedAt": 1777087463.9035552,
+    "output": {
+      "jobId": "1586171a0934",
+      "videoUrl": "https://storage.googleapis.com/lumeet-bucket/videos/1586171a0934/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T032422Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=cd3615901118797bdc4c0e5e9f5f7ae7c310dcc014a3cafda6cfb11e3c36d6917563fb0f2173da54d67c52622714c3fa0348c397cb36ece2b32a93924d1c502f6a48318ac2ae7f797475fcded1d054f8b3158f4dd403d7b99158939455e201a8d75465b5cf9c070aef3c8fedfe877b5fd59842420f075787135a223bd1d76fcdaaafdcdf55017fcb8dfe9939c6713d45e714e713a74bbac806e11037a131b81edcca61b6bb3f1b46351e08c0d40a51b7f867178cad22d66bc87bd81255e40813f768c6b7bb7aae6a4104cc258dd6663dbcb9596ed60a73ecf0983b2a2a177708952ac76a49d5e7b9a121fc775eea1063712bd71b6cce85058b9e5940c0fe3f56",
+      "resultPath": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/jobs/1586171a0934/output/final_output.mp4",
+      "videoGcs": {
+        "bucket": "lumeet-bucket",
+        "object": "videos/1586171a0934/final_output.mp4",
+        "url": "https://storage.googleapis.com/lumeet-bucket/videos/1586171a0934/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T032422Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=cd3615901118797bdc4c0e5e9f5f7ae7c310dcc014a3cafda6cfb11e3c36d6917563fb0f2173da54d67c52622714c3fa0348c397cb36ece2b32a93924d1c502f6a48318ac2ae7f797475fcded1d054f8b3158f4dd403d7b99158939455e201a8d75465b5cf9c070aef3c8fedfe877b5fd59842420f075787135a223bd1d76fcdaaafdcdf55017fcb8dfe9939c6713d45e714e713a74bbac806e11037a131b81edcca61b6bb3f1b46351e08c0d40a51b7f867178cad22d66bc87bd81255e40813f768c6b7bb7aae6a4104cc258dd6663dbcb9596ed60a73ecf0983b2a2a177708952ac76a49d5e7b9a121fc775eea1063712bd71b6cce85058b9e5940c0fe3f56"
+      }
+    },
+    "jobId": "1586171a0934",
+    "scheduled": true
+  },
+  "5a56c6ceba85": {
+    "generationId": "5a56c6ceba85",
+    "type": "video",
+    "label": "ddtik.com_@KwegyLTN_s POV_no_watermark (1).mp4",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Trimmed at 6.63s"
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"POV: When you call your \"I also haven't started studying yet\" Friend after a day of procrastinating to make sure that they haven't started studying either\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      }
+    ],
+    "error": null,
+    "createdAt": 1777087418.4586802,
+    "completedAt": 1777087781.234355,
+    "output": {
+      "jobId": "f36a9979d567",
+      "videoUrl": "https://storage.googleapis.com/lumeet-bucket/videos/f36a9979d567/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T032939Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=167097425caa714da52228f50bb0851fce8cd0e0f94fefc8f36b66450d18bed84df3f6a2452d1aaebc4cbda6b735cc1ab93aed6a5efa6776835cad0e640655806646cbae6f647b01a4ead5f0785bbd7223b5d05c7a992977bd8f1070e5a033febd629d339067d069b4398738cf77643a58274e1408ba71f872792c447e652c736954ada775abe986bd48aa636d15f6e89545f7d05138d6d131eb783dd4ad811f939718a29fda2c5d91ab35c3780c349329d7628fc90af8899fb4b9c7019cb88d92eef544a4d65b5f51862171aeef0d511df5eec373f7f464e94efdccb46696f2b333be95c8ff118f8f9554b45c372ced387c86079f8f04ca7fd7efd3f308bb60",
+      "resultPath": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/jobs/f36a9979d567/output/final_output.mp4",
+      "videoGcs": {
+        "bucket": "lumeet-bucket",
+        "object": "videos/f36a9979d567/final_output.mp4",
+        "url": "https://storage.googleapis.com/lumeet-bucket/videos/f36a9979d567/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T032939Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=167097425caa714da52228f50bb0851fce8cd0e0f94fefc8f36b66450d18bed84df3f6a2452d1aaebc4cbda6b735cc1ab93aed6a5efa6776835cad0e640655806646cbae6f647b01a4ead5f0785bbd7223b5d05c7a992977bd8f1070e5a033febd629d339067d069b4398738cf77643a58274e1408ba71f872792c447e652c736954ada775abe986bd48aa636d15f6e89545f7d05138d6d131eb783dd4ad811f939718a29fda2c5d91ab35c3780c349329d7628fc90af8899fb4b9c7019cb88d92eef544a4d65b5f51862171aeef0d511df5eec373f7f464e94efdccb46696f2b333be95c8ff118f8f9554b45c372ced387c86079f8f04ca7fd7efd3f308bb60"
+      }
+    },
+    "jobId": "f36a9979d567",
+    "scheduled": true
+  },
+  "3c01def9e7ee": {
+    "generationId": "3c01def9e7ee",
+    "type": "video",
+    "label": "ddtik.com_@KwegyLTN_s POV_no_watermark.mp4",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "No scene change detected -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"POV: When you realise you've been studying with your eyes and not your brain so now you gotta restart\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      }
+    ],
+    "error": null,
+    "createdAt": 1777087429.546259,
+    "completedAt": 1777087887.113164,
+    "output": {
+      "jobId": "a2f947122de2",
+      "videoUrl": "https://storage.googleapis.com/lumeet-bucket/videos/a2f947122de2/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T033123Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=7c57d701c8054bf4dcc42c94caa790c2f71621283001bd9a89ee61b8f379c26550774d289fbed13eb3fe8d5a379ee442271769df99977975400b9edb08c695e39daf996363e773be886e938b129f4123efe1f9b57ca45bfe0eb7e63d8198a8ed282182df526b2953b01fbfb2540993e3fcee30df620065bd9d4a26a6a1e2d86e27f6a5743aec179f4726454159ce7668e0f1decd6011490a4973cce97e57b2d03b6f9074bfeda2324d86fdb08335ef2e58336c7830c3b76e28dfc3c6beb8fd7e976ddb3dd847eeda2ced5bc6c50dfb8f313555b5751ec7eeaf3715f32c9d8ad6fb742bd8dd62cefb5135f9c82c02c758e3774cb672ede68af0745c07fd2165e0",
+      "resultPath": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/jobs/a2f947122de2/output/final_output.mp4",
+      "videoGcs": {
+        "bucket": "lumeet-bucket",
+        "object": "videos/a2f947122de2/final_output.mp4",
+        "url": "https://storage.googleapis.com/lumeet-bucket/videos/a2f947122de2/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T033123Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=7c57d701c8054bf4dcc42c94caa790c2f71621283001bd9a89ee61b8f379c26550774d289fbed13eb3fe8d5a379ee442271769df99977975400b9edb08c695e39daf996363e773be886e938b129f4123efe1f9b57ca45bfe0eb7e63d8198a8ed282182df526b2953b01fbfb2540993e3fcee30df620065bd9d4a26a6a1e2d86e27f6a5743aec179f4726454159ce7668e0f1decd6011490a4973cce97e57b2d03b6f9074bfeda2324d86fdb08335ef2e58336c7830c3b76e28dfc3c6beb8fd7e976ddb3dd847eeda2ced5bc6c50dfb8f313555b5751ec7eeaf3715f32c9d8ad6fb742bd8dd62cefb5135f9c82c02c758e3774cb672ede68af0745c07fd2165e0"
+      }
+    },
+    "jobId": "a2f947122de2",
+    "scheduled": true
+  },
+  "6433538c09bb": {
+    "generationId": "6433538c09bb",
+    "type": "video",
+    "label": "ddtik.com_@KwegyLTN_s POV_no_watermark (2).mp4",
+    "status": "failed",
+    "progress": 66,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Trimmed at 5.63s"
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"POV: You're supposed to be studying but you're on the phone with your friend talking about a situation that has already been discussed 1000 times because you think you've finally connected the dots\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "running",
+        "message": "Fal rendering\u2026 (~1405s)"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "Cancelled by user",
+    "createdAt": 1777088115.020448,
+    "completedAt": 1777089566.009839,
+    "output": null,
+    "jobId": "0ed8774a56cb"
+  },
+  "f2c9d03898c2": {
+    "generationId": "f2c9d03898c2",
+    "type": "remix",
+    "label": "Remix of 111cf11555b3",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "download_hook",
+        "label": "Download Hook Video",
+        "status": "completed",
+        "message": "Hook video downloaded"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption applied"
+      },
+      {
+        "key": "video_concatenation",
+        "label": "Video Concatenation",
+        "status": "completed",
+        "message": "Videos concatenated"
+      },
+      {
+        "key": "audio_replacement",
+        "label": "Audio Replacement",
+        "status": "completed",
+        "message": "Audio replaced"
+      }
+    ],
+    "error": null,
+    "createdAt": 1777089062.0900748,
+    "completedAt": 1777089066.487648,
+    "output": {
+      "videoUrl": "https://storage.googleapis.com/lumeet-bucket/videos/f2c9d03898c2/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T035106Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=8718a95a99ccbdc58811a41aba108b2762ddae1df67fa86d12456db9102fe35499793d89a1913b0adfc460d74283b0d968e773deb7d78daa86553787cc3bd37525a9c0b89ca00950d8ff4f43998a772a418f07dd9c94bd84f6b79ea8eec5faa6a6e87bb2f8a5877cddd3cb50c8ab50959db87d5d9d0e82a8120268517af34c636fd2face532554b621e7aef2d05c7f8a82a329ea1a65efc892db27607afd0ab1043f0b6e4cdad3ea1d75312acc0adaa5a1794335661620a6aebe3716d35ff8c622a8831cc5481ad2d83946b9808f98f90a60e2bdd294cf1719829b308e3ba6058572ea7673565e800f53d58f2538ace9a4a57bafcfcc21da6cea2f6ed3ad6b5f",
+      "resultPath": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/jobs/f2c9d03898c2/output/remix_final.mp4",
+      "videoGcs": {
+        "bucket": "lumeet-bucket",
+        "object": "videos/f2c9d03898c2/final_output.mp4",
+        "url": "https://storage.googleapis.com/lumeet-bucket/videos/f2c9d03898c2/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T035106Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=8718a95a99ccbdc58811a41aba108b2762ddae1df67fa86d12456db9102fe35499793d89a1913b0adfc460d74283b0d968e773deb7d78daa86553787cc3bd37525a9c0b89ca00950d8ff4f43998a772a418f07dd9c94bd84f6b79ea8eec5faa6a6e87bb2f8a5877cddd3cb50c8ab50959db87d5d9d0e82a8120268517af34c636fd2face532554b621e7aef2d05c7f8a82a329ea1a65efc892db27607afd0ab1043f0b6e4cdad3ea1d75312acc0adaa5a1794335661620a6aebe3716d35ff8c622a8831cc5481ad2d83946b9808f98f90a60e2bdd294cf1719829b308e3ba6058572ea7673565e800f53d58f2538ace9a4a57bafcfcc21da6cea2f6ed3ad6b5f"
+      },
+      "sourceHookId": "111cf11555b3"
+    },
+    "scheduled": true
+  },
+  "483077525b8e": {
+    "generationId": "483077525b8e",
+    "type": "video",
+    "label": "videotalking.mp4",
+    "status": "failed",
+    "progress": 66,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Trimmed at 2.57s"
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"my favorite way to study \ud83c\udf55\u270f\ufe0f\ud83e\udde0\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "running",
+        "message": "Fal finished, downloading result\u2026"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "[{'loc': ['body'], 'msg': 'Video duration can not less than 3s', 'type': 'input_value_error', 'url': 'https://docs.fal.ai/errors#input_value_error', 'input': {'prompt': 'A young woman reacting to the camera', 'image_url': 'https://v3b.fal.media/files/b/0a979fa2/kmg7t8meFGon9UVuAC9Bx_recreated_scene.png', 'video_url': 'https://v3b.fal.media/files/b/0a979fa2/een1Bs0KWxY8SgywVhcPT_trimmed.mp4', 'keep_original_sound': True, 'character_orientation': 'video'}}]",
+    "createdAt": 1777089593.494405,
+    "completedAt": 1777089633.610623,
+    "output": null,
+    "jobId": "a790d43d4c27"
+  },
+  "a6c538a06334": {
+    "generationId": "a6c538a06334",
+    "type": "video",
+    "label": "ddtik.com_@Emely_no_watermark.mp4",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "No scene change detected -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"the feeling of understand everything after hours of studying\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      }
+    ],
+    "error": null,
+    "createdAt": 1777089606.294948,
+    "completedAt": 1777089998.294094,
+    "output": {
+      "jobId": "b65386863bff",
+      "videoUrl": "https://storage.googleapis.com/lumeet-bucket/videos/b65386863bff/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T040636Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=4b0ee15cea2559501597ae53e48e996e01de5be37479605432ea17da8772caec921d68cefdf373b1ce764e08fb740dd276a3eaf259d221d3efcdb6c19a6863e102a9af68a7e9a87ab3213ec2b4d648f42519e4ea95a7e87c603197d3c38e47ee48eddabb04d1997d7dff2ee36f8a434e73d7fe78e4b019e3c48991f5a066eb98eac52dafd1b45d78065f5f6d206f376956b8d134d6c2b23a4fe0b3127f431c8ba7bc20f5b96ad715003a6c668c67624abb50b87701e4a30d013e8aab3a32a1c4821e13029e08d3fb1a0b2af4c658c3774b6a1438045ac2a79afb258f50173b8f8fab94f99a6d2adb22077af3bf49e29c495b68f7342aca484f86b24b7048f3c2",
+      "resultPath": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/jobs/b65386863bff/output/final_output.mp4",
+      "videoGcs": {
+        "bucket": "lumeet-bucket",
+        "object": "videos/b65386863bff/final_output.mp4",
+        "url": "https://storage.googleapis.com/lumeet-bucket/videos/b65386863bff/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T040636Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=4b0ee15cea2559501597ae53e48e996e01de5be37479605432ea17da8772caec921d68cefdf373b1ce764e08fb740dd276a3eaf259d221d3efcdb6c19a6863e102a9af68a7e9a87ab3213ec2b4d648f42519e4ea95a7e87c603197d3c38e47ee48eddabb04d1997d7dff2ee36f8a434e73d7fe78e4b019e3c48991f5a066eb98eac52dafd1b45d78065f5f6d206f376956b8d134d6c2b23a4fe0b3127f431c8ba7bc20f5b96ad715003a6c668c67624abb50b87701e4a30d013e8aab3a32a1c4821e13029e08d3fb1a0b2af4c658c3774b6a1438045ac2a79afb258f50173b8f8fab94f99a6d2adb22077af3bf49e29c495b68f7342aca484f86b24b7048f3c2"
+      }
+    },
+    "jobId": "b65386863bff",
+    "scheduled": true
+  },
+  "9b7e380c5f73": {
+    "generationId": "9b7e380c5f73",
+    "type": "video",
+    "label": "ddtik.com_@alisa+ _no_watermark.mp4",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "No scene change detected -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"you seem to scroll a lot for a girl who wants straight A\u2019s\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      }
+    ],
+    "error": null,
+    "createdAt": 1777089619.6796339,
+    "completedAt": 1777090007.322945,
+    "output": {
+      "jobId": "a5d6905d7fea",
+      "videoUrl": "https://storage.googleapis.com/lumeet-bucket/videos/a5d6905d7fea/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T040644Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=61db3b6c05d27a3a3562f3157feccdb2a26cd5ff330cfe0492d064832f95032a444e6e1529e17a2cba77ae2c0197d1508fa016f5d045c20d34e9025b5d8d429708155887ecfae78ce863303571b144634fab92c0c67af982cfde32021403890fb762ded1a8441cb08f339ad117dc52ab2bf93d446e4e85557ad6dec0988f641e0b8810870057bf6e26cc926d5adef6de8562caec2ae1799881fe791bbb9a8294ead4268c0bb988b18d78ccc7a743c07266263164c9d3ddef2d96a9e5a9365a09f5f7e947488cd93a4e221a92ce84d4e8c9c2446d60cedbe639837bec3651d7ae1751beeb413283f9713d8540b05c9cc2edf5086c1f6fe6c8c119d9869ab59cc2",
+      "resultPath": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/jobs/a5d6905d7fea/output/final_output.mp4",
+      "videoGcs": {
+        "bucket": "lumeet-bucket",
+        "object": "videos/a5d6905d7fea/final_output.mp4",
+        "url": "https://storage.googleapis.com/lumeet-bucket/videos/a5d6905d7fea/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T040644Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=61db3b6c05d27a3a3562f3157feccdb2a26cd5ff330cfe0492d064832f95032a444e6e1529e17a2cba77ae2c0197d1508fa016f5d045c20d34e9025b5d8d429708155887ecfae78ce863303571b144634fab92c0c67af982cfde32021403890fb762ded1a8441cb08f339ad117dc52ab2bf93d446e4e85557ad6dec0988f641e0b8810870057bf6e26cc926d5adef6de8562caec2ae1799881fe791bbb9a8294ead4268c0bb988b18d78ccc7a743c07266263164c9d3ddef2d96a9e5a9365a09f5f7e947488cd93a4e221a92ce84d4e8c9c2446d60cedbe639837bec3651d7ae1751beeb413283f9713d8540b05c9cc2edf5086c1f6fe6c8c119d9869ab59cc2"
+      }
+    },
+    "jobId": "a5d6905d7fea",
+    "scheduled": true
+  },
+  "7df982bec9c0": {
+    "generationId": "7df982bec9c0",
+    "type": "remix",
+    "label": "Remix of 8c8afafd89d8",
+    "status": "failed",
+    "progress": 0,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "download_hook",
+        "label": "Download Hook Video",
+        "status": "failed",
+        "message": "400 Client Error: Bad Request for url: https://storage.googleapis.com/lumeet-bucket/hooks/8c8afafd89d8/raw.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260328%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260328T234432Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=45304635d6d3c999070bafa52d6afe4d12fccc12151cacf48f48245536b15c06a47763c281aa4c097c237fd3b07078188f6d614b6e268004623e3177e996435a3e6d4b4bd2d0a671a3399e1506f6e9a09d687830cbb2babbd8603b58eb2017bbbcd1b404ff7103c474e4aca5a7bdb3a07931f63b82b61ec60bde89927417b713639c70702401ba784e3994d402c0b867502cd24fe39e11dc28c0303be23967aa123d5461563c60858d7196d10bf0a568351f081ac4042e4081b2b00fbd1b896856ba778504237a75ab3bc35e95174b7bdf434c30f131f8c3a347766fdfcf46f62a078513a17ec47de139fb7d570f790ef83fa9a57b9a04e77a23120985c88787"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "video_concatenation",
+        "label": "Video Concatenation",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "audio_replacement",
+        "label": "Audio Replacement",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "Failed to download hook video: 400 Client Error: Bad Request for url: https://storage.googleapis.com/lumeet-bucket/hooks/8c8afafd89d8/raw.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260328%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260328T234432Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=45304635d6d3c999070bafa52d6afe4d12fccc12151cacf48f48245536b15c06a47763c281aa4c097c237fd3b07078188f6d614b6e268004623e3177e996435a3e6d4b4bd2d0a671a3399e1506f6e9a09d687830cbb2babbd8603b58eb2017bbbcd1b404ff7103c474e4aca5a7bdb3a07931f63b82b61ec60bde89927417b713639c70702401ba784e3994d402c0b867502cd24fe39e11dc28c0303be23967aa123d5461563c60858d7196d10bf0a568351f081ac4042e4081b2b00fbd1b896856ba778504237a75ab3bc35e95174b7bdf434c30f131f8c3a347766fdfcf46f62a078513a17ec47de139fb7d570f790ef83fa9a57b9a04e77a23120985c88787",
+    "createdAt": 1777090307.183595,
+    "completedAt": 1777090307.346101,
+    "output": null
+  },
+  "3edc9a22d874": {
+    "generationId": "3edc9a22d874",
+    "type": "avatar",
+    "label": "Male \u00b7 African \u00b7 Deep",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "validate",
+        "label": "Validating selections",
+        "status": "completed",
+        "message": "Selections look good"
+      },
+      {
+        "key": "prompt",
+        "label": "Composing prompt",
+        "status": "completed",
+        "message": "Prompt ready"
+      },
+      {
+        "key": "generate",
+        "label": "Generating avatar image",
+        "status": "completed",
+        "message": "Generated via gemini"
+      },
+      {
+        "key": "upload",
+        "label": "Uploading to library",
+        "status": "completed",
+        "message": "Avatar uploaded"
+      },
+      {
+        "key": "save",
+        "label": "Saving avatar",
+        "status": "completed",
+        "message": "Avatar saved"
+      }
+    ],
+    "error": null,
+    "createdAt": 1777697641.911484,
+    "completedAt": 1777697666.664431,
+    "output": {
+      "modelId": "da82defe5c9a",
+      "model": {
+        "modelId": "da82defe5c9a",
+        "url": "https://storage.googleapis.com/lumeet-bucket/models/da82defe5c9a/avatar.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T045426Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=2e828cbc5bf94cbe6ebf5c7b4ab808b4509e4641222ba324981d3a633281290d888fce9b4adecec0a916e368ca3e29ab5c876727eb9e320a37bdbb28c7d7d301cb7479eade50154defce37f2c476332f2d2ba72d02055c74df19cb6500a54cffcd268a9287218b6843b1c9e5c13dc32c765053e44b00ebabeb72f0e1afea9a0ba803c988c41dca0fe4c3782a5ba3b42663f4ab80a3baffcd2eebc71a2f431776c97517e37e8c350d302fdd90b2c734472118847e915b4ec27a7ec55386ed99ed66cdac154b89259e5559db30f5aab7d9dc176c279a3231d1abcb95ed9547d2f1792888b052ca825e0f60bf7872082fd85cbfdb02ec6332dbe997997a0709c9a6",
+        "bucket": "lumeet-bucket",
+        "object": "models/da82defe5c9a/avatar.png",
+        "label": "Male \u00b7 African \u00b7 Deep",
+        "filename": "avatar.png",
+        "createdAt": "2026-05-02T04:54:26.576647+00:00",
+        "source": "avatar_studio",
+        "avatarConfig": {
+          "gender": "male",
+          "ethnicity": "african",
+          "skinTone": "deep",
+          "eyeColor": "hazel",
+          "age": "young_adult",
+          "bodyType": "muscular",
+          "hairType": "curly",
+          "hairLength": "medium",
+          "hairColor": "dark_brown",
+          "tattoos": "full_sleeve",
+          "piercings": "septum",
+          "extras": [
+            "glasses",
+            "beard"
+          ],
+          "outfit": "casual"
+        },
+        "promptSummary": "male-presenting. African features and heritage. deep brown skin tone. hazel eyes. in their early 20s, fresh and youthful. visibly muscular build. curly hair. medium-length hair. dark brown hair. full sleeve tattoos. septum nose piercing. wearing thin-frame modern glasses, well-groomed short beard. casual everyday outfit, simple t-shirt and jeans",
+        "provider": "gemini"
+      },
+      "promptSummary": "male-presenting. African features and heritage. deep brown skin tone. hazel eyes. in their early 20s, fresh and youthful. visibly muscular build. curly hair. medium-length hair. dark brown hair. full sleeve tattoos. septum nose piercing. wearing thin-frame modern glasses, well-groomed short beard. casual everyday outfit, simple t-shirt and jeans",
+      "previewUrl": "https://storage.googleapis.com/lumeet-bucket/models/da82defe5c9a/avatar.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T045426Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=2e828cbc5bf94cbe6ebf5c7b4ab808b4509e4641222ba324981d3a633281290d888fce9b4adecec0a916e368ca3e29ab5c876727eb9e320a37bdbb28c7d7d301cb7479eade50154defce37f2c476332f2d2ba72d02055c74df19cb6500a54cffcd268a9287218b6843b1c9e5c13dc32c765053e44b00ebabeb72f0e1afea9a0ba803c988c41dca0fe4c3782a5ba3b42663f4ab80a3baffcd2eebc71a2f431776c97517e37e8c350d302fdd90b2c734472118847e915b4ec27a7ec55386ed99ed66cdac154b89259e5559db30f5aab7d9dc176c279a3231d1abcb95ed9547d2f1792888b052ca825e0f60bf7872082fd85cbfdb02ec6332dbe997997a0709c9a6"
+    }
   }
 }

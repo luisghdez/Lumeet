@@ -10,6 +10,7 @@ import {
   ChevronDown,
   CalendarClock,
   Trash2,
+  UserCircle2,
 } from 'lucide-react';
 import { listGenerations, cancelGeneration, dismissGeneration } from '../lib/lateApi';
 
@@ -24,6 +25,7 @@ function statusIcon(status) {
 
 function typeIcon(type) {
   if (type === 'carousel') return <Image size={14} className="text-nimbus-300" />;
+  if (type === 'avatar') return <UserCircle2 size={14} className="text-nimbus-300" />;
   return <Video size={14} className="text-nimbus-200" />;
 }
 
@@ -371,8 +373,8 @@ function GenerationRow({
             </div>
           )}
 
-          {/* Completed: scheduled indicator OR schedule button */}
-          {isCompleted && (
+          {/* Completed: scheduled indicator OR schedule button (avatar jobs are not schedulable) */}
+          {isCompleted && gen.type !== 'avatar' && (
             <div className="mt-2 flex items-center gap-2">
               {isScheduled && (
                 <span className="inline-flex items-center gap-1 text-xs text-emerald-300 font-medium">

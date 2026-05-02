@@ -597,7 +597,7 @@ function RemixStudio() {
             {resultUrl && (
               <a
                 href={resultUrl}
-                download="lumeet_remix.mp4"
+                download="nflncrai_remix.mp4"
                 className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-500 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-purple-600 transition-all duration-200"
               >
                 <span className="flex items-center gap-2">

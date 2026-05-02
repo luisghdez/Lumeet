@@ -1,4 +1,4 @@
-# Lumeet - Recruitment Dashboard
+# nflncr.ai - Recruitment Dashboard
 
 A beautiful, modern recruitment dashboard for connecting with creator applicants, featuring a glassy iOS-inspired design.
 

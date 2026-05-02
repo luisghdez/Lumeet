@@ -377,8 +377,8 @@ function VideoLibrary() {
           sessionId: DEFAULT_SESSION_ID,
           profileId: resolvedProfileId,
           content: slot.type === 'carousel'
-            ? (slot.item.prompt || 'Generated with Lumeet')
-            : (bulkCaption || 'Generated with Lumeet'),
+            ? (slot.item.prompt || 'Generated with nflncr.ai')
+            : (bulkCaption || 'Generated with nflncr.ai'),
           platforms: selectedPlatforms,
           publishNow: false,
           timezone,

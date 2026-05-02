@@ -14,7 +14,7 @@ export default function Wordmark({ className = '', size = 'md', light = false })
         light ? 'text-white' : 'text-ink-950'
       } ${className}`}
     >
-      lumeet
+      nflncr.ai
     </span>
   );
 }

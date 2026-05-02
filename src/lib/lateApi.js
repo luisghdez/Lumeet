@@ -267,4 +267,26 @@ export async function deleteExtensionVideo(extId) {
   return request(`/api/extension-videos/${encodeURIComponent(extId)}`, { method: 'DELETE' });
 }
 
+// ---------------------------------------------------------------------------
+// Avatar Studio API
+// ---------------------------------------------------------------------------
+
+/**
+ * Start an AI avatar generation. Returns { generationId } and the caller
+ * should poll getGeneration(generationId) until status === 'completed'.
+ * The generation's output.model is a saved model record that can be reused
+ * directly in the existing video generation flow via modelId.
+ */
+export async function startAvatarGeneration({ selections, promptSummary, label }) {
+  return request('/api/avatars', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      selections: selections || {},
+      promptSummary: promptSummary || '',
+      label: label || '',
+    }),
+  });
+}
+
 export { DEFAULT_SESSION_ID };
