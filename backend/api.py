@@ -21,7 +21,7 @@ import logging
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from fastapi import FastAPI, File, UploadFile, HTTPException, Form, Query
+from fastapi import FastAPI, File, UploadFile, HTTPException, Form, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
@@ -240,6 +240,7 @@ def _run_pipeline_thread(
     extended: bool = False,
     additional_video_path: Optional[str] = None,
     generation_id: Optional[str] = None,
+    skip_scene_detection: bool = False,
 ) -> None:
     """Target for the background thread that runs the pipeline."""
     def cancel_check() -> bool:
@@ -260,12 +261,13 @@ def _run_pipeline_thread(
         generation_store.mark_processing(generation_id, current_step="pipeline")
 
     logger.info(
-        "video pipeline thread started job_id=%s generation_id=%s video=%s image=%s extended=%s",
+        "video pipeline thread started job_id=%s generation_id=%s video=%s image=%s extended=%s skip_scene_detection=%s",
         job_id,
         generation_id or "-",
         os.path.basename(video_path),
         os.path.basename(image_path),
         extended,
+        skip_scene_detection,
     )
 
     # Build a callback that updates both the legacy job_manager AND generation_store
@@ -297,6 +299,7 @@ def _run_pipeline_thread(
             on_step=cb,
             extended=extended,
             additional_video_path=additional_video_path,
+            skip_scene_detection=skip_scene_detection,
             cancel_check=cancel_check,
         )
         if cancel_check():
@@ -464,8 +467,10 @@ def _run_avatar_thread(
 # Endpoints
 # ---------------------------------------------------------------------------
 
+@app.post("/api/generate/no-trim")
 @app.post("/api/generate")
 async def generate(
+    request: Request,
     image: UploadFile = File(..., description="Model / identity reference image"),
     video: UploadFile = File(..., description="Reference video"),
     extended: bool = Form(False, description="Enable extended pipeline (concatenate additional video and replace audio)"),
@@ -483,6 +488,8 @@ async def generate(
     Returns the ``job_id`` which can be used to poll progress and
     download the result.
     """
+    skip_scene_detection = request.url.path.endswith("/no-trim")
+
     # Basic validation
     if not image.content_type or not image.content_type.startswith("image/"):
         raise HTTPException(status_code=400, detail="image must be an image file (PNG, JPG, etc.)")
@@ -536,7 +543,7 @@ async def generate(
     # Launch pipeline in background thread
     thread = threading.Thread(
         target=_run_pipeline_thread,
-        args=(job.id, video_path, image_path, output_dir, extended, additional_video_path),
+        args=(job.id, video_path, image_path, output_dir, extended, additional_video_path, None, skip_scene_detection),
         daemon=True,
     )
     thread.start()
@@ -786,8 +793,10 @@ async def delete_video(video_id: str):
 from job_manager import PIPELINE_STEPS as _PIPELINE_STEPS, EXTENDED_PIPELINE_STEPS as _EXTENDED_PIPELINE_STEPS
 
 
+@app.post("/api/generations/video/no-trim")
 @app.post("/api/generations/video")
 async def generation_create_video(
+    request: Request,
     image: Optional[UploadFile] = File(None, description="Model / identity reference image"),
     video: UploadFile = File(..., description="Reference video"),
     extended: bool = Form(False),
@@ -797,6 +806,8 @@ async def generation_create_video(
 ):
     """Start a video generation job tracked in the Generation Center."""
     import requests as _requests
+
+    skip_scene_detection = request.url.path.endswith("/no-trim")
 
     # Resolve model image: either from saved model or uploaded file
     has_image_upload = image is not None and image.filename
@@ -822,7 +833,7 @@ async def generation_create_video(
 
     gen = generation_store.create(
         gen_type="video",
-        label=video.filename or "Video generation",
+        label=f"{video.filename or 'Video generation'}{' (no trim)' if skip_scene_detection else ''}",
         steps=steps,
     )
     gen_id = gen["generationId"]
@@ -911,7 +922,7 @@ async def generation_create_video(
 
     thread = threading.Thread(
         target=_run_pipeline_thread,
-        args=(job.id, video_path, image_path, output_dir, extended, additional_video_path, gen_id),
+        args=(job.id, video_path, image_path, output_dir, extended, additional_video_path, gen_id, skip_scene_detection),
         daemon=True,
     )
     thread.start()

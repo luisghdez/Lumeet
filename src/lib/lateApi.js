@@ -104,8 +104,9 @@ export async function deleteVideo(videoId) {
 // Generation Center API
 // ---------------------------------------------------------------------------
 
-export async function startVideoGeneration(formData) {
-  const resp = await fetch('/api/generations/video', { method: 'POST', body: formData });
+export async function startVideoGeneration(formData, { noTrim = false } = {}) {
+  const path = noTrim ? '/api/generations/video/no-trim' : '/api/generations/video';
+  const resp = await fetch(path, { method: 'POST', body: formData });
   const data = await resp.json().catch(() => ({}));
   if (!resp.ok) throw new Error(data.detail || `Upload failed (${resp.status})`);
   return data;

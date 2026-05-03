@@ -46,5 +46,71 @@
     },
     "promptSummary": "male-presenting. African features and heritage. deep brown skin tone. hazel eyes. in their early 20s, fresh and youthful. visibly muscular build. curly hair. medium-length hair. dark brown hair. full sleeve tattoos. septum nose piercing. wearing thin-frame modern glasses, well-groomed short beard. casual everyday outfit, simple t-shirt and jeans",
     "provider": "gemini"
+  },
+  "b8e657701b5c": {
+    "modelId": "b8e657701b5c",
+    "url": "https://storage.googleapis.com/lumeet-bucket/models/b8e657701b5c/avatar.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T050614Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=a04d87ee2c08565739f281847e50441691a1e531408a71c42c4d2093283835234a74b5f887a564dfbd7918397bc27b4c6f85ec7bed9d763946bc17e45f7baa61ff3be6eca6ae19f5aa742767f637ae82d2e7aecd03a0170298846aded3ff83796c0c371a5a352e023a4c01ede290b9905144eb2b51a9f46cd666395ca0bb7c826533c374762a736be10b1bd0d793b1a69c0f7840f695409a92b47196a2b6d223de5c116c1efd55093b6254d5aacd9c3e9d5cf4dcc990bb6b87c487b0e98e9b397d95970f80849c8b6dcc83632b407bb893782718be19d00998c93c55c44b96863b09ba48da9b86afc33f5d3bae9927b67c30a100d5e0cbd24ec1a9cfb3c44109",
+    "bucket": "lumeet-bucket",
+    "object": "models/b8e657701b5c/avatar.png",
+    "label": "Female \u00b7 East Asian \u00b7 Fair",
+    "filename": "avatar.png",
+    "createdAt": "2026-05-02T05:06:14.901841+00:00",
+    "source": "avatar_studio",
+    "avatarConfig": {
+      "gender": "female",
+      "ethnicity": "asian",
+      "skinTone": "fair",
+      "age": "young_adult",
+      "bodyType": "athletic",
+      "hairType": "straight",
+      "hairColor": "brown",
+      "outfit": "casual"
+    },
+    "promptSummary": "female-presenting. East Asian features and heritage. fair skin tone. in their early 20s, fresh and youthful. athletic toned build. straight hair. medium brown hair. casual everyday outfit, simple t-shirt and jeans",
+    "provider": "gemini"
+  },
+  "bca22ca30c3e": {
+    "modelId": "bca22ca30c3e",
+    "url": "https://storage.googleapis.com/lumeet-bucket/models/bca22ca30c3e/avatar.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T050706Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=c80a4f97c9167d91edd952ac61dc2c196c1e9c439b36827ca2b240badfed1184c6692ea9f934fd6915ea2fe274ecd87d7fe2d7151c2ea18eec3f4cf4e078375a07af7584984b7b2a98e8d34515d34cd57df9e14ea5e12e4add7ee80808b89b893b983b74f88fe546698f3dfe904017606c2f3fb6b54dbb19d42f29820dcf3310bb69b7ad55e2e6ab41097c1d16eec378ba623db6385faf83d4db2aa77159dd983268d8351130c323d00192d6d78962aefbc6723198c9352847e2776ebb1bd1402c2eb4ee6f41e6c263a78a08c58f496f336f6a3266e9ae8bec0e50de32100b9dc888b8019c8fa3a0671cf8c444f653e87cbf120aa820ba6b7edb2ef39530e8cf",
+    "bucket": "lumeet-bucket",
+    "object": "models/bca22ca30c3e/avatar.png",
+    "label": "Male \u00b7 East Asian \u00b7 Fair",
+    "filename": "avatar.png",
+    "createdAt": "2026-05-02T05:07:06.591853+00:00",
+    "source": "avatar_studio",
+    "avatarConfig": {
+      "gender": "male",
+      "ethnicity": "asian",
+      "skinTone": "fair",
+      "age": "young_adult",
+      "bodyType": "athletic",
+      "hairType": "straight",
+      "hairColor": "brown",
+      "outfit": "casual"
+    },
+    "promptSummary": "male-presenting. East Asian features and heritage. fair skin tone. in their early 20s, fresh and youthful. athletic toned build. straight hair. medium brown hair. casual everyday outfit, simple t-shirt and jeans",
+    "provider": "gemini"
+  },
+  "354f027b3603": {
+    "modelId": "354f027b3603",
+    "url": "https://storage.googleapis.com/lumeet-bucket/models/354f027b3603/avatar.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T050807Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=dbac9416d046b03e2d89d3315b82be790cce8c9cd318ba433269be95c1c9149f2a4e2d7ecf886cfe485f9f9ffd54eaaf3b868b7f283fe5bf948f615a78c3aa2c00c694b3858ff5e34b01ada5112e1f39ede5e137bf0a6af84e583c94374287e7691519ac6d2f91b767c9accba9aab1238d4c135244ec8b724fa84c78ff9733fd139ecccd33be6dff653fcc2e32f0b0703d74fe86a17f064115566eda7f4cca8556681da826a89d2794b854e7e621a1659da428273a6e75757e8eff763854867a1281b274b2daf6895ae8c3bfabff5a81d9e6ba6b6587ad8305df3da3b345cee67ee2892e0694fb24d139becb54a726bce87ea8c05bb762ce2b918384330fd68c",
+    "bucket": "lumeet-bucket",
+    "object": "models/354f027b3603/avatar.png",
+    "label": "Female \u00b7 European \u00b7 Fair",
+    "filename": "avatar.png",
+    "createdAt": "2026-05-02T05:08:07.029318+00:00",
+    "source": "avatar_studio",
+    "avatarConfig": {
+      "gender": "female",
+      "ethnicity": "european",
+      "skinTone": "fair",
+      "age": "young_adult",
+      "bodyType": "athletic",
+      "hairType": "straight",
+      "hairColor": "brown",
+      "outfit": "casual"
+    },
+    "promptSummary": "female-presenting. European features and heritage. fair skin tone. in their early 20s, fresh and youthful. athletic toned build. straight hair. medium brown hair. casual everyday outfit, simple t-shirt and jeans",
+    "provider": "gemini"
   }
 }

@@ -352,6 +352,48 @@ class TestFullFlow:
         data = status_resp.json()
         assert len(data["steps"]) == 9
 
+    @patch("api.run_full_pipeline")
+    def test_no_trim_route_forwards_skip_scene_detection(self, mock_pipeline, client, tmp_path):
+        """The separate no-trim path should run the pipeline without scene trimming."""
+        video_file = tmp_path / "final.mp4"
+        video_file.write_bytes(b"\x00" * 100)
+
+        captured_kwargs = {}
+
+        def fake_pipeline(video_path, model_image_path, output_dir, on_step=None,
+                          extended=False, additional_video_path=None, **kwargs):
+            captured_kwargs.update(kwargs)
+            if on_step:
+                for step_key in [
+                    "scene_detection", "frame_extraction", "caption_detection",
+                    "scene_recreation", "motion_control", "caption_overlay",
+                ]:
+                    on_step(step_key, "start")
+                    on_step(step_key, "complete")
+            return {"final_video": str(video_file)}
+
+        mock_pipeline.side_effect = fake_pipeline
+
+        resp = client.post(
+            "/api/generate/no-trim",
+            files={
+                "image": ("model.png", _dummy_image(), "image/png"),
+                "video": ("input.mp4", _dummy_video(), "video/mp4"),
+            },
+        )
+        assert resp.status_code == 200
+        job_id = resp.json()["job_id"]
+
+        for _ in range(50):
+            status_resp = client.get(f"/api/jobs/{job_id}")
+            if status_resp.json()["status"] == "completed":
+                break
+            time.sleep(0.1)
+        else:
+            pytest.fail("No-trim job did not complete within timeout")
+
+        assert captured_kwargs.get("skip_scene_detection") is True
+
 
 # -- GCS upload on completion -----------------------------------------------
 

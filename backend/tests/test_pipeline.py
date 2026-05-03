@@ -199,6 +199,47 @@ class TestPipelineOrchestration:
     @patch("backend.pipeline.generate_motion_video")
     @patch("backend.pipeline.recreate_scene")
     @patch("backend.pipeline.detect_captions_summary")
+    @patch("backend.pipeline.crop_to_first_scene")
+    def test_skip_scene_detection_uses_original_video(
+        self,
+        mock_crop,
+        mock_captions,
+        mock_recreate,
+        mock_motion,
+        two_scene_video,
+        model_image,
+        output_dir,
+    ):
+        """No-trim runs should bypass scene detection and use the original video."""
+        mock_captions.return_value = None
+
+        def fake_recreate(scene_path, model_path, output_path=None, prompt=None):
+            img = Image.new("RGB", (320, 240), color="green")
+            img.save(output_path)
+            return output_path
+        mock_recreate.side_effect = fake_recreate
+
+        def fake_motion(image_path, video_path, output_path, prompt="", **kwargs):
+            shutil.copy2(video_path, output_path)
+            return output_path
+        mock_motion.side_effect = fake_motion
+
+        result = run_full_pipeline(
+            two_scene_video,
+            model_image,
+            output_dir,
+            skip_scene_detection=True,
+        )
+
+        mock_crop.assert_not_called()
+        assert result["trimmed_video"] == two_scene_video
+        assert result["scene_detection_skipped"] is True
+        assert mock_captions.call_args[0][0] == two_scene_video
+        assert mock_motion.call_args[0][1] == two_scene_video
+
+    @patch("backend.pipeline.generate_motion_video")
+    @patch("backend.pipeline.recreate_scene")
+    @patch("backend.pipeline.detect_captions_summary")
     def test_services_called_with_correct_args(
         self,
         mock_captions,

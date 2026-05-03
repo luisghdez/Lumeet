@@ -100,6 +100,68 @@ function DropZone({ label, icon: Icon, accept, file, onFileSelect, preview }) {
 
 // ---------- Extended Toggle ----------
 
+function ReferenceVideoModePicker({ mode, onChange }) {
+  const options = [
+    {
+      id: 'trim',
+      title: 'Auto-trim first scene',
+      eyebrow: 'Recommended',
+      description: 'Detects the first scene cut and sends only that opening scene into recreate.',
+      result: 'Cleaner, tighter hooks when the source video changes scenes.',
+    },
+    {
+      id: 'full',
+      title: 'Use full reference video',
+      eyebrow: 'Experiment',
+      description: 'Skips scene cutting and sends the uploaded video as-is through recreate and motion.',
+      result: 'Best for testing how the model behaves with the entire clip.',
+    },
+  ];
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {options.map((option) => {
+        const isSelected = mode === option.id;
+        return (
+          <button
+            key={option.id}
+            type="button"
+            onClick={() => onChange(option.id)}
+            aria-pressed={isSelected}
+            className={`group relative overflow-hidden rounded-2xl border-2 p-4 text-left transition-all duration-200 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.35)]
+              ${isSelected
+                ? 'border-purple-500/60 bg-white/45 shadow-md ring-2 ring-purple-200/70'
+                : 'border-nimbus-400/35 bg-white/18 hover:border-purple-400/50 hover:bg-white/28'}`}
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <span
+                  className={`inline-flex rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.12em]
+                    ${isSelected ? 'bg-purple-100 text-purple-700' : 'bg-white/60 text-nimbus-600'}`}
+                >
+                  {option.eyebrow}
+                </span>
+                <h4 className="mt-2 text-sm font-bold text-ink-950">{option.title}</h4>
+              </div>
+              <span
+                className={`mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition-all duration-200
+                  ${isSelected ? 'border-purple-500 bg-purple-500' : 'border-nimbus-400/50 bg-white/50'}`}
+              >
+                {isSelected && <CheckCircle2 size={14} className="text-white" />}
+              </span>
+            </div>
+            <p className="mt-2 text-xs leading-5 text-nimbus-700">{option.description}</p>
+            <p className="mt-3 rounded-xl bg-white/45 px-3 py-2 text-[11px] font-medium leading-4 text-gray-600">
+              {option.result}
+            </p>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+
 function ExtendedToggle({ extended, onChange }) {
   return (
     <button
@@ -330,6 +392,7 @@ function CreateSection({ onVideoGenerationStarted }) {
   const [videoFile, setVideoFile] = useState(null);
   const [additionalVideoFile, setAdditionalVideoFile] = useState(null);
   const [extended, setExtended] = useState(false);
+  const [referenceVideoMode, setReferenceVideoMode] = useState('trim'); // 'trim' | 'full'
   const [videoPreview, setVideoPreview] = useState(null);
   const [additionalVideoPreview, setAdditionalVideoPreview] = useState(null);
   const [error, setError] = useState(null);
@@ -431,7 +494,7 @@ function CreateSection({ onVideoGenerationStarted }) {
     }
 
     try {
-      await startVideoGeneration(formData);
+      await startVideoGeneration(formData, { noTrim: referenceVideoMode === 'full' });
       onVideoGenerationStarted?.();
       setQueueState('queued');
     } catch (err) {
@@ -441,7 +504,7 @@ function CreateSection({ onVideoGenerationStarted }) {
     } finally {
       setIsSubmittingVideo(false);
     }
-  }, [canSubmit, isSubmittingVideo, selectedModelId, videoFile, additionalVideoFile, selectedExtVideoId, extended, onVideoGenerationStarted]);
+  }, [canSubmit, isSubmittingVideo, selectedModelId, videoFile, additionalVideoFile, selectedExtVideoId, extended, referenceVideoMode, onVideoGenerationStarted]);
 
   // Model library handlers
   const handleModelUploaded = useCallback((newModel) => {
@@ -483,16 +546,10 @@ function CreateSection({ onVideoGenerationStarted }) {
     setSelectedModelId(null);
     setSelectedExtVideoId(null);
     setExtended(false);
+    setReferenceVideoMode('trim');
     setError(null);
     setQueueState('idle');
   }, []);
-
-  const handleUploadViewScrollIntent = useCallback((e) => {
-    if (!extended) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-  }, [extended]);
 
   const renderVideoContent = () => {
     if (queueState !== 'idle') {
@@ -538,9 +595,7 @@ function CreateSection({ onVideoGenerationStarted }) {
       return (
         <div
           ref={uploadScrollRef}
-          onWheelCapture={handleUploadViewScrollIntent}
-          onTouchMoveCapture={handleUploadViewScrollIntent}
-          className={`h-full flex flex-col items-center px-4 pt-2 pb-6 md:pt-4 md:pb-8 ${extended ? 'overflow-y-auto' : 'overflow-y-hidden'}`}
+          className="h-full flex flex-col items-center overflow-y-auto px-4 pt-2 pb-6 md:pt-4 md:pb-8"
         >
           <div className="w-full max-w-2xl">
             {/* Saved Models */}
@@ -576,6 +631,32 @@ function CreateSection({ onVideoGenerationStarted }) {
                 onFileSelect={setVideoFile}
                 preview={videoPreview}
               />
+            </section>
+
+            {/* Reference video handling */}
+            <section className="mb-5">
+              <div className="mb-2 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+                <h3 className="text-sm font-bold text-gray-700 flex items-center gap-2">
+                  <Sparkles size={15} className="text-purple-500" />
+                  Reference Video Handling
+                </h3>
+                <span className="text-[11px] font-semibold text-nimbus-600">
+                  Controls what gets sent into recreate
+                </span>
+              </div>
+              <div className="glass-card rounded-2xl p-3">
+                <ReferenceVideoModePicker
+                  mode={referenceVideoMode}
+                  onChange={setReferenceVideoMode}
+                />
+                <div className="mt-3 rounded-2xl border border-nimbus-400/20 bg-white/25 px-4 py-3">
+                  <p className="text-xs leading-5 text-gray-600">
+                    {referenceVideoMode === 'trim'
+                      ? 'Current behavior: we find the first scene change, create a trimmed clip, then use that clip for the screenshot, caption scan, and motion generation.'
+                      : 'No-trim behavior: we skip the scene detector entirely, keep the original upload, and use the full clip for the screenshot, caption scan, and motion generation.'}
+                  </p>
+                </div>
+              </div>
             </section>
 
             {/* Extended mode toggle */}

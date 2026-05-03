@@ -53,6 +53,7 @@ def run_full_pipeline(
     on_step: Optional[Callable[[str, str, str], None]] = None,
     extended: bool = False,
     additional_video_path: Optional[str] = None,
+    skip_scene_detection: bool = False,
     cancel_check: Optional[Callable[[], bool]] = None,
 ) -> dict:
     """
@@ -70,6 +71,8 @@ def run_full_pipeline(
         extended: If True, run extended pipeline (concatenate additional video and replace audio).
         additional_video_path: Path to additional video to append. If None and extended=True,
                               uses ADDITIONAL_VIDEO_PATH from config.
+        skip_scene_detection: If True, skip trimming and use the original video for
+                              frame extraction, caption detection, and motion control.
 
     Returns:
         A dict with paths and metadata for each step:
@@ -109,23 +112,33 @@ def run_full_pipeline(
     # Step 1: Scene Detection -- trim at first scene cut
     # =========================================================================
     check_cancelled()
-    cb("scene_detection", "start", "Detecting scene changes...")
+    if skip_scene_detection:
+        scene_message = "Skipping scene detection; using original video."
+    else:
+        scene_message = "Detecting scene changes..."
+    cb("scene_detection", "start", scene_message)
     print("=" * 60)
-    print("[1/6] Scene Detection")
+    print("[1/6] Scene Detection" + (" (skipped)" if skip_scene_detection else ""))
     print("=" * 60)
 
-    trimmed_path = os.path.join(output_dir, "trimmed.mp4")
-    trim_result = crop_to_first_scene(video_path, output_path=trimmed_path)
-    check_cancelled()
-
-    if trim_result is not None:
-        result["trimmed_video"] = trim_result["output_path"]
-        msg = f"Trimmed at {trim_result['cut_at_seconds']:.2f}s"
+    if skip_scene_detection:
+        result["trimmed_video"] = video_path
+        result["scene_detection_skipped"] = True
+        msg = "Scene detection skipped -- using original video."
         print(f"  {msg}")
     else:
-        result["trimmed_video"] = video_path
-        msg = "No scene change detected -- using original video."
-        print(f"  {msg}")
+        trimmed_path = os.path.join(output_dir, "trimmed.mp4")
+        trim_result = crop_to_first_scene(video_path, output_path=trimmed_path)
+        check_cancelled()
+
+        if trim_result is not None:
+            result["trimmed_video"] = trim_result["output_path"]
+            msg = f"Trimmed at {trim_result['cut_at_seconds']:.2f}s"
+            print(f"  {msg}")
+        else:
+            result["trimmed_video"] = video_path
+            msg = "No scene change detected -- using original video."
+            print(f"  {msg}")
 
     working_video = result["trimmed_video"]
     cb("scene_detection", "complete", msg)

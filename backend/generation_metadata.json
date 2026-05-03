@@ -1115,5 +1115,351 @@
       "promptSummary": "male-presenting. African features and heritage. deep brown skin tone. hazel eyes. in their early 20s, fresh and youthful. visibly muscular build. curly hair. medium-length hair. dark brown hair. full sleeve tattoos. septum nose piercing. wearing thin-frame modern glasses, well-groomed short beard. casual everyday outfit, simple t-shirt and jeans",
       "previewUrl": "https://storage.googleapis.com/lumeet-bucket/models/da82defe5c9a/avatar.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T045426Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=2e828cbc5bf94cbe6ebf5c7b4ab808b4509e4641222ba324981d3a633281290d888fce9b4adecec0a916e368ca3e29ab5c876727eb9e320a37bdbb28c7d7d301cb7479eade50154defce37f2c476332f2d2ba72d02055c74df19cb6500a54cffcd268a9287218b6843b1c9e5c13dc32c765053e44b00ebabeb72f0e1afea9a0ba803c988c41dca0fe4c3782a5ba3b42663f4ab80a3baffcd2eebc71a2f431776c97517e37e8c350d302fdd90b2c734472118847e915b4ec27a7ec55386ed99ed66cdac154b89259e5559db30f5aab7d9dc176c279a3231d1abcb95ed9547d2f1792888b052ca825e0f60bf7872082fd85cbfdb02ec6332dbe997997a0709c9a6"
     }
+  },
+  "245c887c6063": {
+    "generationId": "245c887c6063",
+    "type": "video",
+    "label": "testvidryse.mp4 (no trim)",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "No caption detected."
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "No caption to overlay -- raw video is the final output."
+      }
+    ],
+    "error": null,
+    "createdAt": 1777698311.571336,
+    "completedAt": 1777698794.1010199,
+    "output": {
+      "jobId": "8fcdaf9b971c",
+      "videoUrl": "https://storage.googleapis.com/lumeet-bucket/videos/8fcdaf9b971c/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T051305Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b7ddc122a0d106031695319eca4a5628dac5dc38d48438483b3ca6f12f1c1d2a5768b648b6f2cfd65bd583669187b18da147ab368f7c60e9ba144331c891662eb9cec4a1999327943290cbfc3a6def5914f6b2eec7a74f6bd397c84bd6d773c8da1a44c90bd0697ef293be1272e226edc97fdeaf480ab3f7ba07fa38d3960ace5915e9a9095f8e5807ebb684f58595c3e0efe8904c37944147d4c21cbe5d4341f770cd4280ac62ab73d36889a341f2359f32391d918f88bb6daea1399141a0c6bbf84f1b48976e37b83989a3e814b9fc5d4b1496ac89596b61ac3de8df624b21ee5c8f280db7e01776fcb9df93efb26ef64cf41b17d12632a0d09fc192cd28f6",
+      "resultPath": "/Users/luishernandez/Code/luisghdez/Lumeet/backend/jobs/8fcdaf9b971c/output/generated_raw.mp4",
+      "videoGcs": {
+        "bucket": "lumeet-bucket",
+        "object": "videos/8fcdaf9b971c/final_output.mp4",
+        "url": "https://storage.googleapis.com/lumeet-bucket/videos/8fcdaf9b971c/final_output.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T051305Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=b7ddc122a0d106031695319eca4a5628dac5dc38d48438483b3ca6f12f1c1d2a5768b648b6f2cfd65bd583669187b18da147ab368f7c60e9ba144331c891662eb9cec4a1999327943290cbfc3a6def5914f6b2eec7a74f6bd397c84bd6d773c8da1a44c90bd0697ef293be1272e226edc97fdeaf480ab3f7ba07fa38d3960ace5915e9a9095f8e5807ebb684f58595c3e0efe8904c37944147d4c21cbe5d4341f770cd4280ac62ab73d36889a341f2359f32391d918f88bb6daea1399141a0c6bbf84f1b48976e37b83989a3e814b9fc5d4b1496ac89596b61ac3de8df624b21ee5c8f280db7e01776fcb9df93efb26ef64cf41b17d12632a0d09fc192cd28f6"
+      }
+    },
+    "jobId": "8fcdaf9b971c"
+  },
+  "24d76c33bef0": {
+    "generationId": "24d76c33bef0",
+    "type": "avatar",
+    "label": "Female \u00b7 East Asian \u00b7 Fair",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "validate",
+        "label": "Validating selections",
+        "status": "completed",
+        "message": "Selections look good"
+      },
+      {
+        "key": "prompt",
+        "label": "Composing prompt",
+        "status": "completed",
+        "message": "Prompt ready"
+      },
+      {
+        "key": "generate",
+        "label": "Generating avatar image",
+        "status": "completed",
+        "message": "Generated via gemini"
+      },
+      {
+        "key": "upload",
+        "label": "Uploading to library",
+        "status": "completed",
+        "message": "Avatar uploaded"
+      },
+      {
+        "key": "save",
+        "label": "Saving avatar",
+        "status": "completed",
+        "message": "Avatar saved"
+      }
+    ],
+    "error": null,
+    "createdAt": 1777698351.409987,
+    "completedAt": 1777698374.986979,
+    "output": {
+      "modelId": "b8e657701b5c",
+      "model": {
+        "modelId": "b8e657701b5c",
+        "url": "https://storage.googleapis.com/lumeet-bucket/models/b8e657701b5c/avatar.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T050614Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=a04d87ee2c08565739f281847e50441691a1e531408a71c42c4d2093283835234a74b5f887a564dfbd7918397bc27b4c6f85ec7bed9d763946bc17e45f7baa61ff3be6eca6ae19f5aa742767f637ae82d2e7aecd03a0170298846aded3ff83796c0c371a5a352e023a4c01ede290b9905144eb2b51a9f46cd666395ca0bb7c826533c374762a736be10b1bd0d793b1a69c0f7840f695409a92b47196a2b6d223de5c116c1efd55093b6254d5aacd9c3e9d5cf4dcc990bb6b87c487b0e98e9b397d95970f80849c8b6dcc83632b407bb893782718be19d00998c93c55c44b96863b09ba48da9b86afc33f5d3bae9927b67c30a100d5e0cbd24ec1a9cfb3c44109",
+        "bucket": "lumeet-bucket",
+        "object": "models/b8e657701b5c/avatar.png",
+        "label": "Female \u00b7 East Asian \u00b7 Fair",
+        "filename": "avatar.png",
+        "createdAt": "2026-05-02T05:06:14.901841+00:00",
+        "source": "avatar_studio",
+        "avatarConfig": {
+          "gender": "female",
+          "ethnicity": "asian",
+          "skinTone": "fair",
+          "age": "young_adult",
+          "bodyType": "athletic",
+          "hairType": "straight",
+          "hairColor": "brown",
+          "outfit": "casual"
+        },
+        "promptSummary": "female-presenting. East Asian features and heritage. fair skin tone. in their early 20s, fresh and youthful. athletic toned build. straight hair. medium brown hair. casual everyday outfit, simple t-shirt and jeans",
+        "provider": "gemini"
+      },
+      "promptSummary": "female-presenting. East Asian features and heritage. fair skin tone. in their early 20s, fresh and youthful. athletic toned build. straight hair. medium brown hair. casual everyday outfit, simple t-shirt and jeans",
+      "previewUrl": "https://storage.googleapis.com/lumeet-bucket/models/b8e657701b5c/avatar.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T050614Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=a04d87ee2c08565739f281847e50441691a1e531408a71c42c4d2093283835234a74b5f887a564dfbd7918397bc27b4c6f85ec7bed9d763946bc17e45f7baa61ff3be6eca6ae19f5aa742767f637ae82d2e7aecd03a0170298846aded3ff83796c0c371a5a352e023a4c01ede290b9905144eb2b51a9f46cd666395ca0bb7c826533c374762a736be10b1bd0d793b1a69c0f7840f695409a92b47196a2b6d223de5c116c1efd55093b6254d5aacd9c3e9d5cf4dcc990bb6b87c487b0e98e9b397d95970f80849c8b6dcc83632b407bb893782718be19d00998c93c55c44b96863b09ba48da9b86afc33f5d3bae9927b67c30a100d5e0cbd24ec1a9cfb3c44109"
+    }
+  },
+  "b5bfb9bbe713": {
+    "generationId": "b5bfb9bbe713",
+    "type": "avatar",
+    "label": "Male \u00b7 East Asian \u00b7 Fair",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "validate",
+        "label": "Validating selections",
+        "status": "completed",
+        "message": "Selections look good"
+      },
+      {
+        "key": "prompt",
+        "label": "Composing prompt",
+        "status": "completed",
+        "message": "Prompt ready"
+      },
+      {
+        "key": "generate",
+        "label": "Generating avatar image",
+        "status": "completed",
+        "message": "Generated via gemini"
+      },
+      {
+        "key": "upload",
+        "label": "Uploading to library",
+        "status": "completed",
+        "message": "Avatar uploaded"
+      },
+      {
+        "key": "save",
+        "label": "Saving avatar",
+        "status": "completed",
+        "message": "Avatar saved"
+      }
+    ],
+    "error": null,
+    "createdAt": 1777698405.245404,
+    "completedAt": 1777698426.6801379,
+    "output": {
+      "modelId": "bca22ca30c3e",
+      "model": {
+        "modelId": "bca22ca30c3e",
+        "url": "https://storage.googleapis.com/lumeet-bucket/models/bca22ca30c3e/avatar.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T050706Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=c80a4f97c9167d91edd952ac61dc2c196c1e9c439b36827ca2b240badfed1184c6692ea9f934fd6915ea2fe274ecd87d7fe2d7151c2ea18eec3f4cf4e078375a07af7584984b7b2a98e8d34515d34cd57df9e14ea5e12e4add7ee80808b89b893b983b74f88fe546698f3dfe904017606c2f3fb6b54dbb19d42f29820dcf3310bb69b7ad55e2e6ab41097c1d16eec378ba623db6385faf83d4db2aa77159dd983268d8351130c323d00192d6d78962aefbc6723198c9352847e2776ebb1bd1402c2eb4ee6f41e6c263a78a08c58f496f336f6a3266e9ae8bec0e50de32100b9dc888b8019c8fa3a0671cf8c444f653e87cbf120aa820ba6b7edb2ef39530e8cf",
+        "bucket": "lumeet-bucket",
+        "object": "models/bca22ca30c3e/avatar.png",
+        "label": "Male \u00b7 East Asian \u00b7 Fair",
+        "filename": "avatar.png",
+        "createdAt": "2026-05-02T05:07:06.591853+00:00",
+        "source": "avatar_studio",
+        "avatarConfig": {
+          "gender": "male",
+          "ethnicity": "asian",
+          "skinTone": "fair",
+          "age": "young_adult",
+          "bodyType": "athletic",
+          "hairType": "straight",
+          "hairColor": "brown",
+          "outfit": "casual"
+        },
+        "promptSummary": "male-presenting. East Asian features and heritage. fair skin tone. in their early 20s, fresh and youthful. athletic toned build. straight hair. medium brown hair. casual everyday outfit, simple t-shirt and jeans",
+        "provider": "gemini"
+      },
+      "promptSummary": "male-presenting. East Asian features and heritage. fair skin tone. in their early 20s, fresh and youthful. athletic toned build. straight hair. medium brown hair. casual everyday outfit, simple t-shirt and jeans",
+      "previewUrl": "https://storage.googleapis.com/lumeet-bucket/models/bca22ca30c3e/avatar.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T050706Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=c80a4f97c9167d91edd952ac61dc2c196c1e9c439b36827ca2b240badfed1184c6692ea9f934fd6915ea2fe274ecd87d7fe2d7151c2ea18eec3f4cf4e078375a07af7584984b7b2a98e8d34515d34cd57df9e14ea5e12e4add7ee80808b89b893b983b74f88fe546698f3dfe904017606c2f3fb6b54dbb19d42f29820dcf3310bb69b7ad55e2e6ab41097c1d16eec378ba623db6385faf83d4db2aa77159dd983268d8351130c323d00192d6d78962aefbc6723198c9352847e2776ebb1bd1402c2eb4ee6f41e6c263a78a08c58f496f336f6a3266e9ae8bec0e50de32100b9dc888b8019c8fa3a0671cf8c444f653e87cbf120aa820ba6b7edb2ef39530e8cf"
+    }
+  },
+  "a76737011712": {
+    "generationId": "a76737011712",
+    "type": "avatar",
+    "label": "Female \u00b7 European \u00b7 Fair",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "validate",
+        "label": "Validating selections",
+        "status": "completed",
+        "message": "Selections look good"
+      },
+      {
+        "key": "prompt",
+        "label": "Composing prompt",
+        "status": "completed",
+        "message": "Prompt ready"
+      },
+      {
+        "key": "generate",
+        "label": "Generating avatar image",
+        "status": "completed",
+        "message": "Generated via gemini"
+      },
+      {
+        "key": "upload",
+        "label": "Uploading to library",
+        "status": "completed",
+        "message": "Avatar uploaded"
+      },
+      {
+        "key": "save",
+        "label": "Saving avatar",
+        "status": "completed",
+        "message": "Avatar saved"
+      }
+    ],
+    "error": null,
+    "createdAt": 1777698465.180861,
+    "completedAt": 1777698487.1157289,
+    "output": {
+      "modelId": "354f027b3603",
+      "model": {
+        "modelId": "354f027b3603",
+        "url": "https://storage.googleapis.com/lumeet-bucket/models/354f027b3603/avatar.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T050807Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=dbac9416d046b03e2d89d3315b82be790cce8c9cd318ba433269be95c1c9149f2a4e2d7ecf886cfe485f9f9ffd54eaaf3b868b7f283fe5bf948f615a78c3aa2c00c694b3858ff5e34b01ada5112e1f39ede5e137bf0a6af84e583c94374287e7691519ac6d2f91b767c9accba9aab1238d4c135244ec8b724fa84c78ff9733fd139ecccd33be6dff653fcc2e32f0b0703d74fe86a17f064115566eda7f4cca8556681da826a89d2794b854e7e621a1659da428273a6e75757e8eff763854867a1281b274b2daf6895ae8c3bfabff5a81d9e6ba6b6587ad8305df3da3b345cee67ee2892e0694fb24d139becb54a726bce87ea8c05bb762ce2b918384330fd68c",
+        "bucket": "lumeet-bucket",
+        "object": "models/354f027b3603/avatar.png",
+        "label": "Female \u00b7 European \u00b7 Fair",
+        "filename": "avatar.png",
+        "createdAt": "2026-05-02T05:08:07.029318+00:00",
+        "source": "avatar_studio",
+        "avatarConfig": {
+          "gender": "female",
+          "ethnicity": "european",
+          "skinTone": "fair",
+          "age": "young_adult",
+          "bodyType": "athletic",
+          "hairType": "straight",
+          "hairColor": "brown",
+          "outfit": "casual"
+        },
+        "promptSummary": "female-presenting. European features and heritage. fair skin tone. in their early 20s, fresh and youthful. athletic toned build. straight hair. medium brown hair. casual everyday outfit, simple t-shirt and jeans",
+        "provider": "gemini"
+      },
+      "promptSummary": "female-presenting. European features and heritage. fair skin tone. in their early 20s, fresh and youthful. athletic toned build. straight hair. medium brown hair. casual everyday outfit, simple t-shirt and jeans",
+      "previewUrl": "https://storage.googleapis.com/lumeet-bucket/models/354f027b3603/avatar.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T050807Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=dbac9416d046b03e2d89d3315b82be790cce8c9cd318ba433269be95c1c9149f2a4e2d7ecf886cfe485f9f9ffd54eaaf3b868b7f283fe5bf948f615a78c3aa2c00c694b3858ff5e34b01ada5112e1f39ede5e137bf0a6af84e583c94374287e7691519ac6d2f91b767c9accba9aab1238d4c135244ec8b724fa84c78ff9733fd139ecccd33be6dff653fcc2e32f0b0703d74fe86a17f064115566eda7f4cca8556681da826a89d2794b854e7e621a1659da428273a6e75757e8eff763854867a1281b274b2daf6895ae8c3bfabff5a81d9e6ba6b6587ad8305df3da3b345cee67ee2892e0694fb24d139becb54a726bce87ea8c05bb762ce2b918384330fd68c"
+    }
+  },
+  "fac867b2c95f": {
+    "generationId": "fac867b2c95f",
+    "type": "remix",
+    "label": "Remix of 8c8afafd89d8",
+    "status": "failed",
+    "progress": 0,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "download_hook",
+        "label": "Download Hook Video",
+        "status": "failed",
+        "message": "400 Client Error: Bad Request for url: https://storage.googleapis.com/lumeet-bucket/hooks/8c8afafd89d8/raw.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260328%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260328T234432Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=45304635d6d3c999070bafa52d6afe4d12fccc12151cacf48f48245536b15c06a47763c281aa4c097c237fd3b07078188f6d614b6e268004623e3177e996435a3e6d4b4bd2d0a671a3399e1506f6e9a09d687830cbb2babbd8603b58eb2017bbbcd1b404ff7103c474e4aca5a7bdb3a07931f63b82b61ec60bde89927417b713639c70702401ba784e3994d402c0b867502cd24fe39e11dc28c0303be23967aa123d5461563c60858d7196d10bf0a568351f081ac4042e4081b2b00fbd1b896856ba778504237a75ab3bc35e95174b7bdf434c30f131f8c3a347766fdfcf46f62a078513a17ec47de139fb7d570f790ef83fa9a57b9a04e77a23120985c88787"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "video_concatenation",
+        "label": "Video Concatenation",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "audio_replacement",
+        "label": "Audio Replacement",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "Failed to download hook video: 400 Client Error: Bad Request for url: https://storage.googleapis.com/lumeet-bucket/hooks/8c8afafd89d8/raw.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260328%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260328T234432Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=45304635d6d3c999070bafa52d6afe4d12fccc12151cacf48f48245536b15c06a47763c281aa4c097c237fd3b07078188f6d614b6e268004623e3177e996435a3e6d4b4bd2d0a671a3399e1506f6e9a09d687830cbb2babbd8603b58eb2017bbbcd1b404ff7103c474e4aca5a7bdb3a07931f63b82b61ec60bde89927417b713639c70702401ba784e3994d402c0b867502cd24fe39e11dc28c0303be23967aa123d5461563c60858d7196d10bf0a568351f081ac4042e4081b2b00fbd1b896856ba778504237a75ab3bc35e95174b7bdf434c30f131f8c3a347766fdfcf46f62a078513a17ec47de139fb7d570f790ef83fa9a57b9a04e77a23120985c88787",
+    "createdAt": 1777698532.551517,
+    "completedAt": 1777698532.769993,
+    "output": null
+  },
+  "11489ddc4ab4": {
+    "generationId": "11489ddc4ab4",
+    "type": "remix",
+    "label": "Remix of b65386863bff",
+    "status": "failed",
+    "progress": 0,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "download_hook",
+        "label": "Download Hook Video",
+        "status": "failed",
+        "message": "400 Client Error: Bad Request for url: https://storage.googleapis.com/lumeet-bucket/hooks/b65386863bff/raw.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T040638Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=1c52bccf96611c95262f92e6348411a84455690170c84e5d4981a53fdfc4ec703814f839ed6fde72a470652a99f21e49ae1c4819d05c612a335a5388ba9f380f61821101d66a6af91f99769db23ca828096f18c64e438ab52f9386e312ede4a7e9e7612af7abd98c6a3ce4c45ab906575f8cda7df7d99c5f1592ae07b2f59012ecf3ea20424474d32e5e40d1f60e5af3eadee4e6a7da6b1863930470b6e488182c03036326ff0640b7b845af08b51edc547f2790b641e576b0adc4e03cc0eb19456f30b286b6d67fba065b3898c1b6bf05e66871df3509965e6ac9a4b3aaf2383a584828b9197eca2dfac024715a146bfb2ab61cca262f38d5ec01149fd3ec31"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "video_concatenation",
+        "label": "Video Concatenation",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "audio_replacement",
+        "label": "Audio Replacement",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "Failed to download hook video: 400 Client Error: Bad Request for url: https://storage.googleapis.com/lumeet-bucket/hooks/b65386863bff/raw.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T040638Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=1c52bccf96611c95262f92e6348411a84455690170c84e5d4981a53fdfc4ec703814f839ed6fde72a470652a99f21e49ae1c4819d05c612a335a5388ba9f380f61821101d66a6af91f99769db23ca828096f18c64e438ab52f9386e312ede4a7e9e7612af7abd98c6a3ce4c45ab906575f8cda7df7d99c5f1592ae07b2f59012ecf3ea20424474d32e5e40d1f60e5af3eadee4e6a7da6b1863930470b6e488182c03036326ff0640b7b845af08b51edc547f2790b641e576b0adc4e03cc0eb19456f30b286b6d67fba065b3898c1b6bf05e66871df3509965e6ac9a4b3aaf2383a584828b9197eca2dfac024715a146bfb2ab61cca262f38d5ec01149fd3ec31",
+    "createdAt": 1777698555.432213,
+    "completedAt": 1777698556.585074,
+    "output": null
   }
 }
