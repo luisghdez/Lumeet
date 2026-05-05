@@ -112,5 +112,32 @@
     },
     "promptSummary": "female-presenting. European features and heritage. fair skin tone. in their early 20s, fresh and youthful. athletic toned build. straight hair. medium brown hair. casual everyday outfit, simple t-shirt and jeans",
     "provider": "gemini"
+  },
+  "5a786470293f": {
+    "modelId": "5a786470293f",
+    "url": "https://storage.googleapis.com/lumeet-bucket/models/5a786470293f/model.JPG?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260505%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260505T003651Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=69492f6c2e2ac142d2e4b5741bf52aba0c5ef20bf0b60af241045d561f033e2582f380e2dc55469cb4a4220dfaa03be62e97f86f3766f9cf215ae18abb0397306e76d699f15f390de6a61a80658508e7a74d835ff214d25268b4225ec9f02c56dfbaa847a9a5d7530d9c389bd9be729d41e70e40f8e62aa2670cb270500bff8591dd9a0af6670214e179bd3f8f205daead4a7608fcc43a9b984d05a453665e3f80e05cc53d13b1ff82055379cb302bc4eaf7800a488452067f9d77e1789c42e52e7caabadd32f901112a7e5a113c612b109f6bf840283adfae3a8e375bcf7f6bb41039d2d3aa553be34ca6b4d61a614e3016042e8fcfa3a463ccd0d6fdcd703b",
+    "bucket": "lumeet-bucket",
+    "object": "models/5a786470293f/model.JPG",
+    "label": "d07a75cc-b3bc-40f2-8039-6f19399486df",
+    "filename": "d07a75cc-b3bc-40f2-8039-6f19399486df.JPG",
+    "createdAt": "2026-05-05T00:36:51.806291+00:00"
+  },
+  "041ac9ad0d5b": {
+    "modelId": "041ac9ad0d5b",
+    "url": "https://storage.googleapis.com/lumeet-bucket/models/041ac9ad0d5b/model.jpeg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260505%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260505T004910Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=63e880975be70bd48b135dd24ac78ab2d20e3f69770564390cf168e6b2a389b976465e3a3fbe605b561aa1245ac0b465f4dfcd21b0f2b86c92fa3cd3f0daf565637ff297975d4fb3597ccee2623f1525d8c3431d1bb584f4300d2efbf4230a8f5826cc1879ff046870cce570c143a8e807f6c3392cfb029ca98b856934b3a56e377f825353e969a2f78609402c406a6dfd1d509b1c36ec415f200fdfc6f61757aa22e955016eeb8c1d7f284aaf57e3c9cad1a9ba7d1851482caeb15c60ffe47271ac7772580dacfa983da0eb2e6a11e5192aed72bf579aa77a414dad515bd61fc63d4da55013dce6f3c4d35634a4051860b11b9b334dcacd82213e2164e1a2ef",
+    "bucket": "lumeet-bucket",
+    "object": "models/041ac9ad0d5b/model.jpeg",
+    "label": "hf_20260502_042554_5dbaae89-e758-4a4c-9af3-798460b40dc2",
+    "filename": "hf_20260502_042554_5dbaae89-e758-4a4c-9af3-798460b40dc2.jpeg",
+    "createdAt": "2026-05-05T00:49:10.362565+00:00"
+  },
+  "e46f98cc6425": {
+    "modelId": "e46f98cc6425",
+    "url": "https://storage.googleapis.com/lumeet-bucket/models/e46f98cc6425/model.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260505%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260505T005108Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=6620eae9a58fbd549f6d27ff1c25a678a0d24054ffe1ed406f1a5de56ffa72ca97969a5fc8c6fe1889b88008c2c5bc4cf85cbfd1f59131bca14fef68d5fe1e038b066b367503b498e7720e68f51c2e5772783a9861bc88c04dc3c659f90deb505637520eca37957eb34673e5e331a1bf035b1d35b7734085aa18b0e12c2f63f4119ce4503a800fe004cdd52a81a1c680007a56a5b65862667eada8ceeecc62bfff3af225878196140128b5a57bbb87d94a7518b08e98cbab2d8421aa40d91c6e23cbfc131a03c3a7f9d4ccea1af824ed3aa57827ec8aa0b2d2cf6c062b8dc0f3dc46fc749904959b49aaa214f2fba69c582c34b304bef926f4b3b5ac7393aeab",
+    "bucket": "lumeet-bucket",
+    "object": "models/e46f98cc6425/model.png",
+    "label": "hf_20260313_233106_01a95826-04da-480c-8172-f2771fcbe889",
+    "filename": "hf_20260313_233106_01a95826-04da-480c-8172-f2771fcbe889.png",
+    "createdAt": "2026-05-05T00:51:08.680530+00:00"
   }
 }

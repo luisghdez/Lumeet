@@ -298,5 +298,45 @@
     "originalSoundId": "snd_8fcdaf9b971c",
     "label": "",
     "createdAt": "2026-05-02T05:13:05.592105+00:00"
+  },
+  "59f66cab8890": {
+    "hookId": "59f66cab8890",
+    "sourceJobId": "59f66cab8890",
+    "url": "https://storage.googleapis.com/lumeet-bucket/hooks/59f66cab8890/raw.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260505%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260505T004338Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=a20775ac417e945cc22b9553feab56fe7e5bc81124dcafe71c0a88b93734900a91733b484564d8de2ebd78e454bee5a573c1d92595a445ea193092fcc26199134fa281dbd81c94bce650a48d174169e2a3e64d4fcc44e813234a2acc7f9b8fbb38c6da4ac654a4946b8a70c84eb6a8ee348c64ef8935804bbcca3302c3e1d25cf0006f32114149d41b682396190423cd359bd32de33764989436bd1a13ba419547340ee95eee23ebc424e748e7a2b8425c44bcaca1aa4dd3a94b4cda48441bf9b9291b39ab313a5efa6ccf451bbd3b8f5132831a322e0f031cb4e9cfe9fee0dfac614fd2fd713f5038aba1809e59343e6931c0049a8d06ccca48ba551a6ed64e",
+    "bucket": "lumeet-bucket",
+    "object": "hooks/59f66cab8890/raw.mp4",
+    "originalSoundId": "snd_59f66cab8890",
+    "label": "",
+    "createdAt": "2026-05-05T00:43:34.899088+00:00"
+  },
+  "404a68894efe": {
+    "hookId": "404a68894efe",
+    "sourceJobId": "404a68894efe",
+    "url": "https://storage.googleapis.com/lumeet-bucket/hooks/404a68894efe/raw.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260505%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260505T004344Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=7642ce687e6d6c067f11d3939c48b4cad00c7b653deb956013dbd64a0eba3ec2f21cbdd5e438d87853e5779a9afb705f806a7c7f975e28fb949db01bc18ae181e59d986a68b2d295193bfd3aef83951a0b9d333c3dc5052f4175746d079785234aa388eaf5d664fe9b519b5dfdfa6a6f123182717ee95291754641b2899ff52f332e58864ed39c701c96e2d36f89c2d649053aa98c1621cdeee3273d12b9cb3b9b140b757eb802c609c63a6637b35f08a7369f326cc4cff7b8334060cf5fbc8660661332c2e31b897ab009d42cd05e0673f5fc85f2eb64eaae3dc0de992c17ef87a625993a54c64ea990ca52a40b331ad62ac6150fe62418ae997fb1b1a236c1",
+    "bucket": "lumeet-bucket",
+    "object": "hooks/404a68894efe/raw.mp4",
+    "originalSoundId": "snd_404a68894efe",
+    "label": "",
+    "createdAt": "2026-05-05T00:43:42.475313+00:00"
+  },
+  "0dceeec3cb17": {
+    "hookId": "0dceeec3cb17",
+    "sourceJobId": "0dceeec3cb17",
+    "url": "https://storage.googleapis.com/lumeet-bucket/hooks/0dceeec3cb17/raw.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260505%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260505T010045Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=1be0fcc66682a57b17e49ead31af9bc77e51ca6b8648221e6482c18cc58482a9240e7330f86a955c35ddca519899234709b548666b522b0b3263ecdcc9d8cc77b7c487b2edcc04c847d3510b478772d4a3d4f486a7167f1b0e4215e593c0ec68f59a340b256b4cc053db5db1a33180e42b9e37a47e0286876893b44f0943822d4c755cf69df51563b0f48caaf5460b3e41e41b898c142991c8baafd3821c3034eb079624196ae5b1ba1afc1c652615c0dd350327c802d0f19d5fa8f4aac1d0b4b678490105013209cf488c9d449b58bdd27a3c5d976f4f98074414978014c8ee14c5daefc3c0e08fddaa217913f9d495e02731dc159cc754f675256833e9129c",
+    "bucket": "lumeet-bucket",
+    "object": "hooks/0dceeec3cb17/raw.mp4",
+    "originalSoundId": "snd_0dceeec3cb17",
+    "label": "",
+    "createdAt": "2026-05-05T01:00:41.844399+00:00"
+  },
+  "928fcacdb62c": {
+    "hookId": "928fcacdb62c",
+    "sourceJobId": "928fcacdb62c",
+    "url": "https://storage.googleapis.com/lumeet-bucket/hooks/928fcacdb62c/raw.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260505%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260505T010121Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=2d43aa301f52d6c62e2ec4e150f55815f7f47141671cda71f33f7871b7f86ece734c29aea629f6ec2f8e594caca6f0b05542b67319fcf53424f16f8cf6b6c95cb982b056026f00c2b6dc3c194c4f1aecb7398afcc1d38c3274b5ce4089baec9db960b1b5f98b501cfe1e085fa909401696c8620ab2934b7dd0677fedafb16efc58e274f31dc1418b3779c4db3d7984b8d65b3be92792d052cac9f1c54f704955d56b6c65c16bf8be9f84f740665264650d5e659e20519152cf5df4db46f37ce695cd6cbcc1ffc1a2b1bddf2c678d8fee28138c3b752daaf93da5f478f8c503b202b11da7cbdf12befbb91e542165a922d5a05dbea3be3c2176f5665e43d09148",
+    "bucket": "lumeet-bucket",
+    "object": "hooks/928fcacdb62c/raw.mp4",
+    "originalSoundId": "snd_928fcacdb62c",
+    "label": "",
+    "createdAt": "2026-05-05T01:01:19.232776+00:00"
   }
 }
