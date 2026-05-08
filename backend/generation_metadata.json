@@ -1752,5 +1752,270 @@
       }
     },
     "jobId": "928fcacdb62c"
+  },
+  "5123db5d2b68": {
+    "generationId": "5123db5d2b68",
+    "type": "video",
+    "label": "GoliVid.mp4 (no trim)",
+    "status": "failed",
+    "progress": 16,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "running",
+        "message": "Extracting reference frame..."
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "[Errno 2] No such file or directory: 'ffmpeg'",
+    "createdAt": 1777945516.2243369,
+    "completedAt": 1777945516.260895,
+    "output": null,
+    "jobId": "75abb5221940"
+  },
+  "27b76d7c1ea8": {
+    "generationId": "27b76d7c1ea8",
+    "type": "video",
+    "label": "GoliVid.mp4 (no trim)",
+    "status": "failed",
+    "progress": 50,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"know goli's while\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "running",
+        "message": "Recreating scene with Gemini..."
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "1 validation error for ImageConfig\nimage_size\n  Extra inputs are not permitted [type=extra_forbidden, input_value='2K', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",
+    "createdAt": 1777945757.956306,
+    "completedAt": 1777945764.6969862,
+    "output": null,
+    "jobId": "80885dc30d57"
+  },
+  "6f114efe40e4": {
+    "generationId": "6f114efe40e4",
+    "type": "video",
+    "label": "NoseVid.mp4 (no trim)",
+    "status": "failed",
+    "progress": 50,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"1st time Unbiased Intake Nasal strip review\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "running",
+        "message": "Recreating scene with Gemini..."
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "1 validation error for ImageConfig\nimage_size\n  Extra inputs are not permitted [type=extra_forbidden, input_value='2K', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",
+    "createdAt": 1777945898.8892071,
+    "completedAt": 1777945901.337541,
+    "output": null,
+    "jobId": "5dd6f11c2c44"
+  },
+  "5f797ede79ca": {
+    "generationId": "5f797ede79ca",
+    "type": "video",
+    "label": "NoseVid.mp4 (no trim)",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"1st time Unbiased Intake Nasal strip review\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      }
+    ],
+    "error": null,
+    "createdAt": 1777945972.319915,
+    "completedAt": 1777946384.314649,
+    "output": {
+      "jobId": "491431450918",
+      "videoUrl": "",
+      "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/491431450918/output/final_output.mp4",
+      "videoGcs": null
+    },
+    "jobId": "491431450918"
+  },
+  "3d4fcaf496be": {
+    "generationId": "3d4fcaf496be",
+    "type": "video",
+    "label": "GoliVid.mp4 (no trim)",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"know goli's while\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      }
+    ],
+    "error": null,
+    "createdAt": 1777945984.474078,
+    "completedAt": 1777946425.61447,
+    "output": {
+      "jobId": "01f665a179bf",
+      "videoUrl": "",
+      "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/01f665a179bf/output/final_output.mp4",
+      "videoGcs": null
+    },
+    "jobId": "01f665a179bf"
   }
 }

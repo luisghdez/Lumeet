@@ -29,7 +29,6 @@ DEFAULT_PROMPT = (
 
 MODEL_ID = "gemini-3-pro-image-preview"
 ASPECT_RATIO = "9:16"
-RESOLUTION = "2K"
 
 
 def recreate_scene(
@@ -100,7 +99,6 @@ def recreate_scene(
             response_modalities=["TEXT", "IMAGE"],
             image_config=types.ImageConfig(
                 aspect_ratio=ASPECT_RATIO,
-                image_size=RESOLUTION,
             ),
         ),
     )

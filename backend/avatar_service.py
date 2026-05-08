@@ -258,7 +258,6 @@ def _generate_with_gemini(prompt: str, output_path: str) -> str:
 
     model_id = os.environ.get("AVATAR_GEMINI_MODEL", "gemini-3-pro-image-preview")
     aspect_ratio = os.environ.get("AVATAR_ASPECT_RATIO", "9:16")
-    resolution = os.environ.get("AVATAR_RESOLUTION", "2K")
 
     client = genai.Client(api_key=api_key)
     try:
@@ -269,7 +268,6 @@ def _generate_with_gemini(prompt: str, output_path: str) -> str:
                 response_modalities=["TEXT", "IMAGE"],
                 image_config=types.ImageConfig(
                     aspect_ratio=aspect_ratio,
-                    image_size=resolution,
                 ),
             ),
         )

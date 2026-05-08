@@ -46,6 +46,7 @@ from sound_metadata_store import sound_metadata_store
 from model_metadata_store import model_metadata_store
 from extension_video_metadata_store import extension_video_metadata_store
 from config import (
+    PUBLIC_BACKEND_BASE_URL,
     GCS_VIDEO_OBJECT_PREFIX,
     GCS_HOOKS_OBJECT_PREFIX,
     GCS_SOUNDS_OBJECT_PREFIX,
@@ -856,26 +857,32 @@ async def generation_create_video(
         model_record = model_metadata_store.get(modelId)
         if not model_record:
             raise HTTPException(status_code=404, detail=f"Model {modelId} not found.")
-        model_url = model_record.get("url", "")
-        if not model_url:
-            raise HTTPException(status_code=500, detail=f"Model {modelId} has no URL.")
-        # Refresh signed URL
-        bucket = model_record.get("bucket")
-        obj = model_record.get("object")
-        if bucket and obj:
-            try:
-                from storage_gcs import GcsStorage
-                gcs = GcsStorage()
-                if bucket == gcs.bucket_name:
-                    model_url = gcs.generate_read_url(obj)
-            except Exception:
-                pass
-        image_ext = os.path.splitext(obj or ".png")[1] or ".png"
-        image_path = os.path.join(input_dir, f"model_image{image_ext}")
-        resp = _requests.get(model_url, timeout=60)
-        resp.raise_for_status()
-        with open(image_path, "wb") as f:
-            f.write(resp.content)
+        local_model_path = model_record.get("localPath", "")
+        if local_model_path and os.path.isfile(local_model_path):
+            image_ext = os.path.splitext(local_model_path)[1] or ".png"
+            image_path = os.path.join(input_dir, f"model_image{image_ext}")
+            shutil.copyfile(local_model_path, image_path)
+        else:
+            model_url = model_record.get("url", "")
+            if not model_url:
+                raise HTTPException(status_code=500, detail=f"Model {modelId} has no URL.")
+            # Refresh signed URL
+            bucket = model_record.get("bucket")
+            obj = model_record.get("object")
+            if bucket and obj:
+                try:
+                    from storage_gcs import GcsStorage
+                    gcs = GcsStorage()
+                    if bucket == gcs.bucket_name:
+                        model_url = gcs.generate_read_url(obj)
+                except Exception:
+                    pass
+            image_ext = os.path.splitext(obj or ".png")[1] or ".png"
+            image_path = os.path.join(input_dir, f"model_image{image_ext}")
+            resp = _requests.get(model_url, timeout=60)
+            resp.raise_for_status()
+            with open(image_path, "wb") as f:
+                f.write(resp.content)
 
     video_ext = os.path.splitext(video.filename or "video.mp4")[1] or ".mp4"
     video_path = os.path.join(input_dir, f"reference_video{video_ext}")
@@ -1340,6 +1347,10 @@ def _refresh_model_url(item: dict) -> dict:
                 refreshed["url"] = gcs.generate_read_url(object_name)
         except Exception:
             pass
+    elif item.get("localPath"):
+        model_id = item.get("modelId")
+        if model_id:
+            refreshed["url"] = f"{PUBLIC_BACKEND_BASE_URL.rstrip('/')}/api/models/{model_id}/image"
     return refreshed
 
 
@@ -1349,6 +1360,27 @@ async def list_models():
     items = model_metadata_store.list_all()
     refreshed = [_refresh_model_url(item) for item in items]
     return {"models": refreshed}
+
+
+@app.get("/api/models/{model_id}/image")
+async def get_model_image(model_id: str):
+    """Serve a locally stored model image."""
+    item = model_metadata_store.get(model_id)
+    if not item:
+        raise HTTPException(status_code=404, detail=f"Model {model_id} not found.")
+
+    local_path = item.get("localPath", "")
+    if not local_path or not os.path.isfile(local_path):
+        raise HTTPException(status_code=404, detail=f"Model image {model_id} not found.")
+
+    import mimetypes
+
+    media_type, _ = mimetypes.guess_type(local_path)
+    return FileResponse(
+        local_path,
+        media_type=media_type or "application/octet-stream",
+        filename=item.get("filename") or os.path.basename(local_path),
+    )
 
 
 @app.post("/api/models")
@@ -1372,20 +1404,27 @@ async def upload_model(
     local_path = os.path.join(tmp_dir, f"model{ext}")
     _save_upload(image, local_path)
 
+    gcs_info: Optional[dict] = None
     try:
         from storage_gcs import GcsStorage
         gcs = GcsStorage()
         object_name = f"{GCS_MODELS_OBJECT_PREFIX.strip('/')}/{model_id}/model{ext}"
         gcs_info = gcs.upload_file_public(local_path, object_name)
     except Exception as exc:
-        raise HTTPException(status_code=500, detail=f"GCS upload failed: {exc}") from exc
+        logger.warning("GCS model upload failed; using local model storage: %s", exc)
 
     now_iso = datetime.now(_tz.utc).isoformat()
     record = {
         "modelId": model_id,
-        "url": gcs_info.get("url", ""),
-        "bucket": gcs_info.get("bucket", ""),
-        "object": gcs_info.get("object", ""),
+        "url": (
+            gcs_info.get("url", "")
+            if gcs_info
+            else f"{PUBLIC_BACKEND_BASE_URL.rstrip('/')}/api/models/{model_id}/image"
+        ),
+        "bucket": gcs_info.get("bucket", "") if gcs_info else "",
+        "object": gcs_info.get("object", "") if gcs_info else "",
+        "localPath": local_path,
+        "storage": "gcs" if gcs_info else "local",
         "label": label.strip() if label else "",
         "filename": image.filename or "",
         "createdAt": now_iso,
