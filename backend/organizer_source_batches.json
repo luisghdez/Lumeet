@@ -11,9 +11,9 @@
     "counts": {
       "total": 30,
       "imported": 30,
-      "enriched": 6,
+      "enriched": 9,
       "failed": 0,
-      "aiTagged": 6,
+      "aiTagged": 9,
       "created": 30,
       "duplicates": 0
     },
@@ -50,6 +50,59 @@
       "vidref_58cd98f83331cb11"
     ],
     "createdAt": "2026-05-09T05:31:57.700558+00:00",
-    "updatedAt": "2026-05-09T06:10:48.421437+00:00"
+    "updatedAt": "2026-05-09T06:19:59.296322+00:00"
+  },
+  "batch_2845fe8dc902": {
+    "id": "batch_2845fe8dc902",
+    "sourceType": "tiktok_account",
+    "platform": "tiktok",
+    "sourceScanId": "tt_1a81f5502ce3",
+    "creatorId": "tiktok_lauraonedge",
+    "creatorHandle": "lauraonedge",
+    "nicheHint": "",
+    "status": "imported",
+    "counts": {
+      "total": 30,
+      "imported": 30,
+      "enriched": 5,
+      "failed": 0,
+      "aiTagged": 5,
+      "created": 30,
+      "duplicates": 0
+    },
+    "videoReferenceIds": [
+      "vidref_39a6d4f8228d1030",
+      "vidref_f0a74ca01d76e2b4",
+      "vidref_d7ef0e555af0375d",
+      "vidref_87a087ebe623eed8",
+      "vidref_d2d6e3552f670399",
+      "vidref_49d82e1fca9c10be",
+      "vidref_8daa4d21fa98f23b",
+      "vidref_5f52ad62cb4370e7",
+      "vidref_7bac75c945b27b35",
+      "vidref_2f69c9b8c800b410",
+      "vidref_cb158a1a87d7643c",
+      "vidref_ce7beafcc239b6f0",
+      "vidref_1645667aa51f7caa",
+      "vidref_a6e60141483a7cbf",
+      "vidref_68b8c19e1d97a087",
+      "vidref_45c9492a7537648b",
+      "vidref_6ecc0bc4780fdcec",
+      "vidref_6813d142a5bd330c",
+      "vidref_3af2f6883eeb43e6",
+      "vidref_97d63cbd31a685f2",
+      "vidref_4deb95dc8f6b57c6",
+      "vidref_a60f9831653b5b78",
+      "vidref_dd2e5997e98cdf22",
+      "vidref_bcd6ef211ce35b36",
+      "vidref_8fc9957f8784a1b9",
+      "vidref_c283dd82a0cab227",
+      "vidref_111509242df4286c",
+      "vidref_9078d2a075f30c28",
+      "vidref_d66409b50f599940",
+      "vidref_0d9a1de89563daa7"
+    ],
+    "createdAt": "2026-05-09T06:15:06.787314+00:00",
+    "updatedAt": "2026-05-09T06:17:49.022891+00:00"
   }
 }

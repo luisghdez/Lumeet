@@ -65,6 +65,72 @@ SUB_NICHE_VALUES = {
     "tech_apps": ["app_demo", "software_tutorial", "ai_tool", "phone_setup", "gadget", "other"],
     "entertainment": ["comedy", "skit", "reaction", "storytime", "trend", "other"],
 }
+CONTENT_PILLAR_VALUES = [
+    "relatable_lifestyle", "routine_explainer", "meal_prep_food", "product_demo", "app_demo",
+    "transformation_progress", "educational_tips", "myth_busting", "review_testimonial",
+    "trend_reaction", "community_story", "announcement_launch", "offer_promo",
+    "behind_the_scenes", "other",
+]
+PILLAR_ROLE_VALUES = [
+    "trust_builder", "authority_builder", "relatability_builder", "desire_builder",
+    "conversion_driver", "retention_builder",
+]
+ACCOUNT_ARCHETYPE_VALUES = [
+    "fitness_app_creator", "fitness_lifestyle_creator", "gym_clothing_creator",
+    "skincare_routine_creator", "beauty_review_creator", "study_productivity_creator",
+    "education_app_creator", "wellness_habit_creator", "food_meal_prep_creator",
+    "tech_tool_creator", "founder_builder_creator", "other",
+]
+ACCOUNT_VOICE_VALUES = [
+    "expert_coach", "relatable_peer", "aspirational_friend", "funny_observer",
+    "calm_teacher", "high_energy_hype", "minimal_aesthetic",
+]
+AUDIENCE_STAGE_VALUES = ["beginner", "intermediate", "advanced", "mixed"]
+AUDIENCE_IDENTITY_VALUES = [
+    "gym_beginner", "busy_student", "skincare_beginner", "weight_loss_journey",
+    "muscle_gain_journey", "productivity_seeker", "budget_conscious_buyer",
+    "trend_follower", "other",
+]
+FUNNEL_STAGE_VALUES = ["awareness", "consideration", "conversion", "retention", "reactivation"]
+CAMPAIGN_USE_VALUES = [
+    "top_of_funnel_reach", "organic_account_growth", "paid_ad_creative",
+    "retargeting_ad", "launch_announcement", "evergreen_post", "community_nurture",
+]
+CONVERSION_INTENT_VALUES = ["none", "soft_sell", "medium_sell", "hard_sell"]
+CTA_TYPE_VALUES = [
+    "no_cta", "follow_for_more", "comment_keyword", "link_in_bio", "download_app",
+    "shop_now", "try_free", "save_share",
+]
+PRODUCT_INTEGRATION_VALUES = [
+    "none", "background_context", "mentioned_only", "shown_briefly", "demo_core",
+    "before_after_driver", "testimonial_driver",
+]
+PRODUCT_VISIBILITY_VALUES = ["none", "low", "medium", "high"]
+PRODUCT_FIT_VALUES = ["poor", "okay", "strong", "native"]
+DEMO_DEPTH_VALUES = [
+    "none", "feature_flash", "single_feature_walkthrough",
+    "multi_step_walkthrough", "full_routine_integration",
+]
+CREATIVE_TEMPLATE_VALUES = [
+    "hook_then_demo", "problem_then_solution", "day_in_the_life", "grwm",
+    "routine_breakdown", "three_tips", "mistakes_to_avoid", "before_after",
+    "pov_story", "testimonial_story", "trend_adaptation", "screen_recording_walkthrough",
+]
+SCRIPT_STRUCTURE_VALUES = [
+    "hook_context_payoff", "problem_agitation_solution", "listicle", "story_arc",
+    "demo_steps", "visual_only", "question_answer",
+]
+REPEATABILITY_VALUES = ["one_off", "repeatable_series", "template_reusable", "trend_dependent"]
+PRODUCTION_COMPLEXITY_VALUES = ["low", "medium", "high"]
+LOCATION_COMPLEXITY_VALUES = ["single_location", "multi_location", "public_location", "studio_like"]
+ASSET_REQUIREMENT_VALUES = ["face", "body", "product", "app_screen", "food", "gym", "desk", "car", "outdoor"]
+TRI_STATE_VALUES = ["yes", "no", "optional"]
+TEXT_OVERLAY_VALUES = ["none", "light", "heavy"]
+SCORE_FIELDS = [
+    "campaign_fit_score", "account_fit_score", "repeatability_score", "viral_score",
+    "conversion_potential_score", "trust_building_score", "education_value_score",
+    "entertainment_value_score", "production_ease_score",
+]
 
 
 def _ensure_dirs() -> None:
@@ -523,6 +589,41 @@ def _json_schema() -> Dict[str, Any]:
                 "camera_movement": {"type": "string", "enum": CAMERA_VALUES},
                 "visual_pattern": {"type": "string", "enum": VISUAL_VALUES},
                 "motion_difficulty": {"type": "string", "enum": MOTION_DIFFICULTY_VALUES},
+                "content_pillar": {"type": "string", "enum": CONTENT_PILLAR_VALUES},
+                "pillar_role": {"type": "string", "enum": PILLAR_ROLE_VALUES},
+                "account_archetype": {"type": "string", "enum": ACCOUNT_ARCHETYPE_VALUES},
+                "account_voice": {"type": "string", "enum": ACCOUNT_VOICE_VALUES},
+                "audience_stage": {"type": "string", "enum": AUDIENCE_STAGE_VALUES},
+                "audience_identity": {"type": "string", "enum": AUDIENCE_IDENTITY_VALUES},
+                "funnel_stage": {"type": "string", "enum": FUNNEL_STAGE_VALUES},
+                "campaign_use": {"type": "string", "enum": CAMPAIGN_USE_VALUES},
+                "conversion_intent": {"type": "string", "enum": CONVERSION_INTENT_VALUES},
+                "cta_type": {"type": "string", "enum": CTA_TYPE_VALUES},
+                "product_integration_type": {"type": "string", "enum": PRODUCT_INTEGRATION_VALUES},
+                "product_visibility": {"type": "string", "enum": PRODUCT_VISIBILITY_VALUES},
+                "product_fit": {"type": "string", "enum": PRODUCT_FIT_VALUES},
+                "demo_depth": {"type": "string", "enum": DEMO_DEPTH_VALUES},
+                "creative_template": {"type": "string", "enum": CREATIVE_TEMPLATE_VALUES},
+                "script_structure": {"type": "string", "enum": SCRIPT_STRUCTURE_VALUES},
+                "repeatability": {"type": "string", "enum": REPEATABILITY_VALUES},
+                "production_complexity": {"type": "string", "enum": PRODUCTION_COMPLEXITY_VALUES},
+                "location_complexity": {"type": "string", "enum": LOCATION_COMPLEXITY_VALUES},
+                "asset_requirements": {
+                    "type": "array",
+                    "items": {"type": "string", "enum": ASSET_REQUIREMENT_VALUES},
+                },
+                "requires_voiceover": {"type": "string", "enum": TRI_STATE_VALUES},
+                "requires_text_overlay": {"type": "string", "enum": TEXT_OVERLAY_VALUES},
+                "requires_trend_audio": {"type": "string", "enum": TRI_STATE_VALUES},
+                "campaign_fit_score": {"type": "number", "minimum": 0, "maximum": 1},
+                "account_fit_score": {"type": "number", "minimum": 0, "maximum": 1},
+                "repeatability_score": {"type": "number", "minimum": 0, "maximum": 1},
+                "viral_score": {"type": "number", "minimum": 0, "maximum": 1},
+                "conversion_potential_score": {"type": "number", "minimum": 0, "maximum": 1},
+                "trust_building_score": {"type": "number", "minimum": 0, "maximum": 1},
+                "education_value_score": {"type": "number", "minimum": 0, "maximum": 1},
+                "entertainment_value_score": {"type": "number", "minimum": 0, "maximum": 1},
+                "production_ease_score": {"type": "number", "minimum": 0, "maximum": 1},
                 "hook_summary": {"type": "string"},
                 "first_three_seconds": {"type": "string"},
                 "recreation_notes": {"type": "string"},
@@ -530,8 +631,17 @@ def _json_schema() -> Dict[str, Any]:
             },
             "required": [
                 "niche", "sub_niche", "format", "hook_type", "scene_type", "camera_movement",
-                "visual_pattern", "motion_difficulty", "hook_summary", "first_three_seconds",
-                "recreation_notes", "ai_confidence",
+                "visual_pattern", "motion_difficulty", "content_pillar", "pillar_role",
+                "account_archetype", "account_voice", "audience_stage", "audience_identity",
+                "funnel_stage", "campaign_use", "conversion_intent", "cta_type",
+                "product_integration_type", "product_visibility", "product_fit", "demo_depth",
+                "creative_template", "script_structure", "repeatability", "production_complexity",
+                "location_complexity", "asset_requirements", "requires_voiceover",
+                "requires_text_overlay", "requires_trend_audio", "campaign_fit_score",
+                "account_fit_score", "repeatability_score", "viral_score",
+                "conversion_potential_score", "trust_building_score", "education_value_score",
+                "entertainment_value_score", "production_ease_score", "hook_summary",
+                "first_three_seconds", "recreation_notes", "ai_confidence",
             ],
         },
         "strict": True,
@@ -553,14 +663,22 @@ def _tag_with_openai(video_reference: Dict[str, Any], motion_metrics: Dict[str, 
         }
         for path in frames
     ]
-    sub_niche_text = json.dumps(SUB_NICHE_VALUES, indent=2)
+    taxonomy_text = json.dumps({
+        "sub_niches_by_niche": SUB_NICHE_VALUES,
+        "content_pillars": CONTENT_PILLAR_VALUES,
+        "account_archetypes": ACCOUNT_ARCHETYPE_VALUES,
+        "campaign_uses": CAMPAIGN_USE_VALUES,
+        "creative_templates": CREATIVE_TEMPLATE_VALUES,
+    }, indent=2)
     content = [
         {
             "type": "text",
             "text": (
                 "Tag this short-form video for cheap recreation. Use only fixed enum values. "
-                "Pick sub_niche from the group matching niche; use other if uncertain.\n\n"
-                f"Allowed sub niches by niche:\n{sub_niche_text}\n\n"
+                "Also tag it for account strategy and campaign composition planning. "
+                "Pick sub_niche from the group matching niche; use other if uncertain. "
+                "Scores are 0 to 1. Use content_pillar as the primary account mix bucket.\n\n"
+                f"Campaign taxonomy hints:\n{taxonomy_text}\n\n"
                 f"Metadata:\n{json.dumps(_metadata_for_prompt(video_reference), indent=2)}\n\n"
                 f"Local motion metrics:\n{json.dumps(motion_metrics, indent=2)}"
             ),
@@ -615,11 +733,42 @@ def _normalize_tags(tags: Dict[str, Any], motion_metrics: Dict[str, Any]) -> Dic
         ("camera_movement", CAMERA_VALUES),
         ("visual_pattern", VISUAL_VALUES),
         ("motion_difficulty", MOTION_DIFFICULTY_VALUES),
+        ("content_pillar", CONTENT_PILLAR_VALUES),
+        ("pillar_role", PILLAR_ROLE_VALUES),
+        ("account_archetype", ACCOUNT_ARCHETYPE_VALUES),
+        ("account_voice", ACCOUNT_VOICE_VALUES),
+        ("audience_stage", AUDIENCE_STAGE_VALUES),
+        ("audience_identity", AUDIENCE_IDENTITY_VALUES),
+        ("funnel_stage", FUNNEL_STAGE_VALUES),
+        ("campaign_use", CAMPAIGN_USE_VALUES),
+        ("conversion_intent", CONVERSION_INTENT_VALUES),
+        ("cta_type", CTA_TYPE_VALUES),
+        ("product_integration_type", PRODUCT_INTEGRATION_VALUES),
+        ("product_visibility", PRODUCT_VISIBILITY_VALUES),
+        ("product_fit", PRODUCT_FIT_VALUES),
+        ("demo_depth", DEMO_DEPTH_VALUES),
+        ("creative_template", CREATIVE_TEMPLATE_VALUES),
+        ("script_structure", SCRIPT_STRUCTURE_VALUES),
+        ("repeatability", REPEATABILITY_VALUES),
+        ("production_complexity", PRODUCTION_COMPLEXITY_VALUES),
+        ("location_complexity", LOCATION_COMPLEXITY_VALUES),
+        ("requires_voiceover", TRI_STATE_VALUES),
+        ("requires_text_overlay", TEXT_OVERLAY_VALUES),
+        ("requires_trend_audio", TRI_STATE_VALUES),
     ]:
         if normalized.get(key) not in allowed:
             normalized[key] = "other" if "other" in allowed else allowed[0]
+    requirements = normalized.get("asset_requirements")
+    if not isinstance(requirements, list):
+        requirements = []
+    normalized["asset_requirements"] = [
+        item for item in requirements
+        if item in ASSET_REQUIREMENT_VALUES
+    ]
     if motion_metrics.get("motion_difficulty") in MOTION_DIFFICULTY_VALUES:
         normalized["motion_difficulty"] = motion_metrics["motion_difficulty"]
+    for score_field in SCORE_FIELDS:
+        normalized[score_field] = max(0.0, min(1.0, _safe_float(normalized.get(score_field), 0.0)))
     normalized["ai_confidence"] = max(0.0, min(1.0, _safe_float(normalized.get("ai_confidence"), 0.0)))
     return normalized
 
