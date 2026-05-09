@@ -31,7 +31,7 @@
     "approvalStatus": "pending",
     "processingStatus": "analyzed",
     "aiTagStatus": "tagged",
-    "updatedAt": "2026-05-09T05:54:49.898386+00:00",
+    "updatedAt": "2026-05-09T06:00:07.343600+00:00",
     "createdAt": "2026-05-09T05:31:57.700558+00:00",
     "niche": "fitness",
     "sub_niche": "weight_loss",
@@ -127,7 +127,7 @@
       "fyp",
       "foryou"
     ],
-    "durationSec": 30.0,
+    "durationSec": 30.867,
     "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oQMfdFZ7Ao1jEDjNQI1D3YPnfMEIfT64ADC9QX~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=DoNqtNh0CHSfVe2ln3cTShVqSZg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
     "postedAt": "2026-05-08T12:26:39.000Z",
     "metrics": {
@@ -142,10 +142,14 @@
     "sourceScanId": "tt_a5e66fdc9754",
     "providerVideoId": "7637496364582145300",
     "approvalStatus": "pending",
-    "processingStatus": "imported",
-    "aiTagStatus": "not_tagged",
-    "updatedAt": "2026-05-09T05:31:57.700558+00:00",
-    "createdAt": "2026-05-09T05:31:57.700558+00:00"
+    "processingStatus": "analyzed",
+    "aiTagStatus": "tagged",
+    "updatedAt": "2026-05-09T06:00:27.042265+00:00",
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "niche": "health_wellness",
+    "sub_niche": "self_care",
+    "format": "talking_head",
+    "motionDifficulty": "easy"
   },
   "vidref_fc0615fc9bffe01e": {
     "id": "vidref_fc0615fc9bffe01e",
@@ -201,7 +205,7 @@
       "fyp",
       "foryou"
     ],
-    "durationSec": 11.0,
+    "durationSec": 11.833,
     "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oU9eoLFGwGnXePR3jAt5Av0yQeYdFqGI22QexE~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=KNG%2B5%2F9DEFRqX%2BALITANcnE2NcY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
     "postedAt": "2026-05-08T07:22:47.000Z",
     "metrics": {
@@ -216,10 +220,14 @@
     "sourceScanId": "tt_a5e66fdc9754",
     "providerVideoId": "7637418049217367317",
     "approvalStatus": "pending",
-    "processingStatus": "imported",
-    "aiTagStatus": "not_tagged",
-    "updatedAt": "2026-05-09T05:31:57.700558+00:00",
-    "createdAt": "2026-05-09T05:31:57.700558+00:00"
+    "processingStatus": "analyzed",
+    "aiTagStatus": "tagged",
+    "updatedAt": "2026-05-09T06:01:19.831166+00:00",
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "niche": "fitness",
+    "sub_niche": "weight_loss",
+    "format": "talking_head",
+    "motionDifficulty": "medium"
   },
   "vidref_d61e7344299ed10a": {
     "id": "vidref_d61e7344299ed10a",
@@ -236,7 +244,7 @@
       "fyp",
       "foryou"
     ],
-    "durationSec": 16.0,
+    "durationSec": 16.4,
     "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oEk9xRWEiFjpLQUQuCFTAdfDAO4XrDlnfXfIjz~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=pKPJHIyP%2Bk2%2FosENRLNYO0cl2sM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
     "postedAt": "2026-05-08T05:36:52.000Z",
     "metrics": {
@@ -251,10 +259,14 @@
     "sourceScanId": "tt_a5e66fdc9754",
     "providerVideoId": "7637390752212864277",
     "approvalStatus": "pending",
-    "processingStatus": "imported",
-    "aiTagStatus": "not_tagged",
-    "updatedAt": "2026-05-09T05:31:57.700558+00:00",
-    "createdAt": "2026-05-09T05:31:57.700558+00:00"
+    "processingStatus": "analyzed",
+    "aiTagStatus": "tagged",
+    "updatedAt": "2026-05-09T06:10:48.419637+00:00",
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "niche": "food_beverage",
+    "sub_niche": "recipe",
+    "format": "talking_head",
+    "motionDifficulty": "medium"
   },
   "vidref_18aeca5759e45913": {
     "id": "vidref_18aeca5759e45913",

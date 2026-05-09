@@ -11,9 +11,9 @@
     "counts": {
       "total": 30,
       "imported": 30,
-      "enriched": 3,
+      "enriched": 6,
       "failed": 0,
-      "aiTagged": 3,
+      "aiTagged": 6,
       "created": 30,
       "duplicates": 0
     },
@@ -50,6 +50,6 @@
       "vidref_58cd98f83331cb11"
     ],
     "createdAt": "2026-05-09T05:31:57.700558+00:00",
-    "updatedAt": "2026-05-09T05:55:37.831204+00:00"
+    "updatedAt": "2026-05-09T06:10:48.421437+00:00"
   }
 }

@@ -196,8 +196,8 @@ function BatchVideoRow({ video, onReview, onAnalyze, isUpdating, isAnalyzing }) 
                     <p className="mt-0.5 text-xs font-semibold text-white">{metricValue(motion.estimated_total_frame_count)}</p>
                   </div>
                   <div className="rounded-xl bg-black/20 p-2">
-                    <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Changes</p>
-                    <p className="mt-0.5 text-xs font-semibold text-white">{metricValue(motion.total_frame_changes)}</p>
+                    <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Scenes</p>
+                    <p className="mt-0.5 text-xs font-semibold text-white">{metricValue(motion.scene_count)}</p>
                   </div>
                   <div className="rounded-xl bg-black/20 p-2">
                     <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Movement</p>
@@ -208,6 +208,27 @@ function BatchVideoRow({ video, onReview, onAnalyze, isUpdating, isAnalyzing }) 
                     <p className="mt-0.5 text-xs font-semibold text-white">{metricValue(motion.character_movement_score)}</p>
                   </div>
                 </div>
+                {motion.first_two_scene_similarity_score !== undefined && motion.first_two_scene_similarity_score !== null && (
+                  <div className="mt-2 rounded-xl bg-black/20 p-2">
+                    <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Scene similarity</p>
+                    <p className="mt-0.5 text-xs font-semibold text-white">
+                      Avg {metricValue(motion.average_adjacent_scene_similarity_score)}
+                      {motion.lowest_adjacent_scene_similarity_score !== undefined && motion.lowest_adjacent_scene_similarity_score !== null
+                        ? ` · Low ${metricValue(motion.lowest_adjacent_scene_similarity_score)}`
+                        : ''}
+                    </p>
+                    <div className="mt-1 flex flex-wrap gap-1">
+                      {(motion.scene_similarity_pairs || []).slice(0, 6).map((pair) => (
+                        <span
+                          key={`${pair.from_scene}-${pair.to_scene}`}
+                          className="rounded-full bg-white/10 px-2 py-0.5 text-[11px] text-white/50"
+                        >
+                          {`${pair.from_scene}->${pair.to_scene}: ${metricValue(pair.similarity_score)}`}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </>
             )}
           </div>

@@ -257,6 +257,158 @@ def _sample_frames(video_path: str, frame_dir: str) -> List[str]:
     return frames
 
 
+def _scene_metrics(video_path: str) -> Dict[str, Any]:
+    """Detect real scene boundaries with PySceneDetect, matching recreation crop semantics."""
+    try:
+        from scenedetect import ContentDetector, SceneManager, open_video
+    except Exception as exc:
+        return {
+            "scene_count": 1,
+            "scene_change_count": 0,
+            "first_scene_change_sec": None,
+            "first_scene_change_frame": None,
+            "first_scene_duration_sec": None,
+            "can_crop_to_first_scene": False,
+        **_empty_scene_similarity(),
+            "scene_detection_error": f"PySceneDetect unavailable: {exc}",
+        }
+
+    try:
+        video = open_video(video_path)
+        scene_manager = SceneManager()
+        scene_manager.add_detector(ContentDetector(threshold=27.0))
+        scene_manager.detect_scenes(video)
+        scene_list = scene_manager.get_scene_list()
+    except Exception as exc:
+        return {
+            "scene_count": 1,
+            "scene_change_count": 0,
+            "first_scene_change_sec": None,
+            "first_scene_change_frame": None,
+            "first_scene_duration_sec": None,
+            "can_crop_to_first_scene": False,
+            **_empty_scene_similarity(),
+            "scene_detection_error": str(exc),
+        }
+
+    scene_count = max(1, len(scene_list))
+    if scene_count <= 1:
+        return {
+            "scene_count": 1,
+            "scene_change_count": 0,
+            "first_scene_change_sec": None,
+            "first_scene_change_frame": None,
+            "first_scene_duration_sec": None,
+            "can_crop_to_first_scene": False,
+            **_empty_scene_similarity(),
+            "scene_detection_error": "",
+        }
+
+    first_scene_start, first_scene_end = scene_list[0]
+    first_change_sec = first_scene_end.get_seconds()
+    return {
+        "scene_count": scene_count,
+        "scene_change_count": scene_count - 1,
+        "first_scene_change_sec": round(first_change_sec, 3),
+        "first_scene_change_frame": first_scene_end.get_frames(),
+        "first_scene_duration_sec": round(first_change_sec - first_scene_start.get_seconds(), 3),
+        "can_crop_to_first_scene": True,
+        **_adjacent_scene_similarity(video_path, scene_list),
+        "scene_detection_error": "",
+    }
+
+
+def _adjacent_scene_similarity(video_path: str, scene_list: List[Any]) -> Dict[str, Any]:
+    if len(scene_list) < 2:
+        return _empty_scene_similarity()
+
+    compare_dir = os.path.join(os.path.dirname(video_path), "scene_similarity")
+    os.makedirs(compare_dir, exist_ok=True)
+    try:
+        scene_frames = []
+        for idx, scene in enumerate(scene_list, start=1):
+            frame_path = os.path.join(compare_dir, f"scene_{idx}.jpg")
+            _extract_scene_midpoint_frame(video_path, scene, frame_path)
+            scene_frames.append(frame_path)
+
+        pairs = [
+            _compare_scene_frames(scene_frames[idx], scene_frames[idx + 1], idx + 1, idx + 2)
+            for idx in range(len(scene_frames) - 1)
+        ]
+        first_pair = pairs[0] if pairs else {}
+        scores = [pair["similarity_score"] for pair in pairs if pair.get("similarity_score") is not None]
+        min_pair = min(pairs, key=lambda pair: pair.get("similarity_score", 1.0)) if pairs else {}
+        avg_score = sum(scores) / len(scores) if scores else None
+        return {
+            "scene_similarity_pairs": pairs,
+            "average_adjacent_scene_similarity_score": round(avg_score, 4) if avg_score is not None else None,
+            "lowest_adjacent_scene_similarity_score": min_pair.get("similarity_score"),
+            "lowest_adjacent_scene_similarity_pair": {
+                "from_scene": min_pair.get("from_scene"),
+                "to_scene": min_pair.get("to_scene"),
+            } if min_pair else None,
+            "first_two_scene_similarity_score": first_pair.get("similarity_score"),
+            "first_two_scene_structure_similarity_score": first_pair.get("structure_similarity_score"),
+            "first_two_scene_camera_similarity_score": first_pair.get("camera_similarity_score"),
+            "first_two_scene_character_similarity_score": first_pair.get("character_similarity_score"),
+            "first_two_scenes_similar": first_pair.get("similar"),
+            "scene_similarity_error": "",
+        }
+    except Exception as exc:
+        return {**_empty_scene_similarity(), "scene_similarity_error": str(exc)}
+
+
+def _compare_scene_frames(frame_a: str, frame_b: str, from_scene: int, to_scene: int) -> Dict[str, Any]:
+    diff = _image_diff_score(frame_a, frame_b)
+    structure_score = _histogram_similarity(frame_a, frame_b)
+    camera_score = max(0.0, min(1.0, 1.0 - diff["full"]))
+    character_score = max(0.0, min(1.0, 1.0 - diff["center"]))
+    combined = (structure_score * 0.4) + (camera_score * 0.3) + (character_score * 0.3)
+    return {
+        "from_scene": from_scene,
+        "to_scene": to_scene,
+        "similarity_score": round(combined, 4),
+        "structure_similarity_score": round(structure_score, 4),
+        "camera_similarity_score": round(camera_score, 4),
+        "character_similarity_score": round(character_score, 4),
+        "similar": combined >= 0.72,
+    }
+
+
+def _empty_scene_similarity() -> Dict[str, Any]:
+    return {
+        "scene_similarity_pairs": [],
+        "average_adjacent_scene_similarity_score": None,
+        "lowest_adjacent_scene_similarity_score": None,
+        "lowest_adjacent_scene_similarity_pair": None,
+        "first_two_scene_similarity_score": None,
+        "first_two_scene_structure_similarity_score": None,
+        "first_two_scene_camera_similarity_score": None,
+        "first_two_scene_character_similarity_score": None,
+        "first_two_scenes_similar": None,
+        "scene_similarity_error": "",
+    }
+
+
+def _extract_scene_midpoint_frame(video_path: str, scene: Any, output_path: str) -> None:
+    start, end = scene
+    start_sec = start.get_seconds()
+    end_sec = end.get_seconds()
+    timestamp = start_sec + max(0.05, (end_sec - start_sec) / 2)
+    cmd = [
+        "ffmpeg", "-y",
+        "-ss", str(timestamp),
+        "-i", video_path,
+        "-frames:v", "1",
+        "-vf", f"scale={max(96, VIDEO_ANALYSIS_FRAME_WIDTH)}:-1",
+        "-q:v", "5",
+        output_path,
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0 or not os.path.isfile(output_path):
+        raise VideoAnalysisError(f"scene frame extraction failed: {result.stderr[:200]}", 422)
+
+
 def _image_diff_score(prev_path: str, next_path: str) -> Dict[str, float]:
     with Image.open(prev_path) as prev_img, Image.open(next_path) as next_img:
         prev = prev_img.convert("L")
@@ -269,6 +421,18 @@ def _image_diff_score(prev_path: str, next_path: str) -> Dict[str, float]:
         return {"full": mean, "center": center_mean}
 
 
+def _histogram_similarity(prev_path: str, next_path: str) -> float:
+    with Image.open(prev_path) as prev_img, Image.open(next_path) as next_img:
+        prev = prev_img.convert("L").resize((64, 64))
+        nxt = next_img.convert("L").resize((64, 64))
+        hist_a = prev.histogram()
+        hist_b = nxt.histogram()
+        total_a = sum(hist_a) or 1
+        total_b = sum(hist_b) or 1
+        intersection = sum(min(a / total_a, b / total_b) for a, b in zip(hist_a, hist_b))
+        return max(0.0, min(1.0, intersection))
+
+
 def _center_crop(image: Image.Image) -> Image.Image:
     width, height = image.size
     left = int(width * 0.25)
@@ -278,14 +442,13 @@ def _center_crop(image: Image.Image) -> Image.Image:
     return image.crop((left, top, right, bottom))
 
 
-def _motion_metrics(frames: List[str], probe: Dict[str, Any]) -> Dict[str, Any]:
+def _motion_metrics(frames: List[str], probe: Dict[str, Any], scene_metrics: Dict[str, Any]) -> Dict[str, Any]:
     diffs = [_image_diff_score(frames[i - 1], frames[i]) for i in range(1, len(frames))]
     full_scores = [item["full"] for item in diffs]
     center_scores = [item["center"] for item in diffs]
     avg_full = sum(full_scores) / len(full_scores) if full_scores else 0.0
     avg_center = sum(center_scores) / len(center_scores) if center_scores else 0.0
-    total_frame_changes = sum(1 for score in full_scores if score >= 0.075)
-    scene_change_count = sum(1 for score in full_scores if score >= 0.18)
+    visual_change_events = sum(1 for score in full_scores if score >= 0.075)
     camera_score = min(1.0, avg_full * 5.0)
     character_score = max(0.0, min(1.0, (avg_center - (avg_full * 0.45)) * 5.0))
     total_movement = min(1.0, math.sqrt(avg_full) * 1.6) if avg_full else 0.0
@@ -295,8 +458,25 @@ def _motion_metrics(frames: List[str], probe: Dict[str, Any]) -> Dict[str, Any]:
         "fps": probe.get("fps", 0),
         "estimated_total_frame_count": probe.get("estimated_total_frame_count", 0),
         "sampled_frame_count": len(frames),
-        "scene_change_count": scene_change_count,
-        "total_frame_changes": total_frame_changes,
+        "scene_count": scene_metrics.get("scene_count", 1),
+        "scene_change_count": scene_metrics.get("scene_change_count", 0),
+        "first_scene_change_sec": scene_metrics.get("first_scene_change_sec"),
+        "first_scene_change_frame": scene_metrics.get("first_scene_change_frame"),
+        "first_scene_duration_sec": scene_metrics.get("first_scene_duration_sec"),
+        "can_crop_to_first_scene": scene_metrics.get("can_crop_to_first_scene", False),
+        "scene_detection_error": scene_metrics.get("scene_detection_error", ""),
+        "first_two_scene_similarity_score": scene_metrics.get("first_two_scene_similarity_score"),
+        "first_two_scene_structure_similarity_score": scene_metrics.get("first_two_scene_structure_similarity_score"),
+        "first_two_scene_camera_similarity_score": scene_metrics.get("first_two_scene_camera_similarity_score"),
+        "first_two_scene_character_similarity_score": scene_metrics.get("first_two_scene_character_similarity_score"),
+        "first_two_scenes_similar": scene_metrics.get("first_two_scenes_similar"),
+        "scene_similarity_pairs": scene_metrics.get("scene_similarity_pairs", []),
+        "average_adjacent_scene_similarity_score": scene_metrics.get("average_adjacent_scene_similarity_score"),
+        "lowest_adjacent_scene_similarity_score": scene_metrics.get("lowest_adjacent_scene_similarity_score"),
+        "lowest_adjacent_scene_similarity_pair": scene_metrics.get("lowest_adjacent_scene_similarity_pair"),
+        "scene_similarity_error": scene_metrics.get("scene_similarity_error", ""),
+        "visual_change_events": visual_change_events,
+        "total_frame_changes": visual_change_events,
         "total_frame_movement": round(total_movement, 4),
         "camera_movement_score": round(camera_score, 4),
         "character_movement_score": round(character_score, 4),
@@ -457,8 +637,9 @@ def analyze_video_reference(video_reference: Dict[str, Any]) -> Dict[str, Any]:
         download = _download_video(_source_url(video_reference), video_path)
         downloaded_path = download["path"]
         probe = _ffprobe(downloaded_path)
+        scene_metrics = _scene_metrics(downloaded_path)
         frame_paths = _sample_frames(downloaded_path, frame_dir)
-        motion_metrics = _motion_metrics(frame_paths, probe)
+        motion_metrics = _motion_metrics(frame_paths, probe, scene_metrics)
         selected_frames = _representative_frames(frame_paths, 4)
         normalized_tags = _tag_with_openai(video_reference, motion_metrics, selected_frames)
         kept_frames = frame_paths if VIDEO_ANALYSIS_KEEP_FRAMES else []
