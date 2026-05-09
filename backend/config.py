@@ -71,6 +71,52 @@ LATE_API_KEY = _get_env("LATE_API_KEY", "")
 LATE_CONNECT_REDIRECT_URL = _get_env("LATE_CONNECT_REDIRECT_URL", "")
 LATE_REQUEST_TIMEOUT_SEC = _get_int_env("LATE_REQUEST_TIMEOUT_SEC", 20)
 
+# TikTok organizer import config. Uses Apify by default because it returns
+# public metadata without requiring us to download source videos.
+TIKTOK_PROVIDER = _get_env("TIKTOK_PROVIDER", "apify")
+APIFY_TOKEN = _get_env("APIFY_TOKEN", "")
+APIFY_TIKTOK_ACTOR_ID = _get_env("APIFY_TIKTOK_ACTOR_ID", "clockworks/tiktok-scraper")
+TIKTOK_SCAN_TIMEOUT_SEC = _get_int_env("TIKTOK_SCAN_TIMEOUT_SEC", 120)
+TIKTOK_IMPORT_METADATA_FILE = _get_env(
+    "TIKTOK_IMPORT_METADATA_FILE",
+    os.path.join(os.path.dirname(__file__), "tiktok_import_metadata.json"),
+)
+ORGANIZER_SOURCE_BATCHES_FILE = _get_env(
+    "ORGANIZER_SOURCE_BATCHES_FILE",
+    os.path.join(os.path.dirname(__file__), "organizer_source_batches.json"),
+)
+ORGANIZER_VIDEO_REFERENCES_FILE = _get_env(
+    "ORGANIZER_VIDEO_REFERENCES_FILE",
+    os.path.join(os.path.dirname(__file__), "organizer_video_references.json"),
+)
+ORGANIZER_CREATORS_FILE = _get_env(
+    "ORGANIZER_CREATORS_FILE",
+    os.path.join(os.path.dirname(__file__), "organizer_creators.json"),
+)
+ORGANIZER_REVIEW_ACTIONS_FILE = _get_env(
+    "ORGANIZER_REVIEW_ACTIONS_FILE",
+    os.path.join(os.path.dirname(__file__), "organizer_review_actions.json"),
+)
+ORGANIZER_VIDEO_AI_TAGS_FILE = _get_env(
+    "ORGANIZER_VIDEO_AI_TAGS_FILE",
+    os.path.join(os.path.dirname(__file__), "organizer_video_ai_tags.json"),
+)
+VIDEO_ANALYSIS_TEMP_DIR = _get_env(
+    "VIDEO_ANALYSIS_TEMP_DIR",
+    os.path.join(os.path.dirname(__file__), "analysis_tmp"),
+)
+VIDEO_ANALYSIS_FRAME_DIR = _get_env(
+    "VIDEO_ANALYSIS_FRAME_DIR",
+    os.path.join(os.path.dirname(__file__), "analysis_frames"),
+)
+VIDEO_ANALYSIS_KEEP_FRAMES = _get_bool_env("VIDEO_ANALYSIS_KEEP_FRAMES", True)
+VIDEO_ANALYSIS_SAMPLE_FPS = _get_int_env("VIDEO_ANALYSIS_SAMPLE_FPS", 1)
+VIDEO_ANALYSIS_MAX_FRAMES = _get_int_env("VIDEO_ANALYSIS_MAX_FRAMES", 45)
+VIDEO_ANALYSIS_FRAME_WIDTH = _get_int_env("VIDEO_ANALYSIS_FRAME_WIDTH", 224)
+VIDEO_ANALYSIS_MAX_DOWNLOAD_MB = _get_int_env("VIDEO_ANALYSIS_MAX_DOWNLOAD_MB", 80)
+VIDEO_ANALYSIS_DOWNLOAD_TIMEOUT_SEC = _get_int_env("VIDEO_ANALYSIS_DOWNLOAD_TIMEOUT_SEC", 120)
+OPENAI_TAGGING_MODEL = _get_env("OPENAI_TAGGING_MODEL", "gpt-4o-mini")
+
 # Used to build publicly reachable result URLs for social scheduling.
 PUBLIC_BACKEND_BASE_URL = _get_env("PUBLIC_BACKEND_BASE_URL", "http://127.0.0.1:8000")
 

@@ -7,16 +7,22 @@ import {
   Video,
   Film,
   CalendarDays,
+  Megaphone,
+  Search,
+  Layers,
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
 import ApplicantCard from './components/ApplicantCard';
 import CreateSection from './components/CreateSection';
+import CampaignStudio from './components/CampaignStudio';
 import VariantLab from './components/VariantLab';
 import VideoLibrary from './components/VideoLibrary';
 import GenerationCenter from './components/GenerationCenter';
 import ScheduleModal from './components/ScheduleModal';
 import ScheduledPosts from './components/ScheduledPosts';
+import TikTokAccountImporter from './components/TikTokAccountImporter';
+import OrganizerBatches from './components/OrganizerBatches';
 import Wordmark from './components/ui/Wordmark';
 
 const SIDEBAR_COLLAPSED_KEY = 'lumeet-sidebar-collapsed';
@@ -24,6 +30,7 @@ const SIDEBAR_COLLAPSED_KEY = 'lumeet-sidebar-collapsed';
 function App() {
   const [activeTab, setActiveTab] = useState('create');
   const [scheduleTarget, setScheduleTarget] = useState(null);
+  const [focusBatchId, setFocusBatchId] = useState('');
   const [genRefreshKey, setGenRefreshKey] = useState(0);
   const [genFocusKey, setGenFocusKey] = useState(0);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
@@ -47,6 +54,11 @@ function App() {
     setGenFocusKey((k) => k + 1);
   }, []);
 
+  const handleOrganizerBatchCreated = useCallback((batch) => {
+    setFocusBatchId(batch.id);
+    setActiveTab('batches');
+  }, []);
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get('late_connected') === '1') {
@@ -66,7 +78,10 @@ function App() {
     // { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     // { id: 'recruit', label: 'Recruit', icon: Users },
     // { id: 'messages', label: 'Messages', icon: MessageSquare },
+    { id: 'import', label: 'Import', icon: Search },
+    { id: 'batches', label: 'Batches', icon: Layers },
     { id: 'create', label: 'Create', icon: Plus },
+    { id: 'campaign', label: 'Campaign', icon: Megaphone },
     // { id: 'variant-lab', label: 'Variant Lab', icon: Video },
     { id: 'video-library', label: 'Library', icon: Film },
     { id: 'scheduled', label: 'Scheduled', icon: CalendarDays },
@@ -260,6 +275,15 @@ function App() {
         </div>
         {activeTab === 'create' ? (
           <CreateSection onVideoGenerationStarted={handleVideoGenerationStarted} />
+        ) : activeTab === 'import' ? (
+          <TikTokAccountImporter onBatchCreated={handleOrganizerBatchCreated} />
+        ) : activeTab === 'batches' ? (
+          <OrganizerBatches
+            initialBatchId={focusBatchId}
+            onClearInitialBatch={() => setFocusBatchId('')}
+          />
+        ) : activeTab === 'campaign' ? (
+          <CampaignStudio />
         ) : activeTab === 'variant-lab' ? (
           <VariantLab />
         ) : activeTab === 'video-library' ? (

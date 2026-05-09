@@ -45,6 +45,10 @@ from hook_metadata_store import hook_metadata_store
 from sound_metadata_store import sound_metadata_store
 from model_metadata_store import model_metadata_store
 from extension_video_metadata_store import extension_video_metadata_store
+from tiktok_import_store import tiktok_import_store
+from tiktok_organizer_service import scan_tiktok_account, TikTokOrganizerError
+from organizer_store import APPROVAL_STATUSES, organizer_store
+from video_analysis_service import analyze_video_reference, VideoAnalysisError
 from config import (
     PUBLIC_BACKEND_BASE_URL,
     GCS_VIDEO_OBJECT_PREFIX,
@@ -113,6 +117,26 @@ class AvatarCreateRequest(BaseModel):
     selections: Dict[str, Any] = Field(default_factory=dict)
     promptSummary: str = Field(default="", max_length=500)
     label: str = Field(default="", max_length=120)
+
+
+class TikTokAccountScanRequest(BaseModel):
+    account: str = Field(min_length=1, max_length=200)
+    maxItems: int = Field(default=30, ge=1, le=100)
+
+
+class OrganizerBatchFromScanRequest(BaseModel):
+    scanId: str = Field(min_length=1, max_length=120)
+    nicheHint: str = Field(default="", max_length=200)
+
+
+class OrganizerReviewStatusRequest(BaseModel):
+    approvalStatus: str = Field(pattern=r"^(pending|approved|rejected|saved_hook_only|saved_format_only|needs_deep_analysis)$")
+    notes: str = Field(default="", max_length=1000)
+
+
+class OrganizerBatchAnalyzeRequest(BaseModel):
+    limit: int = Field(default=5, ge=1, le=25)
+    retryFailed: bool = False
 
 
 # ---------------------------------------------------------------------------
@@ -737,6 +761,147 @@ async def list_carousels():
         return carousel_service.list_carousels()
     except CarouselServiceError as exc:
         raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+
+
+# ---------------------------------------------------------------------------
+# TikTok Organizer Import Endpoints
+# ---------------------------------------------------------------------------
+
+@app.post("/api/organizer/tiktok/account-scan")
+async def scan_tiktok_account_endpoint(payload: TikTokAccountScanRequest):
+    """Fetch public TikTok account video metadata without downloading videos."""
+    try:
+        scan = scan_tiktok_account(payload.account, payload.maxItems)
+        tiktok_import_store.save(scan["scanId"], scan)
+        return scan
+    except TikTokOrganizerError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+
+
+@app.get("/api/organizer/tiktok/scans/{scan_id}")
+async def get_tiktok_scan(scan_id: str):
+    """Fetch a saved TikTok account scan."""
+    scan = tiktok_import_store.get(scan_id)
+    if not scan:
+        raise HTTPException(status_code=404, detail=f"TikTok scan {scan_id} not found.")
+    return scan
+
+
+@app.get("/api/organizer/tiktok/scans")
+async def list_tiktok_scans(limit: int = Query(25, ge=1, le=100)):
+    """List recent TikTok account scans."""
+    return {"scans": tiktok_import_store.list_all(limit=limit)}
+
+
+@app.post("/api/organizer/batches/from-tiktok-scan")
+async def create_organizer_batch_from_tiktok_scan(payload: OrganizerBatchFromScanRequest):
+    """Create source batch + video references from a saved TikTok scan."""
+    scan = tiktok_import_store.get(payload.scanId)
+    if not scan:
+        raise HTTPException(status_code=404, detail=f"TikTok scan {payload.scanId} not found.")
+    batch = organizer_store.create_batch_from_scan(scan, niche_hint=payload.nicheHint)
+    return batch
+
+
+@app.get("/api/organizer/batches")
+async def list_organizer_batches(limit: int = Query(25, ge=1, le=100)):
+    """List organizer source batches."""
+    return {"batches": organizer_store.list_batches(limit=limit)}
+
+
+@app.get("/api/organizer/batches/{batch_id}")
+async def get_organizer_batch(batch_id: str):
+    """Get organizer batch details including video references."""
+    batch = organizer_store.get_batch(batch_id)
+    if not batch:
+        raise HTTPException(status_code=404, detail=f"Organizer batch {batch_id} not found.")
+    return batch
+
+
+@app.patch("/api/organizer/video-references/{video_reference_id}/review")
+async def update_organizer_video_review(video_reference_id: str, payload: OrganizerReviewStatusRequest):
+    """Update a video reference approval/review status."""
+    if payload.approvalStatus not in APPROVAL_STATUSES:
+        raise HTTPException(status_code=400, detail=f"Unsupported approval status: {payload.approvalStatus}")
+    try:
+        return organizer_store.update_review_status(
+            video_reference_id=video_reference_id,
+            approval_status=payload.approvalStatus,
+            notes=payload.notes,
+        )
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=f"Video reference {video_reference_id} not found.") from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+def _run_video_reference_analysis(video_reference_id: str) -> Dict[str, Any]:
+    video = organizer_store.get_video_reference(video_reference_id)
+    if not video:
+        raise HTTPException(status_code=404, detail=f"Video reference {video_reference_id} not found.")
+    try:
+        organizer_store.set_video_analysis_status(video_reference_id, "tagging")
+        result = analyze_video_reference(video)
+        return organizer_store.save_video_analysis_result(video_reference_id, result)
+    except VideoAnalysisError as exc:
+        organizer_store.save_video_analysis_failure(video_reference_id, exc.message)
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+    except Exception as exc:
+        message = f"Video analysis failed: {exc}"
+        organizer_store.save_video_analysis_failure(video_reference_id, message)
+        raise HTTPException(status_code=500, detail=message) from exc
+
+
+@app.post("/api/organizer/video-references/{video_reference_id}/analyze")
+async def analyze_organizer_video_reference(video_reference_id: str):
+    """Run cheap motion + structured AI analysis for one video reference."""
+    return _run_video_reference_analysis(video_reference_id)
+
+
+@app.get("/api/organizer/video-references/{video_reference_id}/analysis")
+async def get_organizer_video_analysis(video_reference_id: str):
+    """Get saved analysis for a video reference."""
+    analysis = organizer_store.get_video_analysis(video_reference_id)
+    if not analysis:
+        raise HTTPException(status_code=404, detail=f"Analysis for {video_reference_id} not found.")
+    return analysis
+
+
+@app.post("/api/organizer/batches/{batch_id}/analyze")
+async def analyze_organizer_batch(batch_id: str, payload: OrganizerBatchAnalyzeRequest):
+    """Analyze a small batch of imported video references sequentially."""
+    batch = organizer_store.get_batch(batch_id)
+    if not batch:
+        raise HTTPException(status_code=404, detail=f"Organizer batch {batch_id} not found.")
+
+    candidates = []
+    for video in batch.get("videos", []):
+        status = video.get("aiTagStatus") or (video.get("aiTag") or {}).get("status") or "not_tagged"
+        if status == "tagged":
+            continue
+        if status == "tag_failed" and not payload.retryFailed:
+            continue
+        candidates.append(video)
+        if len(candidates) >= payload.limit:
+            break
+
+    results = []
+    for video in candidates:
+        video_id = video.get("id")
+        if not video_id:
+            continue
+        try:
+            analysis = _run_video_reference_analysis(video_id)
+            results.append({"videoReferenceId": video_id, "ok": True, "analysis": analysis})
+        except HTTPException as exc:
+            results.append({"videoReferenceId": video_id, "ok": False, "error": exc.detail})
+
+    refreshed = organizer_store.get_batch(batch_id)
+    return {
+        "batch": refreshed,
+        "attempted": len(results),
+        "results": results,
+    }
 
 
 # ---------------------------------------------------------------------------

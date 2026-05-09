@@ -1,0 +1,1512 @@
+{
+  "tt_e20e24e55fc1": {
+    "scanId": "tt_e20e24e55fc1",
+    "status": "completed",
+    "platform": "tiktok",
+    "provider": "apify",
+    "accountInput": "https://www.tiktok.com/@definitelytai?_r=1&_t=ZS-96CbnDV8gVR",
+    "creatorHandle": "definitelytai",
+    "maxItems": 30,
+    "createdAt": "2026-05-08T23:41:12.018671+00:00",
+    "counts": {
+      "providerItems": 30,
+      "videos": 30,
+      "duplicatesRemoved": 0
+    },
+    "videos": [
+      {
+        "id": "374d884294c11e1e",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7622066671414414612",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7622066671414414612",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "500 fragrances. $15K spent. One guide. Still the most requested thing in my DMs. Link in bio #fragrance #cologne #perfume",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 58.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/o4fFBwrUxBBFMJiIDIlxoIACreUgWphhDERHET~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=MaDKRs8pw2sU4ZCs0dAZN%2FI%2BwFc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-03-27T22:31:51.000Z",
+        "metrics": {
+          "views": 166700,
+          "likes": 15200,
+          "comments": 69,
+          "shares": 141
+        },
+        "providerVideoId": "7622066671414414612"
+      },
+      {
+        "id": "481203016f9c465e",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7637627285247511829",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7637627285247511829",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Your man\u2019s cologne is telling on him \ud83d\udc40 #fragrance #perfume #cologne ",
+        "hashtags": [
+          "fragrance",
+          "perfume",
+          "cologne"
+        ],
+        "durationSec": 54.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oY62I40IVDAZTNAUAkFvDjTAHIWAbE6fQYfCeE~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=XB641lllIw3lQGHuerBF%2FithShk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-08T20:54:47.000Z",
+        "metrics": {
+          "views": 11000,
+          "likes": 610,
+          "comments": 11,
+          "shares": 6
+        },
+        "providerVideoId": "7637627285247511829"
+      },
+      {
+        "id": "8fa8e87fbc74a90c",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7636890969325014293",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7636890969325014293",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "5 fragrances under $100. Every single one rated over 4 stars on Fragrantica. Twenty thousand strangers can't be wrong. #fragrance",
+        "hashtags": [
+          "fragrance"
+        ],
+        "durationSec": 77.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oUI3QAGAGXE7AYGnfLHYeltbCfYRNIAAQZreJY~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=bEVlt6FnGVOI58Rlr9mU%2FEwlAVs%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-06T21:17:28.000Z",
+        "metrics": {
+          "views": 127600,
+          "likes": 8501,
+          "comments": 96,
+          "shares": 229
+        },
+        "providerVideoId": "7636890969325014293"
+      },
+      {
+        "id": "3aa3e3197f697ada",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7636532955157908757",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7636532955157908757",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "I'm a fashion model. The glow-up that actually works isn't peptides. It's vegetables. The data proves it. #looksmax #skincare ",
+        "hashtags": [
+          "looksmax",
+          "skincare"
+        ],
+        "durationSec": 71.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oY26SBwfvAEpoqDAABI0YkB1aigUiCAjopAIo7~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=IPvi17gf7jPg5M2h%2B69Ij7Hwy6U%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-05T22:08:13.000Z",
+        "metrics": {
+          "views": 159100,
+          "likes": 15500,
+          "comments": 81,
+          "shares": 300
+        },
+        "providerVideoId": "7636532955157908757"
+      },
+      {
+        "id": "f84ffa69aaf376ca",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7636119432678444309",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7636119432678444309",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Rocky sprays cologne nine times a day. I know exactly what he's wearing. And what he should wear instead. #asaprocky #fragrance",
+        "hashtags": [
+          "asaprocky",
+          "fragrance"
+        ],
+        "durationSec": 102.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/ow1IcAoDTE8qrR9FEAAPAAEfID24feIAMjIjDy~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=iCU%2BCvvZLBn%2B0lx4AHPBv6%2BDzTc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-04T19:23:32.000Z",
+        "metrics": {
+          "views": 75700,
+          "likes": 7872,
+          "comments": 26,
+          "shares": 77
+        },
+        "providerVideoId": "7636119432678444309"
+      },
+      {
+        "id": "feb3d60e0dad2268",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7635801269042564372",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7635801269042564372",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "SGA gets dressed like a perfumer. Three layers. Nothing extra. Same with his fragrance. #fragrance #sga #cologne ",
+        "hashtags": [
+          "fragrance",
+          "sga",
+          "cologne"
+        ],
+        "durationSec": 46.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oUUpnkhdAAA3ARmwgEiz90UBsfZ0rNeiBECD3I~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=w3A3FHKz010aR75C8X3oSzzvYkE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-03T22:48:59.000Z",
+        "metrics": {
+          "views": 72500,
+          "likes": 6061,
+          "comments": 44,
+          "shares": 155
+        },
+        "providerVideoId": "7635801269042564372"
+      },
+      {
+        "id": "c802509ee3b97d0d",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7635407507615223061",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7635407507615223061",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Two $40 clones. Two $400 originals. Only one clone actually works. The other isn't a clone at all. #fragrance #clones",
+        "hashtags": [
+          "fragrance",
+          "clones"
+        ],
+        "durationSec": 70.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/o0A1WAAcpHBEfkhsC3FEgqD2E9ARq2AQINf1Um~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=Pj1z4%2FFWsQpDhbMpUK%2BZYYMAsFc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-02T21:20:56.000Z",
+        "metrics": {
+          "views": 23800,
+          "likes": 1474,
+          "comments": 34,
+          "shares": 21
+        },
+        "providerVideoId": "7635407507615223061"
+      },
+      {
+        "id": "702cccab790a6c3c",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7635030042833063188",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7635030042833063188",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Sauvage is the most-worn men's fragrance in the world. Women still hate it. The data shows why. #sauvage #fragrance ",
+        "hashtags": [
+          "sauvage",
+          "fragrance"
+        ],
+        "durationSec": 64.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oEI1j9NEAkR6AIPE8CFpAEDDgTU8ABy2fR9E0f~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=pqgin%2F86UWUhS2RFBInpWQc5Ir8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-01T20:56:05.000Z",
+        "metrics": {
+          "views": 248300,
+          "likes": 18000,
+          "comments": 178,
+          "shares": 553
+        },
+        "providerVideoId": "7635030042833063188"
+      },
+      {
+        "id": "f43655f2cacd899b",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7634658735637499157",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7634658735637499157",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "The Roys don\u2019t wear fragrance to smell good. They wear it to be feared. Most men haven\u2019t figured that out. #fragrance #succession ",
+        "hashtags": [
+          "fragrance",
+          "succession"
+        ],
+        "durationSec": 56.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/okRDLBwXAjAIdAbpe8cFEGI8ECnf0ADzSgDwEn~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=DODQDCKMYAqqry6u9Kudqr1rhUQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-30T20:55:16.000Z",
+        "metrics": {
+          "views": 60900,
+          "likes": 3749,
+          "comments": 31,
+          "shares": 152
+        },
+        "providerVideoId": "7634658735637499157"
+      },
+      {
+        "id": "612f608ad477a3f4",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7634293287947472148",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7634293287947472148",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "The most asked question I get answered. Rabanne 1 Million Elixir + 1 Million EDT, now on Amazon @rabanne @amazonbeauty #MillionByRabanne #RabanneParfums #AmazonBeauty #ad",
+        "hashtags": [
+          "millionbyrabanne",
+          "rabanneparfums",
+          "amazonbeauty",
+          "ad"
+        ],
+        "durationSec": 59.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oIDRDEgeENpAB1EVICyAlUFAb8WMdBfnmgAIVS~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=J%2B7dq%2Fsl3DmzsglHBWoeGXRKj5Y%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-29T21:17:08.000Z",
+        "metrics": {
+          "views": 126500,
+          "likes": 8325,
+          "comments": 91,
+          "shares": 268
+        },
+        "providerVideoId": "7634293287947472148"
+      },
+      {
+        "id": "70a7bc61d3b85924",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7633558035583012116",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7633558035583012116",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Pick a side. Tyler or Rocky? The bottles tell on them... #fragrance #cologne #perfume ",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 50.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oc8TUejDI9M3evAQl2XFTEAKD8AQIAEt7JAoeA~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=tHznY0HoDW21X6M1BXPMR07ZAjU%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-27T21:44:11.000Z",
+        "metrics": {
+          "views": 69600,
+          "likes": 6007,
+          "comments": 33,
+          "shares": 84
+        },
+        "providerVideoId": "7633558035583012116"
+      },
+      {
+        "id": "50f748cdd3b19506",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7633210079180852500",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7633210079180852500",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Five fragrances, $157 total. The clones and indies that punch way above their price. #fragrance #cologne #perfume ",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 76.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oMAArEEQIBgpo77fUOFUdeHlYFwaqEA5DCpRAv~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=w0JDls68MsiME74h1hOeZ0c%2FJPY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-26T23:13:46.000Z",
+        "metrics": {
+          "views": 128000,
+          "likes": 10000,
+          "comments": 81,
+          "shares": 353
+        },
+        "providerVideoId": "7633210079180852500"
+      },
+      {
+        "id": "9a7a5d7b1ed33e94",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7632440352095358228",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7632440352095358228",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Your man\u2019s cologne is telling on him \ud83d\udc40 #fragrance #cologne #perfume ",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 32.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/osDEr4aBECfIon1EvruDfDAjAbAFAAeAA73TI8~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=bSN21VH6pw1pVbBMxAbPUUTW8rM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-24T21:26:53.000Z",
+        "metrics": {
+          "views": 104000,
+          "likes": 5995,
+          "comments": 104,
+          "shares": 145
+        },
+        "providerVideoId": "7632440352095358228"
+      },
+      {
+        "id": "a4c85d86a94f4b90",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7632106379439770901",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7632106379439770901",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Your man\u2019s cologne is telling on him \ud83d\udc40 #fragrance #cologne #perfume",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 31.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oYYIiIIGAgAElCZLeATjDAAGIzVeK1QxWtxHeo~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=hfMPBilTbFC9zzt%2FzZC7fFPcQ6k%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-23T23:50:50.000Z",
+        "metrics": {
+          "views": 242800,
+          "likes": 10800,
+          "comments": 96,
+          "shares": 241
+        },
+        "providerVideoId": "7632106379439770901"
+      },
+      {
+        "id": "8c1eaa040a43329f",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7631680069836082452",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7631680069836082452",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "4 notes proven to make men more attractive to women. Most guys have never heard of them. #fragrance #cologne #perfume ",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 60.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/o0yLKAA60DAzHmKpB7iiwsBoCeAIrCAIEhPAKk~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=p26G47hIvDUYThHhjGjrOTI%2BHRc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-22T20:16:34.000Z",
+        "metrics": {
+          "views": 919500,
+          "likes": 82600,
+          "comments": 419,
+          "shares": 3476
+        },
+        "providerVideoId": "7631680069836082452"
+      },
+      {
+        "id": "a07cc20e0dac2f2a",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7630966943251483925",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7630966943251483925",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Half say passion fruit. Half say something went wrong. Both camps are right. #fragrance #cologne #perfume",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 45.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oMAAV0iIEAw0GF8fypiKmVDWKAIDnCArBB1IA8~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=lUx4LdlmCYFEnRtFOzK3pYudFtA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-20T22:09:19.000Z",
+        "metrics": {
+          "views": 77000,
+          "likes": 3713,
+          "comments": 53,
+          "shares": 107
+        },
+        "providerVideoId": "7630966943251483925"
+      },
+      {
+        "id": "b3d67406d19ebb53",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7630210231896673557",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7630210231896673557",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Replying to @dylxnbu1 Your man\u2019s cologne is telling on him \ud83d\udc40 #fragrance #cologne #perfume",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 36.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oAhpFCnbAAA3ARcVgEiL48UBofMmX9fiBECDjI~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=Ut0e67XPaXEZ%2BqpEFKd62cJD8SI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-18T21:12:51.000Z",
+        "metrics": {
+          "views": 342700,
+          "likes": 21300,
+          "comments": 220,
+          "shares": 490
+        },
+        "providerVideoId": "7630210231896673557"
+      },
+      {
+        "id": "7de0f785c66063a7",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7629836654152256788",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7629836654152256788",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Replying to @Richard_Rabbit Your man\u2019s cologne is telling on him \ud83d\udc40 #fragrance #cologne #perfume ",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 32.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oMRH2BITA1AQsABpMqUFEAj4IC3feAGF5gDQEy~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=KuysdqeOcS5qnJM9WYtEAHoqfeQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-17T21:03:06.000Z",
+        "metrics": {
+          "views": 131300,
+          "likes": 7742,
+          "comments": 134,
+          "shares": 314
+        },
+        "providerVideoId": "7629836654152256788"
+      },
+      {
+        "id": "eaed90d475620463",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7629450411417685269",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7629450411417685269",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Replying to @Jonathan Your man\u2019s cologne is telling on him \ud83d\udc40 #fragrance #cologne #perfume ",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 29.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oopAUKhOCCGEUAFRgBDIfMJAA4EggofDJDQDEU~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=qGGo%2FYXffBryN4hG6uqtq3cBSro%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-16T20:04:20.000Z",
+        "metrics": {
+          "views": 1200000,
+          "likes": 65200,
+          "comments": 294,
+          "shares": 4030
+        },
+        "providerVideoId": "7629450411417685269"
+      },
+      {
+        "id": "1365cbfef6c3861b",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7629062484481133844",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7629062484481133844",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "If the Breaking Bad characters walked into a room this is exactly what they'd smell like. #fragrance #cologne #perfume ",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 49.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oMfA1UeRcex3pxfAn3xlebfAeCAgAREPAeRBCgN~tplv-tiktokx-dmt-logom:tos-alisg-i-0068/oA3Yf8YfsArPffeeAaERBlFEpDYCAAA4AdvoGg.image?dr=9634&x-expires=1778454000&x-signature=nokYhS%2BVrF7bXErtvYLl2WfKtUI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-15T18:59:02.000Z",
+        "metrics": {
+          "views": 312800,
+          "likes": 19300,
+          "comments": 158,
+          "shares": 878
+        },
+        "providerVideoId": "7629062484481133844"
+      },
+      {
+        "id": "232f53f410fe01b1",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7628345697363840276",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7628345697363840276",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Three Khamrahs ranked. They are not created equal. #fragrance #cologne #perfume",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 56.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oUBXAVR7liDAWCqAE0iBwAfoIAvnwoyiAKdFpI~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=o9OF2MCIScyE4jV2R0gg9XAB4eY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-13T20:37:33.000Z",
+        "metrics": {
+          "views": 252600,
+          "likes": 17800,
+          "comments": 120,
+          "shares": 759
+        },
+        "providerVideoId": "7628345697363840276"
+      },
+      {
+        "id": "a6ebfcbd709b9619",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7627999577781652757",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7627999577781652757",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Your man\u2019s cologne is telling on him \ud83d\udc40 #fragrance #cologne #perfume",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 24.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oMDIBiwPEM0A6zCUIBcAsKiAl7CoGAfg5nANyh~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=sWm2xMH3WHhKEGWhMOEHMTFqof4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-12T22:14:28.000Z",
+        "metrics": {
+          "views": 120400,
+          "likes": 6233,
+          "comments": 94,
+          "shares": 138
+        },
+        "providerVideoId": "7627999577781652757"
+      },
+      {
+        "id": "ee4bedf95e5a3c64",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7627610698759097621",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7627610698759097621",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Replying to @Tai Your man\u2019s cologne is telling on him \ud83d\udc40 #fragrance #cologne #perfume",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 38.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/ocAKbt9SGQGxy1e4A6LAQsGf5JefnAGIIyAIRa~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=9Mc05CqaEbrVeWTPLKyq5D2kIuY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-11T21:05:21.000Z",
+        "metrics": {
+          "views": 411500,
+          "likes": 19400,
+          "comments": 223,
+          "shares": 276
+        },
+        "providerVideoId": "7627610698759097621"
+      },
+      {
+        "id": "bd84b5bc010614a4",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7627238152217922837",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7627238152217922837",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Men keep buying the newest flanker. 938 women voted for something else. #fragrance #cologne #perfume",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 39.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/okBeApWCnFSEEQFRTVIAnYAUhZgf921ZAD2ELD~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=51OvKaZaTWmFEQtL7o%2BLMPy0e%2Bo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-10T20:59:36.000Z",
+        "metrics": {
+          "views": 143000,
+          "likes": 7966,
+          "comments": 41,
+          "shares": 142
+        },
+        "providerVideoId": "7627238152217922837"
+      },
+      {
+        "id": "023cb9eb78345854",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7626518010886491412",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7626518010886491412",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Your man\u2019s cologne is telling on him \ud83d\udc40 #fragrance #cologne #perfume ",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 25.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oQEWIABAR1f1AlDpuFDJfc8AiXmEJEAgUJtcC8~tplv-tiktokx-dmt-logom:tos-alisg-i-0068/ok1dWY8iaclIbqlcAA8AADJsEy3ViPBEBA0iI.image?dr=9634&x-expires=1778454000&x-signature=Gu%2FQZWouVpri0GyS%2FXwz00SLGWs%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-08T22:25:15.000Z",
+        "metrics": {
+          "views": 170900,
+          "likes": 9721,
+          "comments": 77,
+          "shares": 353
+        },
+        "providerVideoId": "7626518010886491412"
+      },
+      {
+        "id": "9d1098ee96d43c7d",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7625760823134162196",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7625760823134162196",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Angels Share is $300. Khamrah is $40. I'm going to be honest with you about both. #fragrance #cologne #perfume ",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 36.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oAqAwId4PDHAAAiJivlE8U2QYEBaBll9RVwuA~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=9%2FRC%2BY%2BcNs%2Fe2f0H1aoUnqc7l8A%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-06T21:26:54.000Z",
+        "metrics": {
+          "views": 356200,
+          "likes": 22700,
+          "comments": 151,
+          "shares": 512
+        },
+        "providerVideoId": "7625760823134162196"
+      },
+      {
+        "id": "ea3df410a5ef9170",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7625383524853353748",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7625383524853353748",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Your man\u2019s cologne is telling on him \ud83d\udc40\u00a0Part two. #fragrance #cologne #perfume",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 36.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/osPEIiCpBgAQaGR8AEsffA4Al2vD0Fy3sUjm6E~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=ov6lpHFPYhbTtzXgrVE4hQ%2BpW8E%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-05T21:02:48.000Z",
+        "metrics": {
+          "views": 358100,
+          "likes": 28300,
+          "comments": 187,
+          "shares": 1089
+        },
+        "providerVideoId": "7625383524853353748"
+      },
+      {
+        "id": "5e29300b9980e7cd",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7625060772942548245",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7625060772942548245",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "I ranked every Stronger With You that actually matters. Some are worth it. Some aren't. #fragrance #cologne #perfume",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 94.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oEERfcIRoDQaA9D4CgfPFDAUAhERGAysBa0pqE~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=0aHkET6S9XYInWH4R8Mpvoud1zw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-04-05T00:10:22.000Z",
+        "metrics": {
+          "views": 454900,
+          "likes": 33800,
+          "comments": 287,
+          "shares": 934
+        },
+        "providerVideoId": "7625060772942548245"
+      },
+      {
+        "id": "f3ae95be1da10286",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7622411640377527572",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7622411640377527572",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "Over 645K watch this page. 50% off direct access and voting rights on what I film next. Tap Subscribe #fragrance #cologne #perfume",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 53.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/og5ABBiBw1BAI3wUfsA4irIAv8KAD0ICPbECGG~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=m26TobO0Zs%2FDPn7n%2Bc%2BVoqa1ycc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-03-28T20:50:21.000Z",
+        "metrics": {
+          "views": 62500,
+          "likes": 2704,
+          "comments": 51,
+          "shares": 21
+        },
+        "providerVideoId": "7622411640377527572"
+      },
+      {
+        "id": "610f14c081713832",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@definitelytai/video/7621668110516489492",
+        "normalizedUrl": "https://www.tiktok.com/@definitelytai/video/7621668110516489492",
+        "creatorHandle": "definitelytai",
+        "creatorDisplayName": "Theo",
+        "caption": "AKOTSK characters by cologne. Ser Duncan's pick is as honest as he is. \u2694\ufe0f #fragrance #cologne #perfume",
+        "hashtags": [
+          "fragrance",
+          "cologne",
+          "perfume"
+        ],
+        "durationSec": 51.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/owvAaiaIBAAFiUz9pWEsDaYmx7AcE7AlzBdWJ~tplv-tiktokx-origin.image?dr=9636&x-expires=1778454000&x-signature=h86liqDPLd9TKMh8Ksiiv2%2FFd40%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-03-26T20:45:03.000Z",
+        "metrics": {
+          "views": 68200,
+          "likes": 2031,
+          "comments": 51,
+          "shares": 46
+        },
+        "providerVideoId": "7621668110516489492"
+      }
+    ]
+  },
+  "tt_a5e66fdc9754": {
+    "scanId": "tt_a5e66fdc9754",
+    "status": "completed",
+    "platform": "tiktok",
+    "provider": "apify",
+    "accountInput": "https://www.tiktok.com/@stefantantari?_r=1&_t=ZS-96D1QyCmBXh",
+    "creatorHandle": "stefantantari",
+    "maxItems": 30,
+    "createdAt": "2026-05-09T05:31:47.151731+00:00",
+    "counts": {
+      "providerItems": 30,
+      "videos": 30,
+      "duplicatesRemoved": 0
+    },
+    "videos": [
+      {
+        "id": "15ce1704c5b18c04",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7622225618792467732",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7622225618792467732",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "beef mince rice + walkmor \n\nlifting weights also helps \n\n#food #abs #shredded #fyp #foryou ",
+        "hashtags": [
+          "food",
+          "abs",
+          "shredded",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 13.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oAejgIsL0K9AeRuPk3CHgMbKAILeDTAyjsGoVI~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=PcpeWDRB44oS1Wr5rxstZBwmXeE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-03-28T08:48:32.000Z",
+        "metrics": {
+          "views": 1600000,
+          "likes": 155300,
+          "comments": 507,
+          "shares": 4439
+        },
+        "providerVideoId": "7622225618792467732"
+      },
+      {
+        "id": "9cebe70b7850abc8",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7602421182507552021",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7602421182507552021",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "walk more\n\n#fatloss #walk #abs #foryou #fyp ",
+        "hashtags": [
+          "fatloss",
+          "walk",
+          "abs",
+          "foryou",
+          "fyp"
+        ],
+        "durationSec": 27.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oI1fbrCmQIiePqfGOOmRBGdFBQWLwAXeAATLuG~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=3b9c1%2BUS%2Fnj8yG%2BEqAri5e6Rge4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-02-02T23:57:06.000Z",
+        "metrics": {
+          "views": 1300000,
+          "likes": 180000,
+          "comments": 998,
+          "shares": 14600
+        },
+        "providerVideoId": "7602421182507552021"
+      },
+      {
+        "id": "daaa592a851211a6",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7637716978928487701",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7637716978928487701",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "steps up walkmor high protein actual food water high lift weights dont quit \n\n#fatloss #lean #abs #fyp #foryou",
+        "hashtags": [
+          "fatloss",
+          "lean",
+          "abs",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 32.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/osQX9TvIeCpEEAjkp9QAnFED3PDw2fFPVfUil4~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=8%2BELxh61tgc9RXaqu0PzreeMNf8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-09T02:42:47.000Z",
+        "metrics": {
+          "views": 16200,
+          "likes": 1069,
+          "comments": 7,
+          "shares": 14
+        },
+        "providerVideoId": "7637716978928487701"
+      },
+      {
+        "id": "ca4161b72b60fbca",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7637496364582145300",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7637496364582145300",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "5k steps \ud83d\udc79\n\n#walkmor #health #abs #fyp #foryou ",
+        "hashtags": [
+          "walkmor",
+          "health",
+          "abs",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 30.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oQMfdFZ7Ao1jEDjNQI1D3YPnfMEIfT64ADC9QX~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=DoNqtNh0CHSfVe2ln3cTShVqSZg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-08T12:26:39.000Z",
+        "metrics": {
+          "views": 11100,
+          "likes": 634,
+          "comments": 6,
+          "shares": 35
+        },
+        "providerVideoId": "7637496364582145300"
+      },
+      {
+        "id": "fc0615fc9bffe01e",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7637468448368463124",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7637468448368463124",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "protein veggies snag \n\n#protein #food #abs #fyp #foryou ",
+        "hashtags": [
+          "protein",
+          "food",
+          "abs",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 16.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oE7vSCmHpzBVznz9Bxiig3BwEfARYLmIICfCct~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=mDWHL%2FV9VOEVkxsXMFPvHnZOq%2Fc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-08T10:38:22.000Z",
+        "metrics": {
+          "views": 19100,
+          "likes": 808,
+          "comments": 13,
+          "shares": 9
+        },
+        "providerVideoId": "7637468448368463124"
+      },
+      {
+        "id": "a091b10d148dbf39",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7637418049217367317",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7637418049217367317",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "boys \n\n#lean #physique #abs #fyp #foryou",
+        "hashtags": [
+          "lean",
+          "physique",
+          "abs",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 11.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oU9eoLFGwGnXePR3jAt5Av0yQeYdFqGI22QexE~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=KNG%2B5%2F9DEFRqX%2BALITANcnE2NcY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-08T07:22:47.000Z",
+        "metrics": {
+          "views": 10900,
+          "likes": 748,
+          "comments": 7,
+          "shares": 24
+        },
+        "providerVideoId": "7637418049217367317"
+      },
+      {
+        "id": "d61e7344299ed10a",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7637390752212864277",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7637390752212864277",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "tastes so good \n\n#food #abs #fitness #fyp #foryou ",
+        "hashtags": [
+          "food",
+          "abs",
+          "fitness",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 16.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oEk9xRWEiFjpLQUQuCFTAdfDAO4XrDlnfXfIjz~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=pKPJHIyP%2Bk2%2FosENRLNYO0cl2sM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-08T05:36:52.000Z",
+        "metrics": {
+          "views": 52800,
+          "likes": 3559,
+          "comments": 30,
+          "shares": 219
+        },
+        "providerVideoId": "7637390752212864277"
+      },
+      {
+        "id": "18aeca5759e45913",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7637347892109348116",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7637347892109348116",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "chest vein goes off \n\n#gym #aesthetics #lean #fyp #foryou ",
+        "hashtags": [
+          "gym",
+          "aesthetics",
+          "lean",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 11.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/ooDKDEjD6QTfNFrIhoQffi54lnVCCjAU9TQUAD~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=pNj31JROZSiunvgbtWG1hRN%2FMBU%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-08T02:50:42.000Z",
+        "metrics": {
+          "views": 8809,
+          "likes": 571,
+          "comments": 4,
+          "shares": 15
+        },
+        "providerVideoId": "7637347892109348116"
+      },
+      {
+        "id": "f6a2c9b1348ec549",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7637121328797076757",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7637121328797076757",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "walkmor vascularity \n\n#walkmor #steps #lean #fyp #foryou",
+        "hashtags": [
+          "walkmor",
+          "steps",
+          "lean",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 9.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/o8ICLeWf78mTFDAjIEWPjgFDAEPIoqB2OHfAII~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=A7oJkc3bEFllTiHt8c%2F%2F36JhNbE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-07T12:11:21.000Z",
+        "metrics": {
+          "views": 12300,
+          "likes": 504,
+          "comments": 4,
+          "shares": 8
+        },
+        "providerVideoId": "7637121328797076757"
+      },
+      {
+        "id": "d41b036763f159ac",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7637081396871302421",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7637081396871302421",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "who do you think I am. Did you actually think \n\n#beefmincerice #food #abs #fyp #foryou",
+        "hashtags": [
+          "beefmincerice",
+          "food",
+          "abs",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 17.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/ocRlNfQAwfAFkELuXgGkiefw3mDhGFKQ9FjnL4~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=IybHoEoSIA8sWjw%2BzhXK88Qyt3w%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-07T09:36:24.000Z",
+        "metrics": {
+          "views": 314700,
+          "likes": 20700,
+          "comments": 148,
+          "shares": 2025
+        },
+        "providerVideoId": "7637081396871302421"
+      },
+      {
+        "id": "d5ae341066f8b2cd",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7637060949936983316",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7637060949936983316",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "\u201ceat actual food\u201d \n\n#coach #fitness #food #fyp #foryou",
+        "hashtags": [
+          "coach",
+          "fitness",
+          "food",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 55.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oQ8jwfBBoI0piLwJdqPAIXU1o9rJSxCAAiAwSI~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=sXj3p1nzKn4eMu9hqNg7eFwCRsY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-07T08:17:05.000Z",
+        "metrics": {
+          "views": 10500,
+          "likes": 406,
+          "comments": 4,
+          "shares": 9
+        },
+        "providerVideoId": "7637060949936983316"
+      },
+      {
+        "id": "2c2eb3d3471ea23a",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7637009506018381077",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7637009506018381077",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "boys protein veggies cant lose \n\n#food #abs #health #fyp #foryou",
+        "hashtags": [
+          "food",
+          "abs",
+          "health",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 15.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/o87AIiikYTcivcg8BCBAI1f1RjpgGBLE2gi7f7~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=KuatFWrHOdHNR1I0Un5oacST8ak%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-07T04:57:27.000Z",
+        "metrics": {
+          "views": 72300,
+          "likes": 4163,
+          "comments": 17,
+          "shares": 70
+        },
+        "providerVideoId": "7637009506018381077"
+      },
+      {
+        "id": "ee327283c4bebb2e",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7636991347244715284",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7636991347244715284",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "pullups. Heavy, to failure \n\n#gym #pullups #back #fyp #foryou ",
+        "hashtags": [
+          "gym",
+          "pullups",
+          "back",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 10.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/ocVAzOAF9EjK29KTAjBDICI8fsIXRCD4fDpjfF~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=nS0lejzw837HOBhLdwG6zci%2Fkhk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-07T03:46:57.000Z",
+        "metrics": {
+          "views": 16700,
+          "likes": 766,
+          "comments": 4,
+          "shares": 28
+        },
+        "providerVideoId": "7636991347244715284"
+      },
+      {
+        "id": "719ed2e9df28c26e",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7636965736652475668",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7636965736652475668",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "dumbell side raise stillllll dont get enough recognition \n\nheavy + failure mor \n\n#gym #shoulders #muscle #fyp #foryou",
+        "hashtags": [
+          "gym",
+          "shoulders",
+          "muscle",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 13.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/o8iATU5DATPIfw4Tj3iCDD8NeEQPQDF3tva9fD~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=DMhp4sjEU2S6Yhn2gWVi1qxrt10%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-07T02:07:34.000Z",
+        "metrics": {
+          "views": 90500,
+          "likes": 5470,
+          "comments": 19,
+          "shares": 150
+        },
+        "providerVideoId": "7636965736652475668"
+      },
+      {
+        "id": "7eda8a19e75f9ca4",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7636936297982004500",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7636936297982004500",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "brahera\n\n#gym #fitness #aesthetics #fyp #foryou ",
+        "hashtags": [
+          "gym",
+          "fitness",
+          "aesthetics",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oMExvijIIDAfSID7CTXArbeL4CFgD2eD9RGBxv~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=TjXF3%2Fa4vmV4zlxVwVerZWED2oc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-07T00:13:30.000Z",
+        "metrics": {
+          "views": 6217,
+          "likes": 182,
+          "comments": 1,
+          "shares": 4
+        },
+        "providerVideoId": "7636936297982004500"
+      },
+      {
+        "id": "7841b5613a0f8ce0",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7636713024157420821",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7636713024157420821",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "boys its never been so easy \n\n#food #abs #health #fyp #foryou ",
+        "hashtags": [
+          "food",
+          "abs",
+          "health",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 12.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oYh3INiH5SUv6tL7BCBAIaf6RDpgDBHEXYixfO~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=ndx4zShbFZqSsh0wGSelnuTe2oE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-06T09:46:55.000Z",
+        "metrics": {
+          "views": 18100,
+          "likes": 778,
+          "comments": 10,
+          "shares": 14
+        },
+        "providerVideoId": "7636713024157420821"
+      },
+      {
+        "id": "26d74152f02767f4",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7636675586575928596",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7636675586575928596",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "success leaves clues and so does failure. Diets dont work \n\n#fatloss #diet #abs #fyp #foryou ",
+        "hashtags": [
+          "fatloss",
+          "diet",
+          "abs",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 47.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oMAC6ijPrfOAB7GJIP8ArnCxwuiBATtIY0lzIv~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=K5HNVgb7EAOsA%2FgGryZpb4Yr5RA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-06T07:21:42.000Z",
+        "metrics": {
+          "views": 18600,
+          "likes": 1120,
+          "comments": 9,
+          "shares": 11
+        },
+        "providerVideoId": "7636675586575928596"
+      },
+      {
+        "id": "8e2f8cdadcdddb4b",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7636665373546302740",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7636665373546302740",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "yes you still gain muscle in a deficit as long as proteins high and you\u2019re training like a mad dog \n\n#fatloss #sixpack #abs #fyp #foryou ",
+        "hashtags": [
+          "fatloss",
+          "sixpack",
+          "abs",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 53.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/o8h4rB7ATnD8xIe6CMLIAGGVI9AjjuyIIjee4c~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=3vqiKBDgYPF3K3OkVzewS1V3bgo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-06T06:42:01.000Z",
+        "metrics": {
+          "views": 49600,
+          "likes": 3834,
+          "comments": 16,
+          "shares": 76
+        },
+        "providerVideoId": "7636665373546302740"
+      },
+      {
+        "id": "fde4e05ed38943cf",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7636643113351548180",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7636643113351548180",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "boys \n\n#beefmincerice #food #abs #fyp #foryou ",
+        "hashtags": [
+          "beefmincerice",
+          "food",
+          "abs",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 19.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oMBWzs3xDQfnW672ABFE4ojbaCfNTwDQEZAtIe~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=swHx%2Fn2UzSEgwnQZ1pCS3W9rga8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-06T05:15:39.000Z",
+        "metrics": {
+          "views": 28600,
+          "likes": 1903,
+          "comments": 26,
+          "shares": 68
+        },
+        "providerVideoId": "7636643113351548180"
+      },
+      {
+        "id": "d641ec90a76a9ac0",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7636586801188048148",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7636586801188048148",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "SSPmnuhh-tuhhh\u2026\n\n#coffee #caffeine #fatloss #fyp #foryou ",
+        "hashtags": [
+          "coffee",
+          "caffeine",
+          "fatloss",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 10.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/owcMXCGwTIfgxvXqgHrRQ84Z4b9RTgAPeDxjAe~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=MdCzwdSg3HWN5UG%2FSAeF5azxpt8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-06T01:37:07.000Z",
+        "metrics": {
+          "views": 21600,
+          "likes": 941,
+          "comments": 8,
+          "shares": 19
+        },
+        "providerVideoId": "7636586801188048148"
+      },
+      {
+        "id": "6fba54ae4f7250a2",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7636585029623090452",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7636585029623090452",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "coffee is so sharp \n\n#coffee #caffeine #fatloss #fyp #foryou ",
+        "hashtags": [
+          "coffee",
+          "caffeine",
+          "fatloss",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 24.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oceGIRXyOUfcXie1kuFfQGdMACL0GnAl6EGQoI~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=h3snapr07x5MKhNqec46T%2Bp%2Bv3c%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-06T01:30:17.000Z",
+        "metrics": {
+          "views": 114800,
+          "likes": 8639,
+          "comments": 32,
+          "shares": 178
+        },
+        "providerVideoId": "7636585029623090452"
+      },
+      {
+        "id": "2b4adf87886e4b8e",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7636320587069033749",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7636320587069033749",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "boys its \n\n#food #protein #abs #fyp #foryou ",
+        "hashtags": [
+          "food",
+          "protein",
+          "abs",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 19.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oQWIkeuT8Ax2DrXQQST1fjUC4fz8AHJbIsRABM~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=9LeytolvEj6oPERLZ9KB%2FBfJYjo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-05T08:24:05.000Z",
+        "metrics": {
+          "views": 32300,
+          "likes": 1995,
+          "comments": 17,
+          "shares": 65
+        },
+        "providerVideoId": "7636320587069033749"
+      },
+      {
+        "id": "ed59c6810e48e06a",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7636301092308929812",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7636301092308929812",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "if you have a house \n\n#walkmor #steps #fatloss #fyp #foryou ",
+        "hashtags": [
+          "walkmor",
+          "steps",
+          "fatloss",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 14.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/ooADB2t53xTIfCLI7XDZeI9m4eljEcFA9zFIUt~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=APrju3skhlZ%2B4%2FliL7AhWhVJYP8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-05T07:08:26.000Z",
+        "metrics": {
+          "views": 12800,
+          "likes": 585,
+          "comments": 15,
+          "shares": 8
+        },
+        "providerVideoId": "7636301092308929812"
+      },
+      {
+        "id": "1bf49aae96f04eb1",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7636204854045625620",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7636204854045625620",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "forgot the phone chat baha \n\nif you like running by all means run but if youre looking for the easiest and most effective way to shred fat it would be simply walking more \n\n#walkmor #fatloss #abs #fyp #foryou ",
+        "hashtags": [
+          "walkmor",
+          "fatloss",
+          "abs",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 39.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/o4PRX5Of4XhpAFwRwnGVGkAMeQB08GMMAkf9e9~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=D5aYCJxnGFbekjgDCWVul4etTqA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-05T00:55:09.000Z",
+        "metrics": {
+          "views": 10300,
+          "likes": 610,
+          "comments": 10,
+          "shares": 12
+        },
+        "providerVideoId": "7636204854045625620"
+      },
+      {
+        "id": "5978ededd124b1db",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7636172185022876949",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7636172185022876949",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "you can \n\n#walkmor #steps #abs #fyp #foryou",
+        "hashtags": [
+          "walkmor",
+          "steps",
+          "abs",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 9.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oU8Af5IHAEQIk74TjxECDRkXiIQmQEL5rf18eG~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=zwbRyUoEf2EI1AQ06CqfOroBumc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-04T22:48:13.000Z",
+        "metrics": {
+          "views": 30300,
+          "likes": 2309,
+          "comments": 12,
+          "shares": 75
+        },
+        "providerVideoId": "7636172185022876949"
+      },
+      {
+        "id": "7f2f3cfd7e3f57b1",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7635975638570126612",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7635975638570126612",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "\ud83e\udd69\ud83e\udd54\ud83e\udef1\ud83e\udef1\n\n#protein #food #fatloss #fyp #foryou ",
+        "hashtags": [
+          "protein",
+          "food",
+          "fatloss",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 19.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oodcIcwqXBA2bFiw4Di6BRpCTE1gLB3fIyfz4i~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=d9mEd3nJePUCV8CHTDD%2B8MBUuak%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-04T10:05:30.000Z",
+        "metrics": {
+          "views": 15500,
+          "likes": 782,
+          "comments": 9,
+          "shares": 17
+        },
+        "providerVideoId": "7635975638570126612"
+      },
+      {
+        "id": "3665866613982f31",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7635928728635215125",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7635928728635215125",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "Replying to @societybeatz ",
+        "hashtags": [],
+        "durationSec": 17.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/okfAhBiCM6BFRUgCJp2diJ4Bf2cC3pIER5IWrA~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=PH%2FYBC%2FhlqHwjzrFlYUNho0zjLw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-04T07:03:26.000Z",
+        "metrics": {
+          "views": 7292,
+          "likes": 110,
+          "comments": 7,
+          "shares": 1
+        },
+        "providerVideoId": "7635928728635215125"
+      },
+      {
+        "id": "105e0c680228d6a5",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7635923398060821780",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7635923398060821780",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "my head \n\n#scroll #doomscroll #brainrot #fyp #foryou ",
+        "hashtags": [
+          "scroll",
+          "doomscroll",
+          "brainrot",
+          "fyp",
+          "foryou"
+        ],
+        "durationSec": 50.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oc2LPgZrgenAoGofvagiFu4RGGeYsAlwmg4vEf~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=8vgCQuVCj9%2Ba3eF9BwJSX1cK0MM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-04T06:42:49.000Z",
+        "metrics": {
+          "views": 15600,
+          "likes": 856,
+          "comments": 5,
+          "shares": 10
+        },
+        "providerVideoId": "7635923398060821780"
+      },
+      {
+        "id": "bd7e2e571f8a9242",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7635914524180122900",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7635914524180122900",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "Replying to @p1azix ",
+        "hashtags": [],
+        "durationSec": 52.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oUQiwTKIFCGaeAjPyYQAHFEDfbDFa8EsDfCM74~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=Z8V4QtjLHvTFatrSRpqFKP2gWoM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-04T06:08:26.000Z",
+        "metrics": {
+          "views": 5711,
+          "likes": 73,
+          "comments": 8,
+          "shares": 1
+        },
+        "providerVideoId": "7635914524180122900"
+      },
+      {
+        "id": "58cd98f83331cb11",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@stefantantari/video/7635912725973011733",
+        "normalizedUrl": "https://www.tiktok.com/@stefantantari/video/7635912725973011733",
+        "creatorHandle": "stefantantari",
+        "creatorDisplayName": "Stefan",
+        "caption": "Replying to @liam ",
+        "hashtags": [],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oQhODVfD4I6BjyTIXNwDPeeD4CjABEYnFCcpIA~tplv-tiktokx-origin.image?dr=9636&x-expires=1778475600&x-signature=bjkpuS2Xf8mdFJ6D0VV%2FE4pCrcs%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "postedAt": "2026-05-04T06:01:25.000Z",
+        "metrics": {
+          "views": 10800,
+          "likes": 243,
+          "comments": 9,
+          "shares": 2
+        },
+        "providerVideoId": "7635912725973011733"
+      }
+    ]
+  }
+}

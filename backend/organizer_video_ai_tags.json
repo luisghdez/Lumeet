@@ -1,0 +1,417 @@
+{
+  "vidref_15ce1704c5b18c04": {
+    "videoReferenceId": "vidref_15ce1704c5b18c04",
+    "status": "tagged",
+    "rawAiOutput": {
+      "niche": "fitness",
+      "sub_niche": "weight_loss",
+      "format": "talking_head",
+      "hook_type": "bold_claim",
+      "scene_type": "bedroom",
+      "camera_movement": "static",
+      "visual_pattern": "face_to_camera",
+      "motion_difficulty": "medium",
+      "hook_summary": "Lifting weights helps with abs!",
+      "first_three_seconds": "Show off abs and mention weight lifting.",
+      "recreation_notes": "Focus on fitness tips and personal experience.",
+      "ai_confidence": 0.9
+    },
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:54:49.898386+00:00",
+    "error": "",
+    "analysisId": "analysis_bed91483ed52",
+    "niche": "fitness",
+    "sub_niche": "weight_loss",
+    "format": "talking_head",
+    "hook_type": "bold_claim",
+    "camera_movement": "static",
+    "motion_difficulty": "medium",
+    "normalizedTags": {
+      "niche": "fitness",
+      "sub_niche": "weight_loss",
+      "format": "talking_head",
+      "hook_type": "bold_claim",
+      "scene_type": "bedroom",
+      "camera_movement": "static",
+      "visual_pattern": "face_to_camera",
+      "motion_difficulty": "medium",
+      "hook_summary": "Lifting weights helps with abs!",
+      "first_three_seconds": "Show off abs and mention weight lifting.",
+      "recreation_notes": "Focus on fitness tips and personal experience.",
+      "ai_confidence": 0.9
+    },
+    "motionMetrics": {
+      "duration_sec": 13.867,
+      "fps": 30.0,
+      "estimated_total_frame_count": 416,
+      "sampled_frame_count": 14,
+      "scene_change_count": 0,
+      "total_frame_changes": 12,
+      "total_frame_movement": 0.5372,
+      "camera_movement_score": 0.5635,
+      "character_movement_score": 0.4658,
+      "motion_difficulty": "medium"
+    },
+    "sampledFrames": [
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_bed91483ed52/frame_0001.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_bed91483ed52/frame_0002.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_bed91483ed52/frame_0003.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_bed91483ed52/frame_0004.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_bed91483ed52/frame_0005.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_bed91483ed52/frame_0006.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_bed91483ed52/frame_0007.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_bed91483ed52/frame_0008.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_bed91483ed52/frame_0009.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_bed91483ed52/frame_0010.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_bed91483ed52/frame_0011.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_bed91483ed52/frame_0012.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_bed91483ed52/frame_0013.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_bed91483ed52/frame_0014.jpg"
+    ]
+  },
+  "vidref_9cebe70b7850abc8": {
+    "videoReferenceId": "vidref_9cebe70b7850abc8",
+    "status": "tagged",
+    "rawAiOutput": {
+      "niche": "fitness",
+      "sub_niche": "weight_loss",
+      "format": "talking_head",
+      "hook_type": "problem_callout",
+      "scene_type": "single_room",
+      "camera_movement": "static",
+      "visual_pattern": "face_to_camera",
+      "motion_difficulty": "medium",
+      "hook_summary": "Encouraging viewers to walk more for fat loss.",
+      "first_three_seconds": "Introduction to the importance of walking for weight loss.",
+      "recreation_notes": "Focus on clear messaging and engaging delivery.",
+      "ai_confidence": 0.95
+    },
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:55:10.524850+00:00",
+    "error": "",
+    "analysisId": "analysis_6cb2bea53102",
+    "niche": "fitness",
+    "sub_niche": "weight_loss",
+    "format": "talking_head",
+    "hook_type": "problem_callout",
+    "camera_movement": "static",
+    "motion_difficulty": "medium",
+    "normalizedTags": {
+      "niche": "fitness",
+      "sub_niche": "weight_loss",
+      "format": "talking_head",
+      "hook_type": "problem_callout",
+      "scene_type": "single_room",
+      "camera_movement": "static",
+      "visual_pattern": "face_to_camera",
+      "motion_difficulty": "medium",
+      "hook_summary": "Encouraging viewers to walk more for fat loss.",
+      "first_three_seconds": "Introduction to the importance of walking for weight loss.",
+      "recreation_notes": "Focus on clear messaging and engaging delivery.",
+      "ai_confidence": 0.95
+    },
+    "motionMetrics": {
+      "duration_sec": 27.4,
+      "fps": 30.0,
+      "estimated_total_frame_count": 822,
+      "sampled_frame_count": 27,
+      "scene_change_count": 0,
+      "total_frame_changes": 7,
+      "total_frame_movement": 0.406,
+      "camera_movement_score": 0.3219,
+      "character_movement_score": 0.3901,
+      "motion_difficulty": "medium"
+    },
+    "sampledFrames": [
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0001.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0002.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0003.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0004.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0005.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0006.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0007.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0008.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0009.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0010.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0011.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0012.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0013.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0014.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0015.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0016.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0017.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0018.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0019.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0020.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0021.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0022.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0023.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0024.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0025.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0026.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_6cb2bea53102/frame_0027.jpg"
+    ]
+  },
+  "vidref_daaa592a851211a6": {
+    "videoReferenceId": "vidref_daaa592a851211a6",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_ca4161b72b60fbca": {
+    "videoReferenceId": "vidref_ca4161b72b60fbca",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_fc0615fc9bffe01e": {
+    "videoReferenceId": "vidref_fc0615fc9bffe01e",
+    "status": "tagged",
+    "rawAiOutput": {
+      "niche": "food_beverage",
+      "sub_niche": "meal_prep",
+      "format": "talking_head",
+      "hook_type": "bold_claim",
+      "scene_type": "kitchen",
+      "camera_movement": "static",
+      "visual_pattern": "product_in_hand",
+      "motion_difficulty": "medium",
+      "hook_summary": "Showcasing a protein-packed meal for abs.",
+      "first_three_seconds": "Introducing the meal while flexing abs.",
+      "recreation_notes": "Focus on meal prep and protein benefits.",
+      "ai_confidence": 0.9
+    },
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:55:37.828301+00:00",
+    "error": "",
+    "analysisId": "analysis_30f48583af42",
+    "niche": "food_beverage",
+    "sub_niche": "meal_prep",
+    "format": "talking_head",
+    "hook_type": "bold_claim",
+    "camera_movement": "static",
+    "motion_difficulty": "medium",
+    "normalizedTags": {
+      "niche": "food_beverage",
+      "sub_niche": "meal_prep",
+      "format": "talking_head",
+      "hook_type": "bold_claim",
+      "scene_type": "kitchen",
+      "camera_movement": "static",
+      "visual_pattern": "product_in_hand",
+      "motion_difficulty": "medium",
+      "hook_summary": "Showcasing a protein-packed meal for abs.",
+      "first_three_seconds": "Introducing the meal while flexing abs.",
+      "recreation_notes": "Focus on meal prep and protein benefits.",
+      "ai_confidence": 0.9
+    },
+    "motionMetrics": {
+      "duration_sec": 16.767,
+      "fps": 30.0,
+      "estimated_total_frame_count": 503,
+      "sampled_frame_count": 17,
+      "scene_change_count": 1,
+      "total_frame_changes": 11,
+      "total_frame_movement": 0.5466,
+      "camera_movement_score": 0.5835,
+      "character_movement_score": 0.4937,
+      "motion_difficulty": "medium"
+    },
+    "sampledFrames": [
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_30f48583af42/frame_0001.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_30f48583af42/frame_0002.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_30f48583af42/frame_0003.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_30f48583af42/frame_0004.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_30f48583af42/frame_0005.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_30f48583af42/frame_0006.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_30f48583af42/frame_0007.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_30f48583af42/frame_0008.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_30f48583af42/frame_0009.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_30f48583af42/frame_0010.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_30f48583af42/frame_0011.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_30f48583af42/frame_0012.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_30f48583af42/frame_0013.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_30f48583af42/frame_0014.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_30f48583af42/frame_0015.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_30f48583af42/frame_0016.jpg",
+      "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/analysis_frames/analysis_30f48583af42/frame_0017.jpg"
+    ]
+  },
+  "vidref_a091b10d148dbf39": {
+    "videoReferenceId": "vidref_a091b10d148dbf39",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_d61e7344299ed10a": {
+    "videoReferenceId": "vidref_d61e7344299ed10a",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_18aeca5759e45913": {
+    "videoReferenceId": "vidref_18aeca5759e45913",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_f6a2c9b1348ec549": {
+    "videoReferenceId": "vidref_f6a2c9b1348ec549",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_d41b036763f159ac": {
+    "videoReferenceId": "vidref_d41b036763f159ac",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_d5ae341066f8b2cd": {
+    "videoReferenceId": "vidref_d5ae341066f8b2cd",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_2c2eb3d3471ea23a": {
+    "videoReferenceId": "vidref_2c2eb3d3471ea23a",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_ee327283c4bebb2e": {
+    "videoReferenceId": "vidref_ee327283c4bebb2e",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_719ed2e9df28c26e": {
+    "videoReferenceId": "vidref_719ed2e9df28c26e",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_7eda8a19e75f9ca4": {
+    "videoReferenceId": "vidref_7eda8a19e75f9ca4",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_7841b5613a0f8ce0": {
+    "videoReferenceId": "vidref_7841b5613a0f8ce0",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_26d74152f02767f4": {
+    "videoReferenceId": "vidref_26d74152f02767f4",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_8e2f8cdadcdddb4b": {
+    "videoReferenceId": "vidref_8e2f8cdadcdddb4b",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_fde4e05ed38943cf": {
+    "videoReferenceId": "vidref_fde4e05ed38943cf",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_d641ec90a76a9ac0": {
+    "videoReferenceId": "vidref_d641ec90a76a9ac0",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_6fba54ae4f7250a2": {
+    "videoReferenceId": "vidref_6fba54ae4f7250a2",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_2b4adf87886e4b8e": {
+    "videoReferenceId": "vidref_2b4adf87886e4b8e",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_ed59c6810e48e06a": {
+    "videoReferenceId": "vidref_ed59c6810e48e06a",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_1bf49aae96f04eb1": {
+    "videoReferenceId": "vidref_1bf49aae96f04eb1",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_5978ededd124b1db": {
+    "videoReferenceId": "vidref_5978ededd124b1db",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_7f2f3cfd7e3f57b1": {
+    "videoReferenceId": "vidref_7f2f3cfd7e3f57b1",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_3665866613982f31": {
+    "videoReferenceId": "vidref_3665866613982f31",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_105e0c680228d6a5": {
+    "videoReferenceId": "vidref_105e0c680228d6a5",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_bd7e2e571f8a9242": {
+    "videoReferenceId": "vidref_bd7e2e571f8a9242",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  },
+  "vidref_58cd98f83331cb11": {
+    "videoReferenceId": "vidref_58cd98f83331cb11",
+    "status": "not_tagged",
+    "rawAiOutput": null,
+    "createdAt": "2026-05-09T05:31:57.700558+00:00",
+    "updatedAt": "2026-05-09T05:31:57.700558+00:00"
+  }
+}
