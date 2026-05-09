@@ -12,18 +12,23 @@ import base64
 import json
 import math
 import os
+import re
 import shutil
 import subprocess
 import uuid
 from typing import Any, Dict, List, Optional
 from urllib.error import HTTPError, URLError
+from urllib.parse import quote, urlencode, urlparse
 from urllib.request import Request, urlopen
 
 from PIL import Image, ImageChops, ImageStat
 
 from config import (
+    APIFY_TIKTOK_ACTOR_ID,
+    APIFY_TOKEN,
     OPENAI_API_KEY,
     OPENAI_TAGGING_MODEL,
+    TIKTOK_SCAN_TIMEOUT_SEC,
     VIDEO_ANALYSIS_DOWNLOAD_TIMEOUT_SEC,
     VIDEO_ANALYSIS_FRAME_DIR,
     VIDEO_ANALYSIS_FRAME_WIDTH,
@@ -35,6 +40,9 @@ from config import (
 )
 
 
+ANSI_ESCAPE_RE = re.compile(r"\x1b\[[0-?]*[ -/]*[@-~]")
+
+
 class VideoAnalysisError(Exception):
     def __init__(self, message: str, status_code: int = 400):
         super().__init__(message)
@@ -42,12 +50,28 @@ class VideoAnalysisError(Exception):
         self.status_code = status_code
 
 
-FORMAT_VALUES = ["ugc_demo", "talking_head", "storytime", "problem_solution", "hook_demo", "get_ready_with_me", "other"]
-HOOK_VALUES = ["curiosity_gap", "problem_callout", "bold_claim", "social_proof", "demo_first", "before_after", "relatable_story", "question", "other"]
+FORMAT_VALUES = [
+    "ugc_demo", "talking_head", "storytime", "problem_solution", "hook_demo",
+    "get_ready_with_me", "mirror_body_showcase", "pose_sequence",
+    "outfit_showcase", "product_showcase", "routine_demo", "tutorial_explainer",
+    "comparison", "visual_showcase", "broll_montage", "trend_lip_sync", "other",
+]
+HOOK_VALUES = [
+    "curiosity_gap", "problem_callout", "bold_claim", "social_proof", "demo_first",
+    "before_after", "relatable_story", "question", "visual_body_hook",
+    "visual_reveal", "aesthetic_hook", "text_overlay_hook", "no_explicit_hook",
+    "other",
+]
 SCENE_VALUES = ["single_room", "bathroom_mirror", "bedroom", "desk_setup", "kitchen", "car", "outdoor", "screen_recording", "multi_scene", "other"]
 CAMERA_VALUES = ["static", "handheld_light", "handheld_heavy", "push_in", "pull_back", "pan", "tilt", "walking_follow", "mixed"]
-VISUAL_VALUES = ["face_to_camera", "product_in_hand", "product_closeup", "demo_steps", "text_overlay_heavy", "broll_montage", "mirror_shot", "screen_plus_face", "other"]
+VISUAL_VALUES = [
+    "face_to_camera", "product_in_hand", "product_closeup", "demo_steps",
+    "text_overlay_heavy", "broll_montage", "mirror_shot", "screen_plus_face",
+    "body_focus", "pose_sequence", "outfit_check", "visual_reveal",
+    "hands_only_demo", "on_screen_text", "split_screen", "other",
+]
 MOTION_DIFFICULTY_VALUES = ["very_easy", "easy", "medium", "hard", "very_hard"]
+MOVEMENT_AMOUNT_VALUES = ["very_low", "low", "medium", "high", "very_high"]
 NICHE_VALUES = [
     "beauty", "fashion", "fitness", "health_wellness", "food_beverage", "home_lifestyle",
     "parenting_family", "personal_finance", "business_career", "education", "productivity",
@@ -69,7 +93,8 @@ CONTENT_PILLAR_VALUES = [
     "relatable_lifestyle", "routine_explainer", "meal_prep_food", "product_demo", "app_demo",
     "transformation_progress", "educational_tips", "myth_busting", "review_testimonial",
     "trend_reaction", "community_story", "announcement_launch", "offer_promo",
-    "behind_the_scenes", "other",
+    "behind_the_scenes", "aspirational_showcase", "visual_social_proof",
+    "comparison_proof", "other",
 ]
 PILLAR_ROLE_VALUES = [
     "trust_builder", "authority_builder", "relatability_builder", "desire_builder",
@@ -115,15 +140,22 @@ CREATIVE_TEMPLATE_VALUES = [
     "hook_then_demo", "problem_then_solution", "day_in_the_life", "grwm",
     "routine_breakdown", "three_tips", "mistakes_to_avoid", "before_after",
     "pov_story", "testimonial_story", "trend_adaptation", "screen_recording_walkthrough",
+    "body_check", "physique_showcase", "pose_sequence", "visual_showcase",
+    "outfit_check", "product_try_on", "comparison_reveal", "montage",
+    "voiceover_explainer", "caption_story",
 ]
 SCRIPT_STRUCTURE_VALUES = [
     "hook_context_payoff", "problem_agitation_solution", "listicle", "story_arc",
-    "demo_steps", "visual_only", "question_answer",
+    "demo_steps", "visual_only", "audio_only_visual", "text_overlay_only",
+    "voiceover_narration", "question_answer",
 ]
 REPEATABILITY_VALUES = ["one_off", "repeatable_series", "template_reusable", "trend_dependent"]
 PRODUCTION_COMPLEXITY_VALUES = ["low", "medium", "high"]
 LOCATION_COMPLEXITY_VALUES = ["single_location", "multi_location", "public_location", "studio_like"]
-ASSET_REQUIREMENT_VALUES = ["face", "body", "product", "app_screen", "food", "gym", "desk", "car", "outdoor"]
+ASSET_REQUIREMENT_VALUES = [
+    "face", "body", "product", "app_screen", "food", "gym", "desk", "car",
+    "outdoor", "mirror", "voiceover", "text_overlay",
+]
 TRI_STATE_VALUES = ["yes", "no", "optional"]
 TEXT_OVERLAY_VALUES = ["none", "light", "heavy"]
 SCORE_FIELDS = [
@@ -160,14 +192,63 @@ def _source_url(video_reference: Dict[str, Any]) -> str:
     return url
 
 
-def _download_video(url: str, output_path: str) -> Dict[str, Any]:
-    try:
-        downloaded_bytes = _download_direct(url, output_path)
-        return {"path": output_path, "downloadedBytes": downloaded_bytes, "method": "direct"}
-    except VideoAnalysisError as exc:
-        if "returned HTML" not in exc.message and "download failed" not in exc.message.lower():
-            raise
-        return _download_with_ytdlp(url, output_path)
+def _candidate_source_urls(video_reference: Dict[str, Any]) -> List[str]:
+    candidates = [
+        video_reference.get("sourceMediaUrl"),
+        video_reference.get("mediaUrl"),
+        video_reference.get("downloadUrl"),
+        video_reference.get("url"),
+    ]
+    deduped: List[str] = []
+    seen = set()
+    for candidate in candidates:
+        url = (candidate or "").strip()
+        if not url or url in seen:
+            continue
+        deduped.append(url)
+        seen.add(url)
+    if not deduped:
+        raise VideoAnalysisError("Video reference has no URL to analyze.")
+    return deduped
+
+
+def _download_video(video_reference: Dict[str, Any], output_path: str) -> Dict[str, Any]:
+    errors = []
+    candidates = _candidate_source_urls(video_reference)
+    tiktok_page_url = next((url for url in candidates if _is_tiktok_page_url(url)), "")
+
+    for url in candidates:
+        try:
+            downloaded_bytes = _download_direct(url, output_path)
+            return {"path": output_path, "downloadedBytes": downloaded_bytes, "method": "direct", "resolvedUrl": url}
+        except VideoAnalysisError as exc:
+            errors.append(exc.message)
+            if "returned HTML" not in exc.message and "download failed" not in exc.message.lower():
+                continue
+        if _is_tiktok_page_url(url):
+            try:
+                return _download_with_ytdlp(url, output_path)
+            except VideoAnalysisError as exc:
+                errors.append(exc.message)
+
+    if tiktok_page_url:
+        try:
+            return _download_tiktok_with_apify(tiktok_page_url, output_path)
+        except VideoAnalysisError as exc:
+            errors.append(exc.message)
+
+    detail = " | ".join(_clean_error_message(error) for error in errors if error)
+    raise VideoAnalysisError(detail or "Could not download this video for analysis.", 422)
+
+
+def _is_tiktok_page_url(url: str) -> bool:
+    parsed = urlparse(url if "://" in url else f"https://{url}")
+    host = parsed.netloc.lower()
+    return "tiktok.com" in host and "/video/" in parsed.path
+
+
+def _clean_error_message(message: Any) -> str:
+    return ANSI_ESCAPE_RE.sub("", str(message or "")).strip()
 
 
 def _download_direct(url: str, output_path: str) -> int:
@@ -224,6 +305,7 @@ def _download_with_ytdlp(url: str, output_path_base: str) -> Dict[str, Any]:
         "outtmpl": outtmpl,
         "quiet": True,
         "no_warnings": True,
+        "noprogress": True,
         "noplaylist": True,
         "retries": 2,
         "socket_timeout": VIDEO_ANALYSIS_DOWNLOAD_TIMEOUT_SEC,
@@ -241,7 +323,7 @@ def _download_with_ytdlp(url: str, output_path_base: str) -> Dict[str, Any]:
             if not filepath:
                 filepath = ydl.prepare_filename(info)
     except Exception as exc:
-        raise VideoAnalysisError(f"yt-dlp could not resolve/download this TikTok URL: {exc}", 422) from exc
+        raise VideoAnalysisError(f"yt-dlp could not resolve/download this TikTok URL: {_clean_error_message(exc)}", 422) from exc
 
     if not filepath or not os.path.isfile(filepath):
         candidates = [
@@ -256,7 +338,97 @@ def _download_with_ytdlp(url: str, output_path_base: str) -> Dict[str, Any]:
     size = os.path.getsize(filepath)
     if size > max_bytes:
         raise VideoAnalysisError(f"Video exceeds the {VIDEO_ANALYSIS_MAX_DOWNLOAD_MB} MB analysis limit.", 413)
-    return {"path": filepath, "downloadedBytes": size, "method": "yt_dlp"}
+    return {"path": filepath, "downloadedBytes": size, "method": "yt_dlp", "resolvedUrl": url}
+
+
+def _download_tiktok_with_apify(url: str, output_path: str) -> Dict[str, Any]:
+    if not APIFY_TOKEN:
+        raise VideoAnalysisError("Apify fallback unavailable because APIFY_TOKEN is missing.", 503)
+
+    actor_ref = quote(APIFY_TIKTOK_ACTOR_ID.replace("/", "~"), safe="~")
+    endpoint = f"https://api.apify.com/v2/acts/{actor_ref}/run-sync-get-dataset-items"
+    params = {
+        "token": APIFY_TOKEN,
+        "clean": "true",
+        "format": "json",
+    }
+    payload = {
+        "postURLs": [url],
+        "maxItems": 1,
+        "resultsPerPage": 1,
+        "shouldDownloadVideos": True,
+        "shouldDownloadCovers": False,
+        "shouldDownloadSubtitles": False,
+        "shouldDownloadSlideshowImages": False,
+        "proxyConfiguration": {"useApifyProxy": True},
+    }
+    request = Request(
+        f"{endpoint}?{urlencode(params)}",
+        data=json.dumps(payload).encode("utf-8"),
+        headers={"Content-Type": "application/json", "Accept": "application/json"},
+        method="POST",
+    )
+    try:
+        with urlopen(request, timeout=max(TIKTOK_SCAN_TIMEOUT_SEC, VIDEO_ANALYSIS_DOWNLOAD_TIMEOUT_SEC)) as response:
+            items = json.loads(response.read().decode("utf-8") or "[]")
+    except HTTPError as exc:
+        raise VideoAnalysisError(f"Apify TikTok fallback failed ({exc.code}).", 422) from exc
+    except (URLError, TimeoutError, json.JSONDecodeError) as exc:
+        raise VideoAnalysisError(f"Apify TikTok fallback failed: {_clean_error_message(exc)}", 422) from exc
+
+    if not isinstance(items, list) or not items:
+        raise VideoAnalysisError("Apify TikTok fallback returned no video items.", 422)
+
+    media_urls = _extract_media_urls(items[0], original_url=url)
+    if not media_urls:
+        raise VideoAnalysisError("Apify TikTok fallback returned metadata but no playable media URL.", 422)
+
+    errors = []
+    for media_url in media_urls:
+        try:
+            downloaded_bytes = _download_direct(media_url, output_path)
+            return {
+                "path": output_path,
+                "downloadedBytes": downloaded_bytes,
+                "method": "apify_media_url",
+                "resolvedUrl": media_url,
+            }
+        except VideoAnalysisError as exc:
+            errors.append(exc.message)
+
+    detail = " | ".join(_clean_error_message(error) for error in errors if error)
+    raise VideoAnalysisError(f"Apify returned media URLs, but none were downloadable. {detail}", 422)
+
+
+def _extract_media_urls(item: Dict[str, Any], original_url: str = "") -> List[str]:
+    key_hints = {"downloadaddr", "playaddr", "mediaurl", "videourl", "video_url", "downloadurl"}
+    urls: List[str] = []
+    seen = set()
+
+    def visit(value: Any, key: str = "") -> None:
+        lowered_key = key.lower()
+        if isinstance(value, dict):
+            for child_key, child_value in value.items():
+                visit(child_value, str(child_key))
+            return
+        if isinstance(value, list):
+            for child_value in value:
+                visit(child_value, key)
+            return
+        if not isinstance(value, str) or not any(hint in lowered_key for hint in key_hints):
+            return
+        candidate = value.strip()
+        if not candidate.startswith("http"):
+            return
+        if candidate == original_url or _is_tiktok_page_url(candidate):
+            return
+        if candidate in seen:
+            return
+        urls.append(candidate)
+        seen.add(candidate)
+
+    visit(item)
+    return urls
 
 
 def _ffprobe(video_path: str) -> Dict[str, Any]:
@@ -331,6 +503,7 @@ def _scene_metrics(video_path: str) -> Dict[str, Any]:
         return {
             "scene_count": 1,
             "scene_change_count": 0,
+            "scene_timeline": [],
             "first_scene_change_sec": None,
             "first_scene_change_frame": None,
             "first_scene_duration_sec": None,
@@ -349,6 +522,7 @@ def _scene_metrics(video_path: str) -> Dict[str, Any]:
         return {
             "scene_count": 1,
             "scene_change_count": 0,
+            "scene_timeline": [],
             "first_scene_change_sec": None,
             "first_scene_change_frame": None,
             "first_scene_duration_sec": None,
@@ -362,6 +536,7 @@ def _scene_metrics(video_path: str) -> Dict[str, Any]:
         return {
             "scene_count": 1,
             "scene_change_count": 0,
+            "scene_timeline": _scene_timeline(scene_list),
             "first_scene_change_sec": None,
             "first_scene_change_frame": None,
             "first_scene_duration_sec": None,
@@ -375,6 +550,7 @@ def _scene_metrics(video_path: str) -> Dict[str, Any]:
     return {
         "scene_count": scene_count,
         "scene_change_count": scene_count - 1,
+        "scene_timeline": _scene_timeline(scene_list),
         "first_scene_change_sec": round(first_change_sec, 3),
         "first_scene_change_frame": first_scene_end.get_frames(),
         "first_scene_duration_sec": round(first_change_sec - first_scene_start.get_seconds(), 3),
@@ -382,6 +558,22 @@ def _scene_metrics(video_path: str) -> Dict[str, Any]:
         **_adjacent_scene_similarity(video_path, scene_list),
         "scene_detection_error": "",
     }
+
+
+def _scene_timeline(scene_list: List[Any]) -> List[Dict[str, Any]]:
+    timeline = []
+    for idx, (start, end) in enumerate(scene_list, start=1):
+        start_sec = start.get_seconds()
+        end_sec = end.get_seconds()
+        timeline.append({
+            "scene_index": idx,
+            "start_sec": round(start_sec, 3),
+            "end_sec": round(end_sec, 3),
+            "duration_sec": round(max(0.0, end_sec - start_sec), 3),
+            "start_frame": start.get_frames(),
+            "end_frame": end.get_frames(),
+        })
+    return timeline
 
 
 def _adjacent_scene_similarity(video_path: str, scene_list: List[Any]) -> Dict[str, Any]:
@@ -518,14 +710,29 @@ def _motion_metrics(frames: List[str], probe: Dict[str, Any], scene_metrics: Dic
     camera_score = min(1.0, avg_full * 5.0)
     character_score = max(0.0, min(1.0, (avg_center - (avg_full * 0.45)) * 5.0))
     total_movement = min(1.0, math.sqrt(avg_full) * 1.6) if avg_full else 0.0
-    difficulty_basis = (total_movement * 0.45) + (camera_score * 0.25) + (character_score * 0.30)
+    scene_count = scene_metrics.get("scene_count", 1)
+    scene_factor = min(1.0, max(0, scene_count - 1) / 5.0)
+    camera_choreo_factor = 0.0
+    if camera_score >= 0.65:
+        camera_choreo_factor = 0.25
+    if camera_score >= 0.85:
+        camera_choreo_factor = 0.4
+    recreation_basis = (
+        scene_factor * 0.42
+        + camera_choreo_factor
+        + min(1.0, character_score) * 0.18
+        + min(1.0, total_movement) * 0.12
+    )
+    motion_amount = _movement_label(total_movement)
+    recreation_difficulty = _difficulty_label(recreation_basis)
     return {
         "duration_sec": probe.get("duration_sec", 0),
         "fps": probe.get("fps", 0),
         "estimated_total_frame_count": probe.get("estimated_total_frame_count", 0),
         "sampled_frame_count": len(frames),
-        "scene_count": scene_metrics.get("scene_count", 1),
+        "scene_count": scene_count,
         "scene_change_count": scene_metrics.get("scene_change_count", 0),
+        "scene_timeline": scene_metrics.get("scene_timeline", []),
         "first_scene_change_sec": scene_metrics.get("first_scene_change_sec"),
         "first_scene_change_frame": scene_metrics.get("first_scene_change_frame"),
         "first_scene_duration_sec": scene_metrics.get("first_scene_duration_sec"),
@@ -546,7 +753,10 @@ def _motion_metrics(frames: List[str], probe: Dict[str, Any], scene_metrics: Dic
         "total_frame_movement": round(total_movement, 4),
         "camera_movement_score": round(camera_score, 4),
         "character_movement_score": round(character_score, 4),
-        "motion_difficulty": _difficulty_label(difficulty_basis),
+        "motion_amount": motion_amount,
+        "recreation_difficulty_score": round(recreation_basis, 4),
+        "recreation_difficulty": recreation_difficulty,
+        "motion_difficulty": recreation_difficulty,
     }
 
 
@@ -560,6 +770,18 @@ def _difficulty_label(score: float) -> str:
     if score < 0.74:
         return "hard"
     return "very_hard"
+
+
+def _movement_label(score: float) -> str:
+    if score < 0.18:
+        return "very_low"
+    if score < 0.34:
+        return "low"
+    if score < 0.54:
+        return "medium"
+    if score < 0.74:
+        return "high"
+    return "very_high"
 
 
 def _representative_frames(frames: List[str], count: int = 4) -> List[str]:
@@ -588,6 +810,8 @@ def _json_schema() -> Dict[str, Any]:
                 "scene_type": {"type": "string", "enum": SCENE_VALUES},
                 "camera_movement": {"type": "string", "enum": CAMERA_VALUES},
                 "visual_pattern": {"type": "string", "enum": VISUAL_VALUES},
+                "motion_amount": {"type": "string", "enum": MOVEMENT_AMOUNT_VALUES},
+                "recreation_difficulty": {"type": "string", "enum": MOTION_DIFFICULTY_VALUES},
                 "motion_difficulty": {"type": "string", "enum": MOTION_DIFFICULTY_VALUES},
                 "content_pillar": {"type": "string", "enum": CONTENT_PILLAR_VALUES},
                 "pillar_role": {"type": "string", "enum": PILLAR_ROLE_VALUES},
@@ -631,8 +855,9 @@ def _json_schema() -> Dict[str, Any]:
             },
             "required": [
                 "niche", "sub_niche", "format", "hook_type", "scene_type", "camera_movement",
-                "visual_pattern", "motion_difficulty", "content_pillar", "pillar_role",
-                "account_archetype", "account_voice", "audience_stage", "audience_identity",
+                "visual_pattern", "motion_amount", "recreation_difficulty", "motion_difficulty",
+                "content_pillar", "pillar_role", "account_archetype", "account_voice",
+                "audience_stage", "audience_identity",
                 "funnel_stage", "campaign_use", "conversion_intent", "cta_type",
                 "product_integration_type", "product_visibility", "product_fit", "demo_depth",
                 "creative_template", "script_structure", "repeatability", "production_complexity",
@@ -665,10 +890,14 @@ def _tag_with_openai(video_reference: Dict[str, Any], motion_metrics: Dict[str, 
     ]
     taxonomy_text = json.dumps({
         "sub_niches_by_niche": SUB_NICHE_VALUES,
+        "formats": FORMAT_VALUES,
+        "hook_types": HOOK_VALUES,
+        "visual_patterns": VISUAL_VALUES,
         "content_pillars": CONTENT_PILLAR_VALUES,
         "account_archetypes": ACCOUNT_ARCHETYPE_VALUES,
         "campaign_uses": CAMPAIGN_USE_VALUES,
         "creative_templates": CREATIVE_TEMPLATE_VALUES,
+        "script_structures": SCRIPT_STRUCTURE_VALUES,
     }, indent=2)
     content = [
         {
@@ -678,6 +907,13 @@ def _tag_with_openai(video_reference: Dict[str, Any], motion_metrics: Dict[str, 
                 "Also tag it for account strategy and campaign composition planning. "
                 "Pick sub_niche from the group matching niche; use other if uncertain. "
                 "Scores are 0 to 1. Use content_pillar as the primary account mix bucket.\n\n"
+                "Important definitions:\n"
+                "- talking_head means a person is visibly speaking or presenting to camera. Do not use it just because a face is visible.\n"
+                "- before_after requires two distinct states, edits, or explicit transformation proof. Do not use it for a single physique, outfit, or product showcase.\n"
+                "- bold_claim requires an explicit spoken, caption, or text claim. If the hook is mainly the visual, use visual_body_hook, visual_reveal, aesthetic_hook, or no_explicit_hook.\n"
+                "- motion_amount is visible movement. recreation_difficulty is how hard the clip is to recreate for a campaign. A one-scene mirror/body clip can have medium/high visible movement but easy recreation.\n"
+                "- Prefer visual_only or audio_only_visual when there is no evidence of a spoken script, tutorial, or story arc.\n"
+                "- Use mirror_body_showcase/body_check/physique_showcase for physique, outfit, body check, flexing, or mirror pose clips that are primarily visual.\n\n"
                 f"Campaign taxonomy hints:\n{taxonomy_text}\n\n"
                 f"Metadata:\n{json.dumps(_metadata_for_prompt(video_reference), indent=2)}\n\n"
                 f"Local motion metrics:\n{json.dumps(motion_metrics, indent=2)}"
@@ -732,6 +968,8 @@ def _normalize_tags(tags: Dict[str, Any], motion_metrics: Dict[str, Any]) -> Dic
         ("scene_type", SCENE_VALUES),
         ("camera_movement", CAMERA_VALUES),
         ("visual_pattern", VISUAL_VALUES),
+        ("motion_amount", MOVEMENT_AMOUNT_VALUES),
+        ("recreation_difficulty", MOTION_DIFFICULTY_VALUES),
         ("motion_difficulty", MOTION_DIFFICULTY_VALUES),
         ("content_pillar", CONTENT_PILLAR_VALUES),
         ("pillar_role", PILLAR_ROLE_VALUES),
@@ -765,12 +1003,70 @@ def _normalize_tags(tags: Dict[str, Any], motion_metrics: Dict[str, Any]) -> Dic
         item for item in requirements
         if item in ASSET_REQUIREMENT_VALUES
     ]
-    if motion_metrics.get("motion_difficulty") in MOTION_DIFFICULTY_VALUES:
-        normalized["motion_difficulty"] = motion_metrics["motion_difficulty"]
+    if motion_metrics.get("motion_amount") in MOVEMENT_AMOUNT_VALUES:
+        normalized["motion_amount"] = motion_metrics["motion_amount"]
+    if motion_metrics.get("recreation_difficulty") in MOTION_DIFFICULTY_VALUES:
+        normalized["recreation_difficulty"] = motion_metrics["recreation_difficulty"]
+        normalized["motion_difficulty"] = motion_metrics["recreation_difficulty"]
+    normalized = _apply_tag_guardrails(normalized, motion_metrics)
     for score_field in SCORE_FIELDS:
         normalized[score_field] = max(0.0, min(1.0, _safe_float(normalized.get(score_field), 0.0)))
     normalized["ai_confidence"] = max(0.0, min(1.0, _safe_float(normalized.get("ai_confidence"), 0.0)))
     return normalized
+
+
+def _apply_tag_guardrails(tags: Dict[str, Any], motion_metrics: Dict[str, Any]) -> Dict[str, Any]:
+    normalized = dict(tags)
+    scene_count = int(_safe_float(motion_metrics.get("scene_count"), 1))
+    scene_change_count = int(_safe_float(motion_metrics.get("scene_change_count"), 0))
+    static_or_light_camera = normalized.get("camera_movement") in {"static", "handheld_light"}
+    visual_only = normalized.get("script_structure") in {"visual_only", "audio_only_visual", "text_overlay_only"}
+    mirror_or_body = (
+        normalized.get("scene_type") == "bathroom_mirror"
+        or normalized.get("visual_pattern") in {"mirror_shot", "body_focus", "pose_sequence", "outfit_check"}
+        or "body" in (normalized.get("asset_requirements") or [])
+    )
+
+    if normalized.get("format") == "talking_head" and visual_only:
+        normalized["format"] = "mirror_body_showcase" if mirror_or_body else "visual_showcase"
+
+    if mirror_or_body and visual_only:
+        if normalized.get("format") in {"talking_head", "hook_demo", "other"}:
+            normalized["format"] = "mirror_body_showcase"
+        if normalized.get("visual_pattern") == "face_to_camera":
+            normalized["visual_pattern"] = "mirror_shot" if normalized.get("scene_type") == "bathroom_mirror" else "body_focus"
+        if normalized.get("creative_template") in {"before_after", "hook_then_demo", "problem_then_solution"}:
+            normalized["creative_template"] = "body_check"
+        if normalized.get("hook_type") in {"bold_claim", "problem_callout", "relatable_story", "question"}:
+            normalized["hook_type"] = "visual_body_hook"
+        normalized["requires_voiceover"] = "no"
+
+    if normalized.get("creative_template") == "before_after" and scene_count <= 1:
+        normalized["creative_template"] = "comparison_reveal" if normalized.get("format") == "comparison" else "visual_showcase"
+    if normalized.get("hook_type") == "before_after" and scene_count <= 1:
+        normalized["hook_type"] = "visual_reveal" if mirror_or_body else "no_explicit_hook"
+
+    if normalized.get("hook_type") == "bold_claim" and visual_only and normalized.get("requires_text_overlay") == "none":
+        normalized["hook_type"] = "visual_body_hook" if mirror_or_body else "aesthetic_hook"
+
+    if scene_count <= 1 and static_or_light_camera and normalized.get("production_complexity") == "high":
+        normalized["production_complexity"] = "low" if visual_only else "medium"
+
+    if scene_count <= 1 and scene_change_count == 0 and static_or_light_camera and visual_only:
+        normalized["recreation_difficulty"] = _easier_label(normalized.get("recreation_difficulty"), ceiling="easy")
+        normalized["motion_difficulty"] = normalized["recreation_difficulty"]
+        normalized["production_ease_score"] = max(_safe_float(normalized.get("production_ease_score"), 0.0), 0.75)
+        if normalized.get("repeatability") == "one_off":
+            normalized["repeatability"] = "template_reusable"
+        normalized["repeatability_score"] = max(_safe_float(normalized.get("repeatability_score"), 0.0), 0.7)
+
+    return normalized
+
+
+def _easier_label(value: Any, ceiling: str = "medium") -> str:
+    order = ["very_easy", "easy", "medium", "hard", "very_hard"]
+    current = value if value in order else "medium"
+    return order[min(order.index(current), order.index(ceiling))]
 
 
 def analyze_video_reference(video_reference: Dict[str, Any]) -> Dict[str, Any]:
@@ -783,7 +1079,7 @@ def analyze_video_reference(video_reference: Dict[str, Any]) -> Dict[str, Any]:
     frame_paths: List[str] = []
 
     try:
-        download = _download_video(_source_url(video_reference), video_path)
+        download = _download_video(video_reference, video_path)
         downloaded_path = download["path"]
         probe = _ffprobe(downloaded_path)
         scene_metrics = _scene_metrics(downloaded_path)

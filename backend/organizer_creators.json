@@ -20,5 +20,60 @@
     ],
     "updatedAt": "2026-05-09T06:15:06.787314+00:00",
     "createdAt": "2026-05-09T06:15:06.787314+00:00"
+  },
+  "tiktok_katelynnnmtz": {
+    "id": "tiktok_katelynnnmtz",
+    "platform": "tiktok",
+    "handle": "katelynnnmtz",
+    "displayName": "",
+    "sourceScanIds": [
+      "tt_9a9cfeb5eba7"
+    ],
+    "updatedAt": "2026-05-09T06:30:00.172211+00:00",
+    "createdAt": "2026-05-09T06:30:00.172211+00:00"
+  },
+  "tiktok_amelie.desai": {
+    "id": "tiktok_amelie.desai",
+    "platform": "tiktok",
+    "handle": "amelie.desai",
+    "displayName": "",
+    "sourceScanIds": [
+      "tt_d0b160edad71"
+    ],
+    "updatedAt": "2026-05-09T06:38:25.107957+00:00",
+    "createdAt": "2026-05-09T06:38:25.107957+00:00"
+  },
+  "tiktok_yjn.a": {
+    "id": "tiktok_yjn.a",
+    "platform": "tiktok",
+    "handle": "yjn.a",
+    "displayName": "",
+    "sourceScanIds": [
+      "tt_0d32f630c7c3"
+    ],
+    "updatedAt": "2026-05-09T15:43:47.365441+00:00",
+    "createdAt": "2026-05-09T15:43:47.365441+00:00"
+  },
+  "tiktok_benjamincogan": {
+    "id": "tiktok_benjamincogan",
+    "platform": "tiktok",
+    "handle": "benjamincogan",
+    "displayName": "",
+    "sourceScanIds": [
+      "tt_379e7b53c5eb"
+    ],
+    "updatedAt": "2026-05-09T15:47:24.690148+00:00",
+    "createdAt": "2026-05-09T15:47:24.690148+00:00"
+  },
+  "tiktok_sophc.studies": {
+    "id": "tiktok_sophc.studies",
+    "platform": "tiktok",
+    "handle": "sophc.studies",
+    "displayName": "",
+    "sourceScanIds": [
+      "tt_1f2f33c19ebd"
+    ],
+    "updatedAt": "2026-05-09T15:49:00.814168+00:00",
+    "createdAt": "2026-05-09T15:49:00.814168+00:00"
   }
 }

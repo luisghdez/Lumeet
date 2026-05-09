@@ -203,7 +203,13 @@ function BatchVideoRow({ video, onReview, onAnalyze, isUpdating, isAnalyzing }) 
                     Camera: {tagValue(tags.camera_movement)}
                   </span>
                   <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
-                    Motion: {tagValue(tags.motion_difficulty)}
+                    Visual: {tagValue(tags.visual_pattern)}
+                  </span>
+                  <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
+                    Movement: {tagValue(tags.motion_amount)}
+                  </span>
+                  <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
+                    Difficulty: {tagValue(tags.recreation_difficulty || tags.motion_difficulty)}
                   </span>
                   <span className="rounded-full bg-amber-400/15 px-2 py-1 text-[11px] font-semibold text-amber-100">
                     Pillar: {tagValue(tags.content_pillar)}
@@ -219,6 +225,9 @@ function BatchVideoRow({ video, onReview, onAnalyze, isUpdating, isAnalyzing }) 
                   </span>
                   <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
                     Template: {tagValue(tags.creative_template)}
+                  </span>
+                  <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
+                    Script: {tagValue(tags.script_structure)}
                   </span>
                 </div>
                 <div className="mt-3 grid grid-cols-2 gap-2 md:grid-cols-4">
@@ -239,6 +248,26 @@ function BatchVideoRow({ video, onReview, onAnalyze, isUpdating, isAnalyzing }) 
                     <p className="mt-0.5 text-xs font-semibold text-white">{metricValue(motion.character_movement_score)}</p>
                   </div>
                 </div>
+                {(motion.scene_timeline || []).length > 1 && (
+                  <div className="mt-2 rounded-xl bg-black/20 p-2">
+                    <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Scene timing</p>
+                    <div className="mt-1 flex flex-wrap gap-1">
+                      {(motion.scene_timeline || []).slice(0, 8).map((scene) => (
+                        <span
+                          key={scene.scene_index}
+                          className="rounded-full bg-white/10 px-2 py-0.5 text-[11px] text-white/50"
+                        >
+                          {`S${scene.scene_index}: ${formatDuration(scene.start_sec)}-${formatDuration(scene.end_sec)} (${formatDuration(scene.duration_sec)})`}
+                        </span>
+                      ))}
+                      {(motion.scene_timeline || []).length > 8 && (
+                        <span className="rounded-full bg-white/10 px-2 py-0.5 text-[11px] text-white/40">
+                          +{(motion.scene_timeline || []).length - 8} more
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                )}
                 {motion.first_two_scene_similarity_score !== undefined && motion.first_two_scene_similarity_score !== null && (
                   <div className="mt-2 rounded-xl bg-black/20 p-2">
                     <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Scene similarity</p>
@@ -312,6 +341,7 @@ function OrganizerBatches({ initialBatchId = '', onClearInitialBatch }) {
   const [batchAnalyzeLimit, setBatchAnalyzeLimit] = useState(5);
   const [pillarFilter, setPillarFilter] = useState('all');
   const [funnelFilter, setFunnelFilter] = useState('all');
+  const [formatFilter, setFormatFilter] = useState('all');
   const [error, setError] = useState('');
 
   const loadBatches = useCallback(async () => {
@@ -370,16 +400,21 @@ function OrganizerBatches({ initialBatchId = '', onClearInitialBatch }) {
   const availableFunnels = useMemo(() => (
     [...new Set(selectedVideos.map((video) => getVideoTags(video).funnel_stage).filter(Boolean))].sort()
   ), [selectedVideos]);
+  const availableFormats = useMemo(() => (
+    [...new Set(selectedVideos.map((video) => getVideoTags(video).format).filter(Boolean))].sort()
+  ), [selectedVideos]);
   const filteredVideos = useMemo(() => (
     selectedVideos.filter((video) => {
       const tags = getVideoTags(video);
       const pillarOk = pillarFilter === 'all' || tags.content_pillar === pillarFilter;
       const funnelOk = funnelFilter === 'all' || tags.funnel_stage === funnelFilter;
-      return pillarOk && funnelOk;
+      const formatOk = formatFilter === 'all' || tags.format === formatFilter;
+      return pillarOk && funnelOk && formatOk;
     })
-  ), [selectedVideos, pillarFilter, funnelFilter]);
+  ), [selectedVideos, pillarFilter, funnelFilter, formatFilter]);
   const contentPillarMix = useMemo(() => summarizeByTag(selectedVideos, 'content_pillar'), [selectedVideos]);
   const funnelMix = useMemo(() => summarizeByTag(selectedVideos, 'funnel_stage'), [selectedVideos]);
+  const formatMix = useMemo(() => summarizeByTag(selectedVideos, 'format'), [selectedVideos]);
 
   const handleReview = async (videoReferenceId, approvalStatus) => {
     setUpdatingVideoId(videoReferenceId);
@@ -519,7 +554,7 @@ function OrganizerBatches({ initialBatchId = '', onClearInitialBatch }) {
                 </div>
               </div>
 
-              <div className="mb-5 grid gap-3 lg:grid-cols-2">
+              <div className="mb-5 grid gap-3 lg:grid-cols-3">
                 <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-4">
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/35">
                     Content Pillar Mix
@@ -539,6 +574,18 @@ function OrganizerBatches({ initialBatchId = '', onClearInitialBatch }) {
                   <div className="mt-3 flex flex-wrap gap-2">
                     {funnelMix.slice(0, 6).map((item) => (
                       <span key={item.id} className="rounded-full bg-cyan-400/15 px-3 py-1.5 text-xs font-semibold text-cyan-100">
+                        {tagValue(item.id)} {item.percentage}%
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/35">
+                    Format Mix
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {formatMix.slice(0, 6).map((item) => (
+                      <span key={item.id} className="rounded-full bg-purple-400/15 px-3 py-1.5 text-xs font-semibold text-purple-100">
                         {tagValue(item.id)} {item.percentage}%
                       </span>
                     ))}
@@ -575,6 +622,16 @@ function OrganizerBatches({ initialBatchId = '', onClearInitialBatch }) {
                       <option value="all">All funnel</option>
                       {availableFunnels.map((funnel) => (
                         <option key={funnel} value={funnel}>{tagValue(funnel)}</option>
+                      ))}
+                    </select>
+                    <select
+                      value={formatFilter}
+                      onChange={(event) => setFormatFilter(event.target.value)}
+                      className="rounded-full border border-white/10 bg-white/10 px-3 py-2 text-xs font-semibold text-white/70 outline-none"
+                    >
+                      <option value="all">All formats</option>
+                      {availableFormats.map((format) => (
+                        <option key={format} value={format}>{tagValue(format)}</option>
                       ))}
                     </select>
                     <label className="flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs text-white/55">
