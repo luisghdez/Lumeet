@@ -49,6 +49,11 @@ from tiktok_import_store import tiktok_import_store
 from tiktok_organizer_service import scan_tiktok_account, TikTokOrganizerError
 from organizer_store import APPROVAL_STATUSES, organizer_store
 from video_analysis_service import analyze_video_reference, VideoAnalysisError
+from account_planner_service import (
+    AccountPlannerError,
+    generate_account_plan,
+    list_archetypes as list_account_planner_archetypes,
+)
 from config import (
     PUBLIC_BACKEND_BASE_URL,
     GCS_VIDEO_OBJECT_PREFIX,
@@ -137,6 +142,12 @@ class OrganizerReviewStatusRequest(BaseModel):
 class OrganizerBatchAnalyzeRequest(BaseModel):
     limit: int = Field(default=5, ge=1, le=25)
     retryFailed: bool = False
+
+
+class AccountPlannerCreateRequest(BaseModel):
+    archetype: str = Field(default="studytok", pattern=r"^studytok$")
+    postCount: int = Field(default=10, ge=1, le=20)
+    batchId: str = Field(default="", max_length=120)
 
 
 # ---------------------------------------------------------------------------
@@ -902,6 +913,29 @@ async def analyze_organizer_batch(batch_id: str, payload: OrganizerBatchAnalyzeR
         "attempted": len(results),
         "results": results,
     }
+
+
+# ---------------------------------------------------------------------------
+# Account Planner Endpoints
+# ---------------------------------------------------------------------------
+
+@app.get("/api/account-planner/archetypes")
+async def get_account_planner_archetypes():
+    """List account archetypes available for planner generation."""
+    return list_account_planner_archetypes()
+
+
+@app.post("/api/account-planner/plans")
+async def create_account_plan(payload: AccountPlannerCreateRequest):
+    """Generate a deterministic account content plan from tagged inspo videos."""
+    try:
+        return generate_account_plan(
+            archetype=payload.archetype,
+            post_count=payload.postCount,
+            batch_id=payload.batchId,
+        )
+    except AccountPlannerError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
 
 
 # ---------------------------------------------------------------------------

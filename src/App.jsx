@@ -10,6 +10,7 @@ import {
   Megaphone,
   Search,
   Layers,
+  Sparkles,
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
@@ -23,6 +24,7 @@ import ScheduleModal from './components/ScheduleModal';
 import ScheduledPosts from './components/ScheduledPosts';
 import TikTokAccountImporter from './components/TikTokAccountImporter';
 import OrganizerBatches from './components/OrganizerBatches';
+import AccountPlanner from './components/AccountPlanner';
 import Wordmark from './components/ui/Wordmark';
 
 const SIDEBAR_COLLAPSED_KEY = 'lumeet-sidebar-collapsed';
@@ -80,6 +82,7 @@ function App() {
     // { id: 'messages', label: 'Messages', icon: MessageSquare },
     { id: 'import', label: 'Import', icon: Search },
     { id: 'batches', label: 'Batches', icon: Layers },
+    { id: 'planner', label: 'Planner', icon: Sparkles },
     { id: 'create', label: 'Create', icon: Plus },
     { id: 'campaign', label: 'Campaign', icon: Megaphone },
     // { id: 'variant-lab', label: 'Variant Lab', icon: Video },
@@ -282,6 +285,8 @@ function App() {
             initialBatchId={focusBatchId}
             onClearInitialBatch={() => setFocusBatchId('')}
           />
+        ) : activeTab === 'planner' ? (
+          <AccountPlanner />
         ) : activeTab === 'campaign' ? (
           <CampaignStudio />
         ) : activeTab === 'variant-lab' ? (

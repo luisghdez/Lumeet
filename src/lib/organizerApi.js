@@ -64,3 +64,15 @@ export async function analyzeOrganizerBatch({ batchId, limit = 5, retryFailed = 
     body: JSON.stringify({ limit, retryFailed }),
   });
 }
+
+export async function listAccountPlannerArchetypes() {
+  return request('/api/account-planner/archetypes');
+}
+
+export async function createAccountPlan({ archetype = 'studytok', postCount = 10, batchId = '' } = {}) {
+  return request('/api/account-planner/plans', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ archetype, postCount, batchId }),
+  });
+}
