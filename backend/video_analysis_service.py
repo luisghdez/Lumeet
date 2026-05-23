@@ -93,6 +93,20 @@ SUB_NICHE_VALUES = {
     "tech_apps": ["app_demo", "software_tutorial", "ai_tool", "phone_setup", "gadget", "other"],
     "entertainment": ["comedy", "skit", "reaction", "storytime", "trend", "other"],
 }
+STUDY_CONTENT_TYPE_VALUES = [
+    "not_study", "study_tip", "relatable_student_problem", "app_promo",
+    "app_demo", "routine", "exam_prep", "productivity_hack", "motivation",
+    "note_taking", "flashcards", "ai_study_tool", "study_aesthetic", "other",
+]
+STUDY_PAIN_POINT_VALUES = [
+    "none", "procrastination", "low_focus", "exam_stress", "too_much_content",
+    "memorization", "bad_grades", "study_schedule", "note_organization",
+    "burnout", "other",
+]
+STUDY_OUTCOME_VALUES = [
+    "none", "better_grades", "study_faster", "remember_more", "save_time",
+    "reduce_stress", "stay_consistent", "other",
+]
 CONTENT_PILLAR_VALUES = [
     "relatable_lifestyle", "routine_explainer", "meal_prep_food", "product_demo", "app_demo",
     "transformation_progress", "educational_tips", "myth_busting", "review_testimonial",
@@ -223,6 +237,7 @@ def _download_video(video_reference: Dict[str, Any], output_path: str) -> Dict[s
     errors = []
     candidates = _candidate_source_urls(video_reference)
     tiktok_page_url = next((url for url in candidates if _is_tiktok_page_url(url)), "")
+    tiktok_url = next((url for url in candidates if _is_tiktok_url(url)), "")
 
     for url in candidates:
         try:
@@ -232,15 +247,15 @@ def _download_video(video_reference: Dict[str, Any], output_path: str) -> Dict[s
             errors.append(exc.message)
             if "returned HTML" not in exc.message and "download failed" not in exc.message.lower():
                 continue
-        if _is_tiktok_page_url(url):
+        if _is_tiktok_url(url):
             try:
                 return _download_with_ytdlp(url, output_path)
             except VideoAnalysisError as exc:
                 errors.append(exc.message)
 
-    if tiktok_page_url:
+    if tiktok_page_url or tiktok_url:
         try:
-            return _download_tiktok_with_apify(tiktok_page_url, output_path)
+            return _download_tiktok_with_apify(tiktok_page_url or tiktok_url, output_path)
         except VideoAnalysisError as exc:
             errors.append(exc.message)
 
@@ -254,18 +269,26 @@ def _is_tiktok_page_url(url: str) -> bool:
     return "tiktok.com" in host and "/video/" in parsed.path
 
 
+def _is_tiktok_url(url: str) -> bool:
+    parsed = urlparse(url if "://" in url else f"https://{url}")
+    return "tiktok.com" in parsed.netloc.lower()
+
+
 def _clean_error_message(message: Any) -> str:
     return ANSI_ESCAPE_RE.sub("", str(message or "")).strip()
 
 
-def _download_direct(url: str, output_path: str) -> int:
+def _download_direct(url: str, output_path: str, referer: str = "") -> int:
     max_bytes = max(1, VIDEO_ANALYSIS_MAX_DOWNLOAD_MB) * 1024 * 1024
+    headers = {
+        "User-Agent": "Mozilla/5.0 (compatible; LumeetVideoAnalysis/1.0)",
+        "Accept": "video/*,*/*;q=0.8",
+    }
+    if referer:
+        headers["Referer"] = referer
     request = Request(
         url,
-        headers={
-            "User-Agent": "Mozilla/5.0 (compatible; LumeetVideoAnalysis/1.0)",
-            "Accept": "video/*,*/*;q=0.8",
-        },
+        headers=headers,
     )
     total = 0
     try:
@@ -401,7 +424,16 @@ def _download_tiktok_with_apify(url: str, output_path: str) -> Dict[str, Any]:
                 "resolvedUrl": media_url,
             }
         except VideoAnalysisError as exc:
-            errors.append(exc.message)
+            try:
+                downloaded_bytes = _download_direct(media_url, output_path, referer=url or "https://www.tiktok.com/")
+                return {
+                    "path": output_path,
+                    "downloadedBytes": downloaded_bytes,
+                    "method": "apify_media_url",
+                    "resolvedUrl": media_url,
+                }
+            except VideoAnalysisError as retry_exc:
+                errors.append(f"{exc.message}; retry with referer failed: {retry_exc.message}")
 
     detail = " | ".join(_clean_error_message(error) for error in errors if error)
     raise VideoAnalysisError(f"Apify returned media URLs, but none were downloadable. {detail}", 422)
@@ -849,6 +881,10 @@ def _json_schema() -> Dict[str, Any]:
             "properties": {
                 "niche": {"type": "string", "enum": NICHE_VALUES},
                 "sub_niche": {"type": "string"},
+                "study_content_type": {"type": "string", "enum": STUDY_CONTENT_TYPE_VALUES},
+                "study_pain_point": {"type": "string", "enum": STUDY_PAIN_POINT_VALUES},
+                "study_outcome_promise": {"type": "string", "enum": STUDY_OUTCOME_VALUES},
+                "duration_sec": {"type": "number"},
                 "format": {"type": "string", "enum": FORMAT_VALUES},
                 "hook_type": {"type": "string", "enum": HOOK_VALUES},
                 "scene_type": {"type": "string", "enum": SCENE_VALUES},
@@ -942,7 +978,8 @@ def _json_schema() -> Dict[str, Any]:
                 "ai_confidence": {"type": "number", "minimum": 0, "maximum": 1},
             },
             "required": [
-                "niche", "sub_niche", "format", "hook_type", "scene_type", "camera_movement",
+                "niche", "sub_niche", "study_content_type", "study_pain_point",
+                "study_outcome_promise", "duration_sec", "format", "hook_type", "scene_type", "camera_movement",
                 "visual_pattern", "motion_amount", "recreation_difficulty", "motion_difficulty",
                 "content_pillar", "pillar_role", "account_archetype", "account_voice",
                 "audience_stage", "audience_identity",
@@ -983,6 +1020,9 @@ def _tag_with_openai(video_reference: Dict[str, Any], motion_metrics: Dict[str, 
     ]
     taxonomy_text = json.dumps({
         "sub_niches_by_niche": SUB_NICHE_VALUES,
+        "study_content_types": STUDY_CONTENT_TYPE_VALUES,
+        "study_pain_points": STUDY_PAIN_POINT_VALUES,
+        "study_outcome_promises": STUDY_OUTCOME_VALUES,
         "formats": FORMAT_VALUES,
         "hook_types": HOOK_VALUES,
         "scene_roles": SCENE_ROLE_VALUES,
@@ -1010,6 +1050,12 @@ def _tag_with_openai(video_reference: Dict[str, Any], motion_metrics: Dict[str, 
                 "- motion_amount is visible movement. recreation_difficulty is how hard the clip is to recreate for a campaign. A one-scene mirror/body clip can have medium/high visible movement but easy recreation.\n"
                 "- Prefer visual_only or audio_only_visual when there is no evidence of a spoken script, tutorial, or story arc.\n"
                 "- Use mirror_body_showcase/body_check/physique_showcase for physique, outfit, body check, flexing, or mirror pose clips that are primarily visual.\n\n"
+                "Study influencer rules:\n"
+                "- For education/study/productivity videos, always classify study_content_type, study_pain_point, and study_outcome_promise.\n"
+                "- Use relatable_student_problem for student-life pain point content, even when the product is only mentioned in text.\n"
+                "- Use app_demo or app_promo when an app is shown, named, or promoted; app_demo requires visible app/interface walkthrough, app_promo can be mention-only.\n"
+                "- Use not_study and none for study fields when the video is not study-related.\n"
+                "- duration_sec must reflect the local motion metric duration, not an estimate from the caption.\n\n"
                 "Product mention rules:\n"
                 "- Extract every visible, captioned, or spoken product/app/brand name into mentioned_products.\n"
                 "- If a long text overlay includes an app or brand name, set primary_product_name to that name and product_mention_type to text_overlay.\n"
@@ -1071,6 +1117,9 @@ def _normalize_tags(tags: Dict[str, Any], motion_metrics: Dict[str, Any]) -> Dic
     if normalized.get("sub_niche") not in allowed_subs:
         normalized["sub_niche"] = "other"
     for key, allowed in [
+        ("study_content_type", STUDY_CONTENT_TYPE_VALUES),
+        ("study_pain_point", STUDY_PAIN_POINT_VALUES),
+        ("study_outcome_promise", STUDY_OUTCOME_VALUES),
         ("format", FORMAT_VALUES),
         ("hook_type", HOOK_VALUES),
         ("scene_type", SCENE_VALUES),
@@ -1126,6 +1175,7 @@ def _normalize_tags(tags: Dict[str, Any], motion_metrics: Dict[str, Any]) -> Dic
     normalized = _sync_scene_role_summary(normalized, motion_metrics)
     if motion_metrics.get("motion_amount") in MOVEMENT_AMOUNT_VALUES:
         normalized["motion_amount"] = motion_metrics["motion_amount"]
+    normalized["duration_sec"] = _safe_float(motion_metrics.get("duration_sec"), _safe_float(normalized.get("duration_sec"), 0.0))
     if motion_metrics.get("recreation_difficulty") in MOTION_DIFFICULTY_VALUES:
         normalized["recreation_difficulty"] = motion_metrics["recreation_difficulty"]
         normalized["motion_difficulty"] = motion_metrics["recreation_difficulty"]
@@ -1140,6 +1190,16 @@ def _sync_product_mention_summary(tags: Dict[str, Any]) -> Dict[str, Any]:
     normalized = dict(tags)
     products = normalized.get("mentioned_products") if isinstance(normalized.get("mentioned_products"), list) else []
     primary = products[0] if products else {}
+    if not products and normalized.get("primary_product_name"):
+        primary = {
+            "name": normalized.get("primary_product_name", ""),
+            "product_type": normalized.get("primary_product_type", "unknown"),
+            "mention_type": normalized.get("product_mention_type", "none"),
+            "context": normalized.get("product_mention_context", ""),
+            "confidence": 0.75,
+        }
+        products = [primary]
+        normalized["mentioned_products"] = products
     if not normalized.get("primary_product_name") and primary:
         normalized["primary_product_name"] = primary.get("name", "")
     if normalized.get("primary_product_type") == "unknown" and primary:
@@ -1276,6 +1336,36 @@ def _sync_scene_role_summary(tags: Dict[str, Any], motion_metrics: Dict[str, Any
     if cta_roles and normalized.get("cta_type") in {"download_app", "try_free", "shop_now"}:
         normalized["funnel_stage"] = "conversion"
         normalized["conversion_intent"] = "hard_sell"
+    normalized = _sync_study_summary(normalized)
+    return normalized
+
+
+def _sync_study_summary(tags: Dict[str, Any]) -> Dict[str, Any]:
+    normalized = dict(tags)
+    is_study = normalized.get("niche") in {"education", "productivity", "tech_apps"} or normalized.get("account_archetype") in {
+        "study_productivity_creator", "education_app_creator", "tech_tool_creator",
+    }
+    has_app_mention = normalized.get("primary_product_type") == "app" or "app_screen" in (normalized.get("asset_requirements") or [])
+    if not is_study:
+        normalized["study_content_type"] = "not_study"
+        if normalized.get("study_pain_point") not in STUDY_PAIN_POINT_VALUES:
+            normalized["study_pain_point"] = "none"
+        if normalized.get("study_outcome_promise") not in STUDY_OUTCOME_VALUES:
+            normalized["study_outcome_promise"] = "none"
+        return normalized
+
+    if normalized.get("study_content_type") == "not_study":
+        normalized["study_content_type"] = "app_demo" if normalized.get("demo_depth") != "none" and has_app_mention else "study_tip"
+    if has_app_mention and normalized.get("product_integration_type") == "demo_core":
+        normalized["study_content_type"] = "app_demo"
+    elif (
+        has_app_mention
+        and normalized.get("product_integration_type") in {"mentioned_only", "shown_briefly"}
+        and normalized.get("study_content_type") in {"not_study", "other", "study_tip"}
+    ):
+        normalized["study_content_type"] = "app_promo"
+    if normalized.get("content_pillar") == "relatable_lifestyle" and normalized.get("study_content_type") in {"study_tip", "other"}:
+        normalized["study_content_type"] = "relatable_student_problem"
     return normalized
 
 

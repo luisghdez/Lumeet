@@ -82,6 +82,19 @@ function summarizeByTag(videos, tagKey) {
     .sort((a, b) => b.count - a.count);
 }
 
+function summarizeDuration(videos) {
+  const durations = videos
+    .map((video) => Number(getVideoTags(video).duration_sec || video.durationSec))
+    .filter((value) => Number.isFinite(value) && value >= 0);
+  if (!durations.length) return { min: null, max: null, avg: null };
+  const total = durations.reduce((sum, value) => sum + value, 0);
+  return {
+    min: Math.min(...durations),
+    max: Math.max(...durations),
+    avg: total / durations.length,
+  };
+}
+
 function BatchCard({ batch, onOpen }) {
   const counts = batch.counts || {};
   return (
@@ -193,6 +206,16 @@ function BatchVideoRow({ video, onReview, onAnalyze, isUpdating, isAnalyzing }) 
                   <span className="rounded-full bg-cyan-400/15 px-2 py-1 text-[11px] font-semibold text-cyan-100">
                     {tagValue(tags.niche)} / {tagValue(tags.sub_niche)}
                   </span>
+                  {tags.study_content_type && tags.study_content_type !== 'not_study' && (
+                    <span className="rounded-full bg-sky-400/15 px-2 py-1 text-[11px] font-semibold text-sky-100">
+                      Study: {tagValue(tags.study_content_type)}
+                    </span>
+                  )}
+                  {tags.study_pain_point && tags.study_pain_point !== 'none' && (
+                    <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
+                      Pain: {tagValue(tags.study_pain_point)}
+                    </span>
+                  )}
                   <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
                     Format: {tagValue(tags.format)}
                   </span>
@@ -247,6 +270,10 @@ function BatchVideoRow({ video, onReview, onAnalyze, isUpdating, isAnalyzing }) 
                   <div className="rounded-xl bg-black/20 p-2">
                     <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Frames</p>
                     <p className="mt-0.5 text-xs font-semibold text-white">{metricValue(motion.estimated_total_frame_count)}</p>
+                  </div>
+                  <div className="rounded-xl bg-black/20 p-2">
+                    <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Duration</p>
+                    <p className="mt-0.5 text-xs font-semibold text-white">{formatDuration(tags.duration_sec || motion.duration_sec || video.durationSec)}</p>
                   </div>
                   <div className="rounded-xl bg-black/20 p-2">
                     <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Scenes</p>
@@ -411,6 +438,11 @@ function OrganizerBatches({ initialBatchId = '', onClearInitialBatch }) {
   const [pillarFilter, setPillarFilter] = useState('all');
   const [funnelFilter, setFunnelFilter] = useState('all');
   const [formatFilter, setFormatFilter] = useState('all');
+  const [studyTypeFilter, setStudyTypeFilter] = useState('all');
+  const [productFilter, setProductFilter] = useState('all');
+  const [ctaStrengthFilter, setCtaStrengthFilter] = useState('all');
+  const [minDurationFilter, setMinDurationFilter] = useState('');
+  const [maxDurationFilter, setMaxDurationFilter] = useState('');
   const [error, setError] = useState('');
 
   const loadBatches = useCallback(async () => {
@@ -472,18 +504,38 @@ function OrganizerBatches({ initialBatchId = '', onClearInitialBatch }) {
   const availableFormats = useMemo(() => (
     [...new Set(selectedVideos.map((video) => getVideoTags(video).format).filter(Boolean))].sort()
   ), [selectedVideos]);
+  const availableStudyTypes = useMemo(() => (
+    [...new Set(selectedVideos.map((video) => getVideoTags(video).study_content_type).filter(Boolean))].sort()
+  ), [selectedVideos]);
+  const availableProducts = useMemo(() => (
+    [...new Set(selectedVideos.map((video) => getVideoTags(video).primary_product_name).filter(Boolean))].sort()
+  ), [selectedVideos]);
+  const availableCtaStrengths = useMemo(() => (
+    [...new Set(selectedVideos.map((video) => getVideoTags(video).cta_strength).filter(Boolean))].sort()
+  ), [selectedVideos]);
   const filteredVideos = useMemo(() => (
     selectedVideos.filter((video) => {
       const tags = getVideoTags(video);
       const pillarOk = pillarFilter === 'all' || tags.content_pillar === pillarFilter;
       const funnelOk = funnelFilter === 'all' || tags.funnel_stage === funnelFilter;
       const formatOk = formatFilter === 'all' || tags.format === formatFilter;
-      return pillarOk && funnelOk && formatOk;
+      const studyTypeOk = studyTypeFilter === 'all' || tags.study_content_type === studyTypeFilter;
+      const productOk = productFilter === 'all' || tags.primary_product_name === productFilter;
+      const ctaOk = ctaStrengthFilter === 'all' || tags.cta_strength === ctaStrengthFilter;
+      const duration = Number(tags.duration_sec || video.durationSec);
+      const minDuration = Number(minDurationFilter);
+      const maxDuration = Number(maxDurationFilter);
+      const minOk = !minDurationFilter || (Number.isFinite(duration) && duration >= minDuration);
+      const maxOk = !maxDurationFilter || (Number.isFinite(duration) && duration <= maxDuration);
+      return pillarOk && funnelOk && formatOk && studyTypeOk && productOk && ctaOk && minOk && maxOk;
     })
-  ), [selectedVideos, pillarFilter, funnelFilter, formatFilter]);
+  ), [selectedVideos, pillarFilter, funnelFilter, formatFilter, studyTypeFilter, productFilter, ctaStrengthFilter, minDurationFilter, maxDurationFilter]);
   const contentPillarMix = useMemo(() => summarizeByTag(selectedVideos, 'content_pillar'), [selectedVideos]);
   const funnelMix = useMemo(() => summarizeByTag(selectedVideos, 'funnel_stage'), [selectedVideos]);
   const formatMix = useMemo(() => summarizeByTag(selectedVideos, 'format'), [selectedVideos]);
+  const studyTypeMix = useMemo(() => summarizeByTag(selectedVideos, 'study_content_type'), [selectedVideos]);
+  const productMentionMix = useMemo(() => summarizeByTag(selectedVideos, 'primary_product_name'), [selectedVideos]);
+  const durationSummary = useMemo(() => summarizeDuration(selectedVideos), [selectedVideos]);
 
   const handleReview = async (videoReferenceId, approvalStatus) => {
     setUpdatingVideoId(videoReferenceId);
@@ -660,6 +712,40 @@ function OrganizerBatches({ initialBatchId = '', onClearInitialBatch }) {
                     ))}
                   </div>
                 </div>
+                <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/35">
+                    Study Type Mix
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {studyTypeMix.slice(0, 6).map((item) => (
+                      <span key={item.id} className="rounded-full bg-sky-400/15 px-3 py-1.5 text-xs font-semibold text-sky-100">
+                        {tagValue(item.id)} {item.percentage}%
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/35">
+                    Duration Range
+                  </p>
+                  <p className="mt-3 text-sm font-semibold text-white/80">
+                    {durationSummary.min === null
+                      ? 'n/a'
+                      : `${formatDuration(durationSummary.min)}-${formatDuration(durationSummary.max)} · avg ${formatDuration(durationSummary.avg)}`}
+                  </p>
+                </div>
+                <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/35">
+                    Product Mention Mix
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {productMentionMix.slice(0, 6).map((item) => (
+                      <span key={item.id} className="rounded-full bg-lime-400/15 px-3 py-1.5 text-xs font-semibold text-lime-100">
+                        {tagValue(item.id)} {item.percentage}%
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               <div className="overflow-hidden rounded-3xl border border-white/10 bg-black/20">
@@ -703,6 +789,56 @@ function OrganizerBatches({ initialBatchId = '', onClearInitialBatch }) {
                         <option key={format} value={format}>{tagValue(format)}</option>
                       ))}
                     </select>
+                    <select
+                      value={studyTypeFilter}
+                      onChange={(event) => setStudyTypeFilter(event.target.value)}
+                      className="rounded-full border border-white/10 bg-white/10 px-3 py-2 text-xs font-semibold text-white/70 outline-none"
+                    >
+                      <option value="all">All study types</option>
+                      {availableStudyTypes.map((studyType) => (
+                        <option key={studyType} value={studyType}>{tagValue(studyType)}</option>
+                      ))}
+                    </select>
+                    <select
+                      value={productFilter}
+                      onChange={(event) => setProductFilter(event.target.value)}
+                      className="rounded-full border border-white/10 bg-white/10 px-3 py-2 text-xs font-semibold text-white/70 outline-none"
+                    >
+                      <option value="all">All products</option>
+                      {availableProducts.map((product) => (
+                        <option key={product} value={product}>{product}</option>
+                      ))}
+                    </select>
+                    <select
+                      value={ctaStrengthFilter}
+                      onChange={(event) => setCtaStrengthFilter(event.target.value)}
+                      className="rounded-full border border-white/10 bg-white/10 px-3 py-2 text-xs font-semibold text-white/70 outline-none"
+                    >
+                      <option value="all">All CTA strength</option>
+                      {availableCtaStrengths.map((ctaStrength) => (
+                        <option key={ctaStrength} value={ctaStrength}>{tagValue(ctaStrength)}</option>
+                      ))}
+                    </select>
+                    <label className="flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs text-white/55">
+                      Min sec
+                      <input
+                        type="number"
+                        min="0"
+                        value={minDurationFilter}
+                        onChange={(event) => setMinDurationFilter(event.target.value)}
+                        className="w-12 bg-transparent text-white outline-none"
+                      />
+                    </label>
+                    <label className="flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs text-white/55">
+                      Max sec
+                      <input
+                        type="number"
+                        min="0"
+                        value={maxDurationFilter}
+                        onChange={(event) => setMaxDurationFilter(event.target.value)}
+                        className="w-12 bg-transparent text-white outline-none"
+                      />
+                    </label>
                     <label className="flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs text-white/55">
                       Limit
                       <input
