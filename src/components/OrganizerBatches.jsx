@@ -45,7 +45,7 @@ function formatNumber(value) {
 
 function formatDuration(seconds) {
   const value = Number(seconds);
-  if (!Number.isFinite(value) || value <= 0) return 'n/a';
+  if (!Number.isFinite(value) || value < 0) return 'n/a';
   const mins = Math.floor(value / 60);
   const secs = Math.round(value % 60);
   return mins ? `${mins}:${String(secs).padStart(2, '0')}` : `${secs}s`;
@@ -223,12 +223,25 @@ function BatchVideoRow({ video, onReview, onAnalyze, isUpdating, isAnalyzing }) 
                   <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
                     Product: {tagValue(tags.product_integration_type)}
                   </span>
+                  {tags.primary_product_name && (
+                    <span className="rounded-full bg-lime-400/15 px-2 py-1 text-[11px] font-semibold text-lime-100">
+                      Mention: {tags.primary_product_name}
+                    </span>
+                  )}
+                  <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
+                    CTA: {tagValue(tags.cta_strength)}
+                  </span>
                   <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
                     Template: {tagValue(tags.creative_template)}
                   </span>
                   <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
                     Script: {tagValue(tags.script_structure)}
                   </span>
+                  {tags.is_hook_then_demo && (
+                    <span className="rounded-full bg-emerald-400/15 px-2 py-1 text-[11px] font-semibold text-emerald-100">
+                      Hook + demo
+                    </span>
+                  )}
                 </div>
                 <div className="mt-3 grid grid-cols-2 gap-2 md:grid-cols-4">
                   <div className="rounded-xl bg-black/20 p-2">
@@ -266,6 +279,62 @@ function BatchVideoRow({ video, onReview, onAnalyze, isUpdating, isAnalyzing }) 
                         </span>
                       )}
                     </div>
+                  </div>
+                )}
+                {(tags.scene_roles || []).length > 0 && (
+                  <div className="mt-2 rounded-xl bg-black/20 p-2">
+                    <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">
+                      Scene roles
+                      {tags.is_hook_then_demo
+                        ? ` · demo starts ${formatDuration(tags.demo_start_sec)}`
+                        : ''}
+                    </p>
+                    <div className="mt-1 flex flex-wrap gap-1">
+                      {(tags.scene_roles || []).slice(0, 10).map((scene) => (
+                        <span
+                          key={`${scene.scene_index}-${scene.role}`}
+                          className="rounded-full bg-white/10 px-2 py-0.5 text-[11px] text-white/50"
+                        >
+                          {`S${scene.scene_index}: ${tagValue(scene.role)}`}
+                        </span>
+                      ))}
+                      {(tags.scene_roles || []).length > 10 && (
+                        <span className="rounded-full bg-white/10 px-2 py-0.5 text-[11px] text-white/40">
+                          +{(tags.scene_roles || []).length - 10} more
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-1 text-[11px] text-white/35">
+                      Hook {metricValue(tags.hook_scene_count)} · Demo {metricValue(tags.demo_scene_count)} · CTA {metricValue(tags.cta_scene_count)}
+                    </p>
+                  </div>
+                )}
+                {(tags.mentioned_products || []).length > 0 && (
+                  <div className="mt-2 rounded-xl bg-black/20 p-2">
+                    <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Product mentions</p>
+                    <div className="mt-1 flex flex-wrap gap-1">
+                      {(tags.mentioned_products || []).slice(0, 5).map((product) => (
+                        <span
+                          key={`${product.name}-${product.mention_type}`}
+                          className="rounded-full bg-white/10 px-2 py-0.5 text-[11px] text-white/50"
+                        >
+                          {`${product.name}: ${tagValue(product.mention_type)}`}
+                        </span>
+                      ))}
+                    </div>
+                    {tags.product_mention_context && (
+                      <p className="mt-1 text-[11px] leading-4 text-white/35">
+                        {tags.product_mention_context}
+                      </p>
+                    )}
+                  </div>
+                )}
+                {(tags.detected_text_cues || []).length > 0 && (
+                  <div className="mt-2 rounded-xl bg-black/20 p-2">
+                    <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Text cues</p>
+                    <p className="mt-1 line-clamp-2 text-[11px] leading-4 text-white/40">
+                      {(tags.detected_text_cues || []).slice(0, 3).join(' · ')}
+                    </p>
                   </div>
                 )}
                 {motion.first_two_scene_similarity_score !== undefined && motion.first_two_scene_similarity_score !== null && (

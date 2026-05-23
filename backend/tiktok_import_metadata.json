@@ -7595,5 +7595,2714 @@
         "providerVideoId": "7608713690287738125"
       }
     ]
+  },
+  "tt_3d75687682bc": {
+    "scanId": "tt_3d75687682bc",
+    "status": "completed",
+    "platform": "tiktok",
+    "provider": "apify",
+    "accountInput": "https://www.tiktok.com/@studywithbrianna?_r=1&_t=ZS-96DlzsEHOQH",
+    "creatorHandle": "studywithbrianna",
+    "maxItems": 100,
+    "createdAt": "2026-05-09T16:08:14.673644+00:00",
+    "counts": {
+      "providerItems": 100,
+      "videos": 100,
+      "duplicatesRemoved": 0
+    },
+    "videos": [
+      {
+        "id": "6ffc705b116cb591",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7612161162356083982",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7612161162356083982",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oQSBooEAS9bDTWzPB7HRGgfRENDFj1EpgEeIKX~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=2A0IhdwN%2FeR%2B5vo7aKtVnDrhkLQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-01T05:53:42.000Z",
+        "metrics": {
+          "views": 67700,
+          "likes": 3623,
+          "comments": 17,
+          "shares": 15
+        },
+        "providerVideoId": "7612161162356083982"
+      },
+      {
+        "id": "3d427c042a379f09",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7547939272406486327",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7547939272406486327",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "Changed my life!!! Everyone needs this app ASAP \n\n#studyhacks #studytok #collegetips #collegestudents ",
+        "hashtags": [
+          "studyhacks",
+          "studytok",
+          "collegetips",
+          "collegestudents"
+        ],
+        "durationSec": 9.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owvAuBE6w2DIRYgOoYmsFLfDfjSDVoQEqAIaul~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=ClfS%2FxpmnH5lxnXySu92z0l49eU%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2025-09-09T04:20:19.000Z",
+        "metrics": {
+          "views": 9700000,
+          "likes": 506100,
+          "comments": 909,
+          "shares": 8731
+        },
+        "providerVideoId": "7547939272406486327"
+      },
+      {
+        "id": "2c7ad92ded90d9c0",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7636998524076379422",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7636998524076379422",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/owc8RpINfvviEEK0EAItn5jfhElAUiIBEdVB5g~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=VzR5H%2Ba%2FSNtlY2s6KbcHXWHV4UE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-07T04:15:02.000Z",
+        "metrics": {
+          "views": 495,
+          "likes": 24,
+          "comments": 2,
+          "shares": 0
+        },
+        "providerVideoId": "7636998524076379422"
+      },
+      {
+        "id": "f6008f1ebd3a8b68",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7636630638753320223",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7636630638753320223",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 9.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oUsJfADerwDIzFj4TqwzMAqIAEY6EePIAAusEl~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=RWEecPRPAJYl5spA%2F5kheaKmcbc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-06T04:27:33.000Z",
+        "metrics": {
+          "views": 537,
+          "likes": 56,
+          "comments": 2,
+          "shares": 0
+        },
+        "providerVideoId": "7636630638753320223"
+      },
+      {
+        "id": "70e52ba0b3996bd0",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7636276759431859469",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7636276759431859469",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 10.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4LApHfEoAeXTz5keIEFjxAEAQEPFBIAD0DYg5~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=laR7HpBVsBg1X5JitCeK%2BgTkOAQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-05T05:34:44.000Z",
+        "metrics": {
+          "views": 661,
+          "likes": 57,
+          "comments": 2,
+          "shares": 0
+        },
+        "providerVideoId": "7636276759431859469"
+      },
+      {
+        "id": "86d766fbf9f9428d",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7635888942520323359",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7635888942520323359",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "Yepp \ud83e\udee1\n#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oY14IgGk0IqxCti1IAfipzgiIYBCvOArnAvKKs~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=NLoGq%2B6kc5pB8M9d2YDAwafdudM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-04T04:29:20.000Z",
+        "metrics": {
+          "views": 739,
+          "likes": 52,
+          "comments": 2,
+          "shares": 0
+        },
+        "providerVideoId": "7635888942520323359"
+      },
+      {
+        "id": "655dfb1597c716a2",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7635514079729306893",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7635514079729306893",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oELfBP6nCiNpI6yOsD0wiAI2IxIbAiIBPBwOFw~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=Uh0xKurTRLt1xeiRrwNZpJrQCuE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-03T04:14:33.000Z",
+        "metrics": {
+          "views": 10100,
+          "likes": 1733,
+          "comments": 3,
+          "shares": 24
+        },
+        "providerVideoId": "7635514079729306893"
+      },
+      {
+        "id": "157e79f21daefe5a",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7635156241102146829",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7635156241102146829",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEETQShfYkqQSJERch9puIFYwxVDvfgDA18r1B~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=qdGkld4GqvZ3dyWGDeFaNmLGVUA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-02T05:06:15.000Z",
+        "metrics": {
+          "views": 1353,
+          "likes": 58,
+          "comments": 3,
+          "shares": 1
+        },
+        "providerVideoId": "7635156241102146829"
+      },
+      {
+        "id": "943e14bd293535ff",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7634768786612030750",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7634768786612030750",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oEPLRAVBpCJxBw0iiAAhFAEPEE90fecAORIdDr~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=H5tmHp%2BUSCbGFTIcJhely09nfa8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-01T04:02:32.000Z",
+        "metrics": {
+          "views": 425,
+          "likes": 23,
+          "comments": 1,
+          "shares": 0
+        },
+        "providerVideoId": "7634768786612030750"
+      },
+      {
+        "id": "df10a4f810f02dbc",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7634398317518097678",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7634398317518097678",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oYQiLTEItCa3UAjgCpgAvLIHnUGfK5CzJegPek~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=n13TDKMs901lJBmDBJDaLk12Iak%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-30T04:05:10.000Z",
+        "metrics": {
+          "views": 473,
+          "likes": 28,
+          "comments": 1,
+          "shares": 0
+        },
+        "providerVideoId": "7634398317518097678"
+      },
+      {
+        "id": "2b5cbaf980163c57",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7634025845526400269",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7634025845526400269",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osGeAISAQIg4zLII9kkeDoNhgeAbEjAnxTEwAH~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=Zb1qaDAWkqRTA3kt6gvtNChZwvc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-29T03:59:23.000Z",
+        "metrics": {
+          "views": 1042,
+          "likes": 51,
+          "comments": 1,
+          "shares": 0
+        },
+        "providerVideoId": "7634025845526400269"
+      },
+      {
+        "id": "88c44b9c2458b045",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7633290989402066207",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7633290989402066207",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 13.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/osX7DfuJEEUVIc5OqBpAFBeuEuRuA1XHLE3YKb~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=Cf4YZM5pQZmI56oUE1Oe8XWTAL4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-27T04:27:56.000Z",
+        "metrics": {
+          "views": 1585,
+          "likes": 249,
+          "comments": 4,
+          "shares": 6
+        },
+        "providerVideoId": "7633290989402066207"
+      },
+      {
+        "id": "4da5fd6fd299bc81",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7632555313920527647",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7632555313920527647",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/okQZi9vBqI4BIS0CJSknreCxsALAniIniCAmIA~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=Z4Qn4G%2BDoNjq0naCqS7W6kBpqnQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-25T04:53:05.000Z",
+        "metrics": {
+          "views": 1266,
+          "likes": 53,
+          "comments": 1,
+          "shares": 0
+        },
+        "providerVideoId": "7632555313920527647"
+      },
+      {
+        "id": "81d955899e84b088",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7632175171842936094",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7632175171842936094",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oUr3CtiIIiA04BePJ7iqqdz69vuNGCASBArIC8~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=OQfk2Zo9Qb9UeZUyziXq7wYBap0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-24T04:17:59.000Z",
+        "metrics": {
+          "views": 1601,
+          "likes": 110,
+          "comments": 1,
+          "shares": 0
+        },
+        "providerVideoId": "7632175171842936094"
+      },
+      {
+        "id": "ac2d0f95a30806f2",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7631806915298872606",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7631806915298872606",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/osXAIVEDbsfEVt3CQpaTEIsQCIFx2RA6PUBCeA~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=vGxYvXEL1dz4jW%2FISQto48j2HOI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-23T04:29:10.000Z",
+        "metrics": {
+          "views": 6979,
+          "likes": 105,
+          "comments": 2,
+          "shares": 1
+        },
+        "providerVideoId": "7631806915298872606"
+      },
+      {
+        "id": "aa37ac683fae94aa",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7631435062877228318",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7631435062877228318",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oYqXV8EIEEApMA6fmTFVoIDG6c3mPEAjDBERBe~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=%2BOXoP1B77rmuGsyM5K4eHNw%2BRtI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-22T04:25:51.000Z",
+        "metrics": {
+          "views": 5804,
+          "likes": 678,
+          "comments": 2,
+          "shares": 3
+        },
+        "providerVideoId": "7631435062877228318"
+      },
+      {
+        "id": "9f03e3711a561d19",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7631067171489156382",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7631067171489156382",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 9.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/ocRHcEE8AoAQgA0pivVFE9O5ICif3AQNaADfEr~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=LOXD5J3yO8KYwTw%2BbZejIZQ6VEI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-21T04:38:30.000Z",
+        "metrics": {
+          "views": 1067,
+          "likes": 82,
+          "comments": 1,
+          "shares": 1
+        },
+        "providerVideoId": "7631067171489156382"
+      },
+      {
+        "id": "8116724db5d643a6",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7630700984741874974",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7630700984741874974",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oY9OIIALMINe3jCA9nIyRRQ2e0ZzGehCqH0TxL~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=NYkStSVAuBNAe9y0hj%2FsLvIZc2c%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-20T04:57:32.000Z",
+        "metrics": {
+          "views": 6222,
+          "likes": 731,
+          "comments": 3,
+          "shares": 12
+        },
+        "providerVideoId": "7630700984741874974"
+      },
+      {
+        "id": "cce00119fe6513b6",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7630322621896264973",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7630322621896264973",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ooLIlyIfeLx2ACkALT2vjmAAPIQ1eHIGQkWh56~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=G%2FE53UURiEv%2BMqTsK0xepU0IUQE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-19T04:29:15.000Z",
+        "metrics": {
+          "views": 6112,
+          "likes": 1188,
+          "comments": 0,
+          "shares": 6
+        },
+        "providerVideoId": "7630322621896264973"
+      },
+      {
+        "id": "8a8654366b799b92",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7629955136890178829",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7629955136890178829",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oIEadAREIDAfeQHGApAgbmrESCFvPF4DwJ4mkq~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=qpb2dWUDpq3b07nMv4j1oVhJD8o%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-18T04:43:20.000Z",
+        "metrics": {
+          "views": 6462,
+          "likes": 907,
+          "comments": 3,
+          "shares": 6
+        },
+        "providerVideoId": "7629955136890178829"
+      },
+      {
+        "id": "9daaddad51601e50",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7629571444636257567",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7629571444636257567",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/o8RLwERbAwGICDupnaVFE7D4IBCfqDxhrADrEf~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=DSpTp9ch97hH1aRsRUtO3wpv7wg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-17T03:54:17.000Z",
+        "metrics": {
+          "views": 2055,
+          "likes": 178,
+          "comments": 1,
+          "shares": 0
+        },
+        "providerVideoId": "7629571444636257567"
+      },
+      {
+        "id": "b3f65c4aed21677b",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7628828288122653982",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7628828288122653982",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oQEBCyIAV6AFQEwC2RRH43fdbrDXEBZQXDvpDf~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=dE3BSW5w94hi4lGOFdebRKnUi%2FA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-15T03:50:12.000Z",
+        "metrics": {
+          "views": 10800,
+          "likes": 236,
+          "comments": 1,
+          "shares": 0
+        },
+        "providerVideoId": "7628828288122653982"
+      },
+      {
+        "id": "172e5f4a1836730f",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7628099800222682382",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7628099800222682382",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oAMXBGfBJE4KI20Cvdl8D7PjcBIAdipAiAABIw~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=HarJI32USbpyBniZffJbWHS9fQM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-13T04:43:49.000Z",
+        "metrics": {
+          "views": 680,
+          "likes": 69,
+          "comments": 2,
+          "shares": 0
+        },
+        "providerVideoId": "7628099800222682382"
+      },
+      {
+        "id": "628b1b68f463cf80",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7627748460518755615",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7627748460518755615",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oYdPAb2IPPVjEINiu9rRkABDREiBHvDu0ashH~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=PmyRYO%2B7Gy2WuUpaHHSCg4O1oS0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-12T06:00:13.000Z",
+        "metrics": {
+          "views": 666,
+          "likes": 37,
+          "comments": 2,
+          "shares": 0
+        },
+        "providerVideoId": "7627748460518755615"
+      },
+      {
+        "id": "f9e8586279447a6b",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7626971276539661582",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7626971276539661582",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oAfPCDkGTCclsQoLIwSO0AIYIHYYestAejIhvr~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=KxYF6rmbx7EM45iALxSD6yvzZAg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-10T03:44:24.000Z",
+        "metrics": {
+          "views": 2084,
+          "likes": 97,
+          "comments": 2,
+          "shares": 3
+        },
+        "providerVideoId": "7626971276539661582"
+      },
+      {
+        "id": "ffd9aa912fa194fc",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7626621367106014494",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7626621367106014494",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 9.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/ocEXlrniFuIkBI1EYAi0AMvBAdqFnio9f56C42~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=uT%2B7qiQ866D9NnlVfxnVjb%2B%2FdXk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-09T05:06:37.000Z",
+        "metrics": {
+          "views": 1501,
+          "likes": 152,
+          "comments": 1,
+          "shares": 2
+        },
+        "providerVideoId": "7626621367106014494"
+      },
+      {
+        "id": "5f4ad52b35a7309b",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7626254103793929485",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7626254103793929485",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oUAVPHWIRcOinlX1E5hsdbaviDVpVzAFBEjCB~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=3ziSJ%2BlBTo%2Bz%2B8h0pDojx1xYoxo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-08T05:21:05.000Z",
+        "metrics": {
+          "views": 904,
+          "likes": 78,
+          "comments": 1,
+          "shares": 1
+        },
+        "providerVideoId": "7626254103793929485"
+      },
+      {
+        "id": "f4eb643992f768d1",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7625881497878220062",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7625881497878220062",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oYWfpAelqqQD0JjmI5AhIPLIf3UUMTpdGPISCz~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=DKhBjsplidVScLDj3%2BEiKGT3VBY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-07T05:15:26.000Z",
+        "metrics": {
+          "views": 825,
+          "likes": 60,
+          "comments": 1,
+          "shares": 2
+        },
+        "providerVideoId": "7625881497878220062"
+      },
+      {
+        "id": "e8e0a7e4687a5c61",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7625110830002097421",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7625110830002097421",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owQfzjCTGojrwW4PCIeMAAFIkUH8AFfWvgyZQ6~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=Suk9YI4dmx13nLmA3brZDMmIPnE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-05T03:24:54.000Z",
+        "metrics": {
+          "views": 630,
+          "likes": 39,
+          "comments": 1,
+          "shares": 1
+        },
+        "providerVideoId": "7625110830002097421"
+      },
+      {
+        "id": "2db7b3644aa1cb83",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7624782984704544031",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7624782984704544031",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oQelqqn5GQT9sQNeAeLDURGroFeEnJQII7AlRQ~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=aHiTawFrf30seJKqlGETbhDIIhs%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-04T06:12:41.000Z",
+        "metrics": {
+          "views": 1109,
+          "likes": 49,
+          "comments": 0,
+          "shares": 1
+        },
+        "providerVideoId": "7624782984704544031"
+      },
+      {
+        "id": "3120e02805e7d549",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7624374708938624286",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7624374708938624286",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oUWDPmATnAelIxXLQHtnsjcCq4e8AqjeInYAhM~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=hTfYlkTIlqO1MYUmkvL4mieH%2Fd8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-03T03:48:16.000Z",
+        "metrics": {
+          "views": 1218,
+          "likes": 96,
+          "comments": 1,
+          "shares": 1
+        },
+        "providerVideoId": "7624374708938624286"
+      },
+      {
+        "id": "1a6785f6db0dcad8",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7623634566338727182",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7623634566338727182",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owAUXrB7FuEX0i7McuTW74BIIElZLgBryiHva~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=3mDefKJCwgD6fO7yG4BYrpdCEgI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-01T03:55:59.000Z",
+        "metrics": {
+          "views": 1345,
+          "likes": 66,
+          "comments": 2,
+          "shares": 0
+        },
+        "providerVideoId": "7623634566338727182"
+      },
+      {
+        "id": "785a54e3022127b1",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7623244984426253582",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7623244984426253582",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/o0sWBVrTEiRLuPWcSQxiQAhIEBaNAopBvMCc8~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=%2BwnCfJUAwg7PGCQoJTP05kcgW2U%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-31T02:44:21.000Z",
+        "metrics": {
+          "views": 5267,
+          "likes": 517,
+          "comments": 2,
+          "shares": 4
+        },
+        "providerVideoId": "7623244984426253582"
+      },
+      {
+        "id": "786a48cfaffe3963",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7622537591434284318",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7622537591434284318",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/o8BlAswyyFTTsELBEpEDgaffIiOqAEBdEVI5oR~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=52jXV5yzMeREBgtGZb6wgOKoies%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-29T04:59:15.000Z",
+        "metrics": {
+          "views": 1593,
+          "likes": 142,
+          "comments": 0,
+          "shares": 1
+        },
+        "providerVideoId": "7622537591434284318"
+      },
+      {
+        "id": "3b5ed8a72239d6db",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7621788301644582174",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7621788301644582174",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/ocFdFAvpxAruEOtDEnrgWREBVdMfQfSaEdcAID~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=QVg6IUviOQdp8SgVw2fPKQVXMws%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-27T04:31:39.000Z",
+        "metrics": {
+          "views": 2231,
+          "likes": 142,
+          "comments": 0,
+          "shares": 0
+        },
+        "providerVideoId": "7621788301644582174"
+      },
+      {
+        "id": "8da0a7b3cbd1ecdb",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7621423634409639198",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7621423634409639198",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 10.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oQaBBbcvS7BEiINEK8E6VR03ENvIAviA1VlcC~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=XIkdJc8Q21uV6CXeS7USzCK8Y5s%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-26T04:56:39.000Z",
+        "metrics": {
+          "views": 1178,
+          "likes": 152,
+          "comments": 2,
+          "shares": 1
+        },
+        "providerVideoId": "7621423634409639198"
+      },
+      {
+        "id": "c320f3175e48d37a",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7620689957648223501",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7620689957648223501",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ogsDXFpzCIRYETNEFiAfBIQDCgzSwk0BkxfVWh~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=%2Fp4arqqep%2FECCrlMPU1A1ZtOreg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-24T05:30:20.000Z",
+        "metrics": {
+          "views": 3126,
+          "likes": 130,
+          "comments": 2,
+          "shares": 3
+        },
+        "providerVideoId": "7620689957648223501"
+      },
+      {
+        "id": "d856d011190ea582",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7620304603447430414",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7620304603447430414",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owI6DLtiP1CjcAgDkkAEEKBDBwAH4A32aAica~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=ujnoiDOfJoR8YPH3XbXIjPhJB5g%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-23T04:34:34.000Z",
+        "metrics": {
+          "views": 2758,
+          "likes": 166,
+          "comments": 4,
+          "shares": 14
+        },
+        "providerVideoId": "7620304603447430414"
+      },
+      {
+        "id": "ba1e62b340a15ff2",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7619548327205473566",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7619548327205473566",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 14.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/ocAEeL5bWfduGEHDGe6FCgR2AUIlQ90QemuSI0~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=pDr9%2FKHSu1h3ixp9qmV0FvoLvPo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-21T03:39:21.000Z",
+        "metrics": {
+          "views": 1392,
+          "likes": 168,
+          "comments": 0,
+          "shares": 0
+        },
+        "providerVideoId": "7619548327205473566"
+      },
+      {
+        "id": "f6109bda39f0d665",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7619187492075441438",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7619187492075441438",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 9.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oYRVCf7HDECpFiKED8EyMzIsvBVI2EgAenRYrA~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=tzcH%2FXwu3ef6Saf9K9ucOBjl0Ps%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-20T04:19:17.000Z",
+        "metrics": {
+          "views": 1228,
+          "likes": 93,
+          "comments": 0,
+          "shares": 0
+        },
+        "providerVideoId": "7619187492075441438"
+      },
+      {
+        "id": "8a1f6d54087d0065",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7618811831401843999",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7618811831401843999",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/os17ydpi7iIlBITEsAi0Ad2BAOqJtiNRfb3CK6~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=CErxtiAyOrMaeidi5aIMJkFUxW4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-19T04:01:25.000Z",
+        "metrics": {
+          "views": 516,
+          "likes": 33,
+          "comments": 0,
+          "shares": 0
+        },
+        "providerVideoId": "7618811831401843999"
+      },
+      {
+        "id": "0056894ff1337b57",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7618453730639334686",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7618453730639334686",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oc16Rp0puqWEELyyEAIMHe9fLtsAmFEDBSVBdi~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=OLHduCmuR8RY%2BwuHO8cW%2BiWIc18%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-18T04:51:39.000Z",
+        "metrics": {
+          "views": 849,
+          "likes": 71,
+          "comments": 1,
+          "shares": 1
+        },
+        "providerVideoId": "7618453730639334686"
+      },
+      {
+        "id": "2575c66415bb230c",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7618087971169766669",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7618087971169766669",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osIp5RBpeuxxKFGn3i1DZgCESBDfA3VOBQx5EO~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=9OQK9ASTzrFvftFmtNToCFfyqXI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-17T05:12:48.000Z",
+        "metrics": {
+          "views": 798,
+          "likes": 79,
+          "comments": 1,
+          "shares": 1
+        },
+        "providerVideoId": "7618087971169766669"
+      },
+      {
+        "id": "9960ee53ccfe8d8a",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7617331158505770271",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7617331158505770271",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oQYvlC3mrBWb2nyUiIAAT8aMBEEASR7LLiAAY~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=%2BIr4bHxm%2F7%2Fz0SPya9wcrQHWRys%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-15T04:15:32.000Z",
+        "metrics": {
+          "views": 817,
+          "likes": 92,
+          "comments": 1,
+          "shares": 0
+        },
+        "providerVideoId": "7617331158505770271"
+      },
+      {
+        "id": "f42e539b05690cff",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7616970182262639902",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7616970182262639902",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oQBPb5maAqc6CsRuBtEWcRhWKInViqdBA0ETi~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=ezOQ7dUak8N%2BFP1%2FZI4w0sGamO4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-14T04:54:51.000Z",
+        "metrics": {
+          "views": 39600,
+          "likes": 3131,
+          "comments": 4,
+          "shares": 41
+        },
+        "providerVideoId": "7616970182262639902"
+      },
+      {
+        "id": "4164492e0506ccf8",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7616587033900895501",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7616587033900895501",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0BsN4kBAAEiOAzO6LvjrEABbIaa6gixUgCk4~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=E%2FV0qDw6auU%2FpaynU9JrN8C68Ew%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-13T04:08:16.000Z",
+        "metrics": {
+          "views": 5804,
+          "likes": 350,
+          "comments": 2,
+          "shares": 1
+        },
+        "providerVideoId": "7616587033900895501"
+      },
+      {
+        "id": "321eaeb3cd796a77",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7616216884991626526",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7616216884991626526",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #motivation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "motivation"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oQxfHFmmAPbjhD92QEPIfcgPe1EIZToqABCyIE~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=XDjmt8CduSlWHBheizAZgR%2BWzCg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-12T04:11:38.000Z",
+        "metrics": {
+          "views": 462,
+          "likes": 23,
+          "comments": 1,
+          "shares": 1
+        },
+        "providerVideoId": "7616216884991626526"
+      },
+      {
+        "id": "37ee135190f43aa7",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7615845537576684813",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7615845537576684813",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oIhMI7hB4vBwnibgZI6GDB1AaNEJ9zrVyiUCL~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=Ecg7bwXzaUCAqjMFUDABeJjmKmI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-11T04:10:28.000Z",
+        "metrics": {
+          "views": 703,
+          "likes": 41,
+          "comments": 2,
+          "shares": 3
+        },
+        "providerVideoId": "7615845537576684813"
+      },
+      {
+        "id": "3ac28bf745e8d75d",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7615476439806184717",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7615476439806184717",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ocCmjuGmXazedYjtve49kYJIBJ8LEITwHIAA6e~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=G5idFebVjWZAN0V%2F8S1XFWbS3fE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-10T04:18:46.000Z",
+        "metrics": {
+          "views": 785,
+          "likes": 59,
+          "comments": 1,
+          "shares": 0
+        },
+        "providerVideoId": "7615476439806184717"
+      },
+      {
+        "id": "8345e904f426eac0",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7614393942347500814",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7614393942347500814",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEwE6f8rKgTRDhrIAB4EAxBSwDqFElq1pCLf4C~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=0zuWOyVzZrBFHTMrmw9eUXV9Jgg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-07T06:17:41.000Z",
+        "metrics": {
+          "views": 1504,
+          "likes": 131,
+          "comments": 1,
+          "shares": 2
+        },
+        "providerVideoId": "7614393942347500814"
+      },
+      {
+        "id": "e58d755428b810ad",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7614005496097279245",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7614005496097279245",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #university #gizmo #manifestation ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "gizmo",
+          "manifestation"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ooIB01B4QtWTCATLVWDB1VpAiipcqAWElwfiIY~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=rjRqisqkaiiQjmCrOYatDP1p7rY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-06T05:10:29.000Z",
+        "metrics": {
+          "views": 602,
+          "likes": 84,
+          "comments": 1,
+          "shares": 4
+        },
+        "providerVideoId": "7614005496097279245"
+      },
+      {
+        "id": "8dae6c0221311554",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7613636909159566623",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7613636909159566623",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oceIIpB4QXAn8UCAQjqMq9pfifE3SRTpyIN8Cn~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=JBkluTlPVIct8xFG7kgT1HSt1v4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-05T05:20:00.000Z",
+        "metrics": {
+          "views": 2624,
+          "likes": 208,
+          "comments": 0,
+          "shares": 0
+        },
+        "providerVideoId": "7613636909159566623"
+      },
+      {
+        "id": "9efb557a473723c7",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7612911221209124126",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7612911221209124126",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oIPMRnK0pIVDEJEkfBpFHF6EQ8DDRaAWIAfcp4~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=dNEdUXtEURPXQa5a8P6GMm%2Fgn%2FQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-03T06:24:22.000Z",
+        "metrics": {
+          "views": 830,
+          "likes": 56,
+          "comments": 0,
+          "shares": 1
+        },
+        "providerVideoId": "7612911221209124126"
+      },
+      {
+        "id": "fd15af06a8d6b4ca",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7612545436477312270",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7612545436477312270",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owwR6pEFkAXMpKSeEOHqYMgIDfApFDA9OCApTQ~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=75iY3lqP6eGLaPHlPNVvHsV%2BFfo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-02T06:45:00.000Z",
+        "metrics": {
+          "views": 898,
+          "likes": 106,
+          "comments": 1,
+          "shares": 3
+        },
+        "providerVideoId": "7612545436477312270"
+      },
+      {
+        "id": "ee57d50c906369b8",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7611420184204610830",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7611420184204610830",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #gizmo ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oAJoDfkSEEmSQoMZkDpgFBMhIpRTAIoOeDbp7v~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=EUG67l4J7ex6siOOS9R9IrmpAEk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-27T05:58:30.000Z",
+        "metrics": {
+          "views": 3893,
+          "likes": 282,
+          "comments": 4,
+          "shares": 10
+        },
+        "providerVideoId": "7611420184204610830"
+      },
+      {
+        "id": "5178ba7ee728306e",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7611041703906004237",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7611041703906004237",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oo27THg3RFGOAiAxQy0ICLnf8kLkjPtIxf0oer~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=kfXHCGD6Ls5y0pPwpTBztybjJy8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-26T05:29:48.000Z",
+        "metrics": {
+          "views": 497,
+          "likes": 50,
+          "comments": 2,
+          "shares": 1
+        },
+        "providerVideoId": "7611041703906004237"
+      },
+      {
+        "id": "09f002b3e2e4ea2d",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7610663889235135757",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7610663889235135757",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/okDoeqfKDa5opFME9R6BAPSmEnQDgIsgRb8lDz~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=rSUQ4q0%2B%2FxlmpnopxLsv57BX7tE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-25T05:03:29.000Z",
+        "metrics": {
+          "views": 1410,
+          "likes": 98,
+          "comments": 2,
+          "shares": 1
+        },
+        "providerVideoId": "7610663889235135757"
+      },
+      {
+        "id": "bd4ca2d0512fa8f4",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7610292753662086430",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7610292753662086430",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 10.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oUPdW7AIi8BAzqrip4AmC0Mh570iICBvExQlf7~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=9zDOwH0Y352i9cYlz1XQZgOGaVA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-24T05:03:07.000Z",
+        "metrics": {
+          "views": 824,
+          "likes": 86,
+          "comments": 2,
+          "shares": 0
+        },
+        "providerVideoId": "7610292753662086430"
+      },
+      {
+        "id": "5153d611005a3e84",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7609947289922096398",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7609947289922096398",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8mIE8CDiiAShmBgIRmBS9aDf89RtypbrDGfBw~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=DKHukhu3dsPuF%2F%2FXwCJTor%2BLbmM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-23T06:43:18.000Z",
+        "metrics": {
+          "views": 1411,
+          "likes": 38,
+          "comments": 0,
+          "shares": 1
+        },
+        "providerVideoId": "7609947289922096398"
+      },
+      {
+        "id": "4805b28fde602f27",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7608807495632473357",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7608807495632473357",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/og3Bxq0IXdCBIAA6wNpkfPiXiCAIaDy0jlxFlI~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=UL2f7vKC3mvoFmslayKRxJDyuKA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-20T04:59:50.000Z",
+        "metrics": {
+          "views": 1278,
+          "likes": 94,
+          "comments": 0,
+          "shares": 1
+        },
+        "providerVideoId": "7608807495632473357"
+      },
+      {
+        "id": "5c81211011b57e57",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7608438832383511821",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7608438832383511821",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/oYvEhfpWDgERDrAIAsfEAxCSmDlFEcknphr0AC~tplv-tiktokx-origin.image?dr=14575&x-expires=1778515200&x-signature=OKr8JHvtz8HUWXo0Z5J4iCUg9kc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my2",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-19T05:09:06.000Z",
+        "metrics": {
+          "views": 8159,
+          "likes": 671,
+          "comments": 0,
+          "shares": 14
+        },
+        "providerVideoId": "7608438832383511821"
+      },
+      {
+        "id": "664364343ca72782",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7608067158114897165",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7608067158114897165",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0btjaOIvVxZiA3i6BB5Ig41NDU1VuS5EZ91I~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=NpDfOwbjKF2cQKwnaZt3e%2FZAHxA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-18T05:06:43.000Z",
+        "metrics": {
+          "views": 5282,
+          "likes": 469,
+          "comments": 1,
+          "shares": 5
+        },
+        "providerVideoId": "7608067158114897165"
+      },
+      {
+        "id": "11f6f0c556d5d714",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7607702098565713166",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7607702098565713166",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ocfNffakJCHFPDsQHQHH1DAXTBzAOTXnDIjnEc~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=G1lkQzkOGP%2FMOH7GWl4Zqh9HtWc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-17T05:30:10.000Z",
+        "metrics": {
+          "views": 1896,
+          "likes": 139,
+          "comments": 1,
+          "shares": 10
+        },
+        "providerVideoId": "7607702098565713166"
+      },
+      {
+        "id": "8db439fd7fc08dec",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7607318474116828430",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7607318474116828430",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/okQh8GFmoSlPfLldEa8GeAIRIeOeAFYDDQn3In~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=N636z3oFgIp%2FD7w%2FMnLMLXscv5Y%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-16T04:41:17.000Z",
+        "metrics": {
+          "views": 1467,
+          "likes": 100,
+          "comments": 1,
+          "shares": 1
+        },
+        "providerVideoId": "7607318474116828430"
+      },
+      {
+        "id": "a382746d074b9a4d",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7606950897066822926",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7606950897066822926",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMERIBDjRUdkAUDpeFWhfo3z2GuEHEdgSTVaBU~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=SWLrA6SOCiUveXbuCgFE7DyodSQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-15T04:55:02.000Z",
+        "metrics": {
+          "views": 10100,
+          "likes": 1064,
+          "comments": 9,
+          "shares": 15
+        },
+        "providerVideoId": "7606950897066822926"
+      },
+      {
+        "id": "96ef4082b276f648",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7606577979443006733",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7606577979443006733",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oIfRILGrGROCDgwj3fIgUyFAfR8AnaCmPmeA34~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=4ehJYjexgqT6E0Thf79RLhIFS1o%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-14T04:47:42.000Z",
+        "metrics": {
+          "views": 2450,
+          "likes": 138,
+          "comments": 0,
+          "shares": 2
+        },
+        "providerVideoId": "7606577979443006733"
+      },
+      {
+        "id": "773087e7bbcfc7f5",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7606231557304552718",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7606231557304552718",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 9.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oQrEDjaSBQAsXrq1ihhNdfIfUgExIBD0pQuRNF~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=twtnXDfq3WQN2gcvHeZrDq63RTs%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-13T06:23:24.000Z",
+        "metrics": {
+          "views": 928,
+          "likes": 76,
+          "comments": 3,
+          "shares": 4
+        },
+        "providerVideoId": "7606231557304552718"
+      },
+      {
+        "id": "8a2233568c500420",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7605843461073341710",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7605843461073341710",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osos0GGdIAkvHfDIpHYIlpTxlIOjAFLHTNCPee~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=NSoU6q3zCPwbN6ClNHXIKZp9OvM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-12T05:17:59.000Z",
+        "metrics": {
+          "views": 822,
+          "likes": 74,
+          "comments": 2,
+          "shares": 0
+        },
+        "providerVideoId": "7605843461073341710"
+      },
+      {
+        "id": "ea5d5303dc178371",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7605467903294508301",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7605467903294508301",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owA4CyAUdYYzDENABMIEaMiABwAqG5Kki0Pg0~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=3fPeZBjyMG0%2Fx7JDteioPpzhjyk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-11T05:00:02.000Z",
+        "metrics": {
+          "views": 7045,
+          "likes": 539,
+          "comments": 4,
+          "shares": 3
+        },
+        "providerVideoId": "7605467903294508301"
+      },
+      {
+        "id": "39cc2656fd304416",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7605105232930016542",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7605105232930016542",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oYCvVGUwYBwYKEDCiIACL6awBEEDpR6ByiAAr~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=J1Mhezf0A1t4lIQaEF3j%2FstXakk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-10T05:33:01.000Z",
+        "metrics": {
+          "views": 1114,
+          "likes": 70,
+          "comments": 3,
+          "shares": 0
+        },
+        "providerVideoId": "7605105232930016542"
+      },
+      {
+        "id": "9cfdaa268a6b3642",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7604749970956143886",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7604749970956143886",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oI7Jff3TMgYfIlZfAiXFQSNh1K8lMwcQQJAeiS~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=%2B%2BgVCWJVkN0J6nkLQI0jvyJoXso%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-09T06:34:38.000Z",
+        "metrics": {
+          "views": 1294,
+          "likes": 68,
+          "comments": 2,
+          "shares": 2
+        },
+        "providerVideoId": "7604749970956143886"
+      },
+      {
+        "id": "1e93402d6221a927",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7604346045513944334",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7604346045513944334",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ocpkS0Qs9BXIBAFR0DDQLRuCkiEbgXfsfBIDEu~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=4So7g1kWIOhkU%2FN%2BqP0Gei28CvI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-08T04:26:54.000Z",
+        "metrics": {
+          "views": 1035,
+          "likes": 46,
+          "comments": 1,
+          "shares": 0
+        },
+        "providerVideoId": "7604346045513944334"
+      },
+      {
+        "id": "a2316a3b9e611db3",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7603613964173413645",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7603613964173413645",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oILd7uJ1GQMYuKO1AILDkTj5fCeVTKHIIfAxIC~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=F2Qi8en5faichctDMwID%2Bngs9k4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-06T05:06:09.000Z",
+        "metrics": {
+          "views": 1577,
+          "likes": 142,
+          "comments": 3,
+          "shares": 1
+        },
+        "providerVideoId": "7603613964173413645"
+      },
+      {
+        "id": "ac481ead27067514",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7603251459722988830",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7603251459722988830",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oQZwBf47CiFqIQLnEB0AiAGEEwIhAviICi8TO8~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=331tgRJ43ITqcjOjSsejyZUP14s%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-05T05:39:27.000Z",
+        "metrics": {
+          "views": 1687,
+          "likes": 85,
+          "comments": 2,
+          "shares": 0
+        },
+        "providerVideoId": "7603251459722988830"
+      },
+      {
+        "id": "a075f44a4a950e12",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7602895677533768973",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7602895677533768973",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8CTggDE0IpnFSpltSfBRoRpWfVX6uEPAED8ZI~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=C%2BiCzpwjefNS129FmZlzqgRiO7g%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-04T06:38:28.000Z",
+        "metrics": {
+          "views": 867,
+          "likes": 94,
+          "comments": 4,
+          "shares": 0
+        },
+        "providerVideoId": "7602895677533768973"
+      },
+      {
+        "id": "1721c377d0aa4991",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7602535227495386399",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7602535227495386399",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 9.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/okfBBWpAEABEOVAyutDDVpIcgE6GcoRIaFJEue~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=ZBwNXyCqdteq1mDQfXnOS37r2uI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-03T07:20:37.000Z",
+        "metrics": {
+          "views": 729,
+          "likes": 29,
+          "comments": 1,
+          "shares": 2
+        },
+        "providerVideoId": "7602535227495386399"
+      },
+      {
+        "id": "5d0768b9f14389ba",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7602141903814954253",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7602141903814954253",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oYBAiBggfAIbCv0zCDRp6eBudEDSFElR1D6QMx~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=LZ%2BbDkSMuCKZFOLjx0MNuQfZxyg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-02T05:53:41.000Z",
+        "metrics": {
+          "views": 9998,
+          "likes": 321,
+          "comments": 7,
+          "shares": 3
+        },
+        "providerVideoId": "7602141903814954253"
+      },
+      {
+        "id": "447f2616f1a59ecb",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7601771054226312503",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7601771054226312503",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 9.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEpoIXCSHAWQjTj8JExqfDXAe80DfF8pukZ62I~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=4EzbLyO7PEoxKw6L2RMsWLGVods%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-01T05:54:48.000Z",
+        "metrics": {
+          "views": 1299,
+          "likes": 123,
+          "comments": 2,
+          "shares": 2
+        },
+        "providerVideoId": "7601771054226312503"
+      },
+      {
+        "id": "9422ad5e5b232fdd",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7601385765905501453",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7601385765905501453",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMijBIKiACX4MSaBEkd4Isv66AIBA2g9kZEwA~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=85sIdBe69%2FkAg6xV7p5IgzP7RPE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-31T04:59:15.000Z",
+        "metrics": {
+          "views": 1085,
+          "likes": 59,
+          "comments": 4,
+          "shares": 7
+        },
+        "providerVideoId": "7601385765905501453"
+      },
+      {
+        "id": "74e002f528b38ce3",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7601044535828942094",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7601044535828942094",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oE5vpEZIBririAVhwifcA4BOhiFvR0BC40VIg8~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=LlxcQYXDEzm6OFVX%2Ftjx%2FsCYT44%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-30T06:55:10.000Z",
+        "metrics": {
+          "views": 1411,
+          "likes": 120,
+          "comments": 1,
+          "shares": 0
+        },
+        "providerVideoId": "7601044535828942094"
+      },
+      {
+        "id": "041710e43fa1a4f0",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7600644451609939213",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7600644451609939213",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEDHnfD2FAK9e01rAjcSAExIPwmIQkAfASu2sE~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=aIZkWiDkobtXrpleryN6zrBhO5Q%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-29T05:02:55.000Z",
+        "metrics": {
+          "views": 1739,
+          "likes": 175,
+          "comments": 2,
+          "shares": 1
+        },
+        "providerVideoId": "7600644451609939213"
+      },
+      {
+        "id": "b64271173bdaee61",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7600252821014859038",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7600252821014859038",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/okf5jwnMSEqYIHIXhC8LrBsIIKGBwVAf3Aekbm~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=JdkQi%2BYwl6G2h89DSL3AkNWsEOk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-28T03:42:45.000Z",
+        "metrics": {
+          "views": 773,
+          "likes": 71,
+          "comments": 1,
+          "shares": 0
+        },
+        "providerVideoId": "7600252821014859038"
+      },
+      {
+        "id": "d6ceaac76c1ce0dd",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7599011228366703885",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7599011228366703885",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUD1nSN8IBwdQIEwIfRHE8rDDxbvRg7fCnAuFp~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=sZbINBCU1hVAWWAhg%2BfMf6ByILo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-24T19:25:01.000Z",
+        "metrics": {
+          "views": 906,
+          "likes": 71,
+          "comments": 3,
+          "shares": 0
+        },
+        "providerVideoId": "7599011228366703885"
+      },
+      {
+        "id": "94ddffc037e77cd2",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7598419925245365518",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7598419925245365518",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "new year lock in fr \ud83e\udd1d\n#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owwpBmzyEvaFOLBAegzQcmKuRKmIDDHpEfYQjS~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=8XUg2fngBWuDSvWE4wvMESyz0IQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-23T05:10:41.000Z",
+        "metrics": {
+          "views": 900,
+          "likes": 42,
+          "comments": 1,
+          "shares": 1
+        },
+        "providerVideoId": "7598419925245365518"
+      },
+      {
+        "id": "c36884ccdb012fbe",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7598049696308940062",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7598049696308940062",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/okBJsNAnBIFhYx5jAKiDq4I5tAfr0ViIipASCu~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=pRRpQrkabeMKLzZ92cn4tDdM2e4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-22T05:13:50.000Z",
+        "metrics": {
+          "views": 1629,
+          "likes": 80,
+          "comments": 0,
+          "shares": 1
+        },
+        "providerVideoId": "7598049696308940062"
+      },
+      {
+        "id": "7613406a3c756e8d",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7597636251512032567",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7597636251512032567",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8AEtLCjkGSn4YIH5AQxAefAgeBb8EHIFAgaHM~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=jiDMUl8ZLkjoQax95BXmHKFO8Zo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-21T02:29:10.000Z",
+        "metrics": {
+          "views": 405,
+          "likes": 24,
+          "comments": 1,
+          "shares": 0
+        },
+        "providerVideoId": "7597636251512032567"
+      },
+      {
+        "id": "5c36937be5ddf63e",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7597308202170010935",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7597308202170010935",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "jealous \n#studytok #studyhacks #university #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "studyhacks",
+          "university",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oc8g4IW7v1ssADiDiCNIMvp84EBaBUPP7ucOE~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=41ewGEtQEYI3r4mC1WCI9PFO2Xk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-20T05:16:37.000Z",
+        "metrics": {
+          "views": 7494,
+          "likes": 260,
+          "comments": 0,
+          "shares": 1
+        },
+        "providerVideoId": "7597308202170010935"
+      },
+      {
+        "id": "06465e87869f6117",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7596847680760958222",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7596847680760958222",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #studyhacks #university #gizmo #collegehacks ",
+        "hashtags": [
+          "studytok",
+          "studyhacks",
+          "university",
+          "gizmo",
+          "collegehacks"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUFzNA4pbAsfDWSAEw2WBRbCSLtfIq1AEPCgED~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=KFBuU8IYF22Y27mgDqEuMkpwNdI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-18T23:29:24.000Z",
+        "metrics": {
+          "views": 540,
+          "likes": 40,
+          "comments": 1,
+          "shares": 0
+        },
+        "providerVideoId": "7596847680760958222"
+      },
+      {
+        "id": "a58382c2a8487004",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7596568673163218190",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7596568673163218190",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #collegehacks #studyhacks #university #gizmo ",
+        "hashtags": [
+          "studytok",
+          "collegehacks",
+          "studyhacks",
+          "university",
+          "gizmo"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owAsJceiAORgAINE7CipAbBBgiSCADnxfGbE68~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=RFQrYV1j7iskKNlYIsHTVUFkH8s%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-18T05:26:45.000Z",
+        "metrics": {
+          "views": 1425,
+          "likes": 98,
+          "comments": 0,
+          "shares": 2
+        },
+        "providerVideoId": "7596568673163218190"
+      },
+      {
+        "id": "6b1e0ef1fca99156",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7596145516459642126",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7596145516459642126",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #collegehacks #studyhacks #gizmo ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "collegehacks",
+          "studyhacks",
+          "gizmo"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-eu.com/tos-useast5-p-0068-tx/osQjY1QDTneRdVkHIgvr3eAQM8AWXHGkeCCSdQ~tplv-tiktokx-origin.image?dr=10395&x-expires=1778515200&x-signature=sX7dOyCndR8AIHFv%2Fle3V4D4dcY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=no1a",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-17T02:04:40.000Z",
+        "metrics": {
+          "views": 1733,
+          "likes": 187,
+          "comments": 1,
+          "shares": 2
+        },
+        "providerVideoId": "7596145516459642126"
+      },
+      {
+        "id": "84173ee9c21be320",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7595764993761529143",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7595764993761529143",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "never irresponsible \ud83d\ude42\u200d\u2195\ufe0f\n#studytok #studyhacks #university #collegehacks #gizmo",
+        "hashtags": [
+          "studytok",
+          "studyhacks",
+          "university",
+          "collegehacks",
+          "gizmo"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oQxlBFpeSxH7zzQpCFLIAcGXI0AjjieQQueTky~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=M%2BDWDxVJdy%2FjpOiKmpChpn%2FWvtQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-16T01:27:50.000Z",
+        "metrics": {
+          "views": 1022,
+          "likes": 62,
+          "comments": 1,
+          "shares": 0
+        },
+        "providerVideoId": "7595764993761529143"
+      },
+      {
+        "id": "7a35b163a6f538f3",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7595406299769212215",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7595406299769212215",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "Best feeling\n#studytok #university #studyhacks #activerecall #gizmo ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "activerecall",
+          "gizmo"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ocLte3KS0ADSH2ZEI9pJjjmCkMQeQoe7IymAQG~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=YQ6BnQ89YWjUesRWpZpIpkhPU48%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-15T02:16:01.000Z",
+        "metrics": {
+          "views": 1796,
+          "likes": 120,
+          "comments": 2,
+          "shares": 3
+        },
+        "providerVideoId": "7595406299769212215"
+      },
+      {
+        "id": "e3907ec551ac2069",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7595022823148604685",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7595022823148604685",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "i will pass all my exams! \n#studytok #university #manifestation #studytips #studyhacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "manifestation",
+          "studytips",
+          "studyhacks"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUeJAc9eDNdlLOAjIIj2G4UGAIeRI1AgfdmkQA~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=tUA65XNHi6EzSThhHiFBFVESSOA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-14T01:28:00.000Z",
+        "metrics": {
+          "views": 1042,
+          "likes": 81,
+          "comments": 3,
+          "shares": 3
+        },
+        "providerVideoId": "7595022823148604685"
+      },
+      {
+        "id": "a395cb8416660645",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7594680285380349239",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7594680285380349239",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "S/o her fr \ud83d\ude2d\ud83d\ude2d \n#studytok #university #activerecall #studytips #studyhacks ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "activerecall",
+          "studytips",
+          "studyhacks"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEA0aPQAIiWBg4BurWZBAlHkBAmEoY5jMnEyi~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=FxIxEkBKSrE5ZpTKq6y85nBSQn8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-13T03:18:50.000Z",
+        "metrics": {
+          "views": 1598,
+          "likes": 60,
+          "comments": 1,
+          "shares": 0
+        },
+        "providerVideoId": "7594680285380349239"
+      },
+      {
+        "id": "027ef0cc668f56c7",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7594336481074744589",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7594336481074744589",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "i love school \n#studytok #student #university #activerecall #studytips ",
+        "hashtags": [
+          "studytok",
+          "student",
+          "university",
+          "activerecall",
+          "studytips"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oo5WakBA9LgkBIABgSEvAO7zig4EuEAYAZi0E~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=a9mYs0lMWE6k7gp5oO9ploXn%2B%2Fk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-12T05:04:40.000Z",
+        "metrics": {
+          "views": 1285,
+          "likes": 61,
+          "comments": 1,
+          "shares": 2
+        },
+        "providerVideoId": "7594336481074744589"
+      },
+      {
+        "id": "2e2e623e880ca851",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7593948318451977485",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7593948318451977485",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #student #university #studyhacks #activerecall ",
+        "hashtags": [
+          "studytok",
+          "student",
+          "university",
+          "studyhacks",
+          "activerecall"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ooABHI9SkEPC9jOIfkjfCFHxRDB0jjIuCyzBeA~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=tT0H%2Fkla1zFY6hbV6fCOtkVRrR8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-11T03:58:20.000Z",
+        "metrics": {
+          "views": 7561,
+          "likes": 1249,
+          "comments": 24,
+          "shares": 32
+        },
+        "providerVideoId": "7593948318451977485"
+      },
+      {
+        "id": "b638765207e80dd6",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7593595825050127629",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7593595825050127629",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "sigh\u2026 \n#studytok #university #studyhacks #activerecall #college ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "activerecall",
+          "college"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0f7SHA75bM5ALABBeMICfPORkXSjwEQEhmm8F~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=hEdaV0nqY%2Bbyt%2F9TxISDI4ASnXY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-10T05:10:33.000Z",
+        "metrics": {
+          "views": 1688,
+          "likes": 186,
+          "comments": 1,
+          "shares": 1
+        },
+        "providerVideoId": "7593595825050127629"
+      },
+      {
+        "id": "d77bdf520dca2250",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7593199416903748878",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7593199416903748878",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "#studytok #university #studyhacks #university #activerecall ",
+        "hashtags": [
+          "studytok",
+          "university",
+          "studyhacks",
+          "activerecall"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oYyBtHeIfAwYS94kMQC1jdAtveQnLLIRGTLO7A~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=bD%2BjQcEuTJSDUYNlwf0eu6VVGd0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-09T03:32:19.000Z",
+        "metrics": {
+          "views": 848,
+          "likes": 15,
+          "comments": 0,
+          "shares": 3
+        },
+        "providerVideoId": "7593199416903748878"
+      },
+      {
+        "id": "5af93802dcc8cee5",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7592818946177289485",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7592818946177289485",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "crazy\u2026 \n#studytok #univeristy #college #studyhacks #activerecall ",
+        "hashtags": [
+          "studytok",
+          "univeristy",
+          "college",
+          "studyhacks",
+          "activerecall"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0gBxQ3lftpAqhwHMME7BFXERDLDhgySSIfqBE~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=J2mWCI%2F4Ry13d9%2FNK3MouEyy1pk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-08T02:55:58.000Z",
+        "metrics": {
+          "views": 5509,
+          "likes": 571,
+          "comments": 1,
+          "shares": 1
+        },
+        "providerVideoId": "7592818946177289485"
+      },
+      {
+        "id": "28eb875dc2eadf4a",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@studywithbrianna/video/7592320679467289870",
+        "normalizedUrl": "https://www.tiktok.com/@studywithbrianna/video/7592320679467289870",
+        "creatorHandle": "studywithbrianna",
+        "creatorDisplayName": "studywithbri",
+        "caption": "i will pass all my exams \u2728 \n#studytok #univeristy #college ##manifestation #manifest ",
+        "hashtags": [
+          "studytok",
+          "univeristy",
+          "college",
+          "manifestation",
+          "manifest"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4DjyuIBqA0yldk5In8zVxAEGeAJLHAfeEASqI~tplv-tiktokx-origin.image?dr=9636&x-expires=1778515200&x-signature=tr%2B%2B%2FJmaP9J9psYVGbA0qkh60aw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-06T18:42:36.000Z",
+        "metrics": {
+          "views": 1154,
+          "likes": 65,
+          "comments": 2,
+          "shares": 3
+        },
+        "providerVideoId": "7592320679467289870"
+      }
+    ]
   }
 }

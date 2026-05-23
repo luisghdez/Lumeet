@@ -21,7 +21,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urlencode, urlparse
 from urllib.request import Request, urlopen
 
-from PIL import Image, ImageChops, ImageStat
+from PIL import Image, ImageChops, ImageDraw, ImageStat
 
 from config import (
     APIFY_TIKTOK_ACTOR_ID,
@@ -72,6 +72,10 @@ VISUAL_VALUES = [
 ]
 MOTION_DIFFICULTY_VALUES = ["very_easy", "easy", "medium", "hard", "very_hard"]
 MOVEMENT_AMOUNT_VALUES = ["very_low", "low", "medium", "high", "very_high"]
+SCENE_ROLE_VALUES = [
+    "hook", "setup_context", "demo_step", "product_showcase", "proof",
+    "cta", "payoff", "transition", "broll", "other",
+]
 NICHE_VALUES = [
     "beauty", "fashion", "fitness", "health_wellness", "food_beverage", "home_lifestyle",
     "parenting_family", "personal_finance", "business_career", "education", "productivity",
@@ -130,6 +134,8 @@ PRODUCT_INTEGRATION_VALUES = [
     "none", "background_context", "mentioned_only", "shown_briefly", "demo_core",
     "before_after_driver", "testimonial_driver",
 ]
+PRODUCT_TYPE_VALUES = ["app", "physical_product", "service", "brand", "course", "unknown"]
+PRODUCT_MENTION_TYPE_VALUES = ["none", "text_overlay", "caption", "spoken", "visual_logo", "app_screen", "mixed"]
 PRODUCT_VISIBILITY_VALUES = ["none", "low", "medium", "high"]
 PRODUCT_FIT_VALUES = ["poor", "okay", "strong", "native"]
 DEMO_DEPTH_VALUES = [
@@ -147,7 +153,7 @@ CREATIVE_TEMPLATE_VALUES = [
 SCRIPT_STRUCTURE_VALUES = [
     "hook_context_payoff", "problem_agitation_solution", "listicle", "story_arc",
     "demo_steps", "visual_only", "audio_only_visual", "text_overlay_only",
-    "voiceover_narration", "question_answer",
+    "voiceover_narration", "question_answer", "hook_then_demo",
 ]
 REPEATABILITY_VALUES = ["one_off", "repeatable_series", "template_reusable", "trend_dependent"]
 PRODUCTION_COMPLEXITY_VALUES = ["low", "medium", "high"]
@@ -158,6 +164,7 @@ ASSET_REQUIREMENT_VALUES = [
 ]
 TRI_STATE_VALUES = ["yes", "no", "optional"]
 TEXT_OVERLAY_VALUES = ["none", "light", "heavy"]
+CTA_STRENGTH_VALUES = ["none", "light", "medium", "strong"]
 SCORE_FIELDS = [
     "campaign_fit_score", "account_fit_score", "repeatability_score", "viral_score",
     "conversion_potential_score", "trust_building_score", "education_value_score",
@@ -653,6 +660,10 @@ def _extract_scene_midpoint_frame(video_path: str, scene: Any, output_path: str)
     start_sec = start.get_seconds()
     end_sec = end.get_seconds()
     timestamp = start_sec + max(0.05, (end_sec - start_sec) / 2)
+    _extract_video_frame(video_path, timestamp, output_path)
+
+
+def _extract_video_frame(video_path: str, timestamp: float, output_path: str) -> None:
     cmd = [
         "ffmpeg", "-y",
         "-ss", str(timestamp),
@@ -665,6 +676,39 @@ def _extract_scene_midpoint_frame(video_path: str, scene: Any, output_path: str)
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0 or not os.path.isfile(output_path):
         raise VideoAnalysisError(f"scene frame extraction failed: {result.stderr[:200]}", 422)
+
+
+def _scene_role_contact_sheet(video_path: str, scene_timeline: List[Dict[str, Any]], output_path: str) -> str:
+    if len(scene_timeline) <= 1:
+        return ""
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    frame_dir = os.path.join(os.path.dirname(output_path), "scene_role_frames")
+    os.makedirs(frame_dir, exist_ok=True)
+    selected_scenes = scene_timeline[:16]
+    thumbs = []
+    for scene in selected_scenes:
+        scene_index = scene.get("scene_index")
+        start_sec = _safe_float(scene.get("start_sec"))
+        end_sec = _safe_float(scene.get("end_sec"), start_sec)
+        midpoint = start_sec + max(0.05, (end_sec - start_sec) / 2)
+        frame_path = os.path.join(frame_dir, f"scene_{scene_index}.jpg")
+        _extract_video_frame(video_path, midpoint, frame_path)
+        with Image.open(frame_path) as raw_img:
+            img = raw_img.convert("RGB").resize((168, 298))
+        canvas = Image.new("RGB", (168, 326), "white")
+        canvas.paste(img, (0, 0))
+        label = f"S{scene_index}: {round(start_sec, 1)}-{round(end_sec, 1)}s"
+        ImageDraw.Draw(canvas).text((8, 304), label, fill=(0, 0, 0))
+        thumbs.append(canvas)
+    if not thumbs:
+        return ""
+    cols = 4
+    rows = math.ceil(len(thumbs) / cols)
+    sheet = Image.new("RGB", (cols * 168, rows * 326), (240, 240, 240))
+    for idx, thumb in enumerate(thumbs):
+        sheet.paste(thumb, ((idx % cols) * 168, (idx // cols) * 326))
+    sheet.save(output_path, quality=88)
+    return output_path
 
 
 def _image_diff_score(prev_path: str, next_path: str) -> Dict[str, float]:
@@ -824,6 +868,25 @@ def _json_schema() -> Dict[str, Any]:
                 "conversion_intent": {"type": "string", "enum": CONVERSION_INTENT_VALUES},
                 "cta_type": {"type": "string", "enum": CTA_TYPE_VALUES},
                 "product_integration_type": {"type": "string", "enum": PRODUCT_INTEGRATION_VALUES},
+                "primary_product_name": {"type": "string"},
+                "primary_product_type": {"type": "string", "enum": PRODUCT_TYPE_VALUES},
+                "product_mention_type": {"type": "string", "enum": PRODUCT_MENTION_TYPE_VALUES},
+                "product_mention_context": {"type": "string"},
+                "mentioned_products": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": False,
+                        "properties": {
+                            "name": {"type": "string"},
+                            "product_type": {"type": "string", "enum": PRODUCT_TYPE_VALUES},
+                            "mention_type": {"type": "string", "enum": PRODUCT_MENTION_TYPE_VALUES},
+                            "context": {"type": "string"},
+                            "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+                        },
+                        "required": ["name", "product_type", "mention_type", "context", "confidence"],
+                    },
+                },
                 "product_visibility": {"type": "string", "enum": PRODUCT_VISIBILITY_VALUES},
                 "product_fit": {"type": "string", "enum": PRODUCT_FIT_VALUES},
                 "demo_depth": {"type": "string", "enum": DEMO_DEPTH_VALUES},
@@ -839,6 +902,31 @@ def _json_schema() -> Dict[str, Any]:
                 "requires_voiceover": {"type": "string", "enum": TRI_STATE_VALUES},
                 "requires_text_overlay": {"type": "string", "enum": TEXT_OVERLAY_VALUES},
                 "requires_trend_audio": {"type": "string", "enum": TRI_STATE_VALUES},
+                "cta_strength": {"type": "string", "enum": CTA_STRENGTH_VALUES},
+                "detected_text_cues": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                },
+                "scene_roles": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": False,
+                        "properties": {
+                            "scene_index": {"type": "integer"},
+                            "role": {"type": "string", "enum": SCENE_ROLE_VALUES},
+                            "start_sec": {"type": "number"},
+                            "end_sec": {"type": "number"},
+                            "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+                        },
+                        "required": ["scene_index", "role", "start_sec", "end_sec", "confidence"],
+                    },
+                },
+                "is_hook_then_demo": {"type": "boolean"},
+                "hook_scene_count": {"type": "integer"},
+                "demo_scene_count": {"type": "integer"},
+                "cta_scene_count": {"type": "integer"},
+                "demo_start_sec": {"type": "number"},
                 "campaign_fit_score": {"type": "number", "minimum": 0, "maximum": 1},
                 "account_fit_score": {"type": "number", "minimum": 0, "maximum": 1},
                 "repeatability_score": {"type": "number", "minimum": 0, "maximum": 1},
@@ -859,10 +947,15 @@ def _json_schema() -> Dict[str, Any]:
                 "content_pillar", "pillar_role", "account_archetype", "account_voice",
                 "audience_stage", "audience_identity",
                 "funnel_stage", "campaign_use", "conversion_intent", "cta_type",
-                "product_integration_type", "product_visibility", "product_fit", "demo_depth",
+                "product_integration_type", "primary_product_name", "primary_product_type",
+                "product_mention_type", "product_mention_context", "mentioned_products",
+                "product_visibility", "product_fit", "demo_depth",
                 "creative_template", "script_structure", "repeatability", "production_complexity",
                 "location_complexity", "asset_requirements", "requires_voiceover",
-                "requires_text_overlay", "requires_trend_audio", "campaign_fit_score",
+                "requires_text_overlay", "requires_trend_audio", "cta_strength",
+                "detected_text_cues", "scene_roles",
+                "is_hook_then_demo", "hook_scene_count", "demo_scene_count",
+                "cta_scene_count", "demo_start_sec", "campaign_fit_score",
                 "account_fit_score", "repeatability_score", "viral_score",
                 "conversion_potential_score", "trust_building_score", "education_value_score",
                 "entertainment_value_score", "production_ease_score", "hook_summary",
@@ -892,6 +985,9 @@ def _tag_with_openai(video_reference: Dict[str, Any], motion_metrics: Dict[str, 
         "sub_niches_by_niche": SUB_NICHE_VALUES,
         "formats": FORMAT_VALUES,
         "hook_types": HOOK_VALUES,
+        "scene_roles": SCENE_ROLE_VALUES,
+        "product_mention_types": PRODUCT_MENTION_TYPE_VALUES,
+        "cta_strengths": CTA_STRENGTH_VALUES,
         "visual_patterns": VISUAL_VALUES,
         "content_pillars": CONTENT_PILLAR_VALUES,
         "account_archetypes": ACCOUNT_ARCHETYPE_VALUES,
@@ -914,6 +1010,18 @@ def _tag_with_openai(video_reference: Dict[str, Any], motion_metrics: Dict[str, 
                 "- motion_amount is visible movement. recreation_difficulty is how hard the clip is to recreate for a campaign. A one-scene mirror/body clip can have medium/high visible movement but easy recreation.\n"
                 "- Prefer visual_only or audio_only_visual when there is no evidence of a spoken script, tutorial, or story arc.\n"
                 "- Use mirror_body_showcase/body_check/physique_showcase for physique, outfit, body check, flexing, or mirror pose clips that are primarily visual.\n\n"
+                "Product mention rules:\n"
+                "- Extract every visible, captioned, or spoken product/app/brand name into mentioned_products.\n"
+                "- If a long text overlay includes an app or brand name, set primary_product_name to that name and product_mention_type to text_overlay.\n"
+                "- A product can be mentioned without being demoed. In that case use product_integration_type mentioned_only, product_visibility low, demo_depth none, and cta_strength light if the wording nudges the viewer to use it.\n"
+                "- Use cta_strength light for subtle mentions like 'use/try with [app name]' inside relatable text, medium/strong for direct 'download now', 'try free', 'link in bio', or explicit offer language.\n"
+                "- detected_text_cues should include short exact or near-exact text snippets that explain the hook, CTA, product name, or audience pain point.\n\n"
+                "Scene role rules:\n"
+                "- If the first scene introduces a pain point, curiosity gap, promise, or reason to watch, label it hook.\n"
+                "- If later scenes show the product/app/interface/process in use, label those scenes demo_step, not generic broll.\n"
+                "- If a scene asks the viewer to download, try, buy, click, or use the app, label it cta.\n"
+                "- If scene 1 is hook and most later scenes are demo_step/product_showcase, set format hook_demo, creative_template hook_then_demo, script_structure hook_then_demo, and is_hook_then_demo true.\n"
+                "- A hook_demo can have many demo scenes. Use demo_start_sec for the start of the first demo/product scene.\n\n"
                 f"Campaign taxonomy hints:\n{taxonomy_text}\n\n"
                 f"Metadata:\n{json.dumps(_metadata_for_prompt(video_reference), indent=2)}\n\n"
                 f"Local motion metrics:\n{json.dumps(motion_metrics, indent=2)}"
@@ -982,6 +1090,8 @@ def _normalize_tags(tags: Dict[str, Any], motion_metrics: Dict[str, Any]) -> Dic
         ("conversion_intent", CONVERSION_INTENT_VALUES),
         ("cta_type", CTA_TYPE_VALUES),
         ("product_integration_type", PRODUCT_INTEGRATION_VALUES),
+        ("primary_product_type", PRODUCT_TYPE_VALUES),
+        ("product_mention_type", PRODUCT_MENTION_TYPE_VALUES),
         ("product_visibility", PRODUCT_VISIBILITY_VALUES),
         ("product_fit", PRODUCT_FIT_VALUES),
         ("demo_depth", DEMO_DEPTH_VALUES),
@@ -993,9 +1103,18 @@ def _normalize_tags(tags: Dict[str, Any], motion_metrics: Dict[str, Any]) -> Dic
         ("requires_voiceover", TRI_STATE_VALUES),
         ("requires_text_overlay", TEXT_OVERLAY_VALUES),
         ("requires_trend_audio", TRI_STATE_VALUES),
+        ("cta_strength", CTA_STRENGTH_VALUES),
     ]:
         if normalized.get(key) not in allowed:
             normalized[key] = "other" if "other" in allowed else allowed[0]
+    normalized["primary_product_name"] = str(normalized.get("primary_product_name") or "").strip()
+    normalized["product_mention_context"] = str(normalized.get("product_mention_context") or "").strip()
+    normalized["mentioned_products"] = _normalize_mentioned_products(normalized.get("mentioned_products"))
+    normalized = _sync_product_mention_summary(normalized)
+    text_cues = normalized.get("detected_text_cues")
+    if not isinstance(text_cues, list):
+        text_cues = []
+    normalized["detected_text_cues"] = [str(item).strip()[:180] for item in text_cues if str(item).strip()][:8]
     requirements = normalized.get("asset_requirements")
     if not isinstance(requirements, list):
         requirements = []
@@ -1003,6 +1122,8 @@ def _normalize_tags(tags: Dict[str, Any], motion_metrics: Dict[str, Any]) -> Dic
         item for item in requirements
         if item in ASSET_REQUIREMENT_VALUES
     ]
+    normalized["scene_roles"] = _normalize_scene_roles(normalized.get("scene_roles"), motion_metrics)
+    normalized = _sync_scene_role_summary(normalized, motion_metrics)
     if motion_metrics.get("motion_amount") in MOVEMENT_AMOUNT_VALUES:
         normalized["motion_amount"] = motion_metrics["motion_amount"]
     if motion_metrics.get("recreation_difficulty") in MOTION_DIFFICULTY_VALUES:
@@ -1012,6 +1133,149 @@ def _normalize_tags(tags: Dict[str, Any], motion_metrics: Dict[str, Any]) -> Dic
     for score_field in SCORE_FIELDS:
         normalized[score_field] = max(0.0, min(1.0, _safe_float(normalized.get(score_field), 0.0)))
     normalized["ai_confidence"] = max(0.0, min(1.0, _safe_float(normalized.get("ai_confidence"), 0.0)))
+    return normalized
+
+
+def _sync_product_mention_summary(tags: Dict[str, Any]) -> Dict[str, Any]:
+    normalized = dict(tags)
+    products = normalized.get("mentioned_products") if isinstance(normalized.get("mentioned_products"), list) else []
+    primary = products[0] if products else {}
+    if not normalized.get("primary_product_name") and primary:
+        normalized["primary_product_name"] = primary.get("name", "")
+    if normalized.get("primary_product_type") == "unknown" and primary:
+        normalized["primary_product_type"] = primary.get("product_type", "unknown")
+    if normalized.get("product_mention_type") == "none" and primary:
+        normalized["product_mention_type"] = primary.get("mention_type", "none")
+    if not normalized.get("product_mention_context") and primary:
+        normalized["product_mention_context"] = primary.get("context", "")
+
+    has_product_mention = bool(normalized.get("primary_product_name") or products)
+    if has_product_mention and normalized.get("product_integration_type") == "none":
+        normalized["product_integration_type"] = "mentioned_only"
+    if has_product_mention and normalized.get("product_visibility") == "none":
+        normalized["product_visibility"] = "low"
+    if has_product_mention and normalized.get("product_fit") == "poor":
+        normalized["product_fit"] = "native"
+    if has_product_mention and normalized.get("conversion_intent") == "none" and normalized.get("cta_strength") in {"light", "medium"}:
+        normalized["conversion_intent"] = "soft_sell"
+    if has_product_mention and normalized.get("funnel_stage") == "awareness" and normalized.get("cta_strength") in {"medium", "strong"}:
+        normalized["funnel_stage"] = "consideration"
+    return normalized
+
+
+def _normalize_mentioned_products(raw_products: Any) -> List[Dict[str, Any]]:
+    if not isinstance(raw_products, list):
+        return []
+    normalized = []
+    seen = set()
+    for item in raw_products:
+        if not isinstance(item, dict):
+            continue
+        name = str(item.get("name") or "").strip()
+        if not name:
+            continue
+        key = name.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        product_type = item.get("product_type") if item.get("product_type") in PRODUCT_TYPE_VALUES else "unknown"
+        mention_type = item.get("mention_type") if item.get("mention_type") in PRODUCT_MENTION_TYPE_VALUES else "none"
+        normalized.append({
+            "name": name[:80],
+            "product_type": product_type,
+            "mention_type": mention_type,
+            "context": str(item.get("context") or "").strip()[:180],
+            "confidence": max(0.0, min(1.0, _safe_float(item.get("confidence"), 0.5))),
+        })
+    return normalized[:8]
+
+
+def _normalize_scene_roles(raw_roles: Any, motion_metrics: Dict[str, Any]) -> List[Dict[str, Any]]:
+    timeline = motion_metrics.get("scene_timeline") or []
+    if not isinstance(timeline, list) or not timeline:
+        return []
+    timeline_by_index = {
+        int(_safe_float(scene.get("scene_index"), idx + 1)): scene
+        for idx, scene in enumerate(timeline)
+        if isinstance(scene, dict)
+    }
+    input_roles = raw_roles if isinstance(raw_roles, list) else []
+    role_by_index: Dict[int, Dict[str, Any]] = {}
+    for item in input_roles:
+        if not isinstance(item, dict):
+            continue
+        scene_index = int(_safe_float(item.get("scene_index"), 0))
+        if scene_index not in timeline_by_index:
+            continue
+        role = item.get("role") if item.get("role") in SCENE_ROLE_VALUES else "other"
+        role_by_index[scene_index] = {
+            "scene_index": scene_index,
+            "role": role,
+            "confidence": max(0.0, min(1.0, _safe_float(item.get("confidence"), 0.5))),
+        }
+
+    normalized = []
+    for scene_index, scene in sorted(timeline_by_index.items()):
+        role_item = role_by_index.get(scene_index) or {
+            "scene_index": scene_index,
+            "role": "other",
+            "confidence": 0.0,
+        }
+        normalized.append({
+            "scene_index": scene_index,
+            "role": role_item["role"],
+            "start_sec": _safe_float(scene.get("start_sec"), 0.0),
+            "end_sec": _safe_float(scene.get("end_sec"), 0.0),
+            "confidence": role_item["confidence"],
+        })
+    return normalized
+
+
+def _sync_scene_role_summary(tags: Dict[str, Any], motion_metrics: Dict[str, Any]) -> Dict[str, Any]:
+    normalized = dict(tags)
+    roles = normalized.get("scene_roles") if isinstance(normalized.get("scene_roles"), list) else []
+    hook_roles = [role for role in roles if role.get("role") == "hook"]
+    demo_roles = [role for role in roles if role.get("role") in {"demo_step", "product_showcase"}]
+    cta_roles = [role for role in roles if role.get("role") == "cta"]
+    normalized["hook_scene_count"] = len(hook_roles)
+    normalized["demo_scene_count"] = len(demo_roles)
+    normalized["cta_scene_count"] = len(cta_roles)
+    normalized["demo_start_sec"] = min([_safe_float(role.get("start_sec")) for role in demo_roles], default=0.0)
+    normalized["is_hook_then_demo"] = bool(
+        roles
+        and roles[0].get("role") == "hook"
+        and len(demo_roles) >= 1
+        and normalized["demo_start_sec"] >= _safe_float(roles[0].get("end_sec"), 0.0) - 0.15
+    )
+
+    if normalized["is_hook_then_demo"]:
+        normalized["format"] = "hook_demo"
+        normalized["creative_template"] = "hook_then_demo"
+        normalized["script_structure"] = "hook_then_demo"
+        if normalized.get("product_integration_type") in {"none", "background_context", "mentioned_only"}:
+            normalized["product_integration_type"] = "demo_core"
+        if normalized.get("demo_depth") in {"none", "feature_flash"}:
+            normalized["demo_depth"] = "multi_step_walkthrough" if len(demo_roles) > 1 else "single_feature_walkthrough"
+        if normalized.get("product_visibility") in {"none", "low"}:
+            normalized["product_visibility"] = "high"
+        if normalized.get("cta_type") in {"download_app", "try_free", "shop_now", "link_in_bio"}:
+            normalized["funnel_stage"] = "conversion"
+            normalized["conversion_intent"] = "hard_sell"
+        elif normalized.get("product_integration_type") == "demo_core":
+            normalized["funnel_stage"] = "consideration"
+            normalized["conversion_intent"] = "medium_sell"
+
+    if (
+        "app_screen" in (normalized.get("asset_requirements") or [])
+        and normalized.get("product_integration_type") == "demo_core"
+        and normalized.get("funnel_stage") == "conversion"
+        and normalized.get("cta_type") in {"no_cta", "link_in_bio"}
+    ):
+        normalized["cta_type"] = "download_app"
+
+    if cta_roles and normalized.get("cta_type") in {"download_app", "try_free", "shop_now"}:
+        normalized["funnel_stage"] = "conversion"
+        normalized["conversion_intent"] = "hard_sell"
     return normalized
 
 
@@ -1086,6 +1350,13 @@ def analyze_video_reference(video_reference: Dict[str, Any]) -> Dict[str, Any]:
         frame_paths = _sample_frames(downloaded_path, frame_dir)
         motion_metrics = _motion_metrics(frame_paths, probe, scene_metrics)
         selected_frames = _representative_frames(frame_paths, 4)
+        scene_contact_sheet = _scene_role_contact_sheet(
+            downloaded_path,
+            scene_metrics.get("scene_timeline", []),
+            os.path.join(work_dir, "scene_roles.jpg"),
+        )
+        if scene_contact_sheet:
+            selected_frames.append(scene_contact_sheet)
         normalized_tags = _tag_with_openai(video_reference, motion_metrics, selected_frames)
         kept_frames = frame_paths if VIDEO_ANALYSIS_KEEP_FRAMES else []
         return {

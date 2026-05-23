@@ -329,9 +329,9 @@
     "counts": {
       "total": 100,
       "imported": 100,
-      "enriched": 2,
+      "enriched": 3,
       "failed": 1,
-      "aiTagged": 2,
+      "aiTagged": 3,
       "created": 100,
       "duplicates": 0
     },
@@ -438,6 +438,6 @@
       "vidref_0f42fd355f8ba845"
     ],
     "createdAt": "2026-05-09T15:49:00.814168+00:00",
-    "updatedAt": "2026-05-09T15:55:48.854850+00:00"
+    "updatedAt": "2026-05-09T16:07:20.478298+00:00"
   }
 }
