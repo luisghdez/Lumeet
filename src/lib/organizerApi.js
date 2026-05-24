@@ -76,3 +76,62 @@ export async function createAccountPlan({ archetype = 'studytok', postCount = 10
     body: JSON.stringify({ archetype, postCount, batchId }),
   });
 }
+
+export async function createStudyTokSimplePlan({
+  postCount = 30,
+  relatablePerDay = 3,
+  hookDemoPerDay = 1,
+  startDate = '',
+  dailyTimes = [],
+  timezone = 'UTC',
+} = {}) {
+  return request('/api/account-planner/studytok/simple-plans', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      postCount,
+      relatablePerDay,
+      hookDemoPerDay,
+      startDate,
+      dailyTimes,
+      timezone,
+    }),
+  });
+}
+
+export async function getAccountPlan(planId) {
+  return request(`/api/account-planner/plans/${encodeURIComponent(planId)}`);
+}
+
+export async function updateAccountPlan(planId, updates) {
+  return request(`/api/account-planner/plans/${encodeURIComponent(planId)}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updates),
+  });
+}
+
+export async function generateAccountPlanPosts(
+  planId,
+  { dryRun = false, limit = 0, modelId = '', extensionVideoId = '' } = {},
+) {
+  return request(`/api/account-planner/plans/${encodeURIComponent(planId)}/generate`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ dryRun, limit, modelId, extensionVideoId }),
+  });
+}
+
+export async function updateAccountPlanPost({ planId, slot, updates }) {
+  return request(`/api/account-planner/plans/${encodeURIComponent(planId)}/posts/${encodeURIComponent(slot)}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updates),
+  });
+}
+
+export async function swapAccountPlanPost({ planId, slot }) {
+  return request(`/api/account-planner/plans/${encodeURIComponent(planId)}/posts/${encodeURIComponent(slot)}/swap`, {
+    method: 'POST',
+  });
+}

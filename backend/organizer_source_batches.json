@@ -64,9 +64,9 @@
     "counts": {
       "total": 30,
       "imported": 30,
-      "enriched": 5,
+      "enriched": 19,
       "failed": 0,
-      "aiTagged": 5,
+      "aiTagged": 19,
       "created": 30,
       "duplicates": 0
     },
@@ -103,7 +103,7 @@
       "vidref_0d9a1de89563daa7"
     ],
     "createdAt": "2026-05-09T06:15:06.787314+00:00",
-    "updatedAt": "2026-05-09T06:17:49.022891+00:00"
+    "updatedAt": "2026-05-23T21:02:13.022535+00:00"
   },
   "batch_03697bf4aed1": {
     "id": "batch_03697bf4aed1",
@@ -575,9 +575,9 @@
     "counts": {
       "total": 100,
       "imported": 100,
-      "enriched": 9,
-      "failed": 0,
-      "aiTagged": 9,
+      "enriched": 28,
+      "failed": 1,
+      "aiTagged": 28,
       "created": 71,
       "duplicates": 29
     },
@@ -684,7 +684,7 @@
       "vidref_2a96d1864e762e54"
     ],
     "createdAt": "2026-05-23T20:17:43.663921+00:00",
-    "updatedAt": "2026-05-23T20:20:56.843829+00:00"
+    "updatedAt": "2026-05-23T21:02:13.023055+00:00"
   },
   "batch_15df75883c8d": {
     "id": "batch_15df75883c8d",

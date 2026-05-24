@@ -101,6 +101,10 @@ ORGANIZER_VIDEO_AI_TAGS_FILE = _get_env(
     "ORGANIZER_VIDEO_AI_TAGS_FILE",
     os.path.join(os.path.dirname(__file__), "organizer_video_ai_tags.json"),
 )
+ACCOUNT_PLAN_METADATA_FILE = _get_env(
+    "ACCOUNT_PLAN_METADATA_FILE",
+    os.path.join(os.path.dirname(__file__), "account_plan_metadata.json"),
+)
 VIDEO_ANALYSIS_TEMP_DIR = _get_env(
     "VIDEO_ANALYSIS_TEMP_DIR",
     os.path.join(os.path.dirname(__file__), "analysis_tmp"),

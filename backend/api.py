@@ -51,8 +51,15 @@ from organizer_store import APPROVAL_STATUSES, organizer_store
 from video_analysis_service import analyze_video_reference, VideoAnalysisError
 from account_planner_service import (
     AccountPlannerError,
+    create_studytok_simple_plan,
     generate_account_plan,
     list_archetypes as list_account_planner_archetypes,
+    swap_studytok_plan_post,
+)
+from account_plan_store import account_plan_store
+from account_plan_generation_service import (
+    AccountPlanGenerationError,
+    start_plan_generation,
 )
 from config import (
     PUBLIC_BACKEND_BASE_URL,
@@ -146,8 +153,38 @@ class OrganizerBatchAnalyzeRequest(BaseModel):
 
 class AccountPlannerCreateRequest(BaseModel):
     archetype: str = Field(default="studytok", pattern=r"^studytok$")
-    postCount: int = Field(default=10, ge=1, le=20)
+    postCount: int = Field(default=30, ge=1, le=60)
     batchId: str = Field(default="", max_length=120)
+
+
+class StudyTokSimplePlanCreateRequest(BaseModel):
+    postCount: int = Field(default=30, ge=1, le=60)
+    relatablePerDay: int = Field(default=3, ge=0, le=12)
+    hookDemoPerDay: int = Field(default=1, ge=0, le=12)
+    startDate: str = Field(default="", max_length=20)
+    dailyTimes: List[str] = Field(default_factory=list)
+    timezone: str = Field(default="UTC", max_length=80)
+
+
+class AccountPlanPatchRequest(BaseModel):
+    status: Optional[str] = Field(default=None, pattern=r"^(draft|approved|generating|generated|generation_failed|generation_dry_run)$")
+    plannedPosts: Optional[List[Dict[str, Any]]] = None
+
+
+class AccountPlanGenerateRequest(BaseModel):
+    dryRun: bool = False
+    limit: int = Field(default=0, ge=0, le=60)
+    modelId: Optional[str] = Field(default=None, max_length=120)
+    extensionVideoId: Optional[str] = Field(default=None, max_length=120)
+
+
+class AccountPlanPostPatchRequest(BaseModel):
+    captionDraft: Optional[str] = Field(default=None, max_length=5000)
+    suggestedScheduledFor: Optional[str] = Field(default=None, max_length=80)
+    reviewStatus: Optional[str] = Field(default=None, pattern=r"^(pending|approved|rejected|scheduled)$")
+    status: Optional[str] = Field(default=None, max_length=40)
+    generatedMediaUrl: Optional[str] = Field(default=None, max_length=1000)
+    latePostId: Optional[str] = Field(default=None, max_length=200)
 
 
 # ---------------------------------------------------------------------------
@@ -938,6 +975,95 @@ async def create_account_plan(payload: AccountPlannerCreateRequest):
         raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
 
 
+@app.post("/api/account-planner/studytok/simple-plans")
+async def create_studytok_simple_plan_endpoint(payload: StudyTokSimplePlanCreateRequest):
+    """Create an ordered StudyTok plan from content mix/frequency only."""
+    try:
+        return create_studytok_simple_plan(
+            post_count=payload.postCount,
+            relatable_per_day=payload.relatablePerDay,
+            hook_demo_per_day=payload.hookDemoPerDay,
+            start_date=payload.startDate,
+            daily_times=payload.dailyTimes,
+            timezone=payload.timezone,
+        )
+    except AccountPlannerError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+
+
+@app.get("/api/account-planner/plans")
+async def list_account_plans(limit: int = Query(25, ge=1, le=100)):
+    """List saved account plans."""
+    return {"plans": account_plan_store.list_all(limit=limit)}
+
+
+@app.get("/api/account-planner/plans/{plan_id}")
+async def get_account_plan(plan_id: str):
+    """Get a saved account plan and current generation/review statuses."""
+    plan = account_plan_store.get(plan_id)
+    if not plan:
+        raise HTTPException(status_code=404, detail=f"Account plan {plan_id} not found.")
+    return plan
+
+
+@app.patch("/api/account-planner/plans/{plan_id}")
+async def update_account_plan(plan_id: str, payload: AccountPlanPatchRequest):
+    """Approve or update mutable plan fields such as ordered posts."""
+    updates = {}
+    if payload.status is not None:
+        updates["status"] = payload.status
+    if payload.plannedPosts is not None:
+        updates["plannedPosts"] = payload.plannedPosts
+    if not updates:
+        plan = account_plan_store.get(plan_id)
+    else:
+        plan = account_plan_store.update(plan_id, **updates)
+    if not plan:
+        raise HTTPException(status_code=404, detail=f"Account plan {plan_id} not found.")
+    return plan
+
+
+@app.post("/api/account-planner/plans/{plan_id}/generate")
+async def generate_account_plan_posts(plan_id: str, payload: AccountPlanGenerateRequest):
+    """Start controlled bulk generation for an approved StudyTok plan."""
+    try:
+        return start_plan_generation(
+            plan_id,
+            dry_run=payload.dryRun,
+            limit=payload.limit,
+            model_id=payload.modelId,
+            extension_video_id=payload.extensionVideoId,
+        )
+    except AccountPlanGenerationError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+
+
+@app.patch("/api/account-planner/plans/{plan_id}/posts/{slot}")
+async def update_account_plan_post(plan_id: str, slot: int, payload: AccountPlanPostPatchRequest):
+    """Update per-post caption, schedule suggestion, review state, or schedule metadata."""
+    updates = {
+        key: value
+        for key, value in payload.model_dump().items()
+        if value is not None
+    }
+    if not updates:
+        plan = account_plan_store.get(plan_id)
+    else:
+        plan = account_plan_store.update_post(plan_id, slot, **updates)
+    if not plan:
+        raise HTTPException(status_code=404, detail=f"Plan {plan_id} slot {slot} not found.")
+    return plan
+
+
+@app.post("/api/account-planner/plans/{plan_id}/posts/{slot}/swap")
+async def swap_account_plan_post(plan_id: str, slot: int):
+    """Replace one planned post with a similar unused tagged source video."""
+    try:
+        return swap_studytok_plan_post(plan_id, slot)
+    except AccountPlannerError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+
+
 # ---------------------------------------------------------------------------
 # Video Library Endpoints
 # ---------------------------------------------------------------------------
@@ -1098,26 +1224,32 @@ async def generation_create_video(
             ext_record = extension_video_metadata_store.get(extensionVideoId)
             if not ext_record:
                 raise HTTPException(status_code=404, detail=f"Extension video {extensionVideoId} not found.")
-            ext_url = ext_record.get("url", "")
-            if not ext_url:
-                raise HTTPException(status_code=500, detail=f"Extension video {extensionVideoId} has no URL.")
-            # Refresh signed URL
-            bucket = ext_record.get("bucket")
-            obj = ext_record.get("object")
-            if bucket and obj:
-                try:
-                    from storage_gcs import GcsStorage
-                    gcs = GcsStorage()
-                    if bucket == gcs.bucket_name:
-                        ext_url = gcs.generate_read_url(obj)
-                except Exception:
-                    pass
-            add_ext = os.path.splitext(obj or ".mp4")[1] or ".mp4"
-            additional_video_path = os.path.join(input_dir, f"additional_video{add_ext}")
-            resp = _requests.get(ext_url, timeout=120)
-            resp.raise_for_status()
-            with open(additional_video_path, "wb") as f:
-                f.write(resp.content)
+            local_ext_path = ext_record.get("localPath", "")
+            if local_ext_path and os.path.isfile(local_ext_path):
+                add_ext = os.path.splitext(local_ext_path)[1] or ".mp4"
+                additional_video_path = os.path.join(input_dir, f"additional_video{add_ext}")
+                shutil.copyfile(local_ext_path, additional_video_path)
+            else:
+                ext_url = ext_record.get("url", "")
+                if not ext_url:
+                    raise HTTPException(status_code=500, detail=f"Extension video {extensionVideoId} has no URL.")
+                # Refresh signed URL
+                bucket = ext_record.get("bucket")
+                obj = ext_record.get("object")
+                if bucket and obj:
+                    try:
+                        from storage_gcs import GcsStorage
+                        gcs = GcsStorage()
+                        if bucket == gcs.bucket_name:
+                            ext_url = gcs.generate_read_url(obj)
+                    except Exception:
+                        pass
+                add_ext = os.path.splitext(obj or ".mp4")[1] or ".mp4"
+                additional_video_path = os.path.join(input_dir, f"additional_video{add_ext}")
+                resp = _requests.get(ext_url, timeout=120)
+                resp.raise_for_status()
+                with open(additional_video_path, "wb") as f:
+                    f.write(resp.content)
 
     job.video_path = video_path
     job.image_path = image_path
@@ -1670,7 +1802,13 @@ def _refresh_extension_video_url(item: dict) -> dict:
             if bucket == gcs.bucket_name:
                 refreshed["url"] = gcs.generate_read_url(object_name)
         except Exception:
-            pass
+            ext_id = item.get("extensionVideoId")
+            if ext_id and item.get("localPath"):
+                refreshed["url"] = f"{PUBLIC_BACKEND_BASE_URL.rstrip('/')}/api/extension-videos/{ext_id}/video"
+    elif item.get("localPath"):
+        ext_id = item.get("extensionVideoId")
+        if ext_id:
+            refreshed["url"] = f"{PUBLIC_BACKEND_BASE_URL.rstrip('/')}/api/extension-videos/{ext_id}/video"
     return refreshed
 
 
@@ -1680,6 +1818,27 @@ async def list_extension_videos():
     items = extension_video_metadata_store.list_all()
     refreshed = [_refresh_extension_video_url(item) for item in items]
     return {"extensionVideos": refreshed}
+
+
+@app.get("/api/extension-videos/{ext_id}/video")
+async def get_extension_video(ext_id: str):
+    """Serve a locally stored extension video."""
+    item = extension_video_metadata_store.get(ext_id)
+    if not item:
+        raise HTTPException(status_code=404, detail=f"Extension video {ext_id} not found.")
+
+    local_path = item.get("localPath", "")
+    if not local_path or not os.path.isfile(local_path):
+        raise HTTPException(status_code=404, detail=f"Extension video {ext_id} not found.")
+
+    import mimetypes
+
+    media_type, _ = mimetypes.guess_type(local_path)
+    return FileResponse(
+        local_path,
+        media_type=media_type or "video/mp4",
+        filename=item.get("filename") or os.path.basename(local_path),
+    )
 
 
 @app.post("/api/extension-videos")
@@ -1702,20 +1861,27 @@ async def upload_extension_video(
     local_path = os.path.join(tmp_dir, f"extension{ext}")
     _save_upload(video, local_path)
 
+    gcs_info: Optional[dict] = None
     try:
         from storage_gcs import GcsStorage
         gcs = GcsStorage()
         object_name = f"{GCS_EXTENSION_VIDEOS_OBJECT_PREFIX.strip('/')}/{ext_id}/extension{ext}"
         gcs_info = gcs.upload_file_public(local_path, object_name)
     except Exception as exc:
-        raise HTTPException(status_code=500, detail=f"GCS upload failed: {exc}") from exc
+        logger.warning("GCS extension video upload failed; using local storage: %s", exc)
 
     now_iso = datetime.now(_tz.utc).isoformat()
     record = {
         "extensionVideoId": ext_id,
-        "url": gcs_info.get("url", ""),
-        "bucket": gcs_info.get("bucket", ""),
-        "object": gcs_info.get("object", ""),
+        "url": (
+            gcs_info.get("url", "")
+            if gcs_info
+            else f"{PUBLIC_BACKEND_BASE_URL.rstrip('/')}/api/extension-videos/{ext_id}/video"
+        ),
+        "bucket": gcs_info.get("bucket", "") if gcs_info else "",
+        "object": gcs_info.get("object", "") if gcs_info else "",
+        "localPath": local_path,
+        "storage": "gcs" if gcs_info else "local",
         "label": label.strip() if label else "",
         "filename": video.filename or "",
         "createdAt": now_iso,

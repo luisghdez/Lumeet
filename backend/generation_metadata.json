@@ -2017,5 +2017,111 @@
       "videoGcs": null
     },
     "jobId": "01f665a179bf"
+  },
+  "41ec24c05067": {
+    "generationId": "41ec24c05067",
+    "type": "video",
+    "label": "StudyTok plan plan_7c724ecd2e58 slot 1: relatable",
+    "status": "failed",
+    "progress": 66,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "No scene change detected -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"WHEN YOU'VE ALREADY GIVEN YOUR ALL AND IT'S ONLY FUKIN TUESDAY\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "running",
+        "message": "Fal finished, downloading result\u2026"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "Cancelled by user",
+    "createdAt": 1779641173.951859,
+    "completedAt": 1779642237.078808,
+    "output": null,
+    "jobId": "1a60de1e2662",
+    "plannerPlanId": "plan_7c724ecd2e58",
+    "plannerSlot": 1
+  },
+  "f7462a34f414": {
+    "generationId": "f7462a34f414",
+    "type": "video",
+    "label": "StudyTok plan plan_7c724ecd2e58 slot 2: relatable",
+    "status": "failed",
+    "progress": 66,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "No scene change detected -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"TYPES OF HEADACHES\nMEDSTUDENT EDITION\nhistology (just dots??) muscle origins & insertions\nplexus + lymphatics\n7AM ANATOMY LAB WITH DONORS ON 40 MINUTES OF SLEEP QUESTIONING MY LIFE \ud83d\udc7b\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "running",
+        "message": "Fal rendering\u2026 (~12s)"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "Cancelled by user",
+    "createdAt": 1779641304.372969,
+    "completedAt": 1779642236.217432,
+    "output": null,
+    "jobId": "bdc0b7c27e8e",
+    "plannerPlanId": "plan_7c724ecd2e58",
+    "plannerSlot": 2
   }
 }

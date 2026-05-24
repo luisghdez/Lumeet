@@ -1,127 +1,4 @@
 {
-  "da82defe5c9a": {
-    "modelId": "da82defe5c9a",
-    "url": "https://storage.googleapis.com/lumeet-bucket/models/da82defe5c9a/avatar.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T045426Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=2e828cbc5bf94cbe6ebf5c7b4ab808b4509e4641222ba324981d3a633281290d888fce9b4adecec0a916e368ca3e29ab5c876727eb9e320a37bdbb28c7d7d301cb7479eade50154defce37f2c476332f2d2ba72d02055c74df19cb6500a54cffcd268a9287218b6843b1c9e5c13dc32c765053e44b00ebabeb72f0e1afea9a0ba803c988c41dca0fe4c3782a5ba3b42663f4ab80a3baffcd2eebc71a2f431776c97517e37e8c350d302fdd90b2c734472118847e915b4ec27a7ec55386ed99ed66cdac154b89259e5559db30f5aab7d9dc176c279a3231d1abcb95ed9547d2f1792888b052ca825e0f60bf7872082fd85cbfdb02ec6332dbe997997a0709c9a6",
-    "bucket": "lumeet-bucket",
-    "object": "models/da82defe5c9a/avatar.png",
-    "label": "Male \u00b7 African \u00b7 Deep",
-    "filename": "avatar.png",
-    "createdAt": "2026-05-02T04:54:26.576647+00:00",
-    "source": "avatar_studio",
-    "avatarConfig": {
-      "gender": "male",
-      "ethnicity": "african",
-      "skinTone": "deep",
-      "eyeColor": "hazel",
-      "age": "young_adult",
-      "bodyType": "muscular",
-      "hairType": "curly",
-      "hairLength": "medium",
-      "hairColor": "dark_brown",
-      "tattoos": "full_sleeve",
-      "piercings": "septum",
-      "extras": [
-        "glasses",
-        "beard"
-      ],
-      "outfit": "casual"
-    },
-    "promptSummary": "male-presenting. African features and heritage. deep brown skin tone. hazel eyes. in their early 20s, fresh and youthful. visibly muscular build. curly hair. medium-length hair. dark brown hair. full sleeve tattoos. septum nose piercing. wearing thin-frame modern glasses, well-groomed short beard. casual everyday outfit, simple t-shirt and jeans",
-    "provider": "gemini"
-  },
-  "b8e657701b5c": {
-    "modelId": "b8e657701b5c",
-    "url": "https://storage.googleapis.com/lumeet-bucket/models/b8e657701b5c/avatar.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T050614Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=a04d87ee2c08565739f281847e50441691a1e531408a71c42c4d2093283835234a74b5f887a564dfbd7918397bc27b4c6f85ec7bed9d763946bc17e45f7baa61ff3be6eca6ae19f5aa742767f637ae82d2e7aecd03a0170298846aded3ff83796c0c371a5a352e023a4c01ede290b9905144eb2b51a9f46cd666395ca0bb7c826533c374762a736be10b1bd0d793b1a69c0f7840f695409a92b47196a2b6d223de5c116c1efd55093b6254d5aacd9c3e9d5cf4dcc990bb6b87c487b0e98e9b397d95970f80849c8b6dcc83632b407bb893782718be19d00998c93c55c44b96863b09ba48da9b86afc33f5d3bae9927b67c30a100d5e0cbd24ec1a9cfb3c44109",
-    "bucket": "lumeet-bucket",
-    "object": "models/b8e657701b5c/avatar.png",
-    "label": "Female \u00b7 East Asian \u00b7 Fair",
-    "filename": "avatar.png",
-    "createdAt": "2026-05-02T05:06:14.901841+00:00",
-    "source": "avatar_studio",
-    "avatarConfig": {
-      "gender": "female",
-      "ethnicity": "asian",
-      "skinTone": "fair",
-      "age": "young_adult",
-      "bodyType": "athletic",
-      "hairType": "straight",
-      "hairColor": "brown",
-      "outfit": "casual"
-    },
-    "promptSummary": "female-presenting. East Asian features and heritage. fair skin tone. in their early 20s, fresh and youthful. athletic toned build. straight hair. medium brown hair. casual everyday outfit, simple t-shirt and jeans",
-    "provider": "gemini"
-  },
-  "bca22ca30c3e": {
-    "modelId": "bca22ca30c3e",
-    "url": "https://storage.googleapis.com/lumeet-bucket/models/bca22ca30c3e/avatar.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T050706Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=c80a4f97c9167d91edd952ac61dc2c196c1e9c439b36827ca2b240badfed1184c6692ea9f934fd6915ea2fe274ecd87d7fe2d7151c2ea18eec3f4cf4e078375a07af7584984b7b2a98e8d34515d34cd57df9e14ea5e12e4add7ee80808b89b893b983b74f88fe546698f3dfe904017606c2f3fb6b54dbb19d42f29820dcf3310bb69b7ad55e2e6ab41097c1d16eec378ba623db6385faf83d4db2aa77159dd983268d8351130c323d00192d6d78962aefbc6723198c9352847e2776ebb1bd1402c2eb4ee6f41e6c263a78a08c58f496f336f6a3266e9ae8bec0e50de32100b9dc888b8019c8fa3a0671cf8c444f653e87cbf120aa820ba6b7edb2ef39530e8cf",
-    "bucket": "lumeet-bucket",
-    "object": "models/bca22ca30c3e/avatar.png",
-    "label": "Male \u00b7 East Asian \u00b7 Fair",
-    "filename": "avatar.png",
-    "createdAt": "2026-05-02T05:07:06.591853+00:00",
-    "source": "avatar_studio",
-    "avatarConfig": {
-      "gender": "male",
-      "ethnicity": "asian",
-      "skinTone": "fair",
-      "age": "young_adult",
-      "bodyType": "athletic",
-      "hairType": "straight",
-      "hairColor": "brown",
-      "outfit": "casual"
-    },
-    "promptSummary": "male-presenting. East Asian features and heritage. fair skin tone. in their early 20s, fresh and youthful. athletic toned build. straight hair. medium brown hair. casual everyday outfit, simple t-shirt and jeans",
-    "provider": "gemini"
-  },
-  "354f027b3603": {
-    "modelId": "354f027b3603",
-    "url": "https://storage.googleapis.com/lumeet-bucket/models/354f027b3603/avatar.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260502%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260502T050807Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=dbac9416d046b03e2d89d3315b82be790cce8c9cd318ba433269be95c1c9149f2a4e2d7ecf886cfe485f9f9ffd54eaaf3b868b7f283fe5bf948f615a78c3aa2c00c694b3858ff5e34b01ada5112e1f39ede5e137bf0a6af84e583c94374287e7691519ac6d2f91b767c9accba9aab1238d4c135244ec8b724fa84c78ff9733fd139ecccd33be6dff653fcc2e32f0b0703d74fe86a17f064115566eda7f4cca8556681da826a89d2794b854e7e621a1659da428273a6e75757e8eff763854867a1281b274b2daf6895ae8c3bfabff5a81d9e6ba6b6587ad8305df3da3b345cee67ee2892e0694fb24d139becb54a726bce87ea8c05bb762ce2b918384330fd68c",
-    "bucket": "lumeet-bucket",
-    "object": "models/354f027b3603/avatar.png",
-    "label": "Female \u00b7 European \u00b7 Fair",
-    "filename": "avatar.png",
-    "createdAt": "2026-05-02T05:08:07.029318+00:00",
-    "source": "avatar_studio",
-    "avatarConfig": {
-      "gender": "female",
-      "ethnicity": "european",
-      "skinTone": "fair",
-      "age": "young_adult",
-      "bodyType": "athletic",
-      "hairType": "straight",
-      "hairColor": "brown",
-      "outfit": "casual"
-    },
-    "promptSummary": "female-presenting. European features and heritage. fair skin tone. in their early 20s, fresh and youthful. athletic toned build. straight hair. medium brown hair. casual everyday outfit, simple t-shirt and jeans",
-    "provider": "gemini"
-  },
-  "5a786470293f": {
-    "modelId": "5a786470293f",
-    "url": "https://storage.googleapis.com/lumeet-bucket/models/5a786470293f/model.JPG?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260505%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260505T003651Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=69492f6c2e2ac142d2e4b5741bf52aba0c5ef20bf0b60af241045d561f033e2582f380e2dc55469cb4a4220dfaa03be62e97f86f3766f9cf215ae18abb0397306e76d699f15f390de6a61a80658508e7a74d835ff214d25268b4225ec9f02c56dfbaa847a9a5d7530d9c389bd9be729d41e70e40f8e62aa2670cb270500bff8591dd9a0af6670214e179bd3f8f205daead4a7608fcc43a9b984d05a453665e3f80e05cc53d13b1ff82055379cb302bc4eaf7800a488452067f9d77e1789c42e52e7caabadd32f901112a7e5a113c612b109f6bf840283adfae3a8e375bcf7f6bb41039d2d3aa553be34ca6b4d61a614e3016042e8fcfa3a463ccd0d6fdcd703b",
-    "bucket": "lumeet-bucket",
-    "object": "models/5a786470293f/model.JPG",
-    "label": "d07a75cc-b3bc-40f2-8039-6f19399486df",
-    "filename": "d07a75cc-b3bc-40f2-8039-6f19399486df.JPG",
-    "createdAt": "2026-05-05T00:36:51.806291+00:00"
-  },
-  "041ac9ad0d5b": {
-    "modelId": "041ac9ad0d5b",
-    "url": "https://storage.googleapis.com/lumeet-bucket/models/041ac9ad0d5b/model.jpeg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260505%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260505T004910Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=63e880975be70bd48b135dd24ac78ab2d20e3f69770564390cf168e6b2a389b976465e3a3fbe605b561aa1245ac0b465f4dfcd21b0f2b86c92fa3cd3f0daf565637ff297975d4fb3597ccee2623f1525d8c3431d1bb584f4300d2efbf4230a8f5826cc1879ff046870cce570c143a8e807f6c3392cfb029ca98b856934b3a56e377f825353e969a2f78609402c406a6dfd1d509b1c36ec415f200fdfc6f61757aa22e955016eeb8c1d7f284aaf57e3c9cad1a9ba7d1851482caeb15c60ffe47271ac7772580dacfa983da0eb2e6a11e5192aed72bf579aa77a414dad515bd61fc63d4da55013dce6f3c4d35634a4051860b11b9b334dcacd82213e2164e1a2ef",
-    "bucket": "lumeet-bucket",
-    "object": "models/041ac9ad0d5b/model.jpeg",
-    "label": "hf_20260502_042554_5dbaae89-e758-4a4c-9af3-798460b40dc2",
-    "filename": "hf_20260502_042554_5dbaae89-e758-4a4c-9af3-798460b40dc2.jpeg",
-    "createdAt": "2026-05-05T00:49:10.362565+00:00"
-  },
-  "e46f98cc6425": {
-    "modelId": "e46f98cc6425",
-    "url": "https://storage.googleapis.com/lumeet-bucket/models/e46f98cc6425/model.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260505%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260505T005108Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=6620eae9a58fbd549f6d27ff1c25a678a0d24054ffe1ed406f1a5de56ffa72ca97969a5fc8c6fe1889b88008c2c5bc4cf85cbfd1f59131bca14fef68d5fe1e038b066b367503b498e7720e68f51c2e5772783a9861bc88c04dc3c659f90deb505637520eca37957eb34673e5e331a1bf035b1d35b7734085aa18b0e12c2f63f4119ce4503a800fe004cdd52a81a1c680007a56a5b65862667eada8ceeecc62bfff3af225878196140128b5a57bbb87d94a7518b08e98cbab2d8421aa40d91c6e23cbfc131a03c3a7f9d4ccea1af824ed3aa57827ec8aa0b2d2cf6c062b8dc0f3dc46fc749904959b49aaa214f2fba69c582c34b304bef926f4b3b5ac7393aeab",
-    "bucket": "lumeet-bucket",
-    "object": "models/e46f98cc6425/model.png",
-    "label": "hf_20260313_233106_01a95826-04da-480c-8172-f2771fcbe889",
-    "filename": "hf_20260313_233106_01a95826-04da-480c-8172-f2771fcbe889.png",
-    "createdAt": "2026-05-05T00:51:08.680530+00:00"
-  },
   "9958a78b879e": {
     "modelId": "9958a78b879e",
     "url": "http://127.0.0.1:8000/api/models/9958a78b879e/image",
@@ -143,5 +20,16 @@
     "label": "hf_20260505_013615_81a886b5-2d0b-483f-885f-c4f36eec1c16",
     "filename": "hf_20260505_013615_81a886b5-2d0b-483f-885f-c4f36eec1c16.png",
     "createdAt": "2026-05-05T01:51:25.023998+00:00"
+  },
+  "dcfb0bc5015f": {
+    "modelId": "dcfb0bc5015f",
+    "url": "http://127.0.0.1:8000/api/models/dcfb0bc5015f/image",
+    "bucket": "",
+    "object": "",
+    "localPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/_model_dcfb0bc5015f/model.png",
+    "storage": "local",
+    "label": "hf_20260524_170025_83db9498-4467-4c8a-9cf1-fd127339fef6",
+    "filename": "hf_20260524_170025_83db9498-4467-4c8a-9cf1-fd127339fef6.png",
+    "createdAt": "2026-05-24T17:09:36.734680+00:00"
   }
 }

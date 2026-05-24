@@ -1,4 +1,4 @@
-const DEFAULT_SESSION_ID = 'local-dev-session';
+export const DEFAULT_SESSION_ID = 'local-dev-session';
 
 async function request(path, options = {}) {
   const resp = await fetch(path, options);
@@ -290,4 +290,3 @@ export async function startAvatarGeneration({ selections, promptSummary, label }
   });
 }
 
-export { DEFAULT_SESSION_ID };

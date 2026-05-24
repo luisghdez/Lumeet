@@ -1,29 +1,13 @@
 {
-  "ef8a7e51db63": {
-    "extensionVideoId": "ef8a7e51db63",
-    "url": "https://storage.googleapis.com/lumeet-bucket/extension_videos/ef8a7e51db63/extension.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260329%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260329T005715Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=db7c5221beb5181da1e21da79316263cae64ae53f2a849feb387a25cd15e67540d5ca8515863e665c6cf2faef3dfcfb8a41c6ee473d72cbad09724e043c919bb1970a45e1dda2e539b7a668e49be61ce8f2f73d5faca0adff586529419f658b4c25578ae207d6fc31d47ed1224002e4e03d6368815fa5b68ad53b03356acde6bbfecc04ee14619b6458d0ef3aff66083b7f1e17f97c145f1fcd79f6488179f9d9d660d3939b1c2a7512acbedd85d483da99034fc5df5631acf2cd1f194d7c69053aa80ee3b148d4bfcbecd33ecfc7bce31fcc22a2cf239dfafa1da4373807a3a7a89c6e67584025921460bcf11afd3bc705c40b87f541565334c8b3a8d76fb10",
-    "bucket": "lumeet-bucket",
-    "object": "extension_videos/ef8a7e51db63/extension.mp4",
-    "label": "croppedLumi",
-    "filename": "croppedLumi.mp4",
-    "createdAt": "2026-03-29T00:57:15.626427+00:00"
-  },
-  "68b7e9033aed": {
-    "extensionVideoId": "68b7e9033aed",
-    "url": "https://storage.googleapis.com/lumeet-bucket/extension_videos/68b7e9033aed/extension.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T031430Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=da6f5b4ec058be69221feee51424ea644e2ffac443ed0cddacad2133b5cd89a0dc3623aee83c63efa1e86dcb480d7a998086f52acdb3dd1128d2cda682fa549740f835fd0ff4c7d5d2cf8ce484e703e3bab30b104eb818712713dec1d07e4a495fd36e456812ae1873e036c706472e7085bce9f796c3e57cadde33c41f4523287220492d0124b30be455446573b6dba95b5a25a2558c27f97fea37660416978ac7727a1d882d037962ebc25cd4f843e6bb206d04181d94e98d7668cbf751186d892256a28319e4a8f6fc14668921398023252a85dfee1492317ec601b0a62d1893973dd4d79caf4fc529075c69af148012ac79a643705b7d1ece2bac978f94a4",
-    "bucket": "lumeet-bucket",
-    "object": "extension_videos/68b7e9033aed/extension.mp4",
-    "label": "lumiCropped2",
-    "filename": "lumiCropped2.mp4",
-    "createdAt": "2026-04-25T03:14:30.378912+00:00"
-  },
-  "953fc455b5c5": {
-    "extensionVideoId": "953fc455b5c5",
-    "url": "https://storage.googleapis.com/lumeet-bucket/extension_videos/953fc455b5c5/extension.mp4?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260425%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260425T031434Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=4f71a2f732a82dccc9536be29643617fe1094ab48112da1104be64652c263d027d476fef357897c73b73e8c95c14a096475e60697b02561053e3db689bc31aed9b2ae8c70b09b3d8ce782106aef1da6d80d5c86cd9c5137520d2dcb62e816cccd18ed9f9f761ccaa0a6e6ed3c46ee75670b7eb758c877c8e552768b6749ed17b749853f7151bc68633749b742b6190fbf16bc6b25eaa10209b9d9332e71b9e101ef9b9abbc8fc29942c4a0902e28bafe87d35cc53593bd68a47d327e531935de471a1a4a7bf9bbd6ce3c57f650907a1752185d59029212efd14a70425d1f506e1ac87a08478ac0f6632315251fc686babd451f5931ebe1fd11987347c3b6e322",
-    "bucket": "lumeet-bucket",
-    "object": "extension_videos/953fc455b5c5/extension.mp4",
-    "label": "LumiCropped3",
-    "filename": "LumiCropped3.mp4",
-    "createdAt": "2026-04-25T03:14:34.775212+00:00"
+  "167eab56f864": {
+    "extensionVideoId": "167eab56f864",
+    "url": "http://127.0.0.1:8000/api/extension-videos/167eab56f864/video",
+    "bucket": "",
+    "object": "",
+    "localPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/_ext_167eab56f864/extension.mp4",
+    "storage": "local",
+    "label": "lumiVidDEMO",
+    "filename": "lumiVidDEMO.mp4",
+    "createdAt": "2026-05-24T17:09:42.551363+00:00"
   }
 }
