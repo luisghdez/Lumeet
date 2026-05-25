@@ -107,10 +107,18 @@ def recreate_scene(
     saved = False
     text_response = None
 
-    for part in response.parts:
-        if part.text is not None:
+    # response.parts can be None on blocked/empty Gemini responses.
+    parts = getattr(response, "parts", None) or []
+    if not parts:
+        for candidate in getattr(response, "candidates", None) or []:
+            content = getattr(candidate, "content", None)
+            if content is not None:
+                parts.extend(getattr(content, "parts", None) or [])
+
+    for part in parts:
+        if getattr(part, "text", None) is not None:
             text_response = part.text
-        elif part.inline_data is not None:
+        elif getattr(part, "inline_data", None) is not None:
             image = part.as_image()
             image.save(output_path)
             saved = True

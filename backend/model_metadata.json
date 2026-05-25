@@ -64,5 +64,16 @@
     "label": "hf_20260525_183058_c27d7277-cf6f-47c1-8243-63ebe57169b0",
     "filename": "hf_20260525_183058_c27d7277-cf6f-47c1-8243-63ebe57169b0.png",
     "createdAt": "2026-05-25T18:32:51.917118+00:00"
+  },
+  "d80af5728954": {
+    "modelId": "d80af5728954",
+    "url": "http://127.0.0.1:8000/api/models/d80af5728954/image",
+    "bucket": "",
+    "object": "",
+    "localPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/_model_d80af5728954/model.png",
+    "storage": "local",
+    "label": "Model1",
+    "filename": "Model1.png",
+    "createdAt": "2026-05-25T19:06:28.121161+00:00"
   }
 }

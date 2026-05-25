@@ -172,6 +172,22 @@ class TestRecreateSceneMocked:
         assert contents[0] == custom
 
     @patch("backend.scene_recreator.genai.Client")
+    def test_none_parts_raises_no_image_error(self, mock_client_cls, scene_image, model_image, tmp_path):
+        """When response.parts is None, should not crash with TypeError."""
+        mock_client = MagicMock()
+        mock_client_cls.return_value = mock_client
+        mock_client.models.generate_content.return_value = _make_mock_response(
+            with_image=False, text=None
+        )
+        mock_client.models.generate_content.return_value.parts = None
+
+        output = str(tmp_path / "result.png")
+
+        with patch.dict(os.environ, {"GEMINI_API_KEY": "test-key"}):
+            with pytest.raises(RuntimeError, match="no image"):
+                recreate_scene(scene_image, model_image, output_path=output)
+
+    @patch("backend.scene_recreator.genai.Client")
     def test_no_image_in_response_raises(self, mock_client_cls, scene_image, model_image, tmp_path):
         """If the API returns no image, RuntimeError should be raised."""
         mock_client = MagicMock()

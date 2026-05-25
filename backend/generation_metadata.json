@@ -2680,9 +2680,9 @@
     "generationId": "e3303568aebf",
     "type": "video",
     "label": "SupplementVID.mp4 (no trim)",
-    "status": "processing",
-    "progress": 66,
-    "currentStep": "motion_control",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
     "steps": [
       {
         "key": "scene_detection",
@@ -2711,8 +2711,64 @@
       {
         "key": "motion_control",
         "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      }
+    ],
+    "error": null,
+    "createdAt": 1779734314.869633,
+    "completedAt": 1779734495.844964,
+    "output": {
+      "jobId": "cb0b6247b765",
+      "videoUrl": "",
+      "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/cb0b6247b765/output/final_output.mp4",
+      "videoGcs": null
+    },
+    "jobId": "cb0b6247b765"
+  },
+  "b47f74819510": {
+    "generationId": "b47f74819510",
+    "type": "video",
+    "label": "RelateFeed1.mp4 (no trim)",
+    "status": "failed",
+    "progress": 50,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "No caption detected."
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
         "status": "running",
-        "message": "Fal rendering\u2026 (~63s)"
+        "message": "Recreating scene with Gemini..."
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "pending",
+        "message": ""
       },
       {
         "key": "caption_overlay",
@@ -2721,10 +2777,504 @@
         "message": ""
       }
     ],
-    "error": null,
-    "createdAt": 1779734314.869633,
-    "completedAt": null,
+    "error": "'NoneType' object is not iterable",
+    "createdAt": 1779735998.485688,
+    "completedAt": 1779736024.557886,
     "output": null,
-    "jobId": "cb0b6247b765"
+    "jobId": "ac42fad88d4a"
+  },
+  "e19b56d01eef": {
+    "generationId": "e19b56d01eef",
+    "type": "video",
+    "label": "RelateFeed1.mp4 (no trim)",
+    "status": "failed",
+    "progress": 50,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "No caption detected."
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "running",
+        "message": "Recreating scene with Gemini..."
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "Gemini returned no image in its response.",
+    "createdAt": 1779736185.158728,
+    "completedAt": 1779736211.9465249,
+    "output": null,
+    "jobId": "5ef88152308e"
+  },
+  "1b16c17ad020": {
+    "generationId": "1b16c17ad020",
+    "type": "video",
+    "label": "RelateFeed1.mp4 (no trim)",
+    "status": "failed",
+    "progress": 50,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "No caption detected."
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "running",
+        "message": "Recreating scene with Gemini..."
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "Gemini returned no image in its response.",
+    "createdAt": 1779736344.887787,
+    "completedAt": 1779736369.571392,
+    "output": null,
+    "jobId": "e3c3535f21e1"
+  },
+  "5c1885ff189d": {
+    "generationId": "5c1885ff189d",
+    "type": "video",
+    "label": "TrendFeed1.mp4 (no trim)",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "No caption detected."
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "No caption to overlay -- raw video is the final output."
+      }
+    ],
+    "error": null,
+    "createdAt": 1779736573.6567428,
+    "completedAt": 1779736827.828984,
+    "output": {
+      "jobId": "aa960c76a602",
+      "videoUrl": "",
+      "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/aa960c76a602/output/generated_raw.mp4",
+      "videoGcs": null
+    },
+    "jobId": "aa960c76a602"
+  },
+  "f30e384714f3": {
+    "generationId": "f30e384714f3",
+    "type": "video",
+    "label": "TrendFeed2.mp4 (no trim)",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "No caption detected."
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "No caption to overlay -- raw video is the final output."
+      }
+    ],
+    "error": null,
+    "createdAt": 1779736628.495868,
+    "completedAt": 1779736862.475512,
+    "output": {
+      "jobId": "8952c0131dc0",
+      "videoUrl": "",
+      "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/8952c0131dc0/output/generated_raw.mp4",
+      "videoGcs": null
+    },
+    "jobId": "8952c0131dc0"
+  },
+  "29350ff090e3": {
+    "generationId": "29350ff090e3",
+    "type": "video",
+    "label": "TrendFeed3.mp4 (no trim)",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "No caption detected."
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "No caption to overlay -- raw video is the final output."
+      }
+    ],
+    "error": null,
+    "createdAt": 1779736637.653756,
+    "completedAt": 1779736953.4454012,
+    "output": {
+      "jobId": "0ce7d9b01605",
+      "videoUrl": "",
+      "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/0ce7d9b01605/output/generated_raw.mp4",
+      "videoGcs": null
+    },
+    "jobId": "0ce7d9b01605"
+  },
+  "acf0ba455d65": {
+    "generationId": "acf0ba455d65",
+    "type": "video",
+    "label": "SkinFeed1.mp4 (no trim)",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "No caption detected."
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "No caption to overlay -- raw video is the final output."
+      }
+    ],
+    "error": null,
+    "createdAt": 1779736999.600312,
+    "completedAt": 1779737254.190927,
+    "output": {
+      "jobId": "51419652c503",
+      "videoUrl": "",
+      "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/51419652c503/output/generated_raw.mp4",
+      "videoGcs": null
+    },
+    "jobId": "51419652c503"
+  },
+  "4337471a7a69": {
+    "generationId": "4337471a7a69",
+    "type": "video",
+    "label": "SkinFeed2.mp4 (no trim)",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "No caption detected."
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "No caption to overlay -- raw video is the final output."
+      }
+    ],
+    "error": null,
+    "createdAt": 1779737012.382266,
+    "completedAt": 1779737270.128757,
+    "output": {
+      "jobId": "4115711ed7dc",
+      "videoUrl": "",
+      "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/4115711ed7dc/output/generated_raw.mp4",
+      "videoGcs": null
+    },
+    "jobId": "4115711ed7dc"
+  },
+  "570ba2689303": {
+    "generationId": "570ba2689303",
+    "type": "video",
+    "label": "SkinVid.mp4 (no trim)",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "No caption detected."
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "No caption to overlay -- raw video is the final output."
+      }
+    ],
+    "error": null,
+    "createdAt": 1779737071.394878,
+    "completedAt": 1779737315.5069382,
+    "output": {
+      "jobId": "e776cd9253be",
+      "videoUrl": "",
+      "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/e776cd9253be/output/generated_raw.mp4",
+      "videoGcs": null
+    },
+    "jobId": "e776cd9253be"
+  },
+  "9664e898f3bf": {
+    "generationId": "9664e898f3bf",
+    "type": "video",
+    "label": "RelateFeed2.mp4 (no trim)",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"reminded myself I leave for spring break in 2 weeks and was suddenly able to get out of bed this morning\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      }
+    ],
+    "error": null,
+    "createdAt": 1779737149.7175732,
+    "completedAt": 1779737404.608211,
+    "output": {
+      "jobId": "c682edb712d8",
+      "videoUrl": "",
+      "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/c682edb712d8/output/final_output.mp4",
+      "videoGcs": null
+    },
+    "jobId": "c682edb712d8"
   }
 }
