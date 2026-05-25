@@ -25070,5 +25070,323 @@
     "id": "plan_61523b9d903a",
     "createdAt": "2026-05-24T17:19:11.770635+00:00",
     "updatedAt": "2026-05-24T17:19:51.993192+00:00"
+  },
+  "plan_587e6a7e6447": {
+    "archetype": "studytok",
+    "mode": "studytok_daily",
+    "status": "generation_failed",
+    "settings": {
+      "postCount": 4,
+      "relatablePerDay": 3,
+      "hookDemoPerDay": 1,
+      "startDate": "2026-05-24",
+      "dailyTimes": [
+        "09:00",
+        "12:30",
+        "16:30",
+        "20:00"
+      ],
+      "timezone": "America/Ciudad_Juarez"
+    },
+    "source": {
+      "taggedVideoCount": 48,
+      "relatableCandidates": 29,
+      "hookDemoCandidates": 34
+    },
+    "contentMix": [
+      {
+        "purpose": "relatable",
+        "count": 3,
+        "percentage": 75
+      },
+      {
+        "purpose": "hook_demo",
+        "count": 1,
+        "percentage": 25
+      }
+    ],
+    "plannedPosts": [
+      {
+        "slot": 1,
+        "purpose": "relatable",
+        "label": "Relatable study video",
+        "targetTags": {
+          "study_content_type": [
+            "relatable_student_problem"
+          ],
+          "cta_strength": [
+            "none",
+            "light"
+          ]
+        },
+        "durationTargetSec": {
+          "min": 3,
+          "max": 10
+        },
+        "creativeNotes": "Recreate short single-scene student-life relatable content. Prefer clips under 10 seconds because they are easiest to replicate.",
+        "videoReferenceId": "vidref_7bac75c945b27b35",
+        "sourceVideo": {
+          "id": "vidref_7bac75c945b27b35",
+          "url": "https://www.tiktok.com/@lauraonedge/video/7628695924130270496",
+          "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast2a-p-0037-euttp/o0Q4tjDT0vekUL3X8geGogEIMZGeALM49gCmIS~tplv-tiktokx-origin.image?dr=9636&x-expires=1779739200&x-signature=u7GS0Ht9vW5mUA32E%2FvxJiXNi1s%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+          "creatorHandle": "lauraonedge",
+          "caption": "I can\u2019t take it anymore\ud83d\ude2d\ud83d\ude2d\ud83d\ude2d #medstudent #studytok #mentalhealth #fyp #study",
+          "durationSec": 5.433,
+          "sceneCount": 1
+        },
+        "selectionReasons": [
+          "5s under 10s",
+          "single scene",
+          "relatable student problem",
+          "no or light CTA"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "I can\u2019t take it anymore\ud83d\ude2d\ud83d\ude2d\ud83d\ude2d #medstudent #studytok #mentalhealth #fyp #study",
+        "suggestedScheduledFor": "2026-05-24T09:00:00",
+        "timezone": "America/Ciudad_Juarez",
+        "status": "failed",
+        "reviewStatus": "pending",
+        "generationId": "2cc45da08e95",
+        "jobId": "390376a0f2e8",
+        "generatedMediaUrl": "",
+        "error": "[{'loc': ['body'], 'msg': 'The input was rejected, The duration of continuous valid motion is too short; it should last at least 3 second.', 'type': 'input_value_error', 'url': 'https://docs.fal.ai/errors#input_value_error', 'input': {'prompt': 'A young woman reacting to the camera', 'image_url': 'https://v3b.fal.media/files/b/0a9b8559/VjlpAx-RNORm1ROP2SHSJ_recreated_scene.png', 'video_url': 'https://v3b.fal.media/files/b/0a9b8559/SlRgoDsdpl6BNTRWoxCoR_reference_video.mp4', 'keep_original_sound': True, 'character_orientation': 'video'}}]",
+        "keyTags": {
+          "study_content_type": "relatable_student_problem",
+          "study_pain_point": "burnout",
+          "study_outcome_promise": "none",
+          "format": "ugc_demo",
+          "creative_template": "visual_showcase",
+          "funnel_stage": "awareness",
+          "cta_strength": "none",
+          "primary_product_name": "",
+          "is_hook_then_demo": false,
+          "scene_count": 1
+        },
+        "bulkRunId": "planrun_6a18f77629d5",
+        "modelId": "dcfb0bc5015f",
+        "extensionVideoId": "",
+        "latePostId": "",
+        "scheduleError": "",
+        "updatedAt": "2026-05-24T17:30:24.890116+00:00"
+      },
+      {
+        "slot": 2,
+        "purpose": "relatable",
+        "label": "Relatable study video",
+        "targetTags": {
+          "study_content_type": [
+            "relatable_student_problem"
+          ],
+          "cta_strength": [
+            "none",
+            "light"
+          ]
+        },
+        "durationTargetSec": {
+          "min": 3,
+          "max": 10
+        },
+        "creativeNotes": "Recreate short single-scene student-life relatable content. Prefer clips under 10 seconds because they are easiest to replicate.",
+        "videoReferenceId": "vidref_caae5f47d4722f68",
+        "sourceVideo": {
+          "id": "vidref_caae5f47d4722f68",
+          "url": "https://www.tiktok.com/@lauraonedge/video/7641618789615865121",
+          "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast2a-p-0037-euttp/o89DIQFAAJmQFg1YDADAQvDuRUqQeCAEAHEIfE~tplv-tiktokx-dmt-logom:tos-useast2a-i-0068-euttp/ooDxY5fvAsOHqFAEeXiCAPmYEDQD9IGQR8AA4a.image?dr=9634&x-expires=1779739200&x-signature=8Dq8OKvrESiMzSC%2FgEK22x%2F6whQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+          "creatorHandle": "lauraonedge",
+          "caption": "always the sameeee\u2026where\u2018s my brainnn?!!! #studytok #study #student #medstudent #mentalhealth",
+          "durationSec": 5.033,
+          "sceneCount": 1
+        },
+        "selectionReasons": [
+          "same study content type",
+          "same creative template",
+          "same format",
+          "5s under 10s",
+          "single scene"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "always the sameeee\u2026where\u2018s my brainnn?!!! #studytok #study #student #medstudent #mentalhealth",
+        "suggestedScheduledFor": "2026-05-24T12:30:00",
+        "timezone": "America/Ciudad_Juarez",
+        "status": "generated",
+        "reviewStatus": "pending",
+        "generationId": "0bf26037cc96",
+        "jobId": "b4c42dd5612b",
+        "generatedMediaUrl": "http://127.0.0.1:8000/api/jobs/b4c42dd5612b/result",
+        "error": "",
+        "keyTags": {
+          "study_content_type": "relatable_student_problem",
+          "study_pain_point": "too_much_content",
+          "study_outcome_promise": "none",
+          "format": "ugc_demo",
+          "creative_template": "visual_showcase",
+          "funnel_stage": "awareness",
+          "cta_strength": "none",
+          "primary_product_name": "none",
+          "is_hook_then_demo": false,
+          "scene_count": 1
+        },
+        "swapHistory": [
+          {
+            "fromVideoReferenceId": "vidref_1645667aa51f7caa",
+            "toVideoReferenceId": "vidref_caae5f47d4722f68",
+            "fromStatus": "planned",
+            "swappedAt": "2026-05-24T17:28:36.754318"
+          }
+        ],
+        "updatedAt": "2026-05-24T17:32:57.893597+00:00",
+        "bulkRunId": "planrun_6a18f77629d5",
+        "modelId": "dcfb0bc5015f",
+        "extensionVideoId": "",
+        "latePostId": "",
+        "scheduleError": ""
+      },
+      {
+        "slot": 3,
+        "purpose": "relatable",
+        "label": "Relatable study video",
+        "targetTags": {
+          "study_content_type": [
+            "relatable_student_problem"
+          ],
+          "cta_strength": [
+            "none",
+            "light"
+          ]
+        },
+        "durationTargetSec": {
+          "min": 3,
+          "max": 10
+        },
+        "creativeNotes": "Recreate short single-scene student-life relatable content. Prefer clips under 10 seconds because they are easiest to replicate.",
+        "videoReferenceId": "vidref_a6e60141483a7cbf",
+        "sourceVideo": {
+          "id": "vidref_a6e60141483a7cbf",
+          "url": "https://www.tiktok.com/@lauraonedge/video/7625350474023144736",
+          "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast2a-p-0037-euttp/oMeljT5Lpu0IIXY5GAQkyq7eVJSgJLQGFeMDcV~tplv-tiktokx-origin.image?dr=9636&x-expires=1779739200&x-signature=bOXboVtVpJ8z7FQwsLi5eozA9u4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+          "creatorHandle": "lauraonedge",
+          "caption": "worst nightmare..yall agree??\ud83e\udeea\ud83e\udeea #medstudent #studytok #fyp #mentalhealth #student",
+          "durationSec": 7.8,
+          "sceneCount": 1
+        },
+        "selectionReasons": [
+          "8s under 10s",
+          "single scene",
+          "relatable student problem",
+          "no or light CTA"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "worst nightmare..yall agree??\ud83e\udeea\ud83e\udeea #medstudent #studytok #fyp #mentalhealth #student",
+        "suggestedScheduledFor": "2026-05-24T16:30:00",
+        "timezone": "America/Ciudad_Juarez",
+        "status": "generated",
+        "reviewStatus": "pending",
+        "generationId": "0f43542f3cf2",
+        "jobId": "9f9cf6c75802",
+        "generatedMediaUrl": "http://127.0.0.1:8000/api/jobs/9f9cf6c75802/result",
+        "error": "",
+        "keyTags": {
+          "study_content_type": "relatable_student_problem",
+          "study_pain_point": "exam_stress",
+          "study_outcome_promise": "none",
+          "format": "ugc_demo",
+          "creative_template": "hook_then_demo",
+          "funnel_stage": "awareness",
+          "cta_strength": "none",
+          "primary_product_name": "",
+          "is_hook_then_demo": false,
+          "scene_count": 1
+        },
+        "bulkRunId": "planrun_6a18f77629d5",
+        "modelId": "dcfb0bc5015f",
+        "extensionVideoId": "",
+        "latePostId": "",
+        "scheduleError": "",
+        "updatedAt": "2026-05-24T17:37:23.053167+00:00"
+      },
+      {
+        "slot": 4,
+        "purpose": "hook_demo",
+        "label": "Hook + demo video",
+        "targetTags": {
+          "is_hook_then_demo": [
+            true
+          ],
+          "creative_template": [
+            "hook_then_demo"
+          ],
+          "funnel_stage": [
+            "consideration",
+            "conversion"
+          ]
+        },
+        "durationTargetSec": {
+          "min": 10,
+          "max": 25
+        },
+        "creativeNotes": "Use the source as the hook/reference, then append the account demo extension in the generation pipeline.",
+        "videoReferenceId": "vidref_16ab49b99bc82e7d",
+        "sourceVideo": {
+          "id": "vidref_16ab49b99bc82e7d",
+          "url": "https://www.tiktok.com/@sophc.studies/video/7602461178006228255",
+          "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oMRiVzJZ79BEYByAiBXPLaBO2dIAPjEPKAFBl~tplv-tiktokx-origin.image?dr=9636&x-expires=1778511600&x-signature=5Z5EO9r18WDL8zC%2BgOIzZGoBvGw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+          "creatorHandle": "sophc.studies",
+          "caption": "This is a game changer \n\n#student #biology #studystudystudy",
+          "durationSec": 14.37,
+          "sceneCount": 9
+        },
+        "selectionReasons": [
+          "same study content type",
+          "same creative template",
+          "same format",
+          "hook then demo structure",
+          "hook/demo template"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "This is a game changer \n\n#student #biology #studystudystudy",
+        "suggestedScheduledFor": "2026-05-26T20:00",
+        "timezone": "America/Ciudad_Juarez",
+        "status": "generated",
+        "reviewStatus": "pending",
+        "generationId": "3786ee0ad925",
+        "jobId": "fee252022e83",
+        "generatedMediaUrl": "http://127.0.0.1:8000/api/jobs/fee252022e83/result",
+        "error": "",
+        "keyTags": {
+          "study_content_type": "app_demo",
+          "study_pain_point": "none",
+          "study_outcome_promise": "none",
+          "format": "hook_demo",
+          "creative_template": "hook_then_demo",
+          "funnel_stage": "consideration",
+          "cta_strength": "none",
+          "primary_product_name": "Retain",
+          "is_hook_then_demo": true,
+          "scene_count": 9
+        },
+        "swapHistory": [
+          {
+            "fromVideoReferenceId": "vidref_b04cdf3a2c122995",
+            "toVideoReferenceId": "vidref_16ab49b99bc82e7d",
+            "fromStatus": "planned",
+            "swappedAt": "2026-05-24T17:28:39.146073"
+          }
+        ],
+        "updatedAt": "2026-05-25T17:37:00.805053+00:00",
+        "bulkRunId": "planrun_6a18f77629d5",
+        "modelId": "dcfb0bc5015f",
+        "extensionVideoId": "167eab56f864",
+        "latePostId": "",
+        "scheduleError": ""
+      }
+    ],
+    "id": "plan_587e6a7e6447",
+    "createdAt": "2026-05-24T17:28:32.604225+00:00",
+    "updatedAt": "2026-05-25T17:37:00.805071+00:00",
+    "activeBulkRunId": "planrun_6a18f77629d5"
   }
 }

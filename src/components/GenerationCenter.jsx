@@ -61,7 +61,7 @@ export default function GenerationCenter({ onSchedule, refreshKey, focusKey }) {
 
   const fetchGenerations = useCallback(async () => {
     try {
-      const data = await listGenerations(30);
+      const data = await listGenerations(100);
       const gens = data.generations || [];
       setGenerations(gens);
       return gens;
@@ -306,6 +306,11 @@ function GenerationRow({
               <p className="text-sm font-medium text-white truncate tracking-tight">
                 {gen.label || gen.type}
               </p>
+              {gen.plannerPlanId && (
+                <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-semibold text-white/55">
+                  Slot {gen.plannerSlot || '?'}
+                </span>
+              )}
               <span className="text-[10px] text-white/40 flex-shrink-0">
                 {timeSince(gen.createdAt)}
               </span>

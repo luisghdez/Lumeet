@@ -286,7 +286,7 @@ function App() {
             onClearInitialBatch={() => setFocusBatchId('')}
           />
         ) : activeTab === 'planner' ? (
-          <AccountPlanner />
+          <AccountPlanner onGenerationStarted={handleVideoGenerationStarted} />
         ) : activeTab === 'campaign' ? (
           <CampaignStudio />
         ) : activeTab === 'variant-lab' ? (

@@ -31,5 +31,38 @@
     "label": "hf_20260524_170025_83db9498-4467-4c8a-9cf1-fd127339fef6",
     "filename": "hf_20260524_170025_83db9498-4467-4c8a-9cf1-fd127339fef6.png",
     "createdAt": "2026-05-24T17:09:36.734680+00:00"
+  },
+  "df6d25693eb7": {
+    "modelId": "df6d25693eb7",
+    "url": "http://127.0.0.1:8000/api/models/df6d25693eb7/image",
+    "bucket": "",
+    "object": "",
+    "localPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/_model_df6d25693eb7/model.png",
+    "storage": "local",
+    "label": "hf_20260525_181116_8c9d6f56-3e61-4e15-afee-b75a19d31469",
+    "filename": "hf_20260525_181116_8c9d6f56-3e61-4e15-afee-b75a19d31469.png",
+    "createdAt": "2026-05-25T18:16:30.240315+00:00"
+  },
+  "7e1cb0beff7f": {
+    "modelId": "7e1cb0beff7f",
+    "url": "http://127.0.0.1:8000/api/models/7e1cb0beff7f/image",
+    "bucket": "",
+    "object": "",
+    "localPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/_model_7e1cb0beff7f/model.png",
+    "storage": "local",
+    "label": "hf_20260525_181125_88efcbf8-eb46-4cfb-b25b-556d2c7a2ec9",
+    "filename": "hf_20260525_181125_88efcbf8-eb46-4cfb-b25b-556d2c7a2ec9.png",
+    "createdAt": "2026-05-25T18:20:01.511313+00:00"
+  },
+  "bfe6e9497bb4": {
+    "modelId": "bfe6e9497bb4",
+    "url": "http://127.0.0.1:8000/api/models/bfe6e9497bb4/image",
+    "bucket": "",
+    "object": "",
+    "localPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/_model_bfe6e9497bb4/model.png",
+    "storage": "local",
+    "label": "hf_20260525_183058_c27d7277-cf6f-47c1-8243-63ebe57169b0",
+    "filename": "hf_20260525_183058_c27d7277-cf6f-47c1-8243-63ebe57169b0.png",
+    "createdAt": "2026-05-25T18:32:51.917118+00:00"
   }
 }

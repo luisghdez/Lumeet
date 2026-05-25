@@ -7,7 +7,8 @@ from __future__ import annotations
 import os
 import shutil
 import threading
-from typing import Any, Dict, Optional
+import uuid
+from typing import Any, Dict, List, Optional
 
 import requests
 
@@ -15,6 +16,7 @@ from account_plan_store import account_plan_store
 from config import GCS_VIDEO_OBJECT_PREFIX, PUBLIC_BACKEND_BASE_URL
 from generation_store import generation_store
 from job_manager import EXTENDED_PIPELINE_STEPS, PIPELINE_STEPS, job_manager
+from late_service import LateServiceError, late_service
 from model_metadata_store import model_metadata_store
 from extension_video_metadata_store import extension_video_metadata_store
 from organizer_store import organizer_store
@@ -61,18 +63,43 @@ def start_plan_generation(
             account_plan_store.update_post(plan_id, post["slot"], status="queued", error="")
         return account_plan_store.update(plan_id, status="generation_dry_run") or plan
 
+    model = _select_model(model_id)
+    selected_model_id = model.get("modelId", "")
+    needs_extension = any((post.get("purpose") or "relatable") == "hook_demo" for post in posts)
+    extension_video = _select_extension_video(extension_video_id) if needs_extension else None
+    if needs_extension and not extension_video:
+        raise AccountPlanGenerationError("No default demo/extension video is available for hook + demo posts.", 400)
+    selected_extension_video_id = (extension_video or {}).get("extensionVideoId", "")
+
     with _active_lock:
         if plan_id in _active_plans:
             raise AccountPlanGenerationError("This plan is already generating.", 409)
         _active_plans.add(plan_id)
 
-    account_plan_store.update(plan_id, status="generating")
-    thread = threading.Thread(
-        target=_run_plan_queue,
-        args=(plan_id, [p.get("slot") for p in posts], model_id, extension_video_id),
-        daemon=True,
-    )
-    thread.start()
+    try:
+        bulk_run_id = f"planrun_{uuid.uuid4().hex[:12]}"
+        account_plan_store.update(plan_id, status="generating", activeBulkRunId=bulk_run_id)
+        slots = []
+        for post in posts:
+            _precreate_post_generation(
+                plan_id=plan_id,
+                post=post,
+                model_id=selected_model_id,
+                extension_video_id=selected_extension_video_id,
+                bulk_run_id=bulk_run_id,
+            )
+            slots.append(post.get("slot"))
+
+        thread = threading.Thread(
+            target=_run_plan_queue,
+            args=(plan_id, slots, selected_model_id, selected_extension_video_id, bulk_run_id),
+            daemon=True,
+        )
+        thread.start()
+    except Exception:
+        with _active_lock:
+            _active_plans.discard(plan_id)
+        raise
     return account_plan_store.get(plan_id) or plan
 
 
@@ -81,6 +108,7 @@ def _run_plan_queue(
     slots: list,
     model_id: Optional[str] = None,
     extension_video_id: Optional[str] = None,
+    bulk_run_id: str = "",
 ) -> None:
     try:
         for slot in slots:
@@ -94,8 +122,18 @@ def _run_plan_queue(
             if not post:
                 continue
             try:
-                _generate_post(plan_id, post, model_id=model_id, extension_video_id=extension_video_id)
+                _generate_post(
+                    plan_id,
+                    post,
+                    model_id=model_id,
+                    extension_video_id=extension_video_id,
+                    generation_id=post.get("generationId", ""),
+                    bulk_run_id=bulk_run_id,
+                )
             except Exception as exc:
+                gen_id = (post or {}).get("generationId", "")
+                if gen_id:
+                    generation_store.mark_failed(gen_id, str(exc))
                 account_plan_store.update_post(plan_id, slot, status="failed", error=str(exc))
         _finish_plan(plan_id)
     finally:
@@ -121,6 +159,8 @@ def _generate_post(
     post: Dict[str, Any],
     model_id: Optional[str] = None,
     extension_video_id: Optional[str] = None,
+    generation_id: str = "",
+    bulk_run_id: str = "",
 ) -> None:
     slot = int(post.get("slot") or 0)
     purpose = post.get("purpose") or "relatable"
@@ -136,13 +176,15 @@ def _generate_post(
     if extended and not extension_video:
         raise AccountPlanGenerationError("No default demo/extension video is available for hook + demo posts.", 400)
 
-    steps = list(PIPELINE_STEPS) + (list(EXTENDED_PIPELINE_STEPS) if extended else [])
-    generation = generation_store.create(
-        gen_type="video",
-        label=f"StudyTok plan {plan_id} slot {slot}: {purpose}",
-        steps=[{"key": step["key"], "label": step["label"], "status": "pending", "message": ""} for step in steps],
+    gen_id = generation_id or _create_generation_record(
+        plan_id=plan_id,
+        slot=slot,
+        purpose=purpose,
+        extended=extended,
+        model_id=model.get("modelId", ""),
+        extension_video_id=(extension_video or {}).get("extensionVideoId", ""),
+        bulk_run_id=bulk_run_id,
     )
-    gen_id = generation["generationId"]
 
     job = job_manager.create_job("", "", "", extended=extended)
     job_dir = os.path.join(JOBS_DIR, job.id)
@@ -156,6 +198,7 @@ def _generate_post(
         jobId=job.id,
         plannerPlanId=plan_id,
         plannerSlot=slot,
+        bulkRunId=bulk_run_id,
         modelId=model.get("modelId", ""),
         extensionVideoId=(extension_video or {}).get("extensionVideoId", ""),
     )
@@ -165,6 +208,7 @@ def _generate_post(
         status="generating",
         generationId=gen_id,
         jobId=job.id,
+        bulkRunId=bulk_run_id,
         modelId=model.get("modelId", ""),
         extensionVideoId=(extension_video or {}).get("extensionVideoId", ""),
     )
@@ -206,6 +250,7 @@ def _generate_post(
         "resultPath": final_video,
         "plannerPlanId": plan_id,
         "plannerSlot": slot,
+        "bulkRunId": bulk_run_id,
         "modelId": model.get("modelId", ""),
         "extensionVideoId": (extension_video or {}).get("extensionVideoId", ""),
     }
@@ -219,10 +264,155 @@ def _generate_post(
         generatedMediaUrl=media_url,
         generationId=gen_id,
         jobId=job.id,
+        bulkRunId=bulk_run_id,
         modelId=model.get("modelId", ""),
         extensionVideoId=(extension_video or {}).get("extensionVideoId", ""),
         error="",
     )
+
+
+def schedule_generated_plan_posts(
+    plan_id: str,
+    *,
+    session_id: str,
+    platforms: List[Dict[str, str]],
+    profile_id: Optional[str] = None,
+    timezone: str = "UTC",
+) -> Dict[str, Any]:
+    plan = account_plan_store.get(plan_id)
+    if not plan:
+        raise AccountPlanGenerationError(f"Plan {plan_id} not found.", 404)
+    if not platforms:
+        raise AccountPlanGenerationError("Select at least one connected account before scheduling.", 400)
+
+    posts = [
+        post for post in (plan.get("plannedPosts") or [])
+        if isinstance(post, dict)
+        and (post.get("status") == "generated" or post.get("generatedMediaUrl"))
+        and post.get("reviewStatus") != "scheduled"
+    ]
+    if not posts:
+        raise AccountPlanGenerationError("No generated unscheduled posts are ready to schedule.", 400)
+
+    results = []
+    for post in posts:
+        slot = int(post.get("slot") or 0)
+        try:
+            response = late_service.create_post(
+                session_id=session_id,
+                content=post.get("captionDraft") or "Generated with nflncr.ai",
+                platforms=platforms,
+                profile_id=profile_id,
+                scheduled_for=post.get("suggestedScheduledFor"),
+                publish_now=False,
+                timezone=post.get("timezone") or timezone or "UTC",
+                media_urls=[post.get("generatedMediaUrl")] if post.get("generatedMediaUrl") else [],
+                include_result_video=bool(post.get("jobId")),
+                job_id=post.get("jobId") or None,
+            )
+            late_post_id = (
+                (response.get("post") or {}).get("_id")
+                or response.get("_id")
+                or response.get("id")
+                or "created"
+            )
+            account_plan_store.update_post(
+                plan_id,
+                slot,
+                reviewStatus="scheduled",
+                status="scheduled",
+                latePostId=late_post_id,
+                scheduleError="",
+            )
+            if post.get("generationId"):
+                generation_store.update(post["generationId"], scheduled=True)
+            results.append({"slot": slot, "ok": True, "latePostId": late_post_id})
+        except LateServiceError as exc:
+            account_plan_store.update_post(plan_id, slot, scheduleError=exc.message)
+            results.append({"slot": slot, "ok": False, "error": exc.message})
+        except Exception as exc:
+            account_plan_store.update_post(plan_id, slot, scheduleError=str(exc))
+            results.append({"slot": slot, "ok": False, "error": str(exc)})
+
+    updated = account_plan_store.get(plan_id) or plan
+    return {
+        "plan": updated,
+        "attempted": len(results),
+        "scheduled": sum(1 for result in results if result.get("ok")),
+        "results": results,
+    }
+
+
+def _precreate_post_generation(
+    *,
+    plan_id: str,
+    post: Dict[str, Any],
+    model_id: str,
+    extension_video_id: str,
+    bulk_run_id: str,
+) -> str:
+    slot = int(post.get("slot") or 0)
+    purpose = post.get("purpose") or "relatable"
+    extended = purpose == "hook_demo"
+    gen_id = _create_generation_record(
+        plan_id=plan_id,
+        slot=slot,
+        purpose=purpose,
+        extended=extended,
+        model_id=model_id,
+        extension_video_id=extension_video_id if extended else "",
+        bulk_run_id=bulk_run_id,
+    )
+    account_plan_store.update_post(
+        plan_id,
+        slot,
+        status="queued",
+        generationId=gen_id,
+        jobId="",
+        bulkRunId=bulk_run_id,
+        modelId=model_id,
+        extensionVideoId=extension_video_id if extended else "",
+        generatedMediaUrl="",
+        latePostId="",
+        error="",
+        scheduleError="",
+    )
+    return gen_id
+
+
+def _create_generation_record(
+    *,
+    plan_id: str,
+    slot: int,
+    purpose: str,
+    extended: bool,
+    model_id: str,
+    extension_video_id: str,
+    bulk_run_id: str,
+) -> str:
+    generation = generation_store.create(
+        gen_type="video",
+        label=f"StudyTok slot {slot}: {purpose}",
+        steps=_step_records(extended),
+    )
+    gen_id = generation["generationId"]
+    generation_store.update(
+        gen_id,
+        plannerPlanId=plan_id,
+        plannerSlot=slot,
+        bulkRunId=bulk_run_id,
+        modelId=model_id,
+        extensionVideoId=extension_video_id,
+    )
+    return gen_id
+
+
+def _step_records(extended: bool) -> List[Dict[str, str]]:
+    steps = list(PIPELINE_STEPS) + (list(EXTENDED_PIPELINE_STEPS) if extended else [])
+    return [
+        {"key": step["key"], "label": step["label"], "status": "pending", "message": ""}
+        for step in steps
+    ]
 
 
 def _select_model(model_id: Optional[str] = None) -> Dict[str, Any]:

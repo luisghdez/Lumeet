@@ -122,6 +122,17 @@ export async function generateAccountPlanPosts(
   });
 }
 
+export async function scheduleAccountPlanPosts(
+  planId,
+  { sessionId = 'local-dev-session', profileId, platforms = [], timezone = 'UTC' } = {},
+) {
+  return request(`/api/account-planner/plans/${encodeURIComponent(planId)}/schedule`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ sessionId, profileId, platforms, timezone }),
+  });
+}
+
 export async function updateAccountPlanPost({ planId, slot, updates }) {
   return request(`/api/account-planner/plans/${encodeURIComponent(planId)}/posts/${encodeURIComponent(slot)}`, {
     method: 'PATCH',

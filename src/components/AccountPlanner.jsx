@@ -14,6 +14,7 @@ import {
   createStudyTokSimplePlan,
   generateAccountPlanPosts,
   getAccountPlan,
+  scheduleAccountPlanPosts,
   swapAccountPlanPost,
   updateAccountPlan,
   updateAccountPlanPost,
@@ -344,6 +345,11 @@ function PostCard({
                   Schedule
                 </button>
               </div>
+              {post.scheduleError && (
+                <p className="rounded-2xl bg-red-400/10 px-3 py-2 text-xs text-red-100">
+                  {post.scheduleError}
+                </p>
+              )}
               <button
                 type="button"
                 disabled={isSwapping || post.status === 'generating'}
@@ -378,7 +384,7 @@ function PostCard({
   );
 }
 
-function AccountPlanner() {
+function AccountPlanner({ onGenerationStarted }) {
   const [postCount, setPostCount] = useState(30);
   const [relatablePerDay, setRelatablePerDay] = useState(3);
   const [hookDemoPerDay, setHookDemoPerDay] = useState(1);
@@ -392,6 +398,7 @@ function AccountPlanner() {
   const [isCreating, setIsCreating] = useState(false);
   const [isApproving, setIsApproving] = useState(false);
   const [isStartingGeneration, setIsStartingGeneration] = useState(false);
+  const [isSchedulingAll, setIsSchedulingAll] = useState(false);
   const [schedulingSlot, setSchedulingSlot] = useState(null);
   const [swappingSlot, setSwappingSlot] = useState(null);
   const [error, setError] = useState('');
@@ -467,11 +474,19 @@ function AccountPlanner() {
     const posts = plan?.plannedPosts || [];
     return {
       total: posts.length,
+      queued: posts.filter((post) => post.status === 'queued').length,
+      generating: posts.filter((post) => post.status === 'generating').length,
       generated: posts.filter((post) => post.status === 'generated' || post.generatedMediaUrl).length,
       scheduled: posts.filter((post) => post.reviewStatus === 'scheduled').length,
       failed: posts.filter((post) => post.status === 'failed').length,
     };
   }, [plan]);
+  const generatedUnscheduledPosts = useMemo(() => (
+    (plan?.plannedPosts || []).filter((post) => (
+      (post.status === 'generated' || post.generatedMediaUrl)
+      && post.reviewStatus !== 'scheduled'
+    ))
+  ), [plan]);
   const planNeedsHookDemo = useMemo(
     () => (plan?.plannedPosts || []).some((post) => post.purpose === 'hook_demo'),
     [plan],
@@ -532,6 +547,7 @@ function AccountPlanner() {
         extensionVideoId: selectedExtensionVideoId,
       });
       setPlan(result);
+      if (onGenerationStarted) onGenerationStarted();
     } catch (err) {
       setError(err.message || 'Could not start generation.');
     } finally {
@@ -590,6 +606,25 @@ function AccountPlanner() {
       setError(err.message || 'Could not schedule post.');
     } finally {
       setSchedulingSlot(null);
+    }
+  };
+
+  const handleScheduleAll = async () => {
+    if (!plan?.id) return;
+    setIsSchedulingAll(true);
+    setError('');
+    try {
+      const result = await scheduleAccountPlanPosts(plan.id, {
+        sessionId: DEFAULT_SESSION_ID,
+        platforms: selectedPlatforms,
+        timezone,
+      });
+      setPlan(result.plan || result);
+      if (onGenerationStarted) onGenerationStarted();
+    } catch (err) {
+      setError(err.message || 'Could not schedule generated posts.');
+    } finally {
+      setIsSchedulingAll(false);
     }
   };
 
@@ -705,11 +740,14 @@ function AccountPlanner() {
 
           {plan && (
             <>
-              <div className="grid gap-3 lg:grid-cols-4">
+              <div className="grid gap-3 md:grid-cols-3 lg:grid-cols-7">
                 {[
                   ['Plan status', tagValue(plan.status)],
                   ['Posts', String(planStats.total)],
+                  ['Queued', String(planStats.queued)],
+                  ['Generating', String(planStats.generating)],
                   ['Generated', String(planStats.generated)],
+                  ['Failed', String(planStats.failed)],
                   ['Scheduled', String(planStats.scheduled)],
                 ].map(([label, value]) => (
                   <div key={label} className="rounded-3xl border border-white/10 bg-white/[0.04] p-4">
@@ -775,25 +813,39 @@ function AccountPlanner() {
               </div>
 
               <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-4">
-                <p className="text-sm font-semibold text-white">Schedule account</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {accounts.length ? accounts.map((account) => {
-                    const selected = selectedAccountIds.includes(account.id);
-                    return (
-                      <button
-                        key={account.id}
-                        type="button"
-                        onClick={() => setSelectedAccountIds((ids) => (
-                          selected ? ids.filter((id) => id !== account.id) : [...ids, account.id]
-                        ))}
-                        className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${selected ? 'bg-white text-ink-950' : 'bg-white/10 text-white/60 hover:bg-white/15'}`}
-                      >
-                        {account.platform}
-                      </button>
-                    );
-                  }) : (
-                    <span className="text-sm text-white/45">No Late accounts connected yet.</span>
-                  )}
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-semibold text-white">Schedule account</p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {accounts.length ? accounts.map((account) => {
+                        const selected = selectedAccountIds.includes(account.id);
+                        return (
+                          <button
+                            key={account.id}
+                            type="button"
+                            onClick={() => setSelectedAccountIds((ids) => (
+                              selected ? ids.filter((id) => id !== account.id) : [...ids, account.id]
+                            ))}
+                            className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${selected ? 'bg-white text-ink-950' : 'bg-white/10 text-white/60 hover:bg-white/15'}`}
+                          >
+                            {account.platform}
+                          </button>
+                        );
+                      }) : (
+                        <span className="text-sm text-white/45">No Late accounts connected yet.</span>
+                      )}
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleScheduleAll}
+                    disabled={isSchedulingAll || !selectedPlatforms.length || generatedUnscheduledPosts.length === 0}
+                    className="inline-flex items-center gap-2 rounded-2xl bg-emerald-300 px-4 py-2 text-sm font-semibold text-ink-950 disabled:cursor-not-allowed disabled:opacity-50"
+                    title={!selectedPlatforms.length ? 'Select a connected account first' : generatedUnscheduledPosts.length === 0 ? 'No generated unscheduled posts ready' : undefined}
+                  >
+                    {isSchedulingAll ? <Loader2 size={16} className="animate-spin" aria-hidden /> : <CalendarClock size={16} aria-hidden />}
+                    Schedule all generated
+                  </button>
                 </div>
               </div>
 
@@ -802,7 +854,7 @@ function AccountPlanner() {
                   <PostCard
                     key={post.slot}
                     post={post}
-                    canSchedule={selectedPlatforms.length > 0}
+                    canSchedule={selectedPlatforms.length > 0 && post.reviewStatus !== 'scheduled'}
                     selectedPlatforms={selectedPlatforms}
                     onPatchPost={handlePatchPost}
                     onSchedulePost={handleSchedulePost}

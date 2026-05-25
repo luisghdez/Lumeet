@@ -59,6 +59,7 @@ from account_planner_service import (
 from account_plan_store import account_plan_store
 from account_plan_generation_service import (
     AccountPlanGenerationError,
+    schedule_generated_plan_posts,
     start_plan_generation,
 )
 from config import (
@@ -176,6 +177,13 @@ class AccountPlanGenerateRequest(BaseModel):
     limit: int = Field(default=0, ge=0, le=60)
     modelId: Optional[str] = Field(default=None, max_length=120)
     extensionVideoId: Optional[str] = Field(default=None, max_length=120)
+
+
+class AccountPlanScheduleRequest(BaseModel):
+    sessionId: str = Field(default="local-dev-session")
+    profileId: Optional[str] = None
+    platforms: List[LatePlatformTarget]
+    timezone: Optional[str] = Field(default="UTC")
 
 
 class AccountPlanPostPatchRequest(BaseModel):
@@ -1033,6 +1041,21 @@ async def generate_account_plan_posts(plan_id: str, payload: AccountPlanGenerate
             limit=payload.limit,
             model_id=payload.modelId,
             extension_video_id=payload.extensionVideoId,
+        )
+    except AccountPlanGenerationError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+
+
+@app.post("/api/account-planner/plans/{plan_id}/schedule")
+async def schedule_account_plan_posts(plan_id: str, payload: AccountPlanScheduleRequest):
+    """Schedule every generated unscheduled post in a StudyTok plan."""
+    try:
+        return schedule_generated_plan_posts(
+            plan_id,
+            session_id=payload.sessionId,
+            platforms=[platform.model_dump() for platform in payload.platforms],
+            profile_id=payload.profileId,
+            timezone=payload.timezone or "UTC",
         )
     except AccountPlanGenerationError as exc:
         raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
