@@ -3276,5 +3276,846 @@
       "videoGcs": null
     },
     "jobId": "c682edb712d8"
+  },
+  "20338a91cc58": {
+    "generationId": "20338a91cc58",
+    "type": "video",
+    "label": "RelateFeed1.mp4 (no trim)",
+    "status": "failed",
+    "progress": 50,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "No caption detected."
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "running",
+        "message": "Recreating scene with Gemini..."
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "Gemini returned no image in its response.",
+    "createdAt": 1779737612.952197,
+    "completedAt": 1779737638.5109289,
+    "output": null,
+    "jobId": "19f035e21b14"
+  },
+  "0800bf0f7e56": {
+    "generationId": "0800bf0f7e56",
+    "type": "video",
+    "label": "RelateFeed2.mp4 (no trim)",
+    "status": "failed",
+    "progress": 66,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"reminded myself I leave for spring break in 2 weeks and was suddenly able to get out of bed this morning\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "running",
+        "message": "Fal queue: position 0 (~874s)"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "Cancelled by user",
+    "createdAt": 1779737636.169375,
+    "completedAt": 1779738539.647817,
+    "output": null,
+    "jobId": "1473d042429a"
+  },
+  "d0e1fe80b536": {
+    "generationId": "d0e1fe80b536",
+    "type": "video",
+    "label": "RelateFeed3.mp4",
+    "status": "failed",
+    "progress": 66,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "No scene change detected -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"There\u2019s something so special about being an only child and finding friends who feel like the siblings you always wished for\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "running",
+        "message": "Fal queue: position 0 (~853s)"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "Cancelled by user",
+    "createdAt": 1779737658.120061,
+    "completedAt": 1779738540.693293,
+    "output": null,
+    "jobId": "33a406137ca5"
+  },
+  "5a67070b674c": {
+    "generationId": "5a67070b674c",
+    "type": "video",
+    "label": "ddtik.com_@AMELIE DESAI_no_watermark.mp4 (no trim)",
+    "status": "failed",
+    "progress": 66,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"when a man try's to mansplain the gym to me but they don't know it's my second home.\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "running",
+        "message": "Fal queue: position 0 (~748s)"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "Cancelled by user",
+    "createdAt": 1779737761.1353931,
+    "completedAt": 1779738538.0705762,
+    "output": null,
+    "jobId": "617ce05c756a"
+  },
+  "320f60f638a0": {
+    "generationId": "320f60f638a0",
+    "type": "video",
+    "label": "RelateFeed2.mp4 (no trim)",
+    "status": "failed",
+    "progress": 66,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"reminded myself I leave for spring break in 2 weeks and was suddenly able to get out of bed this morning\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "running",
+        "message": "Generating video with Kling AI (this may take a few minutes)..."
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.",
+    "createdAt": 1779738324.065265,
+    "completedAt": 1779738352.90317,
+    "output": null,
+    "jobId": "1ca2fa42a67a"
+  },
+  "58ccdd0e7de2": {
+    "generationId": "58ccdd0e7de2",
+    "type": "video",
+    "label": "RelateFeed3.mp4 (no trim)",
+    "status": "failed",
+    "progress": 66,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"There\u2019s something so special about being an only child and finding friends who feel like the siblings you always wished for\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "running",
+        "message": "Generating video with Kling AI (this may take a few minutes)..."
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.",
+    "createdAt": 1779738335.698158,
+    "completedAt": 1779738360.805866,
+    "output": null,
+    "jobId": "7410c716f093"
+  },
+  "8b1d38bd30f4": {
+    "generationId": "8b1d38bd30f4",
+    "type": "video",
+    "label": "ddtik.com_@AMELIE DESAI_no_watermark.mp4 (no trim)",
+    "status": "failed",
+    "progress": 66,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"when a man try's to mansplain the gym to me but they don't know it's my second home.\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "running",
+        "message": "Generating video with Kling AI (this may take a few minutes)..."
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.",
+    "createdAt": 1779738358.287045,
+    "completedAt": 1779738385.97438,
+    "output": null,
+    "jobId": "758e8616c0a8"
+  },
+  "aebf988ff3d6": {
+    "generationId": "aebf988ff3d6",
+    "type": "video",
+    "label": "ddtik.com_@AMELIE DESAI_no_watermark.mp4 (no trim)",
+    "status": "failed",
+    "progress": 66,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"when a man try's to mansplain the gym to me but they don't know it's my second home.\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "running",
+        "message": "Generating video with Kling AI (this may take a few minutes)..."
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.",
+    "createdAt": 1779738552.352688,
+    "completedAt": 1779738580.014615,
+    "output": null,
+    "jobId": "ad8468f66839"
+  },
+  "c34cc74bf336": {
+    "generationId": "c34cc74bf336",
+    "type": "video",
+    "label": "RelateFeed2.mp4 (no trim)",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"reminded myself I leave for spring break in 2 weeks and was suddenly able to get out of bed this morning\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      }
+    ],
+    "error": null,
+    "createdAt": 1779738574.3989592,
+    "completedAt": 1779738806.8334022,
+    "output": {
+      "jobId": "2a9f3643dc3c",
+      "videoUrl": "",
+      "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/2a9f3643dc3c/output/final_output.mp4",
+      "videoGcs": null
+    },
+    "jobId": "2a9f3643dc3c"
+  },
+  "da69c201093f": {
+    "generationId": "da69c201093f",
+    "type": "video",
+    "label": "RelateFeed3.mp4 (no trim)",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"There\u2019s something so special about being an only child and finding friends who feel like the siblings you always wished for\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      }
+    ],
+    "error": null,
+    "createdAt": 1779738584.74825,
+    "completedAt": 1779738758.229454,
+    "output": {
+      "jobId": "330720415c82",
+      "videoUrl": "",
+      "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/330720415c82/output/final_output.mp4",
+      "videoGcs": null
+    },
+    "jobId": "330720415c82"
+  },
+  "7d2542b34e9f": {
+    "generationId": "7d2542b34e9f",
+    "type": "video",
+    "label": "ddtik.com_@AMELIE DESAI_no_watermark.mp4 (no trim)",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"when a man try's to mansplain the gym to me but they don't know it's my second home.\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      }
+    ],
+    "error": null,
+    "createdAt": 1779738613.164682,
+    "completedAt": 1779738956.897832,
+    "output": {
+      "jobId": "fc800505ee6e",
+      "videoUrl": "",
+      "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/fc800505ee6e/output/final_output.mp4",
+      "videoGcs": null
+    },
+    "jobId": "fc800505ee6e"
+  },
+  "1a894e77dbd2": {
+    "generationId": "1a894e77dbd2",
+    "type": "video",
+    "label": "RelateFeed2.mp4 (no trim)",
+    "status": "failed",
+    "progress": 66,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"reminded myself I leave for spring break in 2 weeks and was suddenly able to get out of bed this morning\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "running",
+        "message": "Generating video with Kling AI (this may take a few minutes)..."
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing.",
+    "createdAt": 1779738940.791882,
+    "completedAt": 1779738968.101644,
+    "output": null,
+    "jobId": "26d12efe399b"
+  },
+  "53acf89d3e04": {
+    "generationId": "53acf89d3e04",
+    "type": "video",
+    "label": "RelateFeed2.mp4 (no trim)",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "Caption: \"reminded myself I leave for spring break in 2 weeks and was suddenly able to get out of bed this morning\""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "Caption overlaid on video"
+      }
+    ],
+    "error": null,
+    "createdAt": 1779739232.67838,
+    "completedAt": 1779739450.330815,
+    "output": {
+      "jobId": "67791f8e2829",
+      "videoUrl": "",
+      "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/67791f8e2829/output/final_output.mp4",
+      "videoGcs": null
+    },
+    "jobId": "67791f8e2829"
+  },
+  "0585633d6cae": {
+    "generationId": "0585633d6cae",
+    "type": "video",
+    "label": "SkinVid.mp4 (no trim)",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "No caption detected."
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "completed",
+        "message": "Video generated"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "completed",
+        "message": "No caption to overlay -- raw video is the final output."
+      }
+    ],
+    "error": null,
+    "createdAt": 1779739328.767016,
+    "completedAt": 1779739519.9091961,
+    "output": {
+      "jobId": "78bd14dd12e6",
+      "videoUrl": "",
+      "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/78bd14dd12e6/output/generated_raw.mp4",
+      "videoGcs": null
+    },
+    "jobId": "78bd14dd12e6"
+  },
+  "069d44d3b1a9": {
+    "generationId": "069d44d3b1a9",
+    "type": "video",
+    "label": "RelateFeed4.mp4 (no trim)",
+    "status": "processing",
+    "progress": 66,
+    "currentStep": "motion_control",
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "No caption detected."
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "running",
+        "message": "Fal rendering\u2026 (~226s)"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": null,
+    "createdAt": 1779740000.406636,
+    "completedAt": null,
+    "output": null,
+    "jobId": "b3b728b290bc"
+  },
+  "081038342a28": {
+    "generationId": "081038342a28",
+    "type": "video",
+    "label": "SkinFeed4.mp4 (no trim)",
+    "status": "processing",
+    "progress": 66,
+    "currentStep": "motion_control",
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "completed",
+        "message": "Scene detection skipped -- using original video."
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "completed",
+        "message": "Screenshot saved"
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "completed",
+        "message": "No caption detected."
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "completed",
+        "message": "Recreated scene saved"
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "running",
+        "message": "Fal rendering\u2026 (~188s)"
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": null,
+    "createdAt": 1779740034.6866848,
+    "completedAt": null,
+    "output": null,
+    "jobId": "cf2c0e78d089"
   }
 }
