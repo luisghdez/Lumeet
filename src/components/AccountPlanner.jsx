@@ -61,6 +61,15 @@ function formatSchedule(value) {
   return parsed.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
 }
 
+function resolvePostMediaUrl(post) {
+  if (!post) return '';
+  const url = post.generatedMediaUrl || '';
+  if (url && !/\/api\/jobs\/[^/]+\/result(?:[?#].*)?$/.test(url)) {
+    return url;
+  }
+  return '';
+}
+
 function summarizeBulkRuns(plan) {
   const groups = new Map();
   (plan?.plannedPosts || []).forEach((post) => {
@@ -81,8 +90,9 @@ function summarizeBulkRuns(plan) {
       firstSchedule: '',
     };
     group.total += 1;
-    if (post.status === 'generated' || post.generatedMediaUrl) group.generated += 1;
-    if ((post.status === 'generated' || post.generatedMediaUrl) && post.reviewStatus !== 'scheduled') group.unscheduled += 1;
+    const hasResult = Boolean(resolvePostMediaUrl(post));
+    if (hasResult) group.generated += 1;
+    if (hasResult && post.reviewStatus !== 'scheduled') group.unscheduled += 1;
     if (post.reviewStatus === 'scheduled' || post.status === 'scheduled') group.scheduled += 1;
     if (post.status === 'failed') group.failed += 1;
     if (post.updatedAt && post.updatedAt > group.latestPostUpdate) group.latestPostUpdate = post.updatedAt;
@@ -385,45 +395,47 @@ function PostCard({
 }) {
   const source = post.sourceVideo || {};
   const tags = post.keyTags || {};
-  const generated = post.status === 'generated' || post.generatedMediaUrl;
-  const previewUrl = generated ? post.generatedMediaUrl : '';
+  const previewUrl = resolvePostMediaUrl(post);
+  const generated = Boolean(previewUrl);
+  const mediaPreview = previewUrl ? (
+    <a
+      href={previewUrl}
+      target="_blank"
+      rel="noreferrer"
+      className="group relative block overflow-hidden rounded-2xl bg-white/10"
+    >
+      <div className="relative aspect-[9/16] max-h-64 w-full">
+        <video
+          src={previewUrl}
+          className="h-full w-full object-cover"
+          controls
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        />
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/10 text-white/80 opacity-0 transition group-hover:opacity-100">
+          <PlayCircle size={22} aria-hidden />
+        </div>
+      </div>
+    </a>
+  ) : source.thumbnailUrl ? (
+    <div className="overflow-hidden rounded-2xl bg-white/10">
+      <div className="h-32 w-full">
+        <img src={source.thumbnailUrl} alt="" className="h-full w-full object-cover" loading="lazy" />
+      </div>
+    </div>
+  ) : (
+    <div className="flex h-32 w-full items-center justify-center rounded-2xl bg-white/10 text-white/40">
+      <Video size={18} aria-hidden />
+    </div>
+  );
+
   return (
     <article className="rounded-3xl border border-white/10 bg-white/[0.04] p-4">
       <div className="grid gap-4 lg:grid-cols-[160px_minmax(0,1fr)_260px]">
-        <a
-          href={previewUrl || source.url}
-          target="_blank"
-          rel="noreferrer"
-          className="group relative overflow-hidden rounded-2xl bg-white/10"
-        >
-          {previewUrl ? (
-            <div className="relative aspect-[9/16] max-h-64 w-full">
-              <video
-                src={previewUrl}
-                className="h-full w-full object-cover"
-                muted
-                playsInline
-                preload="metadata"
-                onLoadedMetadata={primeVideoFrame}
-                onMouseOver={playPreview}
-                onMouseOut={resetPreview}
-                onFocus={playPreview}
-                onBlur={resetPreview}
-              />
-              <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/10 text-white/80 opacity-0 transition group-hover:opacity-100">
-                <PlayCircle size={22} aria-hidden />
-              </div>
-            </div>
-          ) : source.thumbnailUrl ? (
-            <div className="h-32 w-full">
-              <img src={source.thumbnailUrl} alt="" className="h-full w-full object-cover" loading="lazy" />
-            </div>
-          ) : (
-            <div className="flex h-32 w-full items-center justify-center text-white/40">
-              <Video size={18} aria-hidden />
-            </div>
-          )}
-        </a>
+        {mediaPreview}
 
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
@@ -490,7 +502,7 @@ function PostCard({
             <div className="grid gap-2">
               <div className="flex gap-2">
                 <a
-                  href={post.generatedMediaUrl}
+                  href={previewUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl bg-white/10 px-3 py-2 text-xs font-semibold text-white/70 hover:bg-white/15"
@@ -652,7 +664,7 @@ function AccountPlanner({ onGenerationStarted }) {
     const validIds = accounts.map((account) => account.id);
     const stillValid = selectedAccountIds.filter((id) => validIds.includes(id));
     if (!stillValid.length) {
-      setSelectedAccountIds([accounts[0].id]);
+      setSelectedAccountIds(validIds);
     } else if (stillValid.length !== selectedAccountIds.length) {
       setSelectedAccountIds(stillValid);
     }
@@ -686,6 +698,8 @@ function AccountPlanner({ onGenerationStarted }) {
   const visiblePosts = useMemo(() => (
     (plan?.plannedPosts || []).filter((post) => (
       !selectedBulkRunId || post.bulkRunId === selectedBulkRunId
+    )).filter((post) => (
+      !selectedBulkRunId || Boolean(resolvePostMediaUrl(post))
     ))
   ), [plan, selectedBulkRunId]);
   const planStats = useMemo(() => {
@@ -694,14 +708,14 @@ function AccountPlanner({ onGenerationStarted }) {
       total: posts.length,
       queued: posts.filter((post) => post.status === 'queued').length,
       generating: posts.filter((post) => post.status === 'generating').length,
-      generated: posts.filter((post) => post.status === 'generated' || post.generatedMediaUrl).length,
+      generated: posts.filter((post) => Boolean(resolvePostMediaUrl(post))).length,
       scheduled: posts.filter((post) => post.reviewStatus === 'scheduled').length,
       failed: posts.filter((post) => post.status === 'failed').length,
     };
   }, [visiblePosts]);
   const generatedUnscheduledPosts = useMemo(() => (
     visiblePosts.filter((post) => (
-      (post.status === 'generated' || post.generatedMediaUrl)
+      Boolean(resolvePostMediaUrl(post))
       && post.reviewStatus !== 'scheduled'
     ))
   ), [visiblePosts]);
@@ -822,7 +836,7 @@ function AccountPlanner({ onGenerationStarted }) {
       publishNow: false,
       timezone,
       scheduledFor: scheduledIso,
-      mediaUrls: [post.generatedMediaUrl].filter(Boolean),
+      mediaUrls: [resolvePostMediaUrl(post)].filter(Boolean),
       ...(post.jobId ? { jobId: post.jobId, includeResultVideo: true } : {}),
     };
     const result = await createLatePost(payload);

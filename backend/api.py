@@ -18,6 +18,7 @@ import sys
 import shutil
 import threading
 import logging
+import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -101,6 +102,141 @@ app.add_middleware(
 # Base directory for job files
 JOBS_DIR = os.path.join(os.path.dirname(__file__), "jobs")
 os.makedirs(JOBS_DIR, exist_ok=True)
+
+
+def _extract_legacy_job_id(url: str) -> str:
+    match = re.search(r"/api/jobs/([^/]+)/result(?:[?#].*)?$", url or "")
+    return match.group(1) if match else ""
+
+
+def _is_safe_result_path(path: str) -> bool:
+    if not path:
+        return False
+    try:
+        abs_path = os.path.abspath(path)
+        return abs_path.startswith(os.path.abspath(JOBS_DIR) + os.sep) and os.path.isfile(abs_path)
+    except OSError:
+        return False
+
+
+def _generation_result_url(generation_id: str, output: Any) -> str:
+    if not generation_id or not isinstance(output, dict):
+        return ""
+    result_path = str(output.get("resultPath") or "")
+    if _is_safe_result_path(result_path):
+        return f"{PUBLIC_BACKEND_BASE_URL.rstrip('/')}/api/generations/{generation_id}/result"
+    return ""
+
+
+def _stable_video_url_for_job(job_id: str) -> str:
+    if not job_id:
+        return ""
+
+    job = job_manager.get_job(job_id)
+    if job and job.video_gcs and job.video_gcs.get("url"):
+        return str(job.video_gcs.get("url"))
+
+    video_record = video_metadata_store.get(job_id)
+    if video_record and video_record.get("url"):
+        return str(video_record.get("url"))
+
+    generation = generation_store.get(job_id)
+    if isinstance(generation, dict):
+        output = generation.get("output") or {}
+        if isinstance(output, dict):
+            video_gcs = output.get("videoGcs") or {}
+            if isinstance(video_gcs, dict) and video_gcs.get("url"):
+                return str(video_gcs.get("url"))
+            video_url = output.get("videoUrl") or ""
+            if isinstance(video_url, str) and video_url and "/api/jobs/" not in video_url:
+                return video_url
+
+    for generation in generation_store.list_all(limit=500):
+        if not isinstance(generation, dict):
+            continue
+        output = generation.get("output") or {}
+        if not isinstance(output, dict):
+            continue
+        if str(output.get("jobId") or "") != job_id:
+            continue
+        video_gcs = output.get("videoGcs") or {}
+        if isinstance(video_gcs, dict) and video_gcs.get("url"):
+            return str(video_gcs.get("url"))
+        video_url = output.get("videoUrl") or ""
+        if isinstance(video_url, str) and video_url and "/api/jobs/" not in video_url:
+            return video_url
+        result_url = _generation_result_url(str(generation.get("generationId") or ""), output)
+        if result_url:
+            return result_url
+
+    return ""
+
+
+def _normalize_generation_output(output: Any, generation_id: str = "") -> Any:
+    if not isinstance(output, dict):
+        return output
+    normalized = dict(output)
+    video_gcs = normalized.get("videoGcs") if isinstance(normalized.get("videoGcs"), dict) else {}
+    video_url = str(normalized.get("videoUrl") or "")
+    stable_url = ""
+
+    if isinstance(video_gcs, dict) and video_gcs.get("url"):
+        stable_url = str(video_gcs.get("url"))
+    elif video_url and "/api/jobs/" not in video_url:
+        stable_url = video_url
+    else:
+        stable_url = _stable_video_url_for_job(str(normalized.get("jobId") or ""))
+    if not stable_url:
+        stable_url = _generation_result_url(generation_id, normalized)
+
+    if stable_url:
+        normalized["videoUrl"] = stable_url
+        normalized["videoGcs"] = {
+            **(video_gcs if isinstance(video_gcs, dict) else {}),
+            "url": stable_url,
+        }
+    return normalized
+
+
+def _normalize_generation_record(item: Dict[str, Any]) -> Dict[str, Any]:
+    normalized = dict(item)
+    normalized["output"] = _normalize_generation_output(
+        normalized.get("output"),
+        str(normalized.get("generationId") or ""),
+    )
+    return normalized
+
+
+def _normalize_plan_post(post: Dict[str, Any]) -> Dict[str, Any]:
+    normalized = dict(post)
+    generated_media_url = str(normalized.get("generatedMediaUrl") or "")
+    stable_url = ""
+    if generated_media_url and "/api/jobs/" not in generated_media_url:
+        stable_url = generated_media_url
+    else:
+        generation_id = str(normalized.get("generationId") or "")
+        if generation_id:
+            generation = generation_store.get(generation_id)
+            if isinstance(generation, dict):
+                output = _normalize_generation_output(generation.get("output"), generation_id)
+                if isinstance(output, dict):
+                    stable_url = str(output.get("videoUrl") or "")
+        if not stable_url:
+            stable_url = _stable_video_url_for_job(str(normalized.get("jobId") or ""))
+    if stable_url:
+        normalized["generatedMediaUrl"] = stable_url
+    return normalized
+
+
+def _normalize_plan_record(plan: Dict[str, Any]) -> Dict[str, Any]:
+    normalized = dict(plan)
+    posts = normalized.get("plannedPosts") or []
+    if isinstance(posts, list):
+        normalized["plannedPosts"] = [
+            _normalize_plan_post(post) if isinstance(post, dict) else post
+            for post in posts
+        ]
+    return normalized
 
 
 class LateProfileCreateRequest(BaseModel):
@@ -1422,7 +1558,7 @@ async def create_studytok_simple_plan_endpoint(payload: StudyTokSimplePlanCreate
 @app.get("/api/account-planner/plans")
 async def list_account_plans(limit: int = Query(25, ge=1, le=100)):
     """List saved account plans."""
-    return {"plans": account_plan_store.list_all(limit=limit)}
+    return {"plans": [_normalize_plan_record(plan) for plan in account_plan_store.list_all(limit=limit)]}
 
 
 @app.get("/api/account-planner/plans/{plan_id}")
@@ -1431,7 +1567,7 @@ async def get_account_plan(plan_id: str):
     plan = account_plan_store.get(plan_id)
     if not plan:
         raise HTTPException(status_code=404, detail=f"Account plan {plan_id} not found.")
-    return plan
+    return _normalize_plan_record(plan)
 
 
 @app.patch("/api/account-planner/plans/{plan_id}")
@@ -1778,8 +1914,25 @@ async def generation_create_avatar(payload: AvatarCreateRequest):
 @app.get("/api/generations")
 async def list_generations(limit: int = Query(50, ge=1, le=200)):
     """List generation jobs for the Generation Center panel."""
-    items = generation_store.list_all(limit=limit)
+    items = [_normalize_generation_record(item) for item in generation_store.list_all(limit=limit)]
     return {"generations": items}
+
+
+@app.get("/api/generations/{generation_id}/result")
+async def get_generation_result(generation_id: str):
+    """Stream a persisted generation's final_output.mp4 from disk."""
+    item = generation_store.get(generation_id)
+    if not item:
+        raise HTTPException(status_code=404, detail=f"Generation {generation_id} not found.")
+    output = item.get("output") or {}
+    result_path = str(output.get("resultPath") or "") if isinstance(output, dict) else ""
+    if not _is_safe_result_path(result_path):
+        raise HTTPException(status_code=404, detail=f"Generation {generation_id} result not found.")
+    return FileResponse(
+        result_path,
+        media_type="video/mp4",
+        filename=f"{generation_id}_final_output.mp4",
+    )
 
 
 @app.get("/api/generations/{generation_id}")
@@ -1788,7 +1941,7 @@ async def get_generation(generation_id: str):
     item = generation_store.get(generation_id)
     if not item:
         raise HTTPException(status_code=404, detail=f"Generation {generation_id} not found.")
-    return item
+    return _normalize_generation_record(item)
 
 
 class GenerationPatchRequest(BaseModel):

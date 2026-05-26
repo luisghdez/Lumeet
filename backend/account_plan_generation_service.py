@@ -13,7 +13,7 @@ from typing import Any, Dict, List, Optional
 import requests
 
 from account_plan_store import account_plan_store
-from config import GCS_VIDEO_OBJECT_PREFIX, PUBLIC_BACKEND_BASE_URL
+from config import GCS_VIDEO_OBJECT_PREFIX
 from generation_store import generation_store
 from job_manager import EXTENDED_PIPELINE_STEPS, PIPELINE_STEPS, job_manager
 from late_service import LateServiceError, late_service
@@ -242,7 +242,7 @@ def _generate_post(
     )
     final_video = result.get("final_video", "")
     gcs_info = _upload_video_to_gcs(job.id, final_video)
-    media_url = (gcs_info or {}).get("url") or f"{PUBLIC_BACKEND_BASE_URL.rstrip('/')}/api/jobs/{job.id}/result"
+    media_url = (gcs_info or {}).get("url", "")
     output = {
         "jobId": job.id,
         "videoUrl": media_url,

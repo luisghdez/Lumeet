@@ -4,6 +4,7 @@ Service layer for Late API integration.
 
 from __future__ import annotations
 
+import re
 from datetime import datetime
 from urllib.parse import urlparse
 from typing import Any, Dict, List, Optional
@@ -16,8 +17,10 @@ from config import (
     LATE_API_BASE_URL,
     LATE_API_KEY,
     LATE_REQUEST_TIMEOUT_SEC,
-    PUBLIC_BACKEND_BASE_URL,
 )
+from generation_store import generation_store
+from job_manager import job_manager
+from video_metadata_store import video_metadata_store
 from late_client import LateApiError, LateClient
 
 logger = logging.getLogger("lumeet.late_service")
@@ -145,27 +148,64 @@ class LateService:
                 raise LateServiceError(400, "timezone is required when scheduledFor is set.")
 
     @staticmethod
+    def _resolve_stable_video_url(job_id: str) -> Optional[str]:
+        if not job_id:
+            return None
+
+        job = job_manager.get_job(job_id)
+        if job and job.video_gcs and job.video_gcs.get("url"):
+            return str(job.video_gcs.get("url"))
+
+        video_record = video_metadata_store.get(job_id)
+        if video_record and video_record.get("url"):
+            return str(video_record.get("url"))
+
+        generations = generation_store.list_all(limit=500)
+        for generation in generations:
+            output = generation.get("output") if isinstance(generation, dict) else None
+            if not isinstance(output, dict):
+                continue
+            if str(output.get("jobId") or "") != job_id:
+                continue
+            video_gcs = output.get("videoGcs")
+            if isinstance(video_gcs, dict) and video_gcs.get("url"):
+                return str(video_gcs.get("url"))
+            if output.get("videoUrl"):
+                video_url = str(output.get("videoUrl"))
+                if "/api/jobs/" not in video_url:
+                    return video_url
+
+        return None
+
+    @staticmethod
+    def _extract_job_id(url: str) -> Optional[str]:
+        match = re.search(r"/api/jobs/([^/]+)/result(?:[?#].*)?$", url or "")
+        return match.group(1) if match else None
+
+    @staticmethod
     def _normalize_media_urls(
         *,
         media_urls: Optional[List[str]] = None,
         include_result_video: bool = False,
         job_id: Optional[str] = None,
     ) -> List[str]:
-        normalized = [u for u in (media_urls or []) if u]
-        if include_result_video and job_id:
-            # Prefer the stable GCS public URL stored on the job if available;
-            # fall back to the local result endpoint.
-            from job_manager import job_manager as _jm
+        normalized: List[str] = []
+        for url in media_urls or []:
+            if not url:
+                continue
+            extracted_job_id = LateService._extract_job_id(url)
+            if extracted_job_id:
+                stable = LateService._resolve_stable_video_url(extracted_job_id)
+                if stable:
+                    normalized.append(stable)
+                    continue
+            normalized.append(url)
 
-            gcs_url: Optional[str] = None
-            job = _jm.get_job(job_id)
-            if job and job.video_gcs:
-                gcs_url = job.video_gcs.get("url")
-            if gcs_url:
-                normalized.append(gcs_url)
-            else:
-                base = PUBLIC_BACKEND_BASE_URL.rstrip("/")
-                normalized.append(f"{base}/api/jobs/{job_id}/result")
+        normalized = [u for u in normalized if u]
+        if include_result_video and job_id:
+            stable_url = LateService._resolve_stable_video_url(job_id)
+            if stable_url:
+                normalized.append(stable_url)
         # Keep insertion order while deduplicating.
         return list(dict.fromkeys(normalized))
 

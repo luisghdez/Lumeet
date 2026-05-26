@@ -518,19 +518,31 @@ class TestLateMediaGcsPreference:
         assert urls[0] == "https://storage.googleapis.com/test-bucket/videos/test/final.mp4"
 
     def test_normalize_media_urls_falls_back_to_local(self):
-        """When a job has no video_gcs metadata, falls back to the local result endpoint."""
+        """When a job has no in-memory GCS metadata, use persisted stable media metadata."""
         from late_service import LateService
+        from video_metadata_store import video_metadata_store
 
         job = job_manager.create_job("/tmp/v.mp4", "/tmp/i.png", "/tmp/out")
         job_manager.mark_completed(job.id, "/tmp/final.mp4", {"final_video": "/tmp/final.mp4"})
-        # No video_gcs set
+        payload = {
+            "videoId": job.id,
+            "url": "https://storage.googleapis.com/test-bucket/videos/test/final.mp4",
+            "bucket": "test-bucket",
+            "object": "videos/test/final.mp4",
+            "extended": False,
+            "createdAt": "2026-01-01T00:00:00+00:00",
+        }
 
-        urls = LateService._normalize_media_urls(
-            include_result_video=True,
-            job_id=job.id,
-        )
-        assert len(urls) == 1
-        assert f"/api/jobs/{job.id}/result" in urls[0]
+        try:
+            video_metadata_store.save(job.id, payload)
+            urls = LateService._normalize_media_urls(
+                include_result_video=True,
+                job_id=job.id,
+            )
+            assert len(urls) == 1
+            assert urls[0] == "https://storage.googleapis.com/test-bucket/videos/test/final.mp4"
+        finally:
+            video_metadata_store.delete(job.id)
 
 
 # -- TikTok organizer account jobs -----------------------------------------

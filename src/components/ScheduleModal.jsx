@@ -97,6 +97,19 @@ function nextSlotDatetimeLocal(stepMinutes = 30) {
   return local.toISOString().slice(0, 16);
 }
 
+function resolveGenerationVideoUrl(output) {
+  const url = output?.videoGcs?.url
+    || output?.videoUrl
+    || output?.final_video_gcs?.url
+    || output?.finalVideoUrl
+    || output?.video?.url
+    || '';
+  if (typeof url === 'string' && /\/api\/jobs\/[^/]+\/result(?:[?#].*)?$/.test(url)) {
+    return '';
+  }
+  return url;
+}
+
 const PLATFORM_META = {
   instagram: { label: 'Instagram', Icon: Instagram, tone: 'from-pink-500 to-orange-400' },
   tiktok: { label: 'TikTok', Icon: null, initials: 'TT', tone: 'from-gray-900 to-gray-700' },
@@ -560,7 +573,7 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
 
   const mediaUrls = useMemo(() => {
     if (isVideo) {
-      const url = output.videoGcs?.url || output.videoUrl || '';
+      const url = resolveGenerationVideoUrl(output);
       return url ? [url] : [];
     }
     if (isCarousel) {
