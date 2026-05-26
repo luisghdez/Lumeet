@@ -185,6 +185,33 @@ SCORE_FIELDS = [
     "entertainment_value_score", "production_ease_score",
 ]
 
+CONTENT_TYPE_VALUES = [
+    "hook_demo",
+    "relatable_content",
+    "ugc_physical_product",
+    "trending_audio_dance",
+    "other",
+]
+PRODUCT_KIND_VALUES = ["app", "physical_product", "brand_or_service", "none", "unknown"]
+PRODUCT_CATEGORY_VALUES = [
+    "fitness_app",
+    "study_app",
+    "productivity_app",
+    "ai_tool",
+    "gym_clothing",
+    "normal_clothing",
+    "skincare_cream",
+    "skincare_spray",
+    "skincare_product",
+    "supplement",
+    "beauty_product",
+    "fitness_equipment",
+    "home_product",
+    "food_beverage",
+    "other",
+    "unknown",
+]
+
 
 def _ensure_dirs() -> None:
     os.makedirs(VIDEO_ANALYSIS_TEMP_DIR, exist_ok=True)
@@ -860,7 +887,7 @@ def _movement_label(score: float) -> str:
     return "very_high"
 
 
-def _representative_frames(frames: List[str], count: int = 4) -> List[str]:
+def _representative_frames(frames: List[str], count: int = 3) -> List[str]:
     if len(frames) <= count:
         return frames
     indexes = sorted({round(i * (len(frames) - 1) / (count - 1)) for i in range(count)})
@@ -874,129 +901,28 @@ def _encode_image(path: str) -> str:
 
 def _json_schema() -> Dict[str, Any]:
     return {
-        "name": "video_recreation_tags",
+        "name": "lean_video_tags",
         "schema": {
             "type": "object",
             "additionalProperties": False,
             "properties": {
+                "content_type": {"type": "string", "enum": CONTENT_TYPE_VALUES},
                 "niche": {"type": "string", "enum": NICHE_VALUES},
                 "sub_niche": {"type": "string"},
-                "study_content_type": {"type": "string", "enum": STUDY_CONTENT_TYPE_VALUES},
-                "study_pain_point": {"type": "string", "enum": STUDY_PAIN_POINT_VALUES},
-                "study_outcome_promise": {"type": "string", "enum": STUDY_OUTCOME_VALUES},
-                "duration_sec": {"type": "number"},
-                "format": {"type": "string", "enum": FORMAT_VALUES},
-                "hook_type": {"type": "string", "enum": HOOK_VALUES},
+                "product_kind": {"type": "string", "enum": PRODUCT_KIND_VALUES},
+                "product_name": {"type": "string"},
+                "product_category": {"type": "string", "enum": PRODUCT_CATEGORY_VALUES},
                 "scene_type": {"type": "string", "enum": SCENE_VALUES},
-                "camera_movement": {"type": "string", "enum": CAMERA_VALUES},
-                "visual_pattern": {"type": "string", "enum": VISUAL_VALUES},
-                "motion_amount": {"type": "string", "enum": MOVEMENT_AMOUNT_VALUES},
-                "recreation_difficulty": {"type": "string", "enum": MOTION_DIFFICULTY_VALUES},
-                "motion_difficulty": {"type": "string", "enum": MOTION_DIFFICULTY_VALUES},
-                "content_pillar": {"type": "string", "enum": CONTENT_PILLAR_VALUES},
-                "pillar_role": {"type": "string", "enum": PILLAR_ROLE_VALUES},
-                "account_archetype": {"type": "string", "enum": ACCOUNT_ARCHETYPE_VALUES},
-                "account_voice": {"type": "string", "enum": ACCOUNT_VOICE_VALUES},
-                "audience_stage": {"type": "string", "enum": AUDIENCE_STAGE_VALUES},
-                "audience_identity": {"type": "string", "enum": AUDIENCE_IDENTITY_VALUES},
-                "funnel_stage": {"type": "string", "enum": FUNNEL_STAGE_VALUES},
-                "campaign_use": {"type": "string", "enum": CAMPAIGN_USE_VALUES},
-                "conversion_intent": {"type": "string", "enum": CONVERSION_INTENT_VALUES},
-                "cta_type": {"type": "string", "enum": CTA_TYPE_VALUES},
-                "product_integration_type": {"type": "string", "enum": PRODUCT_INTEGRATION_VALUES},
-                "primary_product_name": {"type": "string"},
-                "primary_product_type": {"type": "string", "enum": PRODUCT_TYPE_VALUES},
-                "product_mention_type": {"type": "string", "enum": PRODUCT_MENTION_TYPE_VALUES},
-                "product_mention_context": {"type": "string"},
-                "mentioned_products": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "additionalProperties": False,
-                        "properties": {
-                            "name": {"type": "string"},
-                            "product_type": {"type": "string", "enum": PRODUCT_TYPE_VALUES},
-                            "mention_type": {"type": "string", "enum": PRODUCT_MENTION_TYPE_VALUES},
-                            "context": {"type": "string"},
-                            "confidence": {"type": "number", "minimum": 0, "maximum": 1},
-                        },
-                        "required": ["name", "product_type", "mention_type", "context", "confidence"],
-                    },
-                },
-                "product_visibility": {"type": "string", "enum": PRODUCT_VISIBILITY_VALUES},
-                "product_fit": {"type": "string", "enum": PRODUCT_FIT_VALUES},
-                "demo_depth": {"type": "string", "enum": DEMO_DEPTH_VALUES},
-                "creative_template": {"type": "string", "enum": CREATIVE_TEMPLATE_VALUES},
-                "script_structure": {"type": "string", "enum": SCRIPT_STRUCTURE_VALUES},
-                "repeatability": {"type": "string", "enum": REPEATABILITY_VALUES},
-                "production_complexity": {"type": "string", "enum": PRODUCTION_COMPLEXITY_VALUES},
-                "location_complexity": {"type": "string", "enum": LOCATION_COMPLEXITY_VALUES},
-                "asset_requirements": {
-                    "type": "array",
-                    "items": {"type": "string", "enum": ASSET_REQUIREMENT_VALUES},
-                },
-                "requires_voiceover": {"type": "string", "enum": TRI_STATE_VALUES},
-                "requires_text_overlay": {"type": "string", "enum": TEXT_OVERLAY_VALUES},
-                "requires_trend_audio": {"type": "string", "enum": TRI_STATE_VALUES},
-                "cta_strength": {"type": "string", "enum": CTA_STRENGTH_VALUES},
-                "detected_text_cues": {
-                    "type": "array",
-                    "items": {"type": "string"},
-                },
-                "scene_roles": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "additionalProperties": False,
-                        "properties": {
-                            "scene_index": {"type": "integer"},
-                            "role": {"type": "string", "enum": SCENE_ROLE_VALUES},
-                            "start_sec": {"type": "number"},
-                            "end_sec": {"type": "number"},
-                            "confidence": {"type": "number", "minimum": 0, "maximum": 1},
-                        },
-                        "required": ["scene_index", "role", "start_sec", "end_sec", "confidence"],
-                    },
-                },
-                "is_hook_then_demo": {"type": "boolean"},
-                "hook_scene_count": {"type": "integer"},
-                "demo_scene_count": {"type": "integer"},
-                "cta_scene_count": {"type": "integer"},
-                "demo_start_sec": {"type": "number"},
-                "campaign_fit_score": {"type": "number", "minimum": 0, "maximum": 1},
-                "account_fit_score": {"type": "number", "minimum": 0, "maximum": 1},
-                "repeatability_score": {"type": "number", "minimum": 0, "maximum": 1},
-                "viral_score": {"type": "number", "minimum": 0, "maximum": 1},
-                "conversion_potential_score": {"type": "number", "minimum": 0, "maximum": 1},
-                "trust_building_score": {"type": "number", "minimum": 0, "maximum": 1},
-                "education_value_score": {"type": "number", "minimum": 0, "maximum": 1},
-                "entertainment_value_score": {"type": "number", "minimum": 0, "maximum": 1},
-                "production_ease_score": {"type": "number", "minimum": 0, "maximum": 1},
-                "hook_summary": {"type": "string"},
-                "first_three_seconds": {"type": "string"},
-                "recreation_notes": {"type": "string"},
+                "is_easy_to_replicate": {"type": "boolean"},
+                "is_single_scene": {"type": "boolean"},
+                "duration_sec": {"type": "number"},
                 "ai_confidence": {"type": "number", "minimum": 0, "maximum": 1},
             },
             "required": [
-                "niche", "sub_niche", "study_content_type", "study_pain_point",
-                "study_outcome_promise", "duration_sec", "format", "hook_type", "scene_type", "camera_movement",
-                "visual_pattern", "motion_amount", "recreation_difficulty", "motion_difficulty",
-                "content_pillar", "pillar_role", "account_archetype", "account_voice",
-                "audience_stage", "audience_identity",
-                "funnel_stage", "campaign_use", "conversion_intent", "cta_type",
-                "product_integration_type", "primary_product_name", "primary_product_type",
-                "product_mention_type", "product_mention_context", "mentioned_products",
-                "product_visibility", "product_fit", "demo_depth",
-                "creative_template", "script_structure", "repeatability", "production_complexity",
-                "location_complexity", "asset_requirements", "requires_voiceover",
-                "requires_text_overlay", "requires_trend_audio", "cta_strength",
-                "detected_text_cues", "scene_roles",
-                "is_hook_then_demo", "hook_scene_count", "demo_scene_count",
-                "cta_scene_count", "demo_start_sec", "campaign_fit_score",
-                "account_fit_score", "repeatability_score", "viral_score",
-                "conversion_potential_score", "trust_building_score", "education_value_score",
-                "entertainment_value_score", "production_ease_score", "hook_summary",
-                "first_three_seconds", "recreation_notes", "ai_confidence",
+                "content_type", "niche", "sub_niche", "product_kind",
+                "product_name", "product_category", "scene_type",
+                "is_easy_to_replicate", "is_single_scene", "duration_sec",
+                "ai_confidence",
             ],
         },
         "strict": True,
@@ -1019,56 +945,39 @@ def _tag_with_openai(video_reference: Dict[str, Any], motion_metrics: Dict[str, 
         for path in frames
     ]
     taxonomy_text = json.dumps({
+        "content_types": CONTENT_TYPE_VALUES,
+        "niches": NICHE_VALUES,
         "sub_niches_by_niche": SUB_NICHE_VALUES,
-        "study_content_types": STUDY_CONTENT_TYPE_VALUES,
-        "study_pain_points": STUDY_PAIN_POINT_VALUES,
-        "study_outcome_promises": STUDY_OUTCOME_VALUES,
-        "formats": FORMAT_VALUES,
-        "hook_types": HOOK_VALUES,
-        "scene_roles": SCENE_ROLE_VALUES,
-        "product_mention_types": PRODUCT_MENTION_TYPE_VALUES,
-        "cta_strengths": CTA_STRENGTH_VALUES,
-        "visual_patterns": VISUAL_VALUES,
-        "content_pillars": CONTENT_PILLAR_VALUES,
-        "account_archetypes": ACCOUNT_ARCHETYPE_VALUES,
-        "campaign_uses": CAMPAIGN_USE_VALUES,
-        "creative_templates": CREATIVE_TEMPLATE_VALUES,
-        "script_structures": SCRIPT_STRUCTURE_VALUES,
+        "product_kinds": PRODUCT_KIND_VALUES,
+        "product_categories": PRODUCT_CATEGORY_VALUES,
+        "scene_types": SCENE_VALUES,
     }, indent=2)
     content = [
         {
             "type": "text",
             "text": (
-                "Tag this short-form video for cheap recreation. Use only fixed enum values. "
-                "Also tag it for account strategy and campaign composition planning. "
-                "Pick sub_niche from the group matching niche; use other if uncertain. "
-                "Scores are 0 to 1. Use content_pillar as the primary account mix bucket.\n\n"
-                "Important definitions:\n"
-                "- talking_head means a person is visibly speaking or presenting to camera. Do not use it just because a face is visible.\n"
-                "- before_after requires two distinct states, edits, or explicit transformation proof. Do not use it for a single physique, outfit, or product showcase.\n"
-                "- bold_claim requires an explicit spoken, caption, or text claim. If the hook is mainly the visual, use visual_body_hook, visual_reveal, aesthetic_hook, or no_explicit_hook.\n"
-                "- motion_amount is visible movement. recreation_difficulty is how hard the clip is to recreate for a campaign. A one-scene mirror/body clip can have medium/high visible movement but easy recreation.\n"
-                "- Prefer visual_only or audio_only_visual when there is no evidence of a spoken script, tutorial, or story arc.\n"
-                "- Use mirror_body_showcase/body_check/physique_showcase for physique, outfit, body check, flexing, or mirror pose clips that are primarily visual.\n\n"
-                "Study influencer rules:\n"
-                "- For education/study/productivity videos, always classify study_content_type, study_pain_point, and study_outcome_promise.\n"
-                "- Use relatable_student_problem for student-life pain point content, even when the product is only mentioned in text.\n"
-                "- Use app_demo or app_promo when an app is shown, named, or promoted; app_demo requires visible app/interface walkthrough, app_promo can be mention-only.\n"
-                "- Use not_study and none for study fields when the video is not study-related.\n"
-                "- duration_sec must reflect the local motion metric duration, not an estimate from the caption.\n\n"
-                "Product mention rules:\n"
-                "- Extract every visible, captioned, or spoken product/app/brand name into mentioned_products.\n"
-                "- If a long text overlay includes an app or brand name, set primary_product_name to that name and product_mention_type to text_overlay.\n"
-                "- A product can be mentioned without being demoed. In that case use product_integration_type mentioned_only, product_visibility low, demo_depth none, and cta_strength light if the wording nudges the viewer to use it.\n"
-                "- Use cta_strength light for subtle mentions like 'use/try with [app name]' inside relatable text, medium/strong for direct 'download now', 'try free', 'link in bio', or explicit offer language.\n"
-                "- detected_text_cues should include short exact or near-exact text snippets that explain the hook, CTA, product name, or audience pain point.\n\n"
-                "Scene role rules:\n"
-                "- If the first scene introduces a pain point, curiosity gap, promise, or reason to watch, label it hook.\n"
-                "- If later scenes show the product/app/interface/process in use, label those scenes demo_step, not generic broll.\n"
-                "- If a scene asks the viewer to download, try, buy, click, or use the app, label it cta.\n"
-                "- If scene 1 is hook and most later scenes are demo_step/product_showcase, set format hook_demo, creative_template hook_then_demo, script_structure hook_then_demo, and is_hook_then_demo true.\n"
-                "- A hook_demo can have many demo scenes. Use demo_start_sec for the start of the first demo/product scene.\n\n"
-                f"Campaign taxonomy hints:\n{taxonomy_text}\n\n"
+                "Tag this short-form video using the lean V1 taxonomy only. "
+                "Use fixed enum values. Keep outputs compact and literal.\n\n"
+                "Content type rules:\n"
+                "- hook_demo: the video has an attention hook and then shows/demos an app, product, feature, workflow, result, or offer. Identify the niche and attempt product_kind/product_name.\n"
+                "- relatable_content: creator-led relatable POV, problem, reaction, student/lifestyle/gym situation, or pain-point content with no later app/product demo. Identify the niche.\n"
+                "- ugc_physical_product: a physical product is central. Identify exact product or brand if visible/captioned, plus product category such as gym_clothing, normal_clothing, skincare_cream, or skincare_spray.\n"
+                "- trending_audio_dance: singing, dancing, lip sync, trend audio, or a one-scene trend replication. Identify scene_type, niche, and whether it is easy to replicate.\n"
+                "- other: use only if none of the target buckets fit.\n\n"
+                "Precedence rules:\n"
+                "- Classify the whole video, not just the opening text.\n"
+                "- If the opening is relatable but later scenes show an app/product workflow, demo, upload, feature screen, generated result, before/after result, or product use, choose hook_demo.\n"
+                "- For study videos, a relatable claim followed by app screens or a visual summary/result is hook_demo, even if the app name is not readable.\n\n"
+                "Product rules:\n"
+                "- product_kind app is for visible or named mobile/web/software apps.\n"
+                "- product_kind physical_product is for clothing, skincare, supplements, equipment, food, or other tangible items.\n"
+                "- product_name should be the exact app/product/brand when readable, captioned, or visually identifiable; otherwise empty string.\n"
+                "- product_category must be the closest enum; use unknown if unclear.\n\n"
+                "Local metric rules:\n"
+                "- duration_sec must equal the local motion metric duration.\n"
+                "- is_single_scene should match local scene_count <= 1.\n"
+                "- is_easy_to_replicate should be true for short, single-scene, static/simple clips and most one-scene trend/dance clips.\n\n"
+                f"Taxonomy:\n{taxonomy_text}\n\n"
                 f"Metadata:\n{json.dumps(_metadata_for_prompt(video_reference), indent=2)}\n\n"
                 f"Local motion metrics:\n{json.dumps(motion_metrics, indent=2)}"
             ),
@@ -1082,8 +991,8 @@ def _tag_with_openai(video_reference: Dict[str, Any], motion_metrics: Dict[str, 
             {
                 "role": "system",
                 "content": (
-                    "You are a precise creative analyst for short-form ads. "
-                    "Return compact recreation tags only."
+                    "You are a precise short-form creative tagging assistant. "
+                    "Return only the requested lean JSON tags."
                 ),
             },
             {"role": "user", "content": content},
@@ -1111,6 +1020,67 @@ def _metadata_for_prompt(video_reference: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def _normalize_tags(tags: Dict[str, Any], motion_metrics: Dict[str, Any]) -> Dict[str, Any]:
+    normalized: Dict[str, Any] = {}
+    content_type = tags.get("content_type")
+    normalized["content_type"] = content_type if content_type in CONTENT_TYPE_VALUES else "other"
+
+    niche = tags.get("niche")
+    normalized["niche"] = niche if niche in NICHE_VALUES else "other"
+    allowed_subs = SUB_NICHE_VALUES.get(normalized["niche"], ["other"])
+    normalized["sub_niche"] = tags.get("sub_niche") if tags.get("sub_niche") in allowed_subs else "other"
+
+    product_kind = tags.get("product_kind")
+    normalized["product_kind"] = product_kind if product_kind in PRODUCT_KIND_VALUES else "unknown"
+    normalized["product_name"] = str(tags.get("product_name") or "").strip()[:80]
+    product_category = tags.get("product_category")
+    normalized["product_category"] = product_category if product_category in PRODUCT_CATEGORY_VALUES else "unknown"
+
+    scene_type = tags.get("scene_type")
+    normalized["scene_type"] = scene_type if scene_type in SCENE_VALUES else "other"
+    scene_count = int(_safe_float(motion_metrics.get("scene_count"), 1))
+    is_single_scene = scene_count <= 1
+    normalized["is_single_scene"] = is_single_scene
+    normalized["duration_sec"] = _safe_float(motion_metrics.get("duration_sec"), _safe_float(tags.get("duration_sec"), 0.0))
+
+    ai_easy = bool(tags.get("is_easy_to_replicate"))
+    metric_easy = (
+        is_single_scene
+        and motion_metrics.get("recreation_difficulty") in {"very_easy", "easy"}
+        and _safe_float(motion_metrics.get("duration_sec"), 0.0) <= 20
+    )
+    normalized["is_easy_to_replicate"] = bool(ai_easy or metric_easy)
+    normalized["ai_confidence"] = max(0.0, min(1.0, _safe_float(tags.get("ai_confidence"), 0.0)))
+
+    normalized = _apply_lean_tag_guardrails(normalized, motion_metrics)
+    return normalized
+
+
+def _apply_lean_tag_guardrails(tags: Dict[str, Any], motion_metrics: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    normalized = dict(tags)
+    metrics = motion_metrics or {}
+    scene_count = int(_safe_float(metrics.get("scene_count"), 1))
+    if normalized.get("product_kind") == "none":
+        normalized["product_name"] = ""
+        normalized["product_category"] = "unknown"
+    if normalized.get("content_type") == "hook_demo" and normalized.get("product_kind") == "none":
+        normalized["product_kind"] = "unknown"
+    if normalized.get("content_type") == "ugc_physical_product":
+        normalized["product_kind"] = "physical_product"
+        if normalized.get("product_category") in {"fitness_app", "study_app", "productivity_app", "ai_tool"}:
+            normalized["product_category"] = "unknown"
+    if (
+        normalized.get("content_type") == "relatable_content"
+        and scene_count > 1
+        and normalized.get("product_kind") == "app"
+        and normalized.get("product_category") in {"fitness_app", "study_app", "productivity_app", "ai_tool", "unknown"}
+    ):
+        normalized["content_type"] = "hook_demo"
+    if normalized.get("content_type") == "trending_audio_dance" and normalized.get("is_single_scene"):
+        normalized["is_easy_to_replicate"] = True
+    return normalized
+
+
+def _normalize_legacy_tags(tags: Dict[str, Any], motion_metrics: Dict[str, Any]) -> Dict[str, Any]:
     normalized = dict(tags)
     normalized["niche"] = normalized.get("niche") if normalized.get("niche") in NICHE_VALUES else "other"
     allowed_subs = SUB_NICHE_VALUES.get(normalized["niche"], ["other"])
@@ -1439,14 +1409,7 @@ def analyze_video_reference(video_reference: Dict[str, Any]) -> Dict[str, Any]:
         scene_metrics = _scene_metrics(downloaded_path)
         frame_paths = _sample_frames(downloaded_path, frame_dir)
         motion_metrics = _motion_metrics(frame_paths, probe, scene_metrics)
-        selected_frames = _representative_frames(frame_paths, 4)
-        scene_contact_sheet = _scene_role_contact_sheet(
-            downloaded_path,
-            scene_metrics.get("scene_timeline", []),
-            os.path.join(work_dir, "scene_roles.jpg"),
-        )
-        if scene_contact_sheet:
-            selected_frames.append(scene_contact_sheet)
+        selected_frames = _representative_frames(frame_paths, 3)
         normalized_tags = _tag_with_openai(video_reference, motion_metrics, selected_frames)
         kept_frames = frame_paths if VIDEO_ANALYSIS_KEEP_FRAMES else []
         return {

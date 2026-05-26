@@ -472,5 +472,13 @@
     "object": "videos/abc123/final_output.mp4",
     "extended": false,
     "createdAt": "2026-05-24T17:08:56.646248+00:00"
+  },
+  "81468f752113": {
+    "videoId": "81468f752113",
+    "url": "https://storage.googleapis.com/test-bucket/videos/abc123/final_output.mp4",
+    "bucket": "test-bucket",
+    "object": "videos/abc123/final_output.mp4",
+    "extended": false,
+    "createdAt": "2026-05-25T21:31:31.958482+00:00"
   }
 }

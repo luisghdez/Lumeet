@@ -148,6 +148,7 @@ function BatchVideoRow({ video, onReview, onAnalyze, isUpdating, isAnalyzing }) 
   const analysisStatus = aiTag.status || video.aiTagStatus || 'not_tagged';
   const isTagged = analysisStatus === 'tagged';
   const isFailed = analysisStatus === 'tag_failed';
+  const duration = tags.duration_sec || motion.duration_sec || video.durationSec;
   return (
     <div className="grid gap-4 border-t border-white/10 px-4 py-4 first:border-t-0 xl:grid-cols-[84px_minmax(0,1fr)_300px]">
       <a
@@ -204,88 +205,48 @@ function BatchVideoRow({ video, onReview, onAnalyze, isUpdating, isAnalyzing }) 
               <>
                 <div className="flex flex-wrap gap-1.5">
                   <span className="rounded-full bg-cyan-400/15 px-2 py-1 text-[11px] font-semibold text-cyan-100">
-                    {tagValue(tags.niche)} / {tagValue(tags.sub_niche)}
-                  </span>
-                  {tags.study_content_type && tags.study_content_type !== 'not_study' && (
-                    <span className="rounded-full bg-sky-400/15 px-2 py-1 text-[11px] font-semibold text-sky-100">
-                      Study: {tagValue(tags.study_content_type)}
-                    </span>
-                  )}
-                  {tags.study_pain_point && tags.study_pain_point !== 'none' && (
-                    <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
-                      Pain: {tagValue(tags.study_pain_point)}
-                    </span>
-                  )}
-                  <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
-                    Format: {tagValue(tags.format)}
+                    Type: {tagValue(tags.content_type)}
                   </span>
                   <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
-                    Hook: {tagValue(tags.hook_type)}
+                    Niche: {tagValue(tags.niche)} / {tagValue(tags.sub_niche)}
                   </span>
                   <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
-                    Camera: {tagValue(tags.camera_movement)}
+                    Product: {tagValue(tags.product_kind)}
                   </span>
-                  <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
-                    Visual: {tagValue(tags.visual_pattern)}
-                  </span>
-                  <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
-                    Movement: {tagValue(tags.motion_amount)}
-                  </span>
-                  <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
-                    Difficulty: {tagValue(tags.recreation_difficulty || tags.motion_difficulty)}
-                  </span>
-                  <span className="rounded-full bg-amber-400/15 px-2 py-1 text-[11px] font-semibold text-amber-100">
-                    Pillar: {tagValue(tags.content_pillar)}
-                  </span>
-                  <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
-                    Funnel: {tagValue(tags.funnel_stage)}
-                  </span>
-                  <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
-                    Use: {tagValue(tags.campaign_use)}
-                  </span>
-                  <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
-                    Product: {tagValue(tags.product_integration_type)}
-                  </span>
-                  {tags.primary_product_name && (
+                  {tags.product_name && (
                     <span className="rounded-full bg-lime-400/15 px-2 py-1 text-[11px] font-semibold text-lime-100">
-                      Mention: {tags.primary_product_name}
+                      {tags.product_name}
                     </span>
                   )}
                   <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
-                    CTA: {tagValue(tags.cta_strength)}
+                    Category: {tagValue(tags.product_category)}
                   </span>
                   <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
-                    Template: {tagValue(tags.creative_template)}
+                    Scene: {tagValue(tags.scene_type)}
                   </span>
                   <span className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/65">
-                    Script: {tagValue(tags.script_structure)}
+                    {tags.is_single_scene ? 'Single scene' : 'Multi-scene'}
                   </span>
-                  {tags.is_hook_then_demo && (
-                    <span className="rounded-full bg-emerald-400/15 px-2 py-1 text-[11px] font-semibold text-emerald-100">
-                      Hook + demo
-                    </span>
-                  )}
+                  <span className={`rounded-full px-2 py-1 text-[11px] font-semibold ${
+                    tags.is_easy_to_replicate
+                      ? 'bg-emerald-400/15 text-emerald-100'
+                      : 'bg-white/10 text-white/65'
+                  }`}>
+                    {tags.is_easy_to_replicate ? 'Easy replicate' : 'Harder replicate'}
+                  </span>
                 </div>
                 <div className="mt-3 grid grid-cols-2 gap-2 md:grid-cols-4">
                   <div className="rounded-xl bg-black/20 p-2">
-                    <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Frames</p>
-                    <p className="mt-0.5 text-xs font-semibold text-white">{metricValue(motion.estimated_total_frame_count)}</p>
-                  </div>
-                  <div className="rounded-xl bg-black/20 p-2">
                     <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Duration</p>
-                    <p className="mt-0.5 text-xs font-semibold text-white">{formatDuration(tags.duration_sec || motion.duration_sec || video.durationSec)}</p>
+                    <p className="mt-0.5 text-xs font-semibold text-white">{formatDuration(duration)}</p>
                   </div>
                   <div className="rounded-xl bg-black/20 p-2">
                     <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Scenes</p>
                     <p className="mt-0.5 text-xs font-semibold text-white">{metricValue(motion.scene_count)}</p>
                   </div>
                   <div className="rounded-xl bg-black/20 p-2">
-                    <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Movement</p>
-                    <p className="mt-0.5 text-xs font-semibold text-white">{metricValue(motion.total_frame_movement)}</p>
-                  </div>
-                  <div className="rounded-xl bg-black/20 p-2">
-                    <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Character</p>
-                    <p className="mt-0.5 text-xs font-semibold text-white">{metricValue(motion.character_movement_score)}</p>
+                    <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Similarity</p>
+                    <p className="mt-0.5 text-xs font-semibold text-white">{metricValue(motion.average_adjacent_scene_similarity_score)}</p>
                   </div>
                 </div>
                 {(motion.scene_timeline || []).length > 1 && (
@@ -306,62 +267,6 @@ function BatchVideoRow({ video, onReview, onAnalyze, isUpdating, isAnalyzing }) 
                         </span>
                       )}
                     </div>
-                  </div>
-                )}
-                {(tags.scene_roles || []).length > 0 && (
-                  <div className="mt-2 rounded-xl bg-black/20 p-2">
-                    <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">
-                      Scene roles
-                      {tags.is_hook_then_demo
-                        ? ` · demo starts ${formatDuration(tags.demo_start_sec)}`
-                        : ''}
-                    </p>
-                    <div className="mt-1 flex flex-wrap gap-1">
-                      {(tags.scene_roles || []).slice(0, 10).map((scene) => (
-                        <span
-                          key={`${scene.scene_index}-${scene.role}`}
-                          className="rounded-full bg-white/10 px-2 py-0.5 text-[11px] text-white/50"
-                        >
-                          {`S${scene.scene_index}: ${tagValue(scene.role)}`}
-                        </span>
-                      ))}
-                      {(tags.scene_roles || []).length > 10 && (
-                        <span className="rounded-full bg-white/10 px-2 py-0.5 text-[11px] text-white/40">
-                          +{(tags.scene_roles || []).length - 10} more
-                        </span>
-                      )}
-                    </div>
-                    <p className="mt-1 text-[11px] text-white/35">
-                      Hook {metricValue(tags.hook_scene_count)} · Demo {metricValue(tags.demo_scene_count)} · CTA {metricValue(tags.cta_scene_count)}
-                    </p>
-                  </div>
-                )}
-                {(tags.mentioned_products || []).length > 0 && (
-                  <div className="mt-2 rounded-xl bg-black/20 p-2">
-                    <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Product mentions</p>
-                    <div className="mt-1 flex flex-wrap gap-1">
-                      {(tags.mentioned_products || []).slice(0, 5).map((product) => (
-                        <span
-                          key={`${product.name}-${product.mention_type}`}
-                          className="rounded-full bg-white/10 px-2 py-0.5 text-[11px] text-white/50"
-                        >
-                          {`${product.name}: ${tagValue(product.mention_type)}`}
-                        </span>
-                      ))}
-                    </div>
-                    {tags.product_mention_context && (
-                      <p className="mt-1 text-[11px] leading-4 text-white/35">
-                        {tags.product_mention_context}
-                      </p>
-                    )}
-                  </div>
-                )}
-                {(tags.detected_text_cues || []).length > 0 && (
-                  <div className="mt-2 rounded-xl bg-black/20 p-2">
-                    <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">Text cues</p>
-                    <p className="mt-1 line-clamp-2 text-[11px] leading-4 text-white/40">
-                      {(tags.detected_text_cues || []).slice(0, 3).join(' · ')}
-                    </p>
                   </div>
                 )}
                 {motion.first_two_scene_similarity_score !== undefined && motion.first_two_scene_similarity_score !== null && (
@@ -435,12 +340,11 @@ function OrganizerBatches({ initialBatchId = '', onClearInitialBatch }) {
   const [analyzingVideoId, setAnalyzingVideoId] = useState('');
   const [isAnalyzingBatch, setIsAnalyzingBatch] = useState(false);
   const [batchAnalyzeLimit, setBatchAnalyzeLimit] = useState(5);
-  const [pillarFilter, setPillarFilter] = useState('all');
-  const [funnelFilter, setFunnelFilter] = useState('all');
-  const [formatFilter, setFormatFilter] = useState('all');
-  const [studyTypeFilter, setStudyTypeFilter] = useState('all');
+  const [contentTypeFilter, setContentTypeFilter] = useState('all');
+  const [nicheFilter, setNicheFilter] = useState('all');
   const [productFilter, setProductFilter] = useState('all');
-  const [ctaStrengthFilter, setCtaStrengthFilter] = useState('all');
+  const [sceneFilter, setSceneFilter] = useState('all');
+  const [easyFilter, setEasyFilter] = useState('all');
   const [minDurationFilter, setMinDurationFilter] = useState('');
   const [maxDurationFilter, setMaxDurationFilter] = useState('');
   const [error, setError] = useState('');
@@ -495,46 +399,38 @@ function OrganizerBatches({ initialBatchId = '', onClearInitialBatch }) {
   }, [selectedBatch]);
 
   const selectedVideos = selectedBatch?.videos || [];
-  const availablePillars = useMemo(() => (
-    [...new Set(selectedVideos.map((video) => getVideoTags(video).content_pillar).filter(Boolean))].sort()
+  const availableContentTypes = useMemo(() => (
+    [...new Set(selectedVideos.map((video) => getVideoTags(video).content_type).filter(Boolean))].sort()
   ), [selectedVideos]);
-  const availableFunnels = useMemo(() => (
-    [...new Set(selectedVideos.map((video) => getVideoTags(video).funnel_stage).filter(Boolean))].sort()
-  ), [selectedVideos]);
-  const availableFormats = useMemo(() => (
-    [...new Set(selectedVideos.map((video) => getVideoTags(video).format).filter(Boolean))].sort()
-  ), [selectedVideos]);
-  const availableStudyTypes = useMemo(() => (
-    [...new Set(selectedVideos.map((video) => getVideoTags(video).study_content_type).filter(Boolean))].sort()
+  const availableNiches = useMemo(() => (
+    [...new Set(selectedVideos.map((video) => getVideoTags(video).niche).filter(Boolean))].sort()
   ), [selectedVideos]);
   const availableProducts = useMemo(() => (
-    [...new Set(selectedVideos.map((video) => getVideoTags(video).primary_product_name).filter(Boolean))].sort()
+    [...new Set(selectedVideos.map((video) => getVideoTags(video).product_name).filter(Boolean))].sort()
   ), [selectedVideos]);
-  const availableCtaStrengths = useMemo(() => (
-    [...new Set(selectedVideos.map((video) => getVideoTags(video).cta_strength).filter(Boolean))].sort()
+  const availableScenes = useMemo(() => (
+    [...new Set(selectedVideos.map((video) => getVideoTags(video).scene_type).filter(Boolean))].sort()
   ), [selectedVideos]);
   const filteredVideos = useMemo(() => (
     selectedVideos.filter((video) => {
       const tags = getVideoTags(video);
-      const pillarOk = pillarFilter === 'all' || tags.content_pillar === pillarFilter;
-      const funnelOk = funnelFilter === 'all' || tags.funnel_stage === funnelFilter;
-      const formatOk = formatFilter === 'all' || tags.format === formatFilter;
-      const studyTypeOk = studyTypeFilter === 'all' || tags.study_content_type === studyTypeFilter;
-      const productOk = productFilter === 'all' || tags.primary_product_name === productFilter;
-      const ctaOk = ctaStrengthFilter === 'all' || tags.cta_strength === ctaStrengthFilter;
+      const contentTypeOk = contentTypeFilter === 'all' || tags.content_type === contentTypeFilter;
+      const nicheOk = nicheFilter === 'all' || tags.niche === nicheFilter;
+      const productOk = productFilter === 'all' || tags.product_name === productFilter;
+      const sceneOk = sceneFilter === 'all' || tags.scene_type === sceneFilter;
+      const easyOk = easyFilter === 'all' || String(Boolean(tags.is_easy_to_replicate)) === easyFilter;
       const duration = Number(tags.duration_sec || video.durationSec);
       const minDuration = Number(minDurationFilter);
       const maxDuration = Number(maxDurationFilter);
       const minOk = !minDurationFilter || (Number.isFinite(duration) && duration >= minDuration);
       const maxOk = !maxDurationFilter || (Number.isFinite(duration) && duration <= maxDuration);
-      return pillarOk && funnelOk && formatOk && studyTypeOk && productOk && ctaOk && minOk && maxOk;
+      return contentTypeOk && nicheOk && productOk && sceneOk && easyOk && minOk && maxOk;
     })
-  ), [selectedVideos, pillarFilter, funnelFilter, formatFilter, studyTypeFilter, productFilter, ctaStrengthFilter, minDurationFilter, maxDurationFilter]);
-  const contentPillarMix = useMemo(() => summarizeByTag(selectedVideos, 'content_pillar'), [selectedVideos]);
-  const funnelMix = useMemo(() => summarizeByTag(selectedVideos, 'funnel_stage'), [selectedVideos]);
-  const formatMix = useMemo(() => summarizeByTag(selectedVideos, 'format'), [selectedVideos]);
-  const studyTypeMix = useMemo(() => summarizeByTag(selectedVideos, 'study_content_type'), [selectedVideos]);
-  const productMentionMix = useMemo(() => summarizeByTag(selectedVideos, 'primary_product_name'), [selectedVideos]);
+  ), [selectedVideos, contentTypeFilter, nicheFilter, productFilter, sceneFilter, easyFilter, minDurationFilter, maxDurationFilter]);
+  const contentTypeMix = useMemo(() => summarizeByTag(selectedVideos, 'content_type'), [selectedVideos]);
+  const nicheMix = useMemo(() => summarizeByTag(selectedVideos, 'niche'), [selectedVideos]);
+  const sceneMix = useMemo(() => summarizeByTag(selectedVideos, 'scene_type'), [selectedVideos]);
+  const productMentionMix = useMemo(() => summarizeByTag(selectedVideos, 'product_name'), [selectedVideos]);
   const durationSummary = useMemo(() => summarizeDuration(selectedVideos), [selectedVideos]);
 
   const handleReview = async (videoReferenceId, approvalStatus) => {
@@ -678,10 +574,10 @@ function OrganizerBatches({ initialBatchId = '', onClearInitialBatch }) {
               <div className="mb-5 grid gap-3 lg:grid-cols-3">
                 <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-4">
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/35">
-                    Content Pillar Mix
+                    Content Type Mix
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
-                    {contentPillarMix.slice(0, 6).map((item) => (
+                    {contentTypeMix.slice(0, 6).map((item) => (
                       <span key={item.id} className="rounded-full bg-amber-400/15 px-3 py-1.5 text-xs font-semibold text-amber-100">
                         {tagValue(item.id)} {item.percentage}%
                       </span>
@@ -690,10 +586,10 @@ function OrganizerBatches({ initialBatchId = '', onClearInitialBatch }) {
                 </div>
                 <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-4">
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/35">
-                    Funnel Mix
+                    Niche Mix
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
-                    {funnelMix.slice(0, 6).map((item) => (
+                    {nicheMix.slice(0, 6).map((item) => (
                       <span key={item.id} className="rounded-full bg-cyan-400/15 px-3 py-1.5 text-xs font-semibold text-cyan-100">
                         {tagValue(item.id)} {item.percentage}%
                       </span>
@@ -702,23 +598,11 @@ function OrganizerBatches({ initialBatchId = '', onClearInitialBatch }) {
                 </div>
                 <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-4">
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/35">
-                    Format Mix
+                    Scene Mix
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
-                    {formatMix.slice(0, 6).map((item) => (
+                    {sceneMix.slice(0, 6).map((item) => (
                       <span key={item.id} className="rounded-full bg-purple-400/15 px-3 py-1.5 text-xs font-semibold text-purple-100">
-                        {tagValue(item.id)} {item.percentage}%
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/35">
-                    Study Type Mix
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {studyTypeMix.slice(0, 6).map((item) => (
-                      <span key={item.id} className="rounded-full bg-sky-400/15 px-3 py-1.5 text-xs font-semibold text-sky-100">
                         {tagValue(item.id)} {item.percentage}%
                       </span>
                     ))}
@@ -760,43 +644,33 @@ function OrganizerBatches({ initialBatchId = '', onClearInitialBatch }) {
                   </div>
                   <div className="flex flex-wrap items-center gap-2">
                     <select
-                      value={pillarFilter}
-                      onChange={(event) => setPillarFilter(event.target.value)}
+                      value={contentTypeFilter}
+                      onChange={(event) => setContentTypeFilter(event.target.value)}
                       className="rounded-full border border-white/10 bg-white/10 px-3 py-2 text-xs font-semibold text-white/70 outline-none"
                     >
-                      <option value="all">All pillars</option>
-                      {availablePillars.map((pillar) => (
-                        <option key={pillar} value={pillar}>{tagValue(pillar)}</option>
+                      <option value="all">All types</option>
+                      {availableContentTypes.map((contentType) => (
+                        <option key={contentType} value={contentType}>{tagValue(contentType)}</option>
                       ))}
                     </select>
                     <select
-                      value={funnelFilter}
-                      onChange={(event) => setFunnelFilter(event.target.value)}
+                      value={nicheFilter}
+                      onChange={(event) => setNicheFilter(event.target.value)}
                       className="rounded-full border border-white/10 bg-white/10 px-3 py-2 text-xs font-semibold text-white/70 outline-none"
                     >
-                      <option value="all">All funnel</option>
-                      {availableFunnels.map((funnel) => (
-                        <option key={funnel} value={funnel}>{tagValue(funnel)}</option>
+                      <option value="all">All niches</option>
+                      {availableNiches.map((niche) => (
+                        <option key={niche} value={niche}>{tagValue(niche)}</option>
                       ))}
                     </select>
                     <select
-                      value={formatFilter}
-                      onChange={(event) => setFormatFilter(event.target.value)}
+                      value={sceneFilter}
+                      onChange={(event) => setSceneFilter(event.target.value)}
                       className="rounded-full border border-white/10 bg-white/10 px-3 py-2 text-xs font-semibold text-white/70 outline-none"
                     >
-                      <option value="all">All formats</option>
-                      {availableFormats.map((format) => (
-                        <option key={format} value={format}>{tagValue(format)}</option>
-                      ))}
-                    </select>
-                    <select
-                      value={studyTypeFilter}
-                      onChange={(event) => setStudyTypeFilter(event.target.value)}
-                      className="rounded-full border border-white/10 bg-white/10 px-3 py-2 text-xs font-semibold text-white/70 outline-none"
-                    >
-                      <option value="all">All study types</option>
-                      {availableStudyTypes.map((studyType) => (
-                        <option key={studyType} value={studyType}>{tagValue(studyType)}</option>
+                      <option value="all">All scenes</option>
+                      {availableScenes.map((scene) => (
+                        <option key={scene} value={scene}>{tagValue(scene)}</option>
                       ))}
                     </select>
                     <select
@@ -810,14 +684,13 @@ function OrganizerBatches({ initialBatchId = '', onClearInitialBatch }) {
                       ))}
                     </select>
                     <select
-                      value={ctaStrengthFilter}
-                      onChange={(event) => setCtaStrengthFilter(event.target.value)}
+                      value={easyFilter}
+                      onChange={(event) => setEasyFilter(event.target.value)}
                       className="rounded-full border border-white/10 bg-white/10 px-3 py-2 text-xs font-semibold text-white/70 outline-none"
                     >
-                      <option value="all">All CTA strength</option>
-                      {availableCtaStrengths.map((ctaStrength) => (
-                        <option key={ctaStrength} value={ctaStrength}>{tagValue(ctaStrength)}</option>
-                      ))}
+                      <option value="all">All difficulty</option>
+                      <option value="true">Easy replicate</option>
+                      <option value="false">Harder replicate</option>
                     </select>
                     <label className="flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs text-white/55">
                       Min sec

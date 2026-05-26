@@ -20,12 +20,12 @@ ARCHETYPES = [
 
 RELATABLE_RULE = {
     "purpose": "relatable",
-    "label": "Relatable study video",
+    "label": "Relatable content video",
     "durationTargetSec": {"min": 3, "max": 10},
-    "creativeNotes": "Recreate short single-scene student-life relatable content. Prefer clips under 10 seconds because they are easiest to replicate.",
+    "creativeNotes": "Recreate short single-scene relatable content. Prefer clips under 10 seconds because they are easiest to replicate.",
     "targetTags": {
-        "study_content_type": ["relatable_student_problem"],
-        "cta_strength": ["none", "light"],
+        "content_type": ["relatable_content"],
+        "is_single_scene": [True],
     },
 }
 
@@ -35,9 +35,8 @@ HOOK_DEMO_RULE = {
     "durationTargetSec": {"min": 10, "max": 25},
     "creativeNotes": "Use the source as the hook/reference, then append the account demo extension in the generation pipeline.",
     "targetTags": {
-        "is_hook_then_demo": [True],
-        "creative_template": ["hook_then_demo"],
-        "funnel_stage": ["consideration", "conversion"],
+        "content_type": ["hook_demo"],
+        "product_kind": ["app", "physical_product", "brand_or_service", "unknown"],
     },
 }
 
@@ -194,8 +193,6 @@ def _tagged_videos(batch_id: str = "") -> List[Dict[str, Any]]:
         tags = ai_tag.get("normalizedTags") or {}
         if not tags:
             continue
-        if not _looks_study_related(tags, video):
-            continue
         tagged.append(video)
     return tagged
 
@@ -282,12 +279,13 @@ def _similarity_to_post(video: Dict[str, Any], current_post: Dict[str, Any]) -> 
     score = 0.0
     reasons: List[str] = []
     weighted_fields = [
-        ("study_content_type", 2.0),
-        ("creative_template", 1.5),
-        ("format", 1.25),
-        ("funnel_stage", 1.0),
-        ("cta_strength", 0.75),
-        ("primary_product_name", 0.75),
+        ("content_type", 2.0),
+        ("niche", 1.25),
+        ("sub_niche", 1.0),
+        ("scene_type", 1.0),
+        ("product_kind", 0.75),
+        ("product_category", 0.75),
+        ("product_name", 0.75),
     ]
     for field, weight in weighted_fields:
         current_value = current_tags.get(field)
@@ -295,10 +293,10 @@ def _similarity_to_post(video: Dict[str, Any], current_post: Dict[str, Any]) -> 
             score += weight
             reasons.append(f"same {field.replace('_', ' ')}")
 
-    if bool(tags.get("is_hook_then_demo")) == bool(current_tags.get("is_hook_then_demo")):
+    if bool(tags.get("is_single_scene")) == bool(current_tags.get("is_single_scene")):
         score += 1.0
-        if current_tags.get("is_hook_then_demo"):
-            reasons.append("same hook/demo structure")
+        if current_tags.get("is_single_scene"):
+            reasons.append("same single-scene structure")
 
     current_duration = 0.0
     try:
@@ -349,36 +347,30 @@ def _score_for_purpose(video: Dict[str, Any], purpose: str) -> Tuple[float, List
             score -= min(4, scene_count - 1)
             reasons.append(f"{scene_count} scenes")
 
-        if tags.get("study_content_type") == "relatable_student_problem":
+        if tags.get("content_type") == "relatable_content":
             score += 4
-            reasons.append("relatable student problem")
-        if tags.get("cta_strength") in {"", "none", "light"}:
+            reasons.append("relatable content")
+        if tags.get("is_easy_to_replicate"):
             score += 1
-            reasons.append("no or light CTA")
-        if tags.get("primary_product_name") and tags.get("product_integration_type") == "demo_core":
+            reasons.append("easy to replicate")
+        if tags.get("product_name") and tags.get("product_kind") == "app":
             score -= 2
     else:
-        if tags.get("is_hook_then_demo"):
+        if tags.get("content_type") == "hook_demo":
             score += 4
-            reasons.append("hook then demo structure")
-        if tags.get("creative_template") == "hook_then_demo" or tags.get("script_structure") == "hook_then_demo":
-            score += 2
-            reasons.append("hook/demo template")
-        if tags.get("study_content_type") in {"app_demo", "app_promo", "ai_study_tool"}:
-            score += 2
-            reasons.append(f"study app content: {tags.get('study_content_type')}")
-        if tags.get("funnel_stage") in {"consideration", "conversion"}:
+            reasons.append("hook demo")
+        if tags.get("product_kind") == "app":
             score += 1
-            reasons.append(f"{tags.get('funnel_stage')} funnel")
-        if tags.get("primary_product_name"):
+            reasons.append("app identified")
+        if tags.get("product_name"):
             score += 0.75
-            reasons.append(f"mentions {tags.get('primary_product_name')}")
+            reasons.append(f"mentions {tags.get('product_name')}")
 
-    if tags.get("repeatability_score"):
-        score += min(0.75, float(tags.get("repeatability_score") or 0) * 0.75)
-    if not reasons and _looks_study_related(tags, video):
+    if tags.get("is_easy_to_replicate"):
+        score += 0.75
+    if not reasons and tags.get("content_type") in {"relatable_content", "hook_demo"}:
         score = 0.5
-        reasons.append("nearby study content fallback")
+        reasons.append("nearby content fallback")
     return score, reasons[:5]
 
 
@@ -464,15 +456,15 @@ def _planned_post_payload(
         "generatedMediaUrl": "",
         "error": "",
         "keyTags": {
-            "study_content_type": tags.get("study_content_type", ""),
-            "study_pain_point": tags.get("study_pain_point", ""),
-            "study_outcome_promise": tags.get("study_outcome_promise", ""),
-            "format": tags.get("format", ""),
-            "creative_template": tags.get("creative_template", ""),
-            "funnel_stage": tags.get("funnel_stage", ""),
-            "cta_strength": tags.get("cta_strength", ""),
-            "primary_product_name": tags.get("primary_product_name", ""),
-            "is_hook_then_demo": tags.get("is_hook_then_demo", False),
+            "content_type": tags.get("content_type", ""),
+            "niche": tags.get("niche", ""),
+            "sub_niche": tags.get("sub_niche", ""),
+            "product_kind": tags.get("product_kind", ""),
+            "product_name": tags.get("product_name", ""),
+            "product_category": tags.get("product_category", ""),
+            "scene_type": tags.get("scene_type", ""),
+            "is_easy_to_replicate": tags.get("is_easy_to_replicate", False),
+            "is_single_scene": tags.get("is_single_scene", False),
             "scene_count": _scene_count(video),
         },
     }

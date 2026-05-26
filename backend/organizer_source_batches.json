@@ -329,9 +329,9 @@
     "counts": {
       "total": 100,
       "imported": 100,
-      "enriched": 14,
+      "enriched": 19,
       "failed": 0,
-      "aiTagged": 14,
+      "aiTagged": 19,
       "created": 100,
       "duplicates": 0
     },
@@ -438,7 +438,7 @@
       "vidref_0f42fd355f8ba845"
     ],
     "createdAt": "2026-05-09T15:49:00.814168+00:00",
-    "updatedAt": "2026-05-23T19:34:50.420050+00:00"
+    "updatedAt": "2026-05-25T21:32:54.804540+00:00"
   },
   "batch_1547e70dfc6d": {
     "id": "batch_1547e70dfc6d",
@@ -575,9 +575,9 @@
     "counts": {
       "total": 100,
       "imported": 100,
-      "enriched": 28,
-      "failed": 1,
-      "aiTagged": 28,
+      "enriched": 31,
+      "failed": 2,
+      "aiTagged": 31,
       "created": 71,
       "duplicates": 29
     },
@@ -684,7 +684,7 @@
       "vidref_2a96d1864e762e54"
     ],
     "createdAt": "2026-05-23T20:17:43.663921+00:00",
-    "updatedAt": "2026-05-23T21:02:13.023055+00:00"
+    "updatedAt": "2026-05-25T21:20:44.752308+00:00"
   },
   "batch_15df75883c8d": {
     "id": "batch_15df75883c8d",
