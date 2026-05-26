@@ -967,6 +967,8 @@ function AccountPlanner({ onGenerationStarted }) {
       timezone,
       scheduledFor: scheduledIso,
       mediaUrls: [resolvePostMediaUrl(post)].filter(Boolean),
+      videoOverlayVersion: Number(post.videoOverlayVersion || 0),
+      extendedVideo: (post.purpose || 'relatable') === 'hook_demo',
       ...(post.jobId ? { jobId: post.jobId, includeResultVideo: true } : {}),
     };
     const result = await createLatePost(payload);

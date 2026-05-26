@@ -21,6 +21,7 @@ from model_metadata_store import model_metadata_store
 from extension_video_metadata_store import extension_video_metadata_store
 from organizer_store import organizer_store
 from pipeline import run_full_pipeline
+from public_media_service import PublicMediaError, ensure_public_media_url
 from video_analysis_service import _download_video
 from video_overlay_styles import overlay_spec_from_caption
 
@@ -248,6 +249,16 @@ def _generate_post(
     gcs_info = _upload_video_to_gcs(job.id, final_video)
     raw_gcs_info = _upload_raw_video_to_gcs(job.id, raw_video)
     media_url = (gcs_info or {}).get("url", "")
+    if not media_url:
+        media_url = ensure_public_media_url(
+            "",
+            job_id=job.id,
+            overlay_version=0,
+            extended=extended,
+        )
+        refreshed_job = job_manager.get_job(job.id)
+        if refreshed_job and refreshed_job.video_gcs:
+            gcs_info = refreshed_job.video_gcs
     raw_media_url = (raw_gcs_info or {}).get("url", "")
     output = {
         "jobId": job.id,
@@ -311,6 +322,22 @@ def schedule_generated_plan_posts(
     for post in posts:
         slot = int(post.get("slot") or 0)
         try:
+            overlay_version = int(post.get("videoOverlayVersion") or 0)
+            extended = (post.get("purpose") or "relatable") == "hook_demo"
+            public_media_url = ensure_public_media_url(
+                str(post.get("generatedMediaUrl") or ""),
+                job_id=str(post.get("jobId") or ""),
+                overlay_version=overlay_version,
+                extended=extended,
+            )
+            if public_media_url != post.get("generatedMediaUrl"):
+                account_plan_store.update_post(plan_id, slot, generatedMediaUrl=public_media_url)
+                if post.get("generationId"):
+                    generation = generation_store.get(post["generationId"])
+                    output = dict((generation or {}).get("output") or {})
+                    output["videoUrl"] = public_media_url
+                    generation_store.update(post["generationId"], output=output)
+
             response = late_service.create_post(
                 session_id=session_id,
                 content=post.get("captionDraft") or "Generated with nflncr.ai",
@@ -319,9 +346,11 @@ def schedule_generated_plan_posts(
                 scheduled_for=post.get("suggestedScheduledFor"),
                 publish_now=False,
                 timezone=post.get("timezone") or timezone or "UTC",
-                media_urls=[post.get("generatedMediaUrl")] if post.get("generatedMediaUrl") else [],
-                include_result_video=bool(post.get("jobId")),
+                media_urls=[public_media_url],
+                include_result_video=False,
                 job_id=post.get("jobId") or None,
+                overlay_version=overlay_version,
+                extended=extended,
             )
             late_post_id = (
                 (response.get("post") or {}).get("_id")
@@ -340,6 +369,9 @@ def schedule_generated_plan_posts(
             if post.get("generationId"):
                 generation_store.update(post["generationId"], scheduled=True)
             results.append({"slot": slot, "ok": True, "latePostId": late_post_id})
+        except PublicMediaError as exc:
+            account_plan_store.update_post(plan_id, slot, scheduleError=str(exc))
+            results.append({"slot": slot, "ok": False, "error": str(exc)})
         except LateServiceError as exc:
             account_plan_store.update_post(plan_id, slot, scheduleError=exc.message)
             results.append({"slot": slot, "ok": False, "error": exc.message})

@@ -43,6 +43,7 @@ from avatar_service import (
 )
 from video_metadata_store import video_metadata_store
 from generation_store import generation_store, GenerationStatus
+from public_media_service import is_public_media_url
 from hook_metadata_store import hook_metadata_store
 from sound_metadata_store import sound_metadata_store
 from model_metadata_store import model_metadata_store
@@ -216,9 +217,8 @@ def _normalize_generation_record(item: Dict[str, Any]) -> Dict[str, Any]:
 def _normalize_plan_post(post: Dict[str, Any]) -> Dict[str, Any]:
     normalized = dict(post)
     generated_media_url = str(normalized.get("generatedMediaUrl") or "")
-    overlay_version = int(normalized.get("videoOverlayVersion") or 0)
 
-    if overlay_version > 0 and generated_media_url:
+    if is_public_media_url(generated_media_url):
         normalized["generatedMediaUrl"] = generated_media_url
         return normalized
 
@@ -232,9 +232,13 @@ def _normalize_plan_post(post: Dict[str, Any]) -> Dict[str, Any]:
             if isinstance(generation, dict):
                 output = _normalize_generation_output(generation.get("output"), generation_id)
                 if isinstance(output, dict):
-                    stable_url = str(output.get("videoUrl") or "")
+                    candidate = str(output.get("videoUrl") or "")
+                    if is_public_media_url(candidate):
+                        stable_url = candidate
         if not stable_url:
-            stable_url = _stable_video_url_for_job(str(normalized.get("jobId") or ""))
+            candidate = _stable_video_url_for_job(str(normalized.get("jobId") or ""))
+            if is_public_media_url(candidate):
+                stable_url = candidate
     if stable_url:
         normalized["generatedMediaUrl"] = stable_url
     return normalized
@@ -273,6 +277,8 @@ class LateCreatePostRequest(BaseModel):
     mediaUrls: List[str] = Field(default_factory=list)
     includeResultVideo: bool = False
     jobId: Optional[str] = None
+    videoOverlayVersion: int = Field(default=0, ge=0)
+    extendedVideo: bool = False
 
 
 class CarouselCreateRequest(BaseModel):
@@ -976,6 +982,8 @@ async def create_late_post(payload: LateCreatePostRequest):
             media_urls=payload.mediaUrls,
             include_result_video=payload.includeResultVideo,
             job_id=payload.jobId,
+            overlay_version=payload.videoOverlayVersion,
+            extended=payload.extendedVideo,
         )
     except LateServiceError as exc:
         logger.warning(

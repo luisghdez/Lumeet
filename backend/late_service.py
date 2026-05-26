@@ -20,6 +20,7 @@ from config import (
 )
 from generation_store import generation_store
 from job_manager import job_manager
+from public_media_service import PublicMediaError, ensure_public_media_urls
 from video_metadata_store import video_metadata_store
 from late_client import LateApiError, LateClient
 
@@ -188,26 +189,19 @@ class LateService:
         media_urls: Optional[List[str]] = None,
         include_result_video: bool = False,
         job_id: Optional[str] = None,
+        overlay_version: int = 0,
+        extended: bool = False,
     ) -> List[str]:
-        normalized: List[str] = []
-        for url in media_urls or []:
-            if not url:
-                continue
-            extracted_job_id = LateService._extract_job_id(url)
-            if extracted_job_id:
-                stable = LateService._resolve_stable_video_url(extracted_job_id)
-                if stable:
-                    normalized.append(stable)
-                    continue
-            normalized.append(url)
-
-        normalized = [u for u in normalized if u]
-        if include_result_video and job_id:
-            stable_url = LateService._resolve_stable_video_url(job_id)
-            if stable_url:
-                normalized.append(stable_url)
-        # Keep insertion order while deduplicating.
-        return list(dict.fromkeys(normalized))
+        try:
+            return ensure_public_media_urls(
+                media_urls,
+                job_id=job_id or "",
+                overlay_version=overlay_version,
+                extended=extended,
+                include_result_video=include_result_video,
+            )
+        except PublicMediaError as exc:
+            raise LateServiceError(400, str(exc)) from exc
 
     @staticmethod
     def _guess_mime_type(url: str) -> str:
@@ -235,6 +229,8 @@ class LateService:
         media_urls: Optional[List[str]] = None,
         include_result_video: bool = False,
         job_id: Optional[str] = None,
+        overlay_version: int = 0,
+        extended: bool = False,
     ) -> Dict[str, Any]:
         del session_id  # Reserved for future multi-tenant persistence.
 
@@ -253,7 +249,14 @@ class LateService:
             media_urls=media_urls,
             include_result_video=include_result_video,
             job_id=job_id,
+            overlay_version=overlay_version,
+            extended=extended,
         )
+        if (media_urls or include_result_video) and not media_list:
+            raise LateServiceError(
+                400,
+                "No publicly accessible media URL is available for this post.",
+            )
 
         payload: Dict[str, Any] = {
             "content": content.strip(),

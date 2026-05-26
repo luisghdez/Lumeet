@@ -4,7 +4,9 @@ GCS storage helper for carousel media and generated videos.
 
 from __future__ import annotations
 
+import json
 import mimetypes
+import os
 from datetime import timedelta
 from typing import Dict
 
@@ -20,12 +22,52 @@ class GcsStorageError(Exception):
         self.message = message
 
 
+def validate_gcs_credentials() -> None:
+    """Validate GCS auth config before attempting uploads."""
+    creds_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS", "").strip()
+    if not creds_path:
+        return
+
+    if not os.path.isfile(creds_path):
+        raise GcsStorageError(
+            500,
+            f"GOOGLE_APPLICATION_CREDENTIALS file not found: {creds_path}",
+        )
+
+    if os.path.getsize(creds_path) == 0:
+        raise GcsStorageError(
+            500,
+            "GOOGLE_APPLICATION_CREDENTIALS points to an empty file "
+            f"({creds_path}). Download the lumeet-backend service account key "
+            "from Google Cloud Console and save it there, then restart the backend.",
+        )
+
+    try:
+        with open(creds_path, encoding="utf-8") as handle:
+            json.load(handle)
+    except json.JSONDecodeError as exc:
+        raise GcsStorageError(
+            500,
+            f"GOOGLE_APPLICATION_CREDENTIALS is not valid JSON ({creds_path}): {exc}",
+        ) from exc
+
+
 class GcsStorage:
     def __init__(self):
         if not GCS_BUCKET_NAME:
             raise GcsStorageError(500, "GCS_BUCKET_NAME is not configured.")
+        validate_gcs_credentials()
         self.bucket_name = GCS_BUCKET_NAME
-        self.client = storage.Client()
+        try:
+            self.client = storage.Client()
+        except Exception as exc:
+            creds_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS", "").strip()
+            hint = (
+                f" Check GOOGLE_APPLICATION_CREDENTIALS ({creds_path})."
+                if creds_path
+                else " Set GOOGLE_APPLICATION_CREDENTIALS or run gcloud auth application-default login."
+            )
+            raise GcsStorageError(500, f"Could not initialize Google Cloud Storage client.{hint} {exc}") from exc
         self.bucket = self.client.bucket(self.bucket_name)
 
     def upload_file(self, local_path: str, object_name: str) -> Dict[str, str]:

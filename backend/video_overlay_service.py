@@ -16,6 +16,8 @@ from account_plan_store import account_plan_store
 from caption_overlay import render_video_overlay
 from config import GCS_VIDEO_OBJECT_PREFIX, PUBLIC_BACKEND_BASE_URL
 from generation_store import generation_store
+from job_manager import job_manager
+from public_media_service import ensure_public_media_url
 from video_overlay_styles import (
     DEFAULT_OVERLAY,
     normalize_overlay_spec,
@@ -262,9 +264,22 @@ def render_plan_post_overlay(plan_id: str, slot: int, overlay_spec: Dict[str, An
                 deliverable_path = _finalize_deliverable_video(job_id, post, _local_final_video_path(job_id))
 
             gcs_info = _upload_video_to_gcs(job_id or f"plan_{plan_id}_{slot}", deliverable_path, version=version)
-            media_url = (gcs_info or {}).get("url") or post.get("generatedMediaUrl") or ""
-            if not (gcs_info or {}).get("url") and job_id:
-                media_url = f"{PUBLIC_BACKEND_BASE_URL.rstrip('/')}/api/jobs/{job_id}/result?v={version}"
+            media_url = (gcs_info or {}).get("url") or ""
+            if not media_url and job_id:
+                media_url = ensure_public_media_url(
+                    "",
+                    job_id=job_id,
+                    overlay_version=version,
+                    extended=_is_extended_post(post),
+                )
+                job = job_manager.get_job(job_id)
+                if job and job.video_gcs:
+                    gcs_info = job.video_gcs
+            if not media_url:
+                raise VideoOverlayError(
+                    "Could not upload captioned video to public storage.",
+                    503,
+                )
 
         updates = {
             "videoOverlay": normalized,
