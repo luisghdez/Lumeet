@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   AlertCircle,
-  ArrowUpRight,
   CalendarClock,
   CheckCircle2,
   History,
@@ -10,6 +9,7 @@ import {
   RefreshCw,
   Sparkles,
   Video,
+  X,
 } from 'lucide-react';
 import {
   createStudyTokSimplePlan,
@@ -393,9 +393,110 @@ function ExtensionVideoPicker({ videos, loading, disabled, selectedVideoId, onSe
   );
 }
 
+function InlinePostVideo({ src, forcePaused = false }) {
+  const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    if (forcePaused) videoRef.current?.pause();
+  }, [forcePaused]);
+
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  };
+
+  return (
+    <div className="overflow-hidden rounded-2xl bg-white/10">
+      <div className="relative aspect-[9/16] max-h-64 w-full">
+        <video
+          ref={videoRef}
+          src={src}
+          className="h-full w-full object-cover"
+          loop
+          playsInline
+          preload="metadata"
+          controlsList="nofullscreen nodownload noremoteplayback"
+          disablePictureInPicture
+          onLoadedMetadata={showVideoFirstFrame}
+          onLoadedData={showVideoFirstFrame}
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+        />
+        <button
+          type="button"
+          onClick={togglePlay}
+          className={`absolute inset-0 flex items-center justify-center transition ${
+            isPlaying ? 'bg-transparent hover:bg-black/20' : 'bg-black/20'
+          }`}
+          aria-label={isPlaying ? 'Pause video' : 'Play video'}
+        >
+          {!isPlaying && <PlayCircle size={28} className="text-white/90" aria-hidden />}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function VideoPreviewLightbox({ src, title, onClose }) {
+  useEffect(() => {
+    const onKey = (event) => {
+      if (event.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-6"
+      onClick={onClose}
+    >
+      <div
+        className="absolute inset-0 bg-ink-950/40 backdrop-blur-[2px]"
+        aria-hidden
+      />
+      <div
+        className="relative w-fit max-w-[calc(100vw-3rem)] rounded-3xl border border-white/10 bg-ink-950 p-3 shadow-2xl"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="mb-2 flex items-center justify-between gap-3 px-1">
+          <p className="truncate text-xs font-semibold text-white/80">{title}</p>
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-full bg-white/10 p-1.5 text-white/70 transition hover:bg-white/20 hover:text-white"
+            aria-label="Close preview"
+          >
+            <X size={14} aria-hidden />
+          </button>
+        </div>
+        <video
+          src={src}
+          controls
+          controlsList="nofullscreen nodownload noremoteplayback"
+          disablePictureInPicture
+          loop
+          playsInline
+          preload="metadata"
+          onLoadedMetadata={showVideoFirstFrame}
+          onLoadedData={showVideoFirstFrame}
+          className="aspect-[9/16] h-[28rem] max-h-[calc(100vh-6rem)] w-auto rounded-2xl bg-black object-contain"
+        />
+      </div>
+    </div>
+  );
+}
+
 function PostCard({
   post,
   canSchedule,
+  canSwap,
   selectedPlatforms,
   onPatchPost,
   onSchedulePost,
@@ -403,25 +504,13 @@ function PostCard({
   isScheduling,
   isSwapping,
 }) {
+  const [previewOpen, setPreviewOpen] = useState(false);
   const source = post.sourceVideo || {};
   const tags = post.keyTags || {};
   const previewUrl = resolvePostMediaUrl(post);
   const generated = Boolean(previewUrl);
   const mediaPreview = previewUrl ? (
-    <div className="overflow-hidden rounded-2xl bg-white/10">
-      <div className="relative aspect-[9/16] max-h-64 w-full">
-        <video
-          src={previewUrl}
-          className="h-full w-full object-cover"
-          controls
-          loop
-          playsInline
-          preload="metadata"
-          onLoadedMetadata={showVideoFirstFrame}
-          onLoadedData={showVideoFirstFrame}
-        />
-      </div>
-    </div>
+    <InlinePostVideo src={previewUrl} forcePaused={previewOpen} />
   ) : source.thumbnailUrl ? (
     <div className="overflow-hidden rounded-2xl bg-white/10">
       <div className="h-32 w-full">
@@ -456,17 +545,6 @@ function PostCard({
               </span>
             )}
           </div>
-          <div className="mt-3 flex items-center gap-2">
-            <p className="truncate text-sm font-semibold text-white/75">@{source.creatorHandle || 'unknown'}</p>
-            {source.url && (
-              <a href={source.url} target="_blank" rel="noreferrer" className="text-white/40 hover:text-white">
-                <ArrowUpRight size={14} aria-hidden />
-              </a>
-            )}
-          </div>
-          <p className="mt-2 line-clamp-2 text-sm leading-6 text-white/50">
-            {source.caption || 'No source caption.'}
-          </p>
           <div className="mt-3 flex flex-wrap gap-1.5">
             {(post.selectionReasons || []).slice(0, 4).map((reason) => (
               <span key={reason} className="rounded-full bg-white/10 px-2 py-1 text-[11px] text-white/45">
@@ -503,15 +581,14 @@ function PostCard({
           {generated ? (
             <div className="grid gap-2">
               <div className="flex gap-2">
-                <a
-                  href={previewUrl}
-                  target="_blank"
-                  rel="noreferrer"
+                <button
+                  type="button"
+                  onClick={() => setPreviewOpen(true)}
                   className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl bg-white/10 px-3 py-2 text-xs font-semibold text-white/70 hover:bg-white/15"
                 >
                   <PlayCircle size={14} aria-hidden />
                   Review
-                </a>
+                </button>
                 <button
                   type="button"
                   disabled={!canSchedule || isScheduling}
@@ -528,36 +605,35 @@ function PostCard({
                   {post.scheduleError}
                 </p>
               )}
-              <button
-                type="button"
-                disabled={isSwapping || post.status === 'generating'}
-                onClick={() => onSwapPost(post.slot)}
-                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white/10 px-3 py-2 text-xs font-semibold text-white/70 hover:bg-white/15 disabled:cursor-not-allowed disabled:opacity-50"
-                title="Swap this source for a similar unused tagged video"
-              >
-                {isSwapping ? <Loader2 size={14} className="animate-spin" aria-hidden /> : <RefreshCw size={14} aria-hidden />}
-                Swap similar
-              </button>
             </div>
           ) : (
             <div className="grid gap-2">
               <p className="rounded-2xl bg-black/20 px-3 py-2 text-xs text-white/40">
                 {post.error || `Scheduled for ${formatSchedule(post.suggestedScheduledFor)} after generation.`}
               </p>
-              <button
-                type="button"
-                disabled={isSwapping || post.status === 'generating'}
-                onClick={() => onSwapPost(post.slot)}
-                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white/10 px-3 py-2 text-xs font-semibold text-white/70 hover:bg-white/15 disabled:cursor-not-allowed disabled:opacity-50"
-                title="Swap this source for a similar unused tagged video"
-              >
-                {isSwapping ? <Loader2 size={14} className="animate-spin" aria-hidden /> : <RefreshCw size={14} aria-hidden />}
-                Swap similar
-              </button>
+              {canSwap && (
+                <button
+                  type="button"
+                  disabled={isSwapping || post.status === 'generating'}
+                  onClick={() => onSwapPost(post.slot)}
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white/10 px-3 py-2 text-xs font-semibold text-white/70 hover:bg-white/15 disabled:cursor-not-allowed disabled:opacity-50"
+                  title="Swap this source for a similar unused tagged video"
+                >
+                  {isSwapping ? <Loader2 size={14} className="animate-spin" aria-hidden /> : <RefreshCw size={14} aria-hidden />}
+                  Swap similar
+                </button>
+              )}
             </div>
           )}
         </div>
       </div>
+      {previewOpen && previewUrl && (
+        <VideoPreviewLightbox
+          src={previewUrl}
+          title={`Slot ${post.slot} preview`}
+          onClose={() => setPreviewOpen(false)}
+        />
+      )}
     </article>
   );
 }
@@ -896,6 +972,8 @@ function AccountPlanner({ onGenerationStarted }) {
     }
   };
 
+  const canSwapPosts = ['draft', 'approved'].includes(plan?.status) && !selectedBulkRunId;
+
   const updateTime = (idx, value) => {
     setDailyTimes((items) => items.map((item, itemIdx) => (itemIdx === idx ? value : item)));
   };
@@ -1150,6 +1228,7 @@ function AccountPlanner({ onGenerationStarted }) {
                     key={post.slot}
                     post={post}
                     canSchedule={selectedPlatforms.length > 0 && post.reviewStatus !== 'scheduled'}
+                    canSwap={canSwapPosts}
                     selectedPlatforms={selectedPlatforms}
                     onPatchPost={handlePatchPost}
                     onSchedulePost={handleSchedulePost}
