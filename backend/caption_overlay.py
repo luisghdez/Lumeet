@@ -61,10 +61,12 @@ def _split_runs(text: str) -> list[tuple[str, str]]:
 # Font loading (macOS-first, with fallbacks)
 # ---------------------------------------------------------------------------
 
-_TEXT_FONT_PATHS = [
-    "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
-    "/System/Library/Fonts/Supplemental/Helvetica Bold.ttf",
-    "/System/Library/Fonts/Helvetica.ttc",
+_TEXT_FONT_CANDIDATES = [
+    ("/System/Library/Fonts/Supplemental/Arial.ttf", None),
+    ("/Library/Fonts/Arial.ttf", None),
+    ("/System/Library/Fonts/Supplemental/Helvetica.ttf", None),
+    ("/System/Library/Fonts/Helvetica.ttc", 0),
+    ("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", None),
 ]
 _EMOJI_FONT_PATH = "/System/Library/Fonts/Apple Color Emoji.ttc"
 
@@ -78,12 +80,15 @@ def _nearest_emoji_size(desired: int) -> int:
 
 
 def _load_text_font(size: int) -> ImageFont.FreeTypeFont:
-    for p in _TEXT_FONT_PATHS:
-        if os.path.isfile(p):
-            try:
-                return ImageFont.truetype(p, size)
-            except Exception:
-                continue
+    for path, index in _TEXT_FONT_CANDIDATES:
+        if not os.path.isfile(path):
+            continue
+        try:
+            if index is None:
+                return ImageFont.truetype(path, size)
+            return ImageFont.truetype(path, size, index=index)
+        except Exception:
+            continue
     return ImageFont.load_default(size)
 
 
@@ -180,8 +185,6 @@ def _render_caption_png(
             (-border, -border), (border, -border),
             (-border, border), (border, border),
         ]
-    elif style == "minimal":
-        outline_offsets = [(1, 1), (-1, 1), (1, -1), (-1, -1)]
 
     y = max(border, 3) + 5
     for line in lines:
@@ -206,12 +209,8 @@ def _render_caption_png(
             font = emoji_font if kind == "emoji" and emoji_font else text_font
 
             if kind == "text":
-                if style == "minimal":
-                    for dx, dy in outline_offsets:
-                        draw.text((x + dx, y + dy), content, font=font, fill=(0, 0, 0, 120))
-                else:
-                    for dx, dy in outline_offsets:
-                        draw.text((x + dx, y + dy), content, font=font, fill=(0, 0, 0, 255))
+                for dx, dy in outline_offsets:
+                    draw.text((x + dx, y + dy), content, font=font, fill=(0, 0, 0, 255))
                 draw.text((x, y), content, font=font, fill=fill_rgba)
             else:
                 draw.text((x, y), content, font=font, embedded_color=True)

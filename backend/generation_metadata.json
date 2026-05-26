@@ -4731,14 +4731,23 @@
     "completedAt": 1779768991.535108,
     "output": {
       "jobId": "af7e6c7c9574",
-      "videoUrl": "http://127.0.0.1:8000/api/jobs/af7e6c7c9574/result",
+      "videoUrl": "http://127.0.0.1:8000/api/jobs/af7e6c7c9574/result?v=1",
       "videoGcs": null,
       "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/af7e6c7c9574/output/final_output.mp4",
       "plannerPlanId": "plan_7098d8aa879b",
       "plannerSlot": 1,
       "bulkRunId": "planrun_f6f63a7f7525",
       "modelId": "d80af5728954",
-      "extensionVideoId": ""
+      "extensionVideoId": "",
+      "videoOverlay": {
+        "enabled": true,
+        "text": "exam season is over.",
+        "fontSize": 48,
+        "fontColor": "#FFFFFF",
+        "style": "minimal",
+        "verticalPosition": 0.55
+      },
+      "videoOverlayVersion": 1
     },
     "plannerPlanId": "plan_7098d8aa879b",
     "plannerSlot": 1,

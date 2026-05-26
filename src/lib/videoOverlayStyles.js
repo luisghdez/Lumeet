@@ -88,8 +88,8 @@ export function overlayPreviewStyle(spec, scale = 1) {
     color: normalized.fontColor,
     fontSize: `${fontSize}px`,
     lineHeight: 1.35,
-    fontWeight: 700,
-    fontFamily: '"Arial Black", "Helvetica Neue", Arial, sans-serif',
+    fontWeight: 400,
+    fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
     textAlign: 'center',
     whiteSpace: 'pre-wrap',
     wordBreak: 'break-word',
@@ -104,7 +104,10 @@ export function overlayPreviewStyle(spec, scale = 1) {
         2px -2px 0 #000,
         -2px 2px 0 #000,
         2px 2px 0 #000,
-        0 0 4px rgba(0,0,0,0.9)
+        -2px 0 0 #000,
+        2px 0 0 #000,
+        0 -2px 0 #000,
+        0 2px 0 #000
       `,
     };
   }
@@ -119,10 +122,7 @@ export function overlayPreviewStyle(spec, scale = 1) {
   }
 
   if (normalized.style === 'minimal') {
-    return {
-      ...base,
-      textShadow: '0 1px 3px rgba(0,0,0,0.65)',
-    };
+    return base;
   }
 
   return {
@@ -131,7 +131,11 @@ export function overlayPreviewStyle(spec, scale = 1) {
       -1px -1px 0 #000,
       1px -1px 0 #000,
       -1px 1px 0 #000,
-      1px 1px 0 #000
+      1px 1px 0 #000,
+      -1px 0 0 #000,
+      1px 0 0 #000,
+      0 -1px 0 #000,
+      0 1px 0 #000
     `,
   };
 }

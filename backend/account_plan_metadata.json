@@ -32906,7 +32906,7 @@
         "reviewStatus": "pending",
         "generationId": "99245efc87b6",
         "jobId": "af7e6c7c9574",
-        "generatedMediaUrl": "http://127.0.0.1:8000/api/jobs/af7e6c7c9574/result",
+        "generatedMediaUrl": "http://127.0.0.1:8000/api/jobs/af7e6c7c9574/result?v=1",
         "error": "",
         "keyTags": {
           "content_type": "relatable_content",
@@ -32925,7 +32925,7 @@
         "extensionVideoId": "",
         "latePostId": "",
         "scheduleError": "",
-        "updatedAt": "2026-05-26T18:38:14.939937+00:00",
+        "updatedAt": "2026-05-26T19:17:52.092414+00:00",
         "videoOverlayOriginal": {
           "enabled": true,
           "text": "exam season is over.",
@@ -32939,10 +32939,10 @@
           "text": "exam season is over.",
           "fontSize": 48,
           "fontColor": "#FFFFFF",
-          "style": "classic",
+          "style": "minimal",
           "verticalPosition": 0.55
         },
-        "videoOverlayVersion": 0,
+        "videoOverlayVersion": 1,
         "rawVideoUrl": "http://127.0.0.1:8000/api/jobs/af7e6c7c9574/raw"
       },
       {
@@ -33192,7 +33192,7 @@
     ],
     "id": "plan_7098d8aa879b",
     "createdAt": "2026-05-26T04:13:04.012341+00:00",
-    "updatedAt": "2026-05-26T18:38:14.939947+00:00",
+    "updatedAt": "2026-05-26T19:17:52.092440+00:00",
     "activeBulkRunId": "planrun_f6f63a7f7525"
   }
 }
