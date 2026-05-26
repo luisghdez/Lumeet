@@ -21,7 +21,6 @@ import {
   Loader2,
   Plus,
   Clock,
-  Pencil,
   Check,
   Eye,
   Maximize2,
@@ -34,7 +33,11 @@ import {
   patchGeneration,
   DEFAULT_SESSION_ID,
 } from '../lib/lateApi';
-import { getNickname, setNickname as saveNickname } from '../lib/accountNicknames';
+import {
+  accountDisplayName,
+  accountSubtitle,
+  normalizeLateAccounts,
+} from '../lib/lateAccounts';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -409,89 +412,16 @@ function PreviewLightbox({
 // Account card
 // ---------------------------------------------------------------------------
 
-function AccountCard({ account, selected, onToggle, onNicknameSaved }) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [draft, setDraft] = useState('');
-
+function AccountCard({ account, selected, onToggle }) {
   const meta = getPlatformMeta(account.platform);
-  const nick = getNickname(account._id);
-  const shortId = account._id.length > 10
-    ? `${account._id.slice(0, 4)}…${account._id.slice(-4)}`
-    : account._id;
-
-  const startEdit = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDraft(nick);
-    setIsEditing(true);
-  };
-
-  const commitEdit = (e) => {
-    e?.preventDefault?.();
-    e?.stopPropagation?.();
-    saveNickname(account._id, draft);
-    setIsEditing(false);
-    onNicknameSaved?.();
-  };
-
-  const cancelEdit = (e) => {
-    e?.preventDefault?.();
-    e?.stopPropagation?.();
-    setIsEditing(false);
-  };
-
-  const handleKey = (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      commitEdit(e);
-    }
-    if (e.key === 'Escape') {
-      e.preventDefault();
-      cancelEdit(e);
-    }
-  };
+  const title = accountDisplayName(account);
+  const subtitle = accountSubtitle(account);
 
   const containerClass = `relative w-full flex items-center gap-3 px-3 py-2.5 rounded-xl border text-left transition-all duration-150 group ${
     selected
       ? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200'
       : 'border-gray-200 bg-white hover:border-purple-300 hover:bg-gray-50'
   }`;
-
-  if (isEditing) {
-    return (
-      <div className={containerClass}>
-        <PlatformBadge platform={account.platform} size={36} />
-        <div className="flex-1 min-w-0">
-          <input
-            autoFocus
-            value={draft}
-            onChange={(e) => setDraft(e.target.value)}
-            onKeyDown={handleKey}
-            onClick={(e) => e.stopPropagation()}
-            placeholder={meta.label}
-            className="w-full px-2 py-1 rounded-md border border-purple-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none text-sm bg-white"
-          />
-          <p className="text-[10px] text-gray-400 mt-0.5 truncate">{meta.label} · {shortId}</p>
-        </div>
-        <button
-          type="button"
-          onClick={commitEdit}
-          className="p-1.5 rounded-lg bg-green-50 hover:bg-green-100 text-green-600 flex-shrink-0 transition-colors"
-          title="Save nickname"
-        >
-          <Check size={14} />
-        </button>
-        <button
-          type="button"
-          onClick={cancelEdit}
-          className="p-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-500 flex-shrink-0 transition-colors"
-          title="Cancel"
-        >
-          <X size={14} />
-        </button>
-      </div>
-    );
-  }
 
   return (
     <div
@@ -509,21 +439,11 @@ function AccountCard({ account, selected, onToggle, onNicknameSaved }) {
     >
       <PlatformBadge platform={account.platform} size={36} />
       <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-1.5">
-          <p className="text-sm font-semibold text-gray-900 truncate">
-            {nick || meta.label}
-          </p>
-          <button
-            type="button"
-            onClick={startEdit}
-            className="p-0.5 rounded-md text-gray-400 hover:text-purple-600 hover:bg-purple-50 opacity-70 sm:opacity-0 sm:group-hover:opacity-100 transition-all"
-            title={nick ? 'Edit nickname' : 'Add nickname'}
-          >
-            <Pencil size={11} />
-          </button>
-        </div>
+        <p className="text-sm font-semibold text-gray-900 truncate">
+          {title}
+        </p>
         <p className="text-[11px] text-gray-500 truncate">
-          {nick ? meta.label : shortId}
+          {subtitle !== title ? subtitle : meta.label}
         </p>
       </div>
       <div
@@ -560,9 +480,6 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
   const [isPreviewOpen, setIsPreviewOpen] = useState(true);
   const [activeSlide, setActiveSlide] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  // Bumped when any nickname changes, forces re-render of getNickname consumers
-  const [, setNicknameVersion] = useState(0);
-  const bumpNicknames = () => setNicknameVersion((v) => v + 1);
 
   const output = generation?.output || {};
   // Remix generations produce a video output, so treat them as videos for
@@ -639,20 +556,7 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
         sessionId: DEFAULT_SESSION_ID,
         profileId: profileId || undefined,
       });
-      const raw = data.accounts || [];
-      const normalized = raw
-        .map((acc) => ({
-          _id: String(acc?._id ?? acc?.id ?? '').trim(),
-          platform: String(acc?.platform ?? acc?.provider ?? '').trim(),
-          profileId: (
-            typeof acc?.profileId === 'string'
-              ? acc.profileId
-              : typeof acc?.profile?._id === 'string'
-                ? acc.profile._id
-                : ''
-          ).trim(),
-        }))
-        .filter((acc) => acc._id && acc.platform);
+      const normalized = normalizeLateAccounts(data.accounts || []);
       setAccounts(normalized);
     } catch (err) {
       setError(err.message);
@@ -921,7 +825,6 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
                         next ? [...prev, acc._id] : prev.filter((id) => id !== acc._id),
                       );
                     }}
-                    onNicknameSaved={bumpNicknames}
                   />
                 ))}
 
@@ -1062,8 +965,7 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
                     {accounts
                       .filter((acc) => selectedAccountIds.includes(acc._id))
                       .map((acc, i) => {
-                        const nick = getNickname(acc._id);
-                        const meta = getPlatformMeta(acc.platform);
+                        const title = accountDisplayName(acc);
                         const next = nextByAccount[acc._id];
                         const formatted = next ? formatRelativeSchedule(next) : null;
                         return (
@@ -1078,7 +980,7 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
                             <PlatformBadge platform={acc.platform} size={28} />
                             <div className="min-w-0 flex-1">
                               <p className="text-xs font-semibold text-gray-800 truncate">
-                                {nick || meta.label}
+                                {title}
                               </p>
                               {formatted ? (
                                 <p className="text-[11px] text-gray-500 truncate">

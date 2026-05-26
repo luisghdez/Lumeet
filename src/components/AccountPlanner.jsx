@@ -28,6 +28,11 @@ import {
   createLatePost,
   listLateAccounts,
 } from '../lib/lateApi';
+import {
+  accountDisplayName,
+  accountSubtitle,
+  normalizeLateAccounts,
+} from '../lib/lateAccounts';
 import { useExtensionVideos, useModels } from '../lib/mediaLibrary';
 import { mediaUrlWithVersion } from '../lib/videoOverlayStyles';
 
@@ -669,6 +674,27 @@ function PostCard({
   );
 }
 
+function ScheduleAccountChip({ account, selected, onToggle }) {
+  const title = accountDisplayName(account);
+  const subtitle = accountSubtitle(account);
+
+  return (
+    <button
+      type="button"
+      onClick={() => onToggle(!selected)}
+      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition ${selected ? 'bg-white text-ink-950' : 'bg-white/10 text-white/60 hover:bg-white/15'}`}
+      title={subtitle !== title ? `${title} · ${subtitle}` : title}
+    >
+      <span>{title}</span>
+      {subtitle && subtitle !== title ? (
+        <span className={`text-[10px] font-medium capitalize ${selected ? 'text-ink-950/55' : 'text-white/40'}`}>
+          {subtitle}
+        </span>
+      ) : null}
+    </button>
+  );
+}
+
 function AccountPlanner({ onGenerationStarted }) {
   const [postCount, setPostCount] = useState(30);
   const [relatablePerDay, setRelatablePerDay] = useState(3);
@@ -742,12 +768,7 @@ function AccountPlanner({ onGenerationStarted }) {
       try {
         const result = await listLateAccounts({ sessionId: DEFAULT_SESSION_ID });
         if (cancelled) return;
-        const normalized = (result.accounts || [])
-          .map((account) => ({
-            id: String(account?._id ?? account?.id ?? ''),
-            platform: String(account?.platform ?? account?.provider ?? ''),
-          }))
-          .filter((account) => account.id && account.platform);
+        const normalized = normalizeLateAccounts(result.accounts || []);
         setAccounts(normalized);
       } catch {
         setAccounts([]);
@@ -1222,21 +1243,18 @@ function AccountPlanner({ onGenerationStarted }) {
                   <div>
                     <p className="text-sm font-semibold text-white">Schedule account</p>
                     <div className="mt-3 flex flex-wrap gap-2">
-                      {accounts.length ? accounts.map((account) => {
-                        const selected = selectedAccountIds.includes(account.id);
-                        return (
-                          <button
-                            key={account.id}
-                            type="button"
-                            onClick={() => setSelectedAccountIds((ids) => (
-                              selected ? ids.filter((id) => id !== account.id) : [...ids, account.id]
-                            ))}
-                            className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${selected ? 'bg-white text-ink-950' : 'bg-white/10 text-white/60 hover:bg-white/15'}`}
-                          >
-                            {account.platform}
-                          </button>
-                        );
-                      }) : (
+                      {accounts.length ? accounts.map((account) => (
+                        <ScheduleAccountChip
+                          key={account.id}
+                          account={account}
+                          selected={selectedAccountIds.includes(account.id)}
+                          onToggle={(nextSelected) => setSelectedAccountIds((ids) => (
+                            nextSelected
+                              ? [...ids, account.id]
+                              : ids.filter((id) => id !== account.id)
+                          ))}
+                        />
+                      )) : (
                         <span className="text-sm text-white/45">No Late accounts connected yet.</span>
                       )}
                     </div>

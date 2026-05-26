@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import { CalendarRange, CheckCircle2, Clock, Film, Image as ImageIcon, RefreshCw, Send, Trash2 } from 'lucide-react';
 import AccountRow from './AccountRow';
 import ScheduleModal from './ScheduleModal';
+import { normalizeLateAccounts } from '../lib/lateAccounts';
 import {
   createLatePost,
   DEFAULT_SESSION_ID,
@@ -261,19 +262,7 @@ function VideoLibrary() {
       const data = await listLateAccounts({
         sessionId: DEFAULT_SESSION_ID,
       });
-      const normalized = (data.accounts || [])
-        .map((acc) => ({
-          _id: String(acc?._id ?? acc?.id ?? '').trim(),
-          platform: String(acc?.platform ?? acc?.provider ?? '').trim(),
-          profileId: (
-            typeof acc?.profileId === 'string'
-              ? acc.profileId
-              : typeof acc?.profile?._id === 'string'
-                ? acc.profile._id
-                : ''
-          ).trim(),
-        }))
-        .filter((acc) => acc._id && acc.platform);
+      const normalized = normalizeLateAccounts(data.accounts || []);
       setAccounts(normalized);
       if (normalized.length > 0) {
         setStatusMessage(`Loaded ${normalized.length} connected account(s).`);

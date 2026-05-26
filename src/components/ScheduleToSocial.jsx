@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { CalendarClock, Link2, RefreshCw, Send, CheckCircle2 } from 'lucide-react';
 import AccountRow from './AccountRow';
+import { normalizeLateAccounts } from '../lib/lateAccounts';
 import {
   createLatePost,
   createLateProfile,
@@ -75,7 +76,7 @@ function ScheduleToSocial({ jobId, resultUrl, videoGcsUrl }) {
         sessionId: DEFAULT_SESSION_ID,
         profileId: profileId || undefined,
       });
-      setAccounts(data.accounts || []);
+      setAccounts(normalizeLateAccounts(data.accounts || []));
     } catch (err) {
       setError(err.message);
     } finally {

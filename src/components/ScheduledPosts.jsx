@@ -13,7 +13,7 @@ import {
   listLateAccounts,
   listLatePosts,
 } from '../lib/lateApi';
-import { accountLabel } from '../lib/accountNicknames';
+import { accountDisplayName, normalizeLateAccounts } from '../lib/lateAccounts';
 import MiniCalendar, { isoToDateKey, toDateKey } from './MiniCalendar';
 
 /* ------------------------------------------------------------------ */
@@ -199,19 +199,7 @@ export default function ScheduledPosts() {
     setIsLoadingAccounts(true);
     try {
       const data = await listLateAccounts({ sessionId: DEFAULT_SESSION_ID });
-      const normalized = (data.accounts || [])
-        .map((acc) => ({
-          _id: String(acc?._id ?? acc?.id ?? '').trim(),
-          platform: String(acc?.platform ?? acc?.provider ?? '').trim(),
-          profileId: (
-            typeof acc?.profileId === 'string'
-              ? acc.profileId
-              : typeof acc?.profile?._id === 'string'
-                ? acc.profile._id
-                : ''
-          ).trim(),
-        }))
-        .filter((acc) => acc._id && acc.platform);
+      const normalized = normalizeLateAccounts(data.accounts || []);
       setAccounts(normalized);
     } catch {
       // non-critical
@@ -301,7 +289,7 @@ export default function ScheduledPosts() {
               <option value="">All Accounts</option>
               {accounts.map((acc) => (
                 <option key={acc._id} value={acc._id}>
-                  {accountLabel(acc)}
+                  {accountDisplayName(acc)}
                 </option>
               ))}
             </select>
