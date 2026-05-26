@@ -112,6 +112,16 @@ function assetLabel(asset, idKey) {
   return asset.label || asset.filename || (id ? id.slice(0, 8) : 'Untitled asset');
 }
 
+function showVideoFirstFrame(event) {
+  const video = event.currentTarget;
+  try {
+    video.pause();
+    video.currentTime = 0;
+  } catch {
+    // Some browsers block seeking before enough data is buffered.
+  }
+}
+
 function primeVideoFrame(event) {
   const video = event.currentTarget;
   if (!Number.isFinite(video.duration) || video.duration <= 0) return;
@@ -398,28 +408,20 @@ function PostCard({
   const previewUrl = resolvePostMediaUrl(post);
   const generated = Boolean(previewUrl);
   const mediaPreview = previewUrl ? (
-    <a
-      href={previewUrl}
-      target="_blank"
-      rel="noreferrer"
-      className="group relative block overflow-hidden rounded-2xl bg-white/10"
-    >
+    <div className="overflow-hidden rounded-2xl bg-white/10">
       <div className="relative aspect-[9/16] max-h-64 w-full">
         <video
           src={previewUrl}
           className="h-full w-full object-cover"
           controls
-          autoPlay
-          muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
+          onLoadedMetadata={showVideoFirstFrame}
+          onLoadedData={showVideoFirstFrame}
         />
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/10 text-white/80 opacity-0 transition group-hover:opacity-100">
-          <PlayCircle size={22} aria-hidden />
-        </div>
       </div>
-    </a>
+    </div>
   ) : source.thumbnailUrl ? (
     <div className="overflow-hidden rounded-2xl bg-white/10">
       <div className="h-32 w-full">
