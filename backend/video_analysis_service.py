@@ -305,7 +305,7 @@ def _clean_error_message(message: Any) -> str:
     return ANSI_ESCAPE_RE.sub("", str(message or "")).strip()
 
 
-def _download_direct(url: str, output_path: str, referer: str = "") -> int:
+def _download_direct(url: str, output_path: str, referer: str = "", extra_headers: Optional[Dict[str, str]] = None) -> int:
     max_bytes = max(1, VIDEO_ANALYSIS_MAX_DOWNLOAD_MB) * 1024 * 1024
     headers = {
         "User-Agent": "Mozilla/5.0 (compatible; LumeetVideoAnalysis/1.0)",
@@ -313,6 +313,8 @@ def _download_direct(url: str, output_path: str, referer: str = "") -> int:
     }
     if referer:
         headers["Referer"] = referer
+    if extra_headers:
+        headers.update({key: value for key, value in extra_headers.items() if value})
     request = Request(
         url,
         headers=headers,
@@ -402,6 +404,7 @@ def _download_tiktok_with_apify(url: str, output_path: str) -> Dict[str, Any]:
     if not APIFY_TOKEN:
         raise VideoAnalysisError("Apify fallback unavailable because APIFY_TOKEN is missing.", 503)
 
+    video_store_name = f"lumeet-video-{uuid.uuid4().hex[:12]}"
     actor_ref = quote(APIFY_TIKTOK_ACTOR_ID.replace("/", "~"), safe="~")
     endpoint = f"https://api.apify.com/v2/acts/{actor_ref}/run-sync-get-dataset-items"
     params = {
@@ -417,6 +420,7 @@ def _download_tiktok_with_apify(url: str, output_path: str) -> Dict[str, Any]:
         "shouldDownloadCovers": False,
         "shouldDownloadSubtitles": False,
         "shouldDownloadSlideshowImages": False,
+        "videoKvStoreIdOrName": video_store_name,
         "proxyConfiguration": {"useApifyProxy": True},
     }
     request = Request(
@@ -435,6 +439,10 @@ def _download_tiktok_with_apify(url: str, output_path: str) -> Dict[str, Any]:
 
     if not isinstance(items, list) or not items:
         raise VideoAnalysisError("Apify TikTok fallback returned no video items.", 422)
+
+    store_download = _download_apify_video_record(video_store_name, output_path)
+    if store_download:
+        return store_download
 
     media_urls = _extract_media_urls(items[0], original_url=url)
     if not media_urls:
@@ -464,6 +472,67 @@ def _download_tiktok_with_apify(url: str, output_path: str) -> Dict[str, Any]:
 
     detail = " | ".join(_clean_error_message(error) for error in errors if error)
     raise VideoAnalysisError(f"Apify returned media URLs, but none were downloadable. {detail}", 422)
+
+
+def _download_apify_video_record(store_id_or_name: str, output_path: str) -> Optional[Dict[str, Any]]:
+    video_keys = _list_apify_video_record_keys(store_id_or_name)
+    for record_key in video_keys:
+        record_url = _apify_record_url(store_id_or_name, record_key)
+        try:
+            downloaded_bytes = _download_direct(
+                record_url,
+                output_path,
+                extra_headers={"Authorization": f"Bearer {APIFY_TOKEN}"},
+            )
+            return {
+                "path": output_path,
+                "downloadedBytes": downloaded_bytes,
+                "method": "apify_kv_store",
+                "resolvedUrl": record_url,
+            }
+        except VideoAnalysisError:
+            continue
+    return None
+
+
+def _list_apify_video_record_keys(store_id_or_name: str) -> List[str]:
+    if not store_id_or_name:
+        return []
+    url = (
+        "https://api.apify.com/v2/key-value-stores/"
+        f"{quote(store_id_or_name, safe='~')}/keys?{urlencode({'token': APIFY_TOKEN})}"
+    )
+    request = Request(url, headers={"Accept": "application/json"})
+    try:
+        with urlopen(request, timeout=VIDEO_ANALYSIS_DOWNLOAD_TIMEOUT_SEC) as response:
+            payload = json.loads(response.read().decode("utf-8") or "{}")
+    except (HTTPError, URLError, TimeoutError, json.JSONDecodeError):
+        return []
+
+    items = payload.get("items") if isinstance(payload, dict) else []
+    if not isinstance(items, list):
+        return []
+
+    ranked = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        key = str(item.get("key") or "").strip()
+        if not key:
+            continue
+        content_type = str(item.get("contentType") or item.get("content_type") or "").lower()
+        lowered_key = key.lower()
+        is_video = content_type.startswith("video/") or lowered_key.endswith((".mp4", ".mov", ".webm", ".m4v"))
+        if is_video:
+            ranked.append(key)
+    return ranked
+
+
+def _apify_record_url(store_id_or_name: str, record_key: str) -> str:
+    return (
+        "https://api.apify.com/v2/key-value-stores/"
+        f"{quote(store_id_or_name, safe='~')}/records/{quote(record_key, safe='')}"
+    )
 
 
 def _extract_media_urls(item: Dict[str, Any], original_url: str = "") -> List[str]:

@@ -4,6 +4,7 @@ import {
   ArrowUpRight,
   CalendarClock,
   CheckCircle2,
+  History,
   Loader2,
   PlayCircle,
   RefreshCw,
@@ -14,6 +15,7 @@ import {
   createStudyTokSimplePlan,
   generateAccountPlanPosts,
   getAccountPlan,
+  listAccountPlans,
   scheduleAccountPlanPosts,
   swapAccountPlanPost,
   updateAccountPlan,
@@ -59,6 +61,41 @@ function formatSchedule(value) {
   return parsed.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
 }
 
+function summarizeBulkRuns(plan) {
+  const groups = new Map();
+  (plan?.plannedPosts || []).forEach((post) => {
+    const runId = post.bulkRunId || '';
+    if (!runId) return;
+    const group = groups.get(runId) || {
+      id: runId,
+      planId: plan.id,
+      planStatus: plan.status,
+      createdAt: plan.createdAt,
+      updatedAt: plan.updatedAt,
+      total: 0,
+      generated: 0,
+      unscheduled: 0,
+      scheduled: 0,
+      failed: 0,
+      latestPostUpdate: '',
+      firstSchedule: '',
+    };
+    group.total += 1;
+    if (post.status === 'generated' || post.generatedMediaUrl) group.generated += 1;
+    if ((post.status === 'generated' || post.generatedMediaUrl) && post.reviewStatus !== 'scheduled') group.unscheduled += 1;
+    if (post.reviewStatus === 'scheduled' || post.status === 'scheduled') group.scheduled += 1;
+    if (post.status === 'failed') group.failed += 1;
+    if (post.updatedAt && post.updatedAt > group.latestPostUpdate) group.latestPostUpdate = post.updatedAt;
+    if (post.suggestedScheduledFor && (!group.firstSchedule || post.suggestedScheduledFor < group.firstSchedule)) {
+      group.firstSchedule = post.suggestedScheduledFor;
+    }
+    groups.set(runId, group);
+  });
+  return Array.from(groups.values()).sort((a, b) => (
+    (b.latestPostUpdate || b.updatedAt || '').localeCompare(a.latestPostUpdate || a.updatedAt || '')
+  ));
+}
+
 function assetLabel(asset, idKey) {
   if (!asset) return 'Not selected';
   const id = asset[idKey] || '';
@@ -87,6 +124,112 @@ function resetPreview(event) {
   } catch {
     // Ignore reset failures for signed/streaming videos.
   }
+}
+
+function BulkRunHistorySection({ runs, loading, currentPlanId, currentRunId, onOpenRun, onRefresh }) {
+  if (loading) {
+    return (
+      <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-4 text-sm text-white/45">
+        <span className="inline-flex items-center gap-2">
+          <Loader2 size={16} className="animate-spin" aria-hidden />
+          Loading recent bulk generations...
+        </span>
+      </div>
+    );
+  }
+
+  if (!runs.length) {
+    return (
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-3xl border border-white/10 bg-white/[0.04] p-4">
+        <div>
+          <p className="text-sm font-semibold text-white">Recent bulk generations</p>
+          <p className="mt-1 text-sm text-white/45">
+            Completed bulk runs will appear here after generation starts.
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={onRefresh}
+          className="inline-flex items-center gap-2 rounded-2xl bg-white/10 px-3 py-2 text-xs font-semibold text-white/70 hover:bg-white/15"
+        >
+          <RefreshCw size={14} aria-hidden />
+          Check
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-4">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <p className="inline-flex items-center gap-2 text-sm font-semibold text-white">
+            <History size={16} aria-hidden />
+            Recent bulk generations
+          </p>
+          <p className="mt-1 text-sm text-white/45">
+            Reopen a completed run to review captions, dates, times, and schedule generated posts.
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={onRefresh}
+          className="inline-flex items-center gap-2 rounded-2xl bg-white/10 px-3 py-2 text-xs font-semibold text-white/70 hover:bg-white/15"
+        >
+          <RefreshCw size={14} aria-hidden />
+          Refresh runs
+        </button>
+      </div>
+      <div className="mt-4 grid gap-2 lg:grid-cols-2">
+        {runs.slice(0, 6).map((run) => {
+          const active = run.planId === currentPlanId && run.id === currentRunId;
+          const ready = run.unscheduled > 0;
+          return (
+            <button
+              key={`${run.planId}:${run.id}`}
+              type="button"
+              onClick={() => onOpenRun(run)}
+              className={`grid gap-3 rounded-2xl border p-3 text-left transition ${
+                active
+                  ? 'border-cyan-300/70 bg-cyan-300/10'
+                  : 'border-white/10 bg-black/20 hover:border-white/25 hover:bg-white/[0.06]'
+              }`}
+            >
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <span className="text-xs font-semibold uppercase tracking-[0.14em] text-white/35">
+                  {run.id.replace('planrun_', 'Run ')}
+                </span>
+                <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${ready ? 'bg-emerald-400/15 text-emerald-100' : 'bg-white/10 text-white/55'}`}>
+                  {ready ? `${run.unscheduled} ready to schedule` : `${run.generated} generated`}
+                </span>
+              </div>
+              <div className="grid grid-cols-4 gap-2 text-xs">
+                <span className="rounded-2xl bg-white/10 px-2.5 py-2 text-white/55">
+                  <b className="block text-sm text-white">{run.total}</b>
+                  posts
+                </span>
+                <span className="rounded-2xl bg-white/10 px-2.5 py-2 text-white/55">
+                  <b className="block text-sm text-white">{run.generated}</b>
+                  done
+                </span>
+                <span className="rounded-2xl bg-white/10 px-2.5 py-2 text-white/55">
+                  <b className="block text-sm text-white">{run.scheduled}</b>
+                  scheduled
+                </span>
+                <span className="rounded-2xl bg-white/10 px-2.5 py-2 text-white/55">
+                  <b className="block text-sm text-white">{run.failed}</b>
+                  failed
+                </span>
+              </div>
+              <p className="text-xs text-white/40">
+                First slot: {formatSchedule(run.firstSchedule)} · Plan {tagValue(run.planStatus)}
+              </p>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
 
 function ModelImagePicker({ models, loading, selectedModelId, onSelect }) {
@@ -243,19 +386,40 @@ function PostCard({
   const source = post.sourceVideo || {};
   const tags = post.keyTags || {};
   const generated = post.status === 'generated' || post.generatedMediaUrl;
+  const previewUrl = generated ? post.generatedMediaUrl : '';
   return (
     <article className="rounded-3xl border border-white/10 bg-white/[0.04] p-4">
-      <div className="grid gap-4 lg:grid-cols-[84px_minmax(0,1fr)_260px]">
+      <div className="grid gap-4 lg:grid-cols-[160px_minmax(0,1fr)_260px]">
         <a
-          href={source.url}
+          href={previewUrl || source.url}
           target="_blank"
           rel="noreferrer"
-          className="relative h-28 overflow-hidden rounded-2xl bg-white/10"
+          className="group relative overflow-hidden rounded-2xl bg-white/10"
         >
-          {source.thumbnailUrl ? (
-            <img src={source.thumbnailUrl} alt="" className="h-full w-full object-cover" loading="lazy" />
+          {previewUrl ? (
+            <div className="relative aspect-[9/16] max-h-64 w-full">
+              <video
+                src={previewUrl}
+                className="h-full w-full object-cover"
+                muted
+                playsInline
+                preload="metadata"
+                onLoadedMetadata={primeVideoFrame}
+                onMouseOver={playPreview}
+                onMouseOut={resetPreview}
+                onFocus={playPreview}
+                onBlur={resetPreview}
+              />
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/10 text-white/80 opacity-0 transition group-hover:opacity-100">
+                <PlayCircle size={22} aria-hidden />
+              </div>
+            </div>
+          ) : source.thumbnailUrl ? (
+            <div className="h-32 w-full">
+              <img src={source.thumbnailUrl} alt="" className="h-full w-full object-cover" loading="lazy" />
+            </div>
           ) : (
-            <div className="flex h-full w-full items-center justify-center text-white/40">
+            <div className="flex h-32 w-full items-center justify-center text-white/40">
               <Video size={18} aria-hidden />
             </div>
           )}
@@ -391,6 +555,9 @@ function AccountPlanner({ onGenerationStarted }) {
   const [startDate, setStartDate] = useState(todayInputValue());
   const [dailyTimes, setDailyTimes] = useState(DEFAULT_TIMES);
   const [plan, setPlan] = useState(null);
+  const [selectedBulkRunId, setSelectedBulkRunId] = useState('');
+  const [recentPlans, setRecentPlans] = useState([]);
+  const [loadingRecentPlans, setLoadingRecentPlans] = useState(false);
   const [accounts, setAccounts] = useState([]);
   const [selectedAccountIds, setSelectedAccountIds] = useState([]);
   const [selectedModelId, setSelectedModelId] = useState('');
@@ -406,15 +573,47 @@ function AccountPlanner({ onGenerationStarted }) {
   const { models, loading: loadingModels } = useModels();
   const { extensionVideos, loading: loadingExtensionVideos } = useExtensionVideos();
 
+  const loadRecentPlans = useCallback(async () => {
+    setLoadingRecentPlans(true);
+    try {
+      const result = await listAccountPlans({ limit: 25 });
+      setRecentPlans(Array.isArray(result.plans) ? result.plans : []);
+    } catch (err) {
+      setError(err.message || 'Could not load recent planner runs.');
+    } finally {
+      setLoadingRecentPlans(false);
+    }
+  }, []);
+
   const refreshPlan = useCallback(async () => {
-    if (!plan?.id) return;
+    if (!plan?.id) {
+      await loadRecentPlans();
+      return;
+    }
     try {
       const next = await getAccountPlan(plan.id);
       setPlan(next);
+      await loadRecentPlans();
     } catch (err) {
       setError(err.message || 'Could not refresh plan.');
     }
-  }, [plan?.id]);
+  }, [loadRecentPlans, plan?.id]);
+
+  const handleOpenBulkRun = async (run) => {
+    if (!run?.planId) return;
+    setError('');
+    try {
+      const next = await getAccountPlan(run.planId);
+      setPlan(next);
+      setSelectedBulkRunId(run.id || '');
+    } catch (err) {
+      setError(err.message || 'Could not open planner run.');
+    }
+  };
+
+  useEffect(() => {
+    loadRecentPlans();
+  }, [loadRecentPlans]);
 
   useEffect(() => {
     let cancelled = false;
@@ -446,6 +645,20 @@ function AccountPlanner({ onGenerationStarted }) {
   }, [plan?.id, plan?.status, refreshPlan]);
 
   useEffect(() => {
+    if (!accounts.length) {
+      if (selectedAccountIds.length) setSelectedAccountIds([]);
+      return;
+    }
+    const validIds = accounts.map((account) => account.id);
+    const stillValid = selectedAccountIds.filter((id) => validIds.includes(id));
+    if (!stillValid.length) {
+      setSelectedAccountIds([accounts[0].id]);
+    } else if (stillValid.length !== selectedAccountIds.length) {
+      setSelectedAccountIds(stillValid);
+    }
+  }, [accounts, selectedAccountIds]);
+
+  useEffect(() => {
     if (models.length && !models.some((model) => model.modelId === selectedModelId)) {
       setSelectedModelId(models[0].modelId || '');
     } else if (!models.length && selectedModelId) {
@@ -470,8 +683,13 @@ function AccountPlanner({ onGenerationStarted }) {
       .map((account) => ({ platform: account.platform, accountId: account.id }))
   ), [accounts, selectedAccountIds]);
 
+  const visiblePosts = useMemo(() => (
+    (plan?.plannedPosts || []).filter((post) => (
+      !selectedBulkRunId || post.bulkRunId === selectedBulkRunId
+    ))
+  ), [plan, selectedBulkRunId]);
   const planStats = useMemo(() => {
-    const posts = plan?.plannedPosts || [];
+    const posts = visiblePosts;
     return {
       total: posts.length,
       queued: posts.filter((post) => post.status === 'queued').length,
@@ -480,13 +698,18 @@ function AccountPlanner({ onGenerationStarted }) {
       scheduled: posts.filter((post) => post.reviewStatus === 'scheduled').length,
       failed: posts.filter((post) => post.status === 'failed').length,
     };
-  }, [plan]);
+  }, [visiblePosts]);
   const generatedUnscheduledPosts = useMemo(() => (
-    (plan?.plannedPosts || []).filter((post) => (
+    visiblePosts.filter((post) => (
       (post.status === 'generated' || post.generatedMediaUrl)
       && post.reviewStatus !== 'scheduled'
     ))
-  ), [plan]);
+  ), [visiblePosts]);
+  const recentBulkRuns = useMemo(() => (
+    recentPlans
+      .flatMap((item) => summarizeBulkRuns(item))
+      .sort((a, b) => (b.latestPostUpdate || b.updatedAt || '').localeCompare(a.latestPostUpdate || a.updatedAt || ''))
+  ), [recentPlans]);
   const planNeedsHookDemo = useMemo(
     () => (plan?.plannedPosts || []).some((post) => post.purpose === 'hook_demo'),
     [plan],
@@ -516,6 +739,8 @@ function AccountPlanner({ onGenerationStarted }) {
         timezone,
       });
       setPlan(result);
+      setSelectedBulkRunId('');
+      await loadRecentPlans();
     } catch (err) {
       setError(err.message || 'Could not create StudyTok plan.');
     } finally {
@@ -530,6 +755,7 @@ function AccountPlanner({ onGenerationStarted }) {
     try {
       const result = await updateAccountPlan(plan.id, { status: 'approved' });
       setPlan(result);
+      await loadRecentPlans();
     } catch (err) {
       setError(err.message || 'Could not approve plan.');
     } finally {
@@ -547,6 +773,8 @@ function AccountPlanner({ onGenerationStarted }) {
         extensionVideoId: selectedExtensionVideoId,
       });
       setPlan(result);
+      setSelectedBulkRunId(result.activeBulkRunId || selectedBulkRunId);
+      await loadRecentPlans();
       if (onGenerationStarted) onGenerationStarted();
     } catch (err) {
       setError(err.message || 'Could not start generation.');
@@ -564,6 +792,7 @@ function AccountPlanner({ onGenerationStarted }) {
     try {
       const result = await updateAccountPlanPost({ planId: plan.id, slot, updates });
       setPlan(result);
+      loadRecentPlans();
     } catch (err) {
       setError(err.message || 'Could not update planned post.');
     }
@@ -576,6 +805,7 @@ function AccountPlanner({ onGenerationStarted }) {
     try {
       const result = await swapAccountPlanPost({ planId: plan.id, slot });
       setPlan(result);
+      await loadRecentPlans();
     } catch (err) {
       setError(err.message || 'Could not swap planned video.');
     } finally {
@@ -583,25 +813,35 @@ function AccountPlanner({ onGenerationStarted }) {
     }
   };
 
+  const scheduleOnePost = async (post) => {
+    const scheduledIso = toIsoLocal(post.suggestedScheduledFor);
+    const payload = {
+      sessionId: DEFAULT_SESSION_ID,
+      content: post.captionDraft || 'Generated with nflncr.ai',
+      platforms: selectedPlatforms,
+      publishNow: false,
+      timezone,
+      scheduledFor: scheduledIso,
+      mediaUrls: [post.generatedMediaUrl].filter(Boolean),
+      ...(post.jobId ? { jobId: post.jobId, includeResultVideo: true } : {}),
+    };
+    const result = await createLatePost(payload);
+    const latePostId = result?.post?._id || result?._id || result?.id || 'created';
+    return updateAccountPlanPost({
+      planId: plan.id,
+      slot: post.slot,
+      updates: { reviewStatus: 'scheduled', status: 'scheduled', latePostId, scheduleError: '' },
+    });
+  };
+
   const handleSchedulePost = async (post) => {
     if (!plan?.id) return;
     setSchedulingSlot(post.slot);
     setError('');
     try {
-      const scheduledIso = toIsoLocal(post.suggestedScheduledFor);
-      const payload = {
-        sessionId: DEFAULT_SESSION_ID,
-        content: post.captionDraft || 'Generated with nflncr.ai',
-        platforms: selectedPlatforms,
-        publishNow: false,
-        timezone,
-        scheduledFor: scheduledIso,
-        mediaUrls: [post.generatedMediaUrl].filter(Boolean),
-        ...(post.jobId ? { jobId: post.jobId, includeResultVideo: true } : {}),
-      };
-      const result = await createLatePost(payload);
-      const latePostId = result?.post?._id || result?._id || result?.id || 'created';
-      await handlePatchPost(post.slot, { reviewStatus: 'scheduled', status: 'scheduled', latePostId });
+      const result = await scheduleOnePost(post);
+      setPlan(result);
+      await loadRecentPlans();
     } catch (err) {
       setError(err.message || 'Could not schedule post.');
     } finally {
@@ -614,16 +854,28 @@ function AccountPlanner({ onGenerationStarted }) {
     setIsSchedulingAll(true);
     setError('');
     try {
-      const result = await scheduleAccountPlanPosts(plan.id, {
-        sessionId: DEFAULT_SESSION_ID,
-        platforms: selectedPlatforms,
-        timezone,
-      });
-      setPlan(result.plan || result);
+      let latestPlan = plan;
+      if (selectedBulkRunId) {
+        for (const post of generatedUnscheduledPosts) {
+          setSchedulingSlot(post.slot);
+          latestPlan = await scheduleOnePost(post);
+          setPlan(latestPlan);
+        }
+      } else {
+        const result = await scheduleAccountPlanPosts(plan.id, {
+          sessionId: DEFAULT_SESSION_ID,
+          platforms: selectedPlatforms,
+          timezone,
+        });
+        latestPlan = result.plan || result;
+        setPlan(latestPlan);
+      }
+      await loadRecentPlans();
       if (onGenerationStarted) onGenerationStarted();
     } catch (err) {
       setError(err.message || 'Could not schedule generated posts.');
     } finally {
+      setSchedulingSlot(null);
       setIsSchedulingAll(false);
     }
   };
@@ -667,6 +919,15 @@ function AccountPlanner({ onGenerationStarted }) {
               <p>{error}</p>
             </div>
           )}
+
+          <BulkRunHistorySection
+            runs={recentBulkRuns}
+            loading={loadingRecentPlans}
+            currentPlanId={plan?.id || ''}
+            currentRunId={selectedBulkRunId}
+            onOpenRun={handleOpenBulkRun}
+            onRefresh={loadRecentPlans}
+          />
 
           <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-4">
             <div className="grid gap-3 md:grid-cols-5">
@@ -756,6 +1017,24 @@ function AccountPlanner({ onGenerationStarted }) {
                   </div>
                 ))}
               </div>
+
+              {selectedBulkRunId && (
+                <div className="flex flex-wrap items-center justify-between gap-3 rounded-3xl border border-cyan-300/20 bg-cyan-300/10 p-4">
+                  <div>
+                    <p className="text-sm font-semibold text-white">Opened bulk run</p>
+                    <p className="mt-1 text-sm text-white/50">
+                      Showing generated posts from {selectedBulkRunId.replace('planrun_', 'run ')} with their saved captions and scheduled times.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedBulkRunId('')}
+                    className="rounded-2xl bg-white/10 px-3 py-2 text-xs font-semibold text-white/70 hover:bg-white/15"
+                  >
+                    Show full plan
+                  </button>
+                </div>
+              )}
 
               <div className="flex flex-wrap items-center justify-between gap-3 rounded-3xl border border-white/10 bg-white/[0.04] p-4">
                 <div>
@@ -850,7 +1129,7 @@ function AccountPlanner({ onGenerationStarted }) {
               </div>
 
               <div className="grid gap-3">
-                {(plan.plannedPosts || []).map((post) => (
+                {visiblePosts.map((post) => (
                   <PostCard
                     key={post.slot}
                     post={post}

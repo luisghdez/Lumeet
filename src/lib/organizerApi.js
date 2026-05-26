@@ -163,6 +163,10 @@ export async function getAccountPlan(planId) {
   return request(`/api/account-planner/plans/${encodeURIComponent(planId)}`);
 }
 
+export async function listAccountPlans({ limit = 25 } = {}) {
+  return request(`/api/account-planner/plans?limit=${encodeURIComponent(limit)}`);
+}
+
 export async function updateAccountPlan(planId, updates) {
   return request(`/api/account-planner/plans/${encodeURIComponent(planId)}`, {
     method: 'PATCH',

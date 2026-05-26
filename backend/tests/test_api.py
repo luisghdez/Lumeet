@@ -706,6 +706,55 @@ class TestTikTokOrganizerAccountJobs:
         assert result["status"] == "tagged"
         assert mock_sample.call_args.kwargs["max_frames_override"] == 12
 
+    def test_apify_tiktok_download_prefers_key_value_store_video(self, tmp_path):
+        import video_analysis_service as service
+
+        class FakeHeaders:
+            def __init__(self, content_type):
+                self._content_type = content_type
+
+            def get(self, name, default=None):
+                return self._content_type if name.lower() == "content-type" else default
+
+        class FakeResponse:
+            def __init__(self, body, content_type="application/json"):
+                self._body = body
+                self.headers = FakeHeaders(content_type)
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return False
+
+            def read(self, _size=-1):
+                if _size is None or _size < 0:
+                    data, self._body = self._body, b""
+                    return data
+                data, self._body = self._body[:_size], self._body[_size:]
+                return data
+
+        calls = []
+
+        def fake_urlopen(request, timeout=0):
+            calls.append((request.full_url, dict(request.header_items())))
+            if "/run-sync-get-dataset-items" in request.full_url:
+                return FakeResponse(b'[{"webVideoUrl":"https://www.tiktok.com/@x/video/1"}]')
+            if "/keys?" in request.full_url:
+                return FakeResponse(b'{"items":[{"key":"video-1.mp4","contentType":"video/mp4"}]}')
+            if "/records/video-1.mp4" in request.full_url:
+                return FakeResponse(b"\x00\x00\x00\x1cftypisom" + b"\x00" * 32, "video/mp4")
+            raise AssertionError(f"unexpected URL {request.full_url}")
+
+        output_path = tmp_path / "source_video"
+        with patch("video_analysis_service.APIFY_TOKEN", "token"), \
+             patch("video_analysis_service.urlopen", side_effect=fake_urlopen):
+            result = service._download_tiktok_with_apify("https://www.tiktok.com/@x/video/1", str(output_path))
+
+        assert result["method"] == "apify_kv_store"
+        assert output_path.read_bytes().startswith(b"\x00\x00\x00\x1cftyp")
+        assert any(headers.get("Authorization") == "Bearer token" for _, headers in calls)
+
 
 class TestTikTokOrganizerAccountDiscovery:
     def test_discovery_niches_endpoint_returns_presets(self, client):

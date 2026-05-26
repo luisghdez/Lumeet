@@ -32828,5 +32828,299 @@
     "createdAt": "2026-05-26T04:03:55.509989+00:00",
     "updatedAt": "2026-05-26T04:05:55.977974+00:00",
     "activeBulkRunId": "planrun_a0360c339f02"
+  },
+  "plan_7098d8aa879b": {
+    "archetype": "studytok",
+    "mode": "studytok_daily",
+    "status": "generated",
+    "settings": {
+      "postCount": 4,
+      "relatablePerDay": 3,
+      "hookDemoPerDay": 1,
+      "startDate": "2026-05-25",
+      "dailyTimes": [
+        "09:00",
+        "12:30",
+        "16:30",
+        "20:00"
+      ],
+      "timezone": "America/Ciudad_Juarez"
+    },
+    "source": {
+      "taggedVideoCount": 176,
+      "relatableCandidates": 104,
+      "hookDemoCandidates": 8
+    },
+    "contentMix": [
+      {
+        "purpose": "relatable",
+        "count": 3,
+        "percentage": 75
+      },
+      {
+        "purpose": "hook_demo",
+        "count": 1,
+        "percentage": 25
+      }
+    ],
+    "plannedPosts": [
+      {
+        "slot": 1,
+        "purpose": "relatable",
+        "label": "Relatable content video",
+        "targetTags": {
+          "content_type": [
+            "relatable_content"
+          ],
+          "is_single_scene": [
+            true
+          ]
+        },
+        "durationTargetSec": {
+          "min": 3,
+          "max": 10
+        },
+        "creativeNotes": "Recreate short single-scene relatable content. Prefer clips under 10 seconds because they are easiest to replicate.",
+        "videoReferenceId": "vidref_31ee7ba3b136bd6f",
+        "sourceVideo": {
+          "id": "vidref_31ee7ba3b136bd6f",
+          "url": "https://www.tiktok.com/@lauraonedge/video/7607160029715827970",
+          "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-no1a-p-0037-no/okwUCf31DF6pF2eE1SEDgEI8kBkIDxpgqURp9A~tplv-tiktokx-origin.image?dr=9636&x-expires=1779739200&x-signature=Vxra3HDW7beRSgrK1cbDlLQ1Pik%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+          "creatorHandle": "lauraonedge",
+          "caption": "\ud83e\udd79\ud83e\udd79\ud83d\ude2d #studytok #fyp #mentalhealth #medstudent #studying",
+          "durationSec": 5.767,
+          "sceneCount": 1
+        },
+        "selectionReasons": [
+          "6s under 10s",
+          "single scene",
+          "relatable content",
+          "easy to replicate"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "\ud83e\udd79\ud83e\udd79\ud83d\ude2d #studytok #fyp #mentalhealth #medstudent #studying",
+        "suggestedScheduledFor": "2026-05-25T09:00:00",
+        "timezone": "America/Ciudad_Juarez",
+        "status": "generated",
+        "reviewStatus": "pending",
+        "generationId": "99245efc87b6",
+        "jobId": "af7e6c7c9574",
+        "generatedMediaUrl": "http://127.0.0.1:8000/api/jobs/af7e6c7c9574/result",
+        "error": "",
+        "keyTags": {
+          "content_type": "relatable_content",
+          "niche": "education",
+          "sub_niche": "student_life",
+          "product_kind": "none",
+          "product_name": "",
+          "product_category": "unknown",
+          "scene_type": "single_room",
+          "is_easy_to_replicate": true,
+          "is_single_scene": true,
+          "scene_count": 1
+        },
+        "bulkRunId": "planrun_f6f63a7f7525",
+        "modelId": "d80af5728954",
+        "extensionVideoId": "",
+        "latePostId": "",
+        "scheduleError": "",
+        "updatedAt": "2026-05-26T04:16:31.544628+00:00"
+      },
+      {
+        "slot": 2,
+        "purpose": "relatable",
+        "label": "Relatable content video",
+        "targetTags": {
+          "content_type": [
+            "relatable_content"
+          ],
+          "is_single_scene": [
+            true
+          ]
+        },
+        "durationTargetSec": {
+          "min": 3,
+          "max": 10
+        },
+        "creativeNotes": "Recreate short single-scene relatable content. Prefer clips under 10 seconds because they are easiest to replicate.",
+        "videoReferenceId": "vidref_fd818b8c3dfd4240",
+        "sourceVideo": {
+          "id": "vidref_fd818b8c3dfd4240",
+          "url": "https://www.tiktok.com/@dgrindstaff/video/7610256415252434189",
+          "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osj7giAUaEP8E4qrA8BQiBCIQEBiPZ9dKPg0I~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=iMoDBjtA2YnhPGYlPr5E%2B26LoOY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+          "creatorHandle": "dgrindstaff",
+          "caption": "A slight chin rub to pretend I\u2019m capable of thinking #studying #college #collegelife #collegestudent #relateable",
+          "durationSec": 5.233,
+          "sceneCount": 1
+        },
+        "selectionReasons": [
+          "5s under 10s",
+          "single scene",
+          "relatable content",
+          "easy to replicate"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "A slight chin rub to pretend I\u2019m capable of thinking #studying #college #collegelife #collegestudent #relateable",
+        "suggestedScheduledFor": "2026-05-25T12:30:00",
+        "timezone": "America/Ciudad_Juarez",
+        "status": "generated",
+        "reviewStatus": "pending",
+        "generationId": "0d10d610e03b",
+        "jobId": "aa81b36f0019",
+        "generatedMediaUrl": "http://127.0.0.1:8000/api/jobs/aa81b36f0019/result",
+        "error": "",
+        "keyTags": {
+          "content_type": "relatable_content",
+          "niche": "education",
+          "sub_niche": "student_life",
+          "product_kind": "none",
+          "product_name": "",
+          "product_category": "unknown",
+          "scene_type": "single_room",
+          "is_easy_to_replicate": true,
+          "is_single_scene": true,
+          "scene_count": 1
+        },
+        "bulkRunId": "planrun_f6f63a7f7525",
+        "modelId": "d80af5728954",
+        "extensionVideoId": "",
+        "latePostId": "",
+        "scheduleError": "",
+        "updatedAt": "2026-05-26T04:19:31.466806+00:00"
+      },
+      {
+        "slot": 3,
+        "purpose": "relatable",
+        "label": "Relatable content video",
+        "targetTags": {
+          "content_type": [
+            "relatable_content"
+          ],
+          "is_single_scene": [
+            true
+          ]
+        },
+        "durationTargetSec": {
+          "min": 3,
+          "max": 10
+        },
+        "creativeNotes": "Recreate short single-scene relatable content. Prefer clips under 10 seconds because they are easiest to replicate.",
+        "videoReferenceId": "vidref_c7c987f14a5990f1",
+        "sourceVideo": {
+          "id": "vidref_c7c987f14a5990f1",
+          "url": "https://www.tiktok.com/@dgrindstaff/video/7638472291499740429",
+          "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oYixIYL6fpkdbzTBHCGAQwARjXUATCEIipIfer~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=WtZE1hk1diBQru4FqGzqjiK3Ybo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+          "creatorHandle": "dgrindstaff",
+          "caption": "Like come on #college #relatable #studytok #finals #collegelife",
+          "durationSec": 5.667,
+          "sceneCount": 1
+        },
+        "selectionReasons": [
+          "6s under 10s",
+          "single scene",
+          "relatable content",
+          "easy to replicate"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "Like come on #college #relatable #studytok #finals #collegelife",
+        "suggestedScheduledFor": "2026-05-25T16:30:00",
+        "timezone": "America/Ciudad_Juarez",
+        "status": "generated",
+        "reviewStatus": "pending",
+        "generationId": "21e9e7df7a5c",
+        "jobId": "b2c214bec058",
+        "generatedMediaUrl": "http://127.0.0.1:8000/api/jobs/b2c214bec058/result",
+        "error": "",
+        "keyTags": {
+          "content_type": "relatable_content",
+          "niche": "education",
+          "sub_niche": "student_life",
+          "product_kind": "none",
+          "product_name": "",
+          "product_category": "unknown",
+          "scene_type": "single_room",
+          "is_easy_to_replicate": true,
+          "is_single_scene": true,
+          "scene_count": 1
+        },
+        "bulkRunId": "planrun_f6f63a7f7525",
+        "modelId": "d80af5728954",
+        "extensionVideoId": "",
+        "latePostId": "",
+        "scheduleError": "",
+        "updatedAt": "2026-05-26T04:22:45.585584+00:00"
+      },
+      {
+        "slot": 4,
+        "purpose": "hook_demo",
+        "label": "Hook + demo video",
+        "targetTags": {
+          "content_type": [
+            "hook_demo"
+          ],
+          "product_kind": [
+            "app",
+            "physical_product",
+            "brand_or_service",
+            "unknown"
+          ]
+        },
+        "durationTargetSec": {
+          "min": 10,
+          "max": 25
+        },
+        "creativeNotes": "Use the source as the hook/reference, then append the account demo extension in the generation pipeline.",
+        "videoReferenceId": "vidref_8649f1203aff652f",
+        "sourceVideo": {
+          "id": "vidref_8649f1203aff652f",
+          "url": "https://www.tiktok.com/@sophc.studies/video/7634383581770534158",
+          "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4jI8fizRSqnsyp4CqF8xUwEBvA0iBB7EAj0LI~tplv-tiktokx-origin.image?dr=9636&x-expires=1778511600&x-signature=Z87xD8N7SaFmy4fzMcKJeODd1s4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+          "creatorHandle": "sophc.studies",
+          "caption": "As a visual learner this changed the game \ud83e\udd2f\n\n#college #student #finalsweek #uni",
+          "durationSec": 7.8,
+          "sceneCount": 4
+        },
+        "selectionReasons": [
+          "hook demo",
+          "app identified"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "As a visual learner this changed the game \ud83e\udd2f\n\n#college #student #finalsweek #uni",
+        "suggestedScheduledFor": "2026-05-25T20:00:00",
+        "timezone": "America/Ciudad_Juarez",
+        "status": "generated",
+        "reviewStatus": "pending",
+        "generationId": "744ed3376902",
+        "jobId": "3966ef388f1d",
+        "generatedMediaUrl": "http://127.0.0.1:8000/api/jobs/3966ef388f1d/result",
+        "error": "",
+        "keyTags": {
+          "content_type": "hook_demo",
+          "niche": "education",
+          "sub_niche": "student_life",
+          "product_kind": "app",
+          "product_name": "",
+          "product_category": "study_app",
+          "scene_type": "multi_scene",
+          "is_easy_to_replicate": false,
+          "is_single_scene": false,
+          "scene_count": 4
+        },
+        "bulkRunId": "planrun_f6f63a7f7525",
+        "modelId": "d80af5728954",
+        "extensionVideoId": "167eab56f864",
+        "latePostId": "",
+        "scheduleError": "",
+        "updatedAt": "2026-05-26T04:25:05.217608+00:00"
+      }
+    ],
+    "id": "plan_7098d8aa879b",
+    "createdAt": "2026-05-26T04:13:04.012341+00:00",
+    "updatedAt": "2026-05-26T04:25:05.248233+00:00",
+    "activeBulkRunId": "planrun_f6f63a7f7525"
   }
 }
