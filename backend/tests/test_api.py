@@ -9,6 +9,7 @@ import os
 import sys
 import time
 import threading
+import concurrent.futures
 from unittest.mock import patch, MagicMock
 
 import pytest
@@ -530,3 +531,379 @@ class TestLateMediaGcsPreference:
         )
         assert len(urls) == 1
         assert f"/api/jobs/{job.id}/result" in urls[0]
+
+
+# -- TikTok organizer account jobs -----------------------------------------
+
+class TestTikTokOrganizerAccountJobs:
+    def test_suggested_accounts_endpoint_returns_seed_accounts(self, client):
+        resp = client.get("/api/organizer/tiktok/suggested-accounts")
+
+        assert resp.status_code == 200
+        data = resp.json()
+        assert len(data["accounts"]) >= 1
+        assert {"handle", "nicheHint", "accountType"}.issubset(data["accounts"][0].keys())
+
+    def test_create_account_job_queues_background_work(self, client):
+        import api as api_module
+
+        started = []
+
+        class FakeThread:
+            def __init__(self, target, args=(), daemon=None):
+                self.target = target
+                self.args = args
+                self.daemon = daemon
+
+            def start(self):
+                started.append(self.args[0])
+
+        with patch("api.threading.Thread", FakeThread):
+            resp = client.post(
+                "/api/organizer/tiktok/account-jobs",
+                json={
+                    "account": "sophc.studies",
+                    "maxItems": 100,
+                    "nicheHint": "study apps",
+                    "maxDurationSec": 30,
+                    "tagConcurrency": 2,
+                    "maxAnalysisFrames": 12,
+                },
+            )
+
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["status"] == "queued"
+        assert data["maxItems"] == 100
+        assert data["maxDurationSec"] == 30
+        assert data["tagConcurrency"] == 2
+        assert data["maxAnalysisFrames"] == 12
+        assert started == [data["jobId"]]
+        api_module.organizer_account_job_store.delete(data["jobId"])
+
+    def test_account_job_runner_filters_long_videos_and_tags_eligible_with_limits(self):
+        import api as api_module
+
+        seen_workers = []
+
+        class TrackingExecutor:
+            def __init__(self, max_workers):
+                seen_workers.append(max_workers)
+                self.inner = concurrent.futures.ThreadPoolExecutor(max_workers=max_workers)
+
+            def __enter__(self):
+                return self.inner.__enter__()
+
+            def __exit__(self, exc_type, exc, tb):
+                return self.inner.__exit__(exc_type, exc, tb)
+
+        job = api_module.organizer_account_job_store.create(
+            account="seed.account",
+            max_items=100,
+            niche_hint="study apps",
+            analyze=True,
+            max_duration_sec=30,
+            tag_concurrency=2,
+            max_analysis_frames=12,
+        )
+        batch = {
+            "id": "batch_test",
+            "videos": [
+                {"id": "vid_1", "aiTagStatus": "not_tagged", "durationSec": 12},
+                {"id": "vid_long", "aiTagStatus": "not_tagged", "durationSec": 61},
+                {"id": "vid_tagged", "aiTagStatus": "tagged", "durationSec": 10},
+                {"id": "vid_failed", "aiTagStatus": "tag_failed", "durationSec": 8},
+            ],
+        }
+        scan = {
+            "scanId": "scan_test",
+            "creatorHandle": "seed.account",
+            "videos": [{"id": "one"}, {"id": "two"}, {"id": "three"}, {"id": "four"}],
+        }
+
+        try:
+            with patch("api.scan_tiktok_account", return_value=scan) as mock_scan, \
+                 patch("api.tiktok_import_store.save") as mock_save_scan, \
+                 patch("api.organizer_store.create_batch_from_scan", return_value=batch) as mock_create_batch, \
+                 patch("api._run_video_reference_analysis", return_value={"status": "tagged"}) as mock_analyze, \
+                 patch("api.ThreadPoolExecutor", TrackingExecutor), \
+                 patch("api.organizer_store.get_batch", return_value={**batch, "refreshed": True}):
+                api_module._run_organizer_account_job(job["jobId"])
+
+            final_job = api_module.organizer_account_job_store.get(job["jobId"])
+            assert final_job["status"] == "completed"
+            assert final_job["scanId"] == "scan_test"
+            assert final_job["batchId"] == "batch_test"
+            assert final_job["counts"]["imported"] == 4
+            assert final_job["counts"]["eligible"] == 1
+            assert final_job["counts"]["tagged"] == 1
+            assert final_job["counts"]["skippedDuration"] == 1
+            assert final_job["counts"]["skippedAlreadyTagged"] == 1
+            assert final_job["counts"]["skippedFailed"] == 1
+            assert final_job["counts"]["skipped"] == 3
+            mock_scan.assert_called_once_with("seed.account", 100)
+            mock_save_scan.assert_called_once_with("scan_test", scan)
+            mock_create_batch.assert_called_once()
+            mock_analyze.assert_called_once_with("vid_1", max_analysis_frames=12)
+            assert seen_workers == [2]
+        finally:
+            api_module.organizer_account_job_store.delete(job["jobId"])
+
+    def test_account_job_completed_when_every_video_is_skipped(self):
+        import api as api_module
+
+        job = api_module.organizer_account_job_store.create(
+            account="seed.account",
+            max_items=100,
+            niche_hint="study apps",
+            analyze=True,
+            max_duration_sec=30,
+        )
+        batch = {
+            "id": "batch_test",
+            "videos": [
+                {"id": "vid_long", "aiTagStatus": "not_tagged", "durationSec": 45},
+                {"id": "vid_tagged", "aiTagStatus": "tagged", "durationSec": 10},
+            ],
+        }
+        scan = {
+            "scanId": "scan_test",
+            "creatorHandle": "seed.account",
+            "videos": [{"id": "one"}, {"id": "two"}],
+        }
+
+        try:
+            with patch("api.scan_tiktok_account", return_value=scan), \
+                 patch("api.tiktok_import_store.save"), \
+                 patch("api.organizer_store.create_batch_from_scan", return_value=batch), \
+                 patch("api._run_video_reference_analysis") as mock_analyze, \
+                 patch("api.organizer_store.get_batch", return_value={**batch, "refreshed": True}):
+                api_module._run_organizer_account_job(job["jobId"])
+
+            final_job = api_module.organizer_account_job_store.get(job["jobId"])
+            assert final_job["status"] == "completed"
+            assert final_job["progress"] == 100
+            assert final_job["counts"]["eligible"] == 0
+            assert final_job["counts"]["tagged"] == 0
+            assert final_job["counts"]["skippedDuration"] == 1
+            assert final_job["counts"]["skippedAlreadyTagged"] == 1
+            mock_analyze.assert_not_called()
+        finally:
+            api_module.organizer_account_job_store.delete(job["jobId"])
+
+    def test_analyze_video_reference_uses_max_frame_override(self):
+        import video_analysis_service as service
+
+        with patch("video_analysis_service._download_video", return_value={"path": "/tmp/source.mp4", "downloadedBytes": 10, "method": "mock"}), \
+             patch("video_analysis_service._ffprobe", return_value={"duration_sec": 12}), \
+             patch("video_analysis_service._scene_metrics", return_value={}), \
+             patch("video_analysis_service._sample_frames", return_value=["/tmp/frame1.jpg", "/tmp/frame2.jpg"]) as mock_sample, \
+             patch("video_analysis_service._motion_metrics", return_value={"duration_sec": 12}), \
+             patch("video_analysis_service._representative_frames", return_value=["/tmp/frame1.jpg"]), \
+             patch("video_analysis_service._tag_with_openai", return_value={"content_type": "hook_demo", "duration_sec": 12}):
+            result = service.analyze_video_reference({"url": "https://example.com/video.mp4"}, max_frames=12)
+
+        assert result["status"] == "tagged"
+        assert mock_sample.call_args.kwargs["max_frames_override"] == 12
+
+
+class TestTikTokOrganizerAccountDiscovery:
+    def test_discovery_niches_endpoint_returns_presets(self, client):
+        resp = client.get("/api/organizer/tiktok/niches")
+
+        assert resp.status_code == 200
+        data = resp.json()
+        assert any(item["id"] == "study_apps" for item in data["niches"])
+        assert {"id", "label", "hashtags", "searchQueries"}.issubset(data["niches"][0].keys())
+
+    def test_discovery_payload_is_metadata_only(self):
+        from tiktok_organizer_service import DISCOVERY_NICHES, build_discovery_payload
+
+        payload = build_discovery_payload(DISCOVERY_NICHES["study_apps"], max_items=40, results_per_page=10)
+
+        assert payload["hashtags"]
+        assert payload["searchQueries"]
+        assert payload["searchSection"] == "/video"
+        assert payload["shouldDownloadVideos"] is False
+        assert payload["shouldDownloadCovers"] is False
+        assert payload["resultsPerPage"] == 10
+        assert payload["maxItems"] == 40
+
+    def test_discovery_aggregates_and_ranks_creators(self):
+        from tiktok_organizer_service import _rank_discovered_accounts, DISCOVERY_NICHES
+
+        videos = [
+            {
+                "creatorHandle": "strong.creator",
+                "creatorDisplayName": "Strong Creator",
+                "caption": "best study app for focus #studytok",
+                "hashtags": ["studytok"],
+                "url": "https://www.tiktok.com/@strong.creator/video/1",
+                "postedAt": "2026-05-01T00:00:00+00:00",
+                "metrics": {"views": 100000, "likes": 10000},
+            },
+            {
+                "creatorHandle": "strong.creator",
+                "creatorDisplayName": "Strong Creator",
+                "caption": "student productivity app setup",
+                "hashtags": ["productivityapp"],
+                "url": "https://www.tiktok.com/@strong.creator/video/2",
+                "postedAt": "2026-05-02T00:00:00+00:00",
+                "metrics": {"views": 80000, "likes": 8000},
+            },
+            {
+                "creatorHandle": "weak.creator",
+                "creatorDisplayName": "Weak Creator",
+                "caption": "study",
+                "hashtags": [],
+                "url": "https://www.tiktok.com/@weak.creator/video/1",
+                "postedAt": "2024-01-01T00:00:00+00:00",
+                "metrics": {"views": 100, "likes": 3},
+            },
+        ]
+
+        ranked = _rank_discovered_accounts(videos, DISCOVERY_NICHES["study_apps"], limit=10)
+
+        assert len(ranked) == 2
+        assert ranked[0]["handle"] == "strong.creator"
+        assert ranked[0]["score"] > ranked[1]["score"]
+        assert ranked[0]["metricsSummary"]["videoCount"] == 2
+
+    def test_create_discovery_queues_background_work(self, client):
+        import api as api_module
+
+        started = []
+
+        class FakeThread:
+            def __init__(self, target, args=(), daemon=None):
+                self.target = target
+                self.args = args
+                self.daemon = daemon
+
+            def start(self):
+                started.append(self.args[0])
+
+        with patch("api.threading.Thread", FakeThread):
+            resp = client.post(
+                "/api/organizer/tiktok/account-discovery",
+                json={"niche": "study_apps", "limit": 10, "videosPerSource": 5, "refresh": True},
+            )
+
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["status"] == "queued"
+        assert data["niche"] == "study_apps"
+        assert started == [data["discoveryId"]]
+        api_module.organizer_account_discovery_store.delete(data["discoveryId"])
+
+    def test_discovery_runner_saves_ranked_accounts(self):
+        import api as api_module
+
+        discovery = api_module.organizer_account_discovery_store.create(
+            niche="study_apps",
+            limit=10,
+            videos_per_source=5,
+        )
+        result = {
+            "niche": "study_apps",
+            "nicheLabel": "Study apps",
+            "nicheHint": "study apps",
+            "provider": "apify",
+            "counts": {"providerItems": 3, "videos": 2, "accounts": 1},
+            "accounts": [{"handle": "seed.account", "score": 88, "nicheHint": "study apps"}],
+            "providerInput": {"hashtags": ["studytok"], "searchQueries": ["study app"]},
+        }
+
+        try:
+            with patch("api.discover_tiktok_accounts_for_niche", return_value=result) as mock_discover:
+                api_module._run_organizer_account_discovery(discovery["discoveryId"])
+
+            final_discovery = api_module.organizer_account_discovery_store.get(discovery["discoveryId"])
+            assert final_discovery["status"] == "completed"
+            assert final_discovery["accounts"][0]["handle"] == "seed.account"
+            assert final_discovery["counts"]["accounts"] == 1
+            mock_discover.assert_called_once_with("study_apps", limit=10, videos_per_source=5)
+        finally:
+            api_module.organizer_account_discovery_store.delete(discovery["discoveryId"])
+
+
+class TestLeanRelatableTagging:
+    def test_high_confidence_study_pov_remains_relatable(self):
+        from video_analysis_service import _normalize_tags
+
+        tags = {
+            "content_type": "relatable_content",
+            "niche": "education",
+            "sub_niche": "student_life",
+            "product_kind": "none",
+            "product_name": "",
+            "product_category": "unknown",
+            "scene_type": "single_room",
+            "is_easy_to_replicate": True,
+            "is_single_scene": False,
+            "duration_sec": 6.4,
+            "ai_confidence": 0.9,
+        }
+        metrics = {
+            "duration_sec": 6.4,
+            "scene_count": 2,
+            "recreation_difficulty": "easy",
+        }
+
+        normalized = _normalize_tags(tags, metrics)
+
+        assert normalized["content_type"] == "relatable_content"
+        assert normalized["niche"] == "education"
+        assert normalized["sub_niche"] == "student_life"
+
+    def test_low_confidence_relatable_is_downgraded_to_other(self):
+        from video_analysis_service import _normalize_tags
+
+        tags = {
+            "content_type": "relatable_content",
+            "niche": "education",
+            "sub_niche": "student_life",
+            "product_kind": "none",
+            "product_name": "",
+            "product_category": "unknown",
+            "scene_type": "multi_scene",
+            "is_easy_to_replicate": False,
+            "is_single_scene": False,
+            "duration_sec": 10.033,
+            "ai_confidence": 0.0,
+        }
+        metrics = {
+            "duration_sec": 10.033,
+            "scene_count": 2,
+            "recreation_difficulty": "easy",
+        }
+
+        normalized = _normalize_tags(tags, metrics)
+
+        assert normalized["content_type"] == "other"
+        assert normalized["niche"] == "education"
+
+    def test_suggested_accounts_can_filter_by_latest_niche_discovery(self, client):
+        import api as api_module
+
+        discovery = api_module.organizer_account_discovery_store.create(
+            niche="study_apps",
+            limit=10,
+            videos_per_source=5,
+        )
+
+        try:
+            api_module.organizer_account_discovery_store.mark_completed(
+                discovery["discoveryId"],
+                accounts=[{"handle": "discovered.account", "niche": "study_apps", "score": 76}],
+                counts={"providerItems": 1, "videos": 1, "accounts": 1},
+            )
+
+            resp = client.get("/api/organizer/tiktok/suggested-accounts?niche=study_apps")
+
+            assert resp.status_code == 200
+            accounts = resp.json()["accounts"]
+            assert accounts[0]["handle"] == "discovered.account"
+            assert accounts[0]["status"] == "not_processed"
+        finally:
+            api_module.organizer_account_discovery_store.delete(discovery["discoveryId"])

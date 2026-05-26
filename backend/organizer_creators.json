@@ -98,5 +98,16 @@
     ],
     "updatedAt": "2026-05-23T20:22:14.519910+00:00",
     "createdAt": "2026-05-23T20:22:14.519910+00:00"
+  },
+  "tiktok_dgrindstaff": {
+    "id": "tiktok_dgrindstaff",
+    "platform": "tiktok",
+    "handle": "dgrindstaff",
+    "displayName": "",
+    "sourceScanIds": [
+      "tt_238bca3329f6"
+    ],
+    "updatedAt": "2026-05-26T03:45:21.063606+00:00",
+    "createdAt": "2026-05-26T03:45:21.063606+00:00"
   }
 }

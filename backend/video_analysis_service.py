@@ -535,10 +535,10 @@ def _parse_fps(raw: Any) -> float:
     return _safe_float(text)
 
 
-def _sample_frames(video_path: str, frame_dir: str) -> List[str]:
+def _sample_frames(video_path: str, frame_dir: str, max_frames_override: Optional[int] = None) -> List[str]:
     os.makedirs(frame_dir, exist_ok=True)
     fps = max(1, VIDEO_ANALYSIS_SAMPLE_FPS)
-    max_frames = max(1, VIDEO_ANALYSIS_MAX_FRAMES)
+    max_frames = max(1, int(max_frames_override or VIDEO_ANALYSIS_MAX_FRAMES))
     width = max(96, VIDEO_ANALYSIS_FRAME_WIDTH)
     pattern = os.path.join(frame_dir, "frame_%04d.jpg")
     cmd = [
@@ -960,10 +960,17 @@ def _tag_with_openai(video_reference: Dict[str, Any], motion_metrics: Dict[str, 
                 "Use fixed enum values. Keep outputs compact and literal.\n\n"
                 "Content type rules:\n"
                 "- hook_demo: the video has an attention hook and then shows/demos an app, product, feature, workflow, result, or offer. Identify the niche and attempt product_kind/product_name.\n"
-                "- relatable_content: creator-led relatable POV, problem, reaction, student/lifestyle/gym situation, or pain-point content with no later app/product demo. Identify the niche.\n"
+                "- relatable_content: creator/viewer POV pain point, personal reaction, self-roast, everyday situation, or student/lifestyle/gym problem that viewers can project themselves into, with no later app/product demo. Identify the niche.\n"
                 "- ugc_physical_product: a physical product is central. Identify exact product or brand if visible/captioned, plus product category such as gym_clothing, normal_clothing, skincare_cream, or skincare_spray.\n"
                 "- trending_audio_dance: singing, dancing, lip sync, trend audio, or a one-scene trend replication. Identify scene_type, niche, and whether it is easy to replicate.\n"
                 "- other: use only if none of the target buckets fit.\n\n"
+                "Relatable content evidence rules:\n"
+                "- Relatable requires the creator/viewer/student to be the emotional subject, not merely present in the same niche.\n"
+                "- Strong relatable study examples include exam stress, not knowing material, procrastination, bad grades, study schedule panic, note organization, burnout, or a student self-roast/realization.\n"
+                "- Do NOT tag as relatable only because the setting is school, class, gym, or everyday life.\n"
+                "- Classroom lecture footage, professor/teacher dialogue, public interactions, or observational clips are other unless clearly framed as the student's/creator's own POV or reaction.\n"
+                "- Example relatable_content: a student writing with text like \"when I realize I know nothing for the final\".\n"
+                "- Example other: a professor in class saying \"extra credit today\" / \"where were you in October\".\n\n"
                 "Precedence rules:\n"
                 "- Classify the whole video, not just the opening text.\n"
                 "- If the opening is relatable but later scenes show an app/product workflow, demo, upload, feature screen, generated result, before/after result, or product use, choose hook_demo.\n"
@@ -1075,6 +1082,11 @@ def _apply_lean_tag_guardrails(tags: Dict[str, Any], motion_metrics: Optional[Di
         and normalized.get("product_category") in {"fitness_app", "study_app", "productivity_app", "ai_tool", "unknown"}
     ):
         normalized["content_type"] = "hook_demo"
+    if (
+        normalized.get("content_type") == "relatable_content"
+        and _safe_float(normalized.get("ai_confidence"), 0.0) < 0.55
+    ):
+        normalized["content_type"] = "other"
     if normalized.get("content_type") == "trending_audio_dance" and normalized.get("is_single_scene"):
         normalized["is_easy_to_replicate"] = True
     return normalized
@@ -1393,7 +1405,7 @@ def _easier_label(value: Any, ceiling: str = "medium") -> str:
     return order[min(order.index(current), order.index(ceiling))]
 
 
-def analyze_video_reference(video_reference: Dict[str, Any]) -> Dict[str, Any]:
+def analyze_video_reference(video_reference: Dict[str, Any], max_frames: Optional[int] = None) -> Dict[str, Any]:
     _ensure_dirs()
     analysis_id = f"analysis_{uuid.uuid4().hex[:12]}"
     work_dir = os.path.join(VIDEO_ANALYSIS_TEMP_DIR, analysis_id)
@@ -1407,7 +1419,7 @@ def analyze_video_reference(video_reference: Dict[str, Any]) -> Dict[str, Any]:
         downloaded_path = download["path"]
         probe = _ffprobe(downloaded_path)
         scene_metrics = _scene_metrics(downloaded_path)
-        frame_paths = _sample_frames(downloaded_path, frame_dir)
+        frame_paths = _sample_frames(downloaded_path, frame_dir, max_frames_override=max_frames)
         motion_metrics = _motion_metrics(frame_paths, probe, scene_metrics)
         selected_frames = _representative_frames(frame_paths, 3)
         normalized_tags = _tag_with_openai(video_reference, motion_metrics, selected_frames)

@@ -23,6 +23,66 @@ export async function listTikTokScans({ limit = 25 } = {}) {
   return request(`/api/organizer/tiktok/scans?limit=${encodeURIComponent(limit)}`);
 }
 
+export async function listTikTokDiscoveryNiches() {
+  return request('/api/organizer/tiktok/niches');
+}
+
+export async function listSuggestedTikTokAccounts({ niche = '' } = {}) {
+  const query = niche ? `?niche=${encodeURIComponent(niche)}` : '';
+  return request(`/api/organizer/tiktok/suggested-accounts${query}`);
+}
+
+export async function createTikTokAccountDiscovery({
+  niche,
+  limit = 25,
+  videosPerSource = 20,
+  refresh = false,
+}) {
+  return request('/api/organizer/tiktok/account-discovery', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ niche, limit, videosPerSource, refresh }),
+  });
+}
+
+export async function getTikTokAccountDiscovery(discoveryId) {
+  return request(`/api/organizer/tiktok/account-discovery/${encodeURIComponent(discoveryId)}`);
+}
+
+export async function createTikTokAccountJob({
+  account,
+  maxItems = 100,
+  nicheHint = '',
+  analyze = true,
+  retryFailed = false,
+  maxDurationSec = 30,
+  tagConcurrency = 2,
+  maxAnalysisFrames = 12,
+}) {
+  return request('/api/organizer/tiktok/account-jobs', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      account,
+      maxItems,
+      nicheHint,
+      analyze,
+      retryFailed,
+      maxDurationSec,
+      tagConcurrency,
+      maxAnalysisFrames,
+    }),
+  });
+}
+
+export async function getTikTokAccountJob(jobId) {
+  return request(`/api/organizer/tiktok/account-jobs/${encodeURIComponent(jobId)}`);
+}
+
+export async function listTikTokAccountJobs({ limit = 25 } = {}) {
+  return request(`/api/organizer/tiktok/account-jobs?limit=${encodeURIComponent(limit)}`);
+}
+
 export async function createBatchFromTikTokScan({ scanId, nicheHint = '' }) {
   return request('/api/organizer/batches/from-tiktok-scan', {
     method: 'POST',

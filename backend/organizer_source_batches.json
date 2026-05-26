@@ -50,7 +50,8 @@
       "vidref_58cd98f83331cb11"
     ],
     "createdAt": "2026-05-09T05:31:57.700558+00:00",
-    "updatedAt": "2026-05-09T15:58:26.794359+00:00"
+    "updatedAt": "2026-05-09T15:58:26.794359+00:00",
+    "videoReferenceCount": 30
   },
   "batch_2845fe8dc902": {
     "id": "batch_2845fe8dc902",
@@ -103,7 +104,8 @@
       "vidref_0d9a1de89563daa7"
     ],
     "createdAt": "2026-05-09T06:15:06.787314+00:00",
-    "updatedAt": "2026-05-23T21:02:13.022535+00:00"
+    "updatedAt": "2026-05-23T21:02:13.022535+00:00",
+    "videoReferenceCount": 30
   },
   "batch_03697bf4aed1": {
     "id": "batch_03697bf4aed1",
@@ -156,7 +158,8 @@
       "vidref_e0ffb072c0839764"
     ],
     "createdAt": "2026-05-09T06:30:00.172211+00:00",
-    "updatedAt": "2026-05-09T06:30:00.172211+00:00"
+    "updatedAt": "2026-05-09T06:30:00.172211+00:00",
+    "videoReferenceCount": 30
   },
   "batch_5375611205c0": {
     "id": "batch_5375611205c0",
@@ -209,7 +212,8 @@
       "vidref_5fc9f5fc5a292f34"
     ],
     "createdAt": "2026-05-09T06:38:25.107957+00:00",
-    "updatedAt": "2026-05-09T06:39:44.663670+00:00"
+    "updatedAt": "2026-05-09T06:39:44.663670+00:00",
+    "videoReferenceCount": 30
   },
   "batch_6d051943b2ee": {
     "id": "batch_6d051943b2ee",
@@ -262,7 +266,8 @@
       "vidref_fafea80e96fe0c6f"
     ],
     "createdAt": "2026-05-09T15:43:47.365441+00:00",
-    "updatedAt": "2026-05-23T19:29:12.815400+00:00"
+    "updatedAt": "2026-05-23T19:29:12.815400+00:00",
+    "videoReferenceCount": 30
   },
   "batch_45657953d4aa": {
     "id": "batch_45657953d4aa",
@@ -315,7 +320,8 @@
       "vidref_7a90796f8cf56d95"
     ],
     "createdAt": "2026-05-09T15:47:24.690148+00:00",
-    "updatedAt": "2026-05-23T19:20:06.307009+00:00"
+    "updatedAt": "2026-05-23T19:20:06.307009+00:00",
+    "videoReferenceCount": 30
   },
   "batch_d055cda2d7e0": {
     "id": "batch_d055cda2d7e0",
@@ -438,7 +444,8 @@
       "vidref_0f42fd355f8ba845"
     ],
     "createdAt": "2026-05-09T15:49:00.814168+00:00",
-    "updatedAt": "2026-05-25T21:32:54.804540+00:00"
+    "updatedAt": "2026-05-25T21:32:54.804540+00:00",
+    "videoReferenceCount": 100
   },
   "batch_1547e70dfc6d": {
     "id": "batch_1547e70dfc6d",
@@ -561,7 +568,8 @@
       "vidref_f19351171cb05088"
     ],
     "createdAt": "2026-05-23T20:14:27.625800+00:00",
-    "updatedAt": "2026-05-23T20:14:27.625800+00:00"
+    "updatedAt": "2026-05-23T20:14:27.625800+00:00",
+    "videoReferenceCount": 100
   },
   "batch_f00dc75473dd": {
     "id": "batch_f00dc75473dd",
@@ -684,7 +692,8 @@
       "vidref_2a96d1864e762e54"
     ],
     "createdAt": "2026-05-23T20:17:43.663921+00:00",
-    "updatedAt": "2026-05-25T21:20:44.752308+00:00"
+    "updatedAt": "2026-05-25T21:20:44.752308+00:00",
+    "videoReferenceCount": 100
   },
   "batch_15df75883c8d": {
     "id": "batch_15df75883c8d",
@@ -807,6 +816,131 @@
       "vidref_c3ce1a4cc5d21e6f"
     ],
     "createdAt": "2026-05-23T20:22:14.519910+00:00",
-    "updatedAt": "2026-05-23T20:23:40.380027+00:00"
+    "updatedAt": "2026-05-23T20:23:40.380027+00:00",
+    "videoReferenceCount": 100
+  },
+  "batch_04016f56cc1a": {
+    "id": "batch_04016f56cc1a",
+    "sourceType": "tiktok_account",
+    "platform": "tiktok",
+    "sourceScanId": "tt_238bca3329f6",
+    "creatorId": "tiktok_dgrindstaff",
+    "creatorHandle": "dgrindstaff",
+    "nicheHint": "student life, relatable school content",
+    "status": "imported",
+    "counts": {
+      "total": 100,
+      "imported": 100,
+      "enriched": 97,
+      "failed": 3,
+      "aiTagged": 97,
+      "created": 100,
+      "duplicates": 0
+    },
+    "videoReferenceIds": [
+      "vidref_1292aca1725c8ae4",
+      "vidref_fd818b8c3dfd4240",
+      "vidref_e7ac71f8812441a1",
+      "vidref_01590f57135245b3",
+      "vidref_538a61fd239dc652",
+      "vidref_c7c987f14a5990f1",
+      "vidref_3e51f8324db60cf3",
+      "vidref_6652851d21c9656b",
+      "vidref_dc2adaa676116f42",
+      "vidref_307e01e6d8f3f2f9",
+      "vidref_df756a82d1ff306b",
+      "vidref_81d37f7099232836",
+      "vidref_53b9a8b8c6e81666",
+      "vidref_77225eaab7006abf",
+      "vidref_44a77da387ba69a5",
+      "vidref_42bae523a2c36f74",
+      "vidref_2d839f45c1c34445",
+      "vidref_464a7cfe9c6d5d80",
+      "vidref_be99ebbe900b9c43",
+      "vidref_374280efa82d1f4c",
+      "vidref_e15471f2fbe04d05",
+      "vidref_ac5ccb13d75cece1",
+      "vidref_ff4186713d3b9b20",
+      "vidref_3e71288ce495c7c9",
+      "vidref_d68ef05e59da09fb",
+      "vidref_346b2bdeed38fc5a",
+      "vidref_bedeb5f66584176e",
+      "vidref_482533973f3618ad",
+      "vidref_91ef9abd4f5e9c99",
+      "vidref_56dba0309cf93959",
+      "vidref_7e051c2cc8e6fe1b",
+      "vidref_e6ef61d80dfb0243",
+      "vidref_a7cf774739e82395",
+      "vidref_f7547598cababbde",
+      "vidref_c2c2dd8c33bef6f7",
+      "vidref_8ed1b8368a772366",
+      "vidref_24a6ff0d654438df",
+      "vidref_99068a9b6c784846",
+      "vidref_e79b6683aa2b0a73",
+      "vidref_813d85e5e685e126",
+      "vidref_1a74430b1c496788",
+      "vidref_84ba3f03b9079ef8",
+      "vidref_ebb231bc05671917",
+      "vidref_fbae65238fe79eae",
+      "vidref_26a13f83341f04f6",
+      "vidref_ae2d01bb389fa851",
+      "vidref_046dd2ecb120e25a",
+      "vidref_2fb64d1fa81fc944",
+      "vidref_840390d7f620b547",
+      "vidref_f54347757255db64",
+      "vidref_6638eb1797b436af",
+      "vidref_04c5da718df3fe2f",
+      "vidref_54bc845f28b75435",
+      "vidref_a71f680c3d3e87b2",
+      "vidref_e149891ca5d35d1e",
+      "vidref_4e39d0f78ad1f97f",
+      "vidref_afb04188e29f6935",
+      "vidref_c6fc3c0af58d46b3",
+      "vidref_7ea747d1341b1446",
+      "vidref_744b3436741598fb",
+      "vidref_98972614b96a6ca6",
+      "vidref_ab4c9595d5133923",
+      "vidref_a3a99cd1a0db42e6",
+      "vidref_804e3687d3918a89",
+      "vidref_ce2685b878a079dc",
+      "vidref_f82e6b3c1f388911",
+      "vidref_b1c7143b284151e8",
+      "vidref_bc9f6109847d0e2d",
+      "vidref_b54eea459e9b426f",
+      "vidref_b5724ec7f785a823",
+      "vidref_bfa21e3e8a944773",
+      "vidref_a7a692b7e763b3ab",
+      "vidref_2323019616cf6eeb",
+      "vidref_6404bcf1eeb3b7ec",
+      "vidref_bdc998d4be5767b7",
+      "vidref_09441d21f993b84e",
+      "vidref_61ff098eae3c8fd7",
+      "vidref_31d142261e8e627b",
+      "vidref_3459b0c0cdcc4afc",
+      "vidref_abd4dd90bdcf4736",
+      "vidref_e175f3dc1d3c3339",
+      "vidref_65a7748c8be51ed7",
+      "vidref_4039af3e012c0923",
+      "vidref_3b11bc3f26d19a2b",
+      "vidref_bd2b5d1b9cd088c2",
+      "vidref_5e87d883ee97546c",
+      "vidref_27059f43fc798310",
+      "vidref_525354038286e4dc",
+      "vidref_5d46d6a39cb8b404",
+      "vidref_2de1b9496f88632a",
+      "vidref_b23839ebce0f87bd",
+      "vidref_76facf9cdef9c44a",
+      "vidref_c9c47bbb963e3dd1",
+      "vidref_deb454876be04add",
+      "vidref_652e03dca01df0da",
+      "vidref_c19e1f44167e70b2",
+      "vidref_c182604a0dd79942",
+      "vidref_1e1347678ca6bbb7",
+      "vidref_d0df4179a639203a",
+      "vidref_ac2dc2343178da7e"
+    ],
+    "createdAt": "2026-05-26T03:45:21.063606+00:00",
+    "updatedAt": "2026-05-26T03:52:13.479965+00:00",
+    "videoReferenceCount": 100
   }
 }

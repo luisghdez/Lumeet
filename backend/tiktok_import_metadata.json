@@ -21137,5 +21137,2712 @@
         "providerVideoId": "7640021208586521876"
       }
     ]
+  },
+  "tt_238bca3329f6": {
+    "scanId": "tt_238bca3329f6",
+    "status": "completed",
+    "platform": "tiktok",
+    "provider": "apify",
+    "accountInput": "dgrindstaff",
+    "creatorHandle": "dgrindstaff",
+    "maxItems": 100,
+    "createdAt": "2026-05-26T03:45:21.016541+00:00",
+    "counts": {
+      "providerItems": 100,
+      "videos": 100,
+      "duplicatesRemoved": 0
+    },
+    "videos": [
+      {
+        "id": "1292aca1725c8ae4",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7631962117544905997",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7631962117544905997",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Am I the only one\ud83d\ude2d #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oU8qRiQVpQSiEYD0LB6FvfwEQHDGzvAHSgfZSD~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=3BE3NPo%2FttWLcNqB63bKySmZEM8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-23T14:31:05.000Z",
+        "metrics": {
+          "views": 3600000,
+          "likes": 879100,
+          "comments": 702,
+          "shares": 99700
+        },
+        "providerVideoId": "7631962117544905997"
+      },
+      {
+        "id": "fd818b8c3dfd4240",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7610256415252434189",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7610256415252434189",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "A slight chin rub to pretend I\u2019m capable of thinking #studying #college #collegelife #collegestudent #relateable ",
+        "hashtags": [
+          "studying",
+          "college",
+          "collegelife",
+          "collegestudent",
+          "relateable"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osj7giAUaEP8E4qrA8BQiBCIQEBiPZ9dKPg0I~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=iMoDBjtA2YnhPGYlPr5E%2B26LoOY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-24T02:42:05.000Z",
+        "metrics": {
+          "views": 3300000,
+          "likes": 804400,
+          "comments": 968,
+          "shares": 115600
+        },
+        "providerVideoId": "7610256415252434189"
+      },
+      {
+        "id": "e7ac71f8812441a1",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7612078288055422221",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7612078288055422221",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Happens at least once a week #college #collegelife #studying #collegestudent #relateable ",
+        "hashtags": [
+          "college",
+          "collegelife",
+          "studying",
+          "collegestudent",
+          "relateable"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oQPj7igofAI95cK7DDRpkPBciEDSFEufV4KIn2~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=1syz82BeQvvsZ%2FLThAguVXm9zqE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-01T00:31:56.000Z",
+        "metrics": {
+          "views": 2200000,
+          "likes": 578500,
+          "comments": 870,
+          "shares": 74200
+        },
+        "providerVideoId": "7612078288055422221"
+      },
+      {
+        "id": "01590f57135245b3",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7639114918154865950",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7639114918154865950",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "I\u2019m ready to be done #college #relatable #studytok #finals #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "finals",
+          "collegelife"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/okYHZqMpEeC5AF4QiDVI6AEL3SGABaDqEQTfRK~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=gsApQ1PQ3uIPJObjlnVoXwdzkAI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-12T21:07:43.000Z",
+        "metrics": {
+          "views": 31600,
+          "likes": 6627,
+          "comments": 30,
+          "shares": 514
+        },
+        "providerVideoId": "7639114918154865950"
+      },
+      {
+        "id": "538a61fd239dc652",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7638731818946006286",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7638731818946006286",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "I have nightmares about calculus #college #relatable #studytok #finals #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "finals",
+          "collegelife"
+        ],
+        "durationSec": 10.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ost83jBgIiAwI1AATDipcOCKB2R1fINC1QjYw6~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=vdZGuilkdY8RMt16v6tVl%2BiCrUI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-11T20:21:13.000Z",
+        "metrics": {
+          "views": 2028,
+          "likes": 138,
+          "comments": 2,
+          "shares": 21
+        },
+        "providerVideoId": "7638731818946006286"
+      },
+      {
+        "id": "c7c987f14a5990f1",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7638472291499740429",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7638472291499740429",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Like come on #college #relatable #studytok #finals #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "finals",
+          "collegelife"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oYixIYL6fpkdbzTBHCGAQwARjXUATCEIipIfer~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=WtZE1hk1diBQru4FqGzqjiK3Ybo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-11T03:34:07.000Z",
+        "metrics": {
+          "views": 2210,
+          "likes": 218,
+          "comments": 3,
+          "shares": 11
+        },
+        "providerVideoId": "7638472291499740429"
+      },
+      {
+        "id": "3e51f8324db60cf3",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7637956472927735053",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7637956472927735053",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Worst they can do is say no #college #relatable #canvas #finals #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "canvas",
+          "finals",
+          "collegelife"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUYgrO8QTAfQnRZIHAFIGzAJAYB7WsRYMWfvee~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=ULvnWlyRuszBstr5i%2Ftx0CAOn4o%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-09T18:12:27.000Z",
+        "metrics": {
+          "views": 48600,
+          "likes": 6242,
+          "comments": 9,
+          "shares": 2418
+        },
+        "providerVideoId": "7637956472927735053"
+      },
+      {
+        "id": "6652851d21c9656b",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7637521067287809293",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7637521067287809293",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "You pulled off one miracle now pull off another #college #relatable #canvas #finals #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "canvas",
+          "finals",
+          "collegelife"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ooIDneDvC64eRFrPHIuOivGAETIQ9eWIzAfFG7~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=p9vE1OL2VZulx2o0yRWb16ZPAWE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-08T14:02:40.000Z",
+        "metrics": {
+          "views": 6849,
+          "likes": 1541,
+          "comments": 1,
+          "shares": 104
+        },
+        "providerVideoId": "7637521067287809293"
+      },
+      {
+        "id": "dc2adaa676116f42",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7637317293214600462",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7637317293214600462",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Best news ever #college #relatable #canvas #hackers #finals ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "canvas",
+          "hackers",
+          "finals"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oIiaIJSRFEwpwvBLDAgiUf7CIvMtpeiBXDlx9A~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=idrd6Dj8ftU7ijmf0LBhjcS9wfA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-08T00:52:09.000Z",
+        "metrics": {
+          "views": 28400,
+          "likes": 2184,
+          "comments": 31,
+          "shares": 88
+        },
+        "providerVideoId": "7637317293214600462"
+      },
+      {
+        "id": "307e01e6d8f3f2f9",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7637291879654083854",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7637291879654083854",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "It\u2019s like I was never meant to study #college #relatable #studytok #collegelife #finalsweek ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "collegelife",
+          "finalsweek"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oECXAHef0FrSyIRBETEDhJf7IGl8Ayr9Hk9X0j~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=NOdo4RnAM8CO0DgISMCtSgCFc60%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-07T23:13:29.000Z",
+        "metrics": {
+          "views": 21300,
+          "likes": 3871,
+          "comments": 23,
+          "shares": 428
+        },
+        "providerVideoId": "7637291879654083854"
+      },
+      {
+        "id": "df756a82d1ff306b",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7637248276139379981",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7637248276139379981",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Kidding but not kidding\u2026 #college #relatable #studytok #collegelife #finalsweek ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "collegelife",
+          "finalsweek"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/okIDTfDgXl7PICGMMbQHSESAE7kO8tZIfAfFj9~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=MLHguWi0%2B%2BSE8OHBj85TdwxC1JI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-07T20:24:04.000Z",
+        "metrics": {
+          "views": 8991,
+          "likes": 1189,
+          "comments": 7,
+          "shares": 209
+        },
+        "providerVideoId": "7637248276139379981"
+      },
+      {
+        "id": "81d37f7099232836",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7636914985112751374",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7636914985112751374",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Cannot wait #college #relatable #studytok #collegelife #finalsweek ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "collegelife",
+          "finalsweek"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4dIff87HATjDIVIEX7EAPCkxHeFI9EXTHXgaP~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=vsTt3CEs9E1a7oDFevA5hpMoxOI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-06T22:50:57.000Z",
+        "metrics": {
+          "views": 57600,
+          "likes": 9278,
+          "comments": 9,
+          "shares": 1884
+        },
+        "providerVideoId": "7636914985112751374"
+      },
+      {
+        "id": "53b9a8b8c6e81666",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7636520579075558670",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7636520579075558670",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "A slight chin rub to pretend I\u2019m capable of thinking #college #relatable #studytok #collegelife #finalsweek ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "collegelife",
+          "finalsweek"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osAHDyN6OyTIfClRgbDl2Iz5keXjEvFAaZTIaf~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=hq4JUB5KkU9itCqKrE0Xg7nKtlk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-05T21:20:33.000Z",
+        "metrics": {
+          "views": 2271,
+          "likes": 233,
+          "comments": 7,
+          "shares": 23
+        },
+        "providerVideoId": "7636520579075558670"
+      },
+      {
+        "id": "77225eaab7006abf",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7636136530477731085",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7636136530477731085",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Finals week has NO rules #college #relatable #studytok #collegelife #finalsweek ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "collegelife",
+          "finalsweek"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEAPKklFAn4cXfBAfAUCyC6eNteAxc00ixeAdQ~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=GghyYLlpI6nv7Bu1Xrw7%2BxqUAlI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-04T20:30:25.000Z",
+        "metrics": {
+          "views": 7267,
+          "likes": 751,
+          "comments": 5,
+          "shares": 33
+        },
+        "providerVideoId": "7636136530477731085"
+      },
+      {
+        "id": "44a77da387ba69a5",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7635773920917966094",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7635773920917966094",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "It\u2019s only up from here right #college #relatable #studytok #collegelife #finalsweek ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "collegelife",
+          "finalsweek"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oIipigREIDAfAI33IpwgaxZ1SBisPueB9QKrHy~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=FIZ4btZZUcCyrKax1UV96w9jQ%2Fo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-03T21:03:03.000Z",
+        "metrics": {
+          "views": 1793,
+          "likes": 136,
+          "comments": 3,
+          "shares": 24
+        },
+        "providerVideoId": "7635773920917966094"
+      },
+      {
+        "id": "42bae523a2c36f74",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7635445190051876110",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7635445190051876110",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "I ain\u2019t passing them anyways #college #relatable #studytok #collegelife #finalsweek ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "collegelife",
+          "finalsweek"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o40vISDyIDAQjfltZoFgDRpDXE2gjBD9IufH2E~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=AbLyZjUnMxpIpKZzBfflqUqOUSg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-02T23:47:21.000Z",
+        "metrics": {
+          "views": 1252,
+          "likes": 99,
+          "comments": 2,
+          "shares": 17
+        },
+        "providerVideoId": "7635445190051876110"
+      },
+      {
+        "id": "2d839f45c1c34445",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7635020979432951053",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7635020979432951053",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Finals week has NO rules #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 10.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oYfpdVRrEkD9m1QEVCFrXIW0DTU7IgBfQHESBA~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=H9z8VBTQ77qamcwdyTErBCNdV%2FI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-05-01T20:21:24.000Z",
+        "metrics": {
+          "views": 7676,
+          "likes": 801,
+          "comments": 2,
+          "shares": 61
+        },
+        "providerVideoId": "7635020979432951053"
+      },
+      {
+        "id": "464a7cfe9c6d5d80",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7634602171945798943",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7634602171945798943",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Like let me live bruh #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oArfCfNcDE3pF30ENnEH4mIL8BVQmCGAmpRs2A~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=ZmzyUW%2BtyhWdlMeNAC7pe%2BDOUDk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-30T17:16:13.000Z",
+        "metrics": {
+          "views": 6657,
+          "likes": 701,
+          "comments": 0,
+          "shares": 45
+        },
+        "providerVideoId": "7634602171945798943"
+      },
+      {
+        "id": "be99ebbe900b9c43",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7634211601716972813",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7634211601716972813",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Am I the only one\ud83d\ude2d @getrawnutrition  #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMIhgXQAk8AW0QFKnHjte58ieYMDHCrQ5HxTfy~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=spTN0gjSBQ%2Fw8vyquQKu7ZZJMjA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-29T16:00:14.000Z",
+        "metrics": {
+          "views": 2283,
+          "likes": 246,
+          "comments": 15,
+          "shares": 24
+        },
+        "providerVideoId": "7634211601716972813"
+      },
+      {
+        "id": "374280efa82d1f4c",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7633916575686380813",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7633916575686380813",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Am I the only one\ud83d\ude2d #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMAiDEspSi7DzRKI66xfBiHebBhDkII7us6jTg~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=HjMljXuRxxkOF4hoqZgFhWyRSmQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-28T20:55:25.000Z",
+        "metrics": {
+          "views": 6995,
+          "likes": 1130,
+          "comments": 3,
+          "shares": 78
+        },
+        "providerVideoId": "7633916575686380813"
+      },
+      {
+        "id": "e15471f2fbe04d05",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7633452863863164174",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7633452863863164174",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Finals week has NO rules #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 10.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oweIUQwMApcCQFZW86TjHNAGhge4R3A2vFdegk~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=ex8BZ02EIg%2FjnXdSnAxsXKtCSmY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-27T14:56:23.000Z",
+        "metrics": {
+          "views": 533000,
+          "likes": 110900,
+          "comments": 247,
+          "shares": 7328
+        },
+        "providerVideoId": "7633452863863164174"
+      },
+      {
+        "id": "ac5ccb13d75cece1",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7633155543812623630",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7633155543812623630",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "I\u2019m losing my humanity #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8BuKpPlIA6eVEidqPIaCjwBYqaV5wPkBuAUi0~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=NoE1i0s0x%2BCscaKw1rjSV6bEM1E%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-26T19:42:32.000Z",
+        "metrics": {
+          "views": 83000,
+          "likes": 25100,
+          "comments": 22,
+          "shares": 1766
+        },
+        "providerVideoId": "7633155543812623630"
+      },
+      {
+        "id": "ff4186713d3b9b20",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7632803625655405837",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7632803625655405837",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Who hasn\u2019t done this\u2026 #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ooIB0eE2XU30CAKylNoBUHZAiXpptgJIqwviIK~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=stM2lv2gZwBlPTWXCKLQDGIbnG4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-25T20:56:47.000Z",
+        "metrics": {
+          "views": 11700,
+          "likes": 924,
+          "comments": 1,
+          "shares": 101
+        },
+        "providerVideoId": "7632803625655405837"
+      },
+      {
+        "id": "3e71288ce495c7c9",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7632373457623305485",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7632373457623305485",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "I\u2019m tired bruh #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMLG5DpB0Ao85jQiiH3dmAIqCBKrf9PwqII2Do~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=XU6PLmzFTCRRKu%2FkW7cj81OUPD4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-24T17:07:45.000Z",
+        "metrics": {
+          "views": 3512,
+          "likes": 309,
+          "comments": 3,
+          "shares": 35
+        },
+        "providerVideoId": "7632373457623305485"
+      },
+      {
+        "id": "d68ef05e59da09fb",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7631676923197836557",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7631676923197836557",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "It\u2019s pointless #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oIuSjlCdTQklIJHfUC0LfXIIQdGG1DAmnAea76~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=O6%2BrpVqFfMZidTSNGouutKJm27s%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-22T20:04:39.000Z",
+        "metrics": {
+          "views": 5162,
+          "likes": 636,
+          "comments": 7,
+          "shares": 22
+        },
+        "providerVideoId": "7631676923197836557"
+      },
+      {
+        "id": "346b2bdeed38fc5a",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7631203638043593998",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7631203638043593998",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Wish somebody told me this\ud83e\udd72 #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 9.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oIIh37SejTIqHkHhCHGO8bLvp4BzAAeQDGeJQI~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=KMcp5cSm2pjXdnseJ4pDbGrr8V4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-21T13:28:32.000Z",
+        "metrics": {
+          "views": 6211,
+          "likes": 646,
+          "comments": 2,
+          "shares": 38
+        },
+        "providerVideoId": "7631203638043593998"
+      },
+      {
+        "id": "bedeb5f66584176e",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7630970405435608334",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7630970405435608334",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Who\u2019s Molly #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oc2mL9niJAIGDIlIgAi0Ap3BwqpzYBO0PaeCg3~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=A0oMTg9OXfGngXLruWElXd8qxog%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-20T22:23:03.000Z",
+        "metrics": {
+          "views": 15700,
+          "likes": 2626,
+          "comments": 6,
+          "shares": 111
+        },
+        "providerVideoId": "7630970405435608334"
+      },
+      {
+        "id": "482533973f3618ad",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7630587536733113613",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7630587536733113613",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Finally clicked #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oYZlRUIIpIS6ELD5SB5F2fsEQbDCErA8IgfMw7~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=uxurXUKxZfCWAw3TRUK%2B37tA0Xc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-19T21:37:14.000Z",
+        "metrics": {
+          "views": 57200,
+          "likes": 9105,
+          "comments": 24,
+          "shares": 1669
+        },
+        "providerVideoId": "7630587536733113613"
+      },
+      {
+        "id": "91ef9abd4f5e9c99",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7630240213582859534",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7630240213582859534",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "D1 procrastinator #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oA5AGBEAygDvRygI4d2TFrkDfhSEfpQED7QHJR~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=no2mmy18OIRqEw%2BmRMHeWs%2BUXx8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-18T23:09:27.000Z",
+        "metrics": {
+          "views": 45500,
+          "likes": 8168,
+          "comments": 37,
+          "shares": 1464
+        },
+        "providerVideoId": "7630240213582859534"
+      },
+      {
+        "id": "56dba0309cf93959",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7629846961624976653",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7629846961624976653",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "WHERE IS IT #college #relatable #studytok #work #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "work",
+          "collegelife"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oQFqDCWERQrAvSkftHID19Dp5eiFED4qBgGlU4~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=smxN2r1lU4CaOEp5QZ3HJOsHOf8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-17T21:43:24.000Z",
+        "metrics": {
+          "views": 336700,
+          "likes": 80100,
+          "comments": 139,
+          "shares": 12900
+        },
+        "providerVideoId": "7629846961624976653"
+      },
+      {
+        "id": "7e051c2cc8e6fe1b",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7629409320735722782",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7629409320735722782",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "How do people just know stuff #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 9.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/o88hWTAIEiDA4VmFRvBBHpGrrvfERED3IQ2Qf1~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=0YABxuEicBsbUjW360wP63mX0UY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-16T17:24:54.000Z",
+        "metrics": {
+          "views": 13000,
+          "likes": 2163,
+          "comments": 10,
+          "shares": 172
+        },
+        "providerVideoId": "7629409320735722782"
+      },
+      {
+        "id": "e6ef61d80dfb0243",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7629030580759399693",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7629030580759399693",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "If I get one more \u201cu look like mrbeast\u201d comment I\u2019m deleting this app #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 12.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUFHaUTgfKyG7CRwArky4eITLIAjeNvjKMWwyg~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=2dkP9%2BUei2TEivKmmLznohD2lKQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-15T16:55:59.000Z",
+        "metrics": {
+          "views": 10200,
+          "likes": 984,
+          "comments": 8,
+          "shares": 198
+        },
+        "providerVideoId": "7629030580759399693"
+      },
+      {
+        "id": "a7cf774739e82395",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7628668003453914381",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7628668003453914381",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Life or death type speed run #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o43renlkDQWVy8jjACFDSIR54BfhpADIE9grE3~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=tCkatMd1zpUiy2FoqMOjeWa4Xh0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-14T17:28:57.000Z",
+        "metrics": {
+          "views": 13700,
+          "likes": 1961,
+          "comments": 15,
+          "shares": 202
+        },
+        "providerVideoId": "7628668003453914381"
+      },
+      {
+        "id": "f7547598cababbde",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7626145119422434573",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7626145119422434573",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Like come on that\u2019s actually pretty bad #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oIpPSJViVBSQYAFRwDuQCqaEe1E4gJfHuJgDE0~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=hwYiFmHS43CzTGeWEKWSgnlARXs%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-07T22:18:09.000Z",
+        "metrics": {
+          "views": 1302,
+          "likes": 102,
+          "comments": 3,
+          "shares": 7
+        },
+        "providerVideoId": "7626145119422434573"
+      },
+      {
+        "id": "c2c2dd8c33bef6f7",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7625640640012963085",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7625640640012963085",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "They should be grateful I\u2019m even doing the assignment #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUEn1FApeAgUr9G8MGjT6fCIbIHkLIetm29gsu~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=I09QiK77Cp%2BHDEHrZwf5py4Oq8M%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-06T13:41:07.000Z",
+        "metrics": {
+          "views": 23400,
+          "likes": 4323,
+          "comments": 24,
+          "shares": 494
+        },
+        "providerVideoId": "7625640640012963085"
+      },
+      {
+        "id": "8ed1b8368a772366",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7625405918494067982",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7625405918494067982",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "I\u2019m tired bruh #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osgvmiB7dSBIE4Ubzc3EiiayYBld4iEaALk3N~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=X6%2FIpPdubDHmGVvu%2Fcx6jFEZq8A%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-05T22:29:45.000Z",
+        "metrics": {
+          "views": 714300,
+          "likes": 171300,
+          "comments": 236,
+          "shares": 23400
+        },
+        "providerVideoId": "7625405918494067982"
+      },
+      {
+        "id": "24a6ff0d654438df",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7624909771962961165",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7624909771962961165",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Sorry to all my classmates #college #relatable #studytok #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "studytok",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/okyCB6rptIAIQUjXtvH9RfB77wi4vABX0EoIYi~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=LKofAT%2FnYixKE7vPoAVxjDiW9zE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-04T14:24:46.000Z",
+        "metrics": {
+          "views": 2663,
+          "likes": 360,
+          "comments": 2,
+          "shares": 56
+        },
+        "providerVideoId": "7624909771962961165"
+      },
+      {
+        "id": "99068a9b6c784846",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7624553969829809421",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7624553969829809421",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Probably explains why I have glasses #college #relatable #collegelife #studytok #studying ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "collegelife",
+          "studytok",
+          "studying"
+        ],
+        "durationSec": 9.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/og3D14Bxio0wz2P1aR2dABwE7yvIISDfgpeiCi~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=Da6HQpXICeOc8ADiIAEoAY%2F7EC4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-03T15:23:54.000Z",
+        "metrics": {
+          "views": 446900,
+          "likes": 72000,
+          "comments": 111,
+          "shares": 22400
+        },
+        "providerVideoId": "7624553969829809421"
+      },
+      {
+        "id": "e79b6683aa2b0a73",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7624152929225788686",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7624152929225788686",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Too much work break time\ud83e\udd71 #college #relatable #collegelife #studytok #studying ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "collegelife",
+          "studytok",
+          "studying"
+        ],
+        "durationSec": 10.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oIwMcPtsNTpAiOvaRIgDaBsEUiqI47QBib9n5~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=yv8boKjas4Z%2BuvtFwIxhGRzrNNo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-02T13:27:30.000Z",
+        "metrics": {
+          "views": 6333,
+          "likes": 796,
+          "comments": 1,
+          "shares": 52
+        },
+        "providerVideoId": "7624152929225788686"
+      },
+      {
+        "id": "813d85e5e685e126",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7623800449090555149",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7623800449090555149",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "This last month got everybody stressing #college #relatable #collegelife #studytok #studying ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "collegelife",
+          "studytok",
+          "studying"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0pA5dKA3p9B3U6MC4VIpIfbCBBiNLi0wIbI9W~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=j8XG8gMqH5jwt510LNXgi7CyW20%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-04-01T14:41:23.000Z",
+        "metrics": {
+          "views": 7287,
+          "likes": 1059,
+          "comments": 6,
+          "shares": 76
+        },
+        "providerVideoId": "7623800449090555149"
+      },
+      {
+        "id": "1a74430b1c496788",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7623436659614403853",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7623436659614403853",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Imposter syndrome #college #relatable #collegelife #studytok #studying ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "collegelife",
+          "studytok",
+          "studying"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMFuA4fLctXwER4FQngYf34gQfSrAqfVOILzkG~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=PCImHoK%2FBF%2FscTAl7Use9AT3OdY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-31T15:08:34.000Z",
+        "metrics": {
+          "views": 5274,
+          "likes": 692,
+          "comments": 2,
+          "shares": 39
+        },
+        "providerVideoId": "7623436659614403853"
+      },
+      {
+        "id": "84ba3f03b9079ef8",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7623067677430402335",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7623067677430402335",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Every time #college #collegelife #relatable #studytok #studying ",
+        "hashtags": [
+          "college",
+          "collegelife",
+          "relatable",
+          "studytok",
+          "studying"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oYME8J3IVAaiXRBqxFLam6wugAkBKPpiCAIcT~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=2JZSpoh2rXWPh2Vt%2F%2FKXhCFR9BM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-30T15:16:22.000Z",
+        "metrics": {
+          "views": 21300,
+          "likes": 4514,
+          "comments": 36,
+          "shares": 585
+        },
+        "providerVideoId": "7623067677430402335"
+      },
+      {
+        "id": "ebb231bc05671917",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7622682413063228685",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7622682413063228685",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Like yes bro we get it #college #relatable #collegelife #studytok #studying ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "collegelife",
+          "studytok",
+          "studying"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEDvUD1ViBscJt0ciI4BOxaNBEEG6gjuCiMAk~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=I9jRh%2BTJpiiFUNCUneYQvCa6n38%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-29T14:21:04.000Z",
+        "metrics": {
+          "views": 6549,
+          "likes": 828,
+          "comments": 3,
+          "shares": 43
+        },
+        "providerVideoId": "7622682413063228685"
+      },
+      {
+        "id": "fbae65238fe79eae",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7622319308831509774",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7622319308831509774",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Difficulty: Impossible #college #relatable #collegelife #studytok #english ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "collegelife",
+          "studytok",
+          "english"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ocEHcHw4vAIxBpnIDBI0jyA26iBpiCy78fEIFx~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=rueTDi19OQz%2BVcIAxBo1YU4PV8E%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-28T14:52:25.000Z",
+        "metrics": {
+          "views": 10600,
+          "likes": 2103,
+          "comments": 4,
+          "shares": 149
+        },
+        "providerVideoId": "7622319308831509774"
+      },
+      {
+        "id": "26a13f83341f04f6",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7621947017119534350",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7621947017119534350",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Calling it quits at this point #college #relatable #collegelife #studying #studytok ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "collegelife",
+          "studying",
+          "studytok"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4XCxHfEiAjKTFekXICejCAh3lI7FQIcD9LSmG~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=MCdDxY%2B2XtKbquy%2FuATxNLDWNkQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-27T14:48:10.000Z",
+        "metrics": {
+          "views": 10200,
+          "likes": 1965,
+          "comments": 9,
+          "shares": 192
+        },
+        "providerVideoId": "7621947017119534350"
+      },
+      {
+        "id": "ae2d01bb389fa851",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7621572912641887501",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7621572912641887501",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "That feeling of impending doom right after #college #relateable #collegelife #studying #studytok ",
+        "hashtags": [
+          "college",
+          "relateable",
+          "collegelife",
+          "studying",
+          "studytok"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oE07pNFyrAzIqAiIyBOIGENCg4CPwDfPCFRBiC~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=4ePsQ0pzWIEBqemsMqeXIaYwu%2F0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-26T14:35:45.000Z",
+        "metrics": {
+          "views": 13000,
+          "likes": 2225,
+          "comments": 9,
+          "shares": 196
+        },
+        "providerVideoId": "7621572912641887501"
+      },
+      {
+        "id": "046dd2ecb120e25a",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7621325510336892173",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7621325510336892173",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Nothing wrong with a little crying in between study sessions #college #relateable #collegelife #studying #studytok ",
+        "hashtags": [
+          "college",
+          "relateable",
+          "collegelife",
+          "studying",
+          "studytok"
+        ],
+        "durationSec": 10.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/os7iDYx0ImwCpu4AMEXBfBCICuAiCVjwPlU0I5~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=MMjhIywxxb0Pwi%2B3bcDfct9woR8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-25T22:35:47.000Z",
+        "metrics": {
+          "views": 1538,
+          "likes": 160,
+          "comments": 4,
+          "shares": 10
+        },
+        "providerVideoId": "7621325510336892173"
+      },
+      {
+        "id": "2fb64d1fa81fc944",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7620990127199849742",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7620990127199849742",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Not one clue #college #relateable #collegelife #studying #studytok ",
+        "hashtags": [
+          "college",
+          "relateable",
+          "collegelife",
+          "studying",
+          "studytok"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUDBYk0ABMIEibdCiZAr0EIBDwUp4QpAGJfMkx~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=Oy5XBKwh41buYuG3L940mjf0lRs%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-25T00:54:26.000Z",
+        "metrics": {
+          "views": 1694,
+          "likes": 110,
+          "comments": 1,
+          "shares": 11
+        },
+        "providerVideoId": "7620990127199849742"
+      },
+      {
+        "id": "840390d7f620b547",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7620625907719359757",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7620625907719359757",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Worst feeling on the planet #college #relateable #collegelife #studying #studytok ",
+        "hashtags": [
+          "college",
+          "relateable",
+          "collegelife",
+          "studying",
+          "studytok"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEA4Eiz0lc4VB5BgkUbaByEBMpkH7ICdNIiPv~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=kG8V5iLv7v8foDpebtYYyAc3x2c%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-24T01:20:55.000Z",
+        "metrics": {
+          "views": 1800000,
+          "likes": 508200,
+          "comments": 348,
+          "shares": 51100
+        },
+        "providerVideoId": "7620625907719359757"
+      },
+      {
+        "id": "f54347757255db64",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7620240386618871053",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7620240386618871053",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Do it at least once week #college #relateable #collegelife #studying #studytok ",
+        "hashtags": [
+          "college",
+          "relateable",
+          "collegelife",
+          "studying",
+          "studytok"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/okIDTgBfh8yQICzdNhfHRI7AEjkFAqPEvAfFji~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=bkE9WRrQuENocVzB2La2ZUoEGzM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-23T00:24:56.000Z",
+        "metrics": {
+          "views": 1854,
+          "likes": 220,
+          "comments": 2,
+          "shares": 11
+        },
+        "providerVideoId": "7620240386618871053"
+      },
+      {
+        "id": "6638eb1797b436af",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7619874469636590878",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7619874469636590878",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Like bro just stop #college #relateable #collegelife #studying #studytok ",
+        "hashtags": [
+          "college",
+          "relateable",
+          "collegelife",
+          "studying",
+          "studytok"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/ocge1GFmyfedbWfs20rMxAORUnQ8ANqFggI4Qn~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=qieP%2Fg6KgGhcyAOqT5Zq%2FDeVuAk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-22T00:44:58.000Z",
+        "metrics": {
+          "views": 15100,
+          "likes": 2028,
+          "comments": 11,
+          "shares": 243
+        },
+        "providerVideoId": "7619874469636590878"
+      },
+      {
+        "id": "04c5da718df3fe2f",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7619460698275400973",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7619460698275400973",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Story of my life #college #relateable #studying #collegelife #studytok ",
+        "hashtags": [
+          "college",
+          "relateable",
+          "studying",
+          "collegelife",
+          "studytok"
+        ],
+        "durationSec": 9.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oIAoTDbA43EBvBgTqCBm1Ii8Uaiz9RbUIwEDv~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=VULpmjvDVpmdPiZ%2FX5fKLFC3eIg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-20T21:59:11.000Z",
+        "metrics": {
+          "views": 7524,
+          "likes": 1208,
+          "comments": 7,
+          "shares": 238
+        },
+        "providerVideoId": "7619460698275400973"
+      },
+      {
+        "id": "54bc845f28b75435",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7619126550700608781",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7619126550700608781",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "PLEASE JUST GO TO OFFICE HOURS FAM #college #relateable #studying #collegelife #studytok ",
+        "hashtags": [
+          "college",
+          "relateable",
+          "studying",
+          "collegelife",
+          "studytok"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o81rIfLwNdIpP0b8ODGAIXefGjmAkFGRkSINeO~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=mwDiavjrdWgyqzgiTevkzMBufEE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-20T00:22:48.000Z",
+        "metrics": {
+          "views": 263100,
+          "likes": 55700,
+          "comments": 81,
+          "shares": 7080
+        },
+        "providerVideoId": "7619126550700608781"
+      },
+      {
+        "id": "a71f680c3d3e87b2",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7618719277343902989",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7618719277343902989",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Cause of teachers that can\u2019t teach\u2026 #college #studying #relateable #collegelife #collegestudent ",
+        "hashtags": [
+          "college",
+          "studying",
+          "relateable",
+          "collegelife",
+          "collegestudent"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owmfIIIGcdeOOf5CImH7Rk9IO8LoeGA7GxFstA~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=kGqOV2sWfRjG7o8bhljYZCm6mwU%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-18T22:02:19.000Z",
+        "metrics": {
+          "views": 13100,
+          "likes": 2745,
+          "comments": 36,
+          "shares": 136
+        },
+        "providerVideoId": "7618719277343902989"
+      },
+      {
+        "id": "e149891ca5d35d1e",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7618373738538618126",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7618373738538618126",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "We failing together #college #relateable #studying #collegelife #studytok ",
+        "hashtags": [
+          "college",
+          "relateable",
+          "studying",
+          "collegelife",
+          "studytok"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oQCzA5Sc1FufDIeFQTEDqpfmQG41ANO9Hk5DKj~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=b5oF%2B%2FI8T%2FF2gHerTaRsN%2FTQEgU%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-17T23:41:14.000Z",
+        "metrics": {
+          "views": 1271,
+          "likes": 140,
+          "comments": 0,
+          "shares": 28
+        },
+        "providerVideoId": "7618373738538618126"
+      },
+      {
+        "id": "4e39d0f78ad1f97f",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7617998587695222029",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7617998587695222029",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Canon event #college #studying #relateable #collegelife #studytok ",
+        "hashtags": [
+          "college",
+          "studying",
+          "relateable",
+          "collegelife",
+          "studytok"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4giUktXAKBIbB1ziCkzYa43aRI4IWEv7AiwA~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=fpLDfOePTP2sfmLR88jpLORtp8I%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-16T23:25:27.000Z",
+        "metrics": {
+          "views": 3660,
+          "likes": 382,
+          "comments": 2,
+          "shares": 17
+        },
+        "providerVideoId": "7617998587695222029"
+      },
+      {
+        "id": "afb04188e29f6935",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7617648936102153485",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7617648936102153485",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "I\u2019m losing my humanity #college #collegestudent #studying #relateable #collegelife ",
+        "hashtags": [
+          "college",
+          "collegestudent",
+          "studying",
+          "relateable",
+          "collegelife"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/og3C14vERIBA3SJffGICNADpTHvFEDp1BgqNUt~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=2YDrgWAI7u43WiuO5MzwZXSUH9c%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-16T00:48:48.000Z",
+        "metrics": {
+          "views": 250500,
+          "likes": 79800,
+          "comments": 60,
+          "shares": 5906
+        },
+        "providerVideoId": "7617648936102153485"
+      },
+      {
+        "id": "c6fc3c0af58d46b3",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7616885875485478158",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7616885875485478158",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "8 am are too much #college #relateable #collegestudent #collegelife #studytok ",
+        "hashtags": [
+          "college",
+          "relateable",
+          "collegestudent",
+          "collegelife",
+          "studytok"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ok3PUilXhBTb0xcOiI4Dc0anBEItdgWgjisAS~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=7sjOUCdH16oKhqJNIFwS5k0z3aM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-13T23:27:50.000Z",
+        "metrics": {
+          "views": 6062,
+          "likes": 566,
+          "comments": 9,
+          "shares": 33
+        },
+        "providerVideoId": "7616885875485478158"
+      },
+      {
+        "id": "7ea747d1341b1446",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7615308831308025102",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7615308831308025102",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "About as un locked as it gets #college #relateable #collegestudent #collegelife #studying ",
+        "hashtags": [
+          "college",
+          "relateable",
+          "collegestudent",
+          "collegelife",
+          "studying"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ocvUA4ixAgA89DBAikAadAaEWBCAJIbvKEE7U~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=Zb2%2Bmtn68wwpR4AU9JRi7pDNt58%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-09T17:27:48.000Z",
+        "metrics": {
+          "views": 1979,
+          "likes": 131,
+          "comments": 2,
+          "shares": 5
+        },
+        "providerVideoId": "7615308831308025102"
+      },
+      {
+        "id": "744b3436741598fb",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7614287537992977677",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7614287537992977677",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Money well spent #college #relateable #collegestudent #collegelife #studying ",
+        "hashtags": [
+          "college",
+          "relateable",
+          "collegestudent",
+          "collegelife",
+          "studying"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/okWsAVMHnQTrW1dHfk8CjetYJfUkxsIpAQHyTQ~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=s6R6UyOu7VZsS7DYnwVQlAW9gYI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-06T23:24:58.000Z",
+        "metrics": {
+          "views": 25400,
+          "likes": 5086,
+          "comments": 15,
+          "shares": 787
+        },
+        "providerVideoId": "7614287537992977677"
+      },
+      {
+        "id": "98972614b96a6ca6",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7613558968681516318",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7613558968681516318",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "A sequel nobody asked for\u2026 #college #studying #collegelife #collegestudent #relateable ",
+        "hashtags": [
+          "college",
+          "studying",
+          "collegelife",
+          "collegestudent",
+          "relateable"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oooAejy1AlbIZ0qTjDqCIepp5IIKIDLokykUeG~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=3LUJvaxhRXbZA7gaAoFjZqM5mRw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-05T00:17:25.000Z",
+        "metrics": {
+          "views": 228100,
+          "likes": 70200,
+          "comments": 141,
+          "shares": 3590
+        },
+        "providerVideoId": "7613558968681516318"
+      },
+      {
+        "id": "ab4c9595d5133923",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7603819936590482702",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7603819936590482702",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "It could not be more annoying #college #studying #relatable #collegestudent ",
+        "hashtags": [
+          "college",
+          "studying",
+          "relatable",
+          "collegestudent"
+        ],
+        "durationSec": 11.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/o07CxILBG70Aa1oMuTiqAiwCIBiBHwjpvIfmZz~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=GcpvKwzeoR3BI5jeiKF01IK%2Bzuk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my2",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-06T18:25:43.000Z",
+        "metrics": {
+          "views": 1515,
+          "likes": 83,
+          "comments": 0,
+          "shares": 4
+        },
+        "providerVideoId": "7603819936590482702"
+      },
+      {
+        "id": "a3a99cd1a0db42e6",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7612811638059633934",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7612811638059633934",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Who hasn\u2019t done this\u2026 #college #collegelife #studying #collegestudent #relateable ",
+        "hashtags": [
+          "college",
+          "collegelife",
+          "studying",
+          "collegestudent",
+          "relateable"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/oUYEmLCjkGTqTYIajAirAffRgeUL3KHIVwg1EJ~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=dDp4lwHOF7FVQsLcqp9qZK03QDQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-02T23:57:43.000Z",
+        "metrics": {
+          "views": 612100,
+          "likes": 138700,
+          "comments": 161,
+          "shares": 20600
+        },
+        "providerVideoId": "7612811638059633934"
+      },
+      {
+        "id": "804e3687d3918a89",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7612469072579611917",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7612469072579611917",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Can never catch a break\ud83d\ude2d #studying #college #collegelife #collegestudent #relateable ",
+        "hashtags": [
+          "studying",
+          "college",
+          "collegelife",
+          "collegestudent",
+          "relateable"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/o8hfdFUHAG1juD1nQa7Hf7eYqBEISTYkAFCkQQ~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=pMmncOi7sRQi1b7ZxPYgbJf8Kh0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-03-02T01:48:25.000Z",
+        "metrics": {
+          "views": 15700,
+          "likes": 2469,
+          "comments": 14,
+          "shares": 229
+        },
+        "providerVideoId": "7612469072579611917"
+      },
+      {
+        "id": "ce2685b878a079dc",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7611713751087189261",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7611713751087189261",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Someone patch this\ud83d\udc94 #college #collegestudent #collegelife #relateable #studying",
+        "hashtags": [
+          "college",
+          "collegestudent",
+          "collegelife",
+          "relateable",
+          "studying"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/oEBDAPZomFa5xEjGQpED5XfGQfZ6g1XmDSiwvR~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=cAbxRi0BQ%2FWY47%2FD5jk7TjQJF6Y%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-28T00:57:24.000Z",
+        "metrics": {
+          "views": 7060,
+          "likes": 734,
+          "comments": 1,
+          "shares": 29
+        },
+        "providerVideoId": "7611713751087189261"
+      },
+      {
+        "id": "f82e6b3c1f388911",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7611336772928179470",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7611336772928179470",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "I\u2019m out of touch with reality #college #collegestudent #relateable #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "collegestudent",
+          "relateable",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/oAvLQ4VazB5s6RpBWEEkIggPUiDmHagiCIdAi~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=6%2BKyfgnv9SxGk3gCT%2BS2KTyZlb8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-27T00:34:24.000Z",
+        "metrics": {
+          "views": 67600,
+          "likes": 13200,
+          "comments": 21,
+          "shares": 1817
+        },
+        "providerVideoId": "7611336772928179470"
+      },
+      {
+        "id": "b1c7143b284151e8",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7610953220470459662",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7610953220470459662",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Every time without fail #college #collegestudent #relateable #collegelife #studying ",
+        "hashtags": [
+          "college",
+          "collegestudent",
+          "relateable",
+          "collegelife",
+          "studying"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/o8ehuIbsxTsYQAI6iKcLCIpGC4EKPQjfNekAFH~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=NGLrONrkYlhhlBhP2fr4a6VpEyk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-25T23:46:04.000Z",
+        "metrics": {
+          "views": 383200,
+          "likes": 92900,
+          "comments": 413,
+          "shares": 9659
+        },
+        "providerVideoId": "7610953220470459662"
+      },
+      {
+        "id": "bc9f6109847d0e2d",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7610598951762283790",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7610598951762283790",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "\ud83d\ude2d\ud83d\ude2d #college #collegelife #studying #collegestudent #relateable ",
+        "hashtags": [
+          "college",
+          "collegelife",
+          "studying",
+          "collegestudent",
+          "relateable"
+        ],
+        "durationSec": 11.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/ockBLyIfk8VpFDAlQTwoRjPDgE8ESeFJYonwQB~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=0n2uh8kPkL2JG2h7U%2BLFmQFJ474%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-25T00:51:16.000Z",
+        "metrics": {
+          "views": 13500,
+          "likes": 2374,
+          "comments": 5,
+          "shares": 232
+        },
+        "providerVideoId": "7610598951762283790"
+      },
+      {
+        "id": "b54eea459e9b426f",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7609810627971845390",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7609810627971845390",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "And I\u2019ll still get it done in time\u2026 #studying #college #collegelife #collegestudent #drinking ",
+        "hashtags": [
+          "studying",
+          "college",
+          "collegelife",
+          "collegestudent",
+          "drinking"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/o4UQkQeyAAGzHYEHjLe2vTGCCMNKeIIdpKJpG2~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=aRHvYkX9Td3EfdeZuZytAtCYt18%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-22T21:52:13.000Z",
+        "metrics": {
+          "views": 221500,
+          "likes": 68300,
+          "comments": 58,
+          "shares": 7939
+        },
+        "providerVideoId": "7609810627971845390"
+      },
+      {
+        "id": "b5724ec7f785a823",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7608367300269395214",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7608367300269395214",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Don\u2019t get me started on my sleep schedule\u2026 #collegestudent #collegelife #relatable #studying #fyp ",
+        "hashtags": [
+          "collegestudent",
+          "collegelife",
+          "relatable",
+          "studying",
+          "fyp"
+        ],
+        "durationSec": 14.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/oItvIYIQIHAT7mLewsLksfEeo7CmZIArGCLjCu~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=x4jQZ2qqgEzo%2BV0A0EiS6iJJJdw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-19T00:31:24.000Z",
+        "metrics": {
+          "views": 4833,
+          "likes": 784,
+          "comments": 4,
+          "shares": 27
+        },
+        "providerVideoId": "7608367300269395214"
+      },
+      {
+        "id": "bfa21e3e8a944773",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7608002750810508557",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7608002750810508557",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Then everybody starts talking about how easy the test was\u2026 #college #relatable #collegestudent #collegelife #studying ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "collegestudent",
+          "collegelife",
+          "studying"
+        ],
+        "durationSec": 6.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/oIEHdJGOLzeZKHqfPjXKACYIE8HIQkCeATh1JI~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=lbn2mN0NBzO%2BX3m7m7KogQdwtz0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-18T00:56:42.000Z",
+        "metrics": {
+          "views": 436700,
+          "likes": 117700,
+          "comments": 125,
+          "shares": 21700
+        },
+        "providerVideoId": "7608002750810508557"
+      },
+      {
+        "id": "a7a692b7e763b3ab",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7606535524068674830",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7606535524068674830",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Accidental assist #college #relatable #collegestudent #collegelife #studying ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "collegestudent",
+          "collegelife",
+          "studying"
+        ],
+        "durationSec": 9.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/ogGvESiBrgfDO6AB1pePExgI9NiozRAjFmBJZg~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=SdRPHtLhUZH024tR6rpOSSdRhDw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-14T02:02:56.000Z",
+        "metrics": {
+          "views": 4479,
+          "likes": 291,
+          "comments": 3,
+          "shares": 25
+        },
+        "providerVideoId": "7606535524068674830"
+      },
+      {
+        "id": "2323019616cf6eeb",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7606172117251493133",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7606172117251493133",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "The nicest professors be having the most egregious syllabus #college #relatable #collegestudent #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "collegestudent",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 9.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/oIKQkQj5AAqAHQfFjLenRTGCmeHxmIIwVFEpFO~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=nSml5TR7VJ5H9yDmkKORcYWrgw4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-13T02:32:55.000Z",
+        "metrics": {
+          "views": 8400,
+          "likes": 1481,
+          "comments": 9,
+          "shares": 100
+        },
+        "providerVideoId": "7606172117251493133"
+      },
+      {
+        "id": "6404bcf1eeb3b7ec",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7605777180647378190",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7605777180647378190",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "We all got these classes #college #relateable #collegestudent #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relateable",
+          "collegestudent",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 18.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/oQRjJp5aBI6iKNwKAsiDpmISNAfn0bBIiJwICx~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=Ne2G%2F%2B%2B%2FcdEiAU%2Frfnvs6PkYb1Y%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-12T01:00:27.000Z",
+        "metrics": {
+          "views": 2289,
+          "likes": 176,
+          "comments": 1,
+          "shares": 6
+        },
+        "providerVideoId": "7605777180647378190"
+      },
+      {
+        "id": "bdc998d4be5767b7",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7605763191938764046",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7605763191938764046",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "My typa weather #tennessee #college #relateable #snowday #tennesseeweather ",
+        "hashtags": [
+          "tennessee",
+          "college",
+          "relateable",
+          "snowday",
+          "tennesseeweather"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/oYlECwNiIpwfQxWuGwCoGInxIA10m0BaXpXBiA~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=jlmw5x3NOtxPx1Qwxa%2FO1ck0Jbc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-12T00:06:06.000Z",
+        "metrics": {
+          "views": 8451,
+          "likes": 422,
+          "comments": 1,
+          "shares": 16
+        },
+        "providerVideoId": "7605763191938764046"
+      },
+      {
+        "id": "09441d21f993b84e",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7605376413159509262",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7605376413159509262",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "College>>> #college #relateable #collegestudent #studying #collegelife ",
+        "hashtags": [
+          "college",
+          "relateable",
+          "collegestudent",
+          "studying",
+          "collegelife"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/o8fLYfLkgg1e16uOucmRXYzFLgnBIXf4AAPu8G~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=e5Mo0pVAoDvEFWnJvBtWOQcS1Lw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-10T23:05:00.000Z",
+        "metrics": {
+          "views": 1200000,
+          "likes": 279400,
+          "comments": 167,
+          "shares": 8662
+        },
+        "providerVideoId": "7605376413159509262"
+      },
+      {
+        "id": "61ff098eae3c8fd7",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7605010381848841485",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7605010381848841485",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "There\u2019s no in between #college #relateable #studying #collegestudent #fyp",
+        "hashtags": [
+          "college",
+          "relateable",
+          "studying",
+          "collegestudent",
+          "fyp"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/oQiAlBEmMyDFRugfwV6yFtKDf3SDipIEbrIm52~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=Bv2AIK3LWQQXmIM1D%2F97FOkPajQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-09T23:24:57.000Z",
+        "metrics": {
+          "views": 308900,
+          "likes": 80600,
+          "comments": 57,
+          "shares": 4373
+        },
+        "providerVideoId": "7605010381848841485"
+      },
+      {
+        "id": "31d142261e8e627b",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7604258019504901390",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7604258019504901390",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Best way to get it done #college #studying #relatable #collegestudent #fyp ",
+        "hashtags": [
+          "college",
+          "studying",
+          "relatable",
+          "collegestudent",
+          "fyp"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/o0k9HDwySiT7r2C0AUCFIwIHvfCu0ABpEB5Iwi~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=v8yUGUfWi3Yjb01QjxTffOvtpzA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-07T22:45:15.000Z",
+        "metrics": {
+          "views": 940000,
+          "likes": 227400,
+          "comments": 881,
+          "shares": 12100
+        },
+        "providerVideoId": "7604258019504901390"
+      },
+      {
+        "id": "3459b0c0cdcc4afc",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7603480274701241614",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7603480274701241614",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Happens everytime\ud83d\ude2d #college #studying #brainrot #relatable #collegestudent ",
+        "hashtags": [
+          "college",
+          "studying",
+          "brainrot",
+          "relatable",
+          "collegestudent"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/osmfI1JHVFhgfALGQOLgiRVJUERQANesZkfGIk~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=saHtLZmuF3JDvT3JMZXHA%2Bbx5dQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-05T20:27:00.000Z",
+        "metrics": {
+          "views": 9697,
+          "likes": 451,
+          "comments": 2,
+          "shares": 63
+        },
+        "providerVideoId": "7603480274701241614"
+      },
+      {
+        "id": "abd4dd90bdcf4736",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7603111297680477454",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7603111297680477454",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "I had to rot #college #relatable #collegestudent #utk #collegelife ",
+        "hashtags": [
+          "college",
+          "relatable",
+          "collegestudent",
+          "utk",
+          "collegelife"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/oUm9OEYidqBLIG0iLaBWgWxGrYADiIUOK24vB~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=lYuE3XIk%2BEoHdqgYHE8j9VCEmwQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-04T20:35:15.000Z",
+        "metrics": {
+          "views": 75300,
+          "likes": 2099,
+          "comments": 10,
+          "shares": 155
+        },
+        "providerVideoId": "7603111297680477454"
+      },
+      {
+        "id": "e175f3dc1d3c3339",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7602678388842614030",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7602678388842614030",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Been waiting for this #college #snow #fyp #snowstorm #knoxville ",
+        "hashtags": [
+          "college",
+          "snow",
+          "fyp",
+          "snowstorm",
+          "knoxville"
+        ],
+        "durationSec": 13.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/oQjErzABeAQRITs5HGjTyfCURIHkLIQI1EaQZe~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=Adi9BXzKpdZKEabbbXOd9179qC0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-03T16:36:02.000Z",
+        "metrics": {
+          "views": 2059,
+          "likes": 105,
+          "comments": 1,
+          "shares": 4
+        },
+        "providerVideoId": "7602678388842614030"
+      },
+      {
+        "id": "65a7748c8be51ed7",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7601993500871150862",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7601993500871150862",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Knoxville finally seeing some snow #college #snow #fyp #snowstorm ",
+        "hashtags": [
+          "college",
+          "snow",
+          "fyp",
+          "snowstorm"
+        ],
+        "durationSec": 5.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/oEFKt75pDQ7OWf8RAtFDkJjR5CfhSrHQEGApIf~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=1%2BccZdgz4Y1%2FlqOnehQC8RJc1VY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-02-01T20:17:48.000Z",
+        "metrics": {
+          "views": 4458,
+          "likes": 222,
+          "comments": 5,
+          "shares": 3
+        },
+        "providerVideoId": "7601993500871150862"
+      },
+      {
+        "id": "4039af3e012c0923",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7600860319472241933",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7600860319472241933",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Drinking till my heart stops #caffeine #energydrinks #redbull #ghostenergy #college ",
+        "hashtags": [
+          "caffeine",
+          "energydrinks",
+          "redbull",
+          "ghostenergy",
+          "college"
+        ],
+        "durationSec": 12.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/oMkSeEDTIHCEAxvQfIAAQ0eF767O3K81lcijkr~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=OW7jKQL8iKd7vvy3anWuR2Q23U4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-29T19:00:46.000Z",
+        "metrics": {
+          "views": 3936,
+          "likes": 142,
+          "comments": 2,
+          "shares": 7
+        },
+        "providerVideoId": "7600860319472241933"
+      },
+      {
+        "id": "3b11bc3f26d19a2b",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7599097689560698126",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7599097689560698126",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Fueled by @GHOST\u00ae Energy #energydrinks #lifting #college #fyp #superbowl ",
+        "hashtags": [
+          "energydrinks",
+          "lifting",
+          "college",
+          "fyp",
+          "superbowl"
+        ],
+        "durationSec": 28.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/ogD6kgbgGqyXtC1qAIemAIaGBLbofSHIABsjfq~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=AbWhDSnRTYeW1QCblLyP3p5aOj4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-25T01:00:30.000Z",
+        "metrics": {
+          "views": 859,
+          "likes": 35,
+          "comments": 3,
+          "shares": 0
+        },
+        "providerVideoId": "7599097689560698126"
+      },
+      {
+        "id": "bd2b5d1b9cd088c2",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7598689893467884814",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7598689893467884814",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "No mo energy drinks #energydrinks #gorillamind #energydrinkaddicts #relatable ",
+        "hashtags": [
+          "energydrinks",
+          "gorillamind",
+          "energydrinkaddicts",
+          "relatable"
+        ],
+        "durationSec": 13.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/owIdpNQAkmAFQEfeLOjXg5f1ohDBHCHQgIFStn~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=vAFCmomtWNQz5ns%2B7VkZzUyoC%2F8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-23T22:38:09.000Z",
+        "metrics": {
+          "views": 6076,
+          "likes": 226,
+          "comments": 0,
+          "shares": 9
+        },
+        "providerVideoId": "7598689893467884814"
+      },
+      {
+        "id": "5e87d883ee97546c",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7597174647498591543",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7597174647498591543",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Joint total of .50\u00a2 #hellamoney #wife #youngmarriage #marriedlife #fyp ",
+        "hashtags": [
+          "hellamoney",
+          "wife",
+          "youngmarriage",
+          "marriedlife",
+          "fyp"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/oYh3LSlTeACEGeGNIG9dqjQAnLjeS3ZowkIQHw~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=Fiml3%2FVevftkof%2BoP0rlIZfrl3w%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-19T20:38:14.000Z",
+        "metrics": {
+          "views": 2297,
+          "likes": 100,
+          "comments": 0,
+          "shares": 12
+        },
+        "providerVideoId": "7597174647498591543"
+      },
+      {
+        "id": "27059f43fc798310",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7595299540006079758",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7595299540006079758",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Ghost never misses #energydrinks #ghost #fyp #college #ghostenergy ",
+        "hashtags": [
+          "energydrinks",
+          "ghost",
+          "fyp",
+          "college",
+          "ghostenergy"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/oEBiS7QRIP2CpWsAHnDBPBGIquAiEVfwY340IV~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=54gmynqnTb685gscRD2yD3bJIws%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-14T19:22:54.000Z",
+        "metrics": {
+          "views": 1143,
+          "likes": 31,
+          "comments": 6,
+          "shares": 1
+        },
+        "providerVideoId": "7595299540006079758"
+      },
+      {
+        "id": "525354038286e4dc",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7594875629170920718",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7594875629170920718",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Taste exactly like Dr.pepper with vanilla #alaninu #cherrybomb #energydrinks #fyp #alaninucherrybomb @Alani Nutrition ",
+        "hashtags": [
+          "alaninu",
+          "cherrybomb",
+          "energydrinks",
+          "fyp",
+          "alaninucherrybomb"
+        ],
+        "durationSec": 10.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/oYCRCKmiIp7frUtBawDzmI0sIAy0r8BqlW2BiA~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=8BEhTZ9DR99oYDhVBc2b9%2FQY5eU%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-13T15:57:26.000Z",
+        "metrics": {
+          "views": 1545,
+          "likes": 91,
+          "comments": 1,
+          "shares": 3
+        },
+        "providerVideoId": "7594875629170920718"
+      },
+      {
+        "id": "5d46d6a39cb8b404",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7594261129812036878",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7594261129812036878",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "How to make your photos cinematic using filters.\nNah it's a joke I used chatgpt for this. Prompt was\n\"Make the image into 4k HD and add wets effects After rain and make a sunset reflection above but dont blur it and it must be neat and add a littel drizzlemake the image into 4k HZ and add wets effects after rain and make a sunset reflection above the front and dont blur it and must be neat and add a little drizzle.\u201d\n#cinematic #fortnite #Ai #fyp #photography ",
+        "hashtags": [
+          "cinematic",
+          "fortnite",
+          "ai",
+          "fyp",
+          "photography"
+        ],
+        "durationSec": 0.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn.com/tos-maliva-i-photomode-us/205ea6dc04b24dc6a11827d60093d2fc~tplv-photomode-image.jpeg?dr=14555&x-expires=1779937200&x-signature=7%2F69oMTjoVFEPxyBM00KPoSi%2Ff0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my&ftpl=1",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-12T00:12:22.000Z",
+        "metrics": {
+          "views": 1194,
+          "likes": 36,
+          "comments": 2,
+          "shares": 0
+        },
+        "providerVideoId": "7594261129812036878"
+      },
+      {
+        "id": "2de1b9496f88632a",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7591990659322580237",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7591990659322580237",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Has anyone tried these #barebells #barebellprotein #proteinshake #protein #fyp ",
+        "hashtags": [
+          "barebells",
+          "barebellprotein",
+          "proteinshake",
+          "protein",
+          "fyp"
+        ],
+        "durationSec": 10.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEmceKAIQzMAukSWFmCedSKTYZeHjICgEw2D8a~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=x%2B5DTBfCXnoRhQI%2BJCCGIP96PrE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-05T21:21:40.000Z",
+        "metrics": {
+          "views": 1701,
+          "likes": 93,
+          "comments": 4,
+          "shares": 10
+        },
+        "providerVideoId": "7591990659322580237"
+      },
+      {
+        "id": "b23839ebce0f87bd",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7591941364246531341",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7591941364246531341",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "The undeniable goat #coke #soda #college #fyp #lime ",
+        "hashtags": [
+          "coke",
+          "soda",
+          "college",
+          "fyp",
+          "lime"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ocQjAIB8fUwhQnRGtfblMPWvwffMVlAOAai9vF~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=tLVlQnRYNeYjqfwM7t9TZ1JHfvo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2026-01-05T18:10:47.000Z",
+        "metrics": {
+          "views": 2402,
+          "likes": 106,
+          "comments": 1,
+          "shares": 6
+        },
+        "providerVideoId": "7591941364246531341"
+      },
+      {
+        "id": "76facf9cdef9c44a",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7589112055886531895",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7589112055886531895",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "I will be the one to decide\ud83d\ude24 #lifting #college #315 #fitness #fyp ",
+        "hashtags": [
+          "lifting",
+          "college",
+          "315",
+          "fitness",
+          "fyp"
+        ],
+        "durationSec": 27.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oApIGf9j4AxjDfVQCI2EAqCk4HoFQoZ7SVfwd6~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=d7XqnceJHKykpgoSOD5b6or%2F0Zk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2025-12-29T03:11:08.000Z",
+        "metrics": {
+          "views": 1407,
+          "likes": 88,
+          "comments": 9,
+          "shares": 3
+        },
+        "providerVideoId": "7589112055886531895"
+      },
+      {
+        "id": "c9c47bbb963e3dd1",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7588345189165567246",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7588345189165567246",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Years of lifting for this one accomplishment #315 #lifting #college #fitness ",
+        "hashtags": [
+          "315",
+          "lifting",
+          "college",
+          "fitness"
+        ],
+        "durationSec": 28.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEGa8H8QDAneStYksgC8jyAYt4gmWfIaMnUmbe~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=SGCIXXAqy0I%2BNGNQymVXmMlaFS0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2025-12-27T01:35:35.000Z",
+        "metrics": {
+          "views": 1447,
+          "likes": 81,
+          "comments": 10,
+          "shares": 3
+        },
+        "providerVideoId": "7588345189165567246"
+      },
+      {
+        "id": "deb454876be04add",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7584863860423658807",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7584863860423658807",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "My type of Christmas tree #energydrinks #christmas #monster #college #alaninu ",
+        "hashtags": [
+          "energydrinks",
+          "christmas",
+          "monster",
+          "college",
+          "alaninu"
+        ],
+        "durationSec": 10.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oo2W0BI0yFBVwcATItNCAKnCvpiYIoXiWVF9fY~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=bvTIxsJXYzZSC4E%2BDo5An0mx1m4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2025-12-17T16:25:45.000Z",
+        "metrics": {
+          "views": 2859,
+          "likes": 193,
+          "comments": 7,
+          "shares": 24
+        },
+        "providerVideoId": "7584863860423658807"
+      },
+      {
+        "id": "652e03dca01df0da",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7584624707937324343",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7584624707937324343",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "I\u2019ve never seen energy drink prices so low #energydrinks #buccees #ryse #cbum #ghostenergy ",
+        "hashtags": [
+          "energydrinks",
+          "buccees",
+          "ryse",
+          "cbum",
+          "ghostenergy"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owkDVIOWEZoCIAFASmmAkAffV6ijCIIgCEHLeK~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=BTEA6vUgTB7LMZd8EL3T9fVvCU0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2025-12-17T00:57:46.000Z",
+        "metrics": {
+          "views": 14100,
+          "likes": 545,
+          "comments": 3,
+          "shares": 18
+        },
+        "providerVideoId": "7584624707937324343"
+      },
+      {
+        "id": "c19e1f44167e70b2",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7584108871422201143",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7584108871422201143",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "No if ands or buts about it #barnesandnoble #booktok #books #relatable #fyp ",
+        "hashtags": [
+          "barnesandnoble",
+          "booktok",
+          "books",
+          "relatable",
+          "fyp"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oc6QAIfEjOUISAVeAESgqFhuv7jGICLnkveH53~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=Lh6HhcPSk%2BUmHhwZk9%2F6oQzdjTM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2025-12-15T15:36:47.000Z",
+        "metrics": {
+          "views": 1288,
+          "likes": 84,
+          "comments": 0,
+          "shares": 3
+        },
+        "providerVideoId": "7584108871422201143"
+      },
+      {
+        "id": "c182604a0dd79942",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7583069568063556919",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7583069568063556919",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Taller then the twin towers #energydrink #college #gorillamind #ghostenergy #fyp ",
+        "hashtags": [
+          "energydrink",
+          "college",
+          "gorillamind",
+          "ghostenergy",
+          "fyp"
+        ],
+        "durationSec": 8.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ow0J8ksxeAF3FBG1R4V4fsQArLGqd8eAeIIQOK~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=p4SeBJv5oyLYmUsZU4cyWmukZmM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2025-12-12T20:23:30.000Z",
+        "metrics": {
+          "views": 4616,
+          "likes": 121,
+          "comments": 3,
+          "shares": 3
+        },
+        "providerVideoId": "7583069568063556919"
+      },
+      {
+        "id": "1e1347678ca6bbb7",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7582677690524749111",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7582677690524749111",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Finals week built this wall #energydrink #college #fyp ",
+        "hashtags": [
+          "energydrink",
+          "college",
+          "fyp"
+        ],
+        "durationSec": 7.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ooMOeQtwmAVdXXCI1kC8jDeQfhmZCjAwsSBiAH~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=Ej9y%2FD%2FF8f813ZV0aJG2z3xowXo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2025-12-11T19:02:22.000Z",
+        "metrics": {
+          "views": 5227,
+          "likes": 213,
+          "comments": 18,
+          "shares": 3
+        },
+        "providerVideoId": "7582677690524749111"
+      },
+      {
+        "id": "d0df4179a639203a",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7581506022955601207",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7581506022955601207",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Felt like chugging the purple infinity stone #energydrink #college #thanos ",
+        "hashtags": [
+          "energydrink",
+          "college",
+          "thanos"
+        ],
+        "durationSec": 13.0,
+        "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4QCWEkGSC1LHrVLIG3dfAQeIHYtebqAujQ35B~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=9QlnNMv66w6Q0nw6eUa%2BhFQJtdQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2025-12-08T15:16:11.000Z",
+        "metrics": {
+          "views": 1366,
+          "likes": 38,
+          "comments": 2,
+          "shares": 1
+        },
+        "providerVideoId": "7581506022955601207"
+      },
+      {
+        "id": "ac2dc2343178da7e",
+        "platform": "tiktok",
+        "url": "https://www.tiktok.com/@dgrindstaff/video/7581144780525145357",
+        "normalizedUrl": "https://www.tiktok.com/@dgrindstaff/video/7581144780525145357",
+        "creatorHandle": "dgrindstaff",
+        "creatorDisplayName": "DylanGrindstaff",
+        "caption": "Tropic Thunder is one of RDJ\u2019s best performances by far #tropicthunder #robertdowneyjr #blackface ",
+        "hashtags": [
+          "tropicthunder",
+          "robertdowneyjr",
+          "blackface"
+        ],
+        "durationSec": 11.0,
+        "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4AhofEQQDgpxuNfQRFSrNBOglFKhEAgDBaREq~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=XWTuvk3VHL%2BW8IY0Jpgn5hDEwcA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+        "sourceMediaUrl": "",
+        "postedAt": "2025-12-07T15:54:21.000Z",
+        "metrics": {
+          "views": 7114,
+          "likes": 354,
+          "comments": 2,
+          "shares": 22
+        },
+        "providerVideoId": "7581144780525145357"
+      }
+    ]
   }
 }

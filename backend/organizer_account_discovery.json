@@ -1,0 +1,1259 @@
+{
+  "disc_fd6c1527f606": {
+    "discoveryId": "disc_fd6c1527f606",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "niche": "study_apps",
+    "limit": 25,
+    "videosPerSource": 20,
+    "accounts": [
+      {
+        "id": "study_apps_shigcodes",
+        "handle": "shigcodes",
+        "displayName": "<sad/>",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 71.1,
+        "reason": "<sad/> matched 2 Study apps videos around studytok.",
+        "matchedHashtags": [
+          "studytok"
+        ],
+        "matchedQueries": [
+          "study app"
+        ],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@shigcodes/video/7614083965137325320",
+          "https://www.tiktok.com/@shigcodes/video/7641506854295686407"
+        ],
+        "metricsSummary": {
+          "videoCount": 2,
+          "avgViews": 207914,
+          "avgLikes": 4058,
+          "latestPostedAt": 1779176965
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728442+00:00"
+      },
+      {
+        "id": "study_apps_studywithemmane_",
+        "handle": "studywithemmane_",
+        "displayName": "studywithemmane",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 68.6,
+        "reason": "studywithemmane matched 2 Study apps videos around study app.",
+        "matchedHashtags": [],
+        "matchedQueries": [
+          "study app"
+        ],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@studywithemmane_/video/7630820336845458719",
+          "https://www.tiktok.com/@studywithemmane_/video/7643831611762412830"
+        ],
+        "metricsSummary": {
+          "videoCount": 2,
+          "avgViews": 600756,
+          "avgLikes": 6629,
+          "latestPostedAt": 1779718255
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728298+00:00"
+      },
+      {
+        "id": "study_apps_mackharrisonn",
+        "handle": "mackharrisonn",
+        "displayName": "mack",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 63,
+        "reason": "mack matched 2 Study apps videos around studentlife.",
+        "matchedHashtags": [
+          "studentlife"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@mackharrisonn/video/7589752544654576926",
+          "https://www.tiktok.com/@mackharrisonn/video/7604634809763155231"
+        ],
+        "metricsSummary": {
+          "videoCount": 2,
+          "avgViews": 621200,
+          "avgLikes": 105700,
+          "latestPostedAt": 1770592035
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728043+00:00"
+      },
+      {
+        "id": "study_apps_teandstudy",
+        "handle": "teandstudy",
+        "displayName": "Liv \ud83d\udcda",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 63,
+        "reason": "Liv \ud83d\udcda matched 2 Study apps videos around studytok.",
+        "matchedHashtags": [
+          "studytok"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@teandstudy/video/7007307965665381634",
+          "https://www.tiktok.com/@teandstudy/video/7007378124006526209"
+        ],
+        "metricsSummary": {
+          "videoCount": 2,
+          "avgViews": 287800,
+          "avgLikes": 37000,
+          "latestPostedAt": 1631532359
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728141+00:00"
+      },
+      {
+        "id": "study_apps_annastudytok",
+        "handle": "annastudytok",
+        "displayName": "annastudytok",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 62.2,
+        "reason": "annastudytok matched 4 Study apps videos around study app, study planner app.",
+        "matchedHashtags": [],
+        "matchedQueries": [
+          "study app",
+          "study planner app"
+        ],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@annastudytok/video/7641424215471590686",
+          "https://www.tiktok.com/@annastudytok/video/7640950528788286750",
+          "https://www.tiktok.com/@annastudytok/video/7640628306760568095"
+        ],
+        "metricsSummary": {
+          "videoCount": 4,
+          "avgViews": 1294,
+          "avgLikes": 78,
+          "latestPostedAt": 1779157735
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728411+00:00"
+      },
+      {
+        "id": "study_apps_ruslanastudy",
+        "handle": "ruslanastudy",
+        "displayName": "Ruslanastudy",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 62.1,
+        "reason": "Ruslanastudy matched 3 Study apps videos around study app, study planner app.",
+        "matchedHashtags": [],
+        "matchedQueries": [
+          "study app",
+          "study planner app"
+        ],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@ruslanastudy/video/7642136579917532429",
+          "https://www.tiktok.com/@ruslanastudy/video/7639053531994967327",
+          "https://www.tiktok.com/@ruslanastudy/video/7639053958425726238"
+        ],
+        "metricsSummary": {
+          "videoCount": 3,
+          "avgViews": 1001,
+          "avgLikes": 49,
+          "latestPostedAt": 1779323600
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728338+00:00"
+      },
+      {
+        "id": "study_apps_studywithlizzz",
+        "handle": "studywithlizzz",
+        "displayName": "liz\u2002|\u2002studytok\u2002\ud83c\udfa7\ud83d\udcda",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 60.4,
+        "reason": "liz\u2002|\u2002studytok\u2002\ud83c\udfa7\ud83d\udcda matched 1 Study apps videos around studytok.",
+        "matchedHashtags": [
+          "studytok"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@studywithlizzz/video/7641823508313558303"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 174000,
+          "avgLikes": 32200,
+          "latestPostedAt": 1779250699
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728178+00:00"
+      },
+      {
+        "id": "study_apps_sparkle_szn_2.0",
+        "handle": "sparkle_szn_2.0",
+        "displayName": "Sparkle2\ufe0f\u20e3\ud83c\udd92\ud83e\udddf\u200d\u2640\ufe0f",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 59,
+        "reason": "Sparkle2\ufe0f\u20e3\ud83c\udd92\ud83e\udddf\u200d\u2640\ufe0f matched 1 Study apps videos around studytok.",
+        "matchedHashtags": [
+          "studytok"
+        ],
+        "matchedQueries": [
+          "study app"
+        ],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@sparkle_szn_2.0/video/7637095033648221448"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 470146,
+          "avgLikes": 34694,
+          "latestPostedAt": 1778149758
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728472+00:00"
+      },
+      {
+        "id": "study_apps_engineergirlfriend",
+        "handle": "engineergirlfriend",
+        "displayName": "Your Engineer Girlfriend",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 58,
+        "reason": "Your Engineer Girlfriend matched 1 Study apps videos around productivityapp, studyapp.",
+        "matchedHashtags": [
+          "productivityapp",
+          "studyapp"
+        ],
+        "matchedQueries": [
+          "study app"
+        ],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@engineergirlfriend/video/7270209708282252590"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 729400,
+          "avgLikes": 76900,
+          "latestPostedAt": 1692727622
+        },
+        "discoveredAt": "2026-05-26T02:37:06.727896+00:00"
+      },
+      {
+        "id": "study_apps_studyfetchpatty",
+        "handle": "studyfetchpatty",
+        "displayName": "Patty | Studyfetch \ud83d\udcda",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 58,
+        "reason": "Patty | Studyfetch \ud83d\udcda matched 1 Study apps videos around studyapp, studytok.",
+        "matchedHashtags": [
+          "studyapp",
+          "studytok"
+        ],
+        "matchedQueries": [
+          "study app"
+        ],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@studyfetchpatty/video/7549231104872516886"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 2300000,
+          "avgLikes": 304900,
+          "latestPostedAt": 1757692342
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728292+00:00"
+      },
+      {
+        "id": "study_apps_nicksadler.io",
+        "handle": "nicksadler.io",
+        "displayName": "nicksadler.io",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 56,
+        "reason": "nicksadler.io matched 1 Study apps videos around Study apps.",
+        "matchedHashtags": [],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@nicksadler.io/video/7639511608493935894"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 330200,
+          "avgLikes": 20500,
+          "latestPostedAt": 1778712421
+        },
+        "discoveredAt": "2026-05-26T02:37:06.727855+00:00"
+      },
+      {
+        "id": "study_apps_kaybchung",
+        "handle": "kaybchung",
+        "displayName": "kay chung",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 56,
+        "reason": "kay chung matched 1 Study apps videos around Study apps.",
+        "matchedHashtags": [],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@kaybchung/video/7639936010247310623"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 250800,
+          "avgLikes": 31000,
+          "latestPostedAt": 1778811237
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728060+00:00"
+      },
+      {
+        "id": "study_apps_studywith.ale6",
+        "handle": "studywith.ale6",
+        "displayName": "Studywith Ale",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 54.3,
+        "reason": "Studywith Ale matched 2 Study apps videos around studentlife, studytok.",
+        "matchedHashtags": [
+          "studentlife",
+          "studytok"
+        ],
+        "matchedQueries": [
+          "study app"
+        ],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@studywith.ale6/video/7642381296181742869",
+          "https://www.tiktok.com/@studywith.ale6/video/7643080002111573268"
+        ],
+        "metricsSummary": {
+          "videoCount": 2,
+          "avgViews": 928,
+          "avgLikes": 172,
+          "latestPostedAt": 1779543243
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728208+00:00"
+      },
+      {
+        "id": "study_apps_studywithsavannah_",
+        "handle": "studywithsavannah_",
+        "displayName": "studywithsavannah_",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 54.2,
+        "reason": "studywithsavannah_ matched 1 Study apps videos around studentlife.",
+        "matchedHashtags": [
+          "studentlife"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@studywithsavannah_/video/7616397132731256086"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 303000,
+          "avgLikes": 11200,
+          "latestPostedAt": 1773330653
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728024+00:00"
+      },
+      {
+        "id": "study_apps_mia_yilin",
+        "handle": "mia_yilin",
+        "displayName": "Mia Yilin",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 54,
+        "reason": "Mia Yilin matched 1 Study apps videos around studentlife, studytok.",
+        "matchedHashtags": [
+          "studentlife",
+          "studytok"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@mia_yilin/video/7595037705243725070"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 1500000,
+          "avgLikes": 317200,
+          "latestPostedAt": 1768357538
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728039+00:00"
+      },
+      {
+        "id": "study_apps_lauraonedge",
+        "handle": "lauraonedge",
+        "displayName": "lauraonedge\ud83e\udee0",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 54,
+        "reason": "lauraonedge\ud83e\udee0 matched 1 Study apps videos around studentlife, studytok.",
+        "matchedHashtags": [
+          "studentlife",
+          "studytok"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@lauraonedge/video/7602349922288995606"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 541400,
+          "avgLikes": 81100,
+          "latestPostedAt": 1770060030
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728065+00:00"
+      },
+      {
+        "id": "study_apps_sambastudies",
+        "handle": "sambastudies",
+        "displayName": "sambastudies",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 53.1,
+        "reason": "sambastudies matched 2 Study apps videos around studytok.",
+        "matchedHashtags": [
+          "studytok"
+        ],
+        "matchedQueries": [
+          "study app",
+          "study planner app"
+        ],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@sambastudies/video/7643672753832283412",
+          "https://www.tiktok.com/@sambastudies/video/7643565506489830677"
+        ],
+        "metricsSummary": {
+          "videoCount": 2,
+          "avgViews": 1096,
+          "avgLikes": 38,
+          "latestPostedAt": 1779681260
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728322+00:00"
+      },
+      {
+        "id": "study_apps_karthitsa",
+        "handle": "karthitsa",
+        "displayName": "karthi",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 53,
+        "reason": "karthi matched 1 Study apps videos around studytok.",
+        "matchedHashtags": [
+          "studytok"
+        ],
+        "matchedQueries": [
+          "study app"
+        ],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@karthitsa/video/6980376875176840453"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 2000000,
+          "avgLikes": 169100,
+          "latestPostedAt": 1625245644
+        },
+        "discoveredAt": "2026-05-26T02:37:06.727877+00:00"
+      },
+      {
+        "id": "study_apps_shreesvlog_",
+        "handle": "shreesvlog_",
+        "displayName": "shreesvlog_",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 51.1,
+        "reason": "shreesvlog_ matched 1 Study apps videos around studytok.",
+        "matchedHashtags": [
+          "studytok"
+        ],
+        "matchedQueries": [
+          "study app"
+        ],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@shreesvlog_/video/7639401395086544150"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 41500,
+          "avgLikes": 13700,
+          "latestPostedAt": 1778686755
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728056+00:00"
+      },
+      {
+        "id": "study_apps_bymirasoul",
+        "handle": "bymirasoul",
+        "displayName": "Mirasoul",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 50.9,
+        "reason": "Mirasoul matched 1 Study apps videos around study app, study planner app.",
+        "matchedHashtags": [],
+        "matchedQueries": [
+          "study app",
+          "study planner app"
+        ],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@bymirasoul/video/7452712710636178695"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 200900,
+          "avgLikes": 10900,
+          "latestPostedAt": 1735219902
+        },
+        "discoveredAt": "2026-05-26T02:37:06.727872+00:00"
+      },
+      {
+        "id": "study_apps_crystalchavis",
+        "handle": "crystalchavis",
+        "displayName": "crystal",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 50,
+        "reason": "crystal matched 1 Study apps videos around Study apps.",
+        "matchedHashtags": [],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@crystalchavis/video/7616104685421808926"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 360900,
+          "avgLikes": 31100,
+          "latestPostedAt": 1773262579
+        },
+        "discoveredAt": "2026-05-26T02:37:06.727912+00:00"
+      },
+      {
+        "id": "study_apps_diva_in_distress",
+        "handle": "diva_in_distress",
+        "displayName": "\ud83c\udf80",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 50,
+        "reason": "\ud83c\udf80 matched 1 Study apps videos around Study apps.",
+        "matchedHashtags": [],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@diva_in_distress/video/7629910684150615317"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 2100000,
+          "avgLikes": 14400,
+          "latestPostedAt": 1776477028
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728248+00:00"
+      },
+      {
+        "id": "study_apps_babblershii",
+        "handle": "babblershii",
+        "displayName": "babblershii",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 50,
+        "reason": "babblershii matched 1 Study apps videos around Study apps.",
+        "matchedHashtags": [],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@babblershii/video/7613995592892697887"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 591232,
+          "avgLikes": 19355,
+          "latestPostedAt": 1772771523
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728427+00:00"
+      },
+      {
+        "id": "study_apps_naimahkai",
+        "handle": "naimahkai",
+        "displayName": "Naimah",
+        "niche": "study_apps",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "score": 49.9,
+        "reason": "Naimah matched 1 Study apps videos around Study apps.",
+        "matchedHashtags": [],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@naimahkai/video/7636411361278414111"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 238600,
+          "avgLikes": 11900,
+          "latestPostedAt": 1777990602
+        },
+        "discoveredAt": "2026-05-26T02:37:06.728029+00:00"
+      }
+    ],
+    "counts": {
+      "providerItems": 140,
+      "videos": 139,
+      "accounts": 24
+    },
+    "error": "",
+    "createdAt": 1779762996.2080991,
+    "updatedAt": 1779763026.73086,
+    "completedAt": 1779763026.728947,
+    "nicheLabel": "Study apps",
+    "nicheHint": "study apps, productivity, student content",
+    "provider": "apify",
+    "providerInput": {
+      "hashtags": [
+        "studytok",
+        "studyapp",
+        "studentlife",
+        "productivityapp"
+      ],
+      "searchQueries": [
+        "study app",
+        "student productivity app",
+        "study planner app"
+      ],
+      "resultsPerPage": 20,
+      "maxItems": 140
+    }
+  },
+  "disc_4829bb3f31dd": {
+    "discoveryId": "disc_4829bb3f31dd",
+    "status": "completed",
+    "progress": 100,
+    "currentStep": null,
+    "niche": "relatable_student",
+    "limit": 25,
+    "videosPerSource": 20,
+    "accounts": [
+      {
+        "id": "relatable_student_dgrindstaff",
+        "handle": "dgrindstaff",
+        "displayName": "DylanGrindstaff",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 78,
+        "reason": "DylanGrindstaff matched 2 Relatable student videos around collegelife, studytok.",
+        "matchedHashtags": [
+          "collegelife",
+          "studytok"
+        ],
+        "matchedQueries": [
+          "college life relatable"
+        ],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@dgrindstaff/video/7631962117544905997",
+          "https://www.tiktok.com/@dgrindstaff/video/7612078288055422221"
+        ],
+        "metricsSummary": {
+          "videoCount": 2,
+          "avgViews": 2920418,
+          "avgLikes": 728605,
+          "latestPostedAt": 1776954665
+        },
+        "discoveredAt": "2026-05-26T03:18:09.478460+00:00"
+      },
+      {
+        "id": "relatable_student_mia_yilin",
+        "handle": "mia_yilin",
+        "displayName": "Mia Yilin",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 74,
+        "reason": "Mia Yilin matched 2 Relatable student videos around studentlife, studytok.",
+        "matchedHashtags": [
+          "studentlife",
+          "studytok"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@mia_yilin/video/7636058263015951630",
+          "https://www.tiktok.com/@mia_yilin/video/7595037705243725070"
+        ],
+        "metricsSummary": {
+          "videoCount": 2,
+          "avgViews": 851300,
+          "avgLikes": 179100,
+          "latestPostedAt": 1777908405
+        },
+        "discoveredAt": "2026-05-26T03:18:09.478037+00:00"
+      },
+      {
+        "id": "relatable_student_studious.krist",
+        "handle": "studious.krist",
+        "displayName": "Studious Krist\ud83c\udf80",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 66,
+        "reason": "Studious Krist\ud83c\udf80 matched 1 Relatable student videos around collegelife, studytok.",
+        "matchedHashtags": [
+          "collegelife",
+          "studytok"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@studious.krist/video/7640196414047292693"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 1000000,
+          "avgLikes": 60500,
+          "latestPostedAt": 1778871855
+        },
+        "discoveredAt": "2026-05-26T03:18:09.478012+00:00"
+      },
+      {
+        "id": "relatable_student_teandstudy",
+        "handle": "teandstudy",
+        "displayName": "Liv \ud83d\udcda",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 63,
+        "reason": "Liv \ud83d\udcda matched 2 Relatable student videos around studytok.",
+        "matchedHashtags": [
+          "studytok"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@teandstudy/video/7007307965665381634",
+          "https://www.tiktok.com/@teandstudy/video/7007378124006526209"
+        ],
+        "metricsSummary": {
+          "videoCount": 2,
+          "avgViews": 287800,
+          "avgLikes": 37000,
+          "latestPostedAt": 1631532359
+        },
+        "discoveredAt": "2026-05-26T03:18:09.477936+00:00"
+      },
+      {
+        "id": "relatable_student_zimkhitha_.khumalo",
+        "handle": "zimkhitha_.khumalo",
+        "displayName": "Zimkhitha Khumalo\ud83d\udc69\ud83c\udffd\u200d\ud83c\udf93\ud83e\udd0d",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 61,
+        "reason": "Zimkhitha Khumalo\ud83d\udc69\ud83c\udffd\u200d\ud83c\udf93\ud83e\udd0d matched 1 Relatable student videos around studytok.",
+        "matchedHashtags": [
+          "studytok"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@zimkhitha_.khumalo/video/7641613121152486677"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 662100,
+          "avgLikes": 121300,
+          "latestPostedAt": 1779201712
+        },
+        "discoveredAt": "2026-05-26T03:18:09.477963+00:00"
+      },
+      {
+        "id": "relatable_student_sproutful.app",
+        "handle": "sproutful.app",
+        "displayName": "sproutful",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 61.0,
+        "reason": "sproutful matched 1 Relatable student videos around collegelife, studytok.",
+        "matchedHashtags": [
+          "collegelife",
+          "studytok"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@sproutful.app/video/7641710840823041293"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 333600,
+          "avgLikes": 6980,
+          "latestPostedAt": 1779224485
+        },
+        "discoveredAt": "2026-05-26T03:18:09.478243+00:00"
+      },
+      {
+        "id": "relatable_student_mmelijabulani04",
+        "handle": "mmelijabulani04",
+        "displayName": "Mmeli04",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 61,
+        "reason": "Mmeli04 matched 1 Relatable student videos around studytok.",
+        "matchedHashtags": [
+          "studytok"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@mmelijabulani04/video/7639463693075467527"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 1415651,
+          "avgLikes": 299239,
+          "latestPostedAt": 1778701259
+        },
+        "discoveredAt": "2026-05-26T03:18:09.478393+00:00"
+      },
+      {
+        "id": "relatable_student_laughingstockx007",
+        "handle": "laughingstockx007",
+        "displayName": "Laughing  Stockx \ud83d\udd4a",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 61,
+        "reason": "Laughing  Stockx \ud83d\udd4a matched 1 Relatable student videos around studentlife.",
+        "matchedHashtags": [
+          "studentlife"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@laughingstockx007/video/7639017725028814088"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 794309,
+          "avgLikes": 55217,
+          "latestPostedAt": 1778597420
+        },
+        "discoveredAt": "2026-05-26T03:18:09.478423+00:00"
+      },
+      {
+        "id": "relatable_student_studywithlizzz",
+        "handle": "studywithlizzz",
+        "displayName": "liz\u2002|\u2002studytok\u2002\ud83c\udfa7\ud83d\udcda",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 60.4,
+        "reason": "liz\u2002|\u2002studytok\u2002\ud83c\udfa7\ud83d\udcda matched 1 Relatable student videos around studytok.",
+        "matchedHashtags": [
+          "studytok"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@studywithlizzz/video/7641823508313558303"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 174200,
+          "avgLikes": 32300,
+          "latestPostedAt": 1779250699
+        },
+        "discoveredAt": "2026-05-26T03:18:09.477973+00:00"
+      },
+      {
+        "id": "relatable_student_rianna_pinkie",
+        "handle": "rianna_pinkie",
+        "displayName": "Rianna_Pinkie",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 60,
+        "reason": "Rianna_Pinkie matched 1 Relatable student videos around school relatable.",
+        "matchedHashtags": [],
+        "matchedQueries": [
+          "school relatable"
+        ],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@rianna_pinkie/video/7640340815323172104"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 439850,
+          "avgLikes": 76966,
+          "latestPostedAt": 1778905479
+        },
+        "discoveredAt": "2026-05-26T03:18:09.478294+00:00"
+      },
+      {
+        "id": "relatable_student_deeknowsbest_",
+        "handle": "deeknowsbest_",
+        "displayName": "Dee\ud83d\udda4",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 60,
+        "reason": "Dee\ud83d\udda4 matched 1 Relatable student videos around school relatable.",
+        "matchedHashtags": [],
+        "matchedQueries": [
+          "school relatable"
+        ],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@deeknowsbest_/video/7641960283887521044"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 1412628,
+          "avgLikes": 251791,
+          "latestPostedAt": 1779282537
+        },
+        "discoveredAt": "2026-05-26T03:18:09.478405+00:00"
+      },
+      {
+        "id": "relatable_student_absolutecinema2310",
+        "handle": "absolutecinema2310",
+        "displayName": "jivraj23",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 60,
+        "reason": "jivraj23 matched 1 Relatable student videos around school relatable.",
+        "matchedHashtags": [],
+        "matchedQueries": [
+          "school relatable"
+        ],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@absolutecinema2310/video/7642433708879875350"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 195223,
+          "avgLikes": 22397,
+          "latestPostedAt": 1779392766
+        },
+        "discoveredAt": "2026-05-26T03:18:09.478471+00:00"
+      },
+      {
+        "id": "relatable_student_studywithsavannah_",
+        "handle": "studywithsavannah_",
+        "displayName": "studywithsavannah_",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 59.2,
+        "reason": "studywithsavannah_ matched 1 Relatable student videos around collegelife, studentlife.",
+        "matchedHashtags": [
+          "collegelife",
+          "studentlife"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@studywithsavannah_/video/7616397132731256086"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 303000,
+          "avgLikes": 11200,
+          "latestPostedAt": 1773330653
+        },
+        "discoveredAt": "2026-05-26T03:18:09.478052+00:00"
+      },
+      {
+        "id": "relatable_student_chloevanberkel",
+        "handle": "chloevanberkel",
+        "displayName": "Chloe Van Berkel",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 59,
+        "reason": "Chloe Van Berkel matched 1 Relatable student videos around collegelife.",
+        "matchedHashtags": [
+          "collegelife"
+        ],
+        "matchedQueries": [
+          "college life relatable"
+        ],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@chloevanberkel/video/7632796759953083678"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 1431231,
+          "avgLikes": 365029,
+          "latestPostedAt": 1777149002
+        },
+        "discoveredAt": "2026-05-26T03:18:09.478463+00:00"
+      },
+      {
+        "id": "relatable_student_edu.girl5",
+        "handle": "edu.girl5",
+        "displayName": "Edu girl \ud83c\udf1f\ud83d\udc69\ud83c\udffc\u200d\ud83c\udfeb",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 56.3,
+        "reason": "Edu girl \ud83c\udf1f\ud83d\udc69\ud83c\udffc\u200d\ud83c\udfeb matched 1 Relatable student videos around studentlife.",
+        "matchedHashtags": [
+          "studentlife"
+        ],
+        "matchedQueries": [
+          "student life relatable"
+        ],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@edu.girl5/video/7610830065009429778"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 152659,
+          "avgLikes": 31384,
+          "latestPostedAt": 1772034468
+        },
+        "discoveredAt": "2026-05-26T03:18:09.478491+00:00"
+      },
+      {
+        "id": "relatable_student_kaybchung",
+        "handle": "kaybchung",
+        "displayName": "kay chung",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 56,
+        "reason": "kay chung matched 1 Relatable student videos around Relatable student.",
+        "matchedHashtags": [],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@kaybchung/video/7639936010247310623"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 251200,
+          "avgLikes": 31000,
+          "latestPostedAt": 1778811237
+        },
+        "discoveredAt": "2026-05-26T03:18:09.478033+00:00"
+      },
+      {
+        "id": "relatable_student_santecreates",
+        "handle": "santecreates",
+        "displayName": "Adwoa Asantewaa",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 56,
+        "reason": "Adwoa Asantewaa matched 1 Relatable student videos around Relatable student.",
+        "matchedHashtags": [],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@santecreates/video/7641618638016924942"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 180100,
+          "avgLikes": 24700,
+          "latestPostedAt": 1779203032
+        },
+        "discoveredAt": "2026-05-26T03:18:09.478048+00:00"
+      },
+      {
+        "id": "relatable_student_sheisflow0",
+        "handle": "sheisflow0",
+        "displayName": "sheisflow0",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 56,
+        "reason": "sheisflow0 matched 1 Relatable student videos around Relatable student.",
+        "matchedHashtags": [],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@sheisflow0/video/7641321864438107413"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 1071925,
+          "avgLikes": 185357,
+          "latestPostedAt": 1779133895
+        },
+        "discoveredAt": "2026-05-26T03:18:09.478321+00:00"
+      },
+      {
+        "id": "relatable_student_angi.jamz",
+        "handle": "angi.jamz",
+        "displayName": "Angi",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 56,
+        "reason": "Angi matched 1 Relatable student videos around Relatable student.",
+        "matchedHashtags": [],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@angi.jamz/video/7643624956705705229"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 429084,
+          "avgLikes": 31755,
+          "latestPostedAt": 1779670145
+        },
+        "discoveredAt": "2026-05-26T03:18:09.478325+00:00"
+      },
+      {
+        "id": "relatable_student_realmisstropical",
+        "handle": "realmisstropical",
+        "displayName": "Miss Tropical",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 56,
+        "reason": "Miss Tropical matched 1 Relatable student videos around Relatable student.",
+        "matchedHashtags": [],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@realmisstropical/video/7641211627911613718"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 232250,
+          "avgLikes": 37536,
+          "latestPostedAt": 1779108230
+        },
+        "discoveredAt": "2026-05-26T03:18:09.478451+00:00"
+      },
+      {
+        "id": "relatable_student_julie.sxphie",
+        "handle": "julie.sxphie",
+        "displayName": "Julie Sophie \ud83c\udf80",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 55,
+        "reason": "Julie Sophie \ud83c\udf80 matched 1 Relatable student videos around studentlife.",
+        "matchedHashtags": [
+          "studentlife"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@julie.sxphie/video/7635022635662937377"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 247200,
+          "avgLikes": 58300,
+          "latestPostedAt": 1777667239
+        },
+        "discoveredAt": "2026-05-26T03:18:09.477985+00:00"
+      },
+      {
+        "id": "relatable_student_redhotsasa",
+        "handle": "redhotsasa",
+        "displayName": "Redhotsasa\u2022\ud83d\udc8b\ud83c\udf39",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 55,
+        "reason": "Redhotsasa\u2022\ud83d\udc8b\ud83c\udf39 matched 1 Relatable student videos around schooltok.",
+        "matchedHashtags": [
+          "schooltok"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@redhotsasa/video/7628728913107143944"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 7900000,
+          "avgLikes": 1400000,
+          "latestPostedAt": 1776201874
+        },
+        "discoveredAt": "2026-05-26T03:18:09.478087+00:00"
+      },
+      {
+        "id": "relatable_student_jakegoodmanmd",
+        "handle": "jakegoodmanmd",
+        "displayName": "Dr. Jake Goodman \ud83d\udc68\ud83c\udffb\u200d\u2695\ufe0f",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 54,
+        "reason": "Dr. Jake Goodman \ud83d\udc68\ud83c\udffb\u200d\u2695\ufe0f matched 1 Relatable student videos around collegelife, studytok.",
+        "matchedHashtags": [
+          "collegelife",
+          "studytok"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@jakegoodmanmd/video/6996764658476551429"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 417000,
+          "avgLikes": 30800,
+          "latestPostedAt": 1629061220
+        },
+        "discoveredAt": "2026-05-26T03:18:09.477878+00:00"
+      },
+      {
+        "id": "relatable_student_averiebishop",
+        "handle": "averiebishop",
+        "displayName": "Averie Bishop",
+        "niche": "relatable_student",
+        "nicheHint": "student life, relatable school content",
+        "accountType": "relatable_content",
+        "score": 54,
+        "reason": "Averie Bishop matched 1 Relatable student videos around collegelife, studytok.",
+        "matchedHashtags": [
+          "collegelife",
+          "studytok"
+        ],
+        "matchedQueries": [],
+        "sampleVideoUrls": [
+          "https://www.tiktok.com/@averiebishop/video/6998995691540466950"
+        ],
+        "metricsSummary": {
+          "videoCount": 1,
+          "avgViews": 268400,
+          "avgLikes": 35200,
+          "latestPostedAt": 1629580673
+        },
+        "discoveredAt": "2026-05-26T03:18:09.477945+00:00"
+      }
+    ],
+    "counts": {
+      "providerItems": 140,
+      "videos": 139,
+      "accounts": 24
+    },
+    "error": "",
+    "createdAt": 1779765450.669475,
+    "updatedAt": 1779765489.482659,
+    "completedAt": 1779765489.479039,
+    "nicheLabel": "Relatable student",
+    "nicheHint": "student life, relatable school content",
+    "provider": "apify",
+    "providerInput": {
+      "hashtags": [
+        "studentlife",
+        "studytok",
+        "schooltok",
+        "collegelife"
+      ],
+      "searchQueries": [
+        "student life relatable",
+        "college life relatable",
+        "school relatable"
+      ],
+      "resultsPerPage": 20,
+      "maxItems": 140
+    }
+  }
+}

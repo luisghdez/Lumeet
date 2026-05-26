@@ -18,6 +18,7 @@ import sys
 import shutil
 import threading
 import logging
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -46,8 +47,15 @@ from sound_metadata_store import sound_metadata_store
 from model_metadata_store import model_metadata_store
 from extension_video_metadata_store import extension_video_metadata_store
 from tiktok_import_store import tiktok_import_store
-from tiktok_organizer_service import scan_tiktok_account, TikTokOrganizerError
+from tiktok_organizer_service import (
+    discover_tiktok_accounts_for_niche,
+    list_discovery_niches as list_tiktok_discovery_niches,
+    scan_tiktok_account,
+    TikTokOrganizerError,
+)
 from organizer_store import APPROVAL_STATUSES, organizer_store
+from organizer_account_discovery_store import organizer_account_discovery_store
+from organizer_account_job_store import organizer_account_job_store
 from video_analysis_service import analyze_video_reference, VideoAnalysisError
 from account_planner_service import (
     AccountPlannerError,
@@ -150,6 +158,24 @@ class OrganizerReviewStatusRequest(BaseModel):
 class OrganizerBatchAnalyzeRequest(BaseModel):
     limit: int = Field(default=5, ge=1, le=25)
     retryFailed: bool = False
+
+
+class OrganizerAccountProcessRequest(BaseModel):
+    account: str = Field(min_length=1, max_length=200)
+    maxItems: int = Field(default=100, ge=1, le=100)
+    nicheHint: str = Field(default="", max_length=200)
+    analyze: bool = True
+    retryFailed: bool = False
+    maxDurationSec: int = Field(default=30, ge=1, le=300)
+    tagConcurrency: int = Field(default=2, ge=1, le=3)
+    maxAnalysisFrames: int = Field(default=12, ge=1, le=45)
+
+
+class OrganizerAccountDiscoveryRequest(BaseModel):
+    niche: str = Field(min_length=1, max_length=80)
+    limit: int = Field(default=25, ge=1, le=50)
+    videosPerSource: int = Field(default=20, ge=1, le=50)
+    refresh: bool = False
 
 
 class AccountPlannerCreateRequest(BaseModel):
@@ -823,6 +849,400 @@ async def list_carousels():
 # TikTok Organizer Import Endpoints
 # ---------------------------------------------------------------------------
 
+SUGGESTED_TIKTOK_ACCOUNTS = [
+    {
+        "id": "sophc_studies",
+        "handle": "sophc.studies",
+        "displayName": "Soph Studies",
+        "nicheHint": "study apps, productivity, student content",
+        "accountType": "hook_demo",
+        "reason": "Strong app-demo patterns mixed with StudyTok hooks.",
+    },
+    {
+        "id": "notionway",
+        "handle": "notionway",
+        "displayName": "Notionway",
+        "nicheHint": "productivity apps, notion templates, digital organization",
+        "accountType": "hook_demo",
+        "reason": "Useful seed for app and digital-product demo references.",
+    },
+    {
+        "id": "gracevanslooten",
+        "handle": "gracevanslooten",
+        "displayName": "Grace Van Slooten",
+        "nicheHint": "fashion, gym clothing, lifestyle",
+        "accountType": "ugc_physical_product",
+        "reason": "Good seed for clothing and lifestyle product references.",
+    },
+    {
+        "id": "mikaylanogueira",
+        "handle": "mikaylanogueira",
+        "displayName": "Mikayla Nogueira",
+        "nicheHint": "beauty, skincare, makeup",
+        "accountType": "ugc_physical_product",
+        "reason": "High-volume beauty product and skincare UGC examples.",
+    },
+    {
+        "id": "charlidamelio",
+        "handle": "charlidamelio",
+        "displayName": "Charli D'Amelio",
+        "nicheHint": "trending audio, dance, lifestyle",
+        "accountType": "trending_audio_dance",
+        "reason": "Useful seed for simple dance and trending-audio references.",
+    },
+    {
+        "id": "adamw",
+        "handle": "adamw",
+        "displayName": "Adam W",
+        "nicheHint": "relatable comedy, creator skits, lifestyle",
+        "accountType": "relatable_content",
+        "reason": "Useful seed for relatable skit and one-scene content patterns.",
+    },
+]
+
+
+def _jobs_by_handle() -> Dict[str, Dict[str, Any]]:
+    jobs = organizer_account_job_store.list_all(limit=250)
+    jobs_by_handle: Dict[str, Dict[str, Any]] = {}
+    for job in jobs:
+        handle = (job.get("creatorHandle") or job.get("account") or "").strip().lstrip("@").lower()
+        if handle and handle not in jobs_by_handle:
+            jobs_by_handle[handle] = job
+    return jobs_by_handle
+
+
+def _attach_account_job_status(accounts: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    jobs_by_handle = _jobs_by_handle()
+    suggestions = []
+    for account in accounts:
+        handle = (account.get("handle") or "").lower()
+        last_job = jobs_by_handle.get(handle)
+        suggestions.append({
+            **account,
+            "lastJob": last_job,
+            "lastProcessedAt": last_job.get("completedAt") if last_job else None,
+            "status": last_job.get("status") if last_job else "not_processed",
+        })
+    return suggestions
+
+
+def _suggested_accounts_with_status(niche: str = "") -> List[Dict[str, Any]]:
+    niche_key = (niche or "").strip().lower()
+    if niche_key:
+        discovery = organizer_account_discovery_store.latest_for_niche(niche_key)
+        accounts = discovery.get("accounts", []) if discovery else []
+        return _attach_account_job_status(accounts)
+    latest_discoveries = organizer_account_discovery_store.list_all(limit=25)
+    discovered_accounts: List[Dict[str, Any]] = []
+    seen = set()
+    for discovery in latest_discoveries:
+        if discovery.get("status") != "completed":
+            continue
+        for account in discovery.get("accounts") or []:
+            handle = (account.get("handle") or "").lower()
+            if not handle or handle in seen:
+                continue
+            discovered_accounts.append(account)
+            seen.add(handle)
+            if len(discovered_accounts) >= 25:
+                break
+        if len(discovered_accounts) >= 25:
+            break
+    if discovered_accounts:
+        return _attach_account_job_status(discovered_accounts)
+    return _attach_account_job_status(SUGGESTED_TIKTOK_ACCOUNTS)
+
+
+def _account_job_progress_for_tagging(done: int, total: int) -> int:
+    if total <= 0:
+        return 85
+    return min(99, 35 + int((done / total) * 60))
+
+
+def _video_duration_sec(video: Dict[str, Any]) -> Optional[float]:
+    value = video.get("durationSec")
+    if value in (None, ""):
+        value = (video.get("aiTag") or {}).get("duration_sec")
+    try:
+        return float(value) if value not in (None, "") else None
+    except (TypeError, ValueError):
+        return None
+
+
+def _run_organizer_account_job(job_id: str) -> None:
+    job = organizer_account_job_store.get(job_id)
+    if not job:
+        return
+
+    try:
+        account = job.get("account") or ""
+        max_items = int(job.get("maxItems") or 100)
+        niche_hint = job.get("nicheHint") or ""
+        retry_failed = bool(job.get("retryFailed"))
+        max_duration_sec = int(job.get("maxDurationSec") or 30)
+        tag_concurrency = max(1, min(int(job.get("tagConcurrency") or 2), 3))
+        max_analysis_frames = int(job.get("maxAnalysisFrames") or 12)
+
+        organizer_account_job_store.mark_processing(job_id, "scanning", progress=5)
+        scan = scan_tiktok_account(account, max_items)
+        tiktok_import_store.save(scan["scanId"], scan)
+        scanned_count = len(scan.get("videos") or [])
+        organizer_account_job_store.update_counts(
+            job_id,
+            counts={"scanned": scanned_count, "total": scanned_count},
+            scanId=scan.get("scanId", ""),
+            creatorHandle=scan.get("creatorHandle", ""),
+            current_step="importing",
+            progress=25,
+        )
+
+        batch = organizer_store.create_batch_from_scan(scan, niche_hint=niche_hint)
+        videos = batch.get("videos") or []
+        organizer_account_job_store.update_counts(
+            job_id,
+            counts={
+                "imported": len(videos),
+                "total": len(videos),
+                "skipped": max(0, scanned_count - len(videos)),
+            },
+            batchId=batch.get("id", ""),
+            batch=batch,
+            current_step="tagging" if job.get("analyze", True) else "completed",
+            progress=35,
+        )
+
+        if not job.get("analyze", True):
+            organizer_account_job_store.mark_completed(
+                job_id,
+                batchId=batch.get("id", ""),
+                batch=organizer_store.get_batch(batch.get("id", "")) or batch,
+            )
+            return
+
+        candidates = []
+        skipped_already_tagged = 0
+        skipped_failed = 0
+        skipped_duration = 0
+        for video in videos:
+            status = video.get("aiTagStatus") or (video.get("aiTag") or {}).get("status") or "not_tagged"
+            if status == "tagged":
+                skipped_already_tagged += 1
+                continue
+            if status == "tag_failed" and not retry_failed:
+                skipped_failed += 1
+                continue
+            duration_sec = _video_duration_sec(video)
+            if duration_sec is not None and duration_sec > max_duration_sec:
+                skipped_duration += 1
+                continue
+            candidates.append(video)
+
+        import_skips = max(0, scanned_count - len(videos))
+        tagged = 0
+        failed = 0
+        total_to_process = len(candidates)
+        total_skipped = import_skips + skipped_already_tagged + skipped_failed + skipped_duration
+        organizer_account_job_store.update_counts(
+            job_id,
+            counts={
+                "eligible": total_to_process,
+                "tagged": tagged,
+                "failed": failed,
+                "skipped": total_skipped,
+                "skippedDuration": skipped_duration,
+                "skippedAlreadyTagged": skipped_already_tagged,
+                "skippedFailed": skipped_failed,
+                "total": len(videos),
+            },
+            current_step="tagging",
+            progress=_account_job_progress_for_tagging(0, total_to_process),
+        )
+
+        completed = 0
+
+        def analyze_candidate(video: Dict[str, Any]) -> bool:
+            video_id = video.get("id")
+            if not video_id:
+                return False
+            try:
+                _run_video_reference_analysis(video_id, max_analysis_frames=max_analysis_frames)
+                return True
+            except HTTPException:
+                return False
+
+        if candidates:
+            with ThreadPoolExecutor(max_workers=tag_concurrency) as executor:
+                futures = [executor.submit(analyze_candidate, video) for video in candidates]
+                for future in as_completed(futures):
+                    completed += 1
+                    if future.result():
+                        tagged += 1
+                    else:
+                        failed += 1
+                    organizer_account_job_store.update_counts(
+                        job_id,
+                        counts={
+                            "eligible": total_to_process,
+                            "tagged": tagged,
+                            "failed": failed,
+                            "skipped": total_skipped,
+                            "skippedDuration": skipped_duration,
+                            "skippedAlreadyTagged": skipped_already_tagged,
+                            "skippedFailed": skipped_failed,
+                            "total": len(videos),
+                        },
+                        current_step="tagging",
+                        progress=_account_job_progress_for_tagging(completed, total_to_process),
+                    )
+        else:
+            organizer_account_job_store.update_counts(
+                job_id,
+                counts={
+                    "eligible": total_to_process,
+                    "tagged": tagged,
+                    "failed": failed,
+                    "skipped": total_skipped,
+                    "skippedDuration": skipped_duration,
+                    "skippedAlreadyTagged": skipped_already_tagged,
+                    "skippedFailed": skipped_failed,
+                    "total": len(videos),
+                },
+                current_step="tagging",
+                progress=99,
+            )
+
+        refreshed_batch = organizer_store.get_batch(batch.get("id", "")) or batch
+        organizer_account_job_store.mark_completed(
+            job_id,
+            counts={
+                "scanned": scanned_count,
+                "imported": len(videos),
+                "eligible": total_to_process,
+                "tagged": tagged,
+                "failed": failed,
+                "skipped": total_skipped,
+                "skippedDuration": skipped_duration,
+                "skippedAlreadyTagged": skipped_already_tagged,
+                "skippedFailed": skipped_failed,
+                "total": len(videos),
+            },
+            batchId=batch.get("id", ""),
+            batch=refreshed_batch,
+        )
+    except TikTokOrganizerError as exc:
+        logger.warning("Organizer account job failed for TikTok provider: job_id=%s error=%s", job_id, exc.message)
+        organizer_account_job_store.mark_failed(job_id, exc.message)
+    except Exception as exc:
+        logger.exception("Organizer account job failed: %s", job_id)
+        organizer_account_job_store.mark_failed(job_id, str(exc))
+
+
+def _run_organizer_account_discovery(discovery_id: str) -> None:
+    discovery = organizer_account_discovery_store.get(discovery_id)
+    if not discovery:
+        return
+
+    try:
+        organizer_account_discovery_store.mark_processing(discovery_id, "discovering", progress=15)
+        result = discover_tiktok_accounts_for_niche(
+            discovery.get("niche") or "",
+            limit=int(discovery.get("limit") or 25),
+            videos_per_source=int(discovery.get("videosPerSource") or 20),
+        )
+        organizer_account_discovery_store.mark_completed(
+            discovery_id,
+            accounts=result.get("accounts") or [],
+            counts=result.get("counts") or {},
+        )
+        organizer_account_discovery_store.update(
+            discovery_id,
+            nicheLabel=result.get("nicheLabel", ""),
+            nicheHint=result.get("nicheHint", ""),
+            provider=result.get("provider", ""),
+            providerInput=result.get("providerInput") or {},
+        )
+    except TikTokOrganizerError as exc:
+        logger.warning("Organizer account discovery failed for TikTok provider: discovery_id=%s error=%s", discovery_id, exc.message)
+        organizer_account_discovery_store.mark_failed(discovery_id, exc.message)
+    except Exception as exc:
+        logger.exception("Organizer account discovery failed: %s", discovery_id)
+        organizer_account_discovery_store.mark_failed(discovery_id, str(exc))
+
+
+@app.get("/api/organizer/tiktok/niches")
+async def list_organizer_tiktok_niches():
+    """List supported niche presets for TikTok account discovery."""
+    return {"niches": list_tiktok_discovery_niches()}
+
+
+@app.post("/api/organizer/tiktok/account-discovery")
+async def create_organizer_account_discovery(payload: OrganizerAccountDiscoveryRequest):
+    """Start a metadata-only TikTok account discovery job for one niche."""
+    if not payload.refresh:
+        existing = organizer_account_discovery_store.latest_for_niche(payload.niche)
+        if existing:
+            return existing
+    discovery = organizer_account_discovery_store.create(
+        niche=payload.niche.strip().lower(),
+        limit=payload.limit,
+        videos_per_source=payload.videosPerSource,
+    )
+    thread = threading.Thread(target=_run_organizer_account_discovery, args=(discovery["discoveryId"],), daemon=True)
+    thread.start()
+    return discovery
+
+
+@app.get("/api/organizer/tiktok/account-discovery/{discovery_id}")
+async def get_organizer_account_discovery(discovery_id: str):
+    """Fetch TikTok account discovery job status and ranked suggestions."""
+    discovery = organizer_account_discovery_store.get(discovery_id)
+    if not discovery:
+        raise HTTPException(status_code=404, detail=f"Organizer account discovery {discovery_id} not found.")
+    return {
+        **discovery,
+        "accounts": _attach_account_job_status(discovery.get("accounts") or []),
+    }
+
+
+@app.get("/api/organizer/tiktok/suggested-accounts")
+async def list_suggested_tiktok_accounts(niche: str = Query("", max_length=80)):
+    """List seed TikTok accounts that can be one-tap processed."""
+    return {"accounts": _suggested_accounts_with_status(niche)}
+
+
+@app.post("/api/organizer/tiktok/account-jobs")
+async def create_organizer_account_job(payload: OrganizerAccountProcessRequest):
+    """Start a background scan -> batch -> AI-tag job for one TikTok account."""
+    job = organizer_account_job_store.create(
+        account=payload.account,
+        max_items=payload.maxItems,
+        niche_hint=payload.nicheHint,
+        analyze=payload.analyze,
+        retry_failed=payload.retryFailed,
+        max_duration_sec=payload.maxDurationSec,
+        tag_concurrency=payload.tagConcurrency,
+        max_analysis_frames=payload.maxAnalysisFrames,
+    )
+    thread = threading.Thread(target=_run_organizer_account_job, args=(job["jobId"],), daemon=True)
+    thread.start()
+    return job
+
+
+@app.get("/api/organizer/tiktok/account-jobs")
+async def list_organizer_account_jobs(limit: int = Query(25, ge=1, le=100)):
+    """List recent one-tap account processing jobs."""
+    return {"jobs": organizer_account_job_store.list_all(limit=limit)}
+
+
+@app.get("/api/organizer/tiktok/account-jobs/{job_id}")
+async def get_organizer_account_job(job_id: str):
+    """Fetch one-tap account processing job status."""
+    job = organizer_account_job_store.get(job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail=f"Organizer account job {job_id} not found.")
+    return job
+
+
 @app.post("/api/organizer/tiktok/account-scan")
 async def scan_tiktok_account_endpoint(payload: TikTokAccountScanRequest):
     """Fetch public TikTok account video metadata without downloading videos."""
@@ -891,13 +1311,13 @@ async def update_organizer_video_review(video_reference_id: str, payload: Organi
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
-def _run_video_reference_analysis(video_reference_id: str) -> Dict[str, Any]:
+def _run_video_reference_analysis(video_reference_id: str, max_analysis_frames: Optional[int] = None) -> Dict[str, Any]:
     video = organizer_store.get_video_reference(video_reference_id)
     if not video:
         raise HTTPException(status_code=404, detail=f"Video reference {video_reference_id} not found.")
     try:
         organizer_store.set_video_analysis_status(video_reference_id, "tagging")
-        result = analyze_video_reference(video)
+        result = analyze_video_reference(video, max_frames=max_analysis_frames)
         return organizer_store.save_video_analysis_result(video_reference_id, result)
     except VideoAnalysisError as exc:
         organizer_store.save_video_analysis_failure(video_reference_id, exc.message)

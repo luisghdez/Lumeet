@@ -81,6 +81,14 @@ TIKTOK_IMPORT_METADATA_FILE = _get_env(
     "TIKTOK_IMPORT_METADATA_FILE",
     os.path.join(os.path.dirname(__file__), "tiktok_import_metadata.json"),
 )
+ORGANIZER_ACCOUNT_JOBS_FILE = _get_env(
+    "ORGANIZER_ACCOUNT_JOBS_FILE",
+    os.path.join(os.path.dirname(__file__), "organizer_account_jobs.json"),
+)
+ORGANIZER_ACCOUNT_DISCOVERY_FILE = _get_env(
+    "ORGANIZER_ACCOUNT_DISCOVERY_FILE",
+    os.path.join(os.path.dirname(__file__), "organizer_account_discovery.json"),
+)
 ORGANIZER_SOURCE_BATCHES_FILE = _get_env(
     "ORGANIZER_SOURCE_BATCHES_FILE",
     os.path.join(os.path.dirname(__file__), "organizer_source_batches.json"),

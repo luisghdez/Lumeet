@@ -4438,5 +4438,247 @@
     "completedAt": 1779741028.615513,
     "output": null,
     "jobId": "f4e0f77b475b"
+  },
+  "cdca09594e00": {
+    "generationId": "cdca09594e00",
+    "type": "video",
+    "label": "StudyTok slot 1: relatable",
+    "status": "failed",
+    "progress": 0,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "The video URL returned HTML instead of media. Re-scan with a provider that returns direct media URLs. | yt-dlp could not resolve/download this TikTok URL: ERROR: [TikTok] 7607160029715827970: Unable to extract webpage video data; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U | Apify returned media URLs, but none were downloadable. Video download failed (403).; retry with referer failed: Video download failed (403).",
+    "createdAt": 1779768298.989557,
+    "completedAt": 1779768315.90354,
+    "output": null,
+    "plannerPlanId": "plan_44ac6214b4eb",
+    "plannerSlot": 1,
+    "bulkRunId": "planrun_a0360c339f02",
+    "modelId": "d80af5728954",
+    "extensionVideoId": "",
+    "jobId": "40e7c7d22a30"
+  },
+  "7e7c3bb19e09": {
+    "generationId": "7e7c3bb19e09",
+    "type": "video",
+    "label": "StudyTok slot 2: relatable",
+    "status": "failed",
+    "progress": 0,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "The video URL returned HTML instead of media. Re-scan with a provider that returns direct media URLs. | yt-dlp could not resolve/download this TikTok URL: ERROR: [TikTok] 7610256415252434189: Unable to extract webpage video data; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U | Apify returned media URLs, but none were downloadable. Video download failed (403).; retry with referer failed: Video download failed (403).",
+    "createdAt": 1779768299.025494,
+    "completedAt": 1779768329.237299,
+    "output": null,
+    "plannerPlanId": "plan_44ac6214b4eb",
+    "plannerSlot": 2,
+    "bulkRunId": "planrun_a0360c339f02",
+    "modelId": "d80af5728954",
+    "extensionVideoId": "",
+    "jobId": "86e655921eea"
+  },
+  "55361f8b6d7e": {
+    "generationId": "55361f8b6d7e",
+    "type": "video",
+    "label": "StudyTok slot 3: relatable",
+    "status": "failed",
+    "progress": 0,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "The video URL returned HTML instead of media. Re-scan with a provider that returns direct media URLs. | yt-dlp could not resolve/download this TikTok URL: ERROR: [TikTok] 7638472291499740429: Unable to extract webpage video data; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U | Apify returned media URLs, but none were downloadable. Video download failed (403).; retry with referer failed: Video download failed (403).",
+    "createdAt": 1779768299.061107,
+    "completedAt": 1779768342.107899,
+    "output": null,
+    "plannerPlanId": "plan_44ac6214b4eb",
+    "plannerSlot": 3,
+    "bulkRunId": "planrun_a0360c339f02",
+    "modelId": "d80af5728954",
+    "extensionVideoId": "",
+    "jobId": "016eff2b88b3"
+  },
+  "9f0c512621dc": {
+    "generationId": "9f0c512621dc",
+    "type": "video",
+    "label": "StudyTok slot 4: hook_demo",
+    "status": "failed",
+    "progress": 0,
+    "currentStep": null,
+    "steps": [
+      {
+        "key": "scene_detection",
+        "label": "Scene Detection",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "frame_extraction",
+        "label": "Frame Extraction",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "caption_detection",
+        "label": "Caption Detection",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "scene_recreation",
+        "label": "Scene Recreation",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "motion_control",
+        "label": "Motion Control (Kling AI)",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "caption_overlay",
+        "label": "Caption Overlay",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "audio_extraction",
+        "label": "Audio Extraction",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "video_concatenation",
+        "label": "Video Concatenation",
+        "status": "pending",
+        "message": ""
+      },
+      {
+        "key": "audio_replacement",
+        "label": "Audio Replacement",
+        "status": "pending",
+        "message": ""
+      }
+    ],
+    "error": "The video URL returned HTML instead of media. Re-scan with a provider that returns direct media URLs. | yt-dlp could not resolve/download this TikTok URL: ERROR: [TikTok] 7634383581770534158: Unable to extract webpage video data; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U | Apify returned media URLs, but none were downloadable. Video download failed (403).; retry with referer failed: Video download failed (403).",
+    "createdAt": 1779768299.097386,
+    "completedAt": 1779768355.93219,
+    "output": null,
+    "plannerPlanId": "plan_44ac6214b4eb",
+    "plannerSlot": 4,
+    "bulkRunId": "planrun_a0360c339f02",
+    "modelId": "d80af5728954",
+    "extensionVideoId": "167eab56f864",
+    "jobId": "f8e9531cc82b"
   }
 }
