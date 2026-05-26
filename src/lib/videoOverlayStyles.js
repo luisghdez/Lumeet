@@ -75,7 +75,27 @@ export function overlaySpecsEqual(a, b) {
 export function mediaUrlWithVersion(url, version) {
   if (!url) return '';
   if (!version) return url;
-  const [base, query = ''] = url.split('?');
+
+  const cleaned = String(url).trim();
+
+  // Signed object-store URLs embed auth in the query string; extra params break the signature.
+  if (/[?&]X-Goog-Signature=/i.test(cleaned) || /[?&]X-Amz-Signature=/i.test(cleaned)) {
+    return cleaned;
+  }
+
+  // Overlay version is already encoded in versioned deliverable paths.
+  if (/\/final_output_v\d+\.mp4/i.test(cleaned.split('?')[0])) {
+    return cleaned;
+  }
+
+  const basePath = cleaned.split('?')[0].replace(/\/$/, '');
+  const isLocalJobResult = /\/api\/jobs\/[^/]+\/result$/i.test(basePath);
+  const isLocalhost = /^https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?\//i.test(cleaned);
+  if (!isLocalJobResult && !isLocalhost) {
+    return cleaned;
+  }
+
+  const [base, query = ''] = cleaned.split('?');
   const params = new URLSearchParams(query);
   params.set('v', String(version));
   return `${base}?${params.toString()}`;

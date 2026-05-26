@@ -259,9 +259,12 @@ def render_plan_post_overlay(plan_id: str, slot: int, overlay_spec: Dict[str, An
 
             deliverable_path = captioned_hook_path
             if job_id:
-                os.makedirs(os.path.join(JOBS_DIR, job_id, "output"), exist_ok=True)
+                output_dir = os.path.join(JOBS_DIR, job_id, "output")
+                os.makedirs(output_dir, exist_ok=True)
                 shutil.copyfile(captioned_hook_path, _local_final_video_path(job_id))
                 deliverable_path = _finalize_deliverable_video(job_id, post, _local_final_video_path(job_id))
+                versioned_local = os.path.join(output_dir, f"final_output_v{version}.mp4")
+                shutil.copyfile(deliverable_path, versioned_local)
 
             gcs_info = _upload_video_to_gcs(job_id or f"plan_{plan_id}_{slot}", deliverable_path, version=version)
             media_url = (gcs_info or {}).get("url") or ""

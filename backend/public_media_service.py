@@ -253,7 +253,9 @@ def ensure_public_media_urls(
             )
         )
 
-    if include_result_video and job_id:
+    has_supplied_media = bool(media_urls)
+    has_public_media = any(is_public_media_url(url) for url in resolved)
+    if include_result_video and job_id and (not has_supplied_media or not has_public_media):
         resolved.append(
             ensure_public_media_url(
                 "",

@@ -5,6 +5,7 @@ from __future__ import annotations
 from datetime import date, datetime, time, timedelta
 from typing import Any, Dict, List, Optional, Tuple
 
+from account_plan_generation_service import _refresh_plan_status
 from account_plan_store import account_plan_store
 from organizer_store import organizer_store
 
@@ -166,6 +167,36 @@ def swap_studytok_plan_post(plan_id: str, slot: int) -> Dict[str, Any]:
     if updated.get("status") in {"generated", "generation_failed"}:
         return account_plan_store.update(plan_id, status="approved") or updated
     return updated
+
+
+def remove_studytok_plan_post(plan_id: str, slot: int) -> Dict[str, Any]:
+    plan = account_plan_store.get(plan_id)
+    if not plan:
+        raise AccountPlannerError(f"Plan {plan_id} not found.", 404)
+
+    posts = [post for post in plan.get("plannedPosts", []) if isinstance(post, dict)]
+    current = next((post for post in posts if int(post.get("slot") or 0) == int(slot)), None)
+    if not current:
+        raise AccountPlannerError(f"Plan {plan_id} slot {slot} not found.", 404)
+    if current.get("status") in {"generating", "queued"}:
+        raise AccountPlannerError("This post is currently generating and cannot be removed yet.", 409)
+    if current.get("status") == "scheduled" or current.get("reviewStatus") == "scheduled":
+        raise AccountPlannerError("Scheduled posts cannot be removed from the plan.", 409)
+
+    updated = account_plan_store.delete_post(plan_id, int(slot))
+    if not updated:
+        raise AccountPlannerError(f"Plan {plan_id} slot {slot} not found.", 404)
+
+    remaining = [post for post in (updated.get("plannedPosts") or []) if isinstance(post, dict)]
+    settings = dict(updated.get("settings") or {})
+    settings["postCount"] = len(remaining)
+    account_plan_store.update(
+        plan_id,
+        contentMix=_content_mix(remaining),
+        settings=settings,
+    )
+    _refresh_plan_status(plan_id)
+    return account_plan_store.get(plan_id) or updated
 
 
 def _tagged_videos(batch_id: str = "") -> List[Dict[str, Any]]:
@@ -442,6 +473,7 @@ def _planned_post_payload(
             "caption": caption,
             "durationSec": _duration(video, tags),
             "sceneCount": _scene_count(video),
+            "metrics": dict(video.get("metrics") or {}),
         },
         "selectionReasons": item.get("selectionReasons") or ["needs more matching study videos"],
         "weakMatch": bool(weak_match),

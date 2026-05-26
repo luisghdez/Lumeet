@@ -64,6 +64,7 @@ from account_planner_service import (
     create_studytok_simple_plan,
     generate_account_plan,
     list_archetypes as list_account_planner_archetypes,
+    remove_studytok_plan_post,
     swap_studytok_plan_post,
 )
 from account_plan_store import account_plan_store
@@ -834,12 +835,24 @@ async def get_job_status(job_id: str):
 
 
 @app.get("/api/jobs/{job_id}/result")
-async def get_job_result(job_id: str):
+async def get_job_result(job_id: str, v: int = 0):
     """
     Download the final generated video.
 
     Returns 404 if the job doesn't exist, and 409 if it isn't complete yet.
+    Optional ``v`` selects a re-rendered overlay version (``final_output_v{N}.mp4``).
     """
+    version = max(0, int(v or 0))
+    versioned_path = ""
+    if version > 0:
+        versioned_path = os.path.join(JOBS_DIR, job_id, "output", f"final_output_v{version}.mp4")
+        if os.path.isfile(versioned_path):
+            return FileResponse(
+                versioned_path,
+                media_type="video/mp4",
+                filename="lumeet_output.mp4",
+            )
+
     job = job_manager.get_job(job_id)
     if job:
         if job.status == JobStatus.FAILED:
@@ -1702,6 +1715,15 @@ async def swap_account_plan_post(plan_id: str, slot: int):
     """Replace one planned post with a similar unused tagged source video."""
     try:
         return swap_studytok_plan_post(plan_id, slot)
+    except AccountPlannerError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+
+
+@app.delete("/api/account-planner/plans/{plan_id}/posts/{slot}")
+async def delete_account_plan_post(plan_id: str, slot: int):
+    """Remove one post from a plan."""
+    try:
+        return remove_studytok_plan_post(plan_id, slot)
     except AccountPlannerError as exc:
         raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
 

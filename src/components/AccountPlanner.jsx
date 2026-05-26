@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   AlertCircle,
+  ArrowUpRight,
   CalendarClock,
   CheckCircle2,
   History,
@@ -17,6 +18,7 @@ import VideoOverlayEditor from './VideoOverlayEditor';
 import {
   createStudyTokSimplePlan,
   deleteAccountPlanBulkRun,
+  deleteAccountPlanPost,
   generateAccountPlanPosts,
   getAccountPlan,
   listAccountPlans,
@@ -50,6 +52,36 @@ function tagValue(value) {
   return value ? String(value).replaceAll('_', ' ') : 'n/a';
 }
 
+function formatNumber(value) {
+  if (value === null || value === undefined || value === '') return '—';
+  const num = Number(value);
+  if (!Number.isFinite(num)) return '—';
+  return Intl.NumberFormat(undefined, { notation: num >= 10000 ? 'compact' : 'standard' }).format(num);
+}
+
+function formatDuration(seconds) {
+  const value = Number(seconds);
+  if (!Number.isFinite(value) || value < 0) return '';
+  const mins = Math.floor(value / 60);
+  const secs = Math.round(value % 60);
+  return mins ? `${mins}:${String(secs).padStart(2, '0')}` : `${secs}s`;
+}
+
+function sourceMetrics(source) {
+  const metrics = source?.metrics || {};
+  return {
+    views: metrics.views ?? source?.views,
+    likes: metrics.likes ?? source?.likes,
+  };
+}
+
+function canRemovePlanPost(post) {
+  if (!post) return false;
+  if (post.status === 'generating' || post.status === 'queued') return false;
+  if (post.status === 'scheduled' || post.reviewStatus === 'scheduled') return false;
+  return true;
+}
+
 function statusClass(status) {
   if (status === 'generated' || status === 'scheduled') return 'bg-emerald-400/15 text-emerald-100';
   if (status === 'generating' || status === 'queued') return 'bg-cyan-400/15 text-cyan-100';
@@ -71,14 +103,23 @@ function formatSchedule(value) {
   return parsed.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
 }
 
-function resolvePostMediaUrl(post) {
+function resolvePostMediaUrl(post, { forPreview = false } = {}) {
   if (!post) return '';
   const url = post.generatedMediaUrl || '';
   if (!url) return '';
   const baseUrl = url.split('?')[0];
   const isJobResult = /\/api\/jobs\/[^/]+\/result$/.test(baseUrl);
-  if (isJobResult && !post.videoOverlayVersion) return '';
-  return mediaUrlWithVersion(url, post.videoOverlayVersion);
+  const isDeliverable = ['generated', 'scheduled', 'generation_failed'].includes(post.status)
+    || post.reviewStatus === 'scheduled';
+  if (isJobResult && !post.videoOverlayVersion && !isDeliverable) return '';
+
+  const version = Number(post.videoOverlayVersion || 0);
+
+  if (forPreview && post.jobId) {
+    return `/api/jobs/${post.jobId}/result${version ? `?v=${version}` : ''}`;
+  }
+
+  return mediaUrlWithVersion(url, version);
 }
 
 function summarizeBulkRuns(plan) {
@@ -455,13 +496,13 @@ function InlinePostVideo({ src, forcePaused = false }) {
   };
 
   return (
-    <div className="overflow-hidden rounded-2xl bg-white/10">
-      <div className="relative aspect-[9/16] max-h-64 w-full">
+    <div className="overflow-hidden rounded-2xl bg-black">
+      <div className="relative aspect-[9/16] w-full">
         <video
           key={src}
           ref={videoRef}
           src={src}
-          className="h-full w-full object-cover"
+          className="h-full w-full bg-black object-contain"
           loop
           playsInline
           preload="metadata"
@@ -483,6 +524,81 @@ function InlinePostVideo({ src, forcePaused = false }) {
           {!isPlaying && <PlayCircle size={28} className="text-white/90" aria-hidden />}
         </button>
       </div>
+    </div>
+  );
+}
+
+function SourceVideoMeta({ source, compact = false }) {
+  const tiktokUrl = String(source?.url || '').trim();
+  const { views, likes } = sourceMetrics(source);
+  const handle = String(source?.creatorHandle || '').replace(/^@+/, '');
+
+  if (!tiktokUrl && views == null && likes == null && !handle) return null;
+
+  return (
+    <div className={`grid gap-1 ${compact ? 'text-[10px]' : 'text-[11px]'} text-white/45`}>
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+        {views != null && <span>{formatNumber(views)} views</span>}
+        {likes != null && <span>{formatNumber(likes)} likes</span>}
+        {handle ? <span className="text-white/35">@{handle}</span> : null}
+      </div>
+      {tiktokUrl ? (
+        <a
+          href={tiktokUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex w-fit items-center gap-1 font-semibold text-white/70 transition hover:text-white"
+        >
+          Open reference TikTok
+          <ArrowUpRight size={12} aria-hidden />
+        </a>
+      ) : null}
+    </div>
+  );
+}
+
+function ReferenceVideoPreview({ source }) {
+  const tiktokUrl = String(source?.url || '').trim();
+  const durationLabel = formatDuration(source?.durationSec);
+  const Wrapper = tiktokUrl ? 'a' : 'div';
+  const wrapperProps = tiktokUrl
+    ? { href: tiktokUrl, target: '_blank', rel: 'noreferrer' }
+    : {};
+
+  return (
+    <div className="flex w-full max-w-[11rem] flex-col gap-2">
+      <Wrapper
+        {...wrapperProps}
+        className="group relative aspect-[9/16] w-full overflow-hidden rounded-2xl bg-black"
+        title={tiktokUrl ? 'Open reference TikTok' : undefined}
+      >
+        {source?.thumbnailUrl ? (
+          <img
+            src={source.thumbnailUrl}
+            alt=""
+            className="h-full w-full object-contain"
+            loading="lazy"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center text-white/40">
+            <Video size={18} aria-hidden />
+          </div>
+        )}
+        {tiktokUrl ? (
+          <span className="absolute inset-0 bg-black/0 transition group-hover:bg-black/20" aria-hidden />
+        ) : null}
+        {durationLabel ? (
+          <span className="absolute bottom-2 right-2 rounded-full bg-black/70 px-2 py-0.5 text-[10px] font-semibold text-white">
+            {durationLabel}
+          </span>
+        ) : null}
+        {tiktokUrl ? (
+          <span className="absolute bottom-2 left-2 rounded-full bg-black/70 px-2 py-0.5 text-[10px] font-semibold text-white opacity-0 transition group-hover:opacity-100">
+            Open TikTok
+          </span>
+        ) : null}
+      </Wrapper>
+      <SourceVideoMeta source={source} />
     </div>
   );
 }
@@ -543,38 +659,38 @@ function PostCard({
   post,
   canSchedule,
   canSwap,
+  canRemove,
   canEditOverlay,
   selectedPlatforms,
   onPatchPost,
   onSchedulePost,
   onSwapPost,
+  onRemovePost,
   onPlanUpdated,
   isScheduling,
   isSwapping,
+  isRemoving,
 }) {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [overlayEditorOpen, setOverlayEditorOpen] = useState(false);
   const source = post.sourceVideo || {};
   const tags = post.keyTags || {};
-  const previewUrl = resolvePostMediaUrl(post);
-  const generated = Boolean(previewUrl);
-  const mediaPreview = previewUrl ? (
-    <InlinePostVideo key={previewUrl} src={previewUrl} forcePaused={previewOpen || overlayEditorOpen} />
-  ) : source.thumbnailUrl ? (
-    <div className="overflow-hidden rounded-2xl bg-white/10">
-      <div className="h-32 w-full">
-        <img src={source.thumbnailUrl} alt="" className="h-full w-full object-cover" loading="lazy" />
-      </div>
-    </div>
-  ) : (
-    <div className="flex h-32 w-full items-center justify-center rounded-2xl bg-white/10 text-white/40">
-      <Video size={18} aria-hidden />
+  const previewUrl = resolvePostMediaUrl(post, { forPreview: true });
+  const generated = Boolean(previewUrl || resolvePostMediaUrl(post));
+  const mediaPreview = (
+    <div className="flex w-full max-w-[11rem] flex-col gap-2">
+      {generated ? (
+        <InlinePostVideo key={previewUrl} src={previewUrl} forcePaused={previewOpen || overlayEditorOpen} />
+      ) : (
+        <ReferenceVideoPreview source={source} />
+      )}
+      {generated ? <SourceVideoMeta source={source} compact /> : null}
     </div>
   );
 
   return (
     <article className="rounded-3xl border border-white/10 bg-white/[0.04] p-4">
-      <div className="grid gap-4 lg:grid-cols-[160px_minmax(0,1fr)_260px]">
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,11rem)_minmax(0,1fr)_260px]">
         {mediaPreview}
 
         <div className="min-w-0">
@@ -592,6 +708,18 @@ function PostCard({
               <span className="rounded-full bg-amber-400/15 px-2.5 py-1 text-xs font-semibold text-amber-100">
                 weak match
               </span>
+            )}
+            {canRemove && (
+              <button
+                type="button"
+                disabled={isRemoving}
+                onClick={() => onRemovePost(post.slot)}
+                className="ml-auto inline-flex items-center gap-1 rounded-full bg-red-400/10 px-2.5 py-1 text-xs font-semibold text-red-100 hover:bg-red-400/20 disabled:cursor-not-allowed disabled:opacity-50"
+                title="Remove this post from the plan"
+              >
+                {isRemoving ? <Loader2 size={12} className="animate-spin" aria-hidden /> : <Trash2 size={12} aria-hidden />}
+                Remove
+              </button>
             )}
           </div>
           <div className="mt-3 flex flex-wrap gap-1.5">
@@ -748,6 +876,7 @@ function AccountPlanner({ onGenerationStarted }) {
   const [isSchedulingAll, setIsSchedulingAll] = useState(false);
   const [schedulingSlot, setSchedulingSlot] = useState(null);
   const [swappingSlot, setSwappingSlot] = useState(null);
+  const [removingSlot, setRemovingSlot] = useState(null);
   const [deletingBulkRunId, setDeletingBulkRunId] = useState('');
   const [error, setError] = useState('');
   const timezone = useMemo(() => Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC', []);
@@ -1019,8 +1148,25 @@ function AccountPlanner({ onGenerationStarted }) {
     }
   };
 
+  const handleRemovePost = async (slot) => {
+    if (!plan?.id) return;
+    if (!window.confirm(`Remove slot ${slot} from this plan? This cannot be undone.`)) return;
+    setRemovingSlot(slot);
+    setError('');
+    try {
+      const result = await deleteAccountPlanPost({ planId: plan.id, slot });
+      setPlan(result);
+      await loadRecentPlans();
+    } catch (err) {
+      setError(err.message || 'Could not remove planned post.');
+    } finally {
+      setRemovingSlot(null);
+    }
+  };
+
   const scheduleOnePost = async (post) => {
     const scheduledIso = toIsoLocal(post.suggestedScheduledFor);
+    const mediaUrl = resolvePostMediaUrl(post);
     const payload = {
       sessionId: DEFAULT_SESSION_ID,
       content: post.captionDraft || 'Generated with nflncr.ai',
@@ -1028,10 +1174,11 @@ function AccountPlanner({ onGenerationStarted }) {
       publishNow: false,
       timezone,
       scheduledFor: scheduledIso,
-      mediaUrls: [resolvePostMediaUrl(post)].filter(Boolean),
+      mediaUrls: mediaUrl ? [mediaUrl] : [],
       videoOverlayVersion: Number(post.videoOverlayVersion || 0),
       extendedVideo: (post.purpose || 'relatable') === 'hook_demo',
-      ...(post.jobId ? { jobId: post.jobId, includeResultVideo: true } : {}),
+      jobId: post.jobId || undefined,
+      includeResultVideo: !mediaUrl && Boolean(post.jobId),
     };
     const result = await createLatePost(payload);
     const latePostId = result?.post?._id || result?._id || result?.id || 'created';
@@ -1346,17 +1493,20 @@ function AccountPlanner({ onGenerationStarted }) {
                     post={post}
                     canSchedule={selectedPlatforms.length > 0 && post.reviewStatus !== 'scheduled'}
                     canSwap={canSwapPosts}
+                    canRemove={canRemovePlanPost(post)}
                     canEditOverlay={canEditOverlayPosts}
                     selectedPlatforms={selectedPlatforms}
                     onPatchPost={handlePatchPost}
                     onSchedulePost={handleSchedulePost}
                     onSwapPost={handleSwapPost}
+                    onRemovePost={handleRemovePost}
                     onPlanUpdated={(nextPlan) => {
                       setPlan(nextPlan);
                       loadRecentPlans();
                     }}
                     isScheduling={schedulingSlot === post.slot}
                     isSwapping={swappingSlot === post.slot}
+                    isRemoving={removingSlot === post.slot}
                   />
                 ))}
               </div>

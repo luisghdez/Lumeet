@@ -659,7 +659,9 @@ export default function ScheduleModal({ generation, onClose, onScheduled }) {
         timezone,
         scheduledFor: scheduledIso,
         mediaUrls,
-        ...(isVideo && output.jobId ? { jobId: output.jobId, includeResultVideo: true } : {}),
+        ...(isVideo && output.jobId && !mediaUrls.length
+          ? { jobId: output.jobId, includeResultVideo: true }
+          : {}),
       };
       const data = await createLatePost(payload);
       const postId = data?.post?._id || data?._id || 'created';

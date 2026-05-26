@@ -4,6 +4,7 @@ Tests for public media URL resolution before Late/Zernio publishing.
 
 from backend.public_media_service import (
     ensure_public_media_url,
+    ensure_public_media_urls,
     extract_job_id_from_media_url,
     is_public_media_url,
     overlay_version_from_media_url,
@@ -58,3 +59,24 @@ class TestPublicMediaService:
             job_id="job123",
         )
         assert public_url == "https://storage.googleapis.com/test-bucket/videos/job123/final_output.mp4"
+
+    def test_ensure_public_media_urls_skips_job_fallback_when_media_provided(self, monkeypatch):
+        calls = {"job_fallback": 0}
+
+        def fake_ensure(url, *, job_id="", overlay_version=0, extended=False):
+            if url:
+                return "https://storage.googleapis.com/test-bucket/videos/job123/final_output_v2.mp4"
+            calls["job_fallback"] += 1
+            return "https://storage.googleapis.com/test-bucket/videos/job123/final_output.mp4"
+
+        monkeypatch.setattr("backend.public_media_service.ensure_public_media_url", fake_ensure)
+
+        urls = ensure_public_media_urls(
+            ["https://storage.googleapis.com/test-bucket/videos/job123/final_output_v2.mp4"],
+            job_id="job123",
+            overlay_version=2,
+            include_result_video=True,
+        )
+
+        assert urls == ["https://storage.googleapis.com/test-bucket/videos/job123/final_output_v2.mp4"]
+        assert calls["job_fallback"] == 0

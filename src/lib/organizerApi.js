@@ -218,6 +218,12 @@ export async function swapAccountPlanPost({ planId, slot }) {
   });
 }
 
+export async function deleteAccountPlanPost({ planId, slot }) {
+  return request(`/api/account-planner/plans/${encodeURIComponent(planId)}/posts/${encodeURIComponent(slot)}`, {
+    method: 'DELETE',
+  });
+}
+
 export async function getAccountPlanPostOverlay({ planId, slot }) {
   return request(`/api/account-planner/plans/${encodeURIComponent(planId)}/posts/${encodeURIComponent(slot)}/overlay`);
 }

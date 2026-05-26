@@ -101,5 +101,24 @@ class AccountPlanStore:
             self._write_all_unlocked(all_items)
             return plan
 
+    def delete_post(self, plan_id: str, slot: int) -> Optional[Dict[str, Any]]:
+        with self._lock:
+            all_items = self._read_all_unlocked()
+            plan = all_items.get(plan_id)
+            if not isinstance(plan, dict):
+                return None
+            posts = plan.get("plannedPosts") or []
+            kept = [
+                post for post in posts
+                if not (isinstance(post, dict) and int(post.get("slot") or 0) == int(slot))
+            ]
+            if len(kept) == len(posts):
+                return None
+            plan["plannedPosts"] = kept
+            plan["updatedAt"] = utc_now_iso()
+            all_items[plan_id] = plan
+            self._write_all_unlocked(all_items)
+            return plan
+
 
 account_plan_store = AccountPlanStore(ACCOUNT_PLAN_METADATA_FILE)
