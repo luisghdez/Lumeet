@@ -32987,7 +32987,7 @@
         "reviewStatus": "pending",
         "generationId": "0d10d610e03b",
         "jobId": "aa81b36f0019",
-        "generatedMediaUrl": "http://127.0.0.1:8000/api/jobs/aa81b36f0019/result",
+        "generatedMediaUrl": "http://127.0.0.1:8000/api/jobs/aa81b36f0019/result?v=1",
         "error": "",
         "keyTags": {
           "content_type": "relatable_content",
@@ -33006,10 +33006,10 @@
         "extensionVideoId": "",
         "latePostId": "",
         "scheduleError": "",
-        "updatedAt": "2026-05-26T18:31:18.055121+00:00",
+        "updatedAt": "2026-05-26T19:20:36.710614+00:00",
         "videoOverlayOriginal": {
           "enabled": true,
-          "text": "When your prof asks",
+          "text": "When your prof asks \"does anyone have any questions?\" but you don't even understand the topic enough to have a question in the first place",
           "fontSize": 48,
           "fontColor": "#FFFFFF",
           "style": "classic",
@@ -33017,13 +33017,13 @@
         },
         "videoOverlay": {
           "enabled": true,
-          "text": "When your prof asks",
-          "fontSize": 48,
+          "text": "When your prof asks \"does anyone have any questions?\" but you don't even understand the topic enough to have a question in the first place",
+          "fontSize": 36,
           "fontColor": "#FFFFFF",
-          "style": "classic",
+          "style": "minimal",
           "verticalPosition": 0.55
         },
-        "videoOverlayVersion": 0,
+        "videoOverlayVersion": 1,
         "rawVideoUrl": "http://127.0.0.1:8000/api/jobs/aa81b36f0019/raw"
       },
       {
@@ -33068,7 +33068,7 @@
         "reviewStatus": "pending",
         "generationId": "21e9e7df7a5c",
         "jobId": "b2c214bec058",
-        "generatedMediaUrl": "http://127.0.0.1:8000/api/jobs/b2c214bec058/result",
+        "generatedMediaUrl": "http://127.0.0.1:8000/api/jobs/b2c214bec058/result?v=1",
         "error": "",
         "keyTags": {
           "content_type": "relatable_content",
@@ -33087,7 +33087,7 @@
         "extensionVideoId": "",
         "latePostId": "",
         "scheduleError": "",
-        "updatedAt": "2026-05-26T18:31:05.637976+00:00",
+        "updatedAt": "2026-05-26T19:21:10.705445+00:00",
         "videoOverlayOriginal": {
           "enabled": true,
           "text": "When your professor won't round up your grade .01%",
@@ -33099,12 +33099,12 @@
         "videoOverlay": {
           "enabled": true,
           "text": "When your professor won't round up your grade .01%",
-          "fontSize": 48,
+          "fontSize": 36,
           "fontColor": "#FFFFFF",
           "style": "classic",
           "verticalPosition": 0.55
         },
-        "videoOverlayVersion": 0,
+        "videoOverlayVersion": 1,
         "rawVideoUrl": "http://127.0.0.1:8000/api/jobs/b2c214bec058/raw"
       },
       {
@@ -33192,7 +33192,7 @@
     ],
     "id": "plan_7098d8aa879b",
     "createdAt": "2026-05-26T04:13:04.012341+00:00",
-    "updatedAt": "2026-05-26T19:17:52.092440+00:00",
+    "updatedAt": "2026-05-26T19:21:10.705464+00:00",
     "activeBulkRunId": "planrun_f6f63a7f7525"
   }
 }

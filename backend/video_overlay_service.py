@@ -5,7 +5,6 @@ Re-render on-video text overlays for account plan posts.
 from __future__ import annotations
 
 import os
-import re
 import shutil
 import tempfile
 import threading
@@ -100,6 +99,26 @@ def _finalize_deliverable_video(job_id: str, post: Dict[str, Any], captioned_hoo
     return extended_path
 
 
+def _parse_caption_step_message(message: str) -> str:
+    """Extract caption text from a pipeline step message.
+
+    Messages are stored as ``Caption: "{caption}"``. Captions may contain
+    internal double quotes, so we strip the outer wrapping quotes instead of
+    matching with a non-greedy ``[^"]*`` pattern.
+    """
+    raw = str(message or "").strip()
+    if not raw.startswith("Caption:"):
+        return ""
+    payload = raw.split("Caption:", 1)[1].strip()
+    if not payload:
+        return ""
+    if payload.startswith('"'):
+        last_quote = payload.rfind('"')
+        if last_quote > 0:
+            return payload[1:last_quote]
+    return payload.strip('"')
+
+
 def _caption_from_generation(generation_id: str) -> str:
     generation = generation_store.get(generation_id)
     if not isinstance(generation, dict):
@@ -109,12 +128,9 @@ def _caption_from_generation(generation_id: str) -> str:
             continue
         if step.get("key") != "caption_detection":
             continue
-        message = str(step.get("message") or "")
-        match = re.search(r'Caption:\s*"([^"]*)"', message)
-        if match:
-            return match.group(1).strip()
-        if message.startswith("Caption:"):
-            return message.split("Caption:", 1)[1].strip().strip('"')
+        caption = _parse_caption_step_message(str(step.get("message") or ""))
+        if caption:
+            return caption
     return ""
 
 
@@ -142,12 +158,27 @@ def ensure_post_overlay_metadata(plan_id: str, slot: int) -> Optional[Dict[str, 
     job_id = str(post.get("jobId") or "")
     generation_id = str(post.get("generationId") or "")
 
-    if not post.get("videoOverlayOriginal"):
-        caption = _caption_from_generation(generation_id)
+    caption = _caption_from_generation(generation_id) if generation_id else ""
+    if caption:
         original = overlay_spec_from_caption(caption)
-        updates["videoOverlayOriginal"] = original
-        if not post.get("videoOverlay"):
-            updates["videoOverlay"] = dict(original)
+        stored_original = post.get("videoOverlayOriginal")
+        stored_overlay = post.get("videoOverlay")
+        stored_original_text = str((stored_original or {}).get("text") or "")
+
+        if not stored_original:
+            updates["videoOverlayOriginal"] = original
+            if not stored_overlay:
+                updates["videoOverlay"] = dict(original)
+        elif (
+            stored_original_text
+            and stored_original_text != caption
+            and caption.startswith(stored_original_text)
+        ):
+            # Repair captions truncated by the old [^"]* parser.
+            updates["videoOverlayOriginal"] = original
+            stored_overlay_text = str((stored_overlay or {}).get("text") or "")
+            if int(post.get("videoOverlayVersion") or 0) == 0 and stored_overlay_text == stored_original_text:
+                updates["videoOverlay"] = dict(original)
 
     if not post.get("rawVideoUrl") and job_id:
         local_raw = _local_raw_video_path(job_id)

@@ -4806,14 +4806,23 @@
     "completedAt": 1779769171.4548512,
     "output": {
       "jobId": "aa81b36f0019",
-      "videoUrl": "http://127.0.0.1:8000/api/jobs/aa81b36f0019/result",
+      "videoUrl": "http://127.0.0.1:8000/api/jobs/aa81b36f0019/result?v=1",
       "videoGcs": null,
       "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/aa81b36f0019/output/final_output.mp4",
       "plannerPlanId": "plan_7098d8aa879b",
       "plannerSlot": 2,
       "bulkRunId": "planrun_f6f63a7f7525",
       "modelId": "d80af5728954",
-      "extensionVideoId": ""
+      "extensionVideoId": "",
+      "videoOverlay": {
+        "enabled": true,
+        "text": "When your prof asks \"does anyone have any questions?\" but you don't even understand the topic enough to have a question in the first place",
+        "fontSize": 36,
+        "fontColor": "#FFFFFF",
+        "style": "minimal",
+        "verticalPosition": 0.55
+      },
+      "videoOverlayVersion": 1
     },
     "plannerPlanId": "plan_7098d8aa879b",
     "plannerSlot": 2,
@@ -4872,14 +4881,23 @@
     "completedAt": 1779769365.574645,
     "output": {
       "jobId": "b2c214bec058",
-      "videoUrl": "http://127.0.0.1:8000/api/jobs/b2c214bec058/result",
+      "videoUrl": "http://127.0.0.1:8000/api/jobs/b2c214bec058/result?v=1",
       "videoGcs": null,
       "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/b2c214bec058/output/final_output.mp4",
       "plannerPlanId": "plan_7098d8aa879b",
       "plannerSlot": 3,
       "bulkRunId": "planrun_f6f63a7f7525",
       "modelId": "d80af5728954",
-      "extensionVideoId": ""
+      "extensionVideoId": "",
+      "videoOverlay": {
+        "enabled": true,
+        "text": "When your professor won't round up your grade .01%",
+        "fontSize": 36,
+        "fontColor": "#FFFFFF",
+        "style": "classic",
+        "verticalPosition": 0.55
+      },
+      "videoOverlayVersion": 1
     },
     "plannerPlanId": "plan_7098d8aa879b",
     "plannerSlot": 3,
