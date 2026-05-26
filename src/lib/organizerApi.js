@@ -210,3 +210,21 @@ export async function swapAccountPlanPost({ planId, slot }) {
     method: 'POST',
   });
 }
+
+export async function getAccountPlanPostOverlay({ planId, slot }) {
+  return request(`/api/account-planner/plans/${encodeURIComponent(planId)}/posts/${encodeURIComponent(slot)}/overlay`);
+}
+
+export async function renderAccountPlanPostOverlay({ planId, slot, overlay }) {
+  return request(`/api/account-planner/plans/${encodeURIComponent(planId)}/posts/${encodeURIComponent(slot)}/overlay/render`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(overlay),
+  });
+}
+
+export async function revertAccountPlanPostOverlay({ planId, slot }) {
+  return request(`/api/account-planner/plans/${encodeURIComponent(planId)}/posts/${encodeURIComponent(slot)}/overlay/revert`, {
+    method: 'POST',
+  });
+}

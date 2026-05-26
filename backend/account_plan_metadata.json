@@ -32925,7 +32925,25 @@
         "extensionVideoId": "",
         "latePostId": "",
         "scheduleError": "",
-        "updatedAt": "2026-05-26T04:16:31.544628+00:00"
+        "updatedAt": "2026-05-26T18:38:14.939937+00:00",
+        "videoOverlayOriginal": {
+          "enabled": true,
+          "text": "exam season is over.",
+          "fontSize": 48,
+          "fontColor": "#FFFFFF",
+          "style": "classic",
+          "verticalPosition": 0.55
+        },
+        "videoOverlay": {
+          "enabled": true,
+          "text": "exam season is over.",
+          "fontSize": 48,
+          "fontColor": "#FFFFFF",
+          "style": "classic",
+          "verticalPosition": 0.55
+        },
+        "videoOverlayVersion": 0,
+        "rawVideoUrl": "http://127.0.0.1:8000/api/jobs/af7e6c7c9574/raw"
       },
       {
         "slot": 2,
@@ -32988,7 +33006,25 @@
         "extensionVideoId": "",
         "latePostId": "",
         "scheduleError": "",
-        "updatedAt": "2026-05-26T04:19:31.466806+00:00"
+        "updatedAt": "2026-05-26T18:31:18.055121+00:00",
+        "videoOverlayOriginal": {
+          "enabled": true,
+          "text": "When your prof asks",
+          "fontSize": 48,
+          "fontColor": "#FFFFFF",
+          "style": "classic",
+          "verticalPosition": 0.55
+        },
+        "videoOverlay": {
+          "enabled": true,
+          "text": "When your prof asks",
+          "fontSize": 48,
+          "fontColor": "#FFFFFF",
+          "style": "classic",
+          "verticalPosition": 0.55
+        },
+        "videoOverlayVersion": 0,
+        "rawVideoUrl": "http://127.0.0.1:8000/api/jobs/aa81b36f0019/raw"
       },
       {
         "slot": 3,
@@ -33051,7 +33087,25 @@
         "extensionVideoId": "",
         "latePostId": "",
         "scheduleError": "",
-        "updatedAt": "2026-05-26T04:22:45.585584+00:00"
+        "updatedAt": "2026-05-26T18:31:05.637976+00:00",
+        "videoOverlayOriginal": {
+          "enabled": true,
+          "text": "When your professor won't round up your grade .01%",
+          "fontSize": 48,
+          "fontColor": "#FFFFFF",
+          "style": "classic",
+          "verticalPosition": 0.55
+        },
+        "videoOverlay": {
+          "enabled": true,
+          "text": "When your professor won't round up your grade .01%",
+          "fontSize": 48,
+          "fontColor": "#FFFFFF",
+          "style": "classic",
+          "verticalPosition": 0.55
+        },
+        "videoOverlayVersion": 0,
+        "rawVideoUrl": "http://127.0.0.1:8000/api/jobs/b2c214bec058/raw"
       },
       {
         "slot": 4,
@@ -33096,7 +33150,7 @@
         "reviewStatus": "pending",
         "generationId": "744ed3376902",
         "jobId": "3966ef388f1d",
-        "generatedMediaUrl": "http://127.0.0.1:8000/api/jobs/3966ef388f1d/result",
+        "generatedMediaUrl": "http://127.0.0.1:8000/api/jobs/3966ef388f1d/result?v=5",
         "error": "",
         "keyTags": {
           "content_type": "hook_demo",
@@ -33115,12 +33169,30 @@
         "extensionVideoId": "167eab56f864",
         "latePostId": "",
         "scheduleError": "",
-        "updatedAt": "2026-05-26T04:25:05.217608+00:00"
+        "updatedAt": "2026-05-26T18:37:35.053581+00:00",
+        "videoOverlayOriginal": {
+          "enabled": true,
+          "text": "Unpopular opinion: ChatGPT is the worst way to study if you\u2019re a visual learner (I found something better)",
+          "fontSize": 48,
+          "fontColor": "#FFFFFF",
+          "style": "classic",
+          "verticalPosition": 0.55
+        },
+        "videoOverlay": {
+          "enabled": false,
+          "text": "Unpopular opinion: ChatGPT is the worst way to study if you\u2019re a visual learner (I found something better)",
+          "fontSize": 36,
+          "fontColor": "#FFFFFF",
+          "style": "classic",
+          "verticalPosition": 0.55
+        },
+        "videoOverlayVersion": 5,
+        "rawVideoUrl": "http://127.0.0.1:8000/api/jobs/3966ef388f1d/raw"
       }
     ],
     "id": "plan_7098d8aa879b",
     "createdAt": "2026-05-26T04:13:04.012341+00:00",
-    "updatedAt": "2026-05-26T04:25:05.248233+00:00",
+    "updatedAt": "2026-05-26T18:38:14.939947+00:00",
     "activeBulkRunId": "planrun_f6f63a7f7525"
   }
 }

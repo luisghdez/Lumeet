@@ -8,9 +8,11 @@ import {
   PlayCircle,
   RefreshCw,
   Sparkles,
+  Type,
   Video,
   X,
 } from 'lucide-react';
+import VideoOverlayEditor from './VideoOverlayEditor';
 import {
   createStudyTokSimplePlan,
   generateAccountPlanPosts,
@@ -27,6 +29,7 @@ import {
   listLateAccounts,
 } from '../lib/lateApi';
 import { useExtensionVideos, useModels } from '../lib/mediaLibrary';
+import { mediaUrlWithVersion } from '../lib/videoOverlayStyles';
 
 const DEFAULT_TIMES = ['09:00', '12:30', '16:30', '20:00'];
 
@@ -64,10 +67,11 @@ function formatSchedule(value) {
 function resolvePostMediaUrl(post) {
   if (!post) return '';
   const url = post.generatedMediaUrl || '';
-  if (url && !/\/api\/jobs\/[^/]+\/result(?:[?#].*)?$/.test(url)) {
-    return url;
-  }
-  return '';
+  if (!url) return '';
+  const baseUrl = url.split('?')[0];
+  const isJobResult = /\/api\/jobs\/[^/]+\/result$/.test(baseUrl);
+  if (isJobResult && !post.videoOverlayVersion) return '';
+  return mediaUrlWithVersion(url, post.videoOverlayVersion);
 }
 
 function summarizeBulkRuns(plan) {
@@ -398,8 +402,9 @@ function InlinePostVideo({ src, forcePaused = false }) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
+    setIsPlaying(false);
     if (forcePaused) videoRef.current?.pause();
-  }, [forcePaused]);
+  }, [src, forcePaused]);
 
   const togglePlay = () => {
     const video = videoRef.current;
@@ -415,6 +420,7 @@ function InlinePostVideo({ src, forcePaused = false }) {
     <div className="overflow-hidden rounded-2xl bg-white/10">
       <div className="relative aspect-[9/16] max-h-64 w-full">
         <video
+          key={src}
           ref={videoRef}
           src={src}
           className="h-full w-full object-cover"
@@ -477,6 +483,7 @@ function VideoPreviewLightbox({ src, title, onClose }) {
           </button>
         </div>
         <video
+          key={src}
           src={src}
           controls
           controlsList="nofullscreen nodownload noremoteplayback"
@@ -494,23 +501,27 @@ function VideoPreviewLightbox({ src, title, onClose }) {
 }
 
 function PostCard({
+  planId,
   post,
   canSchedule,
   canSwap,
+  canEditOverlay,
   selectedPlatforms,
   onPatchPost,
   onSchedulePost,
   onSwapPost,
+  onPlanUpdated,
   isScheduling,
   isSwapping,
 }) {
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [overlayEditorOpen, setOverlayEditorOpen] = useState(false);
   const source = post.sourceVideo || {};
   const tags = post.keyTags || {};
   const previewUrl = resolvePostMediaUrl(post);
   const generated = Boolean(previewUrl);
   const mediaPreview = previewUrl ? (
-    <InlinePostVideo src={previewUrl} forcePaused={previewOpen} />
+    <InlinePostVideo key={previewUrl} src={previewUrl} forcePaused={previewOpen || overlayEditorOpen} />
   ) : source.thumbnailUrl ? (
     <div className="overflow-hidden rounded-2xl bg-white/10">
       <div className="h-32 w-full">
@@ -589,6 +600,18 @@ function PostCard({
                   <PlayCircle size={14} aria-hidden />
                   Review
                 </button>
+                {canEditOverlay && (
+                  <button
+                    type="button"
+                    onClick={() => setOverlayEditorOpen(true)}
+                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl bg-white/10 px-3 py-2 text-xs font-semibold text-white/70 hover:bg-white/15"
+                  >
+                    <Type size={14} aria-hidden />
+                    Edit text
+                  </button>
+                )}
+              </div>
+              <div className="flex gap-2">
                 <button
                   type="button"
                   disabled={!canSchedule || isScheduling}
@@ -632,6 +655,14 @@ function PostCard({
           src={previewUrl}
           title={`Slot ${post.slot} preview`}
           onClose={() => setPreviewOpen(false)}
+        />
+      )}
+      {overlayEditorOpen && planId && (
+        <VideoOverlayEditor
+          planId={planId}
+          slot={post.slot}
+          onClose={() => setOverlayEditorOpen(false)}
+          onSaved={onPlanUpdated}
         />
       )}
     </article>
@@ -973,6 +1004,7 @@ function AccountPlanner({ onGenerationStarted }) {
   };
 
   const canSwapPosts = ['draft', 'approved'].includes(plan?.status) && !selectedBulkRunId;
+  const canEditOverlayPosts = Boolean(selectedBulkRunId) && ['generated', 'generation_failed', 'generating'].includes(plan?.status);
 
   const updateTime = (idx, value) => {
     setDailyTimes((items) => items.map((item, itemIdx) => (itemIdx === idx ? value : item)));
@@ -1226,13 +1258,19 @@ function AccountPlanner({ onGenerationStarted }) {
                 {visiblePosts.map((post) => (
                   <PostCard
                     key={post.slot}
+                    planId={plan.id}
                     post={post}
                     canSchedule={selectedPlatforms.length > 0 && post.reviewStatus !== 'scheduled'}
                     canSwap={canSwapPosts}
+                    canEditOverlay={canEditOverlayPosts}
                     selectedPlatforms={selectedPlatforms}
                     onPatchPost={handlePatchPost}
                     onSchedulePost={handleSchedulePost}
                     onSwapPost={handleSwapPost}
+                    onPlanUpdated={(nextPlan) => {
+                      setPlan(nextPlan);
+                      loadRecentPlans();
+                    }}
                     isScheduling={schedulingSlot === post.slot}
                     isSwapping={swappingSlot === post.slot}
                   />

@@ -4947,14 +4947,23 @@
     "completedAt": 1779769505.2093298,
     "output": {
       "jobId": "3966ef388f1d",
-      "videoUrl": "http://127.0.0.1:8000/api/jobs/3966ef388f1d/result",
+      "videoUrl": "http://127.0.0.1:8000/api/jobs/3966ef388f1d/result?v=5",
       "videoGcs": null,
       "resultPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/3966ef388f1d/output/extended_final_output.mp4",
       "plannerPlanId": "plan_7098d8aa879b",
       "plannerSlot": 4,
       "bulkRunId": "planrun_f6f63a7f7525",
       "modelId": "d80af5728954",
-      "extensionVideoId": "167eab56f864"
+      "extensionVideoId": "167eab56f864",
+      "videoOverlay": {
+        "enabled": false,
+        "text": "Unpopular opinion: ChatGPT is the worst way to study if you\u2019re a visual learner (I found something better)",
+        "fontSize": 36,
+        "fontColor": "#FFFFFF",
+        "style": "classic",
+        "verticalPosition": 0.55
+      },
+      "videoOverlayVersion": 5
     },
     "plannerPlanId": "plan_7098d8aa879b",
     "plannerSlot": 4,

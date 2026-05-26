@@ -71,6 +71,12 @@ from account_plan_generation_service import (
     schedule_generated_plan_posts,
     start_plan_generation,
 )
+from video_overlay_service import (
+    VideoOverlayError,
+    get_plan_post_overlay,
+    render_plan_post_overlay,
+    revert_plan_post_overlay,
+)
 from config import (
     PUBLIC_BACKEND_BASE_URL,
     GCS_VIDEO_OBJECT_PREFIX,
@@ -210,6 +216,12 @@ def _normalize_generation_record(item: Dict[str, Any]) -> Dict[str, Any]:
 def _normalize_plan_post(post: Dict[str, Any]) -> Dict[str, Any]:
     normalized = dict(post)
     generated_media_url = str(normalized.get("generatedMediaUrl") or "")
+    overlay_version = int(normalized.get("videoOverlayVersion") or 0)
+
+    if overlay_version > 0 and generated_media_url:
+        normalized["generatedMediaUrl"] = generated_media_url
+        return normalized
+
     stable_url = ""
     if generated_media_url and "/api/jobs/" not in generated_media_url:
         stable_url = generated_media_url
@@ -355,6 +367,15 @@ class AccountPlanPostPatchRequest(BaseModel):
     status: Optional[str] = Field(default=None, max_length=40)
     generatedMediaUrl: Optional[str] = Field(default=None, max_length=1000)
     latePostId: Optional[str] = Field(default=None, max_length=200)
+
+
+class AccountPlanOverlayRenderRequest(BaseModel):
+    enabled: bool = True
+    text: str = Field(default="", max_length=500)
+    fontSize: int = Field(default=48, ge=24, le=72)
+    fontColor: str = Field(default="#FFFFFF", max_length=20)
+    style: str = Field(default="classic", pattern=r"^(classic|bold|background|minimal)$")
+    verticalPosition: float = Field(default=0.55, ge=0.2, le=0.85)
 
 
 # ---------------------------------------------------------------------------
@@ -813,25 +834,49 @@ async def get_job_result(job_id: str):
     Returns 404 if the job doesn't exist, and 409 if it isn't complete yet.
     """
     job = job_manager.get_job(job_id)
-    if not job:
-        raise HTTPException(status_code=404, detail=f"Job {job_id} not found.")
+    if job:
+        if job.status == JobStatus.FAILED:
+            raise HTTPException(status_code=500, detail=f"Job failed: {job.error}")
 
-    if job.status == JobStatus.FAILED:
-        raise HTTPException(status_code=500, detail=f"Job failed: {job.error}")
+        if job.status != JobStatus.COMPLETED:
+            raise HTTPException(
+                status_code=409,
+                detail=f"Job is not complete yet (status: {job.status.value}).",
+            )
 
-    if job.status != JobStatus.COMPLETED:
-        raise HTTPException(
-            status_code=409,
-            detail=f"Job is not complete yet (status: {job.status.value}).",
+        if not job.result_path or not os.path.isfile(job.result_path):
+            raise HTTPException(status_code=500, detail="Result file not found on server.")
+
+        return FileResponse(
+            job.result_path,
+            media_type="video/mp4",
+            filename="lumeet_output.mp4",
         )
 
-    if not job.result_path or not os.path.isfile(job.result_path):
-        raise HTTPException(status_code=500, detail="Result file not found on server.")
+    result_path = os.path.join(JOBS_DIR, job_id, "output", "extended_final_output.mp4")
+    if not os.path.isfile(result_path):
+        result_path = os.path.join(JOBS_DIR, job_id, "output", "final_output.mp4")
+    if not os.path.isfile(result_path):
+        raise HTTPException(status_code=404, detail=f"Job {job_id} not found.")
 
     return FileResponse(
-        job.result_path,
+        result_path,
         media_type="video/mp4",
         filename="lumeet_output.mp4",
+    )
+
+
+@app.get("/api/jobs/{job_id}/raw")
+async def get_job_raw_video(job_id: str):
+    """Stream the captionless generated_raw.mp4 for overlay editing previews."""
+    raw_path = os.path.join(JOBS_DIR, job_id, "output", "generated_raw.mp4")
+    if not os.path.isfile(raw_path):
+        raise HTTPException(status_code=404, detail=f"Raw video for job {job_id} not found.")
+
+    return FileResponse(
+        raw_path,
+        media_type="video/mp4",
+        filename="generated_raw.mp4",
     )
 
 
@@ -1640,6 +1685,35 @@ async def swap_account_plan_post(plan_id: str, slot: int):
     try:
         return swap_studytok_plan_post(plan_id, slot)
     except AccountPlannerError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+
+
+@app.get("/api/account-planner/plans/{plan_id}/posts/{slot}/overlay")
+async def get_account_plan_post_overlay(plan_id: str, slot: int):
+    """Return current and original on-video overlay specs for a generated post."""
+    try:
+        return get_plan_post_overlay(plan_id, slot)
+    except VideoOverlayError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+
+
+@app.post("/api/account-planner/plans/{plan_id}/posts/{slot}/overlay/render")
+async def render_account_plan_post_overlay(plan_id: str, slot: int, payload: AccountPlanOverlayRenderRequest):
+    """Save overlay changes and re-render the final video from the captionless source."""
+    try:
+        plan = render_plan_post_overlay(plan_id, slot, payload.model_dump())
+        return _normalize_plan_record(plan)
+    except VideoOverlayError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+
+
+@app.post("/api/account-planner/plans/{plan_id}/posts/{slot}/overlay/revert")
+async def revert_account_plan_post_overlay(plan_id: str, slot: int):
+    """Restore the original overlay snapshot and re-render the final video."""
+    try:
+        plan = revert_plan_post_overlay(plan_id, slot)
+        return _normalize_plan_record(plan)
+    except VideoOverlayError as exc:
         raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
 
 

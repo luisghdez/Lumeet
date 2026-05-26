@@ -10,7 +10,7 @@ import subprocess
 
 import pytest
 
-from backend.caption_overlay import overlay_caption
+from backend.caption_overlay import copy_video_without_overlay, overlay_caption, render_video_overlay
 
 
 class TestOverlayCaption:
@@ -97,3 +97,32 @@ class TestOverlayCaption:
         orig_dur = get_dur(single_scene_video)
         new_dur = get_dur(output)
         assert abs(orig_dur - new_dur) < 0.5  # within 0.5s tolerance
+
+    def test_style_presets_render(self, single_scene_video, tmp_path):
+        for style in ("classic", "bold", "background", "minimal"):
+            output = os.path.join(str(tmp_path), f"{style}.mp4")
+            result = overlay_caption(
+                single_scene_video,
+                f"Style test {style}",
+                output_path=output,
+                text_color="#FFE135",
+                style=style,
+            )
+            assert os.path.isfile(result)
+            assert os.path.getsize(result) > 0
+
+    def test_render_video_overlay_disabled_copies_raw(self, single_scene_video, tmp_path):
+        output = os.path.join(str(tmp_path), "plain.mp4")
+        result = render_video_overlay(
+            single_scene_video,
+            {"enabled": False, "text": ""},
+            output_path=output,
+        )
+        assert os.path.isfile(result)
+        assert os.path.getsize(result) == os.path.getsize(single_scene_video)
+
+    def test_copy_video_without_overlay(self, single_scene_video, tmp_path):
+        output = os.path.join(str(tmp_path), "copied.mp4")
+        result = copy_video_without_overlay(single_scene_video, output)
+        assert result == output
+        assert os.path.isfile(result)

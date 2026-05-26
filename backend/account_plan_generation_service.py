@@ -22,6 +22,7 @@ from extension_video_metadata_store import extension_video_metadata_store
 from organizer_store import organizer_store
 from pipeline import run_full_pipeline
 from video_analysis_service import _download_video
+from video_overlay_styles import overlay_spec_from_caption
 
 
 JOBS_DIR = os.path.join(os.path.dirname(__file__), "jobs")
@@ -241,18 +242,26 @@ def _generate_post(
         cancel_check=lambda: job_manager.is_cancel_requested(job.id),
     )
     final_video = result.get("final_video", "")
+    raw_video = result.get("raw_video", "")
+    detected_caption = result.get("caption") or ""
+    overlay_spec = overlay_spec_from_caption(detected_caption)
     gcs_info = _upload_video_to_gcs(job.id, final_video)
+    raw_gcs_info = _upload_raw_video_to_gcs(job.id, raw_video)
     media_url = (gcs_info or {}).get("url", "")
+    raw_media_url = (raw_gcs_info or {}).get("url", "")
     output = {
         "jobId": job.id,
         "videoUrl": media_url,
         "videoGcs": gcs_info,
+        "rawVideoUrl": raw_media_url,
         "resultPath": final_video,
         "plannerPlanId": plan_id,
         "plannerSlot": slot,
         "bulkRunId": bulk_run_id,
         "modelId": model.get("modelId", ""),
         "extensionVideoId": (extension_video or {}).get("extensionVideoId", ""),
+        "videoOverlay": overlay_spec,
+        "videoOverlayOriginal": overlay_spec,
     }
     job.video_gcs = gcs_info
     job_manager.mark_completed(job.id, final_video, result)
@@ -267,6 +276,10 @@ def _generate_post(
         bulkRunId=bulk_run_id,
         modelId=model.get("modelId", ""),
         extensionVideoId=(extension_video or {}).get("extensionVideoId", ""),
+        rawVideoUrl=raw_media_url,
+        videoOverlay=overlay_spec,
+        videoOverlayOriginal=overlay_spec,
+        videoOverlayVersion=0,
         error="",
     )
 
@@ -491,6 +504,20 @@ def _upload_video_to_gcs(job_id: str, local_video_path: str) -> Optional[dict]:
         gcs = GcsStorage()
         ext = os.path.splitext(local_video_path)[1] or ".mp4"
         object_name = f"{GCS_VIDEO_OBJECT_PREFIX.strip('/')}/{job_id}/final_output{ext}"
+        return gcs.upload_file_public(local_video_path, object_name)
+    except Exception:
+        return None
+
+
+def _upload_raw_video_to_gcs(job_id: str, local_video_path: str) -> Optional[dict]:
+    if not local_video_path or not os.path.isfile(local_video_path):
+        return None
+    try:
+        from storage_gcs import GcsStorage
+
+        gcs = GcsStorage()
+        ext = os.path.splitext(local_video_path)[1] or ".mp4"
+        object_name = f"{GCS_VIDEO_OBJECT_PREFIX.strip('/')}/{job_id}/generated_raw{ext}"
         return gcs.upload_file_public(local_video_path, object_name)
     except Exception:
         return None
