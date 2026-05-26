@@ -197,6 +197,13 @@ export async function scheduleAccountPlanPosts(
   });
 }
 
+export async function deleteAccountPlanBulkRun(planId, bulkRunId) {
+  return request(
+    `/api/account-planner/plans/${encodeURIComponent(planId)}/bulk-runs/${encodeURIComponent(bulkRunId)}`,
+    { method: 'DELETE' },
+  );
+}
+
 export async function updateAccountPlanPost({ planId, slot, updates }) {
   return request(`/api/account-planner/plans/${encodeURIComponent(planId)}/posts/${encodeURIComponent(slot)}`, {
     method: 'PATCH',

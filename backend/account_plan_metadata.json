@@ -25074,7 +25074,7 @@
   "plan_587e6a7e6447": {
     "archetype": "studytok",
     "mode": "studytok_daily",
-    "status": "generation_failed",
+    "status": "approved",
     "settings": {
       "postCount": 4,
       "relatablePerDay": 3,
@@ -25145,12 +25145,12 @@
         "captionDraft": "I can\u2019t take it anymore\ud83d\ude2d\ud83d\ude2d\ud83d\ude2d #medstudent #studytok #mentalhealth #fyp #study",
         "suggestedScheduledFor": "2026-05-24T09:00:00",
         "timezone": "America/Ciudad_Juarez",
-        "status": "failed",
+        "status": "planned",
         "reviewStatus": "pending",
-        "generationId": "2cc45da08e95",
-        "jobId": "390376a0f2e8",
+        "generationId": "",
+        "jobId": "",
         "generatedMediaUrl": "",
-        "error": "[{'loc': ['body'], 'msg': 'The input was rejected, The duration of continuous valid motion is too short; it should last at least 3 second.', 'type': 'input_value_error', 'url': 'https://docs.fal.ai/errors#input_value_error', 'input': {'prompt': 'A young woman reacting to the camera', 'image_url': 'https://v3b.fal.media/files/b/0a9b8559/VjlpAx-RNORm1ROP2SHSJ_recreated_scene.png', 'video_url': 'https://v3b.fal.media/files/b/0a9b8559/SlRgoDsdpl6BNTRWoxCoR_reference_video.mp4', 'keep_original_sound': True, 'character_orientation': 'video'}}]",
+        "error": "",
         "keyTags": {
           "study_content_type": "relatable_student_problem",
           "study_pain_point": "burnout",
@@ -25163,12 +25163,16 @@
           "is_hook_then_demo": false,
           "scene_count": 1
         },
-        "bulkRunId": "planrun_6a18f77629d5",
-        "modelId": "dcfb0bc5015f",
+        "bulkRunId": "",
+        "modelId": "",
         "extensionVideoId": "",
         "latePostId": "",
         "scheduleError": "",
-        "updatedAt": "2026-05-24T17:30:24.890116+00:00"
+        "updatedAt": "2026-05-26T19:48:09.165234+00:00",
+        "rawVideoUrl": "",
+        "videoOverlay": null,
+        "videoOverlayOriginal": null,
+        "videoOverlayVersion": 0
       },
       {
         "slot": 2,
@@ -25210,11 +25214,11 @@
         "captionDraft": "always the sameeee\u2026where\u2018s my brainnn?!!! #studytok #study #student #medstudent #mentalhealth",
         "suggestedScheduledFor": "2026-05-24T12:30:00",
         "timezone": "America/Ciudad_Juarez",
-        "status": "generated",
+        "status": "planned",
         "reviewStatus": "pending",
-        "generationId": "0bf26037cc96",
-        "jobId": "b4c42dd5612b",
-        "generatedMediaUrl": "http://127.0.0.1:8000/api/jobs/b4c42dd5612b/result",
+        "generationId": "",
+        "jobId": "",
+        "generatedMediaUrl": "",
         "error": "",
         "keyTags": {
           "study_content_type": "relatable_student_problem",
@@ -25236,12 +25240,16 @@
             "swappedAt": "2026-05-24T17:28:36.754318"
           }
         ],
-        "updatedAt": "2026-05-24T17:32:57.893597+00:00",
-        "bulkRunId": "planrun_6a18f77629d5",
-        "modelId": "dcfb0bc5015f",
+        "updatedAt": "2026-05-26T19:48:09.165234+00:00",
+        "bulkRunId": "",
+        "modelId": "",
         "extensionVideoId": "",
         "latePostId": "",
-        "scheduleError": ""
+        "scheduleError": "",
+        "rawVideoUrl": "",
+        "videoOverlay": null,
+        "videoOverlayOriginal": null,
+        "videoOverlayVersion": 0
       },
       {
         "slot": 3,
@@ -25282,11 +25290,11 @@
         "captionDraft": "worst nightmare..yall agree??\ud83e\udeea\ud83e\udeea #medstudent #studytok #fyp #mentalhealth #student",
         "suggestedScheduledFor": "2026-05-24T16:30:00",
         "timezone": "America/Ciudad_Juarez",
-        "status": "generated",
+        "status": "planned",
         "reviewStatus": "pending",
-        "generationId": "0f43542f3cf2",
-        "jobId": "9f9cf6c75802",
-        "generatedMediaUrl": "http://127.0.0.1:8000/api/jobs/9f9cf6c75802/result",
+        "generationId": "",
+        "jobId": "",
+        "generatedMediaUrl": "",
         "error": "",
         "keyTags": {
           "study_content_type": "relatable_student_problem",
@@ -25300,12 +25308,16 @@
           "is_hook_then_demo": false,
           "scene_count": 1
         },
-        "bulkRunId": "planrun_6a18f77629d5",
-        "modelId": "dcfb0bc5015f",
+        "bulkRunId": "",
+        "modelId": "",
         "extensionVideoId": "",
         "latePostId": "",
         "scheduleError": "",
-        "updatedAt": "2026-05-24T17:37:23.053167+00:00"
+        "updatedAt": "2026-05-26T19:48:09.165234+00:00",
+        "rawVideoUrl": "",
+        "videoOverlay": null,
+        "videoOverlayOriginal": null,
+        "videoOverlayVersion": 0
       },
       {
         "slot": 4,
@@ -25350,11 +25362,11 @@
         "captionDraft": "This is a game changer \n\n#student #biology #studystudystudy",
         "suggestedScheduledFor": "2026-05-26T20:00",
         "timezone": "America/Ciudad_Juarez",
-        "status": "generated",
+        "status": "planned",
         "reviewStatus": "pending",
-        "generationId": "3786ee0ad925",
-        "jobId": "fee252022e83",
-        "generatedMediaUrl": "http://127.0.0.1:8000/api/jobs/fee252022e83/result",
+        "generationId": "",
+        "jobId": "",
+        "generatedMediaUrl": "",
         "error": "",
         "keyTags": {
           "study_content_type": "app_demo",
@@ -25376,18 +25388,22 @@
             "swappedAt": "2026-05-24T17:28:39.146073"
           }
         ],
-        "updatedAt": "2026-05-25T17:37:00.805053+00:00",
-        "bulkRunId": "planrun_6a18f77629d5",
-        "modelId": "dcfb0bc5015f",
-        "extensionVideoId": "167eab56f864",
+        "updatedAt": "2026-05-26T19:48:09.165234+00:00",
+        "bulkRunId": "",
+        "modelId": "",
+        "extensionVideoId": "",
         "latePostId": "",
-        "scheduleError": ""
+        "scheduleError": "",
+        "rawVideoUrl": "",
+        "videoOverlay": null,
+        "videoOverlayOriginal": null,
+        "videoOverlayVersion": 0
       }
     ],
     "id": "plan_587e6a7e6447",
     "createdAt": "2026-05-24T17:28:32.604225+00:00",
-    "updatedAt": "2026-05-25T17:37:00.805071+00:00",
-    "activeBulkRunId": "planrun_6a18f77629d5"
+    "updatedAt": "2026-05-26T19:48:09.201115+00:00",
+    "activeBulkRunId": ""
   },
   "plan_2460db07deed": {
     "archetype": "studytok",
@@ -32538,7 +32554,7 @@
   "plan_44ac6214b4eb": {
     "archetype": "studytok",
     "mode": "studytok_daily",
-    "status": "generation_failed",
+    "status": "approved",
     "settings": {
       "postCount": 4,
       "relatablePerDay": 3,
@@ -32608,12 +32624,12 @@
         "captionDraft": "\ud83e\udd79\ud83e\udd79\ud83d\ude2d #studytok #fyp #mentalhealth #medstudent #studying",
         "suggestedScheduledFor": "2026-05-25T09:00:00",
         "timezone": "America/Ciudad_Juarez",
-        "status": "failed",
+        "status": "planned",
         "reviewStatus": "pending",
-        "generationId": "cdca09594e00",
-        "jobId": "40e7c7d22a30",
+        "generationId": "",
+        "jobId": "",
         "generatedMediaUrl": "",
-        "error": "The video URL returned HTML instead of media. Re-scan with a provider that returns direct media URLs. | yt-dlp could not resolve/download this TikTok URL: ERROR: [TikTok] 7607160029715827970: Unable to extract webpage video data; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U | Apify returned media URLs, but none were downloadable. Video download failed (403).; retry with referer failed: Video download failed (403).",
+        "error": "",
         "keyTags": {
           "content_type": "relatable_content",
           "niche": "education",
@@ -32626,12 +32642,16 @@
           "is_single_scene": true,
           "scene_count": 1
         },
-        "bulkRunId": "planrun_a0360c339f02",
-        "modelId": "d80af5728954",
+        "bulkRunId": "",
+        "modelId": "",
         "extensionVideoId": "",
         "latePostId": "",
         "scheduleError": "",
-        "updatedAt": "2026-05-26T04:05:15.916906+00:00"
+        "updatedAt": "2026-05-26T19:48:12.183136+00:00",
+        "rawVideoUrl": "",
+        "videoOverlay": null,
+        "videoOverlayOriginal": null,
+        "videoOverlayVersion": 0
       },
       {
         "slot": 2,
@@ -32671,12 +32691,12 @@
         "captionDraft": "A slight chin rub to pretend I\u2019m capable of thinking #studying #college #collegelife #collegestudent #relateable",
         "suggestedScheduledFor": "2026-05-25T12:30:00",
         "timezone": "America/Ciudad_Juarez",
-        "status": "failed",
+        "status": "planned",
         "reviewStatus": "pending",
-        "generationId": "7e7c3bb19e09",
-        "jobId": "86e655921eea",
+        "generationId": "",
+        "jobId": "",
         "generatedMediaUrl": "",
-        "error": "The video URL returned HTML instead of media. Re-scan with a provider that returns direct media URLs. | yt-dlp could not resolve/download this TikTok URL: ERROR: [TikTok] 7610256415252434189: Unable to extract webpage video data; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U | Apify returned media URLs, but none were downloadable. Video download failed (403).; retry with referer failed: Video download failed (403).",
+        "error": "",
         "keyTags": {
           "content_type": "relatable_content",
           "niche": "education",
@@ -32689,12 +32709,16 @@
           "is_single_scene": true,
           "scene_count": 1
         },
-        "bulkRunId": "planrun_a0360c339f02",
-        "modelId": "d80af5728954",
+        "bulkRunId": "",
+        "modelId": "",
         "extensionVideoId": "",
         "latePostId": "",
         "scheduleError": "",
-        "updatedAt": "2026-05-26T04:05:29.249861+00:00"
+        "updatedAt": "2026-05-26T19:48:12.183136+00:00",
+        "rawVideoUrl": "",
+        "videoOverlay": null,
+        "videoOverlayOriginal": null,
+        "videoOverlayVersion": 0
       },
       {
         "slot": 3,
@@ -32734,12 +32758,12 @@
         "captionDraft": "Like come on #college #relatable #studytok #finals #collegelife",
         "suggestedScheduledFor": "2026-05-25T16:30:00",
         "timezone": "America/Ciudad_Juarez",
-        "status": "failed",
+        "status": "planned",
         "reviewStatus": "pending",
-        "generationId": "55361f8b6d7e",
-        "jobId": "016eff2b88b3",
+        "generationId": "",
+        "jobId": "",
         "generatedMediaUrl": "",
-        "error": "The video URL returned HTML instead of media. Re-scan with a provider that returns direct media URLs. | yt-dlp could not resolve/download this TikTok URL: ERROR: [TikTok] 7638472291499740429: Unable to extract webpage video data; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U | Apify returned media URLs, but none were downloadable. Video download failed (403).; retry with referer failed: Video download failed (403).",
+        "error": "",
         "keyTags": {
           "content_type": "relatable_content",
           "niche": "education",
@@ -32752,12 +32776,16 @@
           "is_single_scene": true,
           "scene_count": 1
         },
-        "bulkRunId": "planrun_a0360c339f02",
-        "modelId": "d80af5728954",
+        "bulkRunId": "",
+        "modelId": "",
         "extensionVideoId": "",
         "latePostId": "",
         "scheduleError": "",
-        "updatedAt": "2026-05-26T04:05:42.121113+00:00"
+        "updatedAt": "2026-05-26T19:48:12.183136+00:00",
+        "rawVideoUrl": "",
+        "videoOverlay": null,
+        "videoOverlayOriginal": null,
+        "videoOverlayVersion": 0
       },
       {
         "slot": 4,
@@ -32798,12 +32826,12 @@
         "captionDraft": "As a visual learner this changed the game \ud83e\udd2f\n\n#college #student #finalsweek #uni",
         "suggestedScheduledFor": "2026-05-25T20:00:00",
         "timezone": "America/Ciudad_Juarez",
-        "status": "failed",
+        "status": "planned",
         "reviewStatus": "pending",
-        "generationId": "9f0c512621dc",
-        "jobId": "f8e9531cc82b",
+        "generationId": "",
+        "jobId": "",
         "generatedMediaUrl": "",
-        "error": "The video URL returned HTML instead of media. Re-scan with a provider that returns direct media URLs. | yt-dlp could not resolve/download this TikTok URL: ERROR: [TikTok] 7634383581770534158: Unable to extract webpage video data; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U | Apify returned media URLs, but none were downloadable. Video download failed (403).; retry with referer failed: Video download failed (403).",
+        "error": "",
         "keyTags": {
           "content_type": "hook_demo",
           "niche": "education",
@@ -32816,18 +32844,22 @@
           "is_single_scene": false,
           "scene_count": 4
         },
-        "bulkRunId": "planrun_a0360c339f02",
-        "modelId": "d80af5728954",
-        "extensionVideoId": "167eab56f864",
+        "bulkRunId": "",
+        "modelId": "",
+        "extensionVideoId": "",
         "latePostId": "",
         "scheduleError": "",
-        "updatedAt": "2026-05-26T04:05:55.944180+00:00"
+        "updatedAt": "2026-05-26T19:48:12.183136+00:00",
+        "rawVideoUrl": "",
+        "videoOverlay": null,
+        "videoOverlayOriginal": null,
+        "videoOverlayVersion": 0
       }
     ],
     "id": "plan_44ac6214b4eb",
     "createdAt": "2026-05-26T04:03:55.509989+00:00",
-    "updatedAt": "2026-05-26T04:05:55.977974+00:00",
-    "activeBulkRunId": "planrun_a0360c339f02"
+    "updatedAt": "2026-05-26T19:48:12.222346+00:00",
+    "activeBulkRunId": ""
   },
   "plan_7098d8aa879b": {
     "archetype": "studytok",
@@ -33194,5 +33226,902 @@
     "createdAt": "2026-05-26T04:13:04.012341+00:00",
     "updatedAt": "2026-05-26T19:43:37.998265+00:00",
     "activeBulkRunId": "planrun_f6f63a7f7525"
+  },
+  "plan_6f7f28b6f05b": {
+    "archetype": "studytok",
+    "mode": "studytok_daily",
+    "status": "draft",
+    "settings": {
+      "postCount": 15,
+      "relatablePerDay": 2,
+      "hookDemoPerDay": 1,
+      "startDate": "2026-05-27",
+      "dailyTimes": [
+        "09:00",
+        "12:30",
+        "16:30"
+      ],
+      "timezone": "America/Denver"
+    },
+    "source": {
+      "taggedVideoCount": 176,
+      "relatableCandidates": 104,
+      "hookDemoCandidates": 8
+    },
+    "contentMix": [
+      {
+        "purpose": "relatable",
+        "count": 10,
+        "percentage": 67
+      },
+      {
+        "purpose": "hook_demo",
+        "count": 5,
+        "percentage": 33
+      }
+    ],
+    "plannedPosts": [
+      {
+        "slot": 1,
+        "purpose": "relatable",
+        "label": "Relatable content video",
+        "targetTags": {
+          "content_type": [
+            "relatable_content"
+          ],
+          "is_single_scene": [
+            true
+          ]
+        },
+        "durationTargetSec": {
+          "min": 3,
+          "max": 10
+        },
+        "creativeNotes": "Recreate short single-scene relatable content. Prefer clips under 10 seconds because they are easiest to replicate.",
+        "videoReferenceId": "vidref_31ee7ba3b136bd6f",
+        "sourceVideo": {
+          "id": "vidref_31ee7ba3b136bd6f",
+          "url": "https://www.tiktok.com/@lauraonedge/video/7607160029715827970",
+          "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-no1a-p-0037-no/okwUCf31DF6pF2eE1SEDgEI8kBkIDxpgqURp9A~tplv-tiktokx-origin.image?dr=9636&x-expires=1779739200&x-signature=Vxra3HDW7beRSgrK1cbDlLQ1Pik%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+          "creatorHandle": "lauraonedge",
+          "caption": "\ud83e\udd79\ud83e\udd79\ud83d\ude2d #studytok #fyp #mentalhealth #medstudent #studying",
+          "durationSec": 5.767,
+          "sceneCount": 1
+        },
+        "selectionReasons": [
+          "6s under 10s",
+          "single scene",
+          "relatable content",
+          "easy to replicate"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "\ud83e\udd79\ud83e\udd79\ud83d\ude2d #studytok #fyp #mentalhealth #medstudent #studying",
+        "suggestedScheduledFor": "2026-05-27T09:00:00",
+        "timezone": "America/Denver",
+        "status": "planned",
+        "reviewStatus": "pending",
+        "generationId": "",
+        "jobId": "",
+        "generatedMediaUrl": "",
+        "error": "",
+        "keyTags": {
+          "content_type": "relatable_content",
+          "niche": "education",
+          "sub_niche": "student_life",
+          "product_kind": "none",
+          "product_name": "",
+          "product_category": "unknown",
+          "scene_type": "single_room",
+          "is_easy_to_replicate": true,
+          "is_single_scene": true,
+          "scene_count": 1
+        }
+      },
+      {
+        "slot": 2,
+        "purpose": "relatable",
+        "label": "Relatable content video",
+        "targetTags": {
+          "content_type": [
+            "relatable_content"
+          ],
+          "is_single_scene": [
+            true
+          ]
+        },
+        "durationTargetSec": {
+          "min": 3,
+          "max": 10
+        },
+        "creativeNotes": "Recreate short single-scene relatable content. Prefer clips under 10 seconds because they are easiest to replicate.",
+        "videoReferenceId": "vidref_fd818b8c3dfd4240",
+        "sourceVideo": {
+          "id": "vidref_fd818b8c3dfd4240",
+          "url": "https://www.tiktok.com/@dgrindstaff/video/7610256415252434189",
+          "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osj7giAUaEP8E4qrA8BQiBCIQEBiPZ9dKPg0I~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=iMoDBjtA2YnhPGYlPr5E%2B26LoOY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+          "creatorHandle": "dgrindstaff",
+          "caption": "A slight chin rub to pretend I\u2019m capable of thinking #studying #college #collegelife #collegestudent #relateable",
+          "durationSec": 5.233,
+          "sceneCount": 1
+        },
+        "selectionReasons": [
+          "5s under 10s",
+          "single scene",
+          "relatable content",
+          "easy to replicate"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "A slight chin rub to pretend I\u2019m capable of thinking #studying #college #collegelife #collegestudent #relateable",
+        "suggestedScheduledFor": "2026-05-27T12:30:00",
+        "timezone": "America/Denver",
+        "status": "planned",
+        "reviewStatus": "pending",
+        "generationId": "",
+        "jobId": "",
+        "generatedMediaUrl": "",
+        "error": "",
+        "keyTags": {
+          "content_type": "relatable_content",
+          "niche": "education",
+          "sub_niche": "student_life",
+          "product_kind": "none",
+          "product_name": "",
+          "product_category": "unknown",
+          "scene_type": "single_room",
+          "is_easy_to_replicate": true,
+          "is_single_scene": true,
+          "scene_count": 1
+        }
+      },
+      {
+        "slot": 3,
+        "purpose": "hook_demo",
+        "label": "Hook + demo video",
+        "targetTags": {
+          "content_type": [
+            "hook_demo"
+          ],
+          "product_kind": [
+            "app",
+            "physical_product",
+            "brand_or_service",
+            "unknown"
+          ]
+        },
+        "durationTargetSec": {
+          "min": 10,
+          "max": 25
+        },
+        "creativeNotes": "Use the source as the hook/reference, then append the account demo extension in the generation pipeline.",
+        "videoReferenceId": "vidref_8649f1203aff652f",
+        "sourceVideo": {
+          "id": "vidref_8649f1203aff652f",
+          "url": "https://www.tiktok.com/@sophc.studies/video/7634383581770534158",
+          "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4jI8fizRSqnsyp4CqF8xUwEBvA0iBB7EAj0LI~tplv-tiktokx-origin.image?dr=9636&x-expires=1778511600&x-signature=Z87xD8N7SaFmy4fzMcKJeODd1s4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+          "creatorHandle": "sophc.studies",
+          "caption": "As a visual learner this changed the game \ud83e\udd2f\n\n#college #student #finalsweek #uni",
+          "durationSec": 7.8,
+          "sceneCount": 4
+        },
+        "selectionReasons": [
+          "hook demo",
+          "app identified"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "As a visual learner this changed the game \ud83e\udd2f\n\n#college #student #finalsweek #uni",
+        "suggestedScheduledFor": "2026-05-27T16:30:00",
+        "timezone": "America/Denver",
+        "status": "planned",
+        "reviewStatus": "pending",
+        "generationId": "",
+        "jobId": "",
+        "generatedMediaUrl": "",
+        "error": "",
+        "keyTags": {
+          "content_type": "hook_demo",
+          "niche": "education",
+          "sub_niche": "student_life",
+          "product_kind": "app",
+          "product_name": "",
+          "product_category": "study_app",
+          "scene_type": "multi_scene",
+          "is_easy_to_replicate": false,
+          "is_single_scene": false,
+          "scene_count": 4
+        }
+      },
+      {
+        "slot": 4,
+        "purpose": "relatable",
+        "label": "Relatable content video",
+        "targetTags": {
+          "content_type": [
+            "relatable_content"
+          ],
+          "is_single_scene": [
+            true
+          ]
+        },
+        "durationTargetSec": {
+          "min": 3,
+          "max": 10
+        },
+        "creativeNotes": "Recreate short single-scene relatable content. Prefer clips under 10 seconds because they are easiest to replicate.",
+        "videoReferenceId": "vidref_c7c987f14a5990f1",
+        "sourceVideo": {
+          "id": "vidref_c7c987f14a5990f1",
+          "url": "https://www.tiktok.com/@dgrindstaff/video/7638472291499740429",
+          "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oYixIYL6fpkdbzTBHCGAQwARjXUATCEIipIfer~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=WtZE1hk1diBQru4FqGzqjiK3Ybo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+          "creatorHandle": "dgrindstaff",
+          "caption": "Like come on #college #relatable #studytok #finals #collegelife",
+          "durationSec": 5.667,
+          "sceneCount": 1
+        },
+        "selectionReasons": [
+          "6s under 10s",
+          "single scene",
+          "relatable content",
+          "easy to replicate"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "Like come on #college #relatable #studytok #finals #collegelife",
+        "suggestedScheduledFor": "2026-05-28T09:00:00",
+        "timezone": "America/Denver",
+        "status": "planned",
+        "reviewStatus": "pending",
+        "generationId": "",
+        "jobId": "",
+        "generatedMediaUrl": "",
+        "error": "",
+        "keyTags": {
+          "content_type": "relatable_content",
+          "niche": "education",
+          "sub_niche": "student_life",
+          "product_kind": "none",
+          "product_name": "",
+          "product_category": "unknown",
+          "scene_type": "single_room",
+          "is_easy_to_replicate": true,
+          "is_single_scene": true,
+          "scene_count": 1
+        }
+      },
+      {
+        "slot": 5,
+        "purpose": "relatable",
+        "label": "Relatable content video",
+        "targetTags": {
+          "content_type": [
+            "relatable_content"
+          ],
+          "is_single_scene": [
+            true
+          ]
+        },
+        "durationTargetSec": {
+          "min": 3,
+          "max": 10
+        },
+        "creativeNotes": "Recreate short single-scene relatable content. Prefer clips under 10 seconds because they are easiest to replicate.",
+        "videoReferenceId": "vidref_3e51f8324db60cf3",
+        "sourceVideo": {
+          "id": "vidref_3e51f8324db60cf3",
+          "url": "https://www.tiktok.com/@dgrindstaff/video/7637956472927735053",
+          "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUYgrO8QTAfQnRZIHAFIGzAJAYB7WsRYMWfvee~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=ULvnWlyRuszBstr5i%2Ftx0CAOn4o%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+          "creatorHandle": "dgrindstaff",
+          "caption": "Worst they can do is say no #college #relatable #canvas #finals #collegelife",
+          "durationSec": 5.833,
+          "sceneCount": 1
+        },
+        "selectionReasons": [
+          "6s under 10s",
+          "single scene",
+          "relatable content",
+          "easy to replicate"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "Worst they can do is say no #college #relatable #canvas #finals #collegelife",
+        "suggestedScheduledFor": "2026-05-28T12:30:00",
+        "timezone": "America/Denver",
+        "status": "planned",
+        "reviewStatus": "pending",
+        "generationId": "",
+        "jobId": "",
+        "generatedMediaUrl": "",
+        "error": "",
+        "keyTags": {
+          "content_type": "relatable_content",
+          "niche": "education",
+          "sub_niche": "student_life",
+          "product_kind": "none",
+          "product_name": "",
+          "product_category": "unknown",
+          "scene_type": "single_room",
+          "is_easy_to_replicate": true,
+          "is_single_scene": true,
+          "scene_count": 1
+        }
+      },
+      {
+        "slot": 6,
+        "purpose": "hook_demo",
+        "label": "Hook + demo video",
+        "targetTags": {
+          "content_type": [
+            "hook_demo"
+          ],
+          "product_kind": [
+            "app",
+            "physical_product",
+            "brand_or_service",
+            "unknown"
+          ]
+        },
+        "durationTargetSec": {
+          "min": 10,
+          "max": 25
+        },
+        "creativeNotes": "Use the source as the hook/reference, then append the account demo extension in the generation pipeline.",
+        "videoReferenceId": "vidref_325fb291147b4025",
+        "sourceVideo": {
+          "id": "vidref_325fb291147b4025",
+          "url": "https://www.tiktok.com/@sophc.studies/video/7633291596468931870",
+          "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oolOEbibAbKVvtkuiABAIme2I20A5BDCA7iLvT~tplv-tiktokx-origin.image?dr=9636&x-expires=1778511600&x-signature=qQR68b4xTn%2BDKB1XHIerLMo%2FTjE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+          "creatorHandle": "sophc.studies",
+          "caption": "me bc im a visual learner \n\n#student #visuallearning #finalsweek #college",
+          "durationSec": 6.867,
+          "sceneCount": 4
+        },
+        "selectionReasons": [
+          "hook demo",
+          "app identified"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "me bc im a visual learner \n\n#student #visuallearning #finalsweek #college",
+        "suggestedScheduledFor": "2026-05-28T16:30:00",
+        "timezone": "America/Denver",
+        "status": "planned",
+        "reviewStatus": "pending",
+        "generationId": "",
+        "jobId": "",
+        "generatedMediaUrl": "",
+        "error": "",
+        "keyTags": {
+          "content_type": "hook_demo",
+          "niche": "education",
+          "sub_niche": "student_life",
+          "product_kind": "app",
+          "product_name": "",
+          "product_category": "study_app",
+          "scene_type": "desk_setup",
+          "is_easy_to_replicate": false,
+          "is_single_scene": false,
+          "scene_count": 4
+        }
+      },
+      {
+        "slot": 7,
+        "purpose": "relatable",
+        "label": "Relatable content video",
+        "targetTags": {
+          "content_type": [
+            "relatable_content"
+          ],
+          "is_single_scene": [
+            true
+          ]
+        },
+        "durationTargetSec": {
+          "min": 3,
+          "max": 10
+        },
+        "creativeNotes": "Recreate short single-scene relatable content. Prefer clips under 10 seconds because they are easiest to replicate.",
+        "videoReferenceId": "vidref_dc2adaa676116f42",
+        "sourceVideo": {
+          "id": "vidref_dc2adaa676116f42",
+          "url": "https://www.tiktok.com/@dgrindstaff/video/7637317293214600462",
+          "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oIiaIJSRFEwpwvBLDAgiUf7CIvMtpeiBXDlx9A~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=idrd6Dj8ftU7ijmf0LBhjcS9wfA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+          "creatorHandle": "dgrindstaff",
+          "caption": "Best news ever #college #relatable #canvas #hackers #finals",
+          "durationSec": 6.133,
+          "sceneCount": 1
+        },
+        "selectionReasons": [
+          "6s under 10s",
+          "single scene",
+          "relatable content",
+          "easy to replicate"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "Best news ever #college #relatable #canvas #hackers #finals",
+        "suggestedScheduledFor": "2026-05-29T09:00:00",
+        "timezone": "America/Denver",
+        "status": "planned",
+        "reviewStatus": "pending",
+        "generationId": "",
+        "jobId": "",
+        "generatedMediaUrl": "",
+        "error": "",
+        "keyTags": {
+          "content_type": "relatable_content",
+          "niche": "education",
+          "sub_niche": "student_life",
+          "product_kind": "none",
+          "product_name": "",
+          "product_category": "unknown",
+          "scene_type": "single_room",
+          "is_easy_to_replicate": true,
+          "is_single_scene": true,
+          "scene_count": 1
+        }
+      },
+      {
+        "slot": 8,
+        "purpose": "relatable",
+        "label": "Relatable content video",
+        "targetTags": {
+          "content_type": [
+            "relatable_content"
+          ],
+          "is_single_scene": [
+            true
+          ]
+        },
+        "durationTargetSec": {
+          "min": 3,
+          "max": 10
+        },
+        "creativeNotes": "Recreate short single-scene relatable content. Prefer clips under 10 seconds because they are easiest to replicate.",
+        "videoReferenceId": "vidref_df756a82d1ff306b",
+        "sourceVideo": {
+          "id": "vidref_df756a82d1ff306b",
+          "url": "https://www.tiktok.com/@dgrindstaff/video/7637248276139379981",
+          "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/okIDTfDgXl7PICGMMbQHSESAE7kO8tZIfAfFj9~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=MLHguWi0%2B%2BSE8OHBj85TdwxC1JI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+          "creatorHandle": "dgrindstaff",
+          "caption": "Kidding but not kidding\u2026 #college #relatable #studytok #collegelife #finalsweek",
+          "durationSec": 8.2,
+          "sceneCount": 1
+        },
+        "selectionReasons": [
+          "8s under 10s",
+          "single scene",
+          "relatable content",
+          "easy to replicate"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "Kidding but not kidding\u2026 #college #relatable #studytok #collegelife #finalsweek",
+        "suggestedScheduledFor": "2026-05-29T12:30:00",
+        "timezone": "America/Denver",
+        "status": "planned",
+        "reviewStatus": "pending",
+        "generationId": "",
+        "jobId": "",
+        "generatedMediaUrl": "",
+        "error": "",
+        "keyTags": {
+          "content_type": "relatable_content",
+          "niche": "education",
+          "sub_niche": "student_life",
+          "product_kind": "none",
+          "product_name": "",
+          "product_category": "unknown",
+          "scene_type": "single_room",
+          "is_easy_to_replicate": true,
+          "is_single_scene": true,
+          "scene_count": 1
+        }
+      },
+      {
+        "slot": 9,
+        "purpose": "hook_demo",
+        "label": "Hook + demo video",
+        "targetTags": {
+          "content_type": [
+            "hook_demo"
+          ],
+          "product_kind": [
+            "app",
+            "physical_product",
+            "brand_or_service",
+            "unknown"
+          ]
+        },
+        "durationTargetSec": {
+          "min": 10,
+          "max": 25
+        },
+        "creativeNotes": "Use the source as the hook/reference, then append the account demo extension in the generation pipeline.",
+        "videoReferenceId": "vidref_ee986e4b20770d59",
+        "sourceVideo": {
+          "id": "vidref_ee986e4b20770d59",
+          "url": "https://www.tiktok.com/@sophc.studies/video/7632481389295832351",
+          "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oMAsRAiIpIVZEMEhBB7FAfSEQlDCEXAUDAfUX2~tplv-tiktokx-origin.image?dr=9636&x-expires=1778511600&x-signature=7SzGeD0DS%2F3YXBAbumXfi5yBxIk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+          "creatorHandle": "sophc.studies",
+          "caption": "why was he gatekeeping this?? \ud83d\ude2d\n\n#student #finalsweek #college #uni",
+          "durationSec": 11.767,
+          "sceneCount": 10
+        },
+        "selectionReasons": [
+          "hook demo",
+          "app identified"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "why was he gatekeeping this?? \ud83d\ude2d\n\n#student #finalsweek #college #uni",
+        "suggestedScheduledFor": "2026-05-29T16:30:00",
+        "timezone": "America/Denver",
+        "status": "planned",
+        "reviewStatus": "pending",
+        "generationId": "",
+        "jobId": "",
+        "generatedMediaUrl": "",
+        "error": "",
+        "keyTags": {
+          "content_type": "hook_demo",
+          "niche": "education",
+          "sub_niche": "study_tips",
+          "product_kind": "app",
+          "product_name": "",
+          "product_category": "study_app",
+          "scene_type": "desk_setup",
+          "is_easy_to_replicate": false,
+          "is_single_scene": false,
+          "scene_count": 10
+        }
+      },
+      {
+        "slot": 10,
+        "purpose": "relatable",
+        "label": "Relatable content video",
+        "targetTags": {
+          "content_type": [
+            "relatable_content"
+          ],
+          "is_single_scene": [
+            true
+          ]
+        },
+        "durationTargetSec": {
+          "min": 3,
+          "max": 10
+        },
+        "creativeNotes": "Recreate short single-scene relatable content. Prefer clips under 10 seconds because they are easiest to replicate.",
+        "videoReferenceId": "vidref_81d37f7099232836",
+        "sourceVideo": {
+          "id": "vidref_81d37f7099232836",
+          "url": "https://www.tiktok.com/@dgrindstaff/video/7636914985112751374",
+          "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4dIff87HATjDIVIEX7EAPCkxHeFI9EXTHXgaP~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=vsTt3CEs9E1a7oDFevA5hpMoxOI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+          "creatorHandle": "dgrindstaff",
+          "caption": "Cannot wait #college #relatable #studytok #collegelife #finalsweek",
+          "durationSec": 7.933,
+          "sceneCount": 1
+        },
+        "selectionReasons": [
+          "8s under 10s",
+          "single scene",
+          "relatable content",
+          "easy to replicate"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "Cannot wait #college #relatable #studytok #collegelife #finalsweek",
+        "suggestedScheduledFor": "2026-05-30T09:00:00",
+        "timezone": "America/Denver",
+        "status": "planned",
+        "reviewStatus": "pending",
+        "generationId": "",
+        "jobId": "",
+        "generatedMediaUrl": "",
+        "error": "",
+        "keyTags": {
+          "content_type": "relatable_content",
+          "niche": "education",
+          "sub_niche": "student_life",
+          "product_kind": "none",
+          "product_name": "",
+          "product_category": "unknown",
+          "scene_type": "single_room",
+          "is_easy_to_replicate": true,
+          "is_single_scene": true,
+          "scene_count": 1
+        }
+      },
+      {
+        "slot": 11,
+        "purpose": "relatable",
+        "label": "Relatable content video",
+        "targetTags": {
+          "content_type": [
+            "relatable_content"
+          ],
+          "is_single_scene": [
+            true
+          ]
+        },
+        "durationTargetSec": {
+          "min": 3,
+          "max": 10
+        },
+        "creativeNotes": "Recreate short single-scene relatable content. Prefer clips under 10 seconds because they are easiest to replicate.",
+        "videoReferenceId": "vidref_53b9a8b8c6e81666",
+        "sourceVideo": {
+          "id": "vidref_53b9a8b8c6e81666",
+          "url": "https://www.tiktok.com/@dgrindstaff/video/7636520579075558670",
+          "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osAHDyN6OyTIfClRgbDl2Iz5keXjEvFAaZTIaf~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=hq4JUB5KkU9itCqKrE0Xg7nKtlk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+          "creatorHandle": "dgrindstaff",
+          "caption": "A slight chin rub to pretend I\u2019m capable of thinking #college #relatable #studytok #collegelife #finalsweek",
+          "durationSec": 5.833,
+          "sceneCount": 1
+        },
+        "selectionReasons": [
+          "6s under 10s",
+          "single scene",
+          "relatable content",
+          "easy to replicate"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "A slight chin rub to pretend I\u2019m capable of thinking #college #relatable #studytok #collegelife #finalsweek",
+        "suggestedScheduledFor": "2026-05-30T12:30:00",
+        "timezone": "America/Denver",
+        "status": "planned",
+        "reviewStatus": "pending",
+        "generationId": "",
+        "jobId": "",
+        "generatedMediaUrl": "",
+        "error": "",
+        "keyTags": {
+          "content_type": "relatable_content",
+          "niche": "education",
+          "sub_niche": "student_life",
+          "product_kind": "none",
+          "product_name": "",
+          "product_category": "unknown",
+          "scene_type": "single_room",
+          "is_easy_to_replicate": true,
+          "is_single_scene": true,
+          "scene_count": 1
+        }
+      },
+      {
+        "slot": 12,
+        "purpose": "hook_demo",
+        "label": "Hook + demo video",
+        "targetTags": {
+          "content_type": [
+            "hook_demo"
+          ],
+          "product_kind": [
+            "app",
+            "physical_product",
+            "brand_or_service",
+            "unknown"
+          ]
+        },
+        "durationTargetSec": {
+          "min": 10,
+          "max": 25
+        },
+        "creativeNotes": "Use the source as the hook/reference, then append the account demo extension in the generation pipeline.",
+        "videoReferenceId": "vidref_3b11bc3f26d19a2b",
+        "sourceVideo": {
+          "id": "vidref_3b11bc3f26d19a2b",
+          "url": "https://www.tiktok.com/@dgrindstaff/video/7599097689560698126",
+          "thumbnailUrl": "https://p16-common-sign.tiktokcdn.com/tos-useast5-p-0068-tx/ogD6kgbgGqyXtC1qAIemAIaGBLbofSHIABsjfq~tplv-tiktokx-origin.image?dr=14575&x-expires=1779937200&x-signature=AbWhDSnRTYeW1QCblLyP3p5aOj4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my",
+          "creatorHandle": "dgrindstaff",
+          "caption": "Fueled by @GHOST\u00ae Energy #energydrinks #lifting #college #fyp #superbowl",
+          "durationSec": 28.567,
+          "sceneCount": 1
+        },
+        "selectionReasons": [
+          "hook demo"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "Fueled by @GHOST\u00ae Energy #energydrinks #lifting #college #fyp #superbowl",
+        "suggestedScheduledFor": "2026-05-30T16:30:00",
+        "timezone": "America/Denver",
+        "status": "planned",
+        "reviewStatus": "pending",
+        "generationId": "",
+        "jobId": "",
+        "generatedMediaUrl": "",
+        "error": "",
+        "keyTags": {
+          "content_type": "hook_demo",
+          "niche": "fitness",
+          "sub_niche": "strength_training",
+          "product_kind": "unknown",
+          "product_name": "",
+          "product_category": "unknown",
+          "scene_type": "single_room",
+          "is_easy_to_replicate": true,
+          "is_single_scene": true,
+          "scene_count": 1
+        }
+      },
+      {
+        "slot": 13,
+        "purpose": "relatable",
+        "label": "Relatable content video",
+        "targetTags": {
+          "content_type": [
+            "relatable_content"
+          ],
+          "is_single_scene": [
+            true
+          ]
+        },
+        "durationTargetSec": {
+          "min": 3,
+          "max": 10
+        },
+        "creativeNotes": "Recreate short single-scene relatable content. Prefer clips under 10 seconds because they are easiest to replicate.",
+        "videoReferenceId": "vidref_77225eaab7006abf",
+        "sourceVideo": {
+          "id": "vidref_77225eaab7006abf",
+          "url": "https://www.tiktok.com/@dgrindstaff/video/7636136530477731085",
+          "thumbnailUrl": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEAPKklFAn4cXfBAfAUCyC6eNteAxc00ixeAdQ~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=GghyYLlpI6nv7Bu1Xrw7%2BxqUAlI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+          "creatorHandle": "dgrindstaff",
+          "caption": "Finals week has NO rules #college #relatable #studytok #collegelife #finalsweek",
+          "durationSec": 7.567,
+          "sceneCount": 1
+        },
+        "selectionReasons": [
+          "8s under 10s",
+          "single scene",
+          "relatable content",
+          "easy to replicate"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "Finals week has NO rules #college #relatable #studytok #collegelife #finalsweek",
+        "suggestedScheduledFor": "2026-05-31T09:00:00",
+        "timezone": "America/Denver",
+        "status": "planned",
+        "reviewStatus": "pending",
+        "generationId": "",
+        "jobId": "",
+        "generatedMediaUrl": "",
+        "error": "",
+        "keyTags": {
+          "content_type": "relatable_content",
+          "niche": "education",
+          "sub_niche": "student_life",
+          "product_kind": "none",
+          "product_name": "",
+          "product_category": "unknown",
+          "scene_type": "single_room",
+          "is_easy_to_replicate": true,
+          "is_single_scene": true,
+          "scene_count": 1
+        }
+      },
+      {
+        "slot": 14,
+        "purpose": "relatable",
+        "label": "Relatable content video",
+        "targetTags": {
+          "content_type": [
+            "relatable_content"
+          ],
+          "is_single_scene": [
+            true
+          ]
+        },
+        "durationTargetSec": {
+          "min": 3,
+          "max": 10
+        },
+        "creativeNotes": "Recreate short single-scene relatable content. Prefer clips under 10 seconds because they are easiest to replicate.",
+        "videoReferenceId": "vidref_44a77da387ba69a5",
+        "sourceVideo": {
+          "id": "vidref_44a77da387ba69a5",
+          "url": "https://www.tiktok.com/@dgrindstaff/video/7635773920917966094",
+          "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oIipigREIDAfAI33IpwgaxZ1SBisPueB9QKrHy~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=FIZ4btZZUcCyrKax1UV96w9jQ%2Fo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+          "creatorHandle": "dgrindstaff",
+          "caption": "It\u2019s only up from here right #college #relatable #studytok #collegelife #finalsweek",
+          "durationSec": 8.1,
+          "sceneCount": 1
+        },
+        "selectionReasons": [
+          "8s under 10s",
+          "single scene",
+          "relatable content",
+          "easy to replicate"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "It\u2019s only up from here right #college #relatable #studytok #collegelife #finalsweek",
+        "suggestedScheduledFor": "2026-05-31T12:30:00",
+        "timezone": "America/Denver",
+        "status": "planned",
+        "reviewStatus": "pending",
+        "generationId": "",
+        "jobId": "",
+        "generatedMediaUrl": "",
+        "error": "",
+        "keyTags": {
+          "content_type": "relatable_content",
+          "niche": "education",
+          "sub_niche": "student_life",
+          "product_kind": "none",
+          "product_name": "",
+          "product_category": "unknown",
+          "scene_type": "outdoor",
+          "is_easy_to_replicate": true,
+          "is_single_scene": true,
+          "scene_count": 1
+        }
+      },
+      {
+        "slot": 15,
+        "purpose": "hook_demo",
+        "label": "Hook + demo video",
+        "targetTags": {
+          "content_type": [
+            "hook_demo"
+          ],
+          "product_kind": [
+            "app",
+            "physical_product",
+            "brand_or_service",
+            "unknown"
+          ]
+        },
+        "durationTargetSec": {
+          "min": 10,
+          "max": 25
+        },
+        "creativeNotes": "Use the source as the hook/reference, then append the account demo extension in the generation pipeline.",
+        "videoReferenceId": "vidref_c9c47bbb963e3dd1",
+        "sourceVideo": {
+          "id": "vidref_c9c47bbb963e3dd1",
+          "url": "https://www.tiktok.com/@dgrindstaff/video/7588345189165567246",
+          "thumbnailUrl": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEGa8H8QDAneStYksgC8jyAYt4gmWfIaMnUmbe~tplv-tiktokx-origin.image?dr=9636&x-expires=1779937200&x-signature=SGCIXXAqy0I%2BNGNQymVXmMlaFS0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+          "creatorHandle": "dgrindstaff",
+          "caption": "Years of lifting for this one accomplishment #315 #lifting #college #fitness",
+          "durationSec": 28.567,
+          "sceneCount": 1
+        },
+        "selectionReasons": [
+          "hook demo"
+        ],
+        "weakMatch": false,
+        "needsSource": false,
+        "captionDraft": "Years of lifting for this one accomplishment #315 #lifting #college #fitness",
+        "suggestedScheduledFor": "2026-05-31T16:30:00",
+        "timezone": "America/Denver",
+        "status": "planned",
+        "reviewStatus": "pending",
+        "generationId": "",
+        "jobId": "",
+        "generatedMediaUrl": "",
+        "error": "",
+        "keyTags": {
+          "content_type": "hook_demo",
+          "niche": "fitness",
+          "sub_niche": "strength_training",
+          "product_kind": "unknown",
+          "product_name": "",
+          "product_category": "unknown",
+          "scene_type": "single_room",
+          "is_easy_to_replicate": true,
+          "is_single_scene": true,
+          "scene_count": 1
+        }
+      }
+    ],
+    "id": "plan_6f7f28b6f05b",
+    "createdAt": "2026-05-26T20:17:02.139122+00:00",
+    "updatedAt": "2026-05-26T20:17:02.139122+00:00"
   }
 }

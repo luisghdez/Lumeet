@@ -70,6 +70,7 @@ from account_plan_store import account_plan_store
 from account_plan_generation_service import (
     AccountPlanGenerationError,
     schedule_generated_plan_posts,
+    delete_plan_bulk_run,
     start_plan_generation,
 )
 from video_overlay_service import (
@@ -1666,6 +1667,15 @@ async def schedule_account_plan_posts(plan_id: str, payload: AccountPlanSchedule
             profile_id=payload.profileId,
             timezone=payload.timezone or "UTC",
         )
+    except AccountPlanGenerationError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+
+
+@app.delete("/api/account-planner/plans/{plan_id}/bulk-runs/{bulk_run_id}")
+async def delete_account_plan_bulk_run(plan_id: str, bulk_run_id: str):
+    """Delete a completed bulk generation run and reset its posts to planned."""
+    try:
+        return delete_plan_bulk_run(plan_id, bulk_run_id)
     except AccountPlanGenerationError as exc:
         raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
 

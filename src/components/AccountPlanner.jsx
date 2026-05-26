@@ -8,6 +8,7 @@ import {
   PlayCircle,
   RefreshCw,
   Sparkles,
+  Trash2,
   Type,
   Video,
   X,
@@ -15,6 +16,7 @@ import {
 import VideoOverlayEditor from './VideoOverlayEditor';
 import {
   createStudyTokSimplePlan,
+  deleteAccountPlanBulkRun,
   generateAccountPlanPosts,
   getAccountPlan,
   listAccountPlans,
@@ -155,7 +157,16 @@ function resetPreview(event) {
   }
 }
 
-function BulkRunHistorySection({ runs, loading, currentPlanId, currentRunId, onOpenRun, onRefresh }) {
+function BulkRunHistorySection({
+  runs,
+  loading,
+  currentPlanId,
+  currentRunId,
+  deletingRunId,
+  onOpenRun,
+  onDeleteRun,
+  onRefresh,
+}) {
   if (loading) {
     return (
       <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-4 text-sm text-white/45">
@@ -213,47 +224,69 @@ function BulkRunHistorySection({ runs, loading, currentPlanId, currentRunId, onO
         {runs.slice(0, 6).map((run) => {
           const active = run.planId === currentPlanId && run.id === currentRunId;
           const ready = run.unscheduled > 0;
+          const isDeleting = deletingRunId === `${run.planId}:${run.id}`;
           return (
-            <button
+            <div
               key={`${run.planId}:${run.id}`}
-              type="button"
-              onClick={() => onOpenRun(run)}
-              className={`grid gap-3 rounded-2xl border p-3 text-left transition ${
+              className={`grid gap-3 rounded-2xl border p-3 transition ${
                 active
                   ? 'border-cyan-300/70 bg-cyan-300/10'
                   : 'border-white/10 bg-black/20 hover:border-white/25 hover:bg-white/[0.06]'
               }`}
             >
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.14em] text-white/35">
-                  {run.id.replace('planrun_', 'Run ')}
-                </span>
-                <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${ready ? 'bg-emerald-400/15 text-emerald-100' : 'bg-white/10 text-white/55'}`}>
-                  {ready ? `${run.unscheduled} ready to schedule` : `${run.generated} generated`}
-                </span>
+                <button
+                  type="button"
+                  onClick={() => onOpenRun(run)}
+                  className="min-w-0 flex-1 text-left"
+                >
+                  <span className="text-xs font-semibold uppercase tracking-[0.14em] text-white/35">
+                    {run.id.replace('planrun_', 'Run ')}
+                  </span>
+                </button>
+                <div className="flex items-center gap-2">
+                  <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${ready ? 'bg-emerald-400/15 text-emerald-100' : 'bg-white/10 text-white/55'}`}>
+                    {ready ? `${run.unscheduled} ready to schedule` : `${run.generated} generated`}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => onDeleteRun(run)}
+                    disabled={Boolean(deletingRunId)}
+                    className="rounded-full p-1.5 text-white/35 transition hover:bg-red-400/15 hover:text-red-200 disabled:cursor-not-allowed disabled:opacity-40"
+                    title="Delete bulk run"
+                  >
+                    {isDeleting ? <Loader2 size={14} className="animate-spin" aria-hidden /> : <Trash2 size={14} aria-hidden />}
+                  </button>
+                </div>
               </div>
-              <div className="grid grid-cols-4 gap-2 text-xs">
-                <span className="rounded-2xl bg-white/10 px-2.5 py-2 text-white/55">
-                  <b className="block text-sm text-white">{run.total}</b>
-                  posts
-                </span>
-                <span className="rounded-2xl bg-white/10 px-2.5 py-2 text-white/55">
-                  <b className="block text-sm text-white">{run.generated}</b>
-                  done
-                </span>
-                <span className="rounded-2xl bg-white/10 px-2.5 py-2 text-white/55">
-                  <b className="block text-sm text-white">{run.scheduled}</b>
-                  scheduled
-                </span>
-                <span className="rounded-2xl bg-white/10 px-2.5 py-2 text-white/55">
-                  <b className="block text-sm text-white">{run.failed}</b>
-                  failed
-                </span>
-              </div>
-              <p className="text-xs text-white/40">
-                First slot: {formatSchedule(run.firstSchedule)} · Plan {tagValue(run.planStatus)}
-              </p>
-            </button>
+              <button
+                type="button"
+                onClick={() => onOpenRun(run)}
+                className="grid gap-3 text-left"
+              >
+                <div className="grid grid-cols-4 gap-2 text-xs">
+                  <span className="rounded-2xl bg-white/10 px-2.5 py-2 text-white/55">
+                    <b className="block text-sm text-white">{run.total}</b>
+                    posts
+                  </span>
+                  <span className="rounded-2xl bg-white/10 px-2.5 py-2 text-white/55">
+                    <b className="block text-sm text-white">{run.generated}</b>
+                    done
+                  </span>
+                  <span className="rounded-2xl bg-white/10 px-2.5 py-2 text-white/55">
+                    <b className="block text-sm text-white">{run.scheduled}</b>
+                    scheduled
+                  </span>
+                  <span className="rounded-2xl bg-white/10 px-2.5 py-2 text-white/55">
+                    <b className="block text-sm text-white">{run.failed}</b>
+                    failed
+                  </span>
+                </div>
+                <p className="text-xs text-white/40">
+                  First slot: {formatSchedule(run.firstSchedule)} · Plan {tagValue(run.planStatus)}
+                </p>
+              </button>
+            </div>
           );
         })}
       </div>
@@ -715,6 +748,7 @@ function AccountPlanner({ onGenerationStarted }) {
   const [isSchedulingAll, setIsSchedulingAll] = useState(false);
   const [schedulingSlot, setSchedulingSlot] = useState(null);
   const [swappingSlot, setSwappingSlot] = useState(null);
+  const [deletingBulkRunId, setDeletingBulkRunId] = useState('');
   const [error, setError] = useState('');
   const timezone = useMemo(() => Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC', []);
   const { models, loading: loadingModels } = useModels();
@@ -755,6 +789,34 @@ function AccountPlanner({ onGenerationStarted }) {
       setSelectedBulkRunId(run.id || '');
     } catch (err) {
       setError(err.message || 'Could not open planner run.');
+    }
+  };
+
+  const handleDeleteBulkRun = async (run) => {
+    if (!run?.planId || !run?.id) return;
+    const label = run.id.replace('planrun_', 'run ');
+    const confirmed = window.confirm(
+      `Delete ${label}? This removes its generated videos and resets those posts to planned. Scheduled posts in this run cannot be deleted.`,
+    );
+    if (!confirmed) return;
+
+    const key = `${run.planId}:${run.id}`;
+    setDeletingBulkRunId(key);
+    setError('');
+    try {
+      const result = await deleteAccountPlanBulkRun(run.planId, run.id);
+      const nextPlan = result.plan || result;
+      if (plan?.id === run.planId) {
+        setPlan(nextPlan);
+      }
+      if (selectedBulkRunId === run.id && plan?.id === run.planId) {
+        setSelectedBulkRunId('');
+      }
+      await loadRecentPlans();
+    } catch (err) {
+      setError(err.message || 'Could not delete bulk run.');
+    } finally {
+      setDeletingBulkRunId('');
     }
   };
 
@@ -1074,7 +1136,9 @@ function AccountPlanner({ onGenerationStarted }) {
             loading={loadingRecentPlans}
             currentPlanId={plan?.id || ''}
             currentRunId={selectedBulkRunId}
+            deletingRunId={deletingBulkRunId}
             onOpenRun={handleOpenBulkRun}
+            onDeleteRun={handleDeleteBulkRun}
             onRefresh={loadRecentPlans}
           />
 

@@ -12,7 +12,7 @@ from typing import Any, Dict, List, Optional
 
 import requests
 
-from account_plan_store import account_plan_store
+from account_plan_store import account_plan_store, utc_now_iso
 from config import GCS_VIDEO_OBJECT_PREFIX
 from generation_store import generation_store
 from job_manager import EXTENDED_PIPELINE_STEPS, PIPELINE_STEPS, job_manager
@@ -154,6 +154,90 @@ def _finish_plan(plan_id: str) -> None:
         account_plan_store.update(plan_id, status="generation_failed")
     else:
         account_plan_store.update(plan_id, status="generated")
+
+
+def _refresh_plan_status(plan_id: str) -> None:
+    plan = account_plan_store.get(plan_id)
+    if not plan:
+        return
+    posts = [post for post in plan.get("plannedPosts", []) if isinstance(post, dict)]
+    if any(post.get("status") == "generating" for post in posts):
+        account_plan_store.update(plan_id, status="generating")
+        return
+    if any(post.get("status") == "failed" for post in posts):
+        account_plan_store.update(plan_id, status="generation_failed")
+        return
+    if any(post.get("status") == "generated" for post in posts):
+        account_plan_store.update(plan_id, status="generated")
+        return
+    if plan.get("status") in {"generating", "generation_failed", "generated"}:
+        account_plan_store.update(plan_id, status="approved")
+
+
+def delete_plan_bulk_run(plan_id: str, bulk_run_id: str) -> Dict[str, Any]:
+    plan = account_plan_store.get(plan_id)
+    if not plan:
+        raise AccountPlanGenerationError(f"Plan {plan_id} not found.", 404)
+
+    bulk_run_id = str(bulk_run_id or "").strip()
+    if not bulk_run_id:
+        raise AccountPlanGenerationError("bulkRunId is required.", 400)
+
+    if plan.get("status") == "generating" and plan.get("activeBulkRunId") == bulk_run_id:
+        raise AccountPlanGenerationError("This bulk run is still generating.", 409)
+
+    posts = [post for post in (plan.get("plannedPosts") or []) if isinstance(post, dict)]
+    matched = [post for post in posts if post.get("bulkRunId") == bulk_run_id]
+    if not matched:
+        raise AccountPlanGenerationError(f"Bulk run {bulk_run_id} not found.", 404)
+
+    if any(
+        post.get("reviewStatus") == "scheduled" or post.get("status") == "scheduled"
+        for post in matched
+    ):
+        raise AccountPlanGenerationError(
+            "Cannot delete a bulk run that contains scheduled posts.",
+            409,
+        )
+
+    removed = 0
+    now = utc_now_iso()
+    for post in posts:
+        if post.get("bulkRunId") != bulk_run_id:
+            continue
+        post.update({
+            "status": "planned",
+            "reviewStatus": "pending",
+            "generationId": "",
+            "jobId": "",
+            "bulkRunId": "",
+            "generatedMediaUrl": "",
+            "rawVideoUrl": "",
+            "videoOverlay": None,
+            "videoOverlayOriginal": None,
+            "videoOverlayVersion": 0,
+            "latePostId": "",
+            "scheduleError": "",
+            "error": "",
+            "modelId": "",
+            "extensionVideoId": "",
+            "updatedAt": now,
+        })
+        removed += 1
+
+    updates: Dict[str, Any] = {"plannedPosts": posts}
+    if plan.get("activeBulkRunId") == bulk_run_id:
+        updates["activeBulkRunId"] = ""
+
+    account_plan_store.update(plan_id, **updates)
+    _refresh_plan_status(plan_id)
+
+    refreshed = account_plan_store.get(plan_id) or plan
+    return {
+        "plan": refreshed,
+        "bulkRunId": bulk_run_id,
+        "removedPosts": removed,
+    }
 
 
 def _generate_post(
