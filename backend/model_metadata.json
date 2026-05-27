@@ -75,5 +75,16 @@
     "label": "Model1",
     "filename": "Model1.png",
     "createdAt": "2026-05-25T19:06:28.121161+00:00"
+  },
+  "227f45fae6c2": {
+    "modelId": "227f45fae6c2",
+    "url": "https://storage.googleapis.com/lumeet-bucket/models/227f45fae6c2/model.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=lumeet-backend%40lumeet-backend.iam.gserviceaccount.com%2F20260526%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260526T214638Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=2e4ec9fa71b65c3d35eabb26d18dfbd28bf1048c2c93e795479bc03638b2c3ed3b87b3408a9a208f6c9d6a488d27b27130cde2bf0b08d9f8ec26356a68313bbaf56a5c9b1cdfdeb42ce2ac61a36c73c9aef481bcebe7e186144235b3c26dc692e9462a62c7fbceb6914076e87d8bcb1d70479abce2b708fa6fa5a52d103d3bb1743ba78c5329805198a41eaaa451dcb9ed1682ae44cff19c1a79549c1ed913aa0c383c35edc197ebecf4161151ad63e4f2513dfbfac41c5350651c24b0ef9e6efafa8dddd50027fcea454a65e241d4cbb987cbfbb0cfb07289d9764eff254cbd6aaf808a5920748c97b49624781588fba7c55d2551eb776e98a13446e06e39fb",
+    "bucket": "lumeet-bucket",
+    "object": "models/227f45fae6c2/model.png",
+    "localPath": "/Users/luisg/Developer/personal/nflncr/Lumeet/backend/jobs/_model_227f45fae6c2/model.png",
+    "storage": "gcs",
+    "label": "hf_20260526_214356_03fcd555-a79e-43fd-a6ff-33905866ccd9",
+    "filename": "hf_20260526_214356_03fcd555-a79e-43fd-a6ff-33905866ccd9.png",
+    "createdAt": "2026-05-26T21:46:38.110125+00:00"
   }
 }
